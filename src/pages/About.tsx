@@ -1,3 +1,5 @@
+import { Section, SectionLabel, FadeIn, GoldRule } from '@/components/ui/Section';
+
 const About = () => {
   const principles = [
     { title: 'Integrity & Intellectual Honesty', desc: 'Transparency and truthfulness in every interaction.' },
@@ -9,76 +11,110 @@ const About = () => {
   ];
 
   const approach = [
-    { num: '01', title: 'Long-Term Alignment', desc: 'Hold periods designed around thesis and growth runway, not artificial timelines.' },
-    { num: '02', title: 'Regulated & Technical Services', desc: 'Stable, defensive industries where compliance, safety, and reliability are paramount.' },
-    { num: '03', title: 'Selective & Focused', desc: 'One or two platforms at a time. Deeply involved, hands-on, operationally supportive.' },
-    { num: '04', title: 'Trusted Network', desc: 'An established bench of advisors and operators who execute with speed and rigor.' },
-    { num: '05', title: 'Prudent Use of Leverage', desc: 'Leverage as an enabler, not a strategy. Long-term value through disciplined growth.' },
+    { title: 'Long-Term Alignment', desc: 'Hold periods designed around thesis and growth runway. At each stage, we ask whether we are the right stewards and whether marginal returns justify the cost of capital.' },
+    { title: 'Regulated & Technical Services', desc: 'We deliberately focus on stable, defensive industries — sectors where compliance, safety, and reliability are paramount.' },
+    { title: 'Selective & Focused', desc: 'We only pursue one or two platforms at a time. This allows us to stay deeply involved, hands-on, and operationally supportive alongside management.' },
+    { title: 'Trusted Network for Execution', desc: 'We bring an established bench of advisors and operators who help us execute with speed, rigor, and real-world expertise.' },
+    { title: 'Prudent Use of Leverage', desc: 'We view leverage as an enabler, not a strategy. Our focus is on creating long-term value through business building and disciplined growth — not financial engineering.' },
   ];
 
   return (
     <div>
       {/* Hero */}
-      <section className="bg-primary text-primary-foreground section-padding py-24 md:py-36">
-        <div className="container-narrow">
-          <p className="text-caption text-gold-muted mb-6">About Cruxway</p>
-          <h1 className="text-display text-primary-foreground max-w-3xl">
-            Values First — Integrity, Partnership, and Stewardship
-          </h1>
-          <div className="w-16 h-px bg-gold-muted/40 mt-8 mb-8" />
-          <p className="text-body text-primary-foreground/60 max-w-2xl">
-            Founded in 2025 by Harin Gupta and Benson Zhang, Cruxway exists to partner with exceptional companies and preserve what makes them special while helping them scale.
-          </p>
+      <section className="relative bg-prussian text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-deep/50 via-transparent to-transparent pointer-events-none" />
+        <div className="relative max-w-6xl mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-24 md:pt-40 md:pb-36">
+          <FadeIn><SectionLabel light>About Cruxway</SectionLabel></FadeIn>
+          <FadeIn delay={0.15}>
+            <h1 className="font-serif text-display text-primary-foreground max-w-3xl text-balance">
+              Values First — Integrity, Partnership, and&nbsp;Stewardship
+            </h1>
+          </FadeIn>
+          <FadeIn delay={0.3}><GoldRule className="mt-8 mb-8" /></FadeIn>
+          <FadeIn delay={0.4}>
+            <p className="font-sans text-body-lg text-primary-foreground/50 max-w-2xl">
+              Founded in 2025 by Harin Gupta and Benson Zhang, Cruxway exists to partner with exceptional companies and preserve what makes them special while helping them scale.
+            </p>
+          </FadeIn>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/8 to-transparent" />
       </section>
 
       {/* Mission */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <p className="text-caption text-muted-foreground mb-4">Our Mission</p>
-          <h2 className="text-heading text-foreground mb-6">Transforming Life's Work Into Market Leaders</h2>
-          <p className="text-body text-muted-foreground max-w-2xl">
-            By combining long-term capital with deep operating expertise, we persevere to help owners transform their life's work into market-leading businesses — while protecting their legacy and strengthening the values that built their success.
-          </p>
+      <Section>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+          <div className="lg:col-span-5">
+            <FadeIn>
+              <SectionLabel>Our Mission</SectionLabel>
+              <h2 className="font-serif text-heading text-foreground text-balance">
+                Transforming Life's Work Into Market&nbsp;Leaders
+              </h2>
+              <GoldRule className="mt-6" />
+            </FadeIn>
+          </div>
+          <div className="lg:col-span-7">
+            <FadeIn delay={0.15}>
+              <p className="font-sans text-body text-muted-foreground leading-[1.9]">
+                By combining long-term capital with deep operating expertise, we persevere to help owners transform their life's work into market-leading businesses — while protecting their legacy and strengthening the values that built their success.
+              </p>
+            </FadeIn>
+          </div>
         </div>
-      </section>
+      </Section>
 
       {/* Core Principles */}
-      <section className="section-padding bg-secondary">
-        <div className="container-narrow">
-          <p className="text-caption text-muted-foreground mb-4">Our Core Principles</p>
-          <h2 className="text-heading text-foreground mb-12">
-            Guiding How We Partner With You
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {principles.map((p) => (
-              <div key={p.title} className="py-4">
-                <h3 className="font-serif text-lg text-foreground mb-3">{p.title}</h3>
-                <p className="text-body text-muted-foreground">{p.desc}</p>
-              </div>
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-20 md:py-28 lg:py-36">
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <SectionLabel>Core Principles</SectionLabel>
+            <h2 className="font-serif text-heading text-foreground mb-4 text-balance">
+              Guiding How We Partner With You
+            </h2>
+            <p className="font-sans text-body text-muted-foreground max-w-2xl mb-14">
+              These principles guide how we protect your legacy while growing your business.
+            </p>
+          </FadeIn>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10 md:gap-y-14">
+            {principles.map((p, i) => (
+              <FadeIn key={p.title} delay={i * 0.06}>
+                <div className="relative pl-5 border-l border-foreground/8">
+                  <h3 className="font-serif text-lg text-foreground mb-2.5">{p.title}</h3>
+                  <p className="font-sans text-body text-muted-foreground">{p.desc}</p>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
       {/* Partnership Approach */}
-      <section className="section-padding bg-background">
-        <div className="container-narrow">
-          <p className="text-caption text-muted-foreground mb-4">Our Approach</p>
-          <h2 className="text-heading text-foreground mb-12">Partnership Model</h2>
-          <div className="space-y-10">
-            {approach.map((a) => (
-              <div key={a.num} className="flex gap-6 items-start border-b border-border pb-8 last:border-b-0">
-                <span className="font-serif text-2xl text-primary/30 min-w-[3rem]">{a.num}</span>
-                <div>
-                  <h3 className="font-serif text-lg text-foreground mb-2">{a.title}</h3>
-                  <p className="text-body text-muted-foreground">{a.desc}</p>
+      <Section>
+        <FadeIn>
+          <SectionLabel>Our Approach</SectionLabel>
+          <h2 className="font-serif text-heading text-foreground mb-14 md:mb-18">
+            Partnership Model
+          </h2>
+        </FadeIn>
+
+        <div className="space-y-0">
+          {approach.map((a, i) => (
+            <FadeIn key={a.title} delay={i * 0.08}>
+              <div className="grid md:grid-cols-12 gap-4 md:gap-8 py-8 md:py-10 border-b border-foreground/6 first:border-t first:border-foreground/6">
+                <div className="md:col-span-1">
+                  <span className="font-serif text-lg text-foreground/15">{String(i + 1).padStart(2, '0')}</span>
+                </div>
+                <div className="md:col-span-4">
+                  <h3 className="font-serif text-subheading text-foreground">{a.title}</h3>
+                </div>
+                <div className="md:col-span-7">
+                  <p className="font-sans text-body text-muted-foreground">{a.desc}</p>
                 </div>
               </div>
-            ))}
-          </div>
+            </FadeIn>
+          ))}
         </div>
-      </section>
+      </Section>
     </div>
   );
 };
