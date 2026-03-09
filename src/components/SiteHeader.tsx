@@ -40,10 +40,10 @@ const SiteHeader = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-prussian ${
           scrolled
-            ? 'bg-prussian/[0.97] backdrop-blur-lg'
-            : 'bg-transparent'
+            ? 'shadow-[0_1px_0_0_hsl(var(--primary-foreground)/0.04)]'
+            : ''
         }`}
       >
         {/* Top accent line */}
