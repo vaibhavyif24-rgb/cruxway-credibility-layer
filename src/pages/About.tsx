@@ -2,7 +2,7 @@ const About = () => {
   const principles = [
     { title: 'Integrity & Intellectual Honesty', desc: 'Transparency and truthfulness in every interaction.' },
     { title: 'Servant Leadership', desc: 'Lead by example and lift others. Earn trust through service, not authority.' },
-    { title: 'The Golden Rule', desc: 'Treat people how you'd want to be treated — with respect, fairness, and compassion.' },
+    { title: 'The Golden Rule', desc: "Treat people how you'd want to be treated — with respect, fairness, and compassion." },
     { title: 'Humility & Growth Mindset', desc: 'Stay curious, stay humble, and never stop learning.' },
     { title: 'Grit & Perseverance', desc: 'Do hard things, especially when things get hard. Fortune favors fortitude.' },
     { title: 'Bias to Action', desc: 'Act decisively — pursue perfection in speed and execution, not only planning.' },
