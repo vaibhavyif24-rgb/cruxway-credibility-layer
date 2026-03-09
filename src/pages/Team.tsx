@@ -1,5 +1,5 @@
 import { useRegion } from '@/contexts/RegionContext';
-import { Section, SectionLabel, FadeIn, GoldRule } from '@/components/ui/Section';
+import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 
 interface TeamMember {
   name: string;
@@ -47,28 +47,28 @@ const indiaTeam: TeamMember[] = [
 ];
 
 const TeamCard = ({ member, index }: { member: TeamMember; index: number }) => (
-  <FadeIn delay={index * 0.1}>
-    <div className="py-10 md:py-12 border-b border-foreground/6 first:border-t first:border-foreground/6">
-      <div className="grid md:grid-cols-12 gap-6 md:gap-10">
-        {/* Name column */}
+  <FadeIn delay={index * 0.08}>
+    <div className="py-8 md:py-10 border-b border-foreground/[0.06]">
+      <div className="grid md:grid-cols-12 gap-5 md:gap-10">
+        {/* Name */}
         <div className="md:col-span-4">
-          <h3 className="font-serif text-subheading text-foreground">{member.name}</h3>
-          <p className="font-sans text-caption uppercase tracking-[0.2em] text-gold-dim mt-1.5">
+          <h3 className="font-serif text-xl md:text-[1.35rem] text-foreground">{member.name}</h3>
+          <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mt-1.5">
             {member.role}
           </p>
           {member.education && (
-            <p className="font-sans text-body text-muted-foreground/70 mt-3 italic text-sm">
+            <p className="font-sans text-[12px] text-muted-foreground/60 mt-3 italic">
               {member.education}
             </p>
           )}
         </div>
 
-        {/* Bio column */}
+        {/* Bio */}
         <div className="md:col-span-8">
-          <ul className="space-y-3">
+          <ul className="space-y-2.5">
             {member.bio.map((line, i) => (
-              <li key={i} className="font-sans text-body text-muted-foreground flex gap-4">
-                <span className="text-foreground/12 mt-0.5 shrink-0 select-none">—</span>
+              <li key={i} className="font-sans text-[14px] text-muted-foreground leading-[1.7] flex gap-3">
+                <span className="text-foreground/10 mt-[2px] shrink-0 select-none text-xs">—</span>
                 <span>{line}</span>
               </li>
             ))}
@@ -88,26 +88,26 @@ const Team = () => {
     <div>
       {/* Hero */}
       <section className="relative bg-prussian text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-deep/50 via-transparent to-transparent pointer-events-none" />
-        <div className="relative max-w-6xl mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-24 md:pt-40 md:pb-36">
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/60 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className="relative max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 pt-32 pb-20 md:pt-44 md:pb-32 lg:pt-48 lg:pb-36">
           <FadeIn><SectionLabel light>Our Team</SectionLabel></FadeIn>
-          <FadeIn delay={0.15}>
-            <h1 className="font-serif text-display text-primary-foreground max-w-4xl text-balance">
+          <FadeIn delay={0.1}>
+            <h1 className="font-serif text-[clamp(2rem,5.5vw,3.5rem)] text-primary-foreground max-w-[640px] leading-[1.1] tracking-[-0.03em]">
               Operators &amp; Investors Who Understand Founder-Led&nbsp;Businesses
             </h1>
           </FadeIn>
-          <FadeIn delay={0.3}><GoldRule className="mt-8" /></FadeIn>
+          <FadeIn delay={0.25}><GoldRule className="mt-8" /></FadeIn>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/8 to-transparent" />
+        <HeroDivider />
       </section>
 
       {/* Founders */}
       <Section>
         <FadeIn>
           <SectionLabel>Founders</SectionLabel>
-          <h2 className="font-serif text-heading text-foreground mb-8 md:mb-12">Leadership</h2>
+          <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-8 md:mb-12">Leadership</h2>
         </FadeIn>
-        <div>
+        <div className="border-t border-foreground/[0.06]">
           {usTeam.map((m, i) => (
             <TeamCard key={m.name} member={m} index={i} />
           ))}
@@ -116,13 +116,13 @@ const Team = () => {
 
       {/* Regional Team */}
       {regionalTeam.length > 0 && (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-20 md:py-28 lg:py-36">
-          <div className="max-w-6xl mx-auto">
+        <section className="bg-cream px-6 md:px-12 lg:px-20 py-20 md:py-28 lg:py-36">
+          <div className="max-w-[1120px] mx-auto">
             <FadeIn>
               <SectionLabel>{isIndia ? 'India' : 'United States'}</SectionLabel>
-              <h2 className="font-serif text-heading text-foreground mb-8 md:mb-12">Regional Partners</h2>
+              <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-8 md:mb-12">Regional Partners</h2>
             </FadeIn>
-            <div>
+            <div className="border-t border-foreground/[0.06]">
               {regionalTeam.map((m, i) => (
                 <TeamCard key={m.name} member={m} index={i} />
               ))}
@@ -133,19 +133,19 @@ const Team = () => {
 
       {/* Advisors */}
       <Section>
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
-          <div className="lg:col-span-5">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-20">
+          <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Advisors &amp; Operating Partners</SectionLabel>
-              <h2 className="font-serif text-heading text-foreground text-balance">
+              <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground leading-[1.15]">
                 Extended Network
               </h2>
               <GoldRule className="mt-6" />
             </FadeIn>
           </div>
-          <div className="lg:col-span-7">
-            <FadeIn delay={0.15}>
-              <p className="font-sans text-body text-muted-foreground leading-[1.9]">
+          <div className="lg:col-span-8">
+            <FadeIn delay={0.1}>
+              <p className="font-sans text-[15px] text-muted-foreground leading-[1.85]">
                 We bring an established bench of advisors and operators who help us execute with speed, rigor, and real-world expertise. Details on our advisory network are shared selectively with prospective partners.
               </p>
             </FadeIn>

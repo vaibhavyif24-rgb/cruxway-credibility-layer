@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --background: 210 15% 97%;
+    --background: 40 20% 97%;
     --foreground: 207 65% 12%;
 
     --card: 0 0% 100%;
@@ -17,16 +17,16 @@
     --popover-foreground: 207 65% 12%;
 
     --primary: 207 65% 12%;
-    --primary-foreground: 40 20% 95%;
+    --primary-foreground: 42 30% 95%;
 
     --secondary: 210 18% 93%;
     --secondary-foreground: 207 65% 12%;
 
     --muted: 210 14% 94%;
-    --muted-foreground: 210 10% 50%;
+    --muted-foreground: 210 10% 45%;
 
     --accent: 207 50% 18%;
-    --accent-foreground: 40 20% 95%;
+    --accent-foreground: 42 30% 95%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
@@ -41,11 +41,11 @@
     --prussian: 207 65% 12%;
     --prussian-mid: 207 50% 18%;
     --prussian-light: 207 35% 28%;
-    --navy-deep: 210 60% 8%;
+    --navy-deep: 210 60% 6%;
     --warm-gray: 30 8% 52%;
     --light-stone: 40 15% 94%;
-    --cream: 40 25% 97%;
-    --gold: 38 40% 52%;
+    --cream: 40 18% 95%;
+    --gold: 38 45% 55%;
     --gold-dim: 38 25% 42%;
     --rule: 210 12% 86%;
 
@@ -72,6 +72,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -79,20 +80,28 @@
     font-family: var(--font-sans);
     font-weight: 400;
     font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.75;
     letter-spacing: 0.01em;
+    color: hsl(var(--foreground));
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    letter-spacing: -0.025em;
+    line-height: 1.12;
+    color: hsl(var(--foreground));
   }
 
   ::selection {
-    background: hsl(var(--prussian) / 0.15);
+    background: hsl(var(--prussian) / 0.12);
     color: hsl(var(--prussian));
+  }
+
+  /* Smooth focus styles */
+  :focus-visible {
+    outline: 1px solid hsl(var(--gold) / 0.4);
+    outline-offset: 2px;
   }
 }
 

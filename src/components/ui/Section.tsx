@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -8,41 +8,64 @@ interface FadeInProps {
   y?: number;
 }
 
-export const FadeIn = ({ children, delay = 0, className = '', y = 20 }: FadeInProps) => (
-  <motion.div
-    initial={{ opacity: 0, y }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-60px' }}
-    transition={{ duration: 0.7, delay, ease: [0.25, 0.1, 0.25, 1] }}
-    className={className}
-  >
-    {children}
-  </motion.div>
+export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
+  ({ children, delay = 0, className = '', y = 18 }, ref) => (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
 );
+
+FadeIn.displayName = 'FadeIn';
 
 interface SectionProps {
   children: React.ReactNode;
   className?: string;
   dark?: boolean;
+  narrow?: boolean;
 }
 
-export const Section = ({ children, className = '', dark = false }: SectionProps) => (
-  <section className={`px-5 md:px-10 lg:px-16 py-20 md:py-28 lg:py-36 ${dark ? 'bg-prussian text-primary-foreground' : 'bg-background text-foreground'} ${className}`}>
-    <div className="max-w-6xl mx-auto">
+export const Section = ({ children, className = '', dark = false, narrow = false }: SectionProps) => (
+  <section
+    className={`
+      px-6 md:px-12 lg:px-20
+      py-20 md:py-28 lg:py-36
+      ${dark ? 'bg-prussian text-primary-foreground' : 'bg-background text-foreground'}
+      ${className}
+    `}
+  >
+    <div className={`mx-auto ${narrow ? 'max-w-4xl' : 'max-w-[1120px]'}`}>
       {children}
     </div>
   </section>
 );
 
 export const SectionLabel = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
-  <p className={`font-sans text-caption uppercase tracking-[0.2em] mb-5 ${light ? 'text-gold/60' : 'text-stone-warm/80'}`}>
+  <p
+    className={`
+      font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em]
+      mb-5
+      ${light ? 'text-gold/50' : 'text-muted-foreground/60'}
+    `}
+  >
     {children}
   </p>
 );
 
 export const GoldRule = ({ className = '' }: { className?: string }) => (
   <div className={`flex items-center gap-3 ${className}`}>
-    <div className="w-8 h-px bg-gold/30" />
-    <div className="w-1 h-1 rotate-45 border border-gold/20" />
+    <div className="w-10 h-px bg-gold/25" />
+    <div className="w-[5px] h-[5px] rotate-45 border border-gold/20" />
   </div>
+);
+
+export const HeroDivider = () => (
+  <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/6 to-transparent" />
 );
