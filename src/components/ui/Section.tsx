@@ -9,13 +9,13 @@ interface FadeInProps {
 }
 
 export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
-  ({ children, delay = 0, className = '', y = 18 }, ref) => (
+  ({ children, delay = 0, className = '', y = 14 }, ref) => (
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -35,13 +35,13 @@ interface SectionProps {
 export const Section = ({ children, className = '', dark = false, narrow = false }: SectionProps) => (
   <section
     className={`
-      px-6 md:px-12 lg:px-20
-      py-20 md:py-28 lg:py-36
+      px-5 md:px-10 lg:px-16
+      py-14 md:py-20 lg:py-24
       ${dark ? 'bg-prussian text-primary-foreground' : 'bg-background text-foreground'}
       ${className}
     `}
   >
-    <div className={`mx-auto ${narrow ? 'max-w-4xl' : 'max-w-[1120px]'}`}>
+    <div className={`mx-auto ${narrow ? 'max-w-3xl' : 'max-w-[1080px]'}`}>
       {children}
     </div>
   </section>
@@ -50,9 +50,9 @@ export const Section = ({ children, className = '', dark = false, narrow = false
 export const SectionLabel = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
   <p
     className={`
-      font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em]
-      mb-5
-      ${light ? 'text-gold/50' : 'text-muted-foreground/60'}
+      font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
+      mb-4
+      ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
     `}
   >
     {children}
@@ -60,12 +60,12 @@ export const SectionLabel = ({ children, light = false }: { children: React.Reac
 );
 
 export const GoldRule = ({ className = '' }: { className?: string }) => (
-  <div className={`flex items-center gap-3 ${className}`}>
-    <div className="w-10 h-px bg-gold/25" />
-    <div className="w-[5px] h-[5px] rotate-45 border border-gold/20" />
+  <div className={`flex items-center gap-2.5 ${className}`}>
+    <div className="w-8 h-px bg-gold/20" />
+    <div className="w-1 h-1 rotate-45 border border-gold/15" />
   </div>
 );
 
 export const HeroDivider = () => (
-  <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/6 to-transparent" />
+  <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/[0.05] to-transparent" />
 );

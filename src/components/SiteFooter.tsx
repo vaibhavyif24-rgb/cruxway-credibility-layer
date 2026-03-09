@@ -17,20 +17,19 @@ const SiteFooter = () => {
     <footer className="bg-prussian">
       <div className="h-px bg-primary-foreground/[0.04]" />
 
-      <div className="max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 py-14 md:py-20">
-        {/* Top */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-20 mb-14">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-6 md:gap-16 mb-10">
           <div>
-            <p className="font-serif text-xl text-primary-foreground tracking-[-0.02em]">Cruxway</p>
-            <div className="w-8 h-px bg-gold/20 mt-4" />
+            <p className="font-serif text-lg text-primary-foreground tracking-[-0.02em]">Cruxway</p>
+            <div className="w-6 h-px bg-gold/15 mt-3" />
           </div>
 
-          <div className="grid grid-cols-2 gap-x-12 gap-y-3">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-2.5">
             {links.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-primary-foreground/18 hover:text-primary-foreground/40 transition-colors duration-300"
+                className="font-sans text-[9px] font-medium uppercase tracking-[0.16em] text-primary-foreground/15 hover:text-primary-foreground/35 transition-colors duration-300"
               >
                 {item.label}
               </Link>
@@ -38,15 +37,13 @@ const SiteFooter = () => {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-primary-foreground/[0.04] mb-7" />
+        <div className="h-px bg-primary-foreground/[0.04] mb-5" />
 
-        {/* Bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-          <p className="font-sans text-[10px] text-primary-foreground/12 tracking-[0.08em]">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1.5">
+          <p className="font-sans text-[9px] text-primary-foreground/10 tracking-[0.06em]">
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>
-          <p className="font-sans text-[9px] text-primary-foreground/8 tracking-[0.15em] uppercase">
+          <p className="font-sans text-[8px] text-primary-foreground/[0.06] tracking-[0.12em] uppercase">
             Privileged &amp; Confidential
           </p>
         </div>
