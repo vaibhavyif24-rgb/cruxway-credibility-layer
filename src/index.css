@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
@@ -7,46 +7,50 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 210 50% 10%;
+    --background: 210 15% 97%;
+    --foreground: 207 65% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 50% 10%;
+    --card-foreground: 207 65% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 50% 10%;
+    --popover-foreground: 207 65% 12%;
 
-    --primary: 205 70% 15%;
-    --primary-foreground: 210 20% 96%;
+    --primary: 207 65% 12%;
+    --primary-foreground: 40 20% 95%;
 
-    --secondary: 210 25% 93%;
-    --secondary-foreground: 205 70% 15%;
+    --secondary: 210 18% 93%;
+    --secondary-foreground: 207 65% 12%;
 
-    --muted: 210 20% 95%;
-    --muted-foreground: 210 15% 45%;
+    --muted: 210 14% 94%;
+    --muted-foreground: 210 10% 50%;
 
-    --accent: 205 55% 22%;
-    --accent-foreground: 210 20% 96%;
+    --accent: 207 50% 18%;
+    --accent-foreground: 40 20% 95%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 88%;
-    --input: 210 20% 88%;
-    --ring: 205 70% 15%;
+    --border: 210 16% 90%;
+    --input: 210 16% 90%;
+    --ring: 207 65% 12%;
 
-    --radius: 0.25rem;
+    --radius: 0rem;
 
-    --prussian: 205 70% 15%;
-    --prussian-light: 205 55% 22%;
-    --prussian-dark: 205 80% 10%;
-    --navy: 210 45% 12%;
-    --slate-warm: 210 15% 45%;
-    --cream: 40 30% 96%;
-    --gold-muted: 38 35% 55%;
+    /* Brand tokens */
+    --prussian: 207 65% 12%;
+    --prussian-mid: 207 50% 18%;
+    --prussian-light: 207 35% 28%;
+    --navy-deep: 210 60% 8%;
+    --warm-gray: 30 8% 52%;
+    --light-stone: 40 15% 94%;
+    --cream: 40 25% 97%;
+    --gold: 38 40% 52%;
+    --gold-dim: 38 25% 42%;
+    --rule: 210 12% 86%;
 
-    --font-serif: 'EB Garamond', 'Georgia', serif;
-    --font-sans: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+    --font-serif: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -57,28 +61,6 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
-  .dark {
-    --background: 210 50% 5%;
-    --foreground: 210 20% 92%;
-    --card: 210 45% 8%;
-    --card-foreground: 210 20% 92%;
-    --popover: 210 45% 8%;
-    --popover-foreground: 210 20% 92%;
-    --primary: 210 30% 80%;
-    --primary-foreground: 210 50% 10%;
-    --secondary: 210 30% 15%;
-    --secondary-foreground: 210 20% 92%;
-    --muted: 210 25% 15%;
-    --muted-foreground: 210 15% 60%;
-    --accent: 205 40% 25%;
-    --accent-foreground: 210 20% 92%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 210 25% 18%;
-    --input: 210 25% 18%;
-    --ring: 210 30% 70%;
-  }
 }
 
 @layer base {
@@ -86,56 +68,36 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
-    letter-spacing: -0.01em;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  ::selection {
+    background: hsl(var(--prussian) / 0.15);
+    color: hsl(var(--prussian));
   }
 }
 
-@layer components {
-  .section-padding {
-    @apply px-6 py-16 md:px-12 md:py-24 lg:px-20 lg:py-32;
-  }
-
-  .container-narrow {
-    @apply max-w-5xl mx-auto;
-  }
-
-  .container-wide {
-    @apply max-w-7xl mx-auto;
-  }
-
-  .divider-thin {
-    @apply w-full h-px bg-border;
-  }
-
-  .text-display {
-    font-family: var(--font-serif);
-    @apply text-3xl md:text-4xl lg:text-5xl font-medium leading-tight;
-  }
-
-  .text-heading {
-    font-family: var(--font-serif);
-    @apply text-2xl md:text-3xl font-medium;
-  }
-
-  .text-subheading {
-    font-family: var(--font-serif);
-    @apply text-xl md:text-2xl font-normal;
-  }
-
-  .text-body {
-    font-family: var(--font-sans);
-    @apply text-sm md:text-base leading-relaxed;
-  }
-
-  .text-caption {
-    font-family: var(--font-sans);
-    @apply text-xs md:text-sm tracking-wide uppercase;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
