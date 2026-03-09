@@ -17,11 +17,8 @@ const SiteHeader = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -40,21 +37,17 @@ const SiteHeader = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 bg-prussian ${
-          scrolled
-            ? 'shadow-[0_1px_0_0_hsl(var(--primary-foreground)/0.04)]'
-            : ''
+        className={`fixed top-0 left-0 right-0 z-50 bg-prussian transition-shadow duration-500 ${
+          scrolled ? 'shadow-[0_1px_0_0_hsl(var(--primary-foreground)/0.04)]' : ''
         }`}
       >
-        {/* Top accent line */}
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-gold/15 to-transparent" />
+        <div className="h-[1px] bg-gradient-to-r from-transparent via-gold/12 to-transparent" />
 
         <div className="max-w-[1200px] mx-auto px-6 md:px-12 lg:px-20">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
+          <div className="flex items-center justify-between h-16 md:h-[72px]">
             <Link
               to={prefix}
-              className="font-serif text-xl md:text-[1.4rem] text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75"
+              className="font-serif text-xl md:text-[1.35rem] text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75"
             >
               Cruxway
             </Link>
@@ -69,14 +62,14 @@ const SiteHeader = () => {
                     className={`relative font-sans text-[11px] font-medium uppercase tracking-[0.16em] py-1 transition-all duration-300 ${
                       isActive(item.path)
                         ? 'text-primary-foreground'
-                        : 'text-primary-foreground/35 hover:text-primary-foreground/65'
+                        : 'text-primary-foreground/30 hover:text-primary-foreground/60'
                     }`}
                   >
                     {item.label}
                     {isActive(item.path) && (
                       <motion.span
                         layoutId="nav-underline"
-                        className="absolute -bottom-1 left-0 right-0 h-[1px] bg-gold/40"
+                        className="absolute -bottom-1 left-0 right-0 h-[1px] bg-gold/35"
                         transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                       />
                     )}
@@ -84,19 +77,19 @@ const SiteHeader = () => {
                 ))}
               </div>
 
-              <div className="w-px h-4 bg-primary-foreground/8 mx-8" />
+              <div className="w-px h-4 bg-primary-foreground/6 mx-8" />
 
               <Link
                 to={`/${otherRegion}`}
                 onClick={() => setRegion(otherRegion)}
-                className="font-sans text-[11px] font-medium uppercase tracking-[0.16em] text-primary-foreground/20 hover:text-primary-foreground/45 transition-colors duration-300 mr-8"
+                className="font-sans text-[11px] font-medium uppercase tracking-[0.16em] text-primary-foreground/18 hover:text-primary-foreground/40 transition-colors duration-300 mr-8"
               >
                 {otherRegion === 'india' ? 'India' : 'US'}
               </Link>
 
               <Link
                 to="/investor-login"
-                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-6 py-2.5 border border-gold/20 text-gold/70 hover:border-gold/40 hover:text-gold transition-all duration-400"
+                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-6 py-2.5 border border-gold/15 text-gold/60 hover:border-gold/35 hover:text-gold/90 transition-all duration-300"
               >
                 Investor Login
               </Link>
@@ -105,7 +98,7 @@ const SiteHeader = () => {
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-primary-foreground/50 hover:text-primary-foreground transition-colors p-2 -mr-2"
+              className="lg:hidden text-primary-foreground/40 hover:text-primary-foreground transition-colors p-2 -mr-2"
               aria-label="Toggle menu"
             >
               {mobileOpen ? <X size={20} strokeWidth={1.2} /> : <Menu size={20} strokeWidth={1.2} />}
@@ -113,36 +106,34 @@ const SiteHeader = () => {
           </div>
         </div>
 
-        {/* Bottom border when scrolled */}
-        {scrolled && <div className="h-px bg-primary-foreground/5" />}
+        {scrolled && <div className="h-px bg-primary-foreground/[0.04]" />}
       </header>
 
-      {/* Mobile Nav Overlay */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="fixed inset-0 z-40 bg-prussian flex flex-col"
           >
-            {/* Spacer for header */}
             <div className="h-16" />
 
             <div className="flex-1 flex flex-col justify-center items-center px-8">
-              <nav className="flex flex-col items-center gap-7">
+              <nav className="flex flex-col items-center gap-6">
                 {navItems.map((item, i) => (
                   <motion.div
                     key={item.path}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 + i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.04 + i * 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <Link
                       to={item.path}
-                      className={`font-serif text-[1.75rem] tracking-[-0.02em] transition-colors duration-300 ${
-                        isActive(item.path) ? 'text-primary-foreground' : 'text-primary-foreground/30 active:text-primary-foreground/60'
+                      className={`font-serif text-[1.6rem] tracking-[-0.02em] transition-colors duration-300 ${
+                        isActive(item.path) ? 'text-primary-foreground' : 'text-primary-foreground/25 active:text-primary-foreground/50'
                       }`}
                     >
                       {item.label}
@@ -154,28 +145,27 @@ const SiteHeader = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.35, duration: 0.5 }}
-                className="flex flex-col items-center gap-5 mt-10 pt-8 border-t border-primary-foreground/6 w-48"
+                transition={{ delay: 0.3, duration: 0.4 }}
+                className="flex flex-col items-center gap-5 mt-10 pt-8 border-t border-primary-foreground/[0.05] w-44"
               >
                 <Link
                   to={`/${otherRegion}`}
                   onClick={() => setRegion(otherRegion)}
-                  className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-primary-foreground/25 active:text-primary-foreground/50"
+                  className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-primary-foreground/20 active:text-primary-foreground/45"
                 >
                   Switch to {otherRegion === 'india' ? 'India' : 'United States'}
                 </Link>
                 <Link
                   to="/investor-login"
-                  className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-8 py-3 border border-gold/20 text-gold/60 active:text-gold/80"
+                  className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-8 py-3 border border-gold/15 text-gold/50 active:text-gold/70"
                 >
                   Investor Login
                 </Link>
               </motion.div>
             </div>
 
-            {/* Bottom */}
             <div className="pb-8 text-center">
-              <p className="font-sans text-[9px] text-primary-foreground/10 tracking-[0.2em] uppercase">
+              <p className="font-sans text-[9px] text-primary-foreground/8 tracking-[0.2em] uppercase">
                 Privileged &amp; Confidential
               </p>
             </div>

@@ -23,16 +23,17 @@ const About = () => {
       {/* Hero */}
       <section className="relative bg-prussian text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/60 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="relative max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 pt-32 pb-20 md:pt-44 md:pb-32 lg:pt-48 lg:pb-36">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(207_50%_18%/0.15)_0%,_transparent_60%)] pointer-events-none" />
+        <div className="relative max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 pt-32 pb-20 md:pt-44 md:pb-28 lg:pt-48 lg:pb-36">
           <FadeIn><SectionLabel light>About Cruxway</SectionLabel></FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-serif text-[clamp(2rem,5.5vw,3.5rem)] text-primary-foreground max-w-[640px] leading-[1.1] tracking-[-0.03em]">
+            <h1 className="font-serif text-[clamp(2rem,5vw,3.25rem)] text-primary-foreground max-w-[620px] leading-[1.1] tracking-[-0.03em]">
               Values First — Integrity, Partnership, and&nbsp;Stewardship
             </h1>
           </FadeIn>
-          <FadeIn delay={0.25}><GoldRule className="mt-8 mb-8" /></FadeIn>
-          <FadeIn delay={0.35}>
-            <p className="font-sans text-[15px] md:text-base text-primary-foreground/40 max-w-[520px] leading-[1.8]">
+          <FadeIn delay={0.2}><GoldRule className="mt-8 mb-8" /></FadeIn>
+          <FadeIn delay={0.3}>
+            <p className="font-sans text-[15px] text-primary-foreground/35 max-w-[500px] leading-[1.8]">
               Founded in 2025 by Harin Gupta and Benson Zhang, Cruxway exists to partner with exceptional companies and preserve what makes them special while helping them scale.
             </p>
           </FadeIn>
@@ -54,7 +55,7 @@ const About = () => {
           </div>
           <div className="lg:col-span-8">
             <FadeIn delay={0.1}>
-              <p className="font-sans text-[15px] text-muted-foreground leading-[1.85]">
+              <p className="font-sans text-[14.5px] text-muted-foreground leading-[1.85]">
                 By combining long-term capital with deep operating expertise, we persevere to help owners transform their life's work into market-leading businesses — while protecting their legacy and strengthening the values that built their success.
               </p>
             </FadeIn>
@@ -67,20 +68,18 @@ const About = () => {
         <div className="max-w-[1120px] mx-auto">
           <FadeIn>
             <SectionLabel>Core Principles</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-4">
+            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-3">
               Guiding How We Partner With You
             </h2>
-            <p className="font-sans text-[14px] text-muted-foreground max-w-[480px] leading-[1.75] mb-12 md:mb-16">
-              These principles guide how we protect your legacy while growing your business.
-            </p>
+            <GoldRule className="mt-4 mb-12 md:mb-16" />
           </FadeIn>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10 md:gap-y-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-10 md:gap-y-14">
             {principles.map((p, i) => (
               <FadeIn key={p.title} delay={i * 0.05}>
                 <div className="relative pl-5 border-l border-foreground/[0.06]">
-                  <h3 className="font-serif text-[1.05rem] text-foreground mb-2">{p.title}</h3>
-                  <p className="font-sans text-[13px] text-muted-foreground leading-[1.7]">{p.desc}</p>
+                  <h3 className="font-serif text-[1.05rem] text-foreground mb-2.5">{p.title}</h3>
+                  <p className="font-sans text-[13px] text-muted-foreground leading-[1.75]">{p.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -90,25 +89,28 @@ const About = () => {
 
       {/* Partnership Approach */}
       <Section>
-        <FadeIn>
-          <SectionLabel>Our Approach</SectionLabel>
-          <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-12 md:mb-16">
-            Partnership Model
-          </h2>
-        </FadeIn>
+        <div className="mb-12 md:mb-16">
+          <FadeIn>
+            <SectionLabel>Our Approach</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground">
+              Partnership Model
+            </h2>
+            <GoldRule className="mt-5" />
+          </FadeIn>
+        </div>
 
-        <div className="space-y-0 border-t border-foreground/[0.06]">
+        <div className="border-t border-foreground/[0.05]">
           {approach.map((a, i) => (
             <FadeIn key={a.title} delay={i * 0.06}>
-              <div className="grid md:grid-cols-12 gap-3 md:gap-8 py-7 md:py-9 border-b border-foreground/[0.06]">
+              <div className="grid md:grid-cols-12 gap-3 md:gap-8 py-7 md:py-9 border-b border-foreground/[0.05]">
                 <div className="md:col-span-1">
-                  <span className="font-serif text-base text-foreground/12">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="font-serif text-[15px] text-foreground/10">{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <div className="md:col-span-4">
-                  <h3 className="font-serif text-lg md:text-xl text-foreground">{a.title}</h3>
+                  <h3 className="font-serif text-lg md:text-[1.2rem] text-foreground">{a.title}</h3>
                 </div>
                 <div className="md:col-span-7">
-                  <p className="font-sans text-[14px] text-muted-foreground leading-[1.75]">{a.desc}</p>
+                  <p className="font-sans text-[13.5px] md:text-[14px] text-muted-foreground leading-[1.75]">{a.desc}</p>
                 </div>
               </div>
             </FadeIn>

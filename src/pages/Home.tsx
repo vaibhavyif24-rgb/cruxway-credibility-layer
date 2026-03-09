@@ -19,7 +19,7 @@ const Home = () => {
       {/* Hero */}
       <section className="relative bg-prussian text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/60 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(207_50%_18%/0.25)_0%,_transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_hsl(207_50%_18%/0.2)_0%,_transparent_60%)] pointer-events-none" />
         <div className="relative max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 pt-32 pb-20 md:pt-44 md:pb-32 lg:pt-52 lg:pb-40">
           <FadeIn>
             <SectionLabel light>
@@ -27,15 +27,15 @@ const Home = () => {
             </SectionLabel>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <h1 className="font-serif text-[clamp(2rem,5.5vw,3.75rem)] text-primary-foreground max-w-[720px] leading-[1.1] tracking-[-0.03em]">
+            <h1 className="font-serif text-[clamp(2rem,5vw,3.5rem)] text-primary-foreground max-w-[700px] leading-[1.1] tracking-[-0.03em]">
               Building Enduring Businesses Through Partnership&nbsp;&amp;&nbsp;Stewardship
             </h1>
           </FadeIn>
-          <FadeIn delay={0.25}>
+          <FadeIn delay={0.2}>
             <GoldRule className="mt-8 mb-8" />
           </FadeIn>
-          <FadeIn delay={0.35}>
-            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/40 max-w-[540px] leading-[1.8]">
+          <FadeIn delay={0.3}>
+            <p className="font-sans text-[15px] text-primary-foreground/35 max-w-[520px] leading-[1.8]">
               We partner with exceptional companies in essential B2B services — preserving what makes them special while helping them scale for generations.
             </p>
           </FadeIn>
@@ -57,10 +57,10 @@ const Home = () => {
           </div>
           <div className="lg:col-span-8">
             <FadeIn delay={0.1}>
-              <p className="font-sans text-[15px] text-muted-foreground leading-[1.85] mb-5">
+              <p className="font-sans text-[14.5px] text-muted-foreground leading-[1.85] mb-5">
                 At Cruxway, we believe enduring businesses are built on values first — integrity, partnership, and stewardship. Founded in 2025 by Harin Gupta and Benson Zhang, Cruxway exists to partner with exceptional companies and preserve what makes them special while helping them scale.
               </p>
-              <p className="font-sans text-[15px] text-muted-foreground leading-[1.85]">
+              <p className="font-sans text-[14.5px] text-muted-foreground leading-[1.85]">
                 We focus on essential B2B services — industries with recurring, compliance-driven demand where reliability and trust are non-negotiable. This includes maintenance, repair &amp; operations, testing, inspection, certification &amp; compliance, and other mission-critical service models.
               </p>
             </FadeIn>
@@ -73,25 +73,26 @@ const Home = () => {
         <div className="max-w-[1120px] mx-auto">
           <FadeIn>
             <SectionLabel>What We Offer</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-12 md:mb-16">
+            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.25rem)] text-foreground mb-4">
               Our Commitment
             </h2>
+            <GoldRule className="mt-4 mb-12 md:mb-16" />
           </FadeIn>
 
-          <div className="space-y-0 border-t border-foreground/[0.06]">
+          <div className="border-t border-foreground/[0.05]">
             {offerings.map((item, i) => (
               <FadeIn key={item.title} delay={i * 0.06}>
-                <div className="grid md:grid-cols-12 gap-3 md:gap-8 py-6 md:py-8 border-b border-foreground/[0.06]">
+                <div className="grid md:grid-cols-12 gap-3 md:gap-8 py-7 md:py-9 border-b border-foreground/[0.05]">
                   <div className="md:col-span-1">
-                    <span className="font-serif text-base text-foreground/12">
+                    <span className="font-serif text-[15px] text-foreground/10">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                   </div>
                   <div className="md:col-span-4">
-                    <h3 className="font-serif text-lg md:text-xl text-foreground">{item.title}</h3>
+                    <h3 className="font-serif text-lg md:text-[1.2rem] text-foreground">{item.title}</h3>
                   </div>
                   <div className="md:col-span-7">
-                    <p className="font-sans text-[14px] text-muted-foreground leading-[1.75]">{item.desc}</p>
+                    <p className="font-sans text-[13.5px] md:text-[14px] text-muted-foreground leading-[1.75]">{item.desc}</p>
                   </div>
                 </div>
               </FadeIn>
@@ -102,22 +103,22 @@ const Home = () => {
 
       {/* CTA */}
       <Section dark>
-        <div className="text-center max-w-[640px] mx-auto">
+        <div className="text-center max-w-[620px] mx-auto">
           <FadeIn>
-            <h2 className="font-serif text-[clamp(1.4rem,3vw,2rem)] text-primary-foreground leading-[1.35] mb-6">
+            <h2 className="font-serif text-[clamp(1.35rem,3vw,2rem)] text-primary-foreground leading-[1.35] mb-6">
               By combining long-term capital with deep operating expertise, we help owners transform their life's work into market-leading businesses.
             </h2>
             <GoldRule className="justify-center my-8" />
             <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
               <Link
                 to={`/${region}/about`}
-                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-8 py-3.5 bg-primary-foreground/[0.06] text-primary-foreground/60 hover:bg-primary-foreground/[0.12] hover:text-primary-foreground transition-all duration-300"
+                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-8 py-3.5 bg-primary-foreground/[0.05] text-primary-foreground/50 hover:bg-primary-foreground/[0.1] hover:text-primary-foreground/80 transition-all duration-300 text-center"
               >
                 Our Approach
               </Link>
               <Link
                 to={`/${region}/contact`}
-                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-8 py-3.5 border border-primary-foreground/8 text-primary-foreground/35 hover:border-primary-foreground/20 hover:text-primary-foreground/60 transition-all duration-300"
+                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] px-8 py-3.5 border border-primary-foreground/8 text-primary-foreground/30 hover:border-primary-foreground/20 hover:text-primary-foreground/60 transition-all duration-300 text-center"
               >
                 Contact
               </Link>

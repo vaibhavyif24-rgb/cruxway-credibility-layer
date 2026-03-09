@@ -15,23 +15,22 @@ const SiteFooter = () => {
 
   return (
     <footer className="bg-prussian">
-      {/* Top rule */}
-      <div className="h-px bg-primary-foreground/4" />
+      <div className="h-px bg-primary-foreground/[0.04]" />
 
-      <div className="max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-20">
+      <div className="max-w-[1120px] mx-auto px-6 md:px-12 lg:px-20 py-14 md:py-20">
         {/* Top */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10 md:gap-20 mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-20 mb-14">
           <div>
             <p className="font-serif text-xl text-primary-foreground tracking-[-0.02em]">Cruxway</p>
             <div className="w-8 h-px bg-gold/20 mt-4" />
           </div>
 
-          <div className="grid grid-cols-2 gap-x-14 gap-y-3">
+          <div className="grid grid-cols-2 gap-x-12 gap-y-3">
             {links.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-primary-foreground/20 hover:text-primary-foreground/45 transition-colors duration-300"
+                className="font-sans text-[10px] font-medium uppercase tracking-[0.18em] text-primary-foreground/18 hover:text-primary-foreground/40 transition-colors duration-300"
               >
                 {item.label}
               </Link>
@@ -40,14 +39,14 @@ const SiteFooter = () => {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-primary-foreground/4 mb-8" />
+        <div className="h-px bg-primary-foreground/[0.04] mb-7" />
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-          <p className="font-sans text-[10px] text-primary-foreground/15 tracking-[0.08em]">
+          <p className="font-sans text-[10px] text-primary-foreground/12 tracking-[0.08em]">
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>
-          <p className="font-sans text-[9px] text-primary-foreground/10 tracking-[0.15em] uppercase">
+          <p className="font-sans text-[9px] text-primary-foreground/8 tracking-[0.15em] uppercase">
             Privileged &amp; Confidential
           </p>
         </div>
