@@ -198,19 +198,19 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
       <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
 
       <motion.div
-        className="flex items-center gap-10 md:gap-14 w-max"
+        className="flex items-center gap-6 md:gap-10 lg:gap-14 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[36px] md:h-[44px]"
+            className="flex items-center justify-center shrink-0 h-[28px] md:h-[38px] lg:h-[44px]"
           >
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-[32px] md:h-[40px] w-auto max-w-[120px] md:max-w-[150px] object-contain transition-all duration-500"
+              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
