@@ -89,6 +89,7 @@ const indiaPartner: TeamMember = {
   name: 'Vaibhav Sharma',
   role: 'Partner — India',
   photo: vaibhavPhoto,
+  linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
     'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
   highlights: [
