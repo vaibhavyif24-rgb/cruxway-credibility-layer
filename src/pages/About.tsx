@@ -126,12 +126,12 @@ const About = () => {
           <FadeIn>
             <SectionLabel light>Connect</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
-              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
+              {isIndia ? 'Partner With Us in India' : 'Built for American Owners Thinking Long-Term'}
             </h2>
             <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.8] mb-7">
               {isIndia
                 ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                : 'If you\'re building a business meant to last, we\'d welcome a conversation about how we can partner together.'}
+                : 'If you\'re building an American business meant to last, we\'d welcome a conversation about how we can partner together.'}
             </p>
             <Link
               to={`/${region}/contact`}
