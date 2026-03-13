@@ -262,7 +262,7 @@ const Home = () => {
                 <GoldRule className="mt-3 md:mt-4 mb-5 md:mb-9" />
               </FadeIn>
 
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 gap-y-1">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-0">
                 {usSectors.map((sector, i) => (
                   <SectorCard key={sector.label} sector={sector} index={i} />
                 ))}
