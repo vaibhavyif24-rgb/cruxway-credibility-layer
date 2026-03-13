@@ -234,7 +234,7 @@ const Home = () => {
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={institutionalLogos} duration={40} variant="dark" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>
       </div>
 
