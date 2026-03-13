@@ -115,8 +115,8 @@ const foundersLogos = [
 const allLogos = [
   ...foundersLogos,
   { src: nitiAayogLogo, alt: 'NITI Aayog' },
-  { src: ashokaLogo, alt: 'Ashoka University' },
-  { src: iicLogo, alt: 'Impact Investors Council' },
+  { src: ashokaLogo, alt: 'Ashoka University', small: true },
+  { src: iicLogo, alt: 'Impact Investors Council', small: true },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
   { src: swishinLogo, alt: 'Swishin Ventures' },
