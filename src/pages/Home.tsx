@@ -376,7 +376,7 @@ const Home = () => {
                   { t: 'Lower Middle Market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
                 ]
               : [
-                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We buy to hold and build, not to flip.' },
+                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We acquire majority stakes to hold and build, not to flip.' },
                   { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth, professionalise systems, and expand capabilities.' },
                   { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy. We protect downside while investing for long-term upside.' },
                   { t: 'Selective Focus', d: 'One platform at a time. Deep conviction and concentrated attention, not diversification across dozens of portfolio companies.' },
