@@ -22,11 +22,8 @@ import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
-
-// Additional logos
-import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
-import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
+import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 interface TeamMember {
   name: string;
