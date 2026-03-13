@@ -78,7 +78,9 @@ const indiaPartner: TeamMember = {
     'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
   highlights: [
     'NITI Aayog — Policy and strategy advisory to the Government of India',
-    'Swishin Ventures — VC fund partnering with multiple family offices across India',
+    'VC fund partnering with multiple family offices across India; early-stage investing and portfolio support',
+    'Vermin Console — Institutional advisory on environmental compliance and regulatory frameworks',
+    'Impact Investors Council — Policy engagement and ecosystem development for impact capital in India',
     'Young India Fellow, Ashoka University; Stanford University research grant recipient',
   ],
   logos: [
@@ -140,16 +142,16 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
             ))}
           </ul>
           {member.logos && member.logos.length > 0 && (
-            <div className="grid grid-cols-4 sm:grid-cols-4 gap-3 md:gap-4 pt-5 border-t border-foreground/[0.04]">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-5 border-t border-foreground/[0.04]">
               {member.logos.map((logo) => (
                 <div
                   key={logo.alt}
-                  className="flex items-center justify-center h-[44px] md:h-[52px] rounded-sm bg-background border border-foreground/[0.04] px-3"
+                  className="flex items-center justify-center h-[52px] md:h-[60px] rounded-sm bg-card border border-foreground/[0.04] px-4 hover:border-gold/15 transition-colors duration-300"
                 >
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="h-[22px] md:h-[28px] w-auto max-w-full object-contain opacity-40 grayscale hover:opacity-65 transition-opacity duration-300"
+                    className="h-[24px] md:h-[28px] w-auto max-w-full object-contain opacity-35 grayscale hover:opacity-55 transition-opacity duration-300"
                   />
                 </div>
               ))}
