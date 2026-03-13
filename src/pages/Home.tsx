@@ -58,22 +58,22 @@ const processStepsUS = [
   {
     num: '01',
     title: 'Identify',
-    description: 'We source founder-led and family-owned businesses in essential sectors with durable competitive advantages and strong client relationships.',
+    description: 'We source founder-led and family-owned American businesses in essential sectors with durable competitive advantages and strong client relationships.',
   },
   {
     num: '02',
     title: 'Evaluate',
-    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the business, its people, and our long-term vision.',
+    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the U.S. business, its people, and our long-term vision.',
   },
   {
     num: '03',
     title: 'Acquire',
-    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.',
+    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing American founders a clean transition.',
   },
   {
     num: '04',
     title: 'Build',
-    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.',
+    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value across U.S. markets without disrupting what already works.',
   },
 ];
 
@@ -112,20 +112,20 @@ const Home = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
           <FadeIn>
-            <SectionLabel light>Investment Firm</SectionLabel>
+            <SectionLabel light>{isIndia ? 'India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.06}>
             <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.4rem)] text-primary-foreground max-w-[620px] leading-[1.1] tracking-[-0.025em]">
               {isIndia
-                ? 'Low Market Buyouts & Acquisitions'
-                : 'The Right Partner for Enduring\u00a0Businesses'}
+                ? 'Low Market Buyouts & Acquisitions in India'
+                : 'The Right Partner for Enduring\u00a0American\u00a0Businesses'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
               {isIndia
-                ? 'We acquire and grow founder-led companies in essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
-                : 'We acquire and grow founder-led companies in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
+                ? 'We acquire and grow founder-led companies across India\'s essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
+                : 'We acquire and grow founder-led companies across the United States in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -159,8 +159,8 @@ const Home = () => {
               <SectionLabel>What We Do</SectionLabel>
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
                 {isIndia
-                  ? 'Acquiring & Building Companies in India'
-                  : 'Acquiring & Building Essential Companies'}
+                  ? 'Acquiring & Building Companies Across India'
+                  : 'Acquiring & Building Essential American Companies'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -169,13 +169,13 @@ const Home = () => {
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
                 {isIndia
-                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in India\u2019s lower middle market. We focus on sectors where operational improvement, compliance, and deep client relationships define long-term value.'
-                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.'}
+                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
+                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across the United States in critical B2B services. We focus on regulated, compliance-driven sectors where reliability and deep client relationships define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
-                  ? 'Our team brings global institutional experience to Indian companies seeking a partner, not just capital.'
-                  : 'Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.'}
+                  ? 'Our team brings global institutional experience to Indian companies seeking a partner who understands both local markets and world-class standards.'
+                  : 'Our team brings institutional investing and operating experience to American companies seeking a partner, not just capital.'}
               </p>
             </FadeIn>
           </div>
@@ -189,7 +189,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
-              From Discovery to Partnership
+              {isIndia ? 'From Discovery to Partnership in India' : 'From Discovery to Partnership'}
             </h2>
             <GoldRule className="mb-12 md:mb-16" />
           </FadeIn>
@@ -250,16 +250,16 @@ const Home = () => {
           <ApproachTable
             items={isIndia
               ? [
-                  { t: 'Founder alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline, not fund constraints.' },
-                  { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to professionalise and scale.' },
+                  { t: 'Founder alignment', d: 'Partnerships designed around the Indian founder\'s vision and growth timeline, not fund constraints.' },
+                  { t: 'Operational depth', d: 'Hands-on involvement alongside Indian management teams to professionalise and scale.' },
                   { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
                   { t: 'Lower middle market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
                 ]
               : [
-                  { t: 'Long-term alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
-                  { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
+                  { t: 'Long-term alignment', d: 'Hold periods designed around American value creation, not fund timelines.' },
+                  { t: 'Operational depth', d: 'Hands-on involvement alongside U.S. management teams to drive growth.' },
                   { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Selective focus', d: 'One platform at a time. Deep conviction, not diversification.' },
+                  { t: 'Selective focus', d: 'One American platform at a time. Deep conviction, not diversification.' },
                 ]}
           />
         </div>
@@ -289,12 +289,12 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light>Connect</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-5">
-              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
+              {isIndia ? 'Partner With Us in India' : 'Built for American Owners Thinking Long-Term'}
             </h2>
             <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-8">
               {isIndia
                 ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about how we can partner together.'
-                : 'If you\'re building a business meant to last, we\'d welcome a conversation about how we can partner together.'}
+                : 'If you\'re building an American business meant to last, we\'d welcome a conversation about how we can partner together.'}
             </p>
             <Link
               to={`/${region}/contact`}
