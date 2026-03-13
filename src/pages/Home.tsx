@@ -437,8 +437,7 @@ const Home = () => {
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-[300px] h-[200px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
+        <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
