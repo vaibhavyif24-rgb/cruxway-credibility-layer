@@ -308,7 +308,7 @@ const Home = () => {
       {/* Our Process */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
