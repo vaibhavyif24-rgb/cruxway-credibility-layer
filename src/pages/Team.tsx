@@ -1,6 +1,7 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
+import LogoMarquee from '@/components/LogoMarquee';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
@@ -19,8 +20,8 @@ import hggcLogo from '@/assets/logos/hggc.png';
 // Logos — Vaibhav
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
-import iicLogo from '@/assets/logos/iic.jpg';
-import treeforestLogo from '@/assets/logos/treeforest.jpg';
+import iicLogo from '@/assets/logos/iic.png';
+import treeforestLogo from '@/assets/logos/treeforest.png';
 
 interface TeamMember {
   name: string;
@@ -91,6 +92,20 @@ const indiaPartner: TeamMember = {
   ],
 };
 
+const allLogos = [
+  { src: warburgLogo, alt: 'Warburg Pincus' },
+  { src: blackrockLogo, alt: 'BlackRock' },
+  { src: jpMorganLogo, alt: 'J.P. Morgan' },
+  { src: evercoreLogo, alt: 'Evercore' },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
+  { src: hggcLogo, alt: 'HGGC' },
+  { src: creditSuisseLogo, alt: 'Credit Suisse' },
+  { src: nitiAayogLogo, alt: 'NITI Aayog' },
+  { src: ashokaLogo, alt: 'Ashoka University' },
+  { src: iicLogo, alt: 'Impact Investors Council' },
+  { src: treeforestLogo, alt: 'TreeForest Capital' },
+];
+
 /* ─── Profile Card ─── */
 const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) => (
   <FadeIn delay={index * 0.08}>
@@ -125,12 +140,12 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
           </p>
         </div>
 
-        {/* Bio + Logos */}
+        {/* Bio */}
         <div className="md:col-span-9">
           <p className="font-sans text-[13px] text-muted-foreground leading-[1.75] mb-3">
             {member.summary}
           </p>
-          <ul className="space-y-1.5 mb-5">
+          <ul className="space-y-1.5">
             {member.highlights.map((line, i) => (
               <li
                 key={i}
@@ -141,22 +156,6 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
               </li>
             ))}
           </ul>
-          {member.logos && member.logos.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 pt-5 border-t border-foreground/[0.04]">
-              {member.logos.map((logo) => (
-                <div
-                  key={logo.alt}
-                  className="flex items-center justify-center h-[52px] md:h-[60px] rounded-sm bg-card border border-foreground/[0.04] px-4 hover:border-gold/15 transition-colors duration-300"
-                >
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-[24px] md:h-[28px] w-auto max-w-full object-contain opacity-35 grayscale hover:opacity-55 transition-opacity duration-300"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </motion.div>
@@ -196,7 +195,6 @@ const Team = () => {
 
       {isIndia ? (
         <>
-          {/* India Partner — top */}
           <Section>
             <div className="mb-5 md:mb-7">
               <FadeIn>
@@ -209,7 +207,6 @@ const Team = () => {
             </div>
           </Section>
 
-          {/* Founders below */}
           <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
             <div className="max-w-[1080px] mx-auto">
               <div className="mb-5 md:mb-7">
@@ -228,7 +225,6 @@ const Team = () => {
         </>
       ) : (
         <>
-          {/* US — Founders */}
           <Section>
             <div className="mb-5 md:mb-7">
               <FadeIn>
@@ -243,7 +239,6 @@ const Team = () => {
             </div>
           </Section>
 
-          {/* US — Regional Partners */}
           <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
             <div className="max-w-[1080px] mx-auto">
               <div className="mb-5 md:mb-7">
@@ -259,6 +254,19 @@ const Team = () => {
           </section>
         </>
       )}
+
+      {/* Institutional Experience Marquee */}
+      <div>
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 pb-6">
+          <FadeIn>
+            <SectionLabel>Institutional Experience</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
+        </div>
+        <FadeIn delay={0.1}>
+          <LogoMarquee logos={allLogos} duration={35} variant="dark" />
+        </FadeIn>
+      </div>
 
       {/* Network */}
       <Section>
