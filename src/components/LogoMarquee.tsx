@@ -57,12 +57,12 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0"
+            className="flex items-center justify-center shrink-0 h-[56px] md:h-[68px]"
           >
             <img
               src={logo.src}
               alt={logo.alt}
-              className={`h-[42px] md:h-[52px] w-auto max-w-[160px] md:max-w-[200px] object-contain transition-opacity duration-300 ${
+              className={`h-[48px] md:h-[60px] w-auto max-w-[180px] md:max-w-[220px] object-contain transition-opacity duration-300 ${
                 isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'
               }`}
               style={{
