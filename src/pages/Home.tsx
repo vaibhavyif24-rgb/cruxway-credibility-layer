@@ -240,7 +240,7 @@ const Home = () => {
                     </p>
                   </FadeIn>
                   <FadeIn delay={0.16}>
-                    <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                    <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-primary-foreground/[0.06]">
                       <StatBlock val="10M+" lbl="U.S. Small Businesses" delay={0} light />
                       <StatBlock val="$10T+" lbl="Transition Value" delay={0.08} light />
                       <StatBlock val="70%+" lbl="Lack Succession Plans" delay={0.16} light />
