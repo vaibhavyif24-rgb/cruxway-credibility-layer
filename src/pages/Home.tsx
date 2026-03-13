@@ -2,6 +2,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
+import LogoMarquee from '@/components/LogoMarquee';
 
 // Logos for social proof
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
@@ -128,38 +129,21 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Social Proof — Institutional Logo Bar */}
-      <Section>
-        <FadeIn>
-          <SectionLabel>Institutional Experience</SectionLabel>
-          <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
-            Our team has invested and operated across leading global institutions
-          </h2>
-          <GoldRule className="mt-5 mb-10 md:mb-14" />
-        </FadeIn>
+      {/* Social Proof — Institutional Logo Marquee */}
+      <div>
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 lg:pt-24 pb-6">
+          <FadeIn>
+            <SectionLabel>Institutional Experience</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
+              Our team has invested and operated across leading global institutions
+            </h2>
+            <GoldRule className="mt-5" />
+          </FadeIn>
+        </div>
         <FadeIn delay={0.1}>
-          <div className="border-t border-foreground/[0.06] pt-10">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
-              {institutionalLogos.map((logo, i) => (
-                <motion.div
-                  key={logo.alt}
-                  initial={{ opacity: 0, y: 8 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.5 }}
-                  className="flex items-center justify-center h-[56px] md:h-[64px] rounded-sm bg-card border border-foreground/[0.04] px-4 hover:border-gold/15 transition-colors duration-300"
-                >
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-[24px] md:h-[30px] w-auto max-w-full object-contain opacity-35 grayscale hover:opacity-55 transition-opacity duration-300"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          <LogoMarquee logos={institutionalLogos} duration={30} variant="dark" />
         </FadeIn>
-      </Section>
+      </div>
 
       {/* CTA */}
       <Section dark>
