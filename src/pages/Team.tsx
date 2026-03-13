@@ -284,16 +284,12 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
             </ul>
 
             {/* Deal logos — horizontal scrolling marquee */}
-            {member.dealImageGold && member.dealImageOriginal && (
+            {member.dealLogos && member.dealLogos.length > 0 && (
               <div className="mt-6 pt-4 border-t border-foreground/[0.05]">
                 <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2">
                   Select Investments &amp; Deals
                 </p>
-                <DealMarquee
-                  goldSrc={member.dealImageGold}
-                  originalSrc={member.dealImageOriginal}
-                  alt={`${member.name} deals`}
-                />
+                <DealLogoMarquee logos={member.dealLogos} />
               </div>
             )}
           </div>
