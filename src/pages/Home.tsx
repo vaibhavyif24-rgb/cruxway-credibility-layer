@@ -18,6 +18,8 @@ import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
+import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
+import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 
 // Harin + Ben logos only (US view)
 const foundersLogos = [
@@ -28,6 +30,8 @@ const foundersLogos = [
   { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: hggcLogo, alt: 'HGGC' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
+  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
 ];
 
 // All logos merged (India view)
