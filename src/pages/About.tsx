@@ -15,7 +15,7 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
 ];
 
-/* ── Premium Sector Card ── */
+/* ── Sector Card ── */
 const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
@@ -29,25 +29,21 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
       className="group"
     >
       <motion.div
-        whileHover={{ y: -3 }}
+        whileHover={{ y: -2 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="relative h-full p-4 md:p-5 rounded-[3px] border border-foreground/[0.06] bg-background hover:border-gold/25 hover:shadow-[0_6px_24px_-8px_hsl(var(--gold)/0.08)] transition-all duration-400"
+        className="relative h-full py-4 md:py-5 border-t border-primary-foreground/[0.06] hover:border-gold/20 transition-all duration-400"
       >
-        {/* Top accent */}
-        <div className="absolute top-0 left-4 md:left-5 right-4 md:right-5 h-px overflow-hidden">
-          <motion.div
-            className="h-full bg-gradient-to-r from-gold/25 via-gold/40 to-gold/25"
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, delay: index * 0.08 + 0.2, ease: [0.22, 1, 0.36, 1] }}
-            style={{ originX: 0 }}
-          />
-        </div>
-
-        <h4 className="font-serif text-[0.92rem] md:text-[1rem] text-foreground leading-[1.25] mb-1.5">
+        {/* Animated gold accent */}
+        <motion.div
+          className="absolute top-0 left-0 h-[2px] bg-gold/30"
+          initial={{ width: 0 }}
+          animate={isInView ? { width: 24 } : {}}
+          transition={{ duration: 0.6, delay: index * 0.08 + 0.2, ease: [0.22, 1, 0.36, 1] }}
+        />
+        <h4 className="font-serif text-[0.88rem] md:text-[0.95rem] text-primary-foreground leading-[1.3] mb-1">
           {sector.label}
         </h4>
-        <p className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/60 leading-[1.65] group-hover:text-muted-foreground/85 transition-colors duration-300">
+        <p className="font-sans text-[11px] md:text-[11.5px] text-primary-foreground/25 leading-[1.65] group-hover:text-primary-foreground/40 transition-colors duration-300">
           {sector.desc}
         </p>
       </motion.div>
@@ -113,19 +109,19 @@ const About = () => {
       {/* Mission */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-16">
-            <div className="lg:col-span-5">
+          <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
+            <div className="lg:col-span-4">
               <FadeIn>
                 <SectionLabel>Mission</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
+                <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.9rem)] text-foreground leading-[1.18]">
                   {isIndia
                     ? 'Scale What India Builds. Preserve What Founders Value.'
                     : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
                 </h2>
-                <GoldRule className="mt-3 md:mt-5" />
+                <GoldRule className="mt-3 md:mt-4" />
               </FadeIn>
             </div>
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-8">
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                   {isIndia
@@ -143,10 +139,11 @@ const About = () => {
         </div>
       </section>
 
-      {/* Our Approach */}
+      {/* Our Approach + Target Sectors combined on dark */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+          {/* Approach */}
           <FadeIn>
             <SectionLabel light>Our Approach</SectionLabel>
             <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
@@ -156,50 +153,58 @@ const About = () => {
           </FadeIn>
 
           <ApproachTable items={approach} variant="dark" />
+
+          {/* Target Sectors — US only, integrated into same dark section */}
+          {!isIndia && (
+            <div className="mt-10 md:mt-14 lg:mt-16 pt-8 md:pt-10 lg:pt-12 border-t border-primary-foreground/[0.04]">
+              <FadeIn>
+                <SectionLabel light>Target Sectors</SectionLabel>
+                <h2 className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground leading-[1.2] max-w-[480px] mb-1">
+                  Essential B2B services across the United States
+                </h2>
+                <GoldRule className="mb-5 md:mb-8" />
+              </FadeIn>
+
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 lg:gap-x-12 gap-y-0">
+                {usSectors.map((sector, i) => (
+                  <SectorCard key={sector.label} sector={sector} index={i} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Target Sectors — US only */}
-      {!isIndia && (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
-          <div className="max-w-[1080px] mx-auto">
-            <FadeIn>
-              <SectionLabel>Target Sectors</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
-                Essential B2B services across the United States
-              </h2>
-              <GoldRule className="mt-3 md:mt-4 mb-4 md:mb-7" />
-            </FadeIn>
-
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
-              {usSectors.map((sector, i) => (
-                <SectorCard key={sector.label} sector={sector} index={i} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Principles */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Principles</SectionLabel>
-            <GoldRule className="mt-1 mb-4 md:mb-7" />
-          </FadeIn>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-4 md:gap-y-6">
-            {principles.map((p, i) => (
-              <FadeIn key={p.t} delay={i * 0.03}>
-                <motion.div
-                  whileHover={{ x: 3 }}
-                  transition={{ duration: 0.2 }}
-                  className="pl-3 md:pl-4 border-l border-foreground/[0.06] hover:border-gold/25 transition-colors duration-300 group"
-                >
-                  <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1">{p.t}</h3>
-                  <p className="font-sans text-[11.5px] md:text-[12.5px] text-muted-foreground leading-[1.65]">{p.d}</p>
-                </motion.div>
+          <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
+            <div className="lg:col-span-4">
+              <FadeIn>
+                <SectionLabel>Principles</SectionLabel>
+                <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2]">
+                  What Guides Us
+                </h2>
+                <GoldRule className="mt-3 md:mt-4" />
               </FadeIn>
-            ))}
+            </div>
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-5 md:gap-y-7">
+                {principles.map((p, i) => (
+                  <FadeIn key={p.t} delay={i * 0.04}>
+                    <motion.div
+                      whileHover={{ y: -2 }}
+                      transition={{ duration: 0.2 }}
+                      className="group"
+                    >
+                      <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1.5 leading-[1.2]">{p.t}</h3>
+                      <div className="w-5 h-px bg-gold/20 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-400 mb-2" />
+                      <p className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/65 leading-[1.65] group-hover:text-muted-foreground/85 transition-colors duration-300">{p.d}</p>
+                    </motion.div>
+                  </FadeIn>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
