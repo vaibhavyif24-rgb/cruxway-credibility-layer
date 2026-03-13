@@ -61,35 +61,37 @@ const About = () => {
       </section>
 
       {/* Mission */}
-      <Section>
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
-          <div className="lg:col-span-5">
-            <FadeIn>
-              <SectionLabel>Mission</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
-                {isIndia
-                  ? 'Scale What India Builds. Preserve What Founders Value.'
-                  : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
-              </h2>
-              <GoldRule className="mt-5" />
-            </FadeIn>
-          </div>
-          <div className="lg:col-span-7">
-            <FadeIn delay={0.08}>
-              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
-                {isIndia
-                  ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
-                  : 'Cruxway combines long-term capital with operating expertise to help business owners across the United States transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
-              </p>
-              {!isIndia && (
-                <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                  We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
+            <div className="lg:col-span-5">
+              <FadeIn>
+                <SectionLabel>Mission</SectionLabel>
+                <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
+                  {isIndia
+                    ? 'Scale What India Builds. Preserve What Founders Value.'
+                    : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
+                </h2>
+                <GoldRule className="mt-5" />
+              </FadeIn>
+            </div>
+            <div className="lg:col-span-7">
+              <FadeIn delay={0.08}>
+                <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
+                  {isIndia
+                    ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
+                    : 'Cruxway combines long-term capital with operating expertise to help business owners across the United States transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
                 </p>
-              )}
-            </FadeIn>
+                {!isIndia && (
+                  <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+                    We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
+                  </p>
+                )}
+              </FadeIn>
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* US: Why Essential Services / India: Market Context */}
       {!isIndia ? (
