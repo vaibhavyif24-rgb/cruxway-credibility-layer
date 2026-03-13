@@ -271,9 +271,9 @@ const Home = () => {
           </section>
         </>
       ) : (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
           <div className="max-w-[1080px] mx-auto">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+            <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
               <div className="lg:col-span-5">
                 <FadeIn>
                   <SectionLabel>The Opportunity</SectionLabel>
