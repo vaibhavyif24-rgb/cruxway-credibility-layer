@@ -24,19 +24,21 @@ const App = () => (
       <Sonner />
       <RegionProvider>
         <BrowserRouter>
-          <Suspense fallback={null}>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/investor-login" element={<InvestorLogin />} />
-              <Route path="/:region" element={<RegionLayout />}>
-                <Route index element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="team" element={<Team />} />
-                <Route path="contact" element={<Contact />} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <main>
+            <Suspense fallback={null}>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/investor-login" element={<InvestorLogin />} />
+                <Route path="/:region" element={<RegionLayout />}>
+                  <Route index element={<Home />} />
+                  <Route path="about" element={<About />} />
+                  <Route path="team" element={<Team />} />
+                  <Route path="contact" element={<Contact />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </main>
         </BrowserRouter>
       </RegionProvider>
     </TooltipProvider>
