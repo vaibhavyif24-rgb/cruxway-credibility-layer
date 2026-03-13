@@ -22,11 +22,8 @@ import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
-
-// Additional logos
-import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
-import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
+import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 interface TeamMember {
   name: string;
@@ -94,6 +91,8 @@ const indiaPartner: TeamMember = {
     { src: ashokaLogo, alt: 'Ashoka University' },
     { src: iicLogo, alt: 'Impact Investors Council' },
     { src: treeforestLogo, alt: 'TreeForest Capital' },
+    { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
+    { src: swishinLogo, alt: 'Swishin Ventures' },
   ],
 };
 
@@ -109,9 +108,8 @@ const allLogos = [
   { src: ashokaLogo, alt: 'Ashoka University' },
   { src: iicLogo, alt: 'Impact Investors Council' },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
-  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
+  { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
 /* ─── Profile Card ─── */

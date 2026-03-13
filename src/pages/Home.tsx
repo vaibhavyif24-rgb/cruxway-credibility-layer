@@ -16,11 +16,11 @@ import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
-import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
-import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
+import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
-const institutionalLogos = [
+// Harin + Ben logos only (US view)
+const foundersLogos = [
   { src: warburgLogo, alt: 'Warburg Pincus' },
   { src: blackrockLogo, alt: 'BlackRock' },
   { src: jpMorganLogo, alt: 'J.P. Morgan' },
@@ -28,13 +28,17 @@ const institutionalLogos = [
   { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: hggcLogo, alt: 'HGGC' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
+];
+
+// All logos merged (India view)
+const allLogos = [
+  ...foundersLogos,
   { src: nitiAayogLogo, alt: 'NITI Aayog' },
   { src: ashokaLogo, alt: 'Ashoka University' },
   { src: iicLogo, alt: 'Impact Investors Council' },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
-  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
+  { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
 const processSteps = [
@@ -234,7 +238,7 @@ const Home = () => {
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={institutionalLogos} duration={40} variant="dark" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>
       </div>
 
