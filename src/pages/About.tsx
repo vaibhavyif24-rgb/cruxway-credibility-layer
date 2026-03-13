@@ -61,35 +61,37 @@ const About = () => {
       </section>
 
       {/* Mission */}
-      <Section>
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
-          <div className="lg:col-span-5">
-            <FadeIn>
-              <SectionLabel>Mission</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
-                {isIndia
-                  ? 'Scale What India Builds. Preserve What Founders Value.'
-                  : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
-              </h2>
-              <GoldRule className="mt-5" />
-            </FadeIn>
-          </div>
-          <div className="lg:col-span-7">
-            <FadeIn delay={0.08}>
-              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
-                {isIndia
-                  ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
-                  : 'Cruxway combines long-term capital with operating expertise to help business owners across the United States transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
-              </p>
-              {!isIndia && (
-                <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                  We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
+            <div className="lg:col-span-5">
+              <FadeIn>
+                <SectionLabel>Mission</SectionLabel>
+                <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
+                  {isIndia
+                    ? 'Scale What India Builds. Preserve What Founders Value.'
+                    : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
+                </h2>
+                <GoldRule className="mt-5" />
+              </FadeIn>
+            </div>
+            <div className="lg:col-span-7">
+              <FadeIn delay={0.08}>
+                <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
+                  {isIndia
+                    ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
+                    : 'Cruxway combines long-term capital with operating expertise to help business owners across the United States transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
                 </p>
-              )}
-            </FadeIn>
+                {!isIndia && (
+                  <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+                    We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
+                  </p>
+                )}
+              </FadeIn>
+            </div>
           </div>
         </div>
-      </Section>
+      </section>
 
       {/* US: Why Essential Services / India: Market Context */}
       {!isIndia ? (
@@ -208,49 +210,53 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <Section>
-        <FadeIn>
-          <SectionLabel>Principles</SectionLabel>
-          <GoldRule className="mt-1 mb-8 md:mb-10" />
-        </FadeIn>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-6 md:gap-y-7">
-          {principles.map((p, i) => (
-            <FadeIn key={p.t} delay={i * 0.03}>
-              <motion.div
-                whileHover={{ x: 3 }}
-                transition={{ duration: 0.2 }}
-                className="pl-3 md:pl-4 border-l border-foreground/[0.06] hover:border-gold/25 transition-colors duration-300 group"
-              >
-                <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1">{p.t}</h3>
-                <p className="font-sans text-[11.5px] md:text-[12.5px] text-muted-foreground leading-[1.65]">{p.d}</p>
-              </motion.div>
-            </FadeIn>
-          ))}
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Principles</SectionLabel>
+            <GoldRule className="mt-1 mb-7 md:mb-9" />
+          </FadeIn>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-5 md:gap-y-6">
+            {principles.map((p, i) => (
+              <FadeIn key={p.t} delay={i * 0.03}>
+                <motion.div
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.2 }}
+                  className="pl-3 md:pl-4 border-l border-foreground/[0.06] hover:border-gold/25 transition-colors duration-300 group"
+                >
+                  <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1">{p.t}</h3>
+                  <p className="font-sans text-[11.5px] md:text-[12.5px] text-muted-foreground leading-[1.65]">{p.d}</p>
+                </motion.div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* CTA */}
-      <Section dark>
-        <div className="max-w-[480px]">
-          <FadeIn>
-            <SectionLabel light>Connect</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
-              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
-            </h2>
-            <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.8] mb-7">
-              {isIndia
-                ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what a long-term partnership could look like.'}
-            </p>
-            <Link
-              to={`/${region}/contact`}
-              className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-primary-foreground/[0.08] text-primary-foreground/35 hover:border-gold/25 hover:text-primary-foreground/65 transition-all duration-300"
-            >
-              Start a Conversation
-            </Link>
-          </FadeIn>
+      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="max-w-[480px]">
+            <FadeIn>
+              <SectionLabel light>Connect</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
+                {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
+              </h2>
+              <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.8] mb-6">
+                {isIndia
+                  ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
+                  : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what a long-term partnership could look like.'}
+              </p>
+              <Link
+                to={`/${region}/contact`}
+                className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-primary-foreground/[0.08] text-primary-foreground/35 hover:border-gold/25 hover:text-primary-foreground/65 transition-all duration-300"
+              >
+                Start a Conversation
+              </Link>
+            </FadeIn>
+          </div>
         </div>
-      </Section>
+      </section>
     </div>
   );
 };
