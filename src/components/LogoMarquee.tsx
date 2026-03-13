@@ -65,7 +65,10 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
               className={`h-[42px] md:h-[52px] w-auto max-w-[160px] md:max-w-[200px] object-contain transition-opacity duration-300 ${
                 isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'
               }`}
-              style={{ filter: goldFilter }}
+              style={{
+                filter: goldFilter,
+                mixBlendMode: isDark ? 'screen' : undefined,
+              }}
               loading="lazy"
             />
           </div>
