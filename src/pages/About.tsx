@@ -97,8 +97,9 @@ const About = () => {
       {/* US: Why Essential Services / India: Market Context */}
       {!isIndia ? (
         <section className="relative bg-primary text-primary-foreground overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
-          <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-prussian-mid/20 rounded-full blur-[80px] pointer-events-none" />
           <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
             <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
               <div className="lg:col-span-5">
