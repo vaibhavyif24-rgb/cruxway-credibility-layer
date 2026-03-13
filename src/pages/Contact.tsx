@@ -36,10 +36,10 @@ const Contact = () => {
                 <div className="py-5">
                   <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-muted-foreground/35 mb-2">Email</p>
                   <a
-                    href="mailto:info@cruxway.com"
+                    href={region === 'india' ? 'mailto:india@cruxway.com' : 'mailto:info@cruxway.com'}
                     className="font-serif text-[1.05rem] text-foreground hover:text-gold-dim transition-colors duration-300"
                   >
-                    info@cruxway.com
+                    {region === 'india' ? 'india@cruxway.com' : 'info@cruxway.com'}
                   </a>
                 </div>
               </div>
