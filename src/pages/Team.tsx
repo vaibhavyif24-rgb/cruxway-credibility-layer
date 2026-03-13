@@ -79,9 +79,7 @@ const indiaPartner: TeamMember = {
   highlights: [
     'NITI Aayog — Policy and strategy advisory to the Government of India',
     'Swishin Ventures — VC fund partnering with multiple family offices across India',
-    'Three-time founder; on-ground consulting across strategy, market entry, and operations',
-    'Select investments: Lohum, Porter, Waaree Solar',
-    'Stanford University — Research grant recipient',
+    'Young India Fellow, Ashoka University; Stanford University research grant recipient',
   ],
   logos: [
     { src: nitiAayogLogo, alt: 'NITI Aayog' },
