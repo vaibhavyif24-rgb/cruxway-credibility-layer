@@ -232,7 +232,7 @@ const Home = () => {
                 </div>
                 <div className="lg:col-span-7">
                   <FadeIn delay={0.08}>
-                    <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                    <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                       The United States is home to tens of thousands of founder-led businesses in essential B2B services: companies that maintain critical infrastructure, ensure regulatory compliance, and keep the economy running. Many of these businesses were built over decades by owners who are now approaching transition without a clear succession plan.
                     </p>
                     <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
