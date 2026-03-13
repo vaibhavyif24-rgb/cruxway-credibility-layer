@@ -62,7 +62,7 @@ const processStepsUS = [
 const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across India\'s lower middle market with strong fundamentals and operational upside.' },
   { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
-  { num: '03', title: 'Acquire', description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
   { num: '04', title: 'Build', description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.' },
 ];
 
