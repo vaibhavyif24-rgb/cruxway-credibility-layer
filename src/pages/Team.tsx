@@ -176,9 +176,11 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-/* ─── Deal Marquee (horizontal scrolling, gold → real colors on hover) ─── */
-const DealMarquee = ({ goldSrc, originalSrc, alt, duration = 22 }: { goldSrc: string; originalSrc: string; alt: string; duration?: number }) => {
+/* ─── Deal Logo Marquee (individual logos, gold → real colors on hover) ─── */
+const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration?: number }) => {
   const [hovered, setHovered] = useState(false);
+  const doubled = [...logos, ...logos];
+  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   return (
     <div
@@ -187,22 +189,29 @@ const DealMarquee = ({ goldSrc, originalSrc, alt, duration = 22 }: { goldSrc: st
       onMouseLeave={() => setHovered(false)}
     >
       {/* Edge fades */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
 
       <motion.div
-        className="flex items-center gap-16 w-max"
+        className="flex items-center gap-10 md:gap-14 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
-        {[0, 1].map((copy) => (
-          <img
-            key={copy}
-            src={hovered ? originalSrc : goldSrc}
-            alt={alt}
-            className="h-[65px] md:h-[80px] w-auto object-contain shrink-0 transition-opacity duration-500"
-            style={{ opacity: hovered ? 1 : 0.85 }}
-          />
+        {doubled.map((logo, i) => (
+          <div
+            key={`${logo.alt}-${i}`}
+            className="flex items-center justify-center shrink-0 h-[36px] md:h-[44px]"
+          >
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              className="h-[32px] md:h-[40px] w-auto max-w-[110px] md:max-w-[140px] object-contain transition-all duration-500"
+              style={{
+                filter: hovered ? 'none' : goldFilter,
+                opacity: hovered ? 1 : 0.8,
+              }}
+            />
+          </div>
         ))}
       </motion.div>
     </div>
