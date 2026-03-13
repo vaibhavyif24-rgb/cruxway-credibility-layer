@@ -195,7 +195,7 @@ const Home = () => {
           </FadeIn>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
-            {processSteps.map((step, i) => (
+            {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
               <FadeIn key={step.num} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -4 }}
