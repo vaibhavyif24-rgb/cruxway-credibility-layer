@@ -47,7 +47,7 @@ const About = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[420px]">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-primary-foreground/30 leading-[1.7] md:leading-[1.75] mt-3 md:mt-4 max-w-[420px]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies in manufacturing, industrial services, and essential sectors.'
                 : 'Combining long-term capital with operating expertise to help business owners across the United States build lasting institutions in essential B2B services.'}
