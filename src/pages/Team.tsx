@@ -108,7 +108,7 @@ const foundersLogos = [
   { src: hggcLogo, alt: 'HGGC' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
   { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', small: true },
 ];
 
 // All logos merged (India team view)
