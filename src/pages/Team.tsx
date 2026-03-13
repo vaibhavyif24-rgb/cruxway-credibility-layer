@@ -213,67 +213,71 @@ const Team = () => {
         <HeroDivider />
       </section>
 
-      {isIndia ? (
-        <>
-          <Section>
-            <div className="mb-5 md:mb-7">
-              <FadeIn>
-                <SectionLabel>Founders</SectionLabel>
-                <GoldRule className="mt-1" />
-              </FadeIn>
-            </div>
-            <div className="border-t border-foreground/[0.06]">
-              {founders.map((m, i) => (
-                <ProfileCard key={m.name} member={m} index={i} />
-              ))}
-            </div>
-          </Section>
+      {/* Select Investments & Deals */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Select Investments &amp; Deals</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
+          <div className="mt-8 grid md:grid-cols-2 gap-8 md:gap-12">
+            <FadeIn delay={0.06}>
+              <div className="flex flex-col items-center">
+                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">Harin Gupta</p>
+                <img
+                  src={harinDeals}
+                  alt="Harin Gupta — Select investments and deals"
+                  className="w-full max-w-[420px] h-auto object-contain opacity-80"
+                  style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+                  loading="lazy"
+                />
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.12}>
+              <div className="flex flex-col items-center">
+                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">Benson Zhang</p>
+                <img
+                  src={bensonDeals}
+                  alt="Benson Zhang — Select investments and deals"
+                  className="w-full max-w-[420px] h-auto object-contain opacity-80"
+                  style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+                  loading="lazy"
+                />
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
 
-          <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-            <div className="max-w-[1080px] mx-auto">
-              <div className="mb-5 md:mb-7">
-                <FadeIn>
-                  <SectionLabel>Partner</SectionLabel>
-                  <GoldRule className="mt-1" />
-                </FadeIn>
-              </div>
-              <div className="border-t border-foreground/[0.06]">
-                <ProfileCard member={indiaPartner} index={0} />
-              </div>
-            </div>
-          </section>
-        </>
-      ) : (
-        <>
-          <Section>
-            <div className="mb-5 md:mb-7">
-              <FadeIn>
-                <SectionLabel>Founders</SectionLabel>
-                <GoldRule className="mt-1" />
-              </FadeIn>
-            </div>
-            <div className="border-t border-foreground/[0.06]">
-              {founders.map((m, i) => (
-                <ProfileCard key={m.name} member={m} index={i} />
-              ))}
-            </div>
-          </Section>
+      {/* Founders */}
+      <Section>
+        <div className="mb-5 md:mb-7">
+          <FadeIn>
+            <SectionLabel>Founders</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
+        </div>
+        <div className="border-t border-foreground/[0.06]">
+          {founders.map((m, i) => (
+            <ProfileCard key={m.name} member={m} index={i} />
+          ))}
+        </div>
+      </Section>
 
-          <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-            <div className="max-w-[1080px] mx-auto">
-              <div className="mb-5 md:mb-7">
-                <FadeIn>
-                  <SectionLabel>Partner</SectionLabel>
-                  <GoldRule className="mt-1" />
-                </FadeIn>
-              </div>
-              <div className="border-t border-foreground/[0.06]">
-                <ProfileCard member={indiaPartner} index={0} />
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {/* Partner */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="mb-5 md:mb-7">
+            <FadeIn>
+              <SectionLabel>Partner</SectionLabel>
+              <GoldRule className="mt-1" />
+            </FadeIn>
+          </div>
+          <div className="border-t border-foreground/[0.06]">
+            <ProfileCard member={indiaPartner} index={0} />
+          </div>
+        </div>
+      </section>
 
       {/* Institutional Experience Marquee */}
       <div>
