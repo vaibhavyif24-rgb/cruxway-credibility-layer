@@ -181,7 +181,13 @@ const Home = () => {
                   )}
 
                   {/* Step number */}
-                  <span className="font-serif text-[2.5rem] md:text-[3rem] leading-none text-primary-foreground/[0.06] group-hover:text-gold/20 transition-colors duration-500 block mb-4">
+                  <motion.span
+                    initial={{ color: 'hsl(var(--primary-foreground) / 0.04)' }}
+                    whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
+                    viewport={{ once: false, margin: '-20px' }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="font-serif text-[2.5rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-4"
+                  >
                     {step.num}
                   </span>
 
