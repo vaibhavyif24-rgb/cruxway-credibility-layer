@@ -235,7 +235,7 @@ const Home = () => {
                     <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                       The United States is home to tens of thousands of founder-led businesses in essential B2B services: companies that maintain critical infrastructure, ensure regulatory compliance, and keep the economy running. Many of these businesses were built over decades by owners who are now approaching transition without a clear succession plan.
                     </p>
-                    <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
+                    <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8]">
                       These companies are highly resilient, often counter-cyclical, and deeply embedded in their customer relationships. Yet most are too small for large private equity and too complex for unsophisticated buyers. Cruxway exists to fill this gap: providing patient capital and operational expertise to preserve what founders built while unlocking the next chapter of growth.
                     </p>
                   </FadeIn>
