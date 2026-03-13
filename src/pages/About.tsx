@@ -210,7 +210,7 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Principles</SectionLabel>
