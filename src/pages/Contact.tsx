@@ -7,8 +7,9 @@ const Contact = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-prussian text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-transparent to-navy-deep/15 pointer-events-none" />
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className="absolute top-1/3 left-0 w-[400px] h-[300px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28">
           <FadeIn>
             <SectionLabel light>Contact</SectionLabel>
@@ -36,7 +37,7 @@ const Contact = () => {
                   <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-muted-foreground/35 mb-2">Email</p>
                   <a
                     href="mailto:info@cruxway.com"
-                    className="font-serif text-[1.05rem] text-foreground hover:text-accent transition-colors duration-300"
+                    className="font-serif text-[1.05rem] text-foreground hover:text-gold-dim transition-colors duration-300"
                   >
                     info@cruxway.com
                   </a>

@@ -37,7 +37,7 @@ export const Section = ({ children, className = '', dark = false, narrow = false
     className={`
       px-5 md:px-10 lg:px-16
       py-14 md:py-20 lg:py-24
-      ${dark ? 'bg-prussian text-primary-foreground' : 'bg-background text-foreground'}
+      ${dark ? 'hero-gradient-animated text-primary-foreground' : 'bg-background text-foreground'}
       ${className}
     `}
   >
@@ -61,8 +61,20 @@ export const SectionLabel = ({ children, light = false }: { children: React.Reac
 
 export const GoldRule = ({ className = '' }: { className?: string }) => (
   <div className={`flex items-center gap-2.5 ${className}`}>
-    <div className="w-8 h-px bg-gold/20" />
-    <div className="w-1 h-1 rotate-45 border border-gold/15" />
+    <motion.div
+      initial={{ width: 0 }}
+      whileInView={{ width: 32 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="h-px bg-gold/20"
+    />
+    <motion.div
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: 0.3 }}
+      className="w-1 h-1 rotate-45 border border-gold/15"
+    />
   </div>
 );
 
