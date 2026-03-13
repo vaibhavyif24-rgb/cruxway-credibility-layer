@@ -54,7 +54,7 @@ const About = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <GoldRule className="mt-6" />
+            <GoldRule className="mt-4 md:mt-6" />
           </FadeIn>
         </div>
         <HeroDivider />
