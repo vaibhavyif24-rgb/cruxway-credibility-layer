@@ -72,7 +72,7 @@ const About = () => {
                     ? 'Scale What India Builds. Preserve What Founders Value.'
                     : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
                 </h2>
-                <GoldRule className="mt-5" />
+                <GoldRule className="mt-3 md:mt-5" />
               </FadeIn>
             </div>
             <div className="lg:col-span-7">
