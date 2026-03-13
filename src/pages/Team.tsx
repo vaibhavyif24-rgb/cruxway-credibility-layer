@@ -214,12 +214,14 @@ const Team = () => {
           <Section>
             <div className="mb-5 md:mb-7">
               <FadeIn>
-                <SectionLabel>India</SectionLabel>
+                <SectionLabel>Founders</SectionLabel>
                 <GoldRule className="mt-1" />
               </FadeIn>
             </div>
             <div className="border-t border-foreground/[0.06]">
-              <ProfileCard member={indiaPartner} index={0} />
+              {founders.map((m, i) => (
+                <ProfileCard key={m.name} member={m} index={i} />
+              ))}
             </div>
           </Section>
 
@@ -227,14 +229,12 @@ const Team = () => {
             <div className="max-w-[1080px] mx-auto">
               <div className="mb-5 md:mb-7">
                 <FadeIn>
-                  <SectionLabel>Founders</SectionLabel>
+                  <SectionLabel>Partner — India</SectionLabel>
                   <GoldRule className="mt-1" />
                 </FadeIn>
               </div>
               <div className="border-t border-foreground/[0.06]">
-                {founders.map((m, i) => (
-                  <ProfileCard key={m.name} member={m} index={i} />
-                ))}
+                <ProfileCard member={indiaPartner} index={0} />
               </div>
             </div>
           </section>
@@ -259,7 +259,7 @@ const Team = () => {
             <div className="max-w-[1080px] mx-auto">
               <div className="mb-5 md:mb-7">
                 <FadeIn>
-                  <SectionLabel>Regional Partners</SectionLabel>
+                  <SectionLabel>Partner — India</SectionLabel>
                   <GoldRule className="mt-1" />
                 </FadeIn>
               </div>
