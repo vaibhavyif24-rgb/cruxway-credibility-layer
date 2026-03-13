@@ -324,7 +324,9 @@ const Team = () => {
           </FadeIn>
           <FadeIn delay={0.12}>
             <p className="font-sans text-[13px] text-primary-foreground/40 leading-[1.7] mt-4 max-w-[420px]">
-              Operators and investors building alongside founders.
+              {isIndia
+                ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
+                : 'Operators and investors building alongside founders.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.16}>
