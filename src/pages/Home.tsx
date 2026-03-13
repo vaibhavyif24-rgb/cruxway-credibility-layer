@@ -75,14 +75,6 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
 ];
 
-const indiaSectors = [
-  { label: 'Manufacturing', desc: 'Precision components, auto ancillaries, and specialised industrial manufacturing' },
-  { label: 'Industrial Services', desc: 'Maintenance, repair, and operational services for critical infrastructure' },
-  { label: 'Building Materials', desc: 'Construction materials, fixtures, and building products for India\'s growing market' },
-  { label: 'Logistics & Distribution', desc: 'Warehousing, cold chain, and last-mile distribution networks' },
-  { label: 'Business Services', desc: 'Compliance, testing, and professional services for regulated sectors' },
-  { label: 'Food & Agriculture', desc: 'Processing, cold storage, and farm-to-market value chain companies' },
-];
 
 /* ── Sector Grid Widget ── */
 const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
@@ -202,26 +194,73 @@ const Home = () => {
         </div>
       </Section>
 
-      {/* Target Sectors */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Target Sectors</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
-              {isIndia
-                ? 'Essential industries across India\'s lower middle market'
-                : 'Essential B2B services across the United States'}
-            </h2>
-            <GoldRule className="mt-4 mb-8 md:mb-10" />
-          </FadeIn>
+      {/* Target Sectors (US) / Why India (India) */}
+      {!isIndia ? (
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+          <div className="max-w-[1080px] mx-auto">
+            <FadeIn>
+              <SectionLabel>Target Sectors</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
+                Essential B2B services across the United States
+              </h2>
+              <GoldRule className="mt-4 mb-8 md:mb-10" />
+            </FadeIn>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 gap-y-1">
-            {(isIndia ? indiaSectors : usSectors).map((sector, i) => (
-              <SectorCard key={sector.label} sector={sector} index={i} />
-            ))}
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 gap-y-1">
+              {usSectors.map((sector, i) => (
+                <SectorCard key={sector.label} sector={sector} index={i} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+          <div className="max-w-[1080px] mx-auto">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+              <div className="lg:col-span-5">
+                <FadeIn>
+                  <SectionLabel>The Opportunity</SectionLabel>
+                  <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-foreground leading-[1.18]">
+                    Why India's Lower Middle Market
+                  </h2>
+                  <GoldRule className="mt-5" />
+                </FadeIn>
+              </div>
+              <div className="lg:col-span-7">
+                <FadeIn delay={0.08}>
+                  <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
+                    India's lower middle market is one of the most under-served segments in global investing. Thousands of founder-led businesses generate strong cash flows and dominate local markets, yet lack access to institutional capital, operational best practices, and structured succession planning.
+                  </p>
+                  <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+                    We believe this gap represents a generational opportunity: companies that have proven their resilience over decades are ready for a partner who can help them scale with discipline, not disrupt what already works.
+                  </p>
+                </FadeIn>
+                <FadeIn delay={0.16}>
+                  <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-foreground/[0.06]">
+                    {[
+                      { val: '63M+', lbl: 'MSMEs in India' },
+                      { val: '<1%', lbl: 'Institutionally Backed' },
+                      { val: '$5T', lbl: 'Economy by 2028' },
+                    ].map((s, i) => (
+                      <motion.div
+                        key={s.lbl}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                        className="text-center"
+                      >
+                        <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-foreground tracking-[-0.02em]">{s.val}</p>
+                        <p className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground/40 mt-1">{s.lbl}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </FadeIn>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Our Process */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
