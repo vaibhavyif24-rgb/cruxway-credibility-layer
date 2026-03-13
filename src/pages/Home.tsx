@@ -75,14 +75,6 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
 ];
 
-const indiaSectors = [
-  { label: 'Manufacturing', desc: 'Precision components, auto ancillaries, and specialised industrial manufacturing' },
-  { label: 'Industrial Services', desc: 'Maintenance, repair, and operational services for critical infrastructure' },
-  { label: 'Building Materials', desc: 'Construction materials, fixtures, and building products for India\'s growing market' },
-  { label: 'Logistics & Distribution', desc: 'Warehousing, cold chain, and last-mile distribution networks' },
-  { label: 'Business Services', desc: 'Compliance, testing, and professional services for regulated sectors' },
-  { label: 'Food & Agriculture', desc: 'Processing, cold storage, and farm-to-market value chain companies' },
-];
 
 /* ── Sector Grid Widget ── */
 const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
