@@ -201,7 +201,7 @@ const Home = () => {
                   ? 'Cruxway acquires majority stakes in founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
                   : 'Cruxway acquires majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
               </p>
-              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+              <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8]">
                 {isIndia
                   ? 'Our team brings global institutional experience to companies seeking a partner who understands both local markets and world-class standards.'
                   : 'Our team brings institutional investing and operating experience to companies seeking a long-term partner, not a financial sponsor with a five-year clock. We acquire to hold, build, and grow for decades.'}
