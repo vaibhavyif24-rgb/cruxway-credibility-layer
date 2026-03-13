@@ -76,7 +76,7 @@ const About = () => {
       </section>
 
       {/* Mission */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-16">
             <div className="lg:col-span-5">
@@ -111,7 +111,7 @@ const About = () => {
       {/* Our Process — moved from Home for a clean separation of concerns */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
@@ -188,7 +188,7 @@ const About = () => {
       </section>
 
       {/* Our Approach — cream/light themed to match brand palette */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Approach</SectionLabel>
@@ -203,11 +203,11 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Principles</SectionLabel>
-            <GoldRule className="mt-1 mb-5 md:mb-9" />
+            <GoldRule className="mt-1 mb-4 md:mb-7" />
           </FadeIn>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-4 md:gap-y-6">
             {principles.map((p, i) => (
@@ -227,7 +227,7 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-14">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
