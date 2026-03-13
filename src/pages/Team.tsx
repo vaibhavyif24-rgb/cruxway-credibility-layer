@@ -147,23 +147,23 @@ const DealImageDisplay = ({ src, alt }: { src: string; alt: string }) => {
 
   return (
     <div
-      className="relative overflow-hidden"
+      className="relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Clip the top ~20% of the image to hide the embedded "Select investments and deals" title */}
-      <div className="overflow-hidden" style={{ marginTop: '-18%' }}>
-        <img
-          src={src}
-          alt={alt}
-          className="w-full max-w-[520px] object-contain transition-all duration-500 cursor-default"
-          style={{
-            filter: hovered ? 'none' : goldFilter,
-            opacity: hovered ? 1 : 0.75,
-          }}
-          loading="lazy"
-        />
-      </div>
+      {/* Use clip-path to crop the top ~18% (title text) from the composite image */}
+      <img
+        src={src}
+        alt={alt}
+        className="w-full max-w-[520px] object-contain transition-all duration-500 cursor-default"
+        style={{
+          filter: hovered ? 'none' : goldFilter,
+          opacity: hovered ? 1 : 0.75,
+          clipPath: 'inset(18% 0 0 0)',
+          marginTop: '-18%',
+        }}
+        loading="lazy"
+      />
     </div>
   );
 };
