@@ -237,14 +237,14 @@ const Home = () => {
           </section>
 
           {/* Target Sectors */}
-          <section className="bg-cream px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
+          <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
             <div className="max-w-[1080px] mx-auto">
               <FadeIn>
                 <SectionLabel>Target Sectors</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
                   Essential B2B services across the United States
                 </h2>
-                <GoldRule className="mt-3 md:mt-4 mb-5 md:mb-9" />
+                <GoldRule className="mt-3 md:mt-4 mb-4 md:mb-7" />
               </FadeIn>
 
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-0">
