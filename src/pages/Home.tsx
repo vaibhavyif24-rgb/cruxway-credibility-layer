@@ -1,11 +1,12 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import ApproachTable from '@/components/ApproachTable';
+import { useRef } from 'react';
 
-// Logos for social proof — institutional experience
+// Logos for social proof
 import blackrockLogo from '@/assets/logos/blackrock.png';
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
@@ -19,7 +20,6 @@ import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import depaulLogo from '@/assets/logos/depaul.png';
 
-// Logos — India-only
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
@@ -27,7 +27,6 @@ import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
-// Institutional experience logos (US view)
 const foundersLogos = [
   { src: blackrockLogo, alt: 'BlackRock' },
   { src: warburgLogo, alt: 'Warburg Pincus' },
@@ -43,7 +42,6 @@ const foundersLogos = [
   { src: depaulLogo, alt: 'DePaul University', small: true },
 ];
 
-// All logos merged (India view)
 const allLogos = [
   ...foundersLogos,
   { src: ashokaLogo, alt: 'Ashoka University', small: true },
@@ -55,50 +53,72 @@ const allLogos = [
 ];
 
 const processStepsUS = [
-  {
-    num: '01',
-    title: 'Identify',
-    description: 'We source founder-led and family-owned American businesses in essential sectors with durable competitive advantages and strong client relationships.',
-  },
-  {
-    num: '02',
-    title: 'Evaluate',
-    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the U.S. business, its people, and our long-term vision.',
-  },
-  {
-    num: '03',
-    title: 'Acquire',
-    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing American founders a clean transition.',
-  },
-  {
-    num: '04',
-    title: 'Build',
-    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value across U.S. markets without disrupting what already works.',
-  },
+  { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across the U.S. in essential B2B sectors with durable competitive advantages and strong client relationships.' },
+  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
+  { num: '03', title: 'Acquire', description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '04', title: 'Build', description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.' },
 ];
 
 const processStepsIndia = [
-  {
-    num: '01',
-    title: 'Identify',
-    description: 'We source founder-led and family-owned businesses in India\'s lower middle market with strong fundamentals and operational upside.',
-  },
-  {
-    num: '02',
-    title: 'Evaluate',
-    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the business, its people, and our long-term vision.',
-  },
-  {
-    num: '03',
-    title: 'Acquire',
-    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.',
-  },
-  {
-    num: '04',
-    title: 'Build',
-    description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.',
-  },
+  { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across India\'s lower middle market with strong fundamentals and operational upside.' },
+  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
+  { num: '03', title: 'Acquire', description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '04', title: 'Build', description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.' },
 ];
+
+const usSectors = [
+  { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
+  { label: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
+  { label: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
+  { label: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
+  { label: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
+  { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
+];
+
+const indiaSectors = [
+  { label: 'Manufacturing', desc: 'Precision components, auto ancillaries, and specialised industrial manufacturing' },
+  { label: 'Industrial Services', desc: 'Maintenance, repair, and operational services for critical infrastructure' },
+  { label: 'Building Materials', desc: 'Construction materials, fixtures, and building products for India\'s growing market' },
+  { label: 'Logistics & Distribution', desc: 'Warehousing, cold chain, and last-mile distribution networks' },
+  { label: 'Business Services', desc: 'Compliance, testing, and professional services for regulated sectors' },
+  { label: 'Food & Agriculture', desc: 'Processing, cold storage, and farm-to-market value chain companies' },
+];
+
+/* ── Sector Grid Widget ── */
+const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-30px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 12 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative"
+    >
+      <motion.div
+        whileHover={{ y: -2 }}
+        transition={{ duration: 0.2 }}
+        className="relative pl-4 py-4 border-l border-foreground/[0.05] hover:border-gold/30 transition-colors duration-400"
+      >
+        {/* Animated gold dot */}
+        <motion.div
+          className="absolute left-[-2.5px] top-5 w-[5px] h-[5px] rounded-full bg-gold/0 group-hover:bg-gold/50 transition-all duration-300"
+          initial={{ scale: 0 }}
+          animate={isInView ? { scale: 1 } : {}}
+          transition={{ duration: 0.3, delay: index * 0.06 + 0.3 }}
+        />
+        <h4 className="font-serif text-[0.92rem] md:text-[0.95rem] text-foreground mb-0.5 leading-[1.3]">
+          {sector.label}
+        </h4>
+        <p className="font-sans text-[11px] md:text-[11.5px] text-muted-foreground/60 leading-[1.6] group-hover:text-muted-foreground/80 transition-colors duration-300">
+          {sector.desc}
+        </p>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Home = () => {
   const { region } = useRegion();
@@ -112,13 +132,13 @@ const Home = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'India' : 'Investment Firm'}</SectionLabel>
+            <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.06}>
             <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.4rem)] text-primary-foreground max-w-[620px] leading-[1.1] tracking-[-0.025em]">
               {isIndia
                 ? 'Low Market Buyouts & Acquisitions in India'
-                : 'The Right Partner for Enduring\u00a0American\u00a0Businesses'}
+                : 'The Right Partner for Enduring\u00a0Businesses'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
@@ -160,7 +180,7 @@ const Home = () => {
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
                 {isIndia
                   ? 'Acquiring & Building Companies Across India'
-                  : 'Acquiring & Building Essential American Companies'}
+                  : 'Acquiring & Building Essential U.S. Companies'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -170,17 +190,38 @@ const Home = () => {
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
                 {isIndia
                   ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
-                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across the United States in critical B2B services. We focus on regulated, compliance-driven sectors where reliability and deep client relationships define long-term value.'}
+                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability and deep client relationships define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
-                  ? 'Our team brings global institutional experience to Indian companies seeking a partner who understands both local markets and world-class standards.'
-                  : 'Our team brings institutional investing and operating experience to American companies seeking a partner, not just capital.'}
+                  ? 'Our team brings global institutional experience to companies seeking a partner who understands both local markets and world-class standards.'
+                  : 'Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.'}
               </p>
             </FadeIn>
           </div>
         </div>
       </Section>
+
+      {/* Target Sectors */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Target Sectors</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
+              {isIndia
+                ? 'Essential industries across India\'s lower middle market'
+                : 'Essential B2B services across the United States'}
+            </h2>
+            <GoldRule className="mt-4 mb-8 md:mb-10" />
+          </FadeIn>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 gap-y-1">
+            {(isIndia ? indiaSectors : usSectors).map((sector, i) => (
+              <SectorCard key={sector.label} sector={sector} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Our Process */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
@@ -189,7 +230,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
-              {isIndia ? 'From Discovery to Partnership in India' : 'From Discovery to Partnership'}
+              {isIndia ? 'From Discovery to Partnership' : 'From Discovery to Partnership'}
             </h2>
             <GoldRule className="mb-12 md:mb-16" />
           </FadeIn>
@@ -202,7 +243,6 @@ const Home = () => {
                   transition={{ duration: 0.25, ease: 'easeOut' }}
                   className="group relative p-6 md:p-8 h-full"
                 >
-                  {/* Vertical divider line on left (except first in each row) */}
                   {i > 0 && (
                     <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden lg:block" />
                   )}
@@ -210,7 +250,6 @@ const Home = () => {
                     <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden sm:block lg:hidden" />
                   )}
 
-                  {/* Step number */}
                   <motion.span
                     initial={{ color: 'hsl(var(--primary-foreground) / 0.04)' }}
                     whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
@@ -221,7 +260,6 @@ const Home = () => {
                     {step.num}
                   </motion.span>
 
-                  {/* Connector dot */}
                   <div className="flex items-center gap-3 mb-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300 shrink-0" />
                     <h3 className="font-serif text-[1.15rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
@@ -240,7 +278,7 @@ const Home = () => {
       </section>
 
       {/* Approach */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+      <Section>
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Approach</SectionLabel>
@@ -250,23 +288,23 @@ const Home = () => {
           <ApproachTable
             items={isIndia
               ? [
-                  { t: 'Founder alignment', d: 'Partnerships designed around the Indian founder\'s vision and growth timeline, not fund constraints.' },
-                  { t: 'Operational depth', d: 'Hands-on involvement alongside Indian management teams to professionalise and scale.' },
-                  { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Lower middle market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
+                  { t: 'Founder Alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline, not fund constraints.' },
+                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to professionalise and scale.' },
+                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy.' },
+                  { t: 'Lower Middle Market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
                 ]
               : [
-                  { t: 'Long-term alignment', d: 'Hold periods designed around American value creation, not fund timelines.' },
-                  { t: 'Operational depth', d: 'Hands-on involvement alongside U.S. management teams to drive growth.' },
-                  { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Selective focus', d: 'One American platform at a time. Deep conviction, not diversification.' },
+                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
+                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
+                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy.' },
+                  { t: 'Selective Focus', d: 'One platform at a time. Deep conviction, not diversification.' },
                 ]}
           />
         </div>
-      </section>
+      </Section>
 
       {/* Social Proof */}
-      <div>
+      <div className="bg-cream">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 lg:pt-24 pb-6">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
@@ -281,6 +319,7 @@ const Home = () => {
         <FadeIn delay={0.1}>
           <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>
+        <div className="h-8 md:h-12" />
       </div>
 
       {/* CTA */}
@@ -289,12 +328,12 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light>Connect</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-5">
-              {isIndia ? 'Partner With Us in India' : 'Built for American Owners Thinking Long-Term'}
+              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
             </h2>
             <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-8">
               {isIndia
-                ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about how we can partner together.'
-                : 'If you\'re building an American business meant to last, we\'d welcome a conversation about how we can partner together.'}
+                ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
+                : 'If you\'re a founder or business owner exploring a long-term partnership, we\'d welcome the conversation.'}
             </p>
             <Link
               to={`/${region}/contact`}
