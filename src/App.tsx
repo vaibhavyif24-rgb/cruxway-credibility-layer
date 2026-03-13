@@ -1,17 +1,19 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { RegionProvider } from "@/contexts/RegionContext";
-import Landing from "./pages/Landing";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Team from "./pages/Team";
-import Contact from "./pages/Contact";
-import InvestorLogin from "./pages/InvestorLogin";
-import RegionLayout from "./components/RegionLayout";
-import NotFound from "./pages/NotFound";
+
+const Landing = lazy(() => import("./pages/Landing"));
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Team = lazy(() => import("./pages/Team"));
+const Contact = lazy(() => import("./pages/Contact"));
+const InvestorLogin = lazy(() => import("./pages/InvestorLogin"));
+const RegionLayout = lazy(() => import("./components/RegionLayout"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
