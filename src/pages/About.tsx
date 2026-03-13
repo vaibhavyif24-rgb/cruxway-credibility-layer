@@ -86,8 +86,60 @@ const About = () => {
         </div>
       </Section>
 
+      {/* India Market Context (India only) */}
+      {isIndia && (
+        <section className="relative bg-primary text-primary-foreground overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
+          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+              <div className="lg:col-span-5">
+                <FadeIn>
+                  <SectionLabel light>The India Opportunity</SectionLabel>
+                  <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
+                    A Generational Gap in India's Lower Middle Market
+                  </h2>
+                  <GoldRule className="mt-5" />
+                </FadeIn>
+              </div>
+              <div className="lg:col-span-7">
+                <FadeIn delay={0.08}>
+                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                    India is home to over 63 million MSMEs, yet less than 1% have access to institutional capital or structured operational expertise. Many of these businesses have thrived for decades through resilience, deep customer relationships, and founder-driven leadership.
+                  </p>
+                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
+                    As India's economy accelerates toward $5 trillion, a new generation of these companies is ready for a partner who brings discipline, governance, and growth capital, without disrupting the culture and values that built them. This is the gap Cruxway was created to fill.
+                  </p>
+                </FadeIn>
+                <FadeIn delay={0.16}>
+                  <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                    {[
+                      { val: '63M+', lbl: 'MSMEs in India' },
+                      { val: '<1%', lbl: 'Institutionally Backed' },
+                      { val: '$5T', lbl: 'Economy by 2028' },
+                    ].map((s, i) => (
+                      <motion.div
+                        key={s.lbl}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                        className="text-center"
+                      >
+                        <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground tracking-[-0.02em]">{s.val}</p>
+                        <p className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-primary-foreground/25 mt-1">{s.lbl}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </FadeIn>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Approach */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+      <section className={`${isIndia ? 'bg-background' : 'bg-cream'} px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24`}>
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Approach</SectionLabel>
