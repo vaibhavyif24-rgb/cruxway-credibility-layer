@@ -191,7 +191,7 @@ const Home = () => {
                   ? 'Acquiring & Building Companies Across India'
                   : 'Acquiring & Building Essential U.S. Companies'}
               </h2>
-              <GoldRule className="mt-5" />
+              <GoldRule className="mt-3 md:mt-5" />
             </FadeIn>
           </div>
           <div className="lg:col-span-7">
