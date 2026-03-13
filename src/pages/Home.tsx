@@ -240,7 +240,7 @@ const Home = () => {
       {/* Our Process */}
       <section className={`relative overflow-hidden ${!isIndia ? 'bg-cream' : 'bg-primary text-primary-foreground'}`}>
         {isIndia && <DarkSectionEffects />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
           <FadeIn>
             <SectionLabel light={isIndia}>Our Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.35rem,2.5vw,2rem)] leading-[1.18] max-w-[480px] mb-1.5 ${isIndia ? 'text-primary-foreground' : 'text-foreground'}`}>
