@@ -12,6 +12,13 @@ import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
 import blackrockLogo from '@/assets/logos/blackrock.png';
 import creditSuisseLogo from '@/assets/logos/credit-suisse.png';
 import hggcLogo from '@/assets/logos/hggc.png';
+import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
+import ashokaLogo from '@/assets/logos/ashoka.png';
+import iicLogo from '@/assets/logos/iic.png';
+import treeforestLogo from '@/assets/logos/treeforest.png';
+import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
+import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
+import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 
 const institutionalLogos = [
   { src: warburgLogo, alt: 'Warburg Pincus' },
@@ -21,10 +28,18 @@ const institutionalLogos = [
   { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: hggcLogo, alt: 'HGGC' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
+  { src: nitiAayogLogo, alt: 'NITI Aayog' },
+  { src: ashokaLogo, alt: 'Ashoka University' },
+  { src: iicLogo, alt: 'Impact Investors Council' },
+  { src: treeforestLogo, alt: 'TreeForest Capital' },
+  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
 ];
 
 const Home = () => {
   const { region } = useRegion();
+  const isIndia = region === 'india';
 
   return (
     <div>
@@ -38,12 +53,16 @@ const Home = () => {
           </FadeIn>
           <FadeIn delay={0.06}>
             <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.4rem)] text-primary-foreground max-w-[620px] leading-[1.1] tracking-[-0.025em]">
-              The Right Partner for Enduring&nbsp;Businesses
+              {isIndia
+                ? 'Low Market Buyouts & Acquisitions'
+                : 'The Right Partner for Enduring\u00a0Businesses'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
-              We acquire and grow founder-led companies in essential B2B services — providing long-term capital, operational expertise, and a commitment to preserving what works.
+              {isIndia
+                ? 'We acquire and grow founder-led companies in essential sectors — providing long-term capital, operational expertise, and a commitment to preserving what works.'
+                : 'We acquire and grow founder-led companies in essential B2B services — providing long-term capital, operational expertise, and a commitment to preserving what works.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -141,7 +160,7 @@ const Home = () => {
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={institutionalLogos} duration={30} variant="dark" />
+          <LogoMarquee logos={institutionalLogos} duration={35} variant="dark" />
         </FadeIn>
       </div>
 
