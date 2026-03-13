@@ -384,6 +384,23 @@ const Team = () => {
         </div>
       </section>
 
+      {/* Partner (US view, shown after Founders) */}
+      {!isIndia && (
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+          <div className="max-w-[1080px] mx-auto">
+            <div className="mb-5 md:mb-7">
+              <FadeIn>
+                <SectionLabel>Partner</SectionLabel>
+                <GoldRule className="mt-1" />
+              </FadeIn>
+            </div>
+            <div className="border-t border-foreground/[0.06]">
+              <ProfileCard member={indiaPartner} index={0} />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Institutional Experience Marquee */}
       <div>
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 pb-6">
