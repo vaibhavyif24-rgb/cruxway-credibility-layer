@@ -51,7 +51,7 @@ export const SectionLabel = ({ children, light = false }: { children: React.Reac
   <p
     className={`
       font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
-      mb-4
+      mb-2.5 md:mb-4
       ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
     `}
   >

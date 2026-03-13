@@ -27,10 +27,10 @@ const ApproachRow = ({ item, index, total }: { item: ApproachItem; index: number
       <motion.div
         whileHover={{ x: 6 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="relative flex items-start gap-4 md:gap-6 lg:gap-8 py-6 md:py-7"
+        className="relative flex items-start gap-3 md:gap-6 lg:gap-8 py-4 md:py-6 lg:py-7"
       >
         {/* Animated gold accent line on left */}
-        <div className="absolute left-0 top-6 md:top-7 bottom-6 md:bottom-7 w-px overflow-hidden">
+        <div className="absolute left-0 top-4 md:top-7 bottom-4 md:bottom-7 w-px overflow-hidden">
           <motion.div
             className="w-full bg-gold/40"
             initial={{ height: 0 }}
@@ -40,12 +40,12 @@ const ApproachRow = ({ item, index, total }: { item: ApproachItem; index: number
         </div>
 
         {/* Number */}
-        <div className="relative pl-4 md:pl-5 shrink-0">
+        <div className="relative pl-3 md:pl-5 shrink-0">
           <motion.span
             initial={{ opacity: 0.04 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0.04 }}
             transition={{ duration: 0.7, delay: index * 0.12 + 0.2 }}
-            className="font-serif text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] leading-none text-gold/20 group-hover:text-gold/45 transition-colors duration-500 block tabular-nums"
+            className="font-serif text-[1.4rem] md:text-[1.8rem] lg:text-[2rem] leading-none text-gold/20 group-hover:text-gold/45 transition-colors duration-500 block tabular-nums"
           >
             {String(index + 1).padStart(2, '0')}
           </motion.span>

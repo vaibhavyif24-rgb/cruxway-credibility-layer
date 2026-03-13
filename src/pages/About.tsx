@@ -37,7 +37,7 @@ const About = () => {
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[300px] bg-gold/[0.02] rounded-full blur-[100px] pointer-events-none" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-14 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-10 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
           </FadeIn>
@@ -47,23 +47,23 @@ const About = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[420px]">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-primary-foreground/30 leading-[1.7] md:leading-[1.75] mt-3 md:mt-4 max-w-[420px]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies in manufacturing, industrial services, and essential sectors.'
                 : 'Combining long-term capital with operating expertise to help business owners across the United States build lasting institutions in essential B2B services.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <GoldRule className="mt-6" />
+            <GoldRule className="mt-4 md:mt-6" />
           </FadeIn>
         </div>
         <HeroDivider />
       </section>
 
       {/* Mission */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
+          <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-16">
             <div className="lg:col-span-5">
               <FadeIn>
                 <SectionLabel>Mission</SectionLabel>
@@ -72,18 +72,18 @@ const About = () => {
                     ? 'Scale What India Builds. Preserve What Founders Value.'
                     : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
                 </h2>
-                <GoldRule className="mt-5" />
+                <GoldRule className="mt-3 md:mt-5" />
               </FadeIn>
             </div>
             <div className="lg:col-span-7">
               <FadeIn delay={0.08}>
-              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
+              <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                   {isIndia
                     ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
                     : 'Cruxway acquires majority stakes in founder-led businesses across the United States, combining long-term capital with operating expertise to help owners transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
                 </p>
                 {!isIndia && (
-                  <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8]">
                     We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
                   </p>
                 )}
@@ -98,31 +98,31 @@ const About = () => {
         <section className="relative bg-primary text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
           <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+            <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
               <div className="lg:col-span-5">
                 <FadeIn>
                   <SectionLabel light>Our Focus</SectionLabel>
                   <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
                     Why Essential B2B Services in the United States
                   </h2>
-                  <GoldRule className="mt-5" />
+                  <GoldRule className="mt-3 md:mt-5" />
                 </FadeIn>
               </div>
               <div className="lg:col-span-7">
                 <FadeIn delay={0.08}>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                     Essential B2B services represent the backbone of the American economy: companies that maintain critical infrastructure, ensure environmental and regulatory compliance, and provide specialised technical expertise that cannot be easily replicated or outsourced.
                   </p>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                     These businesses share characteristics we find compelling: recurring revenue driven by regulatory mandates, high switching costs built on trust and performance, and resilience across economic cycles. Many are led by founders approaching retirement without a succession plan, creating a significant opportunity for a partner who can preserve what works while investing in growth.
                   </p>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8]">
                     We deliberately focus on sectors too small for large private equity and too complex for unsophisticated buyers, where our operating expertise and patient capital create the most value.
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.16}>
-                  <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                  <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-primary-foreground/[0.06]">
                     {[
                       { val: '$7-75M', lbl: 'Revenue Range' },
                       { val: '90%+', lbl: 'Revenue Retention' },
@@ -150,15 +150,15 @@ const About = () => {
         <section className="relative bg-primary text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
           <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+            <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
               <div className="lg:col-span-5">
                 <FadeIn>
                   <SectionLabel light>The India Opportunity</SectionLabel>
                   <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
                     A Generational Gap in India's Lower Middle Market
                   </h2>
-                  <GoldRule className="mt-5" />
+                  <GoldRule className="mt-3 md:mt-5" />
                 </FadeIn>
               </div>
               <div className="lg:col-span-7">
@@ -171,7 +171,7 @@ const About = () => {
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.16}>
-                  <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                  <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-primary-foreground/[0.06]">
                     {[
                       { val: '63M+', lbl: 'MSMEs in India' },
                       { val: '<1%', lbl: 'Institutionally Backed' },
@@ -198,11 +198,11 @@ const About = () => {
       )}
 
       {/* Approach */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-8 md:mb-12" />
+            <GoldRule className="mt-1 mb-5 md:mb-12" />
           </FadeIn>
 
           <ApproachTable items={approach} />
@@ -210,13 +210,13 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Principles</SectionLabel>
-            <GoldRule className="mt-1 mb-7 md:mb-9" />
+            <GoldRule className="mt-1 mb-5 md:mb-9" />
           </FadeIn>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-5 md:gap-y-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-4 md:gap-y-6">
             {principles.map((p, i) => (
               <FadeIn key={p.t} delay={i * 0.03}>
                 <motion.div
@@ -234,15 +234,15 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
               <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
+              <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-3 md:mb-4">
                 {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
               </h2>
-              <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.8] mb-6">
+              <p className="font-sans text-[12.5px] md:text-[13px] text-primary-foreground/30 leading-[1.75] md:leading-[1.8] mb-5 md:mb-6">
                 {isIndia
                   ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what a long-term partnership could look like.'}
