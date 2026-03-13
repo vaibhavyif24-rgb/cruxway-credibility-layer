@@ -132,7 +132,7 @@ const founders: TeamMember[] = [
 
 const indiaPartner: TeamMember = {
   name: 'Vaibhav Sharma',
-  role: 'Partner — India',
+  role: 'Partner, India',
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
