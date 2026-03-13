@@ -10,7 +10,7 @@
     --background: 40 20% 97%;
     --foreground: 207 65% 12%;
 
-    --card: 0 0% 100%;
+    --card: 40 18% 96%;
     --card-foreground: 207 65% 12%;
 
     --popover: 0 0% 100%;
@@ -35,7 +35,7 @@
     --input: 210 16% 90%;
     --ring: 207 65% 12%;
 
-    --radius: 0rem;
+    --radius: 0.375rem;
 
     /* Brand tokens */
     --prussian: 207 65% 12%;
@@ -98,15 +98,51 @@
     color: hsl(var(--prussian));
   }
 
-  /* Smooth focus styles */
   :focus-visible {
     outline: 1px solid hsl(var(--gold) / 0.4);
     outline-offset: 2px;
   }
 }
 
+/* Animated hero gradient */
+@keyframes hero-gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .hero-gradient-animated {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--prussian)) 0%,
+      hsl(var(--navy-deep)) 25%,
+      hsl(var(--prussian-mid)) 50%,
+      hsl(var(--navy-deep)) 75%,
+      hsl(var(--prussian)) 100%
+    );
+    background-size: 400% 400%;
+    animation: hero-gradient-shift 16s ease infinite;
+  }
+
+  .btn-premium {
+    @apply relative overflow-hidden transition-all duration-300;
+  }
+
+  .btn-premium::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(135deg, hsl(var(--gold) / 0.08), transparent);
+  }
+
+  .btn-premium:hover::after {
+    @apply opacity-100;
   }
 }

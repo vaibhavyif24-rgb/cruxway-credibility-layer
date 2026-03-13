@@ -84,15 +84,15 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
         {/* Photo + Identity */}
         <div className="md:col-span-3 flex flex-col items-start">
           {member.photo ? (
-            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.06] mb-4">
+            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] mb-4 shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.15)]">
               <img
                 src={member.photo}
                 alt={member.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-500"
               />
             </div>
           ) : (
-            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] mb-4 flex items-center justify-center">
+            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
               <span className="font-serif text-[1.5rem] text-muted-foreground/30">
                 {member.name.split(' ').map(n => n[0]).join('')}
               </span>
@@ -129,7 +129,7 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
                   key={logo.alt}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-[18px] md:h-[22px] w-auto object-contain opacity-40 grayscale"
+                  className="h-[18px] md:h-[22px] w-auto object-contain opacity-40 grayscale hover:opacity-60 transition-opacity duration-300"
                 />
               ))}
             </div>
@@ -147,8 +147,9 @@ const Team = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-prussian text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-transparent to-navy-deep/15 pointer-events-none" />
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-14 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
           <FadeIn>
             <SectionLabel light>Team</SectionLabel>
@@ -203,7 +204,6 @@ const Team = () => {
           </section>
         </>
       ) : (
-        /* US — Founders only */
         <Section>
           <div className="mb-5 md:mb-7">
             <FadeIn>

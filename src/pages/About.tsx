@@ -1,4 +1,5 @@
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
+import { motion } from 'framer-motion';
 
 const About = () => {
   const approach = [
@@ -11,8 +12,9 @@ const About = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative bg-prussian text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-transparent to-navy-deep/15 pointer-events-none" />
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className="absolute top-1/2 right-0 w-[500px] h-[350px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28">
           <FadeIn>
             <SectionLabel light>About</SectionLabel>
@@ -62,22 +64,26 @@ const About = () => {
           <div className="border-t border-foreground/[0.06]">
             {approach.map((a, i) => (
               <FadeIn key={a.t} delay={i * 0.04}>
-                <div className="flex gap-5 md:gap-8 py-5 md:py-6 border-b border-foreground/[0.06] items-baseline">
-                  <span className="font-serif text-[13px] text-foreground/[0.08] shrink-0 w-6">
+                <motion.div
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex gap-5 md:gap-8 py-5 md:py-6 border-b border-foreground/[0.06] items-baseline group cursor-default"
+                >
+                  <span className="font-serif text-[13px] text-foreground/[0.08] group-hover:text-gold/30 transition-colors duration-300 shrink-0 w-6">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div className="flex flex-col md:flex-row md:items-baseline md:gap-8 flex-1">
                     <h3 className="font-serif text-[1.05rem] text-foreground md:w-56 shrink-0">{a.t}</h3>
                     <p className="font-sans text-[13px] text-muted-foreground leading-[1.7]">{a.d}</p>
                   </div>
-                </div>
+                </motion.div>
               </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Principles — compact grid */}
+      {/* Principles */}
       <Section>
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
@@ -93,7 +99,7 @@ const About = () => {
             { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.' },
           ].map((p, i) => (
             <FadeIn key={p.t} delay={i * 0.03}>
-              <div className="pl-4 border-l border-foreground/[0.06]">
+              <div className="pl-4 border-l border-foreground/[0.06] hover:border-gold/25 transition-colors duration-300 group">
                 <h3 className="font-serif text-[1rem] text-foreground mb-1.5">{p.t}</h3>
                 <p className="font-sans text-[12.5px] text-muted-foreground leading-[1.65]">{p.d}</p>
               </div>

@@ -37,11 +37,11 @@ const SiteHeader = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 bg-prussian transition-all duration-300 ${
-          scrolled ? 'shadow-[0_1px_12px_0_hsl(210_60%_4%/0.5)]' : ''
+        className={`fixed top-0 left-0 right-0 z-50 hero-gradient-animated transition-all duration-300 ${
+          scrolled ? 'shadow-[0_2px_16px_-2px_hsl(210_60%_4%/0.5)]' : ''
         }`}
       >
-        <div className="h-px bg-gradient-to-r from-transparent via-gold/10 to-transparent" />
+        <div className="h-px bg-gradient-to-r from-transparent via-gold/8 to-transparent" />
 
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="flex items-center justify-between h-14 md:h-16">
@@ -89,7 +89,7 @@ const SiteHeader = () => {
 
               <Link
                 to="/investor-login"
-                className="font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-5 py-2 border border-gold/12 text-gold/55 hover:border-gold/30 hover:text-gold/85 transition-all duration-300"
+                className="btn-premium font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-5 py-2 border border-gold/12 text-gold/55 hover:border-gold/30 hover:text-gold/85 transition-all duration-300"
               >
                 Investor Login
               </Link>
@@ -117,7 +117,7 @@ const SiteHeader = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-prussian flex flex-col"
+            className="fixed inset-0 z-40 hero-gradient-animated flex flex-col"
           >
             <div className="h-14" />
 
@@ -157,7 +157,7 @@ const SiteHeader = () => {
                 </Link>
                 <Link
                   to="/investor-login"
-                  className="font-sans text-[9px] font-medium uppercase tracking-[0.16em] px-7 py-2.5 border border-gold/12 text-gold/45 active:text-gold/70"
+                  className="btn-premium font-sans text-[9px] font-medium uppercase tracking-[0.16em] px-7 py-2.5 border border-gold/12 text-gold/45 active:text-gold/70"
                 >
                   Investor Login
                 </Link>
