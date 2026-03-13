@@ -217,35 +217,14 @@ const Home = () => {
             <GoldRule className="mt-1 mb-10 md:mb-12" />
           </FadeIn>
 
-          <div className="border-t border-foreground/[0.06]">
-            {[
+          <ApproachTable
+            items={[
               { t: 'Long-term alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
               { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
               { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
               { t: 'Selective focus', d: 'One platform at a time. Deep conviction, not diversification.' },
-            ].map((item, i) => (
-              <FadeIn key={item.t} delay={i * 0.04}>
-                <motion.div
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex gap-5 md:gap-8 py-5 md:py-6 border-b border-foreground/[0.06] items-baseline group cursor-default"
-                >
-                  <motion.span
-                    initial={{ color: 'hsl(var(--foreground) / 0.06)' }}
-                    whileInView={{ color: 'hsl(var(--gold) / 0.35)' }}
-                    viewport={{ once: false, margin: '-20px' }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    className="font-serif text-[13px] group-hover:!text-gold/50 transition-colors duration-300 shrink-0 w-6"
-                  >
-                  </motion.span>
-                  <div className="flex flex-col md:flex-row md:items-baseline md:gap-8 flex-1">
-                    <h3 className="font-serif text-[1.05rem] text-foreground md:w-52 shrink-0">{item.t}</h3>
-                    <p className="font-sans text-[13px] text-muted-foreground leading-[1.7]">{item.d}</p>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </section>
 
