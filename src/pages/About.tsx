@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   const approach = [
-    { t: 'Long-Term Alignment', d: 'We design hold periods around the growth opportunity — not around fund constraints or artificial timelines.' },
+    { t: 'Long-Term Alignment', d: 'We design hold periods around the growth opportunity, not around fund constraints or artificial timelines.' },
     { t: 'Essential Services', d: 'We focus on regulated, compliance-driven industries where trust and reliability create lasting competitive advantages.' },
-    { t: 'Operational Partnership', d: 'We work closely with management teams — one platform at a time — to drive meaningful, sustainable outcomes.' },
+    { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to drive meaningful, sustainable outcomes.' },
     { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
   ];
 
