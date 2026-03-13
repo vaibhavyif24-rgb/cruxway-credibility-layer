@@ -15,7 +15,7 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
 ];
 
-/* ── Sector Card ── */
+/* ── Sector Row ── */
 const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
@@ -23,27 +23,26 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 14 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.45, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       className="group"
     >
       <motion.div
         whileHover={{ y: -2 }}
-        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="relative h-full py-4 md:py-5 border-t border-primary-foreground/[0.06] hover:border-gold/20 transition-all duration-400"
+        transition={{ duration: 0.2 }}
+        className="relative h-full py-3.5 md:py-4 border-t border-primary-foreground/[0.06] hover:border-gold/20 transition-all duration-400"
       >
-        {/* Animated gold accent */}
         <motion.div
           className="absolute top-0 left-0 h-[2px] bg-gold/30"
           initial={{ width: 0 }}
-          animate={isInView ? { width: 24 } : {}}
-          transition={{ duration: 0.6, delay: index * 0.08 + 0.2, ease: [0.22, 1, 0.36, 1] }}
+          animate={isInView ? { width: 20 } : {}}
+          transition={{ duration: 0.5, delay: index * 0.07 + 0.2, ease: [0.22, 1, 0.36, 1] }}
         />
-        <h4 className="font-serif text-[0.88rem] md:text-[0.95rem] text-primary-foreground leading-[1.3] mb-1">
+        <h4 className="font-serif text-[0.85rem] md:text-[0.92rem] text-primary-foreground leading-[1.3] mb-0.5">
           {sector.label}
         </h4>
-        <p className="font-sans text-[11px] md:text-[11.5px] text-primary-foreground/25 leading-[1.65] group-hover:text-primary-foreground/40 transition-colors duration-300">
+        <p className="font-sans text-[10.5px] md:text-[11px] text-primary-foreground/22 leading-[1.6] group-hover:text-primary-foreground/38 transition-colors duration-300">
           {sector.desc}
         </p>
       </motion.div>
@@ -83,7 +82,7 @@ const About = () => {
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-10 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-8 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
           </FadeIn>
@@ -100,16 +99,16 @@ const About = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <GoldRule className="mt-4 md:mt-6" />
+            <GoldRule className="mt-3 md:mt-5" />
           </FadeIn>
         </div>
         <HeroDivider />
       </section>
 
       {/* Mission */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
+          <div className="grid lg:grid-cols-12 gap-3 md:gap-5 lg:gap-14">
             <div className="lg:col-span-4">
               <FadeIn>
                 <SectionLabel>Mission</SectionLabel>
@@ -118,12 +117,12 @@ const About = () => {
                     ? 'Scale What India Builds. Preserve What Founders Value.'
                     : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
                 </h2>
-                <GoldRule className="mt-3 md:mt-4" />
+                <GoldRule className="mt-2.5 md:mt-4" />
               </FadeIn>
             </div>
             <div className="lg:col-span-8">
               <FadeIn delay={0.08}>
-                <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
+                <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8] mb-2.5 md:mb-3.5">
                   {isIndia
                     ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
                     : 'Cruxway acquires majority stakes in founder-led businesses across the United States, combining long-term capital with operating expertise to help owners transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
@@ -142,27 +141,27 @@ const About = () => {
       {/* Our Approach + Target Sectors combined on dark */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
           {/* Approach */}
           <FadeIn>
             <SectionLabel light>Our Approach</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
+            <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1">
               How We Partner With Founders
             </h2>
-            <GoldRule className="mb-6 md:mb-8" />
+            <GoldRule className="mb-5 md:mb-7" />
           </FadeIn>
 
           <ApproachTable items={approach} variant="dark" />
 
-          {/* Target Sectors — US only, integrated into same dark section */}
+          {/* Target Sectors — US only */}
           {!isIndia && (
-            <div className="mt-10 md:mt-14 lg:mt-16 pt-8 md:pt-10 lg:pt-12 border-t border-primary-foreground/[0.04]">
+            <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 lg:pt-10 border-t border-primary-foreground/[0.04]">
               <FadeIn>
                 <SectionLabel light>Target Sectors</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground leading-[1.2] max-w-[480px] mb-1">
                   Essential B2B services across the United States
                 </h2>
-                <GoldRule className="mb-5 md:mb-8" />
+                <GoldRule className="mb-4 md:mb-6" />
               </FadeIn>
 
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 lg:gap-x-12 gap-y-0">
@@ -176,20 +175,20 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
+          <div className="grid lg:grid-cols-12 gap-3 md:gap-5 lg:gap-14">
             <div className="lg:col-span-4">
               <FadeIn>
                 <SectionLabel>Principles</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2]">
                   What Guides Us
                 </h2>
-                <GoldRule className="mt-3 md:mt-4" />
+                <GoldRule className="mt-2.5 md:mt-4" />
               </FadeIn>
             </div>
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-5 md:gap-y-7">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-4 md:gap-y-5">
                 {principles.map((p, i) => (
                   <FadeIn key={p.t} delay={i * 0.04}>
                     <motion.div
@@ -197,9 +196,9 @@ const About = () => {
                       transition={{ duration: 0.2 }}
                       className="group"
                     >
-                      <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1.5 leading-[1.2]">{p.t}</h3>
-                      <div className="w-5 h-px bg-gold/20 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-400 mb-2" />
-                      <p className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/65 leading-[1.65] group-hover:text-muted-foreground/85 transition-colors duration-300">{p.d}</p>
+                      <h3 className="font-serif text-[0.88rem] md:text-[0.95rem] text-foreground mb-1 leading-[1.2]">{p.t}</h3>
+                      <div className="w-4 h-px bg-gold/20 group-hover:bg-gold/40 group-hover:w-7 transition-all duration-400 mb-1.5" />
+                      <p className="font-sans text-[11px] md:text-[11.5px] text-muted-foreground/60 leading-[1.6] group-hover:text-muted-foreground/85 transition-colors duration-300">{p.d}</p>
                     </motion.div>
                   </FadeIn>
                 ))}
@@ -210,16 +209,16 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-14">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-7 md:py-9 lg:py-12">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
               <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-3 md:mb-4">
+              <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-2.5 md:mb-3.5">
                 {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
               </h2>
-              <p className="font-sans text-[12.5px] md:text-[13px] text-primary-foreground/30 leading-[1.75] md:leading-[1.8] mb-5 md:mb-6">
+              <p className="font-sans text-[12.5px] md:text-[13px] text-primary-foreground/30 leading-[1.75] md:leading-[1.8] mb-4 md:mb-5">
                 {isIndia
                   ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what a long-term partnership could look like.'}
