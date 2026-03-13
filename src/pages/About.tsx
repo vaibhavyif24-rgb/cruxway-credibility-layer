@@ -111,7 +111,7 @@ const About = () => {
               </div>
               <div className="lg:col-span-7">
                 <FadeIn delay={0.08}>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                     Essential B2B services represent the backbone of the American economy: companies that maintain critical infrastructure, ensure environmental and regulatory compliance, and provide specialised technical expertise that cannot be easily replicated or outsourced.
                   </p>
                   <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
