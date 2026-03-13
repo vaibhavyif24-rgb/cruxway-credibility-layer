@@ -62,7 +62,7 @@ const processSteps = [
   {
     num: '02',
     title: 'Evaluate',
-    description: 'Rigorous due diligence across financials, operations, and culture — ensuring alignment between the business, its people, and our long-term vision.',
+    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the business, its people, and our long-term vision.',
   },
   {
     num: '03',
