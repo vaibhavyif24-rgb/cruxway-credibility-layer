@@ -12,13 +12,13 @@ const About = () => {
     ? [
         { t: 'Low Market Focus', d: 'We target high-potential businesses in India\'s under-served lower middle market where operational improvement unlocks outsized returns.' },
         { t: 'Founder Alignment', d: 'We design partnerships around the founder\'s vision and growth timeline, not around fund constraints or artificial exit windows.' },
-        { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to drive meaningful, sustainable outcomes.' },
+        { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to drive meaningful, sustainable outcomes across Indian markets.' },
         { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
       ]
     : [
-        { t: 'Long-Term Alignment', d: 'We design hold periods around the American growth opportunity, not around fund constraints or artificial timelines.' },
+        { t: 'Long-Term Alignment', d: 'We design hold periods around the growth opportunity, not around fund constraints or artificial timelines.' },
         { t: 'Essential Services', d: 'We focus on regulated, compliance-driven U.S. industries where trust and reliability create lasting competitive advantages.' },
-        { t: 'Operational Partnership', d: 'We work closely with American management teams, one platform at a time, to drive meaningful, sustainable outcomes.' },
+        { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to drive meaningful, sustainable outcomes.' },
         { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
       ];
 
@@ -39,18 +39,18 @@ const About = () => {
         <div className="absolute top-1/3 right-0 w-[400px] h-[300px] bg-gold/[0.02] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-14 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'About — India' : 'About — United States'}</SectionLabel>
+            <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.2rem)] text-primary-foreground max-w-[520px] leading-[1.12] tracking-[-0.025em]">
-              {isIndia ? 'Building Enduring Value Across India' : 'Values-Driven Investing in America'}
+              {isIndia ? 'Building Enduring Value Across India' : 'Values-Driven Investing'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[420px]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies in manufacturing, industrial services, and essential sectors.'
-                : 'Combining long-term capital with operating expertise to help American business owners build lasting institutions in essential B2B services.'}
+                : 'Combining long-term capital with operating expertise to help business owners across the United States build lasting institutions.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -69,7 +69,7 @@ const About = () => {
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
                 {isIndia
                   ? 'Scale What India Builds. Preserve What Founders Value.'
-                  : 'Preserve What American Founders Built.\u00a0Scale What\u00a0Matters.'}
+                  : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -79,7 +79,7 @@ const About = () => {
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
                   ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
-                  : 'Cruxway combines long-term capital with operating expertise to help American business owners transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
+                  : 'Cruxway combines long-term capital with operating expertise to help business owners across the United States transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
               </p>
             </FadeIn>
           </div>
@@ -126,12 +126,12 @@ const About = () => {
           <FadeIn>
             <SectionLabel light>Connect</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
-              {isIndia ? 'Partner With Us in India' : 'Built for American Owners Thinking Long-Term'}
+              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
             </h2>
             <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.8] mb-7">
               {isIndia
                 ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                : 'If you\'re building an American business meant to last, we\'d welcome a conversation about how we can partner together.'}
+                : 'If you\'re a founder or business owner exploring a long-term partnership, we\'d welcome the conversation.'}
             </p>
             <Link
               to={`/${region}/contact`}
