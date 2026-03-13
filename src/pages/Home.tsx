@@ -160,7 +160,7 @@ const Home = () => {
             <GoldRule className="mt-5 md:mt-7" />
           </FadeIn>
           <FadeIn delay={0.28}>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-7 md:mt-10 flex flex-wrap gap-2.5 md:gap-3">
               <Link
                 to={`/${region}/about`}
                 className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-primary-foreground/[0.1] text-primary-foreground/40 hover:border-gold/25 hover:text-primary-foreground/70 transition-all duration-300"
