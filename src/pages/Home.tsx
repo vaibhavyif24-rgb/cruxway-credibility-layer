@@ -159,8 +159,8 @@ const Home = () => {
               <SectionLabel>What We Do</SectionLabel>
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
                 {isIndia
-                  ? 'Acquiring & Building Companies in India'
-                  : 'Acquiring & Building Essential Companies'}
+                  ? 'Acquiring & Building Companies Across India'
+                  : 'Acquiring & Building Essential American Companies'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -169,13 +169,13 @@ const Home = () => {
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
                 {isIndia
-                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in India\u2019s lower middle market. We focus on sectors where operational improvement, compliance, and deep client relationships define long-term value.'
-                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.'}
+                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
+                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across the United States in critical B2B services. We focus on regulated, compliance-driven sectors where reliability and deep client relationships define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
-                  ? 'Our team brings global institutional experience to Indian companies seeking a partner, not just capital.'
-                  : 'Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.'}
+                  ? 'Our team brings global institutional experience to Indian companies seeking a partner who understands both local markets and world-class standards.'
+                  : 'Our team brings institutional investing and operating experience to American companies seeking a partner, not just capital.'}
               </p>
             </FadeIn>
           </div>
