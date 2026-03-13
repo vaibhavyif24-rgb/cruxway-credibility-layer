@@ -7,7 +7,7 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
-// Logos
+// Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import jpMorganLogo from '@/assets/logos/jp-morgan.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
@@ -15,6 +15,12 @@ import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
 import blackrockLogo from '@/assets/logos/blackrock.png';
 import creditSuisseLogo from '@/assets/logos/credit-suisse.png';
 import hggcLogo from '@/assets/logos/hggc.png';
+
+// Logos — Vaibhav
+import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
+import ashokaLogo from '@/assets/logos/ashoka.png';
+import iicLogo from '@/assets/logos/iic.jpg';
+import treeforestLogo from '@/assets/logos/treeforest.jpg';
 
 interface TeamMember {
   name: string;
@@ -71,11 +77,17 @@ const indiaPartner: TeamMember = {
   summary:
     'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
   highlights: [
-    'Three-time founder including Studyenclave.com',
+    'NITI Aayog — Policy and strategy advisory to the Government of India',
     'Swishin Ventures — VC fund partnering with multiple family offices across India',
-    'On-ground consulting: strategy, market entry, and operations',
+    'Three-time founder; on-ground consulting across strategy, market entry, and operations',
     'Select investments: Lohum, Porter, Waaree Solar',
-    'Stanford University research grant recipient',
+    'Stanford University — Research grant recipient',
+  ],
+  logos: [
+    { src: nitiAayogLogo, alt: 'NITI Aayog' },
+    { src: ashokaLogo, alt: 'Ashoka University' },
+    { src: iicLogo, alt: 'Impact Investors Council' },
+    { src: treeforestLogo, alt: 'TreeForest Capital' },
   ],
 };
 
@@ -132,12 +144,16 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
           {member.logos && member.logos.length > 0 && (
             <div className="flex flex-wrap items-center gap-6 md:gap-8 pt-4 border-t border-foreground/[0.04]">
               {member.logos.map((logo) => (
-                <img
+                <div
                   key={logo.alt}
-                  src={logo.src}
-                  alt={logo.alt}
-                  className="h-[16px] md:h-[20px] w-auto object-contain opacity-30 grayscale hover:opacity-50 transition-opacity duration-300"
-                />
+                  className="h-[20px] md:h-[24px] flex items-center"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-full w-auto max-w-[80px] md:max-w-[100px] object-contain opacity-30 grayscale hover:opacity-50 transition-opacity duration-300"
+                  />
+                </div>
               ))}
             </div>
           )}
@@ -211,19 +227,37 @@ const Team = () => {
           </section>
         </>
       ) : (
-        <Section>
-          <div className="mb-5 md:mb-7">
-            <FadeIn>
-              <SectionLabel>Founders</SectionLabel>
-              <GoldRule className="mt-1" />
-            </FadeIn>
-          </div>
-          <div className="border-t border-foreground/[0.06]">
-            {founders.map((m, i) => (
-              <ProfileCard key={m.name} member={m} index={i} />
-            ))}
-          </div>
-        </Section>
+        <>
+          {/* US — Founders */}
+          <Section>
+            <div className="mb-5 md:mb-7">
+              <FadeIn>
+                <SectionLabel>Founders</SectionLabel>
+                <GoldRule className="mt-1" />
+              </FadeIn>
+            </div>
+            <div className="border-t border-foreground/[0.06]">
+              {founders.map((m, i) => (
+                <ProfileCard key={m.name} member={m} index={i} />
+              ))}
+            </div>
+          </Section>
+
+          {/* US — Regional Partners */}
+          <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+            <div className="max-w-[1080px] mx-auto">
+              <div className="mb-5 md:mb-7">
+                <FadeIn>
+                  <SectionLabel>Regional Partners</SectionLabel>
+                  <GoldRule className="mt-1" />
+                </FadeIn>
+              </div>
+              <div className="border-t border-foreground/[0.06]">
+                <ProfileCard member={indiaPartner} index={0} />
+              </div>
+            </div>
+          </section>
+        </>
       )}
 
       {/* Network */}
