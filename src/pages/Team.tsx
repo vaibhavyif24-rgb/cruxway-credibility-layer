@@ -104,7 +104,6 @@ const founders: TeamMember[] = [
     ],
     logos: [
       { src: warburgLogo, alt: 'Warburg Pincus' },
-      { src: jpMorganLogo, alt: 'J.P. Morgan' },
       { src: evercoreLogo, alt: 'Evercore' },
       { src: deutscheBankLogo, alt: 'Deutsche Bank' },
     ],
