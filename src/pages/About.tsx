@@ -69,7 +69,7 @@ const About = () => {
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
                 {isIndia
                   ? 'Scale What India Builds. Preserve What Founders Value.'
-                  : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
+                  : 'Preserve What American Founders Built.\u00a0Scale What\u00a0Matters.'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -78,8 +78,8 @@ const About = () => {
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
-                  ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders, while protecting the legacy, culture, and values that built them.'
-                  : 'Cruxway combines long-term capital with operating expertise to help owners transform their businesses into market leaders while protecting the legacy and values that built them.'}
+                  ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
+                  : 'Cruxway combines long-term capital with operating expertise to help American business owners transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
               </p>
             </FadeIn>
           </div>
