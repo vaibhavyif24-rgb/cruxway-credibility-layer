@@ -407,7 +407,7 @@ const Home = () => {
           <div className="max-w-[480px]">
             <FadeIn>
               <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
+              <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-3 md:mb-4">
                 {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
               </h2>
               <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-7">
