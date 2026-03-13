@@ -51,6 +51,8 @@ interface LogoItem {
   src: string;
   alt: string;
   small?: boolean;
+  /** Scale factor to normalize visual weight (default 1) */
+  scale?: number;
 }
 
 interface TeamMember {
