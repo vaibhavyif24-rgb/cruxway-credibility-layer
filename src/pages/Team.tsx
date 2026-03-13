@@ -232,15 +232,9 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
 
             {/* Deal logos — original composite image with gold filter */}
             {member.dealImage && (
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-                className="mt-6 pt-4 border-t border-foreground/[0.05]"
-              >
+              <div className="mt-6 pt-4 border-t border-foreground/[0.05]">
                 <DealImageDisplay src={member.dealImage} alt={`${member.name} deals`} />
-              </motion.div>
+              </div>
             )}
           </div>
         </div>
