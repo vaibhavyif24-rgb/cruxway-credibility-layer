@@ -14,27 +14,28 @@ interface LogoMarqueeProps {
 }
 
 const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProps) => {
-  // Double logos for seamless loop
   const doubled = [...logos, ...logos];
-
   const isDark = variant === 'dark';
+
+  // Gold filter: converts any color logo to a warm gold monochrome
+  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   return (
     <div
       className={`relative overflow-hidden ${
-        isDark ? 'bg-primary py-10 md:py-14' : 'py-6 md:py-8'
+        isDark ? 'bg-primary py-12 md:py-16' : 'py-8 md:py-10'
       }`}
     >
       {/* Edge fade masks */}
       <div
-        className={`absolute left-0 top-0 bottom-0 w-16 md:w-24 z-10 pointer-events-none ${
+        className={`absolute left-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none ${
           isDark
             ? 'bg-gradient-to-r from-primary to-transparent'
             : 'bg-gradient-to-r from-background to-transparent'
         }`}
       />
       <div
-        className={`absolute right-0 top-0 bottom-0 w-16 md:w-24 z-10 pointer-events-none ${
+        className={`absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none ${
           isDark
             ? 'bg-gradient-to-l from-primary to-transparent'
             : 'bg-gradient-to-l from-background to-transparent'
@@ -42,7 +43,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
       />
 
       <motion.div
-        className="flex items-center gap-14 md:gap-20 lg:gap-24 w-max"
+        className="flex items-center gap-16 md:gap-24 lg:gap-28 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{
           x: {
@@ -61,16 +62,11 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
             <img
               src={logo.src}
               alt={logo.alt}
-              className={`h-[38px] md:h-[48px] w-auto object-contain transition-all duration-300 ${
-                isDark
-                  ? 'brightness-0 invert sepia saturate-[3] hue-rotate-[5deg] opacity-70 hover:opacity-90'
-                  : 'brightness-0 invert sepia saturate-[3] hue-rotate-[5deg] opacity-50 hover:opacity-75'
+              className={`h-[42px] md:h-[52px] w-auto max-w-[160px] md:max-w-[200px] object-contain transition-opacity duration-300 ${
+                isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'
               }`}
-              style={{
-                filter: isDark
-                  ? 'brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(0.85)'
-                  : 'brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(0.75)',
-              }}
+              style={{ filter: goldFilter }}
+              loading="lazy"
             />
           </div>
         ))}
