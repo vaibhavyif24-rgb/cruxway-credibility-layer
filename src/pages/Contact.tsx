@@ -19,8 +19,15 @@ const Contact = () => {
               Get in Touch
             </h1>
           </FadeIn>
-          <FadeIn delay={0.14}>
-            <GoldRule className="mt-7" />
+          <FadeIn delay={0.12}>
+            <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[380px]">
+              {region === 'india'
+                ? 'We welcome conversations with Indian founders and business owners exploring long-term partnerships.'
+                : 'We welcome conversations with founders and business owners exploring long-term partnerships.'}
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.18}>
+            <GoldRule className="mt-6" />
           </FadeIn>
         </div>
         <HeroDivider />

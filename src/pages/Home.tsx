@@ -54,7 +54,7 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-const processSteps = [
+const processStepsUS = [
   {
     num: '01',
     title: 'Identify',
@@ -74,6 +74,29 @@ const processSteps = [
     num: '04',
     title: 'Build',
     description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.',
+  },
+];
+
+const processStepsIndia = [
+  {
+    num: '01',
+    title: 'Identify',
+    description: 'We source founder-led and family-owned businesses in India\'s lower middle market with strong fundamentals and operational upside.',
+  },
+  {
+    num: '02',
+    title: 'Evaluate',
+    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the business, its people, and our long-term vision.',
+  },
+  {
+    num: '03',
+    title: 'Acquire',
+    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.',
+  },
+  {
+    num: '04',
+    title: 'Build',
+    description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.',
   },
 ];
 
@@ -135,7 +158,9 @@ const Home = () => {
             <FadeIn>
               <SectionLabel>What We Do</SectionLabel>
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
-                Acquiring &amp; Building Essential Companies
+                {isIndia
+                  ? 'Acquiring & Building Companies in India'
+                  : 'Acquiring & Building Essential Companies'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -143,10 +168,14 @@ const Home = () => {
           <div className="lg:col-span-7">
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
-                Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.
+                {isIndia
+                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in India\u2019s lower middle market. We focus on sectors where operational improvement, compliance, and deep client relationships define long-term value.'
+                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.
+                {isIndia
+                  ? 'Our team brings global institutional experience to Indian companies seeking a partner, not just capital.'
+                  : 'Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.'}
               </p>
             </FadeIn>
           </div>
@@ -166,7 +195,7 @@ const Home = () => {
           </FadeIn>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
-            {processSteps.map((step, i) => (
+            {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
               <FadeIn key={step.num} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -4 }}
@@ -219,23 +248,32 @@ const Home = () => {
           </FadeIn>
 
           <ApproachTable
-            items={[
-              { t: 'Long-term alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
-              { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
-              { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
-              { t: 'Selective focus', d: 'One platform at a time. Deep conviction, not diversification.' },
-            ]}
+            items={isIndia
+              ? [
+                  { t: 'Founder alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline, not fund constraints.' },
+                  { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to professionalise and scale.' },
+                  { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
+                  { t: 'Lower middle market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
+                ]
+              : [
+                  { t: 'Long-term alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
+                  { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
+                  { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
+                  { t: 'Selective focus', d: 'One platform at a time. Deep conviction, not diversification.' },
+                ]}
           />
         </div>
       </section>
 
-      {/* Social Proof — Institutional Logo Marquee */}
+      {/* Social Proof */}
       <div>
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 lg:pt-24 pb-6">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
-              Our team has invested and operated across leading global institutions
+              {isIndia
+                ? 'Global institutional experience brought to Indian markets'
+                : 'Our team has invested and operated across leading global institutions'}
             </h2>
             <GoldRule className="mt-5" />
           </FadeIn>
@@ -251,10 +289,12 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light>Connect</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-5">
-              Built for Owners Thinking Long-Term
+              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
             </h2>
             <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-8">
-              If you're building a business meant to last, we'd welcome a conversation about how we can partner together.
+              {isIndia
+                ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about how we can partner together.'
+                : 'If you\'re building a business meant to last, we\'d welcome a conversation about how we can partner together.'}
             </p>
             <Link
               to={`/${region}/contact`}
