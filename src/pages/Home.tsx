@@ -4,6 +4,7 @@ import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/componen
 import { motion, useInView } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import ApproachTable from '@/components/ApproachTable';
+import DarkSectionEffects from '@/components/DarkSectionEffects';
 import { useRef } from 'react';
 
 // Logos for social proof
