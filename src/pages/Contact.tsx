@@ -8,7 +8,7 @@ const Contact = () => {
   const isIndia = region === 'india';
 
   const email = isIndia ? 'india@cruxway.com' : 'info@cruxway.com';
-  const location = isIndia ? 'Delhi, India' : 'United States';
+  const location = isIndia ? 'Delhi, India' : 'San Diego, California';
 
   return (
     <div>
@@ -109,7 +109,7 @@ const Contact = () => {
                 <p className="font-sans text-[11px] text-muted-foreground/40 leading-[1.6] mt-3">
                   {isIndia
                     ? 'Our India operations are based out of Delhi, with a network spanning key industrial regions.'
-                    : 'Headquartered in the United States, with a nationwide investment focus.'}
+                    : 'Headquartered in San Diego, with a nationwide investment focus across the United States.'}
                 </p>
               </div>
             </motion.div>
