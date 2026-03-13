@@ -135,7 +135,9 @@ const Home = () => {
             <FadeIn>
               <SectionLabel>What We Do</SectionLabel>
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
-                Acquiring &amp; Building Essential Companies
+                {isIndia
+                  ? 'Acquiring & Building Companies in India'
+                  : 'Acquiring & Building Essential Companies'}
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -143,10 +145,14 @@ const Home = () => {
           <div className="lg:col-span-7">
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
-                Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.
+                {isIndia
+                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in India\u2019s lower middle market. We focus on sectors where operational improvement, compliance, and deep client relationships define long-term value.'
+                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.
+                {isIndia
+                  ? 'Our team brings global institutional experience to Indian companies seeking a partner, not just capital.'
+                  : 'Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.'}
               </p>
             </FadeIn>
           </div>
