@@ -152,27 +152,29 @@ const About = () => {
           </FadeIn>
 
           <ApproachTable items={approach} variant="dark" />
-
-          {/* Target Sectors — US only */}
-          {!isIndia && (
-            <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 lg:pt-10 border-t border-primary-foreground/[0.04]">
-              <FadeIn>
-                <SectionLabel light>Target Sectors</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground leading-[1.2] max-w-[480px] mb-1">
-                  Essential B2B services across the United States
-                </h2>
-                <GoldRule className="mb-4 md:mb-6" />
-              </FadeIn>
-
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 lg:gap-x-12 gap-y-0">
-                {usSectors.map((sector, i) => (
-                  <SectorCard key={sector.label} sector={sector} index={i} />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </section>
+
+      {/* Target Sectors — US only, white background */}
+      {!isIndia && (
+        <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+          <div className="max-w-[1080px] mx-auto">
+            <FadeIn>
+              <SectionLabel>Target Sectors</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-foreground leading-[1.2] max-w-[480px] mb-1">
+                Essential B2B services across the United States
+              </h2>
+              <GoldRule className="mb-4 md:mb-6" />
+            </FadeIn>
+
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 lg:gap-x-12 gap-y-0">
+              {usSectors.map((sector, i) => (
+                <SectorCard key={sector.label} sector={sector} index={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Principles */}
       <section className="bg-cream px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
