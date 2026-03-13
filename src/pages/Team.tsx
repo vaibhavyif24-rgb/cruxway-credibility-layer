@@ -10,10 +10,10 @@ import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
 // Deal logos — Harin
-import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
+import rmsEnergyLogo from '@/assets/deals/rms-energy.jpg';
 import bbcElectricLogo from '@/assets/deals/bbc-electric.png';
-import pwrLogo from '@/assets/deals/pwr.png';
-import flexrayLogo from '@/assets/deals/flexray.png';
+import pwrLogo from '@/assets/deals/pwr.jpg';
+import flexrayLogo from '@/assets/deals/flexray.webp';
 import alignLogo from '@/assets/deals/a-lign.png';
 import alliedUniversalLogo from '@/assets/deals/allied-universal.png';
 import energizerLogo from '@/assets/deals/energizer.png';
