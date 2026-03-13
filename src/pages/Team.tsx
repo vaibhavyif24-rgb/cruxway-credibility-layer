@@ -48,7 +48,8 @@ interface TeamMember {
   summary: string;
   highlights: string[];
   logos?: LogoItem[];
-  dealImage?: string;
+  dealImageGold?: string;
+  dealImageOriginal?: string;
   linkedIn?: string;
 }
 
