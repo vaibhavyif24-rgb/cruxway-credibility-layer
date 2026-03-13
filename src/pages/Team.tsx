@@ -39,7 +39,8 @@ import lamResearchLogo from '@/assets/logos/lam-research.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
-
+import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
+import depaulLogo from '@/assets/logos/depaul.png';
 // Logos — Vaibhav
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
@@ -165,13 +166,15 @@ const foundersLogos = [
   { src: evercoreLogo, alt: 'Evercore' },
   { src: dunesPointLogo, alt: 'Dunes Point Capital' },
   { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', small: true },
+  { src: berkeleyHaasLogo, alt: 'UC Berkeley Haas' },
+  { src: depaulLogo, alt: 'DePaul University', small: true },
 ];
 
 // All logos merged (India team view)
 const allLogos = [
   ...foundersLogos,
-  { src: nitiAayogLogo, alt: 'NITI Aayog' },
   { src: ashokaLogo, alt: 'Ashoka University', small: true },
+  { src: nitiAayogLogo, alt: 'NITI Aayog' },
   { src: iicLogo, alt: 'Impact Investors Council', small: true },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
