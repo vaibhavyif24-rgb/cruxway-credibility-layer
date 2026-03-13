@@ -245,7 +245,7 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
                 <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-3">
                   Select Investments &amp; Deals
                 </p>
-                <DealImageMarquee src={member.dealImage} alt={`${member.name} deals`} />
+                <DealImageDisplay src={member.dealImage} alt={`${member.name} deals`} />
               </motion.div>
             )}
           </div>
