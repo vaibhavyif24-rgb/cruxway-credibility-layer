@@ -77,7 +77,7 @@ const About = () => {
             </div>
             <div className="lg:col-span-7">
               <FadeIn delay={0.08}>
-              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
+              <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                   {isIndia
                     ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
                     : 'Cruxway acquires majority stakes in founder-led businesses across the United States, combining long-term capital with operating expertise to help owners transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
