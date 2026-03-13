@@ -402,7 +402,7 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
