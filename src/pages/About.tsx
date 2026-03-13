@@ -117,7 +117,7 @@ const About = () => {
                   <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                     These businesses share characteristics we find compelling: recurring revenue driven by regulatory mandates, high switching costs built on trust and performance, and resilience across economic cycles. Many are led by founders approaching retirement without a succession plan, creating a significant opportunity for a partner who can preserve what works while investing in growth.
                   </p>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8]">
                     We deliberately focus on sectors too small for large private equity and too complex for unsophisticated buyers, where our operating expertise and patient capital create the most value.
                   </p>
                 </FadeIn>
