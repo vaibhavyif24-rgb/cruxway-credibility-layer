@@ -358,11 +358,11 @@ const Home = () => {
       </section>
 
       {/* Approach */}
-      <Section>
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-10 md:mb-12" />
+            <GoldRule className="mt-1 mb-8 md:mb-10" />
           </FadeIn>
 
           <ApproachTable
@@ -381,11 +381,11 @@ const Home = () => {
                 ]}
           />
         </div>
-      </Section>
+      </section>
 
       {/* Social Proof */}
       <div className="bg-cream">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 lg:pt-24 pb-6">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16 pb-4">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
@@ -393,13 +393,13 @@ const Home = () => {
                 ? 'Global institutional experience brought to Indian markets'
                 : 'Our team has invested and operated across leading global institutions'}
             </h2>
-            <GoldRule className="mt-5" />
+            <GoldRule className="mt-4" />
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
           <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>
-        <div className="h-8 md:h-12" />
+        <div className="h-6 md:h-8" />
       </div>
 
       {/* CTA */}
