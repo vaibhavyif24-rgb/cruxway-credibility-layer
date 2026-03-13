@@ -45,7 +45,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
       />
 
       <motion.div
-        className="flex items-center gap-16 md:gap-24 lg:gap-28 w-max"
+        className="flex items-center gap-10 md:gap-20 lg:gap-28 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{
           x: {
@@ -59,15 +59,15 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[64px] md:h-[80px]"
+            className="flex items-center justify-center shrink-0 h-[44px] md:h-[72px] lg:h-[80px]"
           >
             <img
               src={logo.src}
               alt={logo.alt}
               className={`w-auto object-contain transition-opacity duration-300 ${
                 logo.small
-                  ? 'h-[40px] md:h-[52px] max-w-[160px] md:max-w-[200px]'
-                  : 'h-[56px] md:h-[72px] max-w-[200px] md:max-w-[260px]'
+                  ? 'h-[28px] md:h-[44px] lg:h-[52px] max-w-[110px] md:max-w-[180px] lg:max-w-[200px]'
+                  : 'h-[36px] md:h-[60px] lg:h-[72px] max-w-[130px] md:max-w-[220px] lg:max-w-[260px]'
               } ${isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'}`}
               style={{
                 filter: goldFilter,
