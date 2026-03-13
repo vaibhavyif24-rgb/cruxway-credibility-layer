@@ -135,7 +135,7 @@ const Home = () => {
       </section>
 
       {/* What We Do */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
             <div className="lg:col-span-5">
