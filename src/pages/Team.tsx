@@ -91,6 +91,8 @@ const indiaPartner: TeamMember = {
     { src: ashokaLogo, alt: 'Ashoka University' },
     { src: iicLogo, alt: 'Impact Investors Council' },
     { src: treeforestLogo, alt: 'TreeForest Capital' },
+    { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
+    { src: swishinLogo, alt: 'Swishin Ventures' },
   ],
 };
 
@@ -106,9 +108,8 @@ const allLogos = [
   { src: ashokaLogo, alt: 'Ashoka University' },
   { src: iicLogo, alt: 'Impact Investors Council' },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
-  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
+  { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
 /* ─── Profile Card ─── */
