@@ -323,7 +323,7 @@ const Home = () => {
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="group relative p-5 md:p-7 h-full"
+                  className="group relative p-4 md:p-7 h-full"
                 >
                   {i > 0 && (
                     <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden lg:block" />
