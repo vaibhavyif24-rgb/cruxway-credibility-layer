@@ -157,7 +157,7 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <GoldRule className="mt-7" />
+            <GoldRule className="mt-5 md:mt-7" />
           </FadeIn>
           <FadeIn delay={0.28}>
             <div className="mt-10 flex flex-wrap gap-3">
