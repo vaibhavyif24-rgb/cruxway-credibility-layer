@@ -136,13 +136,11 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
+    'Vaibhav is an early-stage investor and operator with experience across family offices, venture capital, and startup building. He has evaluated 500+ companies, led direct investments across cleantech, deeptech, and manufacturing, and secured allocations in oversubscribed rounds.',
   highlights: [
-    'NITI Aayog: Policy and strategy advisory to the Government of India',
-    'VC fund partnering with multiple family offices across India; early-stage investing and portfolio support',
-    'Vermin Console: Institutional advisory on environmental compliance and regulatory frameworks',
-    'Impact Investors Council: Policy engagement and ecosystem development for impact capital in India',
-    'Young India Fellow, Ashoka University; Stanford University research grant recipient',
+    'Led investments and portfolio support across a venture fund and family office, spanning marketplace, cleantech, deeptech, and manufacturing sectors',
+    'Advised on policy and strategy at NITI Aayog, supporting government initiatives impacting millions of students across India',
+    'Young India Fellow, Ashoka University; Stanford University research grant recipient in frugal sciences and bioengineering',
   ],
   logos: [
     { src: nitiAayogLogo, alt: 'NITI Aayog' },
