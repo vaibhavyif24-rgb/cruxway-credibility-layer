@@ -113,6 +113,66 @@
   }
 }
 
+/* Floating orb animations for dark sections */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translate(10px, -15px) scale(1.05);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-5px, -25px) scale(1.02);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(-15px, -10px) scale(0.98);
+    opacity: 0.45;
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(-12px, -20px) scale(1.08);
+    opacity: 0.5;
+  }
+  66% {
+    transform: translate(8px, -12px) scale(0.96);
+    opacity: 0.35;
+  }
+}
+
+@keyframes shimmer-line {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.015;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.04;
+    transform: scale(1.1);
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -129,6 +189,22 @@
     );
     background-size: 400% 400%;
     animation: hero-gradient-shift 16s ease infinite;
+  }
+
+  .float-orb-slow {
+    animation: float-slow 12s ease-in-out infinite;
+  }
+
+  .float-orb-medium {
+    animation: float-medium 8s ease-in-out infinite;
+  }
+
+  .shimmer-effect {
+    animation: shimmer-line 4s ease-in-out infinite;
+  }
+
+  .pulse-glow-effect {
+    animation: pulse-glow 6s ease-in-out infinite;
   }
 
   .btn-premium {
