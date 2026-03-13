@@ -195,15 +195,19 @@ const About = () => {
         </section>
       )}
 
-      {/* Approach */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
-        <div className="max-w-[1080px] mx-auto">
+      {/* Approach — on dark background for premium feel */}
+      <section className="relative bg-primary text-primary-foreground overflow-hidden">
+        <DarkSectionEffects />
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
           <FadeIn>
-            <SectionLabel>Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-5 md:mb-12" />
+            <SectionLabel light>Our Approach</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
+              How We Partner With Founders
+            </h2>
+            <GoldRule className="mb-6 md:mb-10" />
           </FadeIn>
 
-          <ApproachTable items={approach} />
+          <ApproachTable items={approach} variant="dark" />
         </div>
       </section>
 
