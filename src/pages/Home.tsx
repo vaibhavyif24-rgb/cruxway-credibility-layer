@@ -75,7 +75,6 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
 ];
 
-
 /* ── Sector Grid Widget ── */
 const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -94,7 +93,6 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
         transition={{ duration: 0.2 }}
         className="relative pl-4 py-4 border-l border-foreground/[0.05] hover:border-gold/30 transition-colors duration-400"
       >
-        {/* Animated gold dot */}
         <motion.div
           className="absolute left-[-2.5px] top-5 w-[5px] h-[5px] rounded-full bg-gold/0 group-hover:bg-gold/50 transition-all duration-300"
           initial={{ scale: 0 }}
@@ -111,6 +109,24 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
     </motion.div>
   );
 };
+
+/* ── Animated Stat ── */
+const StatBlock = ({ val, lbl, delay = 0, light = false }: { val: string; lbl: string; delay?: number; light?: boolean }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+    className="text-center"
+  >
+    <p className={`font-serif text-[clamp(1.2rem,2.5vw,1.65rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
+      {val}
+    </p>
+    <p className={`font-sans text-[9px] font-medium uppercase tracking-[0.18em] mt-1.5 ${light ? 'text-primary-foreground/25' : 'text-muted-foreground/40'}`}>
+      {lbl}
+    </p>
+  </motion.div>
+);
 
 const Home = () => {
   const { region } = useRegion();
@@ -182,37 +198,76 @@ const Home = () => {
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
                 {isIndia
                   ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
-                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability and deep client relationships define long-term value.'}
+                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
                   ? 'Our team brings global institutional experience to companies seeking a partner who understands both local markets and world-class standards.'
-                  : 'Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.'}
+                  : 'Our team brings institutional investing and operating experience to companies seeking a long-term partner, not a financial sponsor with a five-year clock. We buy businesses we intend to hold, build, and grow for decades.'}
               </p>
             </FadeIn>
           </div>
         </div>
       </Section>
 
-      {/* Target Sectors (US) / Why India (India) */}
+      {/* US Market Thesis / India Opportunity */}
       {!isIndia ? (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
-          <div className="max-w-[1080px] mx-auto">
-            <FadeIn>
-              <SectionLabel>Target Sectors</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
-                Essential B2B services across the United States
-              </h2>
-              <GoldRule className="mt-4 mb-8 md:mb-10" />
-            </FadeIn>
-
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 gap-y-1">
-              {usSectors.map((sector, i) => (
-                <SectorCard key={sector.label} sector={sector} index={i} />
-              ))}
+        <>
+          {/* US Market Thesis */}
+          <section className="relative bg-primary text-primary-foreground overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
+            <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+              <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+                <div className="lg:col-span-5">
+                  <FadeIn>
+                    <SectionLabel light>Our Thesis</SectionLabel>
+                    <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
+                      Why U.S. Essential Services
+                    </h2>
+                    <GoldRule className="mt-5" />
+                  </FadeIn>
+                </div>
+                <div className="lg:col-span-7">
+                  <FadeIn delay={0.08}>
+                    <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                      The United States is home to tens of thousands of founder-led businesses in essential B2B services: companies that maintain critical infrastructure, ensure regulatory compliance, and keep the economy running. Many of these businesses were built over decades by owners who are now approaching transition without a clear succession plan.
+                    </p>
+                    <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
+                      These companies are highly resilient, often counter-cyclical, and deeply embedded in their customer relationships. Yet most are too small for large private equity and too complex for unsophisticated buyers. Cruxway exists to fill this gap: providing patient capital and operational expertise to preserve what founders built while unlocking the next chapter of growth.
+                    </p>
+                  </FadeIn>
+                  <FadeIn delay={0.16}>
+                    <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                      <StatBlock val="10M+" lbl="U.S. Small Businesses" delay={0} light />
+                      <StatBlock val="$10T+" lbl="Transition Value" delay={0.08} light />
+                      <StatBlock val="70%+" lbl="Lack Succession Plans" delay={0.16} light />
+                    </div>
+                  </FadeIn>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          {/* Target Sectors */}
+          <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+            <div className="max-w-[1080px] mx-auto">
+              <FadeIn>
+                <SectionLabel>Target Sectors</SectionLabel>
+                <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[480px] mb-2">
+                  Essential B2B services across the United States
+                </h2>
+                <GoldRule className="mt-4 mb-8 md:mb-10" />
+              </FadeIn>
+
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 gap-y-1">
+                {usSectors.map((sector, i) => (
+                  <SectorCard key={sector.label} sector={sector} index={i} />
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
       ) : (
         <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
           <div className="max-w-[1080px] mx-auto">
@@ -237,23 +292,9 @@ const Home = () => {
                 </FadeIn>
                 <FadeIn delay={0.16}>
                   <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-foreground/[0.06]">
-                    {[
-                      { val: '63M+', lbl: 'MSMEs in India' },
-                      { val: '<1%', lbl: 'Institutionally Backed' },
-                      { val: '$5T', lbl: 'Economy by 2028' },
-                    ].map((s, i) => (
-                      <motion.div
-                        key={s.lbl}
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                        className="text-center"
-                      >
-                        <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-foreground tracking-[-0.02em]">{s.val}</p>
-                        <p className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-muted-foreground/40 mt-1">{s.lbl}</p>
-                      </motion.div>
-                    ))}
+                    <StatBlock val="63M+" lbl="MSMEs in India" delay={0} />
+                    <StatBlock val="<1%" lbl="Institutionally Backed" delay={0.08} />
+                    <StatBlock val="$5T" lbl="Economy by 2028" delay={0.16} />
                   </div>
                 </FadeIn>
               </div>
@@ -263,13 +304,13 @@ const Home = () => {
       )}
 
       {/* Our Process */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+      <section className={`relative ${isIndia ? 'bg-primary' : 'bg-background'} text-${isIndia ? 'primary-foreground' : 'foreground'} overflow-hidden`}>
+        {isIndia && <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
           <FadeIn>
-            <SectionLabel light>Our Process</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
-              {isIndia ? 'From Discovery to Partnership' : 'From Discovery to Partnership'}
+            <SectionLabel light={isIndia}>Our Process</SectionLabel>
+            <h2 className={`font-serif text-[clamp(1.35rem,2.5vw,2rem)] ${isIndia ? 'text-primary-foreground' : 'text-foreground'} leading-[1.18] max-w-[480px] mb-4`}>
+              From Discovery to Partnership
             </h2>
             <GoldRule className="mb-12 md:mb-16" />
           </FadeIn>
@@ -283,14 +324,14 @@ const Home = () => {
                   className="group relative p-6 md:p-8 h-full"
                 >
                   {i > 0 && (
-                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden lg:block" />
+                    <div className={`absolute left-0 top-8 bottom-8 w-px ${isIndia ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.06]'} hidden lg:block`} />
                   )}
                   {i === 2 && (
-                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden sm:block lg:hidden" />
+                    <div className={`absolute left-0 top-8 bottom-8 w-px ${isIndia ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.06]'} hidden sm:block lg:hidden`} />
                   )}
 
                   <motion.span
-                    initial={{ color: 'hsl(var(--primary-foreground) / 0.04)' }}
+                    initial={{ color: isIndia ? 'hsl(var(--primary-foreground) / 0.04)' : 'hsl(var(--foreground) / 0.04)' }}
                     whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
                     viewport={{ once: false, margin: '-20px' }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -301,12 +342,12 @@ const Home = () => {
 
                   <div className="flex items-center gap-3 mb-3">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300 shrink-0" />
-                    <h3 className="font-serif text-[1.15rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
+                    <h3 className={`font-serif text-[1.15rem] md:text-[1.25rem] ${isIndia ? 'text-primary-foreground' : 'text-foreground'} tracking-[-0.01em]`}>
                       {step.title}
                     </h3>
                   </div>
 
-                  <p className="font-sans text-[12.5px] text-primary-foreground/30 leading-[1.75] group-hover:text-primary-foreground/45 transition-colors duration-300">
+                  <p className={`font-sans text-[12.5px] ${isIndia ? 'text-primary-foreground/30 group-hover:text-primary-foreground/45' : 'text-muted-foreground/60 group-hover:text-muted-foreground/80'} leading-[1.75] transition-colors duration-300`}>
                     {step.description}
                   </p>
                 </motion.div>
@@ -333,10 +374,10 @@ const Home = () => {
                   { t: 'Lower Middle Market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
                 ]
               : [
-                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
-                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
-                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Selective Focus', d: 'One platform at a time. Deep conviction, not diversification.' },
+                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We buy to hold and build, not to flip.' },
+                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth, professionalise systems, and expand capabilities.' },
+                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy. We protect downside while investing for long-term upside.' },
+                  { t: 'Selective Focus', d: 'One platform at a time. Deep conviction and concentrated attention, not diversification across dozens of portfolio companies.' },
                 ]}
           />
         </div>
@@ -372,7 +413,7 @@ const Home = () => {
             <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-8">
               {isIndia
                 ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                : 'If you\'re a founder or business owner exploring a long-term partnership, we\'d welcome the conversation.'}
+                : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what partnership could look like.'}
             </p>
             <Link
               to={`/${region}/contact`}
