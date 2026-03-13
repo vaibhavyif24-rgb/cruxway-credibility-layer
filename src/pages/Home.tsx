@@ -250,16 +250,16 @@ const Home = () => {
           <ApproachTable
             items={isIndia
               ? [
-                  { t: 'Founder alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline, not fund constraints.' },
-                  { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to professionalise and scale.' },
+                  { t: 'Founder alignment', d: 'Partnerships designed around the Indian founder\'s vision and growth timeline, not fund constraints.' },
+                  { t: 'Operational depth', d: 'Hands-on involvement alongside Indian management teams to professionalise and scale.' },
                   { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
                   { t: 'Lower middle market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
                 ]
               : [
-                  { t: 'Long-term alignment', d: 'Hold periods designed around value creation, not fund timelines.' },
-                  { t: 'Operational depth', d: 'Hands-on involvement alongside management teams to drive growth.' },
+                  { t: 'Long-term alignment', d: 'Hold periods designed around American value creation, not fund timelines.' },
+                  { t: 'Operational depth', d: 'Hands-on involvement alongside U.S. management teams to drive growth.' },
                   { t: 'Disciplined capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Selective focus', d: 'One platform at a time. Deep conviction, not diversification.' },
+                  { t: 'Selective focus', d: 'One American platform at a time. Deep conviction, not diversification.' },
                 ]}
           />
         </div>
