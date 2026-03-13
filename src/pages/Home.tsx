@@ -37,6 +37,29 @@ const institutionalLogos = [
   { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
 ];
 
+const processSteps = [
+  {
+    num: '01',
+    title: 'Identify',
+    description: 'We source founder-led and family-owned businesses in essential sectors with durable competitive advantages and strong client relationships.',
+  },
+  {
+    num: '02',
+    title: 'Evaluate',
+    description: 'Rigorous due diligence across financials, operations, and culture — ensuring alignment between the business, its people, and our long-term vision.',
+  },
+  {
+    num: '03',
+    title: 'Acquire',
+    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.',
+  },
+  {
+    num: '04',
+    title: 'Build',
+    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value — without disrupting what already works.',
+  },
+];
+
 const Home = () => {
   const { region } = useRegion();
   const isIndia = region === 'india';
@@ -113,6 +136,57 @@ const Home = () => {
         </div>
       </Section>
 
+      {/* Our Process */}
+      <section className="relative bg-primary text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
+          <FadeIn>
+            <SectionLabel light>Our Process</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
+              From Discovery to Partnership
+            </h2>
+            <GoldRule className="mb-12 md:mb-16" />
+          </FadeIn>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
+            {processSteps.map((step, i) => (
+              <FadeIn key={step.num} delay={i * 0.1}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
+                  className="group relative p-6 md:p-8 h-full"
+                >
+                  {/* Vertical divider line on left (except first in each row) */}
+                  {i > 0 && (
+                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden lg:block" />
+                  )}
+                  {i === 2 && (
+                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden sm:block lg:hidden" />
+                  )}
+
+                  {/* Step number */}
+                  <span className="font-serif text-[2.5rem] md:text-[3rem] leading-none text-primary-foreground/[0.06] group-hover:text-gold/20 transition-colors duration-500 block mb-4">
+                    {step.num}
+                  </span>
+
+                  {/* Connector dot */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300 shrink-0" />
+                    <h3 className="font-serif text-[1.15rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
+                      {step.title}
+                    </h3>
+                  </div>
+
+                  <p className="font-sans text-[12.5px] text-primary-foreground/30 leading-[1.75] group-hover:text-primary-foreground/45 transition-colors duration-300">
+                    {step.description}
+                  </p>
+                </motion.div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Approach */}
       <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
         <div className="max-w-[1080px] mx-auto">
@@ -160,7 +234,7 @@ const Home = () => {
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={institutionalLogos} duration={35} variant="dark" />
+          <LogoMarquee logos={institutionalLogos} duration={40} variant="dark" />
         </FadeIn>
       </div>
 
