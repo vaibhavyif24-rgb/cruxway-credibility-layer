@@ -23,6 +23,11 @@ import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
 
+// Additional logos
+import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
+import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
+import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
+
 interface TeamMember {
   name: string;
   role: string;
@@ -104,6 +109,9 @@ const allLogos = [
   { src: ashokaLogo, alt: 'Ashoka University' },
   { src: iicLogo, alt: 'Impact Investors Council' },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
+  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
 ];
 
 /* ─── Profile Card ─── */
@@ -264,7 +272,7 @@ const Team = () => {
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={allLogos} duration={35} variant="dark" />
+          <LogoMarquee logos={allLogos} duration={40} variant="dark" />
         </FadeIn>
       </div>
 

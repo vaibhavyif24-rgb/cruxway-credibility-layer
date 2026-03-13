@@ -42,7 +42,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
       />
 
       <motion.div
-        className="flex items-center gap-12 md:gap-16 lg:gap-20 w-max"
+        className="flex items-center gap-14 md:gap-20 lg:gap-24 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{
           x: {
@@ -61,9 +61,16 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
             <img
               src={logo.src}
               alt={logo.alt}
-              className={`h-[28px] md:h-[36px] w-auto object-contain ${
-                isDark ? 'opacity-60 brightness-150' : 'opacity-50'
-              } hover:opacity-80 transition-opacity duration-300`}
+              className={`h-[38px] md:h-[48px] w-auto object-contain transition-all duration-300 ${
+                isDark
+                  ? 'brightness-0 invert sepia saturate-[3] hue-rotate-[5deg] opacity-70 hover:opacity-90'
+                  : 'brightness-0 invert sepia saturate-[3] hue-rotate-[5deg] opacity-50 hover:opacity-75'
+              }`}
+              style={{
+                filter: isDark
+                  ? 'brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(0.85)'
+                  : 'brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(5deg) brightness(0.75)',
+              }}
             />
           </div>
         ))}
