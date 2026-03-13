@@ -136,7 +136,7 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building. Having evaluated 500+ companies and led investments across sectors, he developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
+    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. Having evaluated 500+ companies and led investments across sectors, he developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
     'Operational experience co-founding and scaling ventures incubated at IIM Bangalore, IIT Delhi, and SMU Singapore',
@@ -383,6 +383,23 @@ const Team = () => {
           )}
         </div>
       </section>
+
+      {/* Partner (US view, shown after Founders) */}
+      {!isIndia && (
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+          <div className="max-w-[1080px] mx-auto">
+            <div className="mb-5 md:mb-7">
+              <FadeIn>
+                <SectionLabel>Partner</SectionLabel>
+                <GoldRule className="mt-1" />
+              </FadeIn>
+            </div>
+            <div className="border-t border-foreground/[0.06]">
+              <ProfileCard member={indiaPartner} index={0} />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Institutional Experience Marquee */}
       <div>
