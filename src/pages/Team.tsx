@@ -9,24 +9,9 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
-// Deal logos — Harin
-import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
-import bbcElectricLogo from '@/assets/deals/bbc-electric.png';
-import pwrLogo from '@/assets/deals/pwr.png';
-import flexrayLogo from '@/assets/deals/flexray.png';
-import alignLogo from '@/assets/deals/a-lign.png';
-import alliedUniversalLogo from '@/assets/deals/allied-universal.png';
-import energizerLogo from '@/assets/deals/energizer.png';
-import broadcomLogo from '@/assets/deals/broadcom.png';
-
-// Deal logos — Benson
-import abgLogo from '@/assets/deals/abg.png';
-import rpxLogo from '@/assets/deals/rpx.png';
-import ideraLogo from '@/assets/deals/idera.png';
-import westernDigitalLogo from '@/assets/deals/western-digital.png';
-import mindbodyLogo from '@/assets/deals/mindbody.png';
-import selligentLogo from '@/assets/deals/selligent.png';
-import micronLogo from '@/assets/deals/micron.png';
+// Deal composite images (original logos)
+import harinDealsImg from '@/assets/deals/harin-deals.png';
+import bensonDealsImg from '@/assets/deals/benson-deals.png';
 
 // Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
