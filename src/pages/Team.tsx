@@ -24,6 +24,8 @@ import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
+import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
+import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 
 interface TeamMember {
   name: string;
@@ -105,14 +107,16 @@ const foundersLogos = [
   { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: hggcLogo, alt: 'HGGC' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
+  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
 ];
 
 // All logos merged (India team view)
 const allLogos = [
   ...foundersLogos,
   { src: nitiAayogLogo, alt: 'NITI Aayog' },
-  { src: ashokaLogo, alt: 'Ashoka University' },
-  { src: iicLogo, alt: 'Impact Investors Council' },
+  { src: ashokaLogo, alt: 'Ashoka University', small: true },
+  { src: iicLogo, alt: 'Impact Investors Council', small: true },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
   { src: swishinLogo, alt: 'Swishin Ventures' },
