@@ -87,7 +87,7 @@ const InvestorLogin = () => {
           </div>
         </form>
 
-        <p className="text-center mt-12 font-sans text-[10px] text-primary-foreground/12 leading-[1.6] tracking-[0.04em]">
+        <p className="text-center mt-12 font-sans text-[10px] text-primary-foreground/30 leading-[1.6] tracking-[0.04em]">
           Access is restricted to registered investors.
           <br />
           Contact your relationship manager for credentials.
