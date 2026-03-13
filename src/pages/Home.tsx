@@ -390,32 +390,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Approach */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Our Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-5 md:mb-10" />
-          </FadeIn>
-
-          <ApproachTable
-            items={isIndia
-              ? [
-                  { t: 'Founder Alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline, not fund constraints.' },
-                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to professionalise and scale.' },
-                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Lower Middle Market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
-                ]
-              : [
-                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We acquire majority stakes to hold and build, not to flip.' },
-                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth, professionalise systems, and expand capabilities.' },
-                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy. We protect downside while investing for long-term upside.' },
-                  { t: 'Selective Focus', d: 'One platform at a time. Deep conviction and concentrated attention, not diversification across dozens of portfolio companies.' },
-                ]}
-          />
-        </div>
-      </section>
-
       {/* Social Proof */}
       <div className="bg-cream">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12 lg:pt-14 pb-2 md:pb-3">
