@@ -47,6 +47,7 @@ const founders: TeamMember[] = [
     name: 'Harin Gupta',
     role: 'Co-Founder',
     photo: harinPhoto,
+    linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
       'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy.',
     highlights: [
@@ -67,6 +68,7 @@ const founders: TeamMember[] = [
     name: 'Benson Zhang',
     role: 'Co-Founder',
     photo: bensonPhoto,
+    linkedIn: 'https://www.linkedin.com/in/benson8zhang/',
     summary:
       'Benson has over a decade of experience in finance and private equity investing across technology and business services sectors. He brings disciplined capital allocation and deep sector knowledge to every partnership.',
     highlights: [
