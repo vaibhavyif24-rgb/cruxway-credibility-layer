@@ -87,14 +87,14 @@ const InvestorLogin = () => {
           </div>
         </form>
 
-        <p className="text-center mt-12 font-sans text-[10px] text-primary-foreground/12 leading-[1.6] tracking-[0.04em]">
+        <p className="text-center mt-12 font-sans text-[10px] text-primary-foreground/30 leading-[1.6] tracking-[0.04em]">
           Access is restricted to registered investors.
           <br />
           Contact your relationship manager for credentials.
         </p>
       </motion.div>
 
-      <p className="absolute bottom-6 sm:bottom-7 font-sans text-[8px] text-primary-foreground/8 tracking-[0.25em] uppercase">
+      <p className="absolute bottom-6 sm:bottom-7 font-sans text-[8px] text-primary-foreground/20 tracking-[0.25em] uppercase">
         Privileged &amp; Confidential
       </p>
     </div>
