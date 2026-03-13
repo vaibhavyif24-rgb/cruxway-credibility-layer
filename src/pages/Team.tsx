@@ -28,14 +28,17 @@ import mindbodyLogo from '@/assets/deals/mindbody.png';
 import selligentLogo from '@/assets/deals/selligent.png';
 import micronLogo from '@/assets/deals/micron.png';
 
-// Logos — Founders
-import warburgLogo from '@/assets/logos/warburg-pincus.png';
-import jpMorganLogo from '@/assets/logos/jp-morgan.png';
-import evercoreLogo from '@/assets/logos/evercore.png';
-import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
+// Logos — Institutional experience
 import blackrockLogo from '@/assets/logos/blackrock.png';
+import warburgLogo from '@/assets/logos/warburg-pincus.png';
+import neosPartnersLogo from '@/assets/logos/neos-partners.png';
+import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
+import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
 import creditSuisseLogo from '@/assets/logos/credit-suisse.png';
-import hggcLogo from '@/assets/logos/hggc.png';
+import lamResearchLogo from '@/assets/logos/lam-research.png';
+import evercoreLogo from '@/assets/logos/evercore.png';
+import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
+import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 
 // Logos — Vaibhav
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
@@ -44,8 +47,6 @@ import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
-import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
-import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 
 interface LogoItem {
   src: string;
