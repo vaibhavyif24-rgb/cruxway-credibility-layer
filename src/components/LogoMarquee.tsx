@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 interface LogoItem {
   src: string;
   alt: string;
+  /** Use smaller size for logos that are visually larger (e.g. square emblems) */
+  small?: boolean;
 }
 
 interface LogoMarqueeProps {
@@ -62,9 +64,11 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
             <img
               src={logo.src}
               alt={logo.alt}
-              className={`h-[48px] md:h-[60px] w-auto max-w-[180px] md:max-w-[220px] object-contain transition-opacity duration-300 ${
-                isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'
-              }`}
+              className={`w-auto object-contain transition-opacity duration-300 ${
+                logo.small
+                  ? 'h-[32px] md:h-[40px] max-w-[140px] md:max-w-[170px]'
+                  : 'h-[48px] md:h-[60px] max-w-[180px] md:max-w-[220px]'
+              } ${isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'}`}
               style={{
                 filter: goldFilter,
                 mixBlendMode: isDark ? 'screen' : undefined,
