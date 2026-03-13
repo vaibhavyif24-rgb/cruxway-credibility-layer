@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 /**
  * Animated background effects for dark/blue sections.
- * Renders floating orbs, shimmer lines, and subtle particle effects
- * to give life and depth to Prussian Blue sections.
+ * Renders floating orbs, shimmer lines, animated particles,
+ * and subtle geometric accents for depth and life.
  */
 const DarkSectionEffects = ({ variant = 'default' }: { variant?: 'default' | 'hero' | 'cta' }) => {
   return (
@@ -14,13 +14,13 @@ const DarkSectionEffects = ({ variant = 'default' }: { variant?: 'default' | 'he
       {/* Floating gold orb - top right */}
       <div
         className="absolute top-[10%] right-[5%] w-[200px] h-[200px] md:w-[350px] md:h-[250px] rounded-full pointer-events-none float-orb-slow"
-        style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.025), transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.03), transparent 70%)' }}
       />
 
       {/* Floating prussian orb - bottom left */}
       <div
         className="absolute bottom-[5%] left-[2%] w-[250px] h-[180px] md:w-[400px] md:h-[280px] rounded-full pointer-events-none float-orb-medium"
-        style={{ background: 'radial-gradient(circle, hsl(207 50% 18% / 0.25), transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, hsl(207 50% 18% / 0.3), transparent 70%)' }}
       />
 
       {/* Central pulsing glow */}
@@ -29,13 +29,58 @@ const DarkSectionEffects = ({ variant = 'default' }: { variant?: 'default' | 'he
         style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 1), transparent 60%)' }}
       />
 
-      {/* Horizontal shimmer line */}
+      {/* Secondary floating orb - mid left */}
+      <div
+        className="absolute top-[40%] left-[15%] w-[150px] h-[150px] md:w-[250px] md:h-[200px] rounded-full pointer-events-none float-orb-slow"
+        style={{
+          background: 'radial-gradient(circle, hsl(38 45% 55% / 0.02), transparent 70%)',
+          animationDelay: '4s',
+        }}
+      />
+
+      {/* Horizontal shimmer line - upper */}
       <div className="absolute top-[30%] left-0 right-0 h-px pointer-events-none overflow-hidden">
         <div
           className="w-[200px] h-full shimmer-effect"
-          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 45% 55% / 0.08), transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 45% 55% / 0.1), transparent)' }}
         />
       </div>
+
+      {/* Horizontal shimmer line - lower */}
+      <div className="absolute top-[70%] left-0 right-0 h-px pointer-events-none overflow-hidden">
+        <div
+          className="w-[150px] h-full shimmer-effect"
+          style={{
+            background: 'linear-gradient(90deg, transparent, hsl(38 45% 55% / 0.06), transparent)',
+            animationDelay: '2s',
+          }}
+        />
+      </div>
+
+      {/* Animated floating particles */}
+      {[...Array(variant === 'hero' ? 5 : 3)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-[2px] h-[2px] rounded-full pointer-events-none"
+          style={{
+            background: 'hsl(38 45% 55%)',
+            left: `${15 + i * 18}%`,
+            top: `${20 + (i * 15) % 60}%`,
+          }}
+          animate={{
+            y: [0, -30, -10, -40, 0],
+            x: [0, 10, -5, 15, 0],
+            opacity: [0, 0.25, 0.15, 0.3, 0],
+            scale: [0, 1, 0.8, 1.2, 0],
+          }}
+          transition={{
+            duration: 8 + i * 2,
+            repeat: Infinity,
+            delay: i * 1.5,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
 
       {/* Animated corner accent - top left */}
       <motion.div
@@ -45,15 +90,36 @@ const DarkSectionEffects = ({ variant = 'default' }: { variant?: 'default' | 'he
         viewport={{ once: true }}
         transition={{ duration: 1.5, delay: 0.3 }}
       >
-        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.03]">
-          <line x1="0" y1="60" x2="60" y2="60" stroke="hsl(38 45% 55%)" strokeWidth="0.5" />
-          <line x1="60" y1="0" x2="60" y2="60" stroke="hsl(38 45% 55%)" strokeWidth="0.5" />
-          <circle cx="60" cy="60" r="2" fill="hsl(38 45% 55%)" />
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.04]">
+          <motion.line
+            x1="0" y1="60" x2="60" y2="60"
+            stroke="hsl(38 45% 55%)" strokeWidth="0.5"
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+          />
+          <motion.line
+            x1="60" y1="0" x2="60" y2="60"
+            stroke="hsl(38 45% 55%)" strokeWidth="0.5"
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.8 }}
+          />
+          <motion.circle
+            cx="60" cy="60" r="2"
+            fill="hsl(38 45% 55%)"
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3, delay: 1.2 }}
+          />
         </svg>
       </motion.div>
 
-      {/* Animated corner accent - bottom right */}
-      {variant === 'hero' && (
+      {/* Animated corner accent - bottom right (hero & cta) */}
+      {(variant === 'hero' || variant === 'cta') && (
         <motion.div
           className="absolute bottom-0 right-0 pointer-events-none rotate-180"
           initial={{ opacity: 0 }}
@@ -61,17 +127,52 @@ const DarkSectionEffects = ({ variant = 'default' }: { variant?: 'default' | 'he
           viewport={{ once: true }}
           transition={{ duration: 1.5, delay: 0.5 }}
         >
-          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.03]">
-            <line x1="0" y1="60" x2="60" y2="60" stroke="hsl(38 45% 55%)" strokeWidth="0.5" />
-            <line x1="60" y1="0" x2="60" y2="60" stroke="hsl(38 45% 55%)" strokeWidth="0.5" />
-            <circle cx="60" cy="60" r="2" fill="hsl(38 45% 55%)" />
+          <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.04]">
+            <motion.line
+              x1="0" y1="60" x2="60" y2="60"
+              stroke="hsl(38 45% 55%)" strokeWidth="0.5"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.7 }}
+            />
+            <motion.line
+              x1="60" y1="0" x2="60" y2="60"
+              stroke="hsl(38 45% 55%)" strokeWidth="0.5"
+              initial={{ pathLength: 0 }}
+              whileInView={{ pathLength: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 1 }}
+            />
+            <motion.circle
+              cx="60" cy="60" r="2"
+              fill="hsl(38 45% 55%)"
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 1.4 }}
+            />
           </svg>
         </motion.div>
       )}
 
+      {/* Vertical shimmer accent - right side */}
+      {variant !== 'cta' && (
+        <div className="absolute top-0 right-[20%] bottom-0 w-px pointer-events-none overflow-hidden">
+          <motion.div
+            className="w-full h-[100px]"
+            style={{
+              background: 'linear-gradient(180deg, transparent, hsl(38 45% 55% / 0.06), transparent)',
+            }}
+            animate={{ y: ['-100px', '500px'] }}
+            transition={{ duration: 6, repeat: Infinity, ease: 'linear', delay: 1 }}
+          />
+        </div>
+      )}
+
       {/* Subtle diagonal lines pattern */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.008]"
+        className="absolute inset-0 pointer-events-none opacity-[0.01]"
         style={{
           backgroundImage: `repeating-linear-gradient(
             135deg,

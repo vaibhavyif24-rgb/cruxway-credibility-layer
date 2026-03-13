@@ -1,9 +1,8 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
-import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
+import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion, useInView } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
-import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import { useRef } from 'react';
 
