@@ -114,7 +114,7 @@ const About = () => {
                   <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                     Essential B2B services represent the backbone of the American economy: companies that maintain critical infrastructure, ensure environmental and regulatory compliance, and provide specialised technical expertise that cannot be easily replicated or outsourced.
                   </p>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
                     These businesses share characteristics we find compelling: recurring revenue driven by regulatory mandates, high switching costs built on trust and performance, and resilience across economic cycles. Many are led by founders approaching retirement without a succession plan, creating a significant opportunity for a partner who can preserve what works while investing in growth.
                   </p>
                   <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
