@@ -112,20 +112,20 @@ const Home = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
           <FadeIn>
-            <SectionLabel light>Investment Firm</SectionLabel>
+            <SectionLabel light>{isIndia ? 'India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.06}>
             <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.4rem)] text-primary-foreground max-w-[620px] leading-[1.1] tracking-[-0.025em]">
               {isIndia
-                ? 'Low Market Buyouts & Acquisitions'
-                : 'The Right Partner for Enduring\u00a0Businesses'}
+                ? 'Low Market Buyouts & Acquisitions in India'
+                : 'The Right Partner for Enduring\u00a0American\u00a0Businesses'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
               {isIndia
-                ? 'We acquire and grow founder-led companies in essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
-                : 'We acquire and grow founder-led companies in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
+                ? 'We acquire and grow founder-led companies across India\'s essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
+                : 'We acquire and grow founder-led companies across the United States in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
