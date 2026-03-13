@@ -207,10 +207,11 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-[32px] md:h-[40px] w-auto max-w-[110px] md:max-w-[140px] object-contain transition-all duration-500"
+              className="h-[32px] md:h-[40px] w-auto max-w-[120px] md:max-w-[150px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
+                transform: logo.scale ? `scale(${logo.scale})` : undefined,
               }}
             />
           </div>
