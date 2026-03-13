@@ -171,7 +171,7 @@ const About = () => {
                   </p>
                 </FadeIn>
                 <FadeIn delay={0.16}>
-                  <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                  <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-primary-foreground/[0.06]">
                     {[
                       { val: '63M+', lbl: 'MSMEs in India' },
                       { val: '<1%', lbl: 'Institutionally Backed' },
