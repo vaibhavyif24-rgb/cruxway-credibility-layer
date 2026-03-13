@@ -111,7 +111,7 @@ const About = () => {
       {/* Our Process — moved from Home for a clean separation of concerns */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
