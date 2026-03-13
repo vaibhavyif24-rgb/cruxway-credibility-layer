@@ -219,8 +219,8 @@ const Home = () => {
           <section className="relative bg-primary text-primary-foreground overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
             <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
-            <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-              <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+            <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
+              <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
                 <div className="lg:col-span-5">
                   <FadeIn>
                     <SectionLabel light>Our Thesis</SectionLabel>
