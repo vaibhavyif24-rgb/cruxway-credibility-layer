@@ -410,7 +410,7 @@ const Home = () => {
               <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-3 md:mb-4">
                 {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
               </h2>
-              <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-7">
+              <p className="font-sans text-[12.5px] md:text-[13.5px] text-primary-foreground/30 leading-[1.75] md:leading-[1.8] mb-5 md:mb-7">
                 {isIndia
                   ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what partnership could look like.'}
