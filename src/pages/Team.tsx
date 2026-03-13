@@ -38,6 +38,7 @@ interface TeamMember {
   summary: string;
   highlights: string[];
   logos?: { src: string; alt: string }[];
+  dealImage?: string;
 }
 
 const founders: TeamMember[] = [
@@ -59,6 +60,7 @@ const founders: TeamMember[] = [
       { src: evercoreLogo, alt: 'Evercore' },
       { src: deutscheBankLogo, alt: 'Deutsche Bank' },
     ],
+    dealImage: harinDeals,
   },
   {
     name: 'Benson Zhang',
@@ -76,6 +78,7 @@ const founders: TeamMember[] = [
       { src: hggcLogo, alt: 'HGGC' },
       { src: creditSuisseLogo, alt: 'Credit Suisse' },
     ],
+    dealImage: bensonDeals,
   },
 ];
 
@@ -176,6 +179,30 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
               </li>
             ))}
           </ul>
+
+          {/* Deal logos — inline under bio */}
+          {member.dealImage && (
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+              className="mt-5 pt-4 border-t border-foreground/[0.05]"
+            >
+              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-3">
+                Select Investments &amp; Deals
+              </p>
+              <motion.img
+                src={member.dealImage}
+                alt={`${member.name} — Select investments and deals`}
+                className="w-full max-w-[400px] h-auto object-contain"
+                style={{ filter: 'grayscale(100%) contrast(1.05)', opacity: 0.65 }}
+                whileHover={{ filter: 'grayscale(0%) contrast(1)', opacity: 1 }}
+                transition={{ duration: 0.4 }}
+                loading="lazy"
+              />
+            </motion.div>
+          )}
         </div>
       </div>
     </motion.div>
@@ -211,42 +238,6 @@ const Team = () => {
           </FadeIn>
         </div>
         <HeroDivider />
-      </section>
-
-      {/* Select Investments & Deals */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Select Investments &amp; Deals</SectionLabel>
-            <GoldRule className="mt-1" />
-          </FadeIn>
-          <div className="mt-8 grid md:grid-cols-2 gap-8 md:gap-12">
-            <FadeIn delay={0.06}>
-              <div className="flex flex-col items-center">
-                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">Harin Gupta</p>
-                <img
-                  src={harinDeals}
-                  alt="Harin Gupta — Select investments and deals"
-                  className="w-full max-w-[420px] h-auto object-contain opacity-80"
-                  style={{ filter: 'grayscale(100%) contrast(1.1)' }}
-                  loading="lazy"
-                />
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.12}>
-              <div className="flex flex-col items-center">
-                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">Benson Zhang</p>
-                <img
-                  src={bensonDeals}
-                  alt="Benson Zhang — Select investments and deals"
-                  className="w-full max-w-[420px] h-auto object-contain opacity-80"
-                  style={{ filter: 'grayscale(100%) contrast(1.1)' }}
-                  loading="lazy"
-                />
-              </div>
-            </FadeIn>
-          </div>
-        </div>
       </section>
 
       {/* Founders */}
