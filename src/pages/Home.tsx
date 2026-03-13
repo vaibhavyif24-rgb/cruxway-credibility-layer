@@ -93,7 +93,7 @@ const Home = () => {
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-12 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-10 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
