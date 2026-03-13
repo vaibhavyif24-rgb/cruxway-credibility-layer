@@ -344,9 +344,7 @@ const Home = () => {
 
                   <div className="flex items-center gap-2.5 md:gap-3 mb-1.5 md:mb-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300 shrink-0" />
-                    <h3 className="font-serif text-[1.15rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
-                      {step.title}
-                    </h3>
+                    <h3 className="font-serif text-[1.05rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
                   </div>
 
                   <p className="font-sans text-[12.5px] text-primary-foreground/30 group-hover:text-primary-foreground/45 leading-[1.75] transition-colors duration-300">
