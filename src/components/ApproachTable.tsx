@@ -30,7 +30,7 @@ const ApproachRow = ({ item, index, total }: { item: ApproachItem; index: number
         className="relative flex items-start gap-3 md:gap-6 lg:gap-8 py-4 md:py-6 lg:py-7"
       >
         {/* Animated gold accent line on left */}
-        <div className="absolute left-0 top-6 md:top-7 bottom-6 md:bottom-7 w-px overflow-hidden">
+        <div className="absolute left-0 top-4 md:top-7 bottom-4 md:bottom-7 w-px overflow-hidden">
           <motion.div
             className="w-full bg-gold/40"
             initial={{ height: 0 }}
