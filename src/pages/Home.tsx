@@ -403,27 +403,29 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <Section dark>
-        <div className="max-w-[480px]">
-          <FadeIn>
-            <SectionLabel light>Connect</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-5">
-              {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
-            </h2>
-            <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-8">
-              {isIndia
-                ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what partnership could look like.'}
-            </p>
-            <Link
-              to={`/${region}/contact`}
-              className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-primary-foreground/[0.08] text-primary-foreground/35 hover:border-gold/25 hover:text-primary-foreground/65 transition-all duration-300"
-            >
-              Start a Conversation
-            </Link>
-          </FadeIn>
+      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="max-w-[480px]">
+            <FadeIn>
+              <SectionLabel light>Connect</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] mb-4">
+                {isIndia ? 'Partner With Us in India' : 'Built for Owners Thinking Long-Term'}
+              </h2>
+              <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-7">
+                {isIndia
+                  ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
+                  : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what partnership could look like.'}
+              </p>
+              <Link
+                to={`/${region}/contact`}
+                className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-primary-foreground/[0.08] text-primary-foreground/35 hover:border-gold/25 hover:text-primary-foreground/65 transition-all duration-300"
+              >
+                Start a Conversation
+              </Link>
+            </FadeIn>
+          </div>
         </div>
-      </Section>
+      </section>
     </div>
   );
 };
