@@ -94,7 +94,7 @@ const InvestorLogin = () => {
         </p>
       </motion.div>
 
-      <p className="absolute bottom-6 sm:bottom-7 font-sans text-[8px] text-primary-foreground/8 tracking-[0.25em] uppercase">
+      <p className="absolute bottom-6 sm:bottom-7 font-sans text-[8px] text-primary-foreground/20 tracking-[0.25em] uppercase">
         Privileged &amp; Confidential
       </p>
     </div>
