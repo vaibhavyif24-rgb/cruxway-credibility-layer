@@ -189,7 +189,7 @@ const Home = () => {
                     className="font-serif text-[2.5rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-4"
                   >
                     {step.num}
-                  </span>
+                  </motion.span>
 
                   {/* Connector dot */}
                   <div className="flex items-center gap-3 mb-3">
