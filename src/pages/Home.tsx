@@ -55,14 +55,14 @@ const allLogos = [
 const processStepsUS = [
   { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across the U.S. in essential B2B sectors with durable competitive advantages and strong client relationships.' },
   { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
-  { num: '03', title: 'Acquire', description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
   { num: '04', title: 'Build', description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.' },
 ];
 
 const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across India\'s lower middle market with strong fundamentals and operational upside.' },
   { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
-  { num: '03', title: 'Acquire', description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
   { num: '04', title: 'Build', description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.' },
 ];
 
@@ -152,8 +152,8 @@ const Home = () => {
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
               {isIndia
-                ? 'We acquire and grow founder-led companies across India\'s essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
-                : 'We acquire and grow founder-led companies across the United States in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
+                ? 'We acquire majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
+                : 'We acquire majority stakes in founder-led companies across the United States in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -198,13 +198,13 @@ const Home = () => {
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
                 {isIndia
-                  ? 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
-                  : 'Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
+                  ? 'Cruxway acquires majority stakes in founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
+                  : 'Cruxway acquires majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
                 {isIndia
                   ? 'Our team brings global institutional experience to companies seeking a partner who understands both local markets and world-class standards.'
-                  : 'Our team brings institutional investing and operating experience to companies seeking a long-term partner, not a financial sponsor with a five-year clock. We buy businesses we intend to hold, build, and grow for decades.'}
+                  : 'Our team brings institutional investing and operating experience to companies seeking a long-term partner, not a financial sponsor with a five-year clock. We acquire to hold, build, and grow for decades.'}
               </p>
             </FadeIn>
           </div>
@@ -376,7 +376,7 @@ const Home = () => {
                   { t: 'Lower Middle Market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
                 ]
               : [
-                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We buy to hold and build, not to flip.' },
+                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We acquire majority stakes to hold and build, not to flip.' },
                   { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth, professionalise systems, and expand capabilities.' },
                   { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy. We protect downside while investing for long-term upside.' },
                   { t: 'Selective Focus', d: 'One platform at a time. Deep conviction and concentrated attention, not diversification across dozens of portfolio companies.' },
