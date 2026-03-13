@@ -140,7 +140,7 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-/* ─── Deal Image Display (uses original composite logo images, crops title) ─── */
+/* ─── Deal Image Display (uses original composite logo images) ─── */
 const DealImageDisplay = ({ src, alt }: { src: string; alt: string }) => {
   const [hovered, setHovered] = useState(false);
   const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
@@ -151,7 +151,6 @@ const DealImageDisplay = ({ src, alt }: { src: string; alt: string }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Use clip-path to crop the top ~18% (title text) from the composite image */}
       <img
         src={src}
         alt={alt}
@@ -159,8 +158,6 @@ const DealImageDisplay = ({ src, alt }: { src: string; alt: string }) => {
         style={{
           filter: hovered ? 'none' : goldFilter,
           opacity: hovered ? 1 : 0.75,
-          clipPath: 'inset(18% 0 0 0)',
-          marginTop: '-18%',
         }}
         loading="lazy"
       />
