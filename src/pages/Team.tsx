@@ -134,84 +134,113 @@ const allLogos = [
 ];
 
 /* ─── Profile Card ─── */
-const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) => (
-  <FadeIn delay={index * 0.08}>
-    <motion.div
-      whileHover={{ backgroundColor: 'hsl(40 18% 95% / 0.5)' }}
-      transition={{ duration: 0.3 }}
-      className="py-8 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm"
-    >
-      <div className="grid md:grid-cols-12 gap-5 md:gap-8 items-start">
-        {/* Photo + Identity */}
-        <div className="md:col-span-3 flex flex-col items-start">
-          {member.photo ? (
-            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] mb-4 shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.12)]">
-              <img
-                src={member.photo}
-                alt={member.name}
-                className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-[filter] duration-500"
-              />
-            </div>
-          ) : (
-            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
-              <span className="font-serif text-[1.5rem] text-muted-foreground/30">
-                {member.name.split(' ').map(n => n[0]).join('')}
-              </span>
-            </div>
-          )}
-          <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
-            {member.name}
-          </h3>
-          <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
-            {member.role}
-          </p>
-        </div>
+const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) => {
+  const LinkedWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) =>
+    member.linkedIn ? (
+      <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
+        {children}
+      </a>
+    ) : (
+      <>{children}</>
+    );
 
-        {/* Bio */}
-        <div className="md:col-span-9">
-          <p className="font-sans text-[13px] text-muted-foreground leading-[1.75] mb-3">
-            {member.summary}
-          </p>
-          <ul className="space-y-1.5">
-            {member.highlights.map((line, i) => (
-              <li
-                key={i}
-                className="font-sans text-[12px] text-muted-foreground/70 leading-[1.65] flex gap-2.5 items-start"
+  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
+
+  return (
+    <FadeIn delay={index * 0.08}>
+      <motion.div
+        whileHover={{ backgroundColor: 'hsl(40 18% 95% / 0.5)' }}
+        transition={{ duration: 0.3 }}
+        className="py-8 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm"
+      >
+        <div className="grid md:grid-cols-12 gap-5 md:gap-8 items-start">
+          {/* Photo + Identity */}
+          <div className="md:col-span-3 flex flex-col items-start">
+            <LinkedWrapper>
+              {member.photo ? (
+                <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] mb-4 shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.12)] group">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-500"
+                  />
+                </div>
+              ) : (
+                <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
+                  <span className="font-serif text-[1.5rem] text-muted-foreground/30">
+                    {member.name.split(' ').map(n => n[0]).join('')}
+                  </span>
+                </div>
+              )}
+            </LinkedWrapper>
+            <LinkedWrapper className="hover:opacity-80 transition-opacity">
+              <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
+                {member.name}
+              </h3>
+            </LinkedWrapper>
+            <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
+              {member.role}
+            </p>
+          </div>
+
+          {/* Bio */}
+          <div className="md:col-span-9">
+            <p className="font-sans text-[13px] text-muted-foreground leading-[1.75] mb-3">
+              {member.summary}
+            </p>
+            <ul className="space-y-1.5">
+              {member.highlights.map((line, i) => (
+                <li
+                  key={i}
+                  className="font-sans text-[12px] text-muted-foreground/70 leading-[1.65] flex gap-2.5 items-start"
+                >
+                  <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Deal logos — horizontal marquee */}
+            {member.dealImage && (
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+                className="mt-6 pt-4 border-t border-foreground/[0.05]"
               >
-                <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
-                <span>{line}</span>
-              </li>
-            ))}
-          </ul>
-
-          {/* Deal logos — inline under bio */}
-          {member.dealImage && (
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-              className="mt-5 pt-4 border-t border-foreground/[0.05]"
-            >
-              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-3">
-                Select Investments &amp; Deals
-              </p>
-              <motion.img
-                src={member.dealImage}
-                alt={`${member.name} — Select investments and deals`}
-                className="w-full max-w-[400px] h-auto object-contain"
-                style={{ filter: 'grayscale(100%) contrast(1.05)', opacity: 0.65 }}
-                whileHover={{ filter: 'grayscale(0%) contrast(1)', opacity: 1 }}
-                transition={{ duration: 0.4 }}
-                loading="lazy"
-              />
-            </motion.div>
-          )}
+                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">
+                  Select Investments &amp; Deals
+                </p>
+                <div className="relative overflow-hidden">
+                  {/* Edge fades */}
+                  <div className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+                  <div className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+                  <motion.div
+                    className="flex items-center gap-12 w-max"
+                    animate={{ x: ['0%', '-50%'] }}
+                    transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 20, ease: 'linear' } }}
+                  >
+                    {[0, 1].map((copy) => (
+                      <img
+                        key={copy}
+                        src={member.dealImage}
+                        alt={`${member.name} — Select investments and deals`}
+                        className="h-[36px] md:h-[44px] w-auto object-contain shrink-0"
+                        style={{ filter: goldFilter, opacity: 0.7 }}
+                        loading="lazy"
+                      />
+                    ))}
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </div>
         </div>
-      </div>
-    </motion.div>
-  </FadeIn>
-);
+      </motion.div>
+    </FadeIn>
+  );
+};
 
 const Team = () => {
   const { region } = useRegion();
