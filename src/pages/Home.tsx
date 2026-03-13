@@ -209,7 +209,8 @@ const Home = () => {
             </FadeIn>
           </div>
         </div>
-      </Section>
+        </div>
+      </section>
 
       {/* US Market Thesis / India Opportunity */}
       {!isIndia ? (
