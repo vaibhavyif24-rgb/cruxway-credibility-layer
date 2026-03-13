@@ -138,7 +138,7 @@ const indiaPartner: TeamMember = {
   summary:
     'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
   highlights: [
-    'NITI Aayog — Policy and strategy advisory to the Government of India',
+    'NITI Aayog: Policy and strategy advisory to the Government of India',
     'VC fund partnering with multiple family offices across India; early-stage investing and portfolio support',
     'Vermin Console — Institutional advisory on environmental compliance and regulatory frameworks',
     'Impact Investors Council — Policy engagement and ecosystem development for impact capital in India',
