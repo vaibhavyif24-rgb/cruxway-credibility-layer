@@ -38,17 +38,6 @@ interface LogoItem {
   small?: boolean;
 }
 
-interface TeamMember {
-  name: string;
-  role: string;
-  photo?: string;
-  summary: string;
-  highlights: string[];
-  logos?: LogoItem[];
-  dealLogos?: LogoItem[];
-  linkedIn?: string;
-}
-
 const harinDealLogos: LogoItem[] = [
   { src: rmsEnergyLogo, alt: 'RMS Energy' },
   { src: bbcElectricLogo, alt: 'BBC Electric' },
