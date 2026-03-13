@@ -60,10 +60,30 @@ interface TeamMember {
   summary: string;
   highlights: string[];
   logos?: LogoItem[];
-  dealImageGold?: string;
-  dealImageOriginal?: string;
+  dealLogos?: LogoItem[];
   linkedIn?: string;
 }
+
+const harinDealLogos: LogoItem[] = [
+  { src: rmsEnergyLogo, alt: 'RMS Energy' },
+  { src: bbcElectricLogo, alt: 'BBC Electric' },
+  { src: pwrLogo, alt: 'PWR' },
+  { src: flexrayLogo, alt: 'FlexRay' },
+  { src: alignLogo, alt: 'A-LIGN' },
+  { src: alliedUniversalLogo, alt: 'Allied Universal' },
+  { src: energizerLogo, alt: 'Energizer' },
+  { src: broadcomLogo, alt: 'Broadcom' },
+];
+
+const bensonDealLogos: LogoItem[] = [
+  { src: abgLogo, alt: 'Authentic Brands Group' },
+  { src: rpxLogo, alt: 'RPX' },
+  { src: ideraLogo, alt: 'Idera' },
+  { src: westernDigitalLogo, alt: 'Western Digital' },
+  { src: mindbodyLogo, alt: 'Mindbody' },
+  { src: selligentLogo, alt: 'Selligent' },
+  { src: micronLogo, alt: 'Micron' },
+];
 
 const founders: TeamMember[] = [
   {
