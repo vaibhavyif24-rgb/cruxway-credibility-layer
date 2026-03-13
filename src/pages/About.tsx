@@ -39,18 +39,18 @@ const About = () => {
         <div className="absolute top-1/3 right-0 w-[400px] h-[300px] bg-gold/[0.02] rounded-full blur-[100px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-14 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
           <FadeIn>
-            <SectionLabel light>About</SectionLabel>
+            <SectionLabel light>{isIndia ? 'About — India' : 'About — United States'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.2rem)] text-primary-foreground max-w-[520px] leading-[1.12] tracking-[-0.025em]">
-              {isIndia ? 'Building Enduring Value in India' : 'Values-Driven Investing'}
+              {isIndia ? 'Building Enduring Value Across India' : 'Values-Driven Investing in America'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[420px]">
               {isIndia
-                ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies.'
-                : 'Combining long-term capital with operating expertise to help owners build lasting institutions.'}
+                ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies in manufacturing, industrial services, and essential sectors.'
+                : 'Combining long-term capital with operating expertise to help American business owners build lasting institutions in essential B2B services.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
