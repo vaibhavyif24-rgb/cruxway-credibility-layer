@@ -138,6 +138,7 @@ const Home = () => {
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-prussian-mid/20 rounded-full blur-[80px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-12 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
@@ -215,10 +216,11 @@ const Home = () => {
       {/* US Market Thesis / India Opportunity */}
       {!isIndia ? (
         <>
-          {/* US Market Thesis */}
+      {/* US Market Thesis */}
           <section className="relative bg-primary text-primary-foreground overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-prussian-mid/20 rounded-full blur-[80px] pointer-events-none" />
             <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
               <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
                 <div className="lg:col-span-5">
@@ -307,54 +309,89 @@ const Home = () => {
 
       {/* Our Process */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className="absolute top-1/4 left-0 w-[300px] h-[200px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-prussian-mid/30 rounded-full blur-[120px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
+            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
               From Discovery to Partnership
             </h2>
             <GoldRule className="mb-6 md:mb-10 lg:mb-14" />
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
-            {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
-              <FadeIn key={step.num} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="group relative p-4 md:p-7 h-full"
-                >
-                  {i > 0 && (
-                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden lg:block" />
-                  )}
-                  {i === 2 && (
-                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden sm:block lg:hidden" />
-                  )}
+          {/* Premium vertical timeline */}
+          <div className="relative">
+            {/* Vertical connector line (mobile) / Horizontal (desktop) */}
+            <div className="absolute left-[15px] md:left-[18px] lg:left-0 top-0 bottom-0 lg:top-[22px] lg:bottom-auto lg:right-0 lg:h-px w-px lg:w-full bg-primary-foreground/[0.06]" />
 
-                  <motion.span
-                    initial={{ color: 'hsl(var(--primary-foreground) / 0.04)' }}
-                    whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
-                    viewport={{ once: false, margin: '-20px' }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="font-serif text-[2rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-2 md:mb-3"
+            <div className="space-y-0 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-0">
+              {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
+                <FadeIn key={step.num} delay={i * 0.12}>
+                  <motion.div
+                    whileHover={{ y: -3 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    className="group relative pl-10 md:pl-12 lg:pl-0 lg:pr-6 py-5 md:py-6 lg:py-0"
                   >
-                    {step.num}
-                  </motion.span>
+                    {/* Timeline node */}
+                    <div className="absolute left-0 lg:left-auto lg:relative lg:mb-5">
+                      <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.12 + 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="relative"
+                      >
+                        {/* Outer ring */}
+                        <div className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] rounded-full border border-gold/20 group-hover:border-gold/40 transition-colors duration-500 flex items-center justify-center bg-primary/80 backdrop-blur-sm">
+                          {/* Inner dot */}
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: i * 0.12 + 0.4 }}
+                            className="w-[6px] h-[6px] md:w-[8px] md:h-[8px] rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300"
+                          />
+                        </div>
+                        {/* Glow on hover */}
+                        <div className="absolute inset-0 rounded-full bg-gold/0 group-hover:bg-gold/[0.06] blur-[8px] transition-all duration-500" />
+                      </motion.div>
+                    </div>
 
-                  <div className="flex items-center gap-2.5 md:gap-3 mb-1.5 md:mb-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300 shrink-0" />
-                    <h3 className="font-serif text-[1.05rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
+                    {/* Step number */}
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: i * 0.12 + 0.3 }}
+                      className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold/25 group-hover:text-gold/45 transition-colors duration-500 block mb-2"
+                    >
+                      Step {step.num}
+                    </motion.span>
+
+                    {/* Title */}
+                    <h3 className="font-serif text-[1.05rem] md:text-[1.15rem] text-primary-foreground tracking-[-0.01em] mb-1.5 group-hover:text-primary-foreground transition-colors duration-300">
                       {step.title}
                     </h3>
-                  </div>
 
-                  <p className="font-sans text-[11.5px] md:text-[12.5px] text-primary-foreground/30 group-hover:text-primary-foreground/45 leading-[1.7] md:leading-[1.75] transition-colors duration-300">
-                    {step.description}
-                  </p>
-                </motion.div>
-              </FadeIn>
-            ))}
+                    {/* Description */}
+                    <p className="font-sans text-[11.5px] md:text-[12px] text-primary-foreground/25 group-hover:text-primary-foreground/40 leading-[1.7] transition-colors duration-300">
+                      {step.description}
+                    </p>
+
+                    {/* Bottom accent line on mobile */}
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: 32 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.12 + 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      className="h-px bg-gold/15 mt-4 lg:mt-5"
+                    />
+                  </motion.div>
+                </FadeIn>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -404,8 +441,10 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
-        <div className="max-w-[1080px] mx-auto">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className="absolute top-0 right-1/4 w-[300px] h-[200px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
+        <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
               <SectionLabel light>Connect</SectionLabel>
