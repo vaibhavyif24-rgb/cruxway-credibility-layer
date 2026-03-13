@@ -72,7 +72,7 @@ const processSteps = [
   {
     num: '04',
     title: 'Build',
-    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value — without disrupting what already works.',
+    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.',
   },
 ];
 
