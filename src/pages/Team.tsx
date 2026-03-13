@@ -60,6 +60,7 @@ const founders: TeamMember[] = [
       { src: evercoreLogo, alt: 'Evercore' },
       { src: deutscheBankLogo, alt: 'Deutsche Bank' },
     ],
+    dealImage: harinDeals,
   },
   {
     name: 'Benson Zhang',
