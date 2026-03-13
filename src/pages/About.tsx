@@ -158,7 +158,7 @@ const About = () => {
                   <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
                     A Generational Gap in India's Lower Middle Market
                   </h2>
-                  <GoldRule className="mt-5" />
+                  <GoldRule className="mt-3 md:mt-5" />
                 </FadeIn>
               </div>
               <div className="lg:col-span-7">
