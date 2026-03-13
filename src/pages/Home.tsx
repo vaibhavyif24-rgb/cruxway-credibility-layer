@@ -231,7 +231,7 @@ const Home = () => {
                     transition={{ duration: 0.6, delay: 0.15 }}
                     className="font-serif text-[13px] group-hover:!text-gold/50 transition-colors duration-300 shrink-0 w-6"
                   >
-                  </span>
+                  </motion.span>
                   <div className="flex flex-col md:flex-row md:items-baseline md:gap-8 flex-1">
                     <h3 className="font-serif text-[1.05rem] text-foreground md:w-52 shrink-0">{item.t}</h3>
                     <p className="font-sans text-[13px] text-muted-foreground leading-[1.7]">{item.d}</p>
