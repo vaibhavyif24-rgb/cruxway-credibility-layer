@@ -387,7 +387,7 @@ const Home = () => {
 
       {/* Social Proof */}
       <div className="bg-cream">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16 pb-4">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-12 lg:pt-14 pb-3">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
@@ -401,11 +401,10 @@ const Home = () => {
         <FadeIn delay={0.1}>
           <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>
-        <div className="h-6 md:h-8" />
       </div>
 
       {/* CTA */}
-      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+      <section className="hero-gradient-animated text-primary-foreground px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
