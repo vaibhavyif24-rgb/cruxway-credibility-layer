@@ -227,7 +227,7 @@ const Home = () => {
                     <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
                       Why U.S. Essential Services
                     </h2>
-                    <GoldRule className="mt-5" />
+                    <GoldRule className="mt-3 md:mt-5" />
                   </FadeIn>
                 </div>
                 <div className="lg:col-span-7">
