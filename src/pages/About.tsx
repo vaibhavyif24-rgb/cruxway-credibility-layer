@@ -210,26 +210,28 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <Section>
-        <FadeIn>
-          <SectionLabel>Principles</SectionLabel>
-          <GoldRule className="mt-1 mb-8 md:mb-10" />
-        </FadeIn>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-6 md:gap-y-7">
-          {principles.map((p, i) => (
-            <FadeIn key={p.t} delay={i * 0.03}>
-              <motion.div
-                whileHover={{ x: 3 }}
-                transition={{ duration: 0.2 }}
-                className="pl-3 md:pl-4 border-l border-foreground/[0.06] hover:border-gold/25 transition-colors duration-300 group"
-              >
-                <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1">{p.t}</h3>
-                <p className="font-sans text-[11.5px] md:text-[12.5px] text-muted-foreground leading-[1.65]">{p.d}</p>
-              </motion.div>
-            </FadeIn>
-          ))}
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Principles</SectionLabel>
+            <GoldRule className="mt-1 mb-7 md:mb-9" />
+          </FadeIn>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-5 md:gap-y-6">
+            {principles.map((p, i) => (
+              <FadeIn key={p.t} delay={i * 0.03}>
+                <motion.div
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.2 }}
+                  className="pl-3 md:pl-4 border-l border-foreground/[0.06] hover:border-gold/25 transition-colors duration-300 group"
+                >
+                  <h3 className="font-serif text-[0.9rem] md:text-[1rem] text-foreground mb-1">{p.t}</h3>
+                  <p className="font-sans text-[11.5px] md:text-[12.5px] text-muted-foreground leading-[1.65]">{p.d}</p>
+                </motion.div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* CTA */}
       <Section dark>
