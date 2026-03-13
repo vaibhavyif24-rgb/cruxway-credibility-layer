@@ -402,9 +402,9 @@ const Team = () => {
         <div className="relative border-t border-primary-foreground/[0.06]">
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-6 md:py-8">
             <div className="grid grid-cols-3 gap-4">
-              <StatItem value="20+" label="Years Combined" delay={0.1} />
+              <StatItem value="25+" label="Years Combined" delay={0.1} />
               <StatItem value="$30B+" label="Deal Experience" delay={0.18} />
-              <StatItem value={isIndia ? '500+' : '50+'} label={isIndia ? 'Companies Evaluated' : 'Transactions'} delay={0.26} />
+              <StatItem value={isIndia ? '3' : '50+'} label={isIndia ? 'Continents Covered' : 'Transactions'} delay={0.26} />
             </div>
           </div>
         </div>
