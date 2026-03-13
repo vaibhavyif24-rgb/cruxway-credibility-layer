@@ -78,6 +78,7 @@ const founders: TeamMember[] = [
       { src: hggcLogo, alt: 'HGGC' },
       { src: creditSuisseLogo, alt: 'Credit Suisse' },
     ],
+    dealImage: bensonDeals,
   },
 ];
 
