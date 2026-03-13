@@ -136,10 +136,10 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav is an early-stage investor and operator with experience across family offices, venture capital, and startup building. He has evaluated 500+ companies, led direct investments across cleantech, deeptech, and manufacturing, and secured allocations in oversubscribed rounds.',
+    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building. Having evaluated 500+ companies and led investments across sectors, he developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
   highlights: [
-    'Led investments and portfolio support across a venture fund and family office, spanning marketplace, cleantech, deeptech, and manufacturing sectors',
-    'Advised on policy and strategy at NITI Aayog, supporting government initiatives impacting millions of students across India',
+    'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
+    'Operational experience co-founding and scaling ventures incubated at IIM Bangalore, IIT Delhi, and SMU Singapore',
     'Young India Fellow, Ashoka University; Stanford University research grant recipient in frugal sciences and bioengineering',
   ],
   logos: [
