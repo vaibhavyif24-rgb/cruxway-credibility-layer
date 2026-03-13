@@ -216,7 +216,7 @@ const About = () => {
             <SectionLabel>Principles</SectionLabel>
             <GoldRule className="mt-1 mb-5 md:mb-9" />
           </FadeIn>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-5 md:gap-y-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-4 md:gap-y-6">
             {principles.map((p, i) => (
               <FadeIn key={p.t} delay={i * 0.03}>
                 <motion.div
