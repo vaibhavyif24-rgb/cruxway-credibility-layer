@@ -3,6 +3,25 @@ import { Link } from 'react-router-dom';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
 
+// Logos for social proof
+import warburgLogo from '@/assets/logos/warburg-pincus.png';
+import jpMorganLogo from '@/assets/logos/jp-morgan.png';
+import evercoreLogo from '@/assets/logos/evercore.png';
+import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
+import blackrockLogo from '@/assets/logos/blackrock.png';
+import creditSuisseLogo from '@/assets/logos/credit-suisse.png';
+import hggcLogo from '@/assets/logos/hggc.png';
+
+const institutionalLogos = [
+  { src: warburgLogo, alt: 'Warburg Pincus' },
+  { src: blackrockLogo, alt: 'BlackRock' },
+  { src: jpMorganLogo, alt: 'J.P. Morgan' },
+  { src: evercoreLogo, alt: 'Evercore' },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
+  { src: hggcLogo, alt: 'HGGC' },
+  { src: creditSuisseLogo, alt: 'Credit Suisse' },
+];
+
 const Home = () => {
   const { region } = useRegion();
 
@@ -11,29 +30,52 @@ const Home = () => {
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-        {/* Subtle radial glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
           <FadeIn>
-            <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.2rem)] text-primary-foreground max-w-[600px] leading-[1.12] tracking-[-0.025em]">
+            <SectionLabel light>Private Equity</SectionLabel>
+          </FadeIn>
+          <FadeIn delay={0.06}>
+            <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.4rem)] text-primary-foreground max-w-[620px] leading-[1.1] tracking-[-0.025em]">
               Long-Term Capital for Essential&nbsp;Businesses
             </h1>
           </FadeIn>
-          <FadeIn delay={0.12}>
+          <FadeIn delay={0.14}>
+            <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.7] mt-5 max-w-[440px]">
+              We partner with founder-led companies in critical B2B services — providing patient capital and operational expertise.
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.2}>
             <GoldRule className="mt-7" />
+          </FadeIn>
+          <FadeIn delay={0.28}>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link
+                to={`/${region}/about`}
+                className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-primary-foreground/[0.1] text-primary-foreground/40 hover:border-gold/25 hover:text-primary-foreground/70 transition-all duration-300"
+              >
+                Our Approach
+              </Link>
+              <Link
+                to={`/${region}/contact`}
+                className="btn-premium inline-block font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-7 py-3 border border-gold/15 text-gold/50 hover:border-gold/35 hover:text-gold/80 transition-all duration-300"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </FadeIn>
         </div>
         <HeroDivider />
       </section>
 
-      {/* Overview */}
+      {/* What We Do */}
       <Section>
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
           <div className="lg:col-span-5">
             <FadeIn>
               <SectionLabel>Overview</SectionLabel>
               <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-foreground leading-[1.18]">
-                Partnership-Driven Private Equity
+                Partnership-Driven Investing
               </h2>
               <GoldRule className="mt-5" />
             </FadeIn>
@@ -83,12 +125,44 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Social Proof — Institutional Logo Bar */}
+      <Section>
+        <FadeIn>
+          <SectionLabel>Team Experience</SectionLabel>
+          <p className="font-sans text-[13px] text-muted-foreground leading-[1.7] max-w-[480px] mb-8">
+            Our team has invested and operated across leading global institutions.
+          </p>
+        </FadeIn>
+        <FadeIn delay={0.1}>
+          <div className="border-t border-foreground/[0.06] pt-8">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-6 md:gap-8 items-center">
+              {institutionalLogos.map((logo, i) => (
+                <motion.div
+                  key={logo.alt}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05, duration: 0.5 }}
+                  className="flex items-center justify-center"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-[16px] md:h-[20px] w-auto object-contain opacity-25 grayscale hover:opacity-45 transition-opacity duration-300"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+      </Section>
+
       {/* CTA */}
       <Section dark>
         <div className="max-w-[480px]">
           <FadeIn>
             <p className="font-sans text-[13.5px] text-primary-foreground/30 leading-[1.8] mb-8">
-              We work with owners who are building for the long term. If that describes your business, we'd welcome a conversation.
+              We work with owners building for the long term. If that describes your business, we'd welcome a conversation.
             </p>
             <Link
               to={`/${region}/contact`}
