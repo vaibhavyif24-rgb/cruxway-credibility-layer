@@ -140,16 +140,16 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
             ))}
           </ul>
           {member.logos && member.logos.length > 0 && (
-            <div className="flex flex-wrap items-center gap-6 md:gap-8 pt-4 border-t border-foreground/[0.04]">
+            <div className="grid grid-cols-4 sm:grid-cols-4 gap-3 md:gap-4 pt-5 border-t border-foreground/[0.04]">
               {member.logos.map((logo) => (
                 <div
                   key={logo.alt}
-                  className="h-[20px] md:h-[24px] flex items-center"
+                  className="flex items-center justify-center h-[44px] md:h-[52px] rounded-sm bg-background border border-foreground/[0.04] px-3"
                 >
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="h-full w-auto max-w-[80px] md:max-w-[100px] object-contain opacity-30 grayscale hover:opacity-50 transition-opacity duration-300"
+                    className="h-[22px] md:h-[28px] w-auto max-w-full object-contain opacity-40 grayscale hover:opacity-65 transition-opacity duration-300"
                   />
                 </div>
               ))}
