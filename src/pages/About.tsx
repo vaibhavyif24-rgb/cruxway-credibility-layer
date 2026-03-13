@@ -203,11 +203,11 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Principles</SectionLabel>
-            <GoldRule className="mt-1 mb-5 md:mb-9" />
+            <GoldRule className="mt-1 mb-4 md:mb-7" />
           </FadeIn>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-10 gap-y-4 md:gap-y-6">
             {principles.map((p, i) => (
