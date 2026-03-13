@@ -74,7 +74,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
                 logo.large
                   ? 'h-[48px] md:h-[76px] lg:h-[88px] max-w-[170px] md:max-w-[280px] lg:max-w-[320px]'
                   : logo.small
-                    ? 'h-[34px] md:h-[52px] lg:h-[60px] max-w-[120px] md:max-w-[200px] lg:max-w-[230px]'
+                    ? 'h-[36px] md:h-[56px] lg:h-[64px] max-w-[130px] md:max-w-[210px] lg:max-w-[240px]'
                     : 'h-[36px] md:h-[60px] lg:h-[72px] max-w-[130px] md:max-w-[220px] lg:max-w-[260px]'
               } ${isDark ? 'opacity-75 hover:opacity-95' : 'opacity-60 hover:opacity-80'}`}
               style={{
