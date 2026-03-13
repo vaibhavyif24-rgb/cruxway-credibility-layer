@@ -52,8 +52,8 @@ const ApproachCard = ({ item, index, variant }: { item: ApproachItem; index: num
             transition={{ duration: 0.4, delay: index * 0.1 + 0.2 }}
             className={`font-serif text-[1.5rem] md:text-[1.75rem] lg:text-[2rem] tabular-nums leading-none tracking-[-0.03em] transition-colors duration-500 ${
               isDark
-                ? 'text-gold/15 group-hover:text-gold/35'
-                : 'text-gold/12 group-hover:text-gold/30'
+                ? 'text-gold/25 group-hover:text-gold/50'
+                : 'text-gold/25 group-hover:text-gold/45'
             }`}
           >
             {String(index + 1).padStart(2, '0')}
