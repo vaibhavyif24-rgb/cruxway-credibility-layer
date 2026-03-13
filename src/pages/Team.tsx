@@ -334,24 +334,9 @@ const Team = () => {
         <HeroDivider />
       </section>
 
-      {/* Founders */}
-      <Section>
-        <div className="mb-5 md:mb-7">
-          <FadeIn>
-            <SectionLabel>Founders</SectionLabel>
-            <GoldRule className="mt-1" />
-          </FadeIn>
-        </div>
-        <div className="border-t border-foreground/[0.06]">
-          {founders.map((m, i) => (
-            <ProfileCard key={m.name} member={m} index={i} />
-          ))}
-        </div>
-      </Section>
-
-      {/* Partner */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-        <div className="max-w-[1080px] mx-auto">
+      {/* Partner (India only, shown before Founders) */}
+      {isIndia && (
+        <Section>
           <div className="mb-5 md:mb-7">
             <FadeIn>
               <SectionLabel>Partner</SectionLabel>
@@ -361,6 +346,41 @@ const Team = () => {
           <div className="border-t border-foreground/[0.06]">
             <ProfileCard member={indiaPartner} index={0} />
           </div>
+        </Section>
+      )}
+
+      {/* Founders */}
+      <section className={isIndia ? "bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20" : ""}>
+        <div className={isIndia ? "max-w-[1080px] mx-auto" : ""}>
+          {!isIndia ? (
+            <Section>
+              <div className="mb-5 md:mb-7">
+                <FadeIn>
+                  <SectionLabel>Founders</SectionLabel>
+                  <GoldRule className="mt-1" />
+                </FadeIn>
+              </div>
+              <div className="border-t border-foreground/[0.06]">
+                {founders.map((m, i) => (
+                  <ProfileCard key={m.name} member={m} index={i} />
+                ))}
+              </div>
+            </Section>
+          ) : (
+            <>
+              <div className="mb-5 md:mb-7">
+                <FadeIn>
+                  <SectionLabel>Founders</SectionLabel>
+                  <GoldRule className="mt-1" />
+                </FadeIn>
+              </div>
+              <div className="border-t border-foreground/[0.06]">
+                {founders.map((m, i) => (
+                  <ProfileCard key={m.name} member={m} index={i} />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
