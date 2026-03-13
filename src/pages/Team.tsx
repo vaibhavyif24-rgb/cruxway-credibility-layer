@@ -9,12 +9,7 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
-// Deal images (golden-treated, original logos preserved)
-import harinDealsGold from '@/assets/deals/harin-deals-gold.png';
-import bensonDealsGold from '@/assets/deals/benson-deals-gold.png';
-// Original color versions for hover
-import harinDealsImg from '@/assets/deals/harin-deals.png';
-import bensonDealsImg from '@/assets/deals/benson-deals.png';
+// Deal images — using public paths for reliability
 
 // Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
