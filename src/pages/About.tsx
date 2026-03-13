@@ -1,41 +1,7 @@
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
-
-/* ── Animated counter hook ── */
-function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) => Math.round(v));
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          animate(count, target, { duration: 1.8, ease: [0.22, 1, 0.36, 1] });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [count, target]);
-
-  useEffect(() => {
-    const unsubscribe = rounded.on('change', (v) => {
-      if (ref.current) ref.current.textContent = `${v}${suffix}`;
-    });
-    return unsubscribe;
-  }, [rounded, suffix]);
-
-  return <span ref={ref}>0{suffix}</span>;
-}
 
 const About = () => {
   const { region } = useRegion();
@@ -53,18 +19,6 @@ const About = () => {
         { t: 'Essential Services', d: 'We focus on regulated, compliance-driven industries where trust and reliability create lasting competitive advantages.' },
         { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to drive meaningful, sustainable outcomes.' },
         { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
-      ];
-
-  const stats = isIndia
-    ? [
-        { value: 150, suffix: '+', label: 'Opportunities Evaluated' },
-        { value: 40, suffix: '+', label: 'Years Combined Experience' },
-        { value: 3, suffix: '', label: 'Continents of Reach' },
-      ]
-    : [
-        { value: 200, suffix: '+', label: 'Opportunities Evaluated' },
-        { value: 50, suffix: '+', label: 'Years Combined Experience' },
-        { value: 3, suffix: '', label: 'Continents of Reach' },
       ];
 
   const principles = [
@@ -103,26 +57,6 @@ const About = () => {
           </FadeIn>
         </div>
         <HeroDivider />
-      </section>
-
-      {/* Stats Bar */}
-      <section className="bg-primary border-b border-primary-foreground/[0.04]">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
-          <div className="grid grid-cols-3 divide-x divide-primary-foreground/[0.06]">
-            {stats.map((stat, i) => (
-              <FadeIn key={stat.label} delay={i * 0.1}>
-                <div className="py-6 md:py-8 text-center group">
-                  <p className="font-serif text-[clamp(1.5rem,3.5vw,2.5rem)] text-gold/60 leading-none mb-1.5 tracking-[-0.02em]">
-                    <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-                  </p>
-                  <p className="font-sans text-[8px] md:text-[9px] text-primary-foreground/20 uppercase tracking-[0.14em] leading-tight px-1">
-                    {stat.label}
-                  </p>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Mission */}
@@ -169,7 +103,6 @@ const About = () => {
                 >
                   <motion.span
                     className="font-serif text-[13px] text-foreground/[0.06] group-hover:text-gold/30 transition-colors duration-300 shrink-0 w-6 mt-0.5 md:mt-0"
-                    whileHover={{ scale: 1.1 }}
                   >
                     {String(i + 1).padStart(2, '0')}
                   </motion.span>
