@@ -54,7 +54,7 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-const processSteps = [
+const processStepsUS = [
   {
     num: '01',
     title: 'Identify',
@@ -74,6 +74,29 @@ const processSteps = [
     num: '04',
     title: 'Build',
     description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.',
+  },
+];
+
+const processStepsIndia = [
+  {
+    num: '01',
+    title: 'Identify',
+    description: 'We source founder-led and family-owned businesses in India\'s lower middle market with strong fundamentals and operational upside.',
+  },
+  {
+    num: '02',
+    title: 'Evaluate',
+    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the business, its people, and our long-term vision.',
+  },
+  {
+    num: '03',
+    title: 'Acquire',
+    description: 'Structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.',
+  },
+  {
+    num: '04',
+    title: 'Build',
+    description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.',
   },
 ];
 
