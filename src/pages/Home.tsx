@@ -362,7 +362,7 @@ const Home = () => {
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-8 md:mb-10" />
+            <GoldRule className="mt-1 mb-5 md:mb-10" />
           </FadeIn>
 
           <ApproachTable
