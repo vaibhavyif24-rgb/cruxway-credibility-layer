@@ -8,6 +8,10 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
+// Deal logos
+import harinDeals from '@/assets/deals/harin-deals.png';
+import bensonDeals from '@/assets/deals/benson-deals.png';
+
 // Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import jpMorganLogo from '@/assets/logos/jp-morgan.png';
@@ -42,12 +46,12 @@ const founders: TeamMember[] = [
     role: 'Co-Founder',
     photo: harinPhoto,
     summary:
-      'Over a decade of experience investing in and operating companies across business services and consumer sectors.',
+      'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy.',
     highlights: [
-      'Warburg Pincus — Business Services Group; global PE firm with $85bn+ AUM',
-      'Board of Directors, RMS Energy — high-voltage electrical testing and maintenance',
-      'Honest Hospitality Group — scaled from ideation to 100+ locations globally; Board of Directors',
-      'Investment banking: J.P. Morgan, Evercore, Deutsche Bank',
+      'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
+      'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
+      'Successfully helped launch and scale Honest Hospitality Group as a family business from ideation to 100+ locations globally; serves on the Board of Directors',
+      'Began his finance career at leading investment banks, including J.P. Morgan, Evercore, and Deutsche Bank',
     ],
     logos: [
       { src: warburgLogo, alt: 'Warburg Pincus' },
@@ -61,11 +65,11 @@ const founders: TeamMember[] = [
     role: 'Co-Founder',
     photo: bensonPhoto,
     summary:
-      'Over a decade of experience in private equity and finance across technology and business services.',
+      'Benson has over a decade of experience in finance and private equity investing across technology and business services sectors. He brings disciplined capital allocation and deep sector knowledge to every partnership.',
     highlights: [
-      'BlackRock — Direct Private Equity; led sale of stake in Authentic Brands Group',
-      'HGGC — Led investments in IDERA and RPX; Board Observer',
-      'Credit Suisse — Technology Investment Banking; 7 deals, $30bn in aggregate deal value',
+      'Most recently invested through BlackRock\'s flagship direct private equity group, where he led the sale of BlackRock\'s stake in Authentic Brands Group',
+      'At HGGC, led the investments in IDERA and RPX where he served as a board observer',
+      'Began his career at Credit Suisse in the Technology Investment Banking Group where he closed 7 deals totaling $30 billion in deal value, primarily in the semiconductor and software spaces',
     ],
     logos: [
       { src: blackrockLogo, alt: 'BlackRock' },
@@ -209,67 +213,71 @@ const Team = () => {
         <HeroDivider />
       </section>
 
-      {isIndia ? (
-        <>
-          <Section>
-            <div className="mb-5 md:mb-7">
-              <FadeIn>
-                <SectionLabel>Founders</SectionLabel>
-                <GoldRule className="mt-1" />
-              </FadeIn>
-            </div>
-            <div className="border-t border-foreground/[0.06]">
-              {founders.map((m, i) => (
-                <ProfileCard key={m.name} member={m} index={i} />
-              ))}
-            </div>
-          </Section>
+      {/* Select Investments & Deals */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Select Investments &amp; Deals</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
+          <div className="mt-8 grid md:grid-cols-2 gap-8 md:gap-12">
+            <FadeIn delay={0.06}>
+              <div className="flex flex-col items-center">
+                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">Harin Gupta</p>
+                <img
+                  src={harinDeals}
+                  alt="Harin Gupta — Select investments and deals"
+                  className="w-full max-w-[420px] h-auto object-contain opacity-80"
+                  style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+                  loading="lazy"
+                />
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.12}>
+              <div className="flex flex-col items-center">
+                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">Benson Zhang</p>
+                <img
+                  src={bensonDeals}
+                  alt="Benson Zhang — Select investments and deals"
+                  className="w-full max-w-[420px] h-auto object-contain opacity-80"
+                  style={{ filter: 'grayscale(100%) contrast(1.1)' }}
+                  loading="lazy"
+                />
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
 
-          <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-            <div className="max-w-[1080px] mx-auto">
-              <div className="mb-5 md:mb-7">
-                <FadeIn>
-                  <SectionLabel>Partner</SectionLabel>
-                  <GoldRule className="mt-1" />
-                </FadeIn>
-              </div>
-              <div className="border-t border-foreground/[0.06]">
-                <ProfileCard member={indiaPartner} index={0} />
-              </div>
-            </div>
-          </section>
-        </>
-      ) : (
-        <>
-          <Section>
-            <div className="mb-5 md:mb-7">
-              <FadeIn>
-                <SectionLabel>Founders</SectionLabel>
-                <GoldRule className="mt-1" />
-              </FadeIn>
-            </div>
-            <div className="border-t border-foreground/[0.06]">
-              {founders.map((m, i) => (
-                <ProfileCard key={m.name} member={m} index={i} />
-              ))}
-            </div>
-          </Section>
+      {/* Founders */}
+      <Section>
+        <div className="mb-5 md:mb-7">
+          <FadeIn>
+            <SectionLabel>Founders</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
+        </div>
+        <div className="border-t border-foreground/[0.06]">
+          {founders.map((m, i) => (
+            <ProfileCard key={m.name} member={m} index={i} />
+          ))}
+        </div>
+      </Section>
 
-          <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-            <div className="max-w-[1080px] mx-auto">
-              <div className="mb-5 md:mb-7">
-                <FadeIn>
-                  <SectionLabel>Partner</SectionLabel>
-                  <GoldRule className="mt-1" />
-                </FadeIn>
-              </div>
-              <div className="border-t border-foreground/[0.06]">
-                <ProfileCard member={indiaPartner} index={0} />
-              </div>
-            </div>
-          </section>
-        </>
-      )}
+      {/* Partner */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="mb-5 md:mb-7">
+            <FadeIn>
+              <SectionLabel>Partner</SectionLabel>
+              <GoldRule className="mt-1" />
+            </FadeIn>
+          </div>
+          <div className="border-t border-foreground/[0.06]">
+            <ProfileCard member={indiaPartner} index={0} />
+          </div>
+        </div>
+      </section>
 
       {/* Institutional Experience Marquee */}
       <div>
