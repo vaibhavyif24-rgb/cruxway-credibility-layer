@@ -93,7 +93,7 @@ const Home = () => {
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-12 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-10 md:pt-32 md:pb-20 lg:pt-40 lg:pb-28">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
@@ -135,7 +135,7 @@ const Home = () => {
       </section>
 
       {/* What We Do */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
             <div className="lg:col-span-5">
@@ -171,7 +171,7 @@ const Home = () => {
       {!isIndia ? (
         <section className="relative bg-primary text-primary-foreground overflow-hidden">
           <DarkSectionEffects />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
             <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
               <div className="lg:col-span-5">
                 <FadeIn>
@@ -203,7 +203,7 @@ const Home = () => {
           </div>
         </section>
       ) : (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
           <div className="max-w-[1080px] mx-auto">
             <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
               <div className="lg:col-span-5">
@@ -240,13 +240,13 @@ const Home = () => {
       {/* Our Process */}
       <section className={`relative overflow-hidden ${!isIndia ? 'bg-cream' : 'bg-primary text-primary-foreground'}`}>
         {isIndia && <DarkSectionEffects />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
           <FadeIn>
             <SectionLabel light={isIndia}>Our Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.35rem,2.5vw,2rem)] leading-[1.18] max-w-[480px] mb-1.5 ${isIndia ? 'text-primary-foreground' : 'text-foreground'}`}>
               From Discovery to Partnership
             </h2>
-            <GoldRule className="mb-6 md:mb-10 lg:mb-14" />
+            <GoldRule className="mb-5 md:mb-8 lg:mb-10" />
           </FadeIn>
 
           <div className="relative">
@@ -329,7 +329,7 @@ const Home = () => {
 
       {/* Social Proof */}
       <div className={isIndia ? 'bg-cream' : 'bg-background'}>
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-7 md:pt-10 lg:pt-12 pb-2 md:pb-3">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10 pb-2 md:pb-3">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
@@ -346,7 +346,7 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
