@@ -46,12 +46,12 @@ const founders: TeamMember[] = [
     role: 'Co-Founder',
     photo: harinPhoto,
     summary:
-      'Over a decade of experience investing in and operating companies across business services and consumer sectors.',
+      'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy.',
     highlights: [
-      'Warburg Pincus — Business Services Group; global PE firm with $85bn+ AUM',
-      'Board of Directors, RMS Energy — high-voltage electrical testing and maintenance',
-      'Honest Hospitality Group — scaled from ideation to 100+ locations globally; Board of Directors',
-      'Investment banking: J.P. Morgan, Evercore, Deutsche Bank',
+      'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
+      'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
+      'Successfully helped launch and scale Honest Hospitality Group as a family business from ideation to 100+ locations globally; serves on the Board of Directors',
+      'Began his finance career at leading investment banks, including J.P. Morgan, Evercore, and Deutsche Bank',
     ],
     logos: [
       { src: warburgLogo, alt: 'Warburg Pincus' },
@@ -65,11 +65,11 @@ const founders: TeamMember[] = [
     role: 'Co-Founder',
     photo: bensonPhoto,
     summary:
-      'Over a decade of experience in private equity and finance across technology and business services.',
+      'Benson has over a decade of experience in finance and private equity investing across technology and business services sectors. He brings disciplined capital allocation and deep sector knowledge to every partnership.',
     highlights: [
-      'BlackRock — Direct Private Equity; led sale of stake in Authentic Brands Group',
-      'HGGC — Led investments in IDERA and RPX; Board Observer',
-      'Credit Suisse — Technology Investment Banking; 7 deals, $30bn in aggregate deal value',
+      'Most recently invested through BlackRock\'s flagship direct private equity group, where he led the sale of BlackRock\'s stake in Authentic Brands Group',
+      'At HGGC, led the investments in IDERA and RPX where he served as a board observer',
+      'Began his career at Credit Suisse in the Technology Investment Banking Group where he closed 7 deals totaling $30 billion in deal value, primarily in the semiconductor and software spaces',
     ],
     logos: [
       { src: blackrockLogo, alt: 'BlackRock' },
