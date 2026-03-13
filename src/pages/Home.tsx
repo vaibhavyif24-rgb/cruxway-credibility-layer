@@ -304,15 +304,15 @@ const Home = () => {
       )}
 
       {/* Our Process */}
-      <section className={`relative ${isIndia ? 'bg-primary' : 'bg-background'} text-${isIndia ? 'primary-foreground' : 'foreground'} overflow-hidden`}>
-        {isIndia && <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
+      <section className="relative bg-primary text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
           <FadeIn>
-            <SectionLabel light={isIndia}>Our Process</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.35rem,2.5vw,2rem)] ${isIndia ? 'text-primary-foreground' : 'text-foreground'} leading-[1.18] max-w-[480px] mb-4`}>
+            <SectionLabel light>Our Process</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
               From Discovery to Partnership
             </h2>
-            <GoldRule className="mb-12 md:mb-16" />
+            <GoldRule className="mb-10 md:mb-14" />
           </FadeIn>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px">
@@ -321,33 +321,33 @@ const Home = () => {
                 <motion.div
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="group relative p-6 md:p-8 h-full"
+                  className="group relative p-5 md:p-7 h-full"
                 >
                   {i > 0 && (
-                    <div className={`absolute left-0 top-8 bottom-8 w-px ${isIndia ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.06]'} hidden lg:block`} />
+                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden lg:block" />
                   )}
                   {i === 2 && (
-                    <div className={`absolute left-0 top-8 bottom-8 w-px ${isIndia ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.06]'} hidden sm:block lg:hidden`} />
+                    <div className="absolute left-0 top-8 bottom-8 w-px bg-primary-foreground/[0.06] hidden sm:block lg:hidden" />
                   )}
 
                   <motion.span
-                    initial={{ color: isIndia ? 'hsl(var(--primary-foreground) / 0.04)' : 'hsl(var(--foreground) / 0.04)' }}
+                    initial={{ color: 'hsl(var(--primary-foreground) / 0.04)' }}
                     whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
                     viewport={{ once: false, margin: '-20px' }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="font-serif text-[2.5rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-4"
+                    className="font-serif text-[2.5rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-3"
                   >
                     {step.num}
                   </motion.span>
 
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex items-center gap-3 mb-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300 shrink-0" />
-                    <h3 className={`font-serif text-[1.15rem] md:text-[1.25rem] ${isIndia ? 'text-primary-foreground' : 'text-foreground'} tracking-[-0.01em]`}>
+                    <h3 className="font-serif text-[1.15rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
                       {step.title}
                     </h3>
                   </div>
 
-                  <p className={`font-sans text-[12.5px] ${isIndia ? 'text-primary-foreground/30 group-hover:text-primary-foreground/45' : 'text-muted-foreground/60 group-hover:text-muted-foreground/80'} leading-[1.75] transition-colors duration-300`}>
+                  <p className="font-sans text-[12.5px] text-primary-foreground/30 group-hover:text-primary-foreground/45 leading-[1.75] transition-colors duration-300">
                     {step.description}
                   </p>
                 </motion.div>
