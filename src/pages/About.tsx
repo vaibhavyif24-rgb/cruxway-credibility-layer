@@ -37,6 +37,7 @@ const About = () => {
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
         <div className="absolute top-1/3 right-0 w-[400px] h-[300px] bg-gold/[0.02] rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-prussian-mid/20 rounded-full blur-[80px] pointer-events-none" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-10 md:pt-36 md:pb-20 lg:pt-40 lg:pb-24">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
