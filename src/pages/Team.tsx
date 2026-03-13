@@ -136,7 +136,7 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building. Having evaluated 500+ companies and led investments across sectors, he developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
+    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. Having evaluated 500+ companies and led investments across sectors, he developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
     'Operational experience co-founding and scaling ventures incubated at IIM Bangalore, IIT Delhi, and SMU Singapore',
