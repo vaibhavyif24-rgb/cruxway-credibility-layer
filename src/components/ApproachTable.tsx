@@ -27,7 +27,7 @@ const ApproachRow = ({ item, index, total }: { item: ApproachItem; index: number
       <motion.div
         whileHover={{ x: 6 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-        className="relative flex items-start gap-4 md:gap-6 lg:gap-8 py-6 md:py-7"
+        className="relative flex items-start gap-3 md:gap-6 lg:gap-8 py-4 md:py-6 lg:py-7"
       >
         {/* Animated gold accent line on left */}
         <div className="absolute left-0 top-6 md:top-7 bottom-6 md:bottom-7 w-px overflow-hidden">
