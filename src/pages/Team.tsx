@@ -96,7 +96,8 @@ const indiaPartner: TeamMember = {
   ],
 };
 
-const allLogos = [
+// Founders only (US team view)
+const foundersLogos = [
   { src: warburgLogo, alt: 'Warburg Pincus' },
   { src: blackrockLogo, alt: 'BlackRock' },
   { src: jpMorganLogo, alt: 'J.P. Morgan' },
@@ -104,6 +105,11 @@ const allLogos = [
   { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: hggcLogo, alt: 'HGGC' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
+];
+
+// All logos merged (India team view)
+const allLogos = [
+  ...foundersLogos,
   { src: nitiAayogLogo, alt: 'NITI Aayog' },
   { src: ashokaLogo, alt: 'Ashoka University' },
   { src: iicLogo, alt: 'Impact Investors Council' },
