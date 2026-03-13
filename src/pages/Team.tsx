@@ -259,7 +259,7 @@ const Team = () => {
             <div className="max-w-[1080px] mx-auto">
               <div className="mb-5 md:mb-7">
                 <FadeIn>
-                  <SectionLabel>Partner — India</SectionLabel>
+                  <SectionLabel>Partner</SectionLabel>
                   <GoldRule className="mt-1" />
                 </FadeIn>
               </div>
