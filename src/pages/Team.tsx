@@ -230,7 +230,7 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
               ))}
             </ul>
 
-            {/* Deal logos — horizontal marquee using original composite image */}
+            {/* Deal logos — original composite image with gold filter */}
             {member.dealImage && (
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
@@ -239,9 +239,6 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
                 transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
                 className="mt-6 pt-4 border-t border-foreground/[0.05]"
               >
-                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-3">
-                  Select Investments &amp; Deals
-                </p>
                 <DealImageDisplay src={member.dealImage} alt={`${member.name} deals`} />
               </motion.div>
             )}
