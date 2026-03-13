@@ -38,6 +38,7 @@ interface TeamMember {
   summary: string;
   highlights: string[];
   logos?: { src: string; alt: string }[];
+  dealImage?: string;
 }
 
 const founders: TeamMember[] = [
