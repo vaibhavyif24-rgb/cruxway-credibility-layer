@@ -150,7 +150,7 @@ const Home = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
+            <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-4 md:mt-5 max-w-[460px]">
               {isIndia
                 ? 'We acquire majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
                 : 'We acquire majority stakes in founder-led companies across the United States in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
