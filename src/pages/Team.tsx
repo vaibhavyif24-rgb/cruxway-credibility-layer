@@ -146,27 +146,35 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-/* ─── Deal Image Display (uses original composite logo images) ─── */
-const DealImageDisplay = ({ src, alt }: { src: string; alt: string }) => {
+/* ─── Deal Marquee (horizontal scrolling, gold → real colors on hover) ─── */
+const DealMarquee = ({ goldSrc, originalSrc, alt, duration = 22 }: { goldSrc: string; originalSrc: string; alt: string; duration?: number }) => {
   const [hovered, setHovered] = useState(false);
-  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   return (
     <div
-      className="relative"
+      className="relative overflow-hidden py-1"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img
-        src={src}
-        alt={alt}
-        className="w-full max-w-[520px] object-contain transition-all duration-500 cursor-default"
-        style={{
-          filter: hovered ? 'none' : goldFilter,
-          opacity: hovered ? 1 : 0.75,
-        }}
-        loading="lazy"
-      />
+      {/* Edge fades */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+
+      <motion.div
+        className="flex items-center gap-16 w-max"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
+      >
+        {[0, 1].map((copy) => (
+          <img
+            key={copy}
+            src={hovered ? originalSrc : goldSrc}
+            alt={alt}
+            className="h-[65px] md:h-[80px] w-auto object-contain shrink-0 transition-opacity duration-500"
+            style={{ opacity: hovered ? 1 : 0.85 }}
+          />
+        ))}
+      </motion.div>
     </div>
   );
 };
