@@ -16,10 +16,10 @@ const About = () => {
         { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
       ]
     : [
-        { t: 'Long-Term Alignment', d: 'We design hold periods around the growth opportunity, not around fund constraints or artificial timelines.' },
-        { t: 'Essential Services', d: 'We focus on regulated, compliance-driven U.S. industries where trust and reliability create lasting competitive advantages.' },
-        { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to drive meaningful, sustainable outcomes.' },
-        { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
+        { t: 'Long-Term Alignment', d: 'We design hold periods around the growth opportunity, not around fund constraints or artificial timelines. Our capital is patient by design.' },
+        { t: 'Essential Services', d: 'We focus on regulated, compliance-driven U.S. industries where trust, reliability, and deep client relationships create lasting competitive advantages.' },
+        { t: 'Operational Partnership', d: 'We work closely with management teams, one platform at a time, to professionalise operations, expand capabilities, and drive sustainable growth.' },
+        { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We protect downside, invest for long-term upside, and never over-lever a business to meet return targets.' },
       ];
 
   const principles = [
@@ -50,7 +50,7 @@ const About = () => {
             <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[420px]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies in manufacturing, industrial services, and essential sectors.'
-                : 'Combining long-term capital with operating expertise to help business owners across the United States build lasting institutions.'}
+                : 'Combining long-term capital with operating expertise to help business owners across the United States build lasting institutions in essential B2B services.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -76,18 +76,75 @@ const About = () => {
           </div>
           <div className="lg:col-span-7">
             <FadeIn delay={0.08}>
-              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+              <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8] mb-4">
                 {isIndia
                   ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders across manufacturing, industrial services, and essential sectors, while protecting the legacy, culture, and values that built them.'
                   : 'Cruxway combines long-term capital with operating expertise to help business owners across the United States transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
               </p>
+              {!isIndia && (
+                <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+                  We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
+                </p>
+              )}
             </FadeIn>
           </div>
         </div>
       </Section>
 
-      {/* India Market Context (India only) */}
-      {isIndia && (
+      {/* US: Why Essential Services / India: Market Context */}
+      {!isIndia ? (
+        <section className="relative bg-primary text-primary-foreground overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
+          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+            <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+              <div className="lg:col-span-5">
+                <FadeIn>
+                  <SectionLabel light>Our Focus</SectionLabel>
+                  <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
+                    Why Essential B2B Services in the United States
+                  </h2>
+                  <GoldRule className="mt-5" />
+                </FadeIn>
+              </div>
+              <div className="lg:col-span-7">
+                <FadeIn delay={0.08}>
+                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                    Essential B2B services represent the backbone of the American economy: companies that maintain critical infrastructure, ensure environmental and regulatory compliance, and provide specialised technical expertise that cannot be easily replicated or outsourced.
+                  </p>
+                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
+                    These businesses share characteristics we find compelling: recurring revenue driven by regulatory mandates, high switching costs built on trust and performance, and resilience across economic cycles. Many are led by founders approaching retirement without a succession plan, creating a significant opportunity for a partner who can preserve what works while investing in growth.
+                  </p>
+                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
+                    We deliberately focus on sectors too small for large private equity and too complex for unsophisticated buyers, where our operating expertise and patient capital create the most value.
+                  </p>
+                </FadeIn>
+                <FadeIn delay={0.16}>
+                  <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
+                    {[
+                      { val: '$7-75M', lbl: 'Revenue Range' },
+                      { val: '90%+', lbl: 'Revenue Retention' },
+                      { val: '20+ Yrs', lbl: 'Avg. Company Age' },
+                    ].map((s, i) => (
+                      <motion.div
+                        key={s.lbl}
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                        className="text-center"
+                      >
+                        <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground tracking-[-0.02em]">{s.val}</p>
+                        <p className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-primary-foreground/25 mt-1">{s.lbl}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </FadeIn>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
         <section className="relative bg-primary text-primary-foreground overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-prussian-mid/20 via-transparent to-navy-deep/30 pointer-events-none" />
           <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.01] rounded-full blur-[100px] pointer-events-none" />
@@ -139,7 +196,7 @@ const About = () => {
       )}
 
       {/* Approach */}
-      <section className={`${isIndia ? 'bg-background' : 'bg-cream'} px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24`}>
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Approach</SectionLabel>
@@ -183,7 +240,7 @@ const About = () => {
             <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.8] mb-7">
               {isIndia
                 ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                : 'If you\'re a founder or business owner exploring a long-term partnership, we\'d welcome the conversation.'}
+                : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what a long-term partnership could look like.'}
             </p>
             <Link
               to={`/${region}/contact`}
