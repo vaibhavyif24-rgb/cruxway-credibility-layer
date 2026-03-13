@@ -329,7 +329,7 @@ const Home = () => {
 
       {/* Social Proof */}
       <div className={isIndia ? 'bg-cream' : 'bg-background'}>
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-7 md:pt-10 lg:pt-12 pb-2 md:pb-3">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10 pb-2 md:pb-3">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <h2 className="font-serif text-[clamp(1.2rem,2vw,1.6rem)] text-foreground leading-[1.2] max-w-[520px]">
