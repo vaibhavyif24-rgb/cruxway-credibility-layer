@@ -80,8 +80,8 @@ const ApproachCard = ({ item, index, variant }: { item: ApproachItem; index: num
         {/* Description */}
         <p className={`font-sans text-[12.5px] md:text-[13px] leading-[1.75] transition-colors duration-400 ${
           isDark
-            ? 'text-primary-foreground/30 group-hover:text-primary-foreground/50'
-            : 'text-muted-foreground/65 group-hover:text-muted-foreground/90'
+            ? 'text-primary-foreground/35 group-hover:text-primary-foreground/55'
+            : 'text-muted-foreground/70 group-hover:text-muted-foreground/95'
         }`}>
           {item.d}
         </p>
