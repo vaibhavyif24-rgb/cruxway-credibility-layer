@@ -2,6 +2,7 @@ import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/componen
 import { motion } from 'framer-motion';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
+import ApproachTable from '@/components/ApproachTable';
 
 const About = () => {
   const { region } = useRegion();

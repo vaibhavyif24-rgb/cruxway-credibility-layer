@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
+import ApproachTable from '@/components/ApproachTable';
 
 // Logos for social proof — institutional experience
 import blackrockLogo from '@/assets/logos/blackrock.png';
