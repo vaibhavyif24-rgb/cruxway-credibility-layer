@@ -1,9 +1,8 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
-import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
+import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion, useInView } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
-import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import { useRef } from 'react';
 
@@ -388,32 +387,6 @@ const Home = () => {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Approach */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Our Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-5 md:mb-10" />
-          </FadeIn>
-
-          <ApproachTable
-            items={isIndia
-              ? [
-                  { t: 'Founder Alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline, not fund constraints.' },
-                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to professionalise and scale.' },
-                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy.' },
-                  { t: 'Lower Middle Market', d: 'Deep conviction in India\'s under-served segment where operational improvement unlocks outsized value.' },
-                ]
-              : [
-                  { t: 'Long-Term Alignment', d: 'Hold periods designed around value creation, not fund timelines. We acquire majority stakes to hold and build, not to flip.' },
-                  { t: 'Operational Depth', d: 'Hands-on involvement alongside management teams to drive growth, professionalise systems, and expand capabilities.' },
-                  { t: 'Disciplined Capital', d: 'Leverage as an enabler, not a strategy. We protect downside while investing for long-term upside.' },
-                  { t: 'Selective Focus', d: 'One platform at a time. Deep conviction and concentrated attention, not diversification across dozens of portfolio companies.' },
-                ]}
-          />
         </div>
       </section>
 
