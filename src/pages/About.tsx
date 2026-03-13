@@ -15,34 +15,39 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
 ];
 
-/* ── Sector Grid Widget ── */
+/* ── Premium Sector Card ── */
 const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-30px' });
+  const isInView = useInView(ref, { once: true, margin: '-20px' });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative"
+      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+      className="group"
     >
       <motion.div
-        whileHover={{ y: -2 }}
-        transition={{ duration: 0.2 }}
-        className="relative pl-4 py-4 border-l border-foreground/[0.05] hover:border-gold/30 transition-colors duration-400"
+        whileHover={{ y: -3 }}
+        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        className="relative h-full p-4 md:p-5 rounded-[3px] border border-foreground/[0.06] bg-background hover:border-gold/25 hover:shadow-[0_6px_24px_-8px_hsl(var(--gold)/0.08)] transition-all duration-400"
       >
-        <motion.div
-          className="absolute left-[-2.5px] top-5 w-[5px] h-[5px] rounded-full bg-gold/0 group-hover:bg-gold/50 transition-all duration-300"
-          initial={{ scale: 0 }}
-          animate={isInView ? { scale: 1 } : {}}
-          transition={{ duration: 0.3, delay: index * 0.06 + 0.3 }}
-        />
-        <h4 className="font-serif text-[0.92rem] md:text-[0.95rem] text-foreground mb-0.5 leading-[1.3]">
+        {/* Top accent */}
+        <div className="absolute top-0 left-4 md:left-5 right-4 md:right-5 h-px overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-gold/25 via-gold/40 to-gold/25"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.7, delay: index * 0.08 + 0.2, ease: [0.22, 1, 0.36, 1] }}
+            style={{ originX: 0 }}
+          />
+        </div>
+
+        <h4 className="font-serif text-[0.92rem] md:text-[1rem] text-foreground leading-[1.25] mb-1.5">
           {sector.label}
         </h4>
-        <p className="font-sans text-[11px] md:text-[11.5px] text-muted-foreground/60 leading-[1.6] group-hover:text-muted-foreground/80 transition-colors duration-300">
+        <p className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/60 leading-[1.65] group-hover:text-muted-foreground/85 transition-colors duration-300">
           {sector.desc}
         </p>
       </motion.div>
@@ -166,7 +171,7 @@ const About = () => {
               <GoldRule className="mt-3 md:mt-4 mb-4 md:mb-7" />
             </FadeIn>
 
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-0">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
               {usSectors.map((sector, i) => (
                 <SectorCard key={sector.label} sector={sector} index={i} />
               ))}
