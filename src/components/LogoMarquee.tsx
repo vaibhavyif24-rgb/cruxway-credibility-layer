@@ -27,7 +27,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
   return (
     <div
       className={`relative overflow-hidden ${
-        isDark ? 'bg-primary py-8 md:py-12 lg:py-16' : 'py-6 md:py-8 lg:py-10'
+        isDark ? 'bg-primary py-6 md:py-10 lg:py-14' : 'py-5 md:py-8 lg:py-10'
       }`}
     >
       {/* Edge fade masks */}
