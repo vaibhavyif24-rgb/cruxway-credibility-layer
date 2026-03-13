@@ -39,7 +39,8 @@ import lamResearchLogo from '@/assets/logos/lam-research.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
-
+import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
+import depaulLogo from '@/assets/logos/depaul.png';
 // Logos — Vaibhav
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
