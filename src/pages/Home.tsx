@@ -29,7 +29,7 @@ import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
   { src: blackrockLogo, alt: 'BlackRock' },
-  { src: warburgLogo, alt: 'Warburg Pincus' },
+  { src: warburgLogo, alt: 'Warburg Pincus', large: true },
   { src: neosPartnersLogo, alt: 'Neos Partners' },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', small: true },
   { src: saltwaterLogo, alt: 'Saltwater Capital' },
