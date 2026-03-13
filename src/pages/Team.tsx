@@ -9,9 +9,24 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
-// Deal logos
-import harinDeals from '@/assets/deals/harin-deals.png';
-import bensonDeals from '@/assets/deals/benson-deals.png';
+// Deal logos — Harin
+import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
+import bbcElectricLogo from '@/assets/deals/bbc-electric.png';
+import pwrLogo from '@/assets/deals/pwr.png';
+import flexrayLogo from '@/assets/deals/flexray.png';
+import alignLogo from '@/assets/deals/a-lign.png';
+import alliedUniversalLogo from '@/assets/deals/allied-universal.png';
+import energizerLogo from '@/assets/deals/energizer.png';
+import broadcomLogo from '@/assets/deals/broadcom.png';
+
+// Deal logos — Benson
+import abgLogo from '@/assets/deals/abg.png';
+import rpxLogo from '@/assets/deals/rpx.png';
+import ideraLogo from '@/assets/deals/idera.png';
+import westernDigitalLogo from '@/assets/deals/western-digital.png';
+import mindbodyLogo from '@/assets/deals/mindbody.png';
+import selligentLogo from '@/assets/deals/selligent.png';
+import micronLogo from '@/assets/deals/micron.png';
 
 // Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
@@ -32,16 +47,43 @@ import swishinLogo from '@/assets/logos/swishin-ventures.png';
 import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
 
+interface LogoItem {
+  src: string;
+  alt: string;
+  small?: boolean;
+}
+
 interface TeamMember {
   name: string;
   role: string;
   photo?: string;
   summary: string;
   highlights: string[];
-  logos?: { src: string; alt: string }[];
-  dealImage?: string;
+  logos?: LogoItem[];
+  dealLogos?: LogoItem[];
   linkedIn?: string;
 }
+
+const harinDealLogos: LogoItem[] = [
+  { src: rmsEnergyLogo, alt: 'RMS Energy' },
+  { src: bbcElectricLogo, alt: 'BBC Electric' },
+  { src: pwrLogo, alt: 'PWR' },
+  { src: flexrayLogo, alt: 'FlexRay' },
+  { src: alignLogo, alt: 'A-LIGN' },
+  { src: alliedUniversalLogo, alt: 'Allied Universal' },
+  { src: energizerLogo, alt: 'Energizer' },
+  { src: broadcomLogo, alt: 'Broadcom' },
+];
+
+const bensonDealLogos: LogoItem[] = [
+  { src: abgLogo, alt: 'Authentic Brands Group' },
+  { src: rpxLogo, alt: 'RPX' },
+  { src: ideraLogo, alt: 'Idera' },
+  { src: westernDigitalLogo, alt: 'Western Digital' },
+  { src: mindbodyLogo, alt: 'Mindbody' },
+  { src: selligentLogo, alt: 'Selligent' },
+  { src: micronLogo, alt: 'Micron' },
+];
 
 const founders: TeamMember[] = [
   {
@@ -63,7 +105,7 @@ const founders: TeamMember[] = [
       { src: evercoreLogo, alt: 'Evercore' },
       { src: deutscheBankLogo, alt: 'Deutsche Bank' },
     ],
-    dealImage: harinDeals,
+    dealLogos: harinDealLogos,
   },
   {
     name: 'Benson Zhang',
@@ -82,7 +124,7 @@ const founders: TeamMember[] = [
       { src: hggcLogo, alt: 'HGGC' },
       { src: creditSuisseLogo, alt: 'Credit Suisse' },
     ],
-    dealImage: bensonDeals,
+    dealLogos: bensonDealLogos,
   },
 ];
 
@@ -134,6 +176,40 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
+/* ─── Inline Deal Marquee ─── */
+const DealMarquee = ({ logos, duration = 18 }: { logos: LogoItem[]; duration?: number }) => {
+  const doubled = [...logos, ...logos];
+  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
+
+  return (
+    <div className="relative overflow-hidden py-1">
+      {/* Edge fades */}
+      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+      <motion.div
+        className="flex items-center gap-10 md:gap-14 w-max"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
+      >
+        {doubled.map((logo, i) => (
+          <div
+            key={`${logo.alt}-${i}`}
+            className="flex items-center justify-center shrink-0 h-[40px] md:h-[48px]"
+          >
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              className="h-[30px] md:h-[38px] w-auto max-w-[120px] md:max-w-[150px] object-contain opacity-70 hover:opacity-95 transition-opacity duration-300"
+              style={{ filter: goldFilter }}
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
 /* ─── Profile Card ─── */
 const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) => {
   const LinkedWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) =>
@@ -144,8 +220,6 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
     ) : (
       <>{children}</>
     );
-
-  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   return (
     <FadeIn delay={index * 0.08}>
@@ -202,7 +276,7 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
             </ul>
 
             {/* Deal logos — horizontal marquee */}
-            {member.dealImage && (
+            {member.dealLogos && member.dealLogos.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -210,30 +284,10 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
                 transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
                 className="mt-6 pt-4 border-t border-foreground/[0.05]"
               >
-                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-4">
+                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-3">
                   Select Investments &amp; Deals
                 </p>
-                <div className="relative overflow-hidden">
-                  {/* Edge fades */}
-                  <div className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-                  <div className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
-                  <motion.div
-                    className="flex items-center gap-12 w-max"
-                    animate={{ x: ['0%', '-50%'] }}
-                    transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 20, ease: 'linear' } }}
-                  >
-                    {[0, 1].map((copy) => (
-                      <img
-                        key={copy}
-                        src={member.dealImage}
-                        alt={`${member.name} — Select investments and deals`}
-                        className="h-[36px] md:h-[44px] w-auto object-contain shrink-0"
-                        style={{ filter: goldFilter, opacity: 0.7 }}
-                        loading="lazy"
-                      />
-                    ))}
-                  </motion.div>
-                </div>
+                <DealMarquee logos={member.dealLogos} />
               </motion.div>
             )}
           </div>
