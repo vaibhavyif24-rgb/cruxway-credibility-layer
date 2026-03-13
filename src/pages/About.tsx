@@ -202,7 +202,7 @@ const About = () => {
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Approach</SectionLabel>
-            <GoldRule className="mt-1 mb-8 md:mb-12" />
+            <GoldRule className="mt-1 mb-5 md:mb-12" />
           </FadeIn>
 
           <ApproachTable items={approach} />
