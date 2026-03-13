@@ -337,7 +337,7 @@ const Home = () => {
                     whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
                     viewport={{ once: false, margin: '-20px' }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="font-serif text-[2.5rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-3"
+                    className="font-serif text-[2rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-2 md:mb-3"
                   >
                     {step.num}
                   </motion.span>
