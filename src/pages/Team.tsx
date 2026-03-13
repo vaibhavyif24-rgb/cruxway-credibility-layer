@@ -123,7 +123,6 @@ const founders: TeamMember[] = [
     ],
     logos: [
       { src: blackrockLogo, alt: 'BlackRock' },
-      { src: hggcLogo, alt: 'HGGC' },
       { src: creditSuisseLogo, alt: 'Credit Suisse' },
     ],
     dealLogos: bensonDealLogos,
