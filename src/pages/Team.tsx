@@ -1,9 +1,11 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
+import { motion } from 'framer-motion';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
+import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
 // Logos
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
@@ -29,12 +31,12 @@ const founders: TeamMember[] = [
     role: 'Co-Founder',
     photo: harinPhoto,
     summary:
-      'More than a decade of experience investing in and operating companies across business services and consumer sectors.',
+      'Over a decade of experience investing in and operating companies across business services and consumer sectors.',
     highlights: [
-      'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
-      'Board of Directors, RMS Energy — leading provider of testing and maintenance services for high-voltage electrical equipment',
-      'Launched and scaled Honest Hospitality Group from ideation to 100+ locations globally; serves on the Board of Directors',
-      'Began his finance career at leading investment banks including J.P. Morgan, Evercore, and Deutsche Bank',
+      'Warburg Pincus — Business Services Group; global PE firm with $85bn+ AUM',
+      'Board of Directors, RMS Energy — high-voltage electrical testing and maintenance',
+      'Honest Hospitality Group — scaled from ideation to 100+ locations globally; Board of Directors',
+      'Investment banking: J.P. Morgan, Evercore, Deutsche Bank',
     ],
     logos: [
       { src: warburgLogo, alt: 'Warburg Pincus' },
@@ -48,11 +50,11 @@ const founders: TeamMember[] = [
     role: 'Co-Founder',
     photo: bensonPhoto,
     summary:
-      'Over a decade of experience in finance and private equity investing across technology and business services sectors.',
+      'Over a decade of experience in private equity and finance across technology and business services.',
     highlights: [
-      'Direct Private Equity at BlackRock — led the sale of BlackRock\'s stake in Authentic Brands Group',
-      'Led investments in IDERA and RPX at HGGC; served as Board Observer',
-      'Began his career at Credit Suisse in Technology Investment Banking — closed 7 deals totaling $30bn in deal value across semiconductor and software',
+      'BlackRock — Direct Private Equity; led sale of stake in Authentic Brands Group',
+      'HGGC — Led investments in IDERA and RPX; Board Observer',
+      'Credit Suisse — Technology Investment Banking; 7 deals, $30bn in aggregate deal value',
     ],
     logos: [
       { src: blackrockLogo, alt: 'BlackRock' },
@@ -65,12 +67,13 @@ const founders: TeamMember[] = [
 const indiaPartner: TeamMember = {
   name: 'Vaibhav Sharma',
   role: 'Partner',
+  photo: vaibhavPhoto,
   summary:
     'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
   highlights: [
     'Three-time founder including Studyenclave.com',
+    'Swishin Ventures — VC fund partnering with multiple family offices across India',
     'On-ground consulting: strategy, market entry, and operations',
-    'Prior: NITI Aayog; family office experience (Swishin Ventures)',
     'Select investments: Lohum, Porter, Waaree Solar',
     'Stanford University research grant recipient',
   ],
@@ -79,16 +82,20 @@ const indiaPartner: TeamMember = {
 /* ─── Profile Card ─── */
 const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) => (
   <FadeIn delay={index * 0.08}>
-    <div className="py-8 md:py-10 border-b border-foreground/[0.06] last:border-b-0">
+    <motion.div
+      whileHover={{ backgroundColor: 'hsl(40 18% 95% / 0.5)' }}
+      transition={{ duration: 0.3 }}
+      className="py-8 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm"
+    >
       <div className="grid md:grid-cols-12 gap-5 md:gap-8 items-start">
         {/* Photo + Identity */}
         <div className="md:col-span-3 flex flex-col items-start">
           {member.photo ? (
-            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] mb-4 shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.15)]">
+            <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] mb-4 shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.12)]">
               <img
                 src={member.photo}
                 alt={member.name}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-[filter] duration-500"
+                className="w-full h-full object-cover object-top grayscale hover:grayscale-0 transition-[filter] duration-500"
               />
             </div>
           ) : (
@@ -123,20 +130,20 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
             ))}
           </ul>
           {member.logos && member.logos.length > 0 && (
-            <div className="flex flex-wrap items-center gap-5 pt-3 border-t border-foreground/[0.04]">
+            <div className="flex flex-wrap items-center gap-6 md:gap-8 pt-4 border-t border-foreground/[0.04]">
               {member.logos.map((logo) => (
                 <img
                   key={logo.alt}
                   src={logo.src}
                   alt={logo.alt}
-                  className="h-[18px] md:h-[22px] w-auto object-contain opacity-40 grayscale hover:opacity-60 transition-opacity duration-300"
+                  className="h-[16px] md:h-[20px] w-auto object-contain opacity-30 grayscale hover:opacity-50 transition-opacity duration-300"
                 />
               ))}
             </div>
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   </FadeIn>
 );
 
@@ -160,8 +167,8 @@ const Team = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[13px] text-primary-foreground/50 leading-[1.7] mt-4 max-w-[420px]">
-              Operators and investors who understand founder-led businesses — and partner to help them grow without losing their identity.
+            <p className="font-sans text-[13px] text-primary-foreground/40 leading-[1.7] mt-4 max-w-[420px]">
+              Operators and investors building alongside founders.
             </p>
           </FadeIn>
           <FadeIn delay={0.16}>
