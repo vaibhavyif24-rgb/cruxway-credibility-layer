@@ -5,6 +5,8 @@ interface LogoItem {
   alt: string;
   /** Use smaller size for logos that are visually larger (e.g. square emblems) */
   small?: boolean;
+  /** Use larger size for logos that need more presence */
+  large?: boolean;
 }
 
 interface LogoMarqueeProps {
