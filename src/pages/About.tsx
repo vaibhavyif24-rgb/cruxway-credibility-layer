@@ -2,6 +2,7 @@ import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/componen
 import { motion } from 'framer-motion';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
+import ApproachTable from '@/components/ApproachTable';
 
 const About = () => {
   const { region } = useRegion();
@@ -93,31 +94,7 @@ const About = () => {
             <GoldRule className="mt-1 mb-8 md:mb-12" />
           </FadeIn>
 
-          <div className="border-t border-foreground/[0.06]">
-            {approach.map((a, i) => (
-              <FadeIn key={a.t} delay={i * 0.04}>
-                <motion.div
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex gap-4 md:gap-8 py-5 md:py-6 border-b border-foreground/[0.06] items-start md:items-baseline group cursor-default"
-                >
-                  <motion.span
-                    initial={{ color: 'hsl(var(--foreground) / 0.06)' }}
-                    whileInView={{ color: 'hsl(var(--gold) / 0.35)' }}
-                    viewport={{ once: false, margin: '-20px' }}
-                    transition={{ duration: 0.6, delay: 0.15 }}
-                    className="font-serif text-[13px] group-hover:!text-gold/50 transition-colors duration-300 shrink-0 w-6 mt-0.5 md:mt-0"
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </motion.span>
-                  <div className="flex flex-col md:flex-row md:items-baseline md:gap-8 flex-1 min-w-0">
-                    <h3 className="font-serif text-[1rem] md:text-[1.05rem] text-foreground md:w-56 shrink-0 mb-1.5 md:mb-0">{a.t}</h3>
-                    <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7]">{a.d}</p>
-                  </div>
-                </motion.div>
-              </FadeIn>
-            ))}
-          </div>
+          <ApproachTable items={approach} />
         </div>
       </section>
 
