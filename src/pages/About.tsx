@@ -83,7 +83,7 @@ const About = () => {
                     : 'Cruxway acquires majority stakes in founder-led businesses across the United States, combining long-term capital with operating expertise to help owners transform their companies into market leaders in regulated, compliance-driven industries, while protecting the legacy and values that built them.'}
                 </p>
                 {!isIndia && (
-                  <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
+                  <p className="font-sans text-[13px] md:text-[13.5px] text-muted-foreground leading-[1.75] md:leading-[1.8]">
                     We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve. Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
                   </p>
                 )}
