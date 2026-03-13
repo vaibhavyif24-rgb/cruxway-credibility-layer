@@ -214,7 +214,7 @@ const About = () => {
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Principles</SectionLabel>
-            <GoldRule className="mt-1 mb-7 md:mb-9" />
+            <GoldRule className="mt-1 mb-5 md:mb-9" />
           </FadeIn>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-5 md:gap-y-6">
             {principles.map((p, i) => (
