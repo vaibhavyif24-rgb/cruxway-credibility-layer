@@ -347,7 +347,7 @@ const Home = () => {
                     <h3 className="font-serif text-[1.05rem] md:text-[1.25rem] text-primary-foreground tracking-[-0.01em]">
                   </div>
 
-                  <p className="font-sans text-[12.5px] text-primary-foreground/30 group-hover:text-primary-foreground/45 leading-[1.75] transition-colors duration-300">
+                  <p className="font-sans text-[11.5px] md:text-[12.5px] text-primary-foreground/30 group-hover:text-primary-foreground/45 leading-[1.7] md:leading-[1.75] transition-colors duration-300">
                     {step.description}
                   </p>
                 </motion.div>
