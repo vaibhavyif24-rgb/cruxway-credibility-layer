@@ -140,40 +140,27 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-/* ─── Deal Image Marquee (uses original composite logo images) ─── */
-const DealImageMarquee = ({ src, alt, duration = 20 }: { src: string; alt: string; duration?: number }) => {
+/* ─── Deal Image Display (uses original composite logo images) ─── */
+const DealImageDisplay = ({ src, alt }: { src: string; alt: string }) => {
   const [hovered, setHovered] = useState(false);
   const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   return (
     <div
-      className="relative overflow-hidden py-2 group"
+      className="relative"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Edge fades */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
-
-      <motion.div
-        className="flex items-center gap-12 w-max"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
-      >
-        {[0, 1].map((copy) => (
-          <img
-            key={copy}
-            src={src}
-            alt={alt}
-            className="h-[70px] md:h-[90px] w-auto object-contain shrink-0 transition-all duration-500"
-            style={{
-              filter: hovered ? 'none' : goldFilter,
-              opacity: hovered ? 1 : 0.7,
-            }}
-            loading="lazy"
-          />
-        ))}
-      </motion.div>
+      <img
+        src={src}
+        alt={alt}
+        className="w-full max-w-[520px] object-contain transition-all duration-500 cursor-default"
+        style={{
+          filter: hovered ? 'none' : goldFilter,
+          opacity: hovered ? 1 : 0.75,
+        }}
+        loading="lazy"
+      />
     </div>
   );
 };
@@ -243,20 +230,11 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
               ))}
             </ul>
 
-            {/* Deal logos — horizontal marquee using original composite image */}
+            {/* Deal logos — original composite image with gold filter */}
             {member.dealImage && (
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-                className="mt-6 pt-4 border-t border-foreground/[0.05]"
-              >
-                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim mb-3">
-                  Select Investments &amp; Deals
-                </p>
-                <DealImageMarquee src={member.dealImage} alt={`${member.name} deals`} />
-              </motion.div>
+              <div className="mt-6 pt-4 border-t border-foreground/[0.05]">
+                <DealImageDisplay src={member.dealImage} alt={`${member.name} deals`} />
+              </div>
             )}
           </div>
         </div>
