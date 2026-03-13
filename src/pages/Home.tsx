@@ -393,7 +393,7 @@ const Home = () => {
                 ? 'Global institutional experience brought to Indian markets'
                 : 'Our team has invested and operated across leading global institutions'}
             </h2>
-            <GoldRule className="mt-4" />
+            <GoldRule className="mt-3 md:mt-4" />
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
