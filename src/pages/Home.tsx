@@ -52,19 +52,6 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-const processStepsUS = [
-  { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across the U.S. in essential B2B sectors with durable competitive advantages and strong client relationships.' },
-  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
-  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
-  { num: '04', title: 'Build', description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.' },
-];
-
-const processStepsIndia = [
-  { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across India\'s lower middle market with strong fundamentals and operational upside.' },
-  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
-  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
-  { num: '04', title: 'Build', description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.' },
-];
 
 const usSectors = [
   { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
@@ -303,92 +290,6 @@ const Home = () => {
         </section>
       )}
 
-      {/* Our Process */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
-          <FadeIn>
-            <SectionLabel light>Our Process</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
-              From Discovery to Partnership
-            </h2>
-            <GoldRule className="mb-6 md:mb-10 lg:mb-14" />
-          </FadeIn>
-
-          {/* Premium vertical timeline */}
-          <div className="relative">
-            {/* Vertical connector line (mobile) / Horizontal (desktop) */}
-            <div className="absolute left-[15px] md:left-[18px] lg:left-0 top-0 bottom-0 lg:top-[22px] lg:bottom-auto lg:right-0 lg:h-px w-px lg:w-full bg-primary-foreground/[0.06]" />
-
-            <div className="space-y-0 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-0">
-              {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
-                <FadeIn key={step.num} delay={i * 0.12}>
-                  <motion.div
-                    whileHover={{ y: -3 }}
-                    transition={{ duration: 0.25, ease: 'easeOut' }}
-                    className="group relative pl-10 md:pl-12 lg:pl-0 lg:pr-6 py-5 md:py-6 lg:py-0"
-                  >
-                    {/* Timeline node */}
-                    <div className="absolute left-0 lg:left-auto lg:relative lg:mb-5">
-                      <motion.div
-                        initial={{ scale: 0, opacity: 0 }}
-                        whileInView={{ scale: 1, opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: i * 0.12 + 0.2, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative"
-                      >
-                        {/* Outer ring */}
-                        <div className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] rounded-full border border-gold/20 group-hover:border-gold/40 transition-colors duration-500 flex items-center justify-center bg-primary/80 backdrop-blur-sm">
-                          {/* Inner dot */}
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            whileInView={{ scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.3, delay: i * 0.12 + 0.4 }}
-                            className="w-[6px] h-[6px] md:w-[8px] md:h-[8px] rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300"
-                          />
-                        </div>
-                        {/* Glow on hover */}
-                        <div className="absolute inset-0 rounded-full bg-gold/0 group-hover:bg-gold/[0.06] blur-[8px] transition-all duration-500" />
-                      </motion.div>
-                    </div>
-
-                    {/* Step number */}
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: i * 0.12 + 0.3 }}
-                      className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold/25 group-hover:text-gold/45 transition-colors duration-500 block mb-2"
-                    >
-                      Step {step.num}
-                    </motion.span>
-
-                    {/* Title */}
-                    <h3 className="font-serif text-[1.05rem] md:text-[1.15rem] text-primary-foreground tracking-[-0.01em] mb-1.5 group-hover:text-primary-foreground transition-colors duration-300">
-                      {step.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="font-sans text-[11.5px] md:text-[12px] text-primary-foreground/25 group-hover:text-primary-foreground/40 leading-[1.7] transition-colors duration-300">
-                      {step.description}
-                    </p>
-
-                    {/* Bottom accent line on mobile */}
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: 32 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.12 + 0.5, ease: [0.22, 1, 0.36, 1] }}
-                      className="h-px bg-gold/15 mt-4 lg:mt-5"
-                    />
-                  </motion.div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Social Proof */}
       <div className="bg-cream">
