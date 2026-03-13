@@ -188,7 +188,7 @@ const About = () => {
       </section>
 
       {/* Our Approach — cream/light themed to match brand palette */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Approach</SectionLabel>
