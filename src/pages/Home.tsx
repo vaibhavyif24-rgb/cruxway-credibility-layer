@@ -62,7 +62,7 @@ const processSteps = [
   {
     num: '02',
     title: 'Evaluate',
-    description: 'Rigorous due diligence across financials, operations, and culture — ensuring alignment between the business, its people, and our long-term vision.',
+    description: 'Rigorous due diligence across financials, operations, and culture, ensuring alignment between the business, its people, and our long-term vision.',
   },
   {
     num: '03',
@@ -72,7 +72,7 @@ const processSteps = [
   {
     num: '04',
     title: 'Build',
-    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value — without disrupting what already works.',
+    description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.',
   },
 ];
 
@@ -100,7 +100,7 @@ const Home = () => {
           <FadeIn delay={0.14}>
             <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
               {isIndia
-                ? 'We acquire and grow founder-led companies in essential sectors — providing long-term capital, operational expertise, and a commitment to preserving what works.'
+                ? 'We acquire and grow founder-led companies in essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
                 : 'We acquire and grow founder-led companies in essential B2B services — providing long-term capital, operational expertise, and a commitment to preserving what works.'}
             </p>
           </FadeIn>
@@ -145,7 +145,7 @@ const Home = () => {
                 Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                Our team brings institutional investing and operating experience to companies seeking a partner — not just capital.
+                Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.
               </p>
             </FadeIn>
           </div>
