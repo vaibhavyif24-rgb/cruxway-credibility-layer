@@ -31,7 +31,7 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
       <motion.div
         whileHover={{ y: -2 }}
         transition={{ duration: 0.2 }}
-        className="relative h-full py-3.5 md:py-4 border-t border-primary-foreground/[0.06] hover:border-gold/20 transition-all duration-400"
+        className="relative h-full py-3.5 md:py-4 border-t border-foreground/[0.06] hover:border-gold/20 transition-all duration-400"
       >
         <motion.div
           className="absolute top-0 left-0 h-[2px] bg-gold/30"
@@ -39,10 +39,10 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
           animate={isInView ? { width: 20 } : {}}
           transition={{ duration: 0.5, delay: index * 0.07 + 0.2, ease: [0.22, 1, 0.36, 1] }}
         />
-        <h4 className="font-serif text-[0.85rem] md:text-[0.92rem] text-primary-foreground leading-[1.3] mb-0.5">
+        <h4 className="font-serif text-[0.85rem] md:text-[0.92rem] text-foreground leading-[1.3] mb-0.5">
           {sector.label}
         </h4>
-        <p className="font-sans text-[10.5px] md:text-[11px] text-primary-foreground/22 leading-[1.6] group-hover:text-primary-foreground/38 transition-colors duration-300">
+        <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/60 leading-[1.6] group-hover:text-muted-foreground/85 transition-colors duration-300">
           {sector.desc}
         </p>
       </motion.div>
@@ -152,27 +152,29 @@ const About = () => {
           </FadeIn>
 
           <ApproachTable items={approach} variant="dark" />
-
-          {/* Target Sectors — US only */}
-          {!isIndia && (
-            <div className="mt-8 md:mt-10 lg:mt-12 pt-6 md:pt-8 lg:pt-10 border-t border-primary-foreground/[0.04]">
-              <FadeIn>
-                <SectionLabel light>Target Sectors</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground leading-[1.2] max-w-[480px] mb-1">
-                  Essential B2B services across the United States
-                </h2>
-                <GoldRule className="mb-4 md:mb-6" />
-              </FadeIn>
-
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 lg:gap-x-12 gap-y-0">
-                {usSectors.map((sector, i) => (
-                  <SectorCard key={sector.label} sector={sector} index={i} />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </section>
+
+      {/* Target Sectors — US only, white background */}
+      {!isIndia && (
+        <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+          <div className="max-w-[1080px] mx-auto">
+            <FadeIn>
+              <SectionLabel>Target Sectors</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-foreground leading-[1.2] max-w-[480px] mb-1">
+                Essential B2B services across the United States
+              </h2>
+              <GoldRule className="mb-4 md:mb-6" />
+            </FadeIn>
+
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 md:gap-x-8 lg:gap-x-12 gap-y-0">
+              {usSectors.map((sector, i) => (
+                <SectorCard key={sector.label} sector={sector} index={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Principles */}
       <section className="bg-cream px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
