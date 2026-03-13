@@ -246,7 +246,7 @@ const Home = () => {
             <h2 className={`font-serif text-[clamp(1.35rem,2.5vw,2rem)] leading-[1.18] max-w-[480px] mb-1.5 ${isIndia ? 'text-primary-foreground' : 'text-foreground'}`}>
               From Discovery to Partnership
             </h2>
-            <GoldRule className="mb-6 md:mb-10 lg:mb-14" />
+            <GoldRule className="mb-5 md:mb-8 lg:mb-10" />
           </FadeIn>
 
           <div className="relative">
