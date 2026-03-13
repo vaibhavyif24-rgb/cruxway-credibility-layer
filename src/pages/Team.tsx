@@ -77,7 +77,7 @@ const founders: TeamMember[] = [
 
 const indiaPartner: TeamMember = {
   name: 'Vaibhav Sharma',
-  role: 'Partner',
+  role: 'Partner — India',
   photo: vaibhavPhoto,
   summary:
     'Founder, operator, and investor with on-ground experience across Indian growth-stage businesses.',
