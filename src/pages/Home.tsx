@@ -145,7 +145,7 @@ const Home = () => {
                 Cruxway identifies, acquires, and actively grows founder-led and family-owned businesses in critical B2B services. We focus on sectors where reliability, compliance, and deep client relationships define long-term value.
               </p>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                Our team brings institutional investing and operating experience to companies seeking a partner — not just capital.
+                Our team brings institutional investing and operating experience to companies seeking a partner, not just capital.
               </p>
             </FadeIn>
           </div>

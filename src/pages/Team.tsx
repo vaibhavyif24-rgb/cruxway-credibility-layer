@@ -140,8 +140,8 @@ const indiaPartner: TeamMember = {
   highlights: [
     'NITI Aayog: Policy and strategy advisory to the Government of India',
     'VC fund partnering with multiple family offices across India; early-stage investing and portfolio support',
-    'Vermin Console — Institutional advisory on environmental compliance and regulatory frameworks',
-    'Impact Investors Council — Policy engagement and ecosystem development for impact capital in India',
+    'Vermin Console: Institutional advisory on environmental compliance and regulatory frameworks',
+    'Impact Investors Council: Policy engagement and ecosystem development for impact capital in India',
     'Young India Fellow, Ashoka University; Stanford University research grant recipient',
   ],
   logos: [

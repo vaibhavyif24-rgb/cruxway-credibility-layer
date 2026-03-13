@@ -46,7 +46,7 @@ const About = () => {
           <div className="lg:col-span-7">
             <FadeIn delay={0.08}>
               <p className="font-sans text-[13.5px] text-muted-foreground leading-[1.8]">
-                Cruxway combines long-term capital with operating expertise to help owners transform their businesses into market leaders — while protecting the legacy and values that built them.
+                Cruxway combines long-term capital with operating expertise to help owners transform their businesses into market leaders while protecting the legacy and values that built them.
               </p>
             </FadeIn>
           </div>

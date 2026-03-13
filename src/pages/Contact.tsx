@@ -51,7 +51,7 @@ const Contact = () => {
               <div className="border-t border-foreground/[0.06] mt-4">
                 <div className="py-5">
                   <p className="font-sans text-[13px] text-muted-foreground leading-[1.7]">
-                    {region === 'india' ? 'India' : 'United States'} — details available upon request.
+                    {region === 'india' ? 'Delhi, India' : 'United States'}
                   </p>
                 </div>
               </div>
