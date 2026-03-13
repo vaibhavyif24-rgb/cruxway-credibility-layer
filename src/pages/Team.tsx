@@ -51,6 +51,8 @@ interface LogoItem {
   src: string;
   alt: string;
   small?: boolean;
+  /** Scale factor to normalize visual weight (default 1) */
+  scale?: number;
 }
 
 interface TeamMember {
@@ -76,12 +78,12 @@ const harinDealLogos: LogoItem[] = [
 ];
 
 const bensonDealLogos: LogoItem[] = [
-  { src: abgLogo, alt: 'Authentic Brands Group' },
+  { src: abgLogo, alt: 'Authentic Brands Group', scale: 1.45 },
   { src: rpxLogo, alt: 'RPX' },
-  { src: ideraLogo, alt: 'Idera' },
-  { src: westernDigitalLogo, alt: 'Western Digital' },
+  { src: ideraLogo, alt: 'Idera', scale: 1.5 },
+  { src: westernDigitalLogo, alt: 'Western Digital', scale: 1.35 },
   { src: mindbodyLogo, alt: 'Mindbody' },
-  { src: selligentLogo, alt: 'Selligent' },
+  { src: selligentLogo, alt: 'Selligent', scale: 1.15 },
   { src: micronLogo, alt: 'Micron' },
 ];
 
@@ -205,10 +207,11 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-[32px] md:h-[40px] w-auto max-w-[110px] md:max-w-[140px] object-contain transition-all duration-500"
+              className="h-[32px] md:h-[40px] w-auto max-w-[120px] md:max-w-[150px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
+                transform: logo.scale ? `scale(${logo.scale})` : undefined,
               }}
             />
           </div>
