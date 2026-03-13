@@ -1,9 +1,24 @@
-import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion } from 'framer-motion';
+import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
+import { motion, useInView } from 'framer-motion';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import { useRef } from 'react';
+
+const processStepsUS = [
+  { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across the U.S. in essential B2B sectors with durable competitive advantages and strong client relationships.' },
+  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
+  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '04', title: 'Build', description: 'Hands-on operational partnership to accelerate growth, professionalise systems, and unlock value without disrupting what already works.' },
+];
+
+const processStepsIndia = [
+  { num: '01', title: 'Identify', description: 'We source founder-led and family-owned businesses across India\'s lower middle market with strong fundamentals and operational upside.' },
+  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture to ensure alignment between the business, its people, and our long-term vision.' },
+  { num: '03', title: 'Acquire', description: 'We acquire majority stakes through structured transactions designed to preserve continuity for employees, clients, and stakeholders while providing founders a clean transition.' },
+  { num: '04', title: 'Build', description: 'Hands-on operational partnership to professionalise systems, strengthen governance, and accelerate growth across Indian markets.' },
+];
 
 const About = () => {
   const { region } = useRegion();
@@ -93,121 +108,97 @@ const About = () => {
         </div>
       </section>
 
-      {/* US: Why Essential Services / India: Market Context */}
-      {!isIndia ? (
-        <section className="relative bg-primary text-primary-foreground overflow-hidden">
-          <DarkSectionEffects />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
-              <div className="lg:col-span-5">
-                <FadeIn>
-                  <SectionLabel light>Our Focus</SectionLabel>
-                  <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
-                    Why Essential B2B Services in the United States
-                  </h2>
-                  <GoldRule className="mt-3 md:mt-5" />
-                </FadeIn>
-              </div>
-              <div className="lg:col-span-7">
-                <FadeIn delay={0.08}>
-                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
-                    Essential B2B services represent the backbone of the American economy: companies that maintain critical infrastructure, ensure environmental and regulatory compliance, and provide specialised technical expertise that cannot be easily replicated or outsourced.
-                  </p>
-                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8] mb-3 md:mb-4">
-                    These businesses share characteristics we find compelling: recurring revenue driven by regulatory mandates, high switching costs built on trust and performance, and resilience across economic cycles. Many are led by founders approaching retirement without a succession plan, creating a significant opportunity for a partner who can preserve what works while investing in growth.
-                  </p>
-                  <p className="font-sans text-[13px] md:text-[13.5px] text-primary-foreground/40 leading-[1.75] md:leading-[1.8]">
-                    We deliberately focus on sectors too small for large private equity and too complex for unsophisticated buyers, where our operating expertise and patient capital create the most value.
-                  </p>
-                </FadeIn>
-                <FadeIn delay={0.16}>
-                  <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-primary-foreground/[0.06]">
-                    {[
-                      { val: '$7-75M', lbl: 'Revenue Range' },
-                      { val: '90%+', lbl: 'Revenue Retention' },
-                      { val: '20+ Yrs', lbl: 'Avg. Company Age' },
-                    ].map((s, i) => (
-                      <motion.div
-                        key={s.lbl}
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                        className="text-center"
-                      >
-                        <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground tracking-[-0.02em]">{s.val}</p>
-                        <p className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-primary-foreground/25 mt-1">{s.lbl}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </FadeIn>
-              </div>
-            </div>
-          </div>
-        </section>
-      ) : (
-        <section className="relative bg-primary text-primary-foreground overflow-hidden">
-          <DarkSectionEffects />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
-            <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
-              <div className="lg:col-span-5">
-                <FadeIn>
-                  <SectionLabel light>The India Opportunity</SectionLabel>
-                  <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18]">
-                    A Generational Gap in India's Lower Middle Market
-                  </h2>
-                  <GoldRule className="mt-3 md:mt-5" />
-                </FadeIn>
-              </div>
-              <div className="lg:col-span-7">
-                <FadeIn delay={0.08}>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8] mb-4">
-                    India is home to over 63 million MSMEs, yet less than 1% have access to institutional capital or structured operational expertise. Many of these businesses have thrived for decades through resilience, deep customer relationships, and founder-driven leadership.
-                  </p>
-                  <p className="font-sans text-[13.5px] text-primary-foreground/40 leading-[1.8]">
-                    As India's economy accelerates toward $5 trillion, a new generation of these companies is ready for a partner who brings discipline, governance, and growth capital, without disrupting the culture and values that built them. This is the gap Cruxway was created to fill.
-                  </p>
-                </FadeIn>
-                <FadeIn delay={0.16}>
-                  <div className="grid grid-cols-3 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 md:pt-6 border-t border-primary-foreground/[0.06]">
-                    {[
-                      { val: '63M+', lbl: 'MSMEs in India' },
-                      { val: '<1%', lbl: 'Institutionally Backed' },
-                      { val: '$5T', lbl: 'Economy by 2028' },
-                    ].map((s, i) => (
-                      <motion.div
-                        key={s.lbl}
-                        initial={{ opacity: 0, y: 8 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                        className="text-center"
-                      >
-                        <p className="font-serif text-[clamp(1.1rem,2vw,1.5rem)] text-primary-foreground tracking-[-0.02em]">{s.val}</p>
-                        <p className="font-sans text-[9px] font-medium uppercase tracking-[0.18em] text-primary-foreground/25 mt-1">{s.lbl}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </FadeIn>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Approach — on dark background for premium feel */}
+      {/* Our Process — moved from Home for a clean separation of concerns */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
           <FadeIn>
-            <SectionLabel light>Our Approach</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
+            <SectionLabel light>Our Process</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1.5">
+              From Discovery to Partnership
+            </h2>
+            <GoldRule className="mb-6 md:mb-10 lg:mb-14" />
+          </FadeIn>
+
+          {/* Premium vertical timeline */}
+          <div className="relative">
+            <div className="absolute left-[15px] md:left-[18px] lg:left-0 top-0 bottom-0 lg:top-[22px] lg:bottom-auto lg:right-0 lg:h-px w-px lg:w-full bg-primary-foreground/[0.06]" />
+
+            <div className="space-y-0 lg:space-y-0 lg:grid lg:grid-cols-4 lg:gap-0">
+              {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
+                <FadeIn key={step.num} delay={i * 0.12}>
+                  <motion.div
+                    whileHover={{ y: -3 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    className="group relative pl-10 md:pl-12 lg:pl-0 lg:pr-6 py-5 md:py-6 lg:py-0"
+                  >
+                    {/* Timeline node */}
+                    <div className="absolute left-0 lg:left-auto lg:relative lg:mb-5">
+                      <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: i * 0.12 + 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="relative"
+                      >
+                        <div className="w-[30px] h-[30px] md:w-[36px] md:h-[36px] rounded-full border border-gold/20 group-hover:border-gold/40 transition-colors duration-500 flex items-center justify-center bg-primary/80 backdrop-blur-sm">
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: i * 0.12 + 0.4 }}
+                            className="w-[6px] h-[6px] md:w-[8px] md:h-[8px] rounded-full bg-gold/40 group-hover:bg-gold/70 transition-colors duration-300"
+                          />
+                        </div>
+                        <div className="absolute inset-0 rounded-full bg-gold/0 group-hover:bg-gold/[0.06] blur-[8px] transition-all duration-500" />
+                      </motion.div>
+                    </div>
+
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: i * 0.12 + 0.3 }}
+                      className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold/25 group-hover:text-gold/45 transition-colors duration-500 block mb-2"
+                    >
+                      Step {step.num}
+                    </motion.span>
+
+                    <h3 className="font-serif text-[1.05rem] md:text-[1.15rem] text-primary-foreground tracking-[-0.01em] mb-1.5 group-hover:text-primary-foreground transition-colors duration-300">
+                      {step.title}
+                    </h3>
+
+                    <p className="font-sans text-[11.5px] md:text-[12px] text-primary-foreground/25 group-hover:text-primary-foreground/40 leading-[1.7] transition-colors duration-300">
+                      {step.description}
+                    </p>
+
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: 32 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.12 + 0.5, ease: [0.22, 1, 0.36, 1] }}
+                      className="h-px bg-gold/15 mt-4 lg:mt-5"
+                    />
+                  </motion.div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Approach — cream/light themed to match brand palette */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Our Approach</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.2rem,2.5vw,1.85rem)] text-foreground leading-[1.18] max-w-[480px] mb-1.5">
               How We Partner With Founders
             </h2>
             <GoldRule className="mb-6 md:mb-10" />
           </FadeIn>
 
-          <ApproachTable items={approach} variant="dark" />
+          <ApproachTable items={approach} variant="light" />
         </div>
       </section>
 
