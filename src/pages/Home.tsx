@@ -189,7 +189,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.35rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-4">
-              From Discovery to Partnership
+              {isIndia ? 'From Discovery to Partnership in India' : 'From Discovery to Partnership'}
             </h2>
             <GoldRule className="mb-12 md:mb-16" />
           </FadeIn>
