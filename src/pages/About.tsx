@@ -102,7 +102,11 @@ const About = () => {
                   className="flex gap-4 md:gap-8 py-5 md:py-6 border-b border-foreground/[0.06] items-start md:items-baseline group cursor-default"
                 >
                   <motion.span
-                    className="font-serif text-[13px] text-foreground/[0.06] group-hover:text-gold/30 transition-colors duration-300 shrink-0 w-6 mt-0.5 md:mt-0"
+                    initial={{ color: 'hsl(var(--foreground) / 0.06)' }}
+                    whileInView={{ color: 'hsl(var(--gold) / 0.35)' }}
+                    viewport={{ once: false, margin: '-20px' }}
+                    transition={{ duration: 0.6, delay: 0.15 }}
+                    className="font-serif text-[13px] group-hover:!text-gold/50 transition-colors duration-300 shrink-0 w-6 mt-0.5 md:mt-0"
                   >
                     {String(i + 1).padStart(2, '0')}
                   </motion.span>

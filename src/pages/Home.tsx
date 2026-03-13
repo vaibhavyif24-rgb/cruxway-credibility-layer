@@ -101,7 +101,7 @@ const Home = () => {
             <p className="font-sans text-[13.5px] text-primary-foreground/35 leading-[1.7] mt-5 max-w-[460px]">
               {isIndia
                 ? 'We acquire and grow founder-led companies in essential sectors, providing long-term capital, operational expertise, and a commitment to preserving what works.'
-                : 'We acquire and grow founder-led companies in essential B2B services — providing long-term capital, operational expertise, and a commitment to preserving what works.'}
+                : 'We acquire and grow founder-led companies in essential B2B services, providing long-term capital, operational expertise, and a commitment to preserving what works.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -181,9 +181,15 @@ const Home = () => {
                   )}
 
                   {/* Step number */}
-                  <span className="font-serif text-[2.5rem] md:text-[3rem] leading-none text-primary-foreground/[0.06] group-hover:text-gold/20 transition-colors duration-500 block mb-4">
+                  <motion.span
+                    initial={{ color: 'hsl(var(--primary-foreground) / 0.04)' }}
+                    whileInView={{ color: 'hsl(var(--gold) / 0.25)' }}
+                    viewport={{ once: false, margin: '-20px' }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="font-serif text-[2.5rem] md:text-[3rem] leading-none group-hover:!text-gold/40 transition-colors duration-500 block mb-4"
+                  >
                     {step.num}
-                  </span>
+                  </motion.span>
 
                   {/* Connector dot */}
                   <div className="flex items-center gap-3 mb-3">
@@ -224,9 +230,14 @@ const Home = () => {
                   transition={{ duration: 0.2 }}
                   className="flex gap-5 md:gap-8 py-5 md:py-6 border-b border-foreground/[0.06] items-baseline group cursor-default"
                 >
-                  <span className="font-serif text-[13px] text-foreground/[0.08] group-hover:text-gold/30 transition-colors duration-300 shrink-0 w-6">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  <motion.span
+                    initial={{ color: 'hsl(var(--foreground) / 0.06)' }}
+                    whileInView={{ color: 'hsl(var(--gold) / 0.35)' }}
+                    viewport={{ once: false, margin: '-20px' }}
+                    transition={{ duration: 0.6, delay: 0.15 }}
+                    className="font-serif text-[13px] group-hover:!text-gold/50 transition-colors duration-300 shrink-0 w-6"
+                  >
+                  </motion.span>
                   <div className="flex flex-col md:flex-row md:items-baseline md:gap-8 flex-1">
                     <h3 className="font-serif text-[1.05rem] text-foreground md:w-52 shrink-0">{item.t}</h3>
                     <p className="font-sans text-[13px] text-muted-foreground leading-[1.7]">{item.d}</p>
