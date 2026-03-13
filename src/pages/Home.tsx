@@ -4,6 +4,7 @@ import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/componen
 import { motion, useInView } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import ApproachTable from '@/components/ApproachTable';
+import DarkSectionEffects from '@/components/DarkSectionEffects';
 import { useRef } from 'react';
 
 // Logos for social proof
@@ -136,9 +137,7 @@ const Home = () => {
     <div>
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-gold/[0.02] rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-prussian-mid/20 rounded-full blur-[80px] pointer-events-none" />
+        <DarkSectionEffects variant="hero" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-12 md:pt-36 md:pb-24 lg:pt-44 lg:pb-32">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
@@ -218,9 +217,7 @@ const Home = () => {
         <>
       {/* US Market Thesis */}
           <section className="relative bg-primary text-primary-foreground overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-            <div className="absolute top-0 right-0 w-[350px] h-[250px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[200px] bg-prussian-mid/20 rounded-full blur-[80px] pointer-events-none" />
+            <DarkSectionEffects />
             <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-9 md:py-14 lg:py-20">
               <div className="grid lg:grid-cols-12 gap-4 md:gap-8 lg:gap-16">
                 <div className="lg:col-span-5">
@@ -309,9 +306,7 @@ const Home = () => {
 
       {/* Our Process */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="absolute top-1/4 left-0 w-[300px] h-[200px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-prussian-mid/30 rounded-full blur-[120px] pointer-events-none" />
+        <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-18 lg:py-24">
           <FadeIn>
             <SectionLabel light>Our Process</SectionLabel>
@@ -442,8 +437,7 @@ const Home = () => {
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="absolute top-0 right-1/4 w-[300px] h-[200px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
+        <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
             <FadeIn>
