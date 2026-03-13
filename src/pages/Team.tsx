@@ -9,7 +9,24 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
-// Deal images — using public paths for reliability
+// Deal logos — Harin
+import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
+import bbcElectricLogo from '@/assets/deals/bbc-electric.png';
+import pwrLogo from '@/assets/deals/pwr.png';
+import flexrayLogo from '@/assets/deals/flexray.png';
+import alignLogo from '@/assets/deals/a-lign.png';
+import alliedUniversalLogo from '@/assets/deals/allied-universal.png';
+import energizerLogo from '@/assets/deals/energizer.png';
+import broadcomLogo from '@/assets/deals/broadcom.png';
+
+// Deal logos — Benson
+import abgLogo from '@/assets/deals/abg.png';
+import rpxLogo from '@/assets/deals/rpx.png';
+import ideraLogo from '@/assets/deals/idera.png';
+import westernDigitalLogo from '@/assets/deals/western-digital.png';
+import mindbodyLogo from '@/assets/deals/mindbody.png';
+import selligentLogo from '@/assets/deals/selligent.png';
+import micronLogo from '@/assets/deals/micron.png';
 
 // Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
@@ -43,10 +60,30 @@ interface TeamMember {
   summary: string;
   highlights: string[];
   logos?: LogoItem[];
-  dealImageGold?: string;
-  dealImageOriginal?: string;
+  dealLogos?: LogoItem[];
   linkedIn?: string;
 }
+
+const harinDealLogos: LogoItem[] = [
+  { src: rmsEnergyLogo, alt: 'RMS Energy' },
+  { src: bbcElectricLogo, alt: 'BBC Electric' },
+  { src: pwrLogo, alt: 'PWR' },
+  { src: flexrayLogo, alt: 'FlexRay' },
+  { src: alignLogo, alt: 'A-LIGN' },
+  { src: alliedUniversalLogo, alt: 'Allied Universal' },
+  { src: energizerLogo, alt: 'Energizer' },
+  { src: broadcomLogo, alt: 'Broadcom' },
+];
+
+const bensonDealLogos: LogoItem[] = [
+  { src: abgLogo, alt: 'Authentic Brands Group' },
+  { src: rpxLogo, alt: 'RPX' },
+  { src: ideraLogo, alt: 'Idera' },
+  { src: westernDigitalLogo, alt: 'Western Digital' },
+  { src: mindbodyLogo, alt: 'Mindbody' },
+  { src: selligentLogo, alt: 'Selligent' },
+  { src: micronLogo, alt: 'Micron' },
+];
 
 const founders: TeamMember[] = [
   {
@@ -68,8 +105,7 @@ const founders: TeamMember[] = [
       { src: evercoreLogo, alt: 'Evercore' },
       { src: deutscheBankLogo, alt: 'Deutsche Bank' },
     ],
-    dealImageGold: '/images/harin-deals-gold.png',
-    dealImageOriginal: '/images/harin-deals.png',
+    dealLogos: harinDealLogos,
   },
   {
     name: 'Benson Zhang',
@@ -88,8 +124,7 @@ const founders: TeamMember[] = [
       { src: hggcLogo, alt: 'HGGC' },
       { src: creditSuisseLogo, alt: 'Credit Suisse' },
     ],
-    dealImageGold: '/images/benson-deals-gold.png',
-    dealImageOriginal: '/images/benson-deals.png',
+    dealLogos: bensonDealLogos,
   },
 ];
 
@@ -141,9 +176,11 @@ const allLogos = [
   { src: swishinLogo, alt: 'Swishin Ventures' },
 ];
 
-/* ─── Deal Marquee (horizontal scrolling, gold → real colors on hover) ─── */
-const DealMarquee = ({ goldSrc, originalSrc, alt, duration = 22 }: { goldSrc: string; originalSrc: string; alt: string; duration?: number }) => {
+/* ─── Deal Logo Marquee (individual logos, gold → real colors on hover) ─── */
+const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration?: number }) => {
   const [hovered, setHovered] = useState(false);
+  const doubled = [...logos, ...logos];
+  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   return (
     <div
@@ -152,22 +189,29 @@ const DealMarquee = ({ goldSrc, originalSrc, alt, duration = 22 }: { goldSrc: st
       onMouseLeave={() => setHovered(false)}
     >
       {/* Edge fades */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
 
       <motion.div
-        className="flex items-center gap-16 w-max"
+        className="flex items-center gap-10 md:gap-14 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
-        {[0, 1].map((copy) => (
-          <img
-            key={copy}
-            src={hovered ? originalSrc : goldSrc}
-            alt={alt}
-            className="h-[65px] md:h-[80px] w-auto object-contain shrink-0 transition-opacity duration-500"
-            style={{ opacity: hovered ? 1 : 0.85 }}
-          />
+        {doubled.map((logo, i) => (
+          <div
+            key={`${logo.alt}-${i}`}
+            className="flex items-center justify-center shrink-0 h-[36px] md:h-[44px]"
+          >
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              className="h-[32px] md:h-[40px] w-auto max-w-[110px] md:max-w-[140px] object-contain transition-all duration-500"
+              style={{
+                filter: hovered ? 'none' : goldFilter,
+                opacity: hovered ? 1 : 0.8,
+              }}
+            />
+          </div>
         ))}
       </motion.div>
     </div>
@@ -240,16 +284,12 @@ const ProfileCard = ({ member, index }: { member: TeamMember; index: number }) =
             </ul>
 
             {/* Deal logos — horizontal scrolling marquee */}
-            {member.dealImageGold && member.dealImageOriginal && (
+            {member.dealLogos && member.dealLogos.length > 0 && (
               <div className="mt-6 pt-4 border-t border-foreground/[0.05]">
                 <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2">
                   Select Investments &amp; Deals
                 </p>
-                <DealMarquee
-                  goldSrc={member.dealImageGold}
-                  originalSrc={member.dealImageOriginal}
-                  alt={`${member.name} deals`}
-                />
+                <DealLogoMarquee logos={member.dealLogos} />
               </div>
             )}
           </div>
