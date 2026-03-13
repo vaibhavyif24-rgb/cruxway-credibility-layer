@@ -155,14 +155,15 @@ const indiaPartner: TeamMember = {
 
 // Founders only (US team view)
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus' },
   { src: blackrockLogo, alt: 'BlackRock' },
-  { src: jpMorganLogo, alt: 'J.P. Morgan' },
-  { src: evercoreLogo, alt: 'Evercore' },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
-  { src: hggcLogo, alt: 'HGGC' },
+  { src: warburgLogo, alt: 'Warburg Pincus' },
+  { src: neosPartnersLogo, alt: 'Neos Partners' },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', small: true },
+  { src: saltwaterLogo, alt: 'Saltwater Capital' },
   { src: creditSuisseLogo, alt: 'Credit Suisse' },
-  { src: berkeleyHaasLogo, alt: 'Berkeley Haas' },
+  { src: lamResearchLogo, alt: 'Lam Research' },
+  { src: evercoreLogo, alt: 'Evercore' },
+  { src: dunesPointLogo, alt: 'Dunes Point Capital' },
   { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', small: true },
 ];
 
