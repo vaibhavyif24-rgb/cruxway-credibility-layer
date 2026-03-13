@@ -45,7 +45,7 @@ const ApproachRow = ({ item, index, total }: { item: ApproachItem; index: number
             initial={{ opacity: 0.04 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0.04 }}
             transition={{ duration: 0.7, delay: index * 0.12 + 0.2 }}
-            className="font-serif text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] leading-none text-gold/20 group-hover:text-gold/45 transition-colors duration-500 block tabular-nums"
+            className="font-serif text-[1.4rem] md:text-[1.8rem] lg:text-[2rem] leading-none text-gold/20 group-hover:text-gold/45 transition-colors duration-500 block tabular-nums"
           >
             {String(index + 1).padStart(2, '0')}
           </motion.span>

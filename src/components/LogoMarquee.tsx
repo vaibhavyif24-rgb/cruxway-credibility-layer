@@ -47,7 +47,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
       />
 
       <motion.div
-        className="flex items-center gap-10 md:gap-20 lg:gap-28 w-max"
+        className="flex items-center gap-8 md:gap-16 lg:gap-24 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{
           x: {
