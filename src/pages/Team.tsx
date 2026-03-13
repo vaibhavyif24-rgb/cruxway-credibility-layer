@@ -8,6 +8,10 @@ import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
 
+// Deal logos
+import harinDeals from '@/assets/deals/harin-deals.png';
+import bensonDeals from '@/assets/deals/benson-deals.png';
+
 // Logos — Founders
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import jpMorganLogo from '@/assets/logos/jp-morgan.png';
