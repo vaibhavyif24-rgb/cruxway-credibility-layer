@@ -40,7 +40,7 @@ const ApproachRow = ({ item, index, total }: { item: ApproachItem; index: number
         </div>
 
         {/* Number */}
-        <div className="relative pl-4 md:pl-5 shrink-0">
+        <div className="relative pl-3 md:pl-5 shrink-0">
           <motion.span
             initial={{ opacity: 0.04 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0.04 }}
