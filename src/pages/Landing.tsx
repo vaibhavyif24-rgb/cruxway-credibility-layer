@@ -28,9 +28,9 @@ const Landing = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/10 to-transparent" />
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 text-center"
       >
         <h1 className="font-serif text-[clamp(2.4rem,7vw,4.5rem)] font-normal text-primary-foreground tracking-[-0.035em] leading-[1]">
@@ -41,19 +41,19 @@ const Landing = () => {
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: 32 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="h-px bg-gold/25"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0.2 }}
             className="w-1 h-1 rotate-45 border border-gold/18"
           />
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: 32 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
+            transition={{ duration: 0.3, delay: 0.15 }}
             className="h-px bg-gold/25"
           />
         </div>
@@ -66,7 +66,7 @@ const Landing = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 0.3, delay: 0.15 }}
         className="relative z-10 mt-20 sm:mt-24"
       >
         <p className="font-sans text-[8px] font-medium uppercase text-primary-foreground/15 tracking-[0.3em] text-center mb-8">
@@ -79,13 +79,13 @@ const Landing = () => {
             return (
               <motion.button
                 key={r.key}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{
                   opacity: isOther ? 0.3 : 1,
                   y: 0,
                   scale: isSelected ? 1.03 : isOther ? 0.97 : 1,
                 }}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.35, delay: 0.2 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={!selected ? { y: -3 } : {}}
                 whileTap={!selected ? { scale: 0.98 } : {}}
                 onClick={() => !selected && selectRegion(r.key)}
@@ -161,7 +161,7 @@ const Landing = () => {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
+        transition={{ delay: 0.25, duration: 0.3 }}
         className="absolute bottom-5 font-sans text-[7.5px] text-primary-foreground/[0.08] tracking-[0.22em] uppercase"
       >
         Privileged &amp; Confidential
