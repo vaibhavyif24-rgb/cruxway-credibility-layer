@@ -28,9 +28,9 @@ const Landing = () => {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/10 to-transparent" />
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 text-center"
       >
         <h1 className="font-serif text-[clamp(2.4rem,7vw,4.5rem)] font-normal text-primary-foreground tracking-[-0.035em] leading-[1]">
