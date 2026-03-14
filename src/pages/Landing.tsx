@@ -66,7 +66,7 @@ const Landing = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.7 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
         className="relative z-10 mt-20 sm:mt-24"
       >
         <p className="font-sans text-[8px] font-medium uppercase text-primary-foreground/15 tracking-[0.3em] text-center mb-8">
