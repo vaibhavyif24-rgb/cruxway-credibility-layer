@@ -144,12 +144,12 @@ const founders: TeamMember[] = [
 const vaibhavDealLogos: LogoItem[] = [
   { src: porterLogo, alt: 'Porter', scale: 1.3 },
   { src: lohumLogo, alt: 'Lohum', scale: 2.4 },
-  { src: wareeLogo, alt: 'Waaree', scale: 0.98 },
+  { src: wareeLogo, alt: 'Waaree', scale: 0.88 },
   { src: otplessLogo, alt: 'OTPless', scale: 1.3 },
   { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 2.4 },
   { src: bytepeLogo, alt: 'BytePe' },
   { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.4 },
-  { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.05 },
+  { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.05, extraGap: -8 },
 ];
 
 const indiaPartner: TeamMember = {
