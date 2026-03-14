@@ -375,7 +375,8 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
       </motion.div>
     </FadeIn>
   );
-};
+});
+ProfileCard.displayName = 'ProfileCard';
 
 /* ─── Stats Bar ─── */
 const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) => (
