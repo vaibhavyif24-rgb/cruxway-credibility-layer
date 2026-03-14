@@ -220,4 +220,24 @@
   .btn-premium:hover::after {
     @apply opacity-100;
   }
+
+  .btn-premium:active {
+    transform: scale(0.96);
+    box-shadow: 0 0 12px 2px hsl(var(--gold) / 0.15);
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  }
+
+  /* Universal button press effect */
+  button:not([disabled]):active,
+  a[role="button"]:active,
+  .inline-flex:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Gold glow for primary/premium buttons */
+  .btn-premium:active::after,
+  button[class*="border-gold"]:active::after {
+    @apply opacity-100;
+  }
 }
