@@ -406,7 +406,7 @@ const Team = () => {
   const isIndia = region === 'india';
 
   return (
-    <div>
+    <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
