@@ -294,7 +294,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
     );
 
   return (
-    <FadeIn delay={index * 0.08}>
+    <FadeIn ref={ref} delay={index * 0.08}>
       <motion.div
         whileHover={{ backgroundColor: creamBg ? 'hsl(40 25% 92% / 0.6)' : 'hsl(40 18% 95% / 0.5)' }}
         transition={{ duration: 0.3 }}
