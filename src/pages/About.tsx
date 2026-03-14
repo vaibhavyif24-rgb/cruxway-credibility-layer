@@ -141,7 +141,7 @@ const About = () => {
       {/* Our Approach + Target Sectors combined on dark */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-5 md:py-8 lg:py-10">
           {/* Approach */}
           <FadeIn>
             <SectionLabel light>Our Approach</SectionLabel>
