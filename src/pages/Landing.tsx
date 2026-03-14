@@ -85,7 +85,7 @@ const Landing = () => {
                   y: 0,
                   scale: isSelected ? 1.03 : isOther ? 0.97 : 1,
                 }}
-                transition={{ duration: 0.6, delay: 0.9 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.5, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={!selected ? { y: -3 } : {}}
                 whileTap={!selected ? { scale: 0.98 } : {}}
                 onClick={() => !selected && selectRegion(r.key)}
