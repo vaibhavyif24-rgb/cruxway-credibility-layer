@@ -160,12 +160,10 @@ const indiaPartner: TeamMember = {
     'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. He developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
-    'Operational experience co-founding and scaling multiple ventures, with direct responsibility across product development, growth strategy, and P&L management',
-    'Advised on policy initiatives at NITI Aayog, contributing to India\'s national economic development agenda',
+    'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
+    'Raised capital across multiple rounds, building investor relationships and managing end-to-end fundraising execution',
   ],
   logos: [
-    { src: nitiAayogLogo, alt: 'NITI Aayog' },
-    { src: ashokaLogo, alt: 'Ashoka University' },
     { src: iicLogo, alt: 'Impact Investors Council' },
     { src: treeforestLogo, alt: 'TreeForest Capital' },
     { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
