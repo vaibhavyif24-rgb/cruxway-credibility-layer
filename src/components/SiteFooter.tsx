@@ -3,8 +3,9 @@ import { useRegion } from '@/contexts/RegionContext';
 
 const SiteFooter = () => {
   const year = new Date().getFullYear();
-  const { region } = useRegion();
+  const { region, setRegion } = useRegion();
   const prefix = `/${region}`;
+  const otherRegion = region === 'india' ? 'us' : 'india';
 
   const links = [
     { label: 'About', path: `${prefix}/about` },
@@ -43,9 +44,19 @@ const SiteFooter = () => {
           <p className="font-sans text-[9px] text-primary-foreground/10 tracking-[0.06em]">
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>
-          <p className="font-sans text-[8px] text-primary-foreground/[0.06] tracking-[0.12em] uppercase">
-            Privileged &amp; Confidential
-          </p>
+          <div className="flex items-center gap-4">
+            <Link
+              to={`/${otherRegion}`}
+              onClick={() => setRegion(otherRegion)}
+              className="font-sans text-[9px] font-medium uppercase tracking-[0.16em] text-primary-foreground/15 hover:text-primary-foreground/35 transition-colors duration-300"
+            >
+              Switch to {otherRegion === 'india' ? 'India' : 'United States'}
+            </Link>
+            <span className="w-px h-2.5 bg-primary-foreground/[0.06]" />
+            <p className="font-sans text-[8px] text-primary-foreground/[0.06] tracking-[0.12em] uppercase">
+              Privileged &amp; Confidential
+            </p>
+          </div>
         </div>
       </div>
     </footer>
