@@ -50,6 +50,16 @@ import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
+// Deal logos — Vaibhav
+import cohomaLogo from '@/assets/deals/cohoma.png';
+import porterLogo from '@/assets/deals/porter.webp';
+import lohumLogo from '@/assets/deals/lohum.png';
+import bytepeLogo from '@/assets/deals/bytepe.png';
+import tractorfactoryLogo from '@/assets/deals/tractorfactory.png';
+import moosak from '@/assets/deals/moosak.png';
+import wareeLogo from '@/assets/deals/waaree.png';
+import otplessLogo from '@/assets/deals/otpless.png';
+
 interface LogoItem {
   src: string;
   alt: string;
