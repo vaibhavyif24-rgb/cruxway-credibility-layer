@@ -91,7 +91,7 @@ const harinDealLogos: LogoItem[] = [
 ];
 
 const bensonDealLogos: LogoItem[] = [
-  { src: abgLogo, alt: 'Authentic Brands Group', scale: 1.7 },
+  { src: abgLogo, alt: 'Authentic Brands Group', scale: 2.55 },
   { src: rpxLogo, alt: 'RPX' },
   { src: ideraLogo, alt: 'Idera', scale: 1.75 },
   { src: westernDigitalLogo, alt: 'Western Digital', scale: 1.5 },
