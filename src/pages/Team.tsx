@@ -149,7 +149,7 @@ const vaibhavDealLogos: LogoItem[] = [
   { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 2.4 },
   { src: bytepeLogo, alt: 'BytePe' },
   { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.4 },
-  { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.05 },
+  { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.05, extraGap: -8 },
 ];
 
 const indiaPartner: TeamMember = {
