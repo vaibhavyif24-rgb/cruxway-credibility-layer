@@ -82,7 +82,7 @@ const About = () => {
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-8 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-6 md:pt-32 md:pb-12 lg:pt-36 lg:pb-14">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
           </FadeIn>
@@ -106,9 +106,9 @@ const About = () => {
       </section>
 
       {/* Mission */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-5 md:py-8 lg:py-10">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-3 md:gap-5 lg:gap-14">
+          <div className="grid lg:grid-cols-12 gap-3 md:gap-4 lg:gap-14">
             <div className="lg:col-span-4">
               <FadeIn>
                 <SectionLabel>Mission</SectionLabel>
@@ -141,7 +141,7 @@ const About = () => {
       {/* Our Approach + Target Sectors combined on dark */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-5 md:py-8 lg:py-10">
           {/* Approach */}
           <FadeIn>
             <SectionLabel light>Our Approach</SectionLabel>
@@ -157,7 +157,7 @@ const About = () => {
 
       {/* Target Sectors — US only, white background */}
       {!isIndia && (
-        <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+        <section className="bg-background px-5 md:px-10 lg:px-16 py-5 md:py-8 lg:py-10">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Target Sectors</SectionLabel>
@@ -177,7 +177,7 @@ const About = () => {
       )}
 
       {/* Principles */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-5 md:py-8 lg:py-10">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-3 md:gap-5 lg:gap-14">
             <div className="lg:col-span-4">
@@ -211,7 +211,7 @@ const About = () => {
       </section>
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-7 md:py-9 lg:py-12">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-5 md:py-7 lg:py-9">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[480px]">
