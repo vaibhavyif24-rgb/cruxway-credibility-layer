@@ -58,7 +58,6 @@ const SiteFooter = () => {
             </p>
           </div>
         </div>
-        </div>
       </div>
     </footer>
   );
