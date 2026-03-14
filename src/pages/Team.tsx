@@ -140,17 +140,27 @@ const founders: TeamMember[] = [
   },
 ];
 
+const vaibhavDealLogos: LogoItem[] = [
+  { src: porterLogo, alt: 'Porter', scale: 1.3 },
+  { src: lohumLogo, alt: 'Lohum', scale: 1.3 },
+  { src: wareeLogo, alt: 'Waaree', scale: 1.4 },
+  { src: otplessLogo, alt: 'OTPless', scale: 1.3 },
+  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 1.2 },
+  { src: bytepeLogo, alt: 'BytePe' },
+  { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.4 },
+  { src: moosak, alt: 'Moosak' },
+];
+
 const indiaPartner: TeamMember = {
   name: 'Vaibhav Sharma',
   role: 'Partner, India',
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. Having evaluated 500+ companies and led investments across sectors, he developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
+    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. He developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
-    'Operational experience co-founding and scaling ventures incubated at IIM Bangalore, IIT Delhi, and SMU Singapore',
-    'Young India Fellow, Ashoka University; Stanford University research grant recipient in frugal sciences and bioengineering',
+    'Co-founded and scaled ventures at IIM Bangalore, IIT Delhi, and SMU Singapore, with direct operating experience across product, growth, and P&L management',
   ],
   logos: [
     { src: nitiAayogLogo, alt: 'NITI Aayog' },
@@ -160,6 +170,7 @@ const indiaPartner: TeamMember = {
     { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
     { src: swishinLogo, alt: 'Swishin Ventures' },
   ],
+  dealLogos: vaibhavDealLogos,
 };
 
 const foundersLogos = [
