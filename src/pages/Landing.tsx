@@ -161,7 +161,7 @@ const Landing = () => {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
+        transition={{ delay: 0.25, duration: 0.3 }}
         className="absolute bottom-5 font-sans text-[7.5px] text-primary-foreground/[0.08] tracking-[0.22em] uppercase"
       >
         Privileged &amp; Confidential
