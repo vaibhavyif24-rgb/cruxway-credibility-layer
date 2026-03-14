@@ -56,7 +56,7 @@ import porterLogo from '@/assets/deals/porter.webp';
 import lohumLogo from '@/assets/deals/lohum.png';
 import bytepeLogo from '@/assets/deals/bytepe.png';
 import tractorfactoryLogo from '@/assets/deals/tractorfactory.png';
-import moosak from '@/assets/deals/moosak.png';
+import sonicLambLogo from '@/assets/deals/sonic-lamb.png';
 import wareeLogo from '@/assets/deals/waaree.png';
 import otplessLogo from '@/assets/deals/otpless.png';
 
