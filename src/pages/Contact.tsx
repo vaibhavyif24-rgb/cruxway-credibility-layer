@@ -8,7 +8,7 @@ const Contact = () => {
   const isIndia = region === 'india';
 
   const email = isIndia ? 'india@cruxway.com' : 'info@cruxway.com';
-  const location = isIndia ? 'Delhi, India' : 'San Diego, California';
+  const location = isIndia ? 'GK II, Delhi, India' : 'San Diego, California';
 
   return (
     <div>
@@ -49,9 +49,9 @@ const Contact = () => {
               href={`mailto:${email}`}
               whileHover={{ y: -4 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="block group"
+              className="block group h-full"
             >
-              <div className="relative border border-foreground/[0.06] rounded-sm p-6 md:p-8 lg:p-10 overflow-hidden transition-colors duration-500 hover:border-gold/20 hover:bg-cream/40">
+              <div className="relative border border-foreground/[0.06] rounded-sm p-6 md:p-8 lg:p-10 overflow-hidden transition-colors duration-500 hover:border-gold/20 hover:bg-cream/40 h-full">
                 {/* Corner accent */}
                 <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
                   <div className="absolute top-0 right-0 w-px h-12 bg-gradient-to-b from-gold/20 to-transparent" />
