@@ -250,7 +250,7 @@ const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; dur
       <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-r from-cream to-transparent" />
       <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-cream to-transparent" />
       <motion.div
-        className="flex items-center gap-6 md:gap-10 lg:gap-14 w-max"
+        className="flex items-center gap-10 md:gap-14 lg:gap-20 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
