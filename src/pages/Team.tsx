@@ -145,7 +145,7 @@ const vaibhavDealLogos: LogoItem[] = [
   { src: lohumLogo, alt: 'Lohum', scale: 1.3 },
   { src: wareeLogo, alt: 'Waaree', scale: 1.4 },
   { src: otplessLogo, alt: 'OTPless', scale: 1.3 },
-  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 1.2 },
+  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 2.4 },
   { src: bytepeLogo, alt: 'BytePe' },
   { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.4 },
   { src: moosak, alt: 'Moosak' },
@@ -160,7 +160,8 @@ const indiaPartner: TeamMember = {
     'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. He developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
-    'Co-founded and scaled ventures at IIM Bangalore, IIT Delhi, and SMU Singapore, with direct operating experience across product, growth, and P&L management',
+    'Operational experience co-founding and scaling multiple ventures, with direct responsibility across product development, growth strategy, and P&L management',
+    'Advised on policy initiatives at NITI Aayog, contributing to India\'s national economic development agenda',
   ],
   logos: [
     { src: nitiAayogLogo, alt: 'NITI Aayog' },
