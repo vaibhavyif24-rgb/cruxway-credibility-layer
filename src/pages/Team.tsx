@@ -412,24 +412,24 @@ const Team = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[250px] h-[250px] bg-gold/[0.008] rounded-full blur-[80px] pointer-events-none" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-14 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
           <FadeIn>
             <SectionLabel light>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(1.8rem,4.5vw,3rem)] text-primary-foreground max-w-[460px] leading-[1.12] tracking-[-0.025em]">
+            <h1 className="font-serif text-[clamp(1.6rem,4.5vw,3rem)] text-primary-foreground max-w-[460px] leading-[1.12] tracking-[-0.025em]">
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[13px] text-primary-foreground/40 leading-[1.7] mt-4 max-w-[420px]">
+            <p className="font-sans text-[12px] md:text-[13px] text-primary-foreground/40 leading-[1.65] md:leading-[1.7] mt-3 md:mt-4 max-w-[420px]">
               {isIndia
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.16}>
-            <GoldRule className="mt-6" />
+            <GoldRule className="mt-4 md:mt-6" />
           </FadeIn>
         </div>
 
