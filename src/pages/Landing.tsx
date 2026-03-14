@@ -79,13 +79,13 @@ const Landing = () => {
             return (
               <motion.button
                 key={r.key}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{
                   opacity: isOther ? 0.3 : 1,
                   y: 0,
                   scale: isSelected ? 1.03 : isOther ? 0.97 : 1,
                 }}
-                transition={{ duration: 0.5, delay: 0.4 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.35, delay: 0.2 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={!selected ? { y: -3 } : {}}
                 whileTap={!selected ? { scale: 0.98 } : {}}
                 onClick={() => !selected && selectRegion(r.key)}
