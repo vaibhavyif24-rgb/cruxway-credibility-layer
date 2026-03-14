@@ -41,7 +41,7 @@ const Landing = () => {
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: 32 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
             className="h-px bg-gold/25"
           />
           <motion.div
