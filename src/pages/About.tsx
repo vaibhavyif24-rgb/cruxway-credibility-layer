@@ -82,7 +82,7 @@ const About = () => {
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-8 md:pt-32 md:pb-16 lg:pt-36 lg:pb-20">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-6 md:pt-32 md:pb-12 lg:pt-36 lg:pb-14">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
           </FadeIn>
