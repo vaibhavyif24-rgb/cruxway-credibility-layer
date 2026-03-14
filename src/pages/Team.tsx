@@ -161,7 +161,7 @@ const indiaPartner: TeamMember = {
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
     'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
-    'Raised capital across multiple rounds, building investor relationships and managing end-to-end fundraising execution',
+    'Exposure to fundraising across early-stage, growth, and late-stage rounds, spanning venture capital, private equity, and multiple asset classes',
   ],
   logos: [
     { src: iicLogo, alt: 'Impact Investors Council' },
