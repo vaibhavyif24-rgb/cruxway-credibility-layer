@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const regions = [
   { key: 'india' as const, label: 'India' },
-  { key: 'us' as const, label: 'USA' },
+  { key: 'us' as const, label: 'UNITED STATES OF AMERICA' },
 ];
 
 const Landing = () => {
