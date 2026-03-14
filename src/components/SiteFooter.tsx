@@ -3,8 +3,9 @@ import { useRegion } from '@/contexts/RegionContext';
 
 const SiteFooter = () => {
   const year = new Date().getFullYear();
-  const { region } = useRegion();
+  const { region, setRegion } = useRegion();
   const prefix = `/${region}`;
+  const otherRegion = region === 'india' ? 'us' : 'india';
 
   const links = [
     { label: 'About', path: `${prefix}/about` },
