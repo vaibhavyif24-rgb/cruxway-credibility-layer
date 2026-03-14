@@ -315,6 +315,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                     <img
                       src={member.photo}
                       alt={member.name}
+                      loading="lazy"
                       className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700"
                     />
                   </div>
