@@ -269,7 +269,8 @@ const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; dur
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
+              loading="lazy"
+              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
