@@ -80,14 +80,6 @@ const SiteHeader = () => {
               <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-7" />
 
               <Link
-                to={`/${otherRegion}`}
-                onClick={() => setRegion(otherRegion)}
-                className="font-sans text-[10.5px] font-medium uppercase tracking-[0.14em] text-primary-foreground/20 hover:text-primary-foreground/45 transition-colors duration-300 mr-7"
-              >
-                {otherRegion === 'india' ? 'India' : 'US'}
-              </Link>
-
-              <Link
                 to="/investor-login"
                 className="btn-premium font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-5 py-2 border border-gold/12 text-gold/55 hover:border-gold/30 hover:text-gold/85 transition-all duration-300"
               >
