@@ -218,7 +218,11 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
         {doubled.map((logo, i) => (
-          <div key={`${logo.alt}-${i}`} className="flex items-center justify-center shrink-0 h-[28px] md:h-[38px] lg:h-[44px]">
+          <div
+            key={`${logo.alt}-${i}`}
+            className="flex items-center justify-center shrink-0 h-[28px] md:h-[38px] lg:h-[44px]"
+            style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
+          >
             <img
               src={logo.src}
               alt={logo.alt}
