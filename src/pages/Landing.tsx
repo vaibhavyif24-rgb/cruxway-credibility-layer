@@ -64,60 +64,91 @@ const Landing = () => {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.6 }}
-        className="relative z-10 mt-16 sm:mt-20"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.7 }}
+        className="relative z-10 mt-20 sm:mt-24"
       >
-        <p className="font-sans text-[8.5px] font-medium uppercase text-primary-foreground/20 tracking-[0.25em] text-center mb-6">
+        <p className="font-sans text-[8px] font-medium uppercase text-primary-foreground/15 tracking-[0.3em] text-center mb-8">
           Select Region
         </p>
-        <div className="grid grid-cols-2 gap-[1px] w-full max-w-[380px] sm:max-w-[420px]">
+        <div className="flex gap-4 sm:gap-5">
           {regions.map((r, i) => {
             const isSelected = selected === r.key;
+            const isOther = selected !== null && !isSelected;
             return (
               <motion.button
                 key={r.key}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 + i * 0.1 }}
-                whileHover={{ scale: 1.015 }}
-                whileTap={{ scale: 0.985 }}
-                onClick={() => selectRegion(r.key)}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: isOther ? 0.3 : 1,
+                  y: 0,
+                  scale: isSelected ? 1.03 : isOther ? 0.97 : 1,
+                }}
+                transition={{ duration: 0.6, delay: 0.9 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={!selected ? { y: -3 } : {}}
+                whileTap={!selected ? { scale: 0.98 } : {}}
+                onClick={() => !selected && selectRegion(r.key)}
                 disabled={selected !== null}
-                className={`
-                  group relative py-5 sm:py-6
-                  font-sans text-[11px] sm:text-xs font-semibold uppercase tracking-[0.22em]
-                  transition-all duration-500 ease-out cursor-pointer
-                  border border-primary-foreground/[0.06]
-                  ${isSelected
-                    ? 'bg-gold/[0.12] text-gold border-gold/20 shadow-[0_0_30px_-5px_hsl(var(--gold)/0.15)]'
-                    : 'bg-primary-foreground/[0.03] text-primary-foreground/40 hover:bg-primary-foreground/[0.07] hover:text-primary-foreground/70 hover:border-primary-foreground/[0.12]'
-                  }
-                `}
+                className="group relative w-[160px] sm:w-[190px] aspect-[4/3] flex items-center justify-center cursor-pointer overflow-hidden"
               >
-                {/* Top accent line on hover */}
+                {/* Outer border — subtle, refines on hover */}
                 <span className={`
-                  absolute top-0 left-1/2 -translate-x-1/2 h-px transition-all duration-500
-                  ${isSelected ? 'w-full bg-gold/40' : 'w-0 bg-gold/25 group-hover:w-3/4'}
+                  absolute inset-0 border transition-all duration-700 ease-out
+                  ${isSelected
+                    ? 'border-gold/30'
+                    : 'border-primary-foreground/[0.07] group-hover:border-primary-foreground/[0.14]'
+                  }
+                `} />
+
+                {/* Inner fill */}
+                <span className={`
+                  absolute inset-[1px] transition-all duration-700 ease-out
+                  ${isSelected
+                    ? 'bg-gold/[0.08]'
+                    : 'bg-primary-foreground/[0.02] group-hover:bg-primary-foreground/[0.05]'
+                  }
+                `} />
+
+                {/* Corner accents — top-left & bottom-right */}
+                <span className={`
+                  absolute top-0 left-0 w-4 h-px transition-all duration-500 delay-100
+                  ${isSelected ? 'bg-gold/50 w-8' : 'bg-gold/0 group-hover:bg-gold/25'}
+                `} />
+                <span className={`
+                  absolute top-0 left-0 h-4 w-px transition-all duration-500 delay-100
+                  ${isSelected ? 'bg-gold/50 h-8' : 'bg-gold/0 group-hover:bg-gold/25'}
+                `} />
+                <span className={`
+                  absolute bottom-0 right-0 w-4 h-px transition-all duration-500 delay-100
+                  ${isSelected ? 'bg-gold/50 w-8' : 'bg-gold/0 group-hover:bg-gold/25'}
+                `} />
+                <span className={`
+                  absolute bottom-0 right-0 h-4 w-px transition-all duration-500 delay-100
+                  ${isSelected ? 'bg-gold/50 h-8' : 'bg-gold/0 group-hover:bg-gold/25'}
                 `} />
 
                 {/* Label */}
-                <span className="relative z-10">{r.label}</span>
-
-                {/* Bottom accent line */}
                 <span className={`
-                  absolute bottom-0 left-1/2 -translate-x-1/2 h-px transition-all duration-500
-                  ${isSelected ? 'w-full bg-gold/40' : 'w-0 bg-gold/25 group-hover:w-3/4'}
-                `} />
+                  relative z-10 font-sans text-[11px] sm:text-[13px] font-semibold uppercase tracking-[0.28em]
+                  transition-all duration-500
+                  ${isSelected
+                    ? 'text-gold'
+                    : 'text-primary-foreground/35 group-hover:text-primary-foreground/70'
+                  }
+                `}>
+                  {r.label}
+                </span>
 
-                {/* Selection glow */}
+                {/* Selection glow pulse */}
                 <AnimatePresence>
                   {isSelected && (
                     <motion.span
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="absolute inset-0 bg-gradient-to-t from-gold/[0.06] via-transparent to-gold/[0.03] pointer-events-none"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: [0, 0.6, 0.3] }}
+                      transition={{ duration: 0.8, ease: 'easeOut' }}
+                      className="absolute inset-0 bg-gradient-radial from-gold/[0.1] via-gold/[0.03] to-transparent pointer-events-none"
+                      style={{ background: 'radial-gradient(ellipse at center, hsl(var(--gold) / 0.1) 0%, transparent 70%)' }}
                     />
                   )}
                 </AnimatePresence>
