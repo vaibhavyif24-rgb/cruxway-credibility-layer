@@ -300,14 +300,14 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
       <motion.div
         whileHover={{ backgroundColor: creamBg ? 'hsl(40 25% 92% / 0.6)' : 'hsl(40 18% 95% / 0.5)' }}
         transition={{ duration: 0.3 }}
-        className="py-8 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm"
+        className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden"
       >
-        <div className="grid md:grid-cols-12 gap-5 md:gap-8 items-start">
+        <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
           {/* Photo + Identity */}
-          <div className="md:col-span-3 flex flex-col items-start">
-            <LinkedWrapper className="group">
+          <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
+            <LinkedWrapper className="group shrink-0">
               {member.photo ? (
-                <div className="relative w-[100px] h-[100px] md:w-[120px] md:h-[120px] mb-4">
+                <div className="relative w-[72px] h-[72px] md:w-[120px] md:h-[120px] md:mb-4">
                   {/* Gold ring on hover */}
                   <motion.div
                     className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/25 transition-colors duration-700"
@@ -323,36 +323,38 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                   </div>
                 </div>
               ) : (
-                <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
-                  <span className="font-serif text-[1.5rem] text-muted-foreground/30">
+                <div className="w-[72px] h-[72px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] md:mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
+                  <span className="font-serif text-[1.2rem] md:text-[1.5rem] text-muted-foreground/30">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
               )}
             </LinkedWrapper>
-            <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-              <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
-                {member.name}
-              </h3>
-              {member.linkedIn && (
-                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
-              )}
-            </LinkedWrapper>
-            <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1.5">
-              {member.role}
-            </p>
+            <div>
+              <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
+                  {member.name}
+                </h3>
+                {member.linkedIn && (
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
+                )}
+              </LinkedWrapper>
+              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
+                {member.role}
+              </p>
+            </div>
           </div>
 
           {/* Bio */}
-          <div className="md:col-span-9">
-            <p className="font-sans text-[13px] text-muted-foreground leading-[1.75] mb-4">
+          <div className="md:col-span-9 overflow-hidden">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
               {member.summary}
             </p>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5 md:space-y-2">
               {member.highlights.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[12px] text-muted-foreground/70 leading-[1.65] flex gap-2.5 items-start"
+                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
@@ -362,8 +364,8 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
             {/* Deal logos */}
             {member.dealLogos && member.dealLogos.length > 0 && (
-              <div className="mt-6 pt-5 border-t border-foreground/[0.05]">
-                <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-3">
+              <div className="mt-4 md:mt-6 pt-4 md:pt-5 border-t border-foreground/[0.05]">
+                <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
                   Select Investments &amp; Deals
                 </p>
                 {creamBg ? (
