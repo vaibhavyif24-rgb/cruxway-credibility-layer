@@ -463,7 +463,7 @@ const Team = () => {
       )}
 
       {/* Founders */}
-      <section className={isIndia ? 'bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20' : ''}>
+      <section className={isIndia ? 'bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-16 lg:py-20 overflow-hidden' : ''}>
         <div className={isIndia ? 'max-w-[1080px] mx-auto' : ''}>
           {!isIndia ? (
             <Section>
