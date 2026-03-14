@@ -47,7 +47,7 @@ const Landing = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.4 }}
+            transition={{ duration: 0.2, delay: 0.2 }}
             className="w-1 h-1 rotate-45 border border-gold/18"
           />
           <motion.div
