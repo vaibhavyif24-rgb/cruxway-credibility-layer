@@ -65,6 +65,7 @@ interface LogoItem {
   alt: string;
   small?: boolean;
   scale?: number;
+  extraGap?: number;
 }
 
 interface TeamMember {
