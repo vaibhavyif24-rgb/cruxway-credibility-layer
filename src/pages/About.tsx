@@ -106,9 +106,9 @@ const About = () => {
       </section>
 
       {/* Mission */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-5 md:py-8 lg:py-10">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-3 md:gap-5 lg:gap-14">
+          <div className="grid lg:grid-cols-12 gap-3 md:gap-4 lg:gap-14">
             <div className="lg:col-span-4">
               <FadeIn>
                 <SectionLabel>Mission</SectionLabel>
