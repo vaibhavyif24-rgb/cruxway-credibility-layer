@@ -387,7 +387,7 @@ ProfileCard.displayName = 'ProfileCard';
 const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) => (
   <FadeIn delay={delay} className="text-center">
     <motion.p
-      className="font-serif text-[clamp(1.4rem,3vw,2rem)] text-primary-foreground tracking-[-0.03em] leading-none"
+      className="font-serif text-[clamp(1.2rem,3vw,2rem)] text-primary-foreground tracking-[-0.03em] leading-none"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -395,7 +395,7 @@ const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; d
     >
       {value}
     </motion.p>
-    <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-primary-foreground/25 mt-2">
+    <p className="font-sans text-[7.5px] md:text-[9px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] text-primary-foreground/25 mt-1.5 md:mt-2">
       {label}
     </p>
   </FadeIn>
