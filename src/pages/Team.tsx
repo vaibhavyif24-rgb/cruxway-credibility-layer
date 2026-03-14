@@ -210,24 +210,24 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
       <motion.div
-        className="flex items-center gap-4 md:gap-7 lg:gap-10 w-max"
+        className="flex items-center gap-6 md:gap-7 lg:gap-10 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[28px] md:h-[38px] lg:h-[44px]"
+            className="flex items-center justify-center shrink-0 h-[32px] md:h-[38px] lg:h-[44px]"
             style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain"
+              className="h-[28px] md:h-[34px] lg:h-[40px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
@@ -253,24 +253,24 @@ const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; dur
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-r from-cream to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-12 z-10 pointer-events-none bg-gradient-to-l from-cream to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r from-cream to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l from-cream to-transparent" />
       <motion.div
-        className="flex items-center gap-14 md:gap-20 lg:gap-28 w-max"
+        className="flex items-center gap-6 md:gap-20 lg:gap-28 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[28px] md:h-[38px] lg:h-[44px]"
+            className="flex items-center justify-center shrink-0 h-[32px] md:h-[38px] lg:h-[44px]"
             style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain"
+              className="h-[28px] md:h-[34px] lg:h-[40px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
@@ -300,14 +300,14 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
       <motion.div
         whileHover={{ backgroundColor: creamBg ? 'hsl(40 25% 92% / 0.6)' : 'hsl(40 18% 95% / 0.5)' }}
         transition={{ duration: 0.3 }}
-        className="py-8 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm"
+        className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden"
       >
-        <div className="grid md:grid-cols-12 gap-5 md:gap-8 items-start">
+        <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
           {/* Photo + Identity */}
-          <div className="md:col-span-3 flex flex-col items-start">
-            <LinkedWrapper className="group">
+          <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
+            <LinkedWrapper className="group shrink-0">
               {member.photo ? (
-                <div className="relative w-[100px] h-[100px] md:w-[120px] md:h-[120px] mb-4">
+                <div className="relative w-[72px] h-[72px] md:w-[120px] md:h-[120px] md:mb-4">
                   {/* Gold ring on hover */}
                   <motion.div
                     className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/25 transition-colors duration-700"
@@ -323,36 +323,38 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                   </div>
                 </div>
               ) : (
-                <div className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
-                  <span className="font-serif text-[1.5rem] text-muted-foreground/30">
+                <div className="w-[72px] h-[72px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] md:mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
+                  <span className="font-serif text-[1.2rem] md:text-[1.5rem] text-muted-foreground/30">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </span>
                 </div>
               )}
             </LinkedWrapper>
-            <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-              <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
-                {member.name}
-              </h3>
-              {member.linkedIn && (
-                <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
-              )}
-            </LinkedWrapper>
-            <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1.5">
-              {member.role}
-            </p>
+            <div>
+              <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
+                  {member.name}
+                </h3>
+                {member.linkedIn && (
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
+                )}
+              </LinkedWrapper>
+              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
+                {member.role}
+              </p>
+            </div>
           </div>
 
           {/* Bio */}
-          <div className="md:col-span-9">
-            <p className="font-sans text-[13px] text-muted-foreground leading-[1.75] mb-4">
+          <div className="md:col-span-9 overflow-hidden">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
               {member.summary}
             </p>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5 md:space-y-2">
               {member.highlights.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[12px] text-muted-foreground/70 leading-[1.65] flex gap-2.5 items-start"
+                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
@@ -362,8 +364,8 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
             {/* Deal logos */}
             {member.dealLogos && member.dealLogos.length > 0 && (
-              <div className="mt-6 pt-5 border-t border-foreground/[0.05]">
-                <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-3">
+              <div className="mt-4 md:mt-6 pt-4 md:pt-5 border-t border-foreground/[0.05]">
+                <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
                   Select Investments &amp; Deals
                 </p>
                 {creamBg ? (
@@ -385,7 +387,7 @@ ProfileCard.displayName = 'ProfileCard';
 const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) => (
   <FadeIn delay={delay} className="text-center">
     <motion.p
-      className="font-serif text-[clamp(1.4rem,3vw,2rem)] text-primary-foreground tracking-[-0.03em] leading-none"
+      className="font-serif text-[clamp(1.2rem,3vw,2rem)] text-primary-foreground tracking-[-0.03em] leading-none"
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -393,7 +395,7 @@ const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; d
     >
       {value}
     </motion.p>
-    <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-primary-foreground/25 mt-2">
+    <p className="font-sans text-[7.5px] md:text-[9px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] text-primary-foreground/25 mt-1.5 md:mt-2">
       {label}
     </p>
   </FadeIn>
@@ -404,37 +406,37 @@ const Team = () => {
   const isIndia = region === 'india';
 
   return (
-    <div>
+    <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[250px] h-[250px] bg-gold/[0.008] rounded-full blur-[80px] pointer-events-none" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-14 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
           <FadeIn>
             <SectionLabel light>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(1.8rem,4.5vw,3rem)] text-primary-foreground max-w-[460px] leading-[1.12] tracking-[-0.025em]">
+            <h1 className="font-serif text-[clamp(1.6rem,4.5vw,3rem)] text-primary-foreground max-w-[460px] leading-[1.12] tracking-[-0.025em]">
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[13px] text-primary-foreground/40 leading-[1.7] mt-4 max-w-[420px]">
+            <p className="font-sans text-[12px] md:text-[13px] text-primary-foreground/40 leading-[1.65] md:leading-[1.7] mt-3 md:mt-4 max-w-[420px]">
               {isIndia
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.16}>
-            <GoldRule className="mt-6" />
+            <GoldRule className="mt-4 md:mt-6" />
           </FadeIn>
         </div>
 
         {/* Stats Bar */}
         <div className="relative border-t border-primary-foreground/[0.06]">
-          <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-6 md:py-8">
-            <div className="grid grid-cols-3 gap-4">
+          <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
+            <div className="grid grid-cols-3 gap-2 md:gap-4">
               <StatItem value="25+" label="Years Combined" delay={0.1} />
               <StatItem value="$30B+" label="Deal Experience" delay={0.18} />
               <StatItem value={isIndia ? '3' : '50+'} label={isIndia ? 'Continents Covered' : 'Transactions'} delay={0.26} />
@@ -461,7 +463,7 @@ const Team = () => {
       )}
 
       {/* Founders */}
-      <section className={isIndia ? 'bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20' : ''}>
+      <section className={isIndia ? 'bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-16 lg:py-20 overflow-hidden' : ''}>
         <div className={isIndia ? 'max-w-[1080px] mx-auto' : ''}>
           {!isIndia ? (
             <Section>
@@ -527,25 +529,25 @@ const Team = () => {
 
       {/* Network */}
       <Section>
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-14">
+        <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Network</SectionLabel>
               <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-foreground leading-[1.18]">
                 Advisors &amp; Operating Partners
               </h2>
-              <GoldRule className="mt-4" />
+              <GoldRule className="mt-3 md:mt-4" />
             </FadeIn>
           </div>
           <div className="lg:col-span-8 flex items-center">
             <FadeIn delay={0.08}>
-              <div className="border-l border-foreground/[0.06] pl-6 md:pl-8">
-                <p className="font-sans text-[13px] text-muted-foreground leading-[1.8] mb-3">
+              <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
+                <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
                     ? 'Our advisory network spans senior operators, industry veterans, and institutional leaders across India and the United States.'
                     : 'Our advisory network includes senior operators, industry veterans, and institutional leaders across the United States.'}
                 </p>
-                <p className="font-sans text-[11px] text-muted-foreground/40 leading-[1.6]">
+                <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
                   Details on our advisory network are shared selectively with prospective partners.
                 </p>
               </div>
