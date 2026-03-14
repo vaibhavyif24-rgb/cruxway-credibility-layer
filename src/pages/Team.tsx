@@ -94,7 +94,7 @@ const bensonDealLogos: LogoItem[] = [
   { src: abgLogo, alt: 'Authentic Brands Group', scale: 1.7 },
   { src: rpxLogo, alt: 'RPX' },
   { src: ideraLogo, alt: 'Idera', scale: 1.75 },
-  { src: westernDigitalLogo, alt: 'Western Digital' },
+  { src: westernDigitalLogo, alt: 'Western Digital', scale: 1.5 },
   { src: mindbodyLogo, alt: 'Mindbody' },
   { src: selligentLogo, alt: 'Selligent', scale: 1.15 },
   { src: micronLogo, alt: 'Micron' },
