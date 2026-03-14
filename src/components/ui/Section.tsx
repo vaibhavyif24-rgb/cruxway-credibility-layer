@@ -47,17 +47,21 @@ export const Section = ({ children, className = '', dark = false, narrow = false
   </section>
 );
 
-export const SectionLabel = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
-  <p
-    className={`
-      font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
-      mb-2.5 md:mb-4
-      ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
-    `}
-  >
-    {children}
-  </p>
+export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.ReactNode; light?: boolean }>(
+  ({ children, light = false }, ref) => (
+    <p
+      ref={ref}
+      className={`
+        font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
+        mb-2.5 md:mb-4
+        ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
+      `}
+    >
+      {children}
+    </p>
+  )
 );
+SectionLabel.displayName = 'SectionLabel';
 
 export const GoldRule = ({ className = '' }: { className?: string }) => (
   <div className={`flex items-center gap-2.5 ${className}`}>
