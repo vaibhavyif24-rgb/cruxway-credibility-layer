@@ -63,14 +63,14 @@ const Landing = () => {
         <p className="font-sans text-[8.5px] font-medium uppercase text-primary-foreground/15 tracking-[0.2em] text-center mb-5">
           Select Region
         </p>
-        <div className="flex flex-col sm:flex-row gap-px">
+        <div className="grid grid-cols-2 gap-px w-full max-w-[340px]">
           {(['india', 'us'] as const).map((r) => (
             <motion.button
               key={r}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => selectRegion(r)}
-              className="btn-premium group relative px-12 sm:px-16 py-3.5 bg-primary-foreground/[0.04] text-primary-foreground/45 font-sans text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-400 hover:bg-primary-foreground/[0.08] hover:text-primary-foreground/80"
+              className="btn-premium group relative py-3.5 bg-primary-foreground/[0.04] text-primary-foreground/45 font-sans text-[10px] font-medium uppercase tracking-[0.18em] transition-all duration-400 hover:bg-primary-foreground/[0.08] hover:text-primary-foreground/80"
             >
               {r === 'india' ? 'India' : 'United States'}
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-gold/30 transition-all duration-400 group-hover:w-full" />
