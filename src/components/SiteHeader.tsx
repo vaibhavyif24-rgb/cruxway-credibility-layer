@@ -59,7 +59,7 @@ const SiteHeader = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[10.5px] font-medium uppercase tracking-[0.14em] py-1 transition-all duration-300 ${
+                    className={`relative font-sans text-[10.5px] font-medium uppercase tracking-[0.14em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
                       isActive(item.path)
                         ? 'text-primary-foreground'
                         : 'text-primary-foreground/30 hover:text-primary-foreground/60'
