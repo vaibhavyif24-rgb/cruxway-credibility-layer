@@ -283,7 +283,7 @@ const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; dur
 };
 
 /* ─── Profile Card ─── */
-const ProfileCard = ({ member, index, creamBg = false }: { member: TeamMember; index: number; creamBg?: boolean }) => {
+const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index: number; creamBg?: boolean }>(({ member, index, creamBg = false }, ref) => {
   const LinkedWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) =>
     member.linkedIn ? (
       <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
