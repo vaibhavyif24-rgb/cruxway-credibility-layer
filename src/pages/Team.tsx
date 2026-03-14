@@ -529,25 +529,25 @@ const Team = () => {
 
       {/* Network */}
       <Section>
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-14">
+        <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Network</SectionLabel>
               <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-foreground leading-[1.18]">
                 Advisors &amp; Operating Partners
               </h2>
-              <GoldRule className="mt-4" />
+              <GoldRule className="mt-3 md:mt-4" />
             </FadeIn>
           </div>
           <div className="lg:col-span-8 flex items-center">
             <FadeIn delay={0.08}>
-              <div className="border-l border-foreground/[0.06] pl-6 md:pl-8">
-                <p className="font-sans text-[13px] text-muted-foreground leading-[1.8] mb-3">
+              <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
+                <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
                     ? 'Our advisory network spans senior operators, industry veterans, and institutional leaders across India and the United States.'
                     : 'Our advisory network includes senior operators, industry veterans, and institutional leaders across the United States.'}
                 </p>
-                <p className="font-sans text-[11px] text-muted-foreground/40 leading-[1.6]">
+                <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
                   Details on our advisory network are shared selectively with prospective partners.
                 </p>
               </div>
