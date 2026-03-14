@@ -47,36 +47,43 @@ export const Section = ({ children, className = '', dark = false, narrow = false
   </section>
 );
 
-export const SectionLabel = ({ children, light = false }: { children: React.ReactNode; light?: boolean }) => (
-  <p
-    className={`
-      font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
-      mb-2.5 md:mb-4
-      ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
-    `}
-  >
-    {children}
-  </p>
+export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.ReactNode; light?: boolean }>(
+  ({ children, light = false }, ref) => (
+    <p
+      ref={ref}
+      className={`
+        font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
+        mb-2.5 md:mb-4
+        ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
+      `}
+    >
+      {children}
+    </p>
+  )
 );
+SectionLabel.displayName = 'SectionLabel';
 
-export const GoldRule = ({ className = '' }: { className?: string }) => (
-  <div className={`flex items-center gap-2.5 ${className}`}>
-    <motion.div
-      initial={{ width: 0 }}
-      whileInView={{ width: 32 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="h-px bg-gold/20"
-    />
-    <motion.div
-      initial={{ opacity: 0, scale: 0 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: 0.3 }}
-      className="w-1 h-1 rotate-45 border border-gold/15"
-    />
-  </div>
+export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
+  ({ className = '' }, ref) => (
+    <div ref={ref} className={`flex items-center gap-2.5 ${className}`}>
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: 32 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="h-px bg-gold/20"
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+        className="w-1 h-1 rotate-45 border border-gold/15"
+      />
+    </div>
+  )
 );
+GoldRule.displayName = 'GoldRule';
 
 export const HeroDivider = () => (
   <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-foreground/[0.05] to-transparent" />

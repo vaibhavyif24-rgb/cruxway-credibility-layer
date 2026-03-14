@@ -226,7 +226,8 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
+              loading="lazy"
+              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
@@ -268,7 +269,8 @@ const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; dur
             <img
               src={logo.src}
               alt={logo.alt}
-              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
+              loading="lazy"
+              className="h-[24px] md:h-[34px] lg:h-[40px] w-auto max-w-[90px] md:max-w-[130px] lg:max-w-[150px] object-contain"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
@@ -283,7 +285,7 @@ const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; dur
 };
 
 /* ─── Profile Card ─── */
-const ProfileCard = ({ member, index, creamBg = false }: { member: TeamMember; index: number; creamBg?: boolean }) => {
+const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index: number; creamBg?: boolean }>(({ member, index, creamBg = false }, ref) => {
   const LinkedWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) =>
     member.linkedIn ? (
       <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
@@ -294,7 +296,7 @@ const ProfileCard = ({ member, index, creamBg = false }: { member: TeamMember; i
     );
 
   return (
-    <FadeIn delay={index * 0.08}>
+    <FadeIn ref={ref} delay={index * 0.08}>
       <motion.div
         whileHover={{ backgroundColor: creamBg ? 'hsl(40 25% 92% / 0.6)' : 'hsl(40 18% 95% / 0.5)' }}
         transition={{ duration: 0.3 }}
@@ -315,6 +317,7 @@ const ProfileCard = ({ member, index, creamBg = false }: { member: TeamMember; i
                     <img
                       src={member.photo}
                       alt={member.name}
+                      loading="lazy"
                       className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700"
                     />
                   </div>
@@ -375,7 +378,8 @@ const ProfileCard = ({ member, index, creamBg = false }: { member: TeamMember; i
       </motion.div>
     </FadeIn>
   );
-};
+});
+ProfileCard.displayName = 'ProfileCard';
 
 /* ─── Stats Bar ─── */
 const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) => (
