@@ -1,4 +1,4 @@
-import { motion, forwardRef as _fwd } from 'framer-motion';
+import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 
 /**
