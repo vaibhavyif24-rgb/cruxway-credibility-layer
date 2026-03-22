@@ -91,28 +91,31 @@ const GuidingPrinciples = () => {
             <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr">
-            {principles.map((p, i) => (
-              <GlassCard key={p.t} index={i} className="p-5 md:p-7 h-full">
-                <div className="flex flex-col h-full">
-                  <motion.span
-                    className="font-serif text-[1.5rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-500 block mb-3"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: i * 0.08 + 0.15 }}
-                  >
-                    {p.icon}
-                  </motion.span>
-                  <h3 className="font-serif text-[1.1rem] md:text-[1.2rem] text-foreground mb-2 leading-[1.2]">
-                    {p.t}
-                  </h3>
-                  <div className="w-5 h-px bg-gold/15 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-500 mb-3" />
-                  <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300 flex-1">
-                    {p.d}
-                  </p>
-                </div>
-              </GlassCard>
-            ))}
+            {principles.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <GlassCard key={p.t} index={i} className="p-5 md:p-7 h-full">
+                  <div className="flex flex-col h-full">
+                    <motion.div
+                      className="w-10 h-10 rounded-full border border-gold/15 group-hover:border-gold/35 flex items-center justify-center mb-4 transition-colors duration-500"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: i * 0.08 + 0.15 }}
+                    >
+                      <Icon className="w-4 h-4 text-gold/40 group-hover:text-gold/70 transition-colors duration-500" strokeWidth={1.5} />
+                    </motion.div>
+                    <h3 className="font-serif text-[1.1rem] md:text-[1.2rem] text-foreground mb-2 leading-[1.2]">
+                      {p.t}
+                    </h3>
+                    <div className="w-5 h-px bg-gold/15 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-500 mb-3" />
+                    <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300 flex-1">
+                      {p.d}
+                    </p>
+                  </div>
+                </GlassCard>
+              );
+            })}
           </div>
         </div>
       </section>
