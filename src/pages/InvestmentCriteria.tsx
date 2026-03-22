@@ -218,7 +218,7 @@ const InvestmentCriteria = () => {
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/45 leading-[1.75] mb-4">
                   {isIndia
-                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage framework — from initial discovery through rigorous evaluation — to ensure every partnership is built on alignment, trust, and shared long-term vision.'
+                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage framework, from initial discovery through rigorous evaluation, to ensure every partnership is built on alignment, trust, and shared long-term vision.'
                     : 'A structured, multi-stage evaluation ensures every partnership is built on deep understanding, rigorous analysis, and genuine alignment between our team and the founders we back.'}
                 </p>
               </FadeIn>
