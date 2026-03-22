@@ -133,7 +133,7 @@ const About = () => {
                     <motion.div
                       whileHover={{ y: -3 }}
                       transition={{ duration: 0.2 }}
-                      className="group h-full flex flex-col p-4 md:p-5 rounded-sm border border-border/60 dark:border-primary-foreground/[0.06] bg-background/60 dark:bg-card/40 hover:border-gold/25 transition-all duration-300"
+                      className="group flex flex-col p-4 md:p-5 rounded-sm border border-border/60 dark:border-primary-foreground/[0.06] bg-background/60 dark:bg-card/40 hover:border-gold/25 transition-all duration-300 min-h-[140px]"
                     >
                       <h3 className="font-serif text-[1rem] md:text-[1.1rem] text-foreground mb-1.5 leading-[1.2]">{p.t}</h3>
                       <div className="w-4 h-px bg-gold/20 group-hover:bg-gold/45 group-hover:w-7 transition-all duration-400 mb-2" />
