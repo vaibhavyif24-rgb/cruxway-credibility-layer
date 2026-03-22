@@ -155,9 +155,11 @@ const InvestmentCriteria = () => {
               </FadeIn>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {approach.map((item, i) => (
-                  <GlassCard key={item.t} index={i} className="p-4 md:p-5" hover={false}>
-                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1.5">{item.t}</h4>
-                    <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65]">{item.d}</p>
+                  <GlassCard key={item.t} index={i} className="p-4 md:p-5 h-full" hover={false}>
+                    <div className="flex flex-col h-full">
+                      <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1.5">{item.t}</h4>
+                      <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] flex-1">{item.d}</p>
+                    </div>
                   </GlassCard>
                 ))}
               </div>
@@ -206,12 +208,12 @@ const InvestmentCriteria = () => {
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
                 {dealCharacteristics.map((item, i) => (
-                  <GlassCard key={item.title} index={i} className="p-5 md:p-6">
-                    <div className="flex items-start gap-3">
-                      <div className="w-1 h-8 bg-gold/20 group-hover:bg-gold/40 group-hover:h-10 transition-all duration-500 rounded-full mt-0.5 shrink-0" />
-                      <div>
+                  <GlassCard key={item.title} index={i} className="p-5 md:p-6 h-full">
+                    <div className="flex items-start gap-3 h-full">
+                      <div className="w-1 self-stretch bg-gold/20 group-hover:bg-gold/40 transition-all duration-500 rounded-full shrink-0" />
+                      <div className="flex flex-col h-full">
                         <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-foreground leading-[1.25] mb-2">{item.title}</h4>
-                        <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300">
+                        <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300 flex-1">
                           {item.desc}
                         </p>
                       </div>

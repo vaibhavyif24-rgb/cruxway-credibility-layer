@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 
 /**
  * Contextually relevant animated SVG compositions for PE branding:
- * - 'partnership': Two converging paths meeting — founder + investor alignment
- * - 'industry': Structured pillars with infrastructure — essential B2B sectors
- * - 'criteria': Evaluation framework with weighted scoring metaphor
+ * - 'partnership': Handshake/convergence — founder + investor alignment
+ * - 'industry': Structured pillars — essential B2B sectors
+ * - 'criteria': Discovery-to-Partnership pipeline process diagram
  * - 'growth': Ascending trajectory with compounding nodes — value creation
  * - default: Abstract diamond network — institutional gravitas
  */
@@ -34,46 +34,78 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       >
         {variant === 'partnership' ? (
           <>
-            {/* Two converging paths — founder meets investor */}
-            <motion.path d="M 30 250 C 80 210 130 180 200 130" {...draw(0.2, 1.4)} stroke={goldStroke} strokeWidth="0.7" fill="none" />
-            <motion.path d="M 370 250 C 320 210 270 180 200 130" {...draw(0.4, 1.4)} stroke={goldStroke} strokeWidth="0.7" fill="none" />
-            {/* United path upward — shared vision */}
-            <motion.path d="M 200 130 L 200 35" {...draw(0.9, 1.0)} stroke={goldStroke} strokeWidth="0.8" fill="none" />
+            {/* Clean handshake / partnership convergence SVG */}
+            {/* Two hands meeting — stylised geometric handshake */}
+            {/* Left arm reaching right */}
+            <motion.path
+              d="M 30 180 C 60 178 90 170 130 155 C 150 147 165 140 180 138"
+              {...draw(0.3, 1.5)} stroke={goldStroke} strokeWidth="1" fill="none" opacity={0.6}
+            />
+            {/* Right arm reaching left */}
+            <motion.path
+              d="M 370 180 C 340 178 310 170 270 155 C 250 147 235 140 220 138"
+              {...draw(0.5, 1.5)} stroke={goldStroke} strokeWidth="1" fill="none" opacity={0.6}
+            />
 
-            {/* Expanding network from convergence — portfolio growth */}
-            <motion.path d="M 200 130 C 155 105 120 75 85 60" {...draw(1.2, 1.0)} stroke={goldStroke} strokeWidth="0.35" fill="none" opacity={0.45} />
-            <motion.path d="M 200 130 C 245 105 280 75 315 60" {...draw(1.3, 1.0)} stroke={goldStroke} strokeWidth="0.35" fill="none" opacity={0.45} />
-            <motion.path d="M 200 130 C 165 165 135 185 100 195" {...draw(1.4, 0.8)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.35} />
-            <motion.path d="M 200 130 C 235 165 265 185 300 195" {...draw(1.5, 0.8)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.35} />
+            {/* Clasped hands — interlocking fingers */}
+            <motion.path
+              d="M 180 138 C 185 130 190 125 200 122 C 210 125 215 130 220 138"
+              {...draw(0.9, 1.0)} stroke={goldStroke} strokeWidth="1.2" fill="none" opacity={0.7}
+            />
+            <motion.path
+              d="M 183 145 C 188 137 195 132 200 130 C 205 132 212 137 217 145"
+              {...draw(1.0, 0.8)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.4}
+            />
 
-            {/* Labels: "Founder" and "Investor" origin points */}
-            <motion.text x="30" y="270" fontSize="6" fill={goldStroke} opacity={0.25}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 1.0 }}>
+            {/* Radiating trust/value lines from handshake point */}
+            {[
+              { x: 200, y: 60, d: 0 },
+              { x: 140, y: 75, d: 0.1 },
+              { x: 260, y: 75, d: 0.15 },
+              { x: 120, y: 100, d: 0.2 },
+              { x: 280, y: 100, d: 0.25 },
+            ].map((p, i) => (
+              <g key={i}>
+                <motion.line x1={200} y1={125} x2={p.x} y2={p.y}
+                  {...draw(1.3 + p.d, 0.8)} stroke={goldStroke} strokeWidth="0.25" fill="none" opacity={0.15}
+                />
+                <motion.circle cx={p.x} cy={p.y} r={i === 0 ? 3 : 1.8} fill={goldStroke}
+                  {...nodeAppear(1.6 + p.d, i === 0 ? 0.45 : 0.25)}
+                />
+              </g>
+            ))}
+
+            {/* Central convergence node */}
+            <motion.circle cx="200" cy="130" r="5" fill={goldStroke} {...nodeAppear(1.1, 0.55)} />
+
+            {/* Expanding trust rings */}
+            <motion.circle cx="200" cy="130" r="25" stroke={goldStroke} strokeWidth="0.25" fill="none" {...draw(1.5, 1.0)} opacity={0.15} />
+            <motion.circle cx="200" cy="130" r="50" stroke={goldStroke} strokeWidth="0.2" fill="none" {...draw(1.7, 1.2)} opacity={0.1} />
+            <motion.circle cx="200" cy="130" r="80" stroke={goldStroke} strokeWidth="0.15" fill="none" {...draw(1.9, 1.4)} opacity={0.07} />
+
+            {/* Labels */}
+            <motion.text x="30" y="198" fontSize="5.5" fill={goldStroke} letterSpacing="0.12em"
+              initial={{ opacity: 0 }} whileInView={{ opacity: 0.22 }} viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.2 }}>
               FOUNDER
             </motion.text>
-            <motion.text x="335" y="270" fontSize="6" fill={goldStroke} opacity={0.25}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 1.1 }}>
-              INVESTOR
+            <motion.text x="332" y="198" fontSize="5.5" fill={goldStroke} letterSpacing="0.12em"
+              initial={{ opacity: 0 }} whileInView={{ opacity: 0.22 }} viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 1.3 }}>
+              CRUXWAY
+            </motion.text>
+            <motion.text x="175" y="55" fontSize="5" fill={goldStroke} letterSpacing="0.15em"
+              initial={{ opacity: 0 }} whileInView={{ opacity: 0.18 }} viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 2.0 }}>
+              SHARED VALUE
             </motion.text>
 
-            {/* Nodes */}
-            <motion.circle cx="200" cy="130" r="5" fill={goldStroke} {...nodeAppear(1.0, 0.6)} />
-            <motion.circle cx="200" cy="35" r="3" fill={goldStroke} {...nodeAppear(1.5, 0.4)} />
-            <motion.circle cx="85" cy="60" r="2" fill={goldStroke} {...nodeAppear(1.6, 0.3)} />
-            <motion.circle cx="315" cy="60" r="2" fill={goldStroke} {...nodeAppear(1.7, 0.3)} />
-            <motion.circle cx="100" cy="195" r="1.5" fill={goldStroke} {...nodeAppear(1.8, 0.25)} />
-            <motion.circle cx="300" cy="195" r="1.5" fill={goldStroke} {...nodeAppear(1.9, 0.25)} />
-
-            {/* Growth rings */}
-            <motion.circle cx="200" cy="130" r="20" stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(1.6, 1.0)} opacity={0.2} />
-            <motion.circle cx="200" cy="130" r="40" stroke={goldStroke} strokeWidth="0.2" fill="none" {...draw(1.8, 1.2)} opacity={0.12} />
+            {/* Subtle base line */}
+            <motion.line x1="60" y1="220" x2="340" y2="220" {...draw(0.2, 1.0)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.1} />
           </>
         ) : variant === 'industry' ? (
           <>
             {/* Structured pillars — essential B2B sectors */}
-            {/* Six sector pillars of varying height */}
             {[
               { x: 70, h: 175 },
               { x: 130, h: 200 },
@@ -87,20 +119,12 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
                 stroke={goldStroke} strokeWidth={i === 2 ? 0.8 : 0.5} fill="none" opacity={i === 2 ? 0.65 : 0.4}
               />
             ))}
-
-            {/* Horizontal infrastructure connecting layers */}
             <motion.line x1="55" y1="110" x2="385" y2="110" {...draw(0.9, 1.0)} stroke={goldStroke} strokeWidth="0.35" fill="none" opacity={0.3} />
             <motion.line x1="65" y1="160" x2="375" y2="160" {...draw(1.1, 1.0)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.25} />
             <motion.line x1="75" y1="210" x2="365" y2="210" {...draw(1.3, 0.8)} stroke={goldStroke} strokeWidth="0.25" fill="none" opacity={0.2} />
-
-            {/* Diagonal braces connecting sectors */}
             <motion.line x1="130" y1="110" x2="190" y2="160" {...draw(1.4, 0.7)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.2} />
             <motion.line x1="250" y1="110" x2="190" y2="160" {...draw(1.5, 0.7)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.2} />
-
-            {/* Growth arrow on tallest pillar */}
             <motion.path d="M 190 30 L 185 42 M 190 30 L 195 42" {...draw(1.2, 0.6)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.45} />
-
-            {/* Sector labels */}
             {['ELEC', 'ENV', 'FAC', 'ENG', 'COMP', 'DIST'].map((label, i) => (
               <motion.text key={label} x={[70, 130, 190, 250, 310, 370][i]} y={272} fontSize="4.5" fill={goldStroke} textAnchor="middle"
                 initial={{ opacity: 0 }} whileInView={{ opacity: 0.2 }} viewport={{ once: true }}
@@ -108,98 +132,138 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
                 {label}
               </motion.text>
             ))}
-
-            {/* Node intersections */}
             {[70, 130, 190, 250, 310, 370].map((x, i) => (
               <motion.circle key={x} cx={x} cy={110} r={i === 2 ? 3 : 2} fill={goldStroke} {...nodeAppear(1.5 + i * 0.08, i === 2 ? 0.5 : 0.3)} />
             ))}
-
-            {/* Base line */}
             <motion.line x1="40" y1="260" x2="390" y2="260" {...draw(0.1, 1.0)} stroke={goldStroke} strokeWidth="0.5" fill="none" opacity={0.35} />
           </>
         ) : variant === 'criteria' ? (
           <>
-            {/* Evaluation framework — weighted scoring / radar-like assessment */}
-            {/* Central evaluation node */}
-            <motion.circle cx="200" cy="150" r="3.5" fill={goldStroke} {...nodeAppear(0.5, 0.55)} />
-
-            {/* Seven evaluation axes radiating outward */}
-            {[0, 1, 2, 3, 4, 5, 6].map((i) => {
-              const angle = (i / 7) * Math.PI * 2 - Math.PI / 2;
-              const x2 = 200 + Math.cos(angle) * 110;
-              const y2 = 150 + Math.sin(angle) * 100;
-              const xMid = 200 + Math.cos(angle) * 70;
-              const yMid = 150 + Math.sin(angle) * 63;
-              return (
-                <g key={i}>
-                  <motion.line x1={200} y1={150} x2={x2} y2={y2}
-                    {...draw(0.3 + i * 0.1, 1.0)}
-                    stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.2}
-                  />
-                  {/* Score marker on axis */}
-                  <motion.circle cx={xMid} cy={yMid} r="2" fill={goldStroke}
-                    {...nodeAppear(1.0 + i * 0.1, 0.4)}
-                  />
-                  {/* Endpoint node */}
-                  <motion.circle cx={x2} cy={y2} r="1.2" fill={goldStroke}
-                    {...nodeAppear(1.4 + i * 0.08, 0.2)}
-                  />
-                </g>
-              );
-            })}
-
-            {/* Connect score markers to form evaluation polygon */}
+            {/* Discovery to Partnership — horizontal process pipeline */}
+            {/* Stage definitions */}
             {(() => {
-              const points = [0, 1, 2, 3, 4, 5, 6].map((i) => {
-                const angle = (i / 7) * Math.PI * 2 - Math.PI / 2;
-                const scores = [0.7, 0.85, 0.65, 0.9, 0.75, 0.8, 0.7];
-                const r = scores[i] * 100;
-                return `${200 + Math.cos(angle) * r},${150 + Math.sin(angle) * (r * 0.9)}`;
-              });
+              const stages = [
+                { label: 'DISCOVERY', x: 55 },
+                { label: 'EVALUATION', x: 130 },
+                { label: 'DUE DILIGENCE', x: 215 },
+                { label: 'STRUCTURING', x: 300 },
+                { label: 'PARTNERSHIP', x: 370 },
+              ];
+              const y = 150;
+
               return (
-                <motion.polygon
-                  points={points.join(' ')}
-                  {...draw(1.5, 1.4)}
-                  stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.35}
-                />
+                <>
+                  {/* Main pipeline line */}
+                  <motion.line x1={35} y1={y} x2={390} y2={y}
+                    {...draw(0.2, 1.8)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.3}
+                  />
+
+                  {/* Stage nodes and labels */}
+                  {stages.map((s, i) => (
+                    <g key={s.label}>
+                      {/* Node */}
+                      <motion.circle cx={s.x} cy={y} r={i === 4 ? 7 : 5} fill={goldStroke}
+                        {...nodeAppear(0.5 + i * 0.25, i === 4 ? 0.6 : 0.4)}
+                      />
+                      {/* Inner ring for final stage */}
+                      {i === 4 && (
+                        <motion.circle cx={s.x} cy={y} r={12} stroke={goldStroke} strokeWidth="0.4" fill="none"
+                          {...draw(2.0, 1.0)} opacity={0.25}
+                        />
+                      )}
+                      {/* Connecting arrow segments */}
+                      {i < 4 && (
+                        <motion.path
+                          d={`M ${s.x + 8} ${y} L ${stages[i + 1].x - 8} ${y}`}
+                          {...draw(0.6 + i * 0.25, 0.8)}
+                          stroke={goldStroke} strokeWidth="0.8" fill="none" opacity={0.45}
+                        />
+                      )}
+                      {/* Arrowhead between stages */}
+                      {i < 4 && (
+                        <motion.path
+                          d={`M ${stages[i + 1].x - 12} ${y - 3} L ${stages[i + 1].x - 7} ${y} L ${stages[i + 1].x - 12} ${y + 3}`}
+                          {...draw(0.8 + i * 0.25, 0.4)}
+                          stroke={goldStroke} strokeWidth="0.5" fill="none" opacity={0.35}
+                        />
+                      )}
+                      {/* Stage label */}
+                      <motion.text x={s.x} y={y + 22} fontSize="4.2" fill={goldStroke} textAnchor="middle" letterSpacing="0.1em"
+                        initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 1.2 + i * 0.15 }}>
+                        {s.label}
+                      </motion.text>
+                      {/* Stage number */}
+                      <motion.text x={s.x} y={y - 14} fontSize="5" fill={goldStroke} textAnchor="middle"
+                        initial={{ opacity: 0 }} whileInView={{ opacity: 0.18 }} viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 1.0 + i * 0.15 }}>
+                        {`0${i + 1}`}
+                      </motion.text>
+                    </g>
+                  ))}
+
+                  {/* Detail branches from each stage */}
+                  {/* Discovery — upward research lines */}
+                  <motion.line x1={55} y1={y - 8} x2={55} y2={75} {...draw(1.5, 0.8)} stroke={goldStroke} strokeWidth="0.25" fill="none" opacity={0.15} />
+                  <motion.line x1={55} y1={75} x2={80} y2={65} {...draw(1.7, 0.5)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.12} />
+                  <motion.line x1={55} y1={75} x2={30} y2={65} {...draw(1.7, 0.5)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.12} />
+                  <motion.circle cx={55} cy={75} r="1.5" fill={goldStroke} {...nodeAppear(1.8, 0.2)} />
+                  <motion.circle cx={80} cy={65} r="1" fill={goldStroke} {...nodeAppear(1.9, 0.15)} />
+                  <motion.circle cx={30} cy={65} r="1" fill={goldStroke} {...nodeAppear(1.9, 0.15)} />
+
+                  {/* Evaluation — downward scoring branches */}
+                  <motion.line x1={130} y1={y + 8} x2={130} y2={215} {...draw(1.6, 0.8)} stroke={goldStroke} strokeWidth="0.25" fill="none" opacity={0.15} />
+                  <motion.line x1={130} y1={215} x2={155} y2={225} {...draw(1.8, 0.5)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.12} />
+                  <motion.line x1={130} y1={215} x2={105} y2={225} {...draw(1.8, 0.5)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.12} />
+                  <motion.circle cx={130} cy={215} r="1.5" fill={goldStroke} {...nodeAppear(1.9, 0.2)} />
+
+                  {/* Due Diligence — upward verification */}
+                  <motion.line x1={215} y1={y - 8} x2={215} y2={80} {...draw(1.7, 0.8)} stroke={goldStroke} strokeWidth="0.25" fill="none" opacity={0.15} />
+                  <motion.rect x={205} y={70} width={20} height={12} rx={1} stroke={goldStroke} strokeWidth="0.3" fill="none"
+                    {...draw(2.0, 0.6)} opacity={0.15}
+                  />
+
+                  {/* Structuring — downward deal terms */}
+                  <motion.line x1={300} y1={y + 8} x2={300} y2={210} {...draw(1.8, 0.8)} stroke={goldStroke} strokeWidth="0.25" fill="none" opacity={0.15} />
+                  <motion.rect x={288} y={210} width={24} height={16} rx={1} stroke={goldStroke} strokeWidth="0.3" fill="none"
+                    {...draw(2.1, 0.6)} opacity={0.15}
+                  />
+
+                  {/* Partnership — celebration rays */}
+                  {[0, 1, 2, 3, 4, 5].map(i => {
+                    const angle = (i / 6) * Math.PI * 2 - Math.PI / 2;
+                    const r1 = 16;
+                    const r2 = 30;
+                    return (
+                      <motion.line key={i}
+                        x1={370 + Math.cos(angle) * r1} y1={y + Math.sin(angle) * r1}
+                        x2={370 + Math.cos(angle) * r2} y2={y + Math.sin(angle) * r2}
+                        {...draw(2.2 + i * 0.05, 0.4)}
+                        stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.2}
+                      />
+                    );
+                  })}
+
+                  {/* Title label */}
+                  <motion.text x={200} y={280} fontSize="5" fill={goldStroke} textAnchor="middle" letterSpacing="0.2em"
+                    initial={{ opacity: 0 }} whileInView={{ opacity: 0.18 }} viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 2.5 }}>
+                    FROM DISCOVERY TO PARTNERSHIP
+                  </motion.text>
+                </>
               );
             })()}
-
-            {/* Inner reference rings */}
-            <motion.circle cx="200" cy="150" r="35" stroke={goldStroke} strokeWidth="0.15" fill="none" {...draw(0.8, 1.0)} opacity={0.1} />
-            <motion.circle cx="200" cy="150" r="70" stroke={goldStroke} strokeWidth="0.15" fill="none" {...draw(0.9, 1.0)} opacity={0.1} />
-            <motion.circle cx="200" cy="150" r="100" stroke={goldStroke} strokeWidth="0.15" fill="none" {...draw(1.0, 1.0)} opacity={0.08} />
-
-            {/* Axis labels */}
-            {['SECTOR', 'TRUST', 'CULTURE', 'REVENUE', 'MOAT', 'FOUNDER', 'MARKET'].map((label, i) => {
-              const angle = (i / 7) * Math.PI * 2 - Math.PI / 2;
-              const x = 200 + Math.cos(angle) * 125;
-              const y = 150 + Math.sin(angle) * 113;
-              return (
-                <motion.text key={label} x={x} y={y} fontSize="4.5" fill={goldStroke} textAnchor="middle" dominantBaseline="middle"
-                  initial={{ opacity: 0 }} whileInView={{ opacity: 0.22 }} viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 1.8 + i * 0.05 }}>
-                  {label}
-                </motion.text>
-              );
-            })}
           </>
         ) : variant === 'growth' ? (
           <>
             {/* Ascending trajectory — value creation over time */}
-            {/* Base timeline */}
             <motion.line x1="40" y1="260" x2="380" y2="260" {...draw(0.1, 1.0)} stroke={goldStroke} strokeWidth="0.4" fill="none" opacity={0.3} />
-            {/* Vertical axis */}
             <motion.line x1="40" y1="260" x2="40" y2="30" {...draw(0.2, 1.0)} stroke={goldStroke} strokeWidth="0.4" fill="none" opacity={0.3} />
-
-            {/* Growth curve — accelerating upward */}
             <motion.path
               d="M 50 245 C 90 240 120 235 150 220 C 180 205 200 185 230 155 C 260 120 290 80 330 40"
               {...draw(0.5, 2.0)}
               stroke={goldStroke} strokeWidth="0.8" fill="none" opacity={0.6}
             />
-
-            {/* Milestone nodes along curve */}
             {[
               { x: 90, y: 240 },
               { x: 150, y: 220 },
@@ -209,7 +273,6 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
             ].map((p, i) => (
               <g key={i}>
                 <motion.circle cx={p.x} cy={p.y} r={i === 4 ? 4 : 2.5} fill={goldStroke} {...nodeAppear(1.2 + i * 0.15, i === 4 ? 0.55 : 0.35)} />
-                {/* Vertical reference lines to axis */}
                 <motion.line x1={p.x} y1={p.y} x2={p.x} y2={260}
                   {...draw(1.3 + i * 0.1, 0.6)}
                   stroke={goldStroke} strokeWidth="0.15" fill="none" opacity={0.12}
@@ -217,11 +280,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
                 />
               </g>
             ))}
-
-            {/* Compounding effect visualization — expanding arcs */}
             <motion.path d="M 260 120 C 275 100 300 80 330 40" stroke={goldStroke} strokeWidth="1.2" fill="none" {...draw(2.0, 0.8)} opacity={0.15} />
-
-            {/* Axis labels */}
             <motion.text x="210" y="278" fontSize="5" fill={goldStroke} textAnchor="middle"
               initial={{ opacity: 0 }} whileInView={{ opacity: 0.2 }} viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 2.0 }}>
@@ -232,21 +291,15 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               transition={{ duration: 0.6, delay: 2.1 }}>
               VALUE
             </motion.text>
-
-            {/* Growth arrow at peak */}
             <motion.path d="M 330 40 L 325 50 M 330 40 L 335 50" {...draw(2.2, 0.5)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.5} />
           </>
         ) : (
           <>
-            {/* Default: abstract diamond network — institutional gravitas */}
+            {/* Default: abstract diamond network */}
             <motion.path d="M 200 50 L 340 150 L 200 250 L 60 150 Z" {...draw(0.3, 1.8)} stroke={goldStroke} strokeWidth="0.6" fill="none" />
             <motion.line x1="200" y1="50" x2="200" y2="250" {...draw(0.9)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.3} />
             <motion.line x1="60" y1="150" x2="340" y2="150" {...draw(1.0)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.3} />
-
-            {/* Inner diamond */}
             <motion.path d="M 200 100 L 270 150 L 200 200 L 130 150 Z" {...draw(1.2, 1.2)} stroke={goldStroke} strokeWidth="0.4" fill="none" opacity={0.4} />
-
-            {/* Nodes */}
             <motion.circle cx="200" cy="150" r="4" fill={goldStroke} {...nodeAppear(1.5, 0.5)} />
             <motion.circle cx="200" cy="50" r="2" fill={goldStroke} {...nodeAppear(1.6, 0.35)} />
             <motion.circle cx="340" cy="150" r="2" fill={goldStroke} {...nodeAppear(1.7, 0.35)} />
