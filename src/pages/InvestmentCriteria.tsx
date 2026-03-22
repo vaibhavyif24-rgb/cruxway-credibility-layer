@@ -296,7 +296,7 @@ const InvestmentCriteria = () => {
               {usSectors.map((sector, i) => (
                 <GlassCard key={sector.label} index={i} variant="dark" className="p-5 md:p-6">
                   <div className="flex items-start gap-3">
-                    <span className="text-lg mt-0.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300">{sector.icon}</span>
+                    <span className="mt-0.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300 text-foreground">{sector.icon}</span>
                     <div>
                       <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-primary-foreground leading-[1.3] mb-2">
                         {sector.label}
