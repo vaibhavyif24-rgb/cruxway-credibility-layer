@@ -26,7 +26,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="group"
+        className="group h-full"
       >
         <motion.div
           whileHover={hover ? { y: -4 } : {}}
