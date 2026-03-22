@@ -68,22 +68,26 @@ const processStepsIndia = [
   { num: '04', title: 'Build', description: 'Hands-on partnership to professionalise systems and accelerate growth.' },
 ];
 
-const StatBlock = ({ val, lbl, delay = 0, light = false }: { val: string; lbl: string; delay?: number; light?: boolean }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-    className="text-center"
-  >
-    <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
-      {val}
-    </p>
-    <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${light ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
-      {lbl}
-    </p>
-  </motion.div>
+const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
+  ({ val, lbl, delay = 0, light = false }, ref) => (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      className="text-center"
+    >
+      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
+        {val}
+      </p>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${light ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
+        {lbl}
+      </p>
+    </motion.div>
+  )
 );
+StatBlock.displayName = 'StatBlock';
 
 const Home = () => {
   const { region } = useRegion();
