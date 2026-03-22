@@ -9,7 +9,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
-import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
+import vaibhavPhoto from '@/assets/vaibhav-sharma.png';
 
 // Deal logos — Harin
 import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
