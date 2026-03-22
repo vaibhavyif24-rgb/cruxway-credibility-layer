@@ -166,7 +166,7 @@ const InvestmentCriteria = () => {
               </div>
             </div>
             <FadeIn delay={0.12}>
-              <AnimatedAccent variant="criteria" />
+              <CriteriaPipeline />
             </FadeIn>
           </div>
         </div>
