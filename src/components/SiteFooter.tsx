@@ -16,17 +16,17 @@ const SiteFooter = () => {
   ];
 
   return (
-    <footer className="bg-prussian">
+    <footer className="bg-primary">
       <div className="h-px bg-primary-foreground/[0.04]" />
 
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-6 md:gap-16 mb-10">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-5 md:gap-14 mb-8">
           <div>
             <p className="font-serif text-xl text-primary-foreground tracking-[-0.02em]">Cruxway</p>
             <div className="w-6 h-px bg-gold/15 mt-3" />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-2.5">
             {links.map((item) => (
               <Link
                 key={item.path}
@@ -39,7 +39,7 @@ const SiteFooter = () => {
           </div>
         </div>
 
-        <div className="h-px bg-primary-foreground/[0.04] mb-5" />
+        <div className="h-px bg-primary-foreground/[0.04] mb-4" />
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1.5">
           <p className="font-sans text-[10px] text-primary-foreground/10 tracking-[0.06em]">

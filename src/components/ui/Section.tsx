@@ -36,7 +36,7 @@ export const Section = ({ children, className = '', dark = false, narrow = false
   <section
     className={`
       px-5 md:px-10 lg:px-16
-      py-14 md:py-20 lg:py-24
+      py-10 md:py-14 lg:py-18
       ${dark ? 'hero-gradient-animated text-primary-foreground' : 'bg-background text-foreground'}
       ${className}
     `}
@@ -53,7 +53,7 @@ export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.R
       ref={ref}
       className={`
         font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
-        mb-2.5 md:mb-4
+        mb-2.5 md:mb-3
         ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
       `}
     >
