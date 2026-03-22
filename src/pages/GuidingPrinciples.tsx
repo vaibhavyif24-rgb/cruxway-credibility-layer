@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import AnimatedAccent from '@/components/AnimatedAccent';
 import GlassCard from '@/components/GlassCard';
+import CinematicHero from '@/components/CinematicHero';
 import { motion } from 'framer-motion';
+
+import heroIndiaImage from '@/assets/hero-india-business.jpg';
+import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
 
 const principles = [
   { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: '◆' },
@@ -21,20 +25,21 @@ const GuidingPrinciples = () => {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
+      {/* Hero — cinematic region-specific photo */}
+      <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
+        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'About Us — India' : 'About Us'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-primary-foreground max-w-[540px] leading-[1.1] tracking-[-0.03em]">
+            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em]">
               {isIndia ? 'Building Enduring Value Across India' : 'Guiding Principles'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.75] mt-5 max-w-[460px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[460px]">
               The values and convictions that shape every partnership and every decision we make.
             </p>
           </FadeIn>
@@ -109,7 +114,7 @@ const GuidingPrinciples = () => {
         </div>
       </section>
 
-      {/* CTA — single, not duplicated */}
+      {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">

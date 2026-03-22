@@ -5,7 +5,10 @@ import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import GlassCard from '@/components/GlassCard';
-import heroImage from '@/assets/hero-crossroads.jpg';
+import CinematicHero from '@/components/CinematicHero';
+
+import heroIndiaImage from '@/assets/hero-india-business.jpg';
+import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
 
 import blackrockLogo from '@/assets/logos/blackrock.png';
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
@@ -88,20 +91,12 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero — crossroads photo with Ken Burns */}
+      {/* Hero — region-specific cinematic photo with Ken Burns + gold geometric lines */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end">
-        <motion.div
-          className="absolute inset-0"
-          initial={{ scale: 1.02 }}
-          animate={{ scale: 1.12 }}
-          transition={{ duration: 20, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
-        >
-          <img src={heroImage} alt="" className="w-full h-full object-cover" loading="eager" aria-hidden="true" />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-prussian/65 to-navy-deep/50" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
         <DarkSectionEffects variant="hero" />
 
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
@@ -120,7 +115,7 @@ const Home = () => {
           <FadeIn delay={0.14}>
             <p className="font-sans text-[14px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[520px]">
               {isIndia
-                ? 'We invest in majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital and operational expertise.'
+                ? 'We invest in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
                 : 'We invest in majority stakes in founder-led companies across the United States in essential B2B services, providing long-term capital and a commitment to preserving what works.'}
             </p>
           </FadeIn>
