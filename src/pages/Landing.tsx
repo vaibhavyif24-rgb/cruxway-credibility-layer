@@ -2,7 +2,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import heroCrossroads from '@/assets/hero-crossroads.jpg';
+import GeometricHero from '@/components/GeometricHero';
 
 const regions = [
   { key: 'india' as const, label: 'India' },
@@ -23,27 +23,14 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-[100dvh] relative flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Hero Background Image with subtle zoom animation */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        initial={{ scale: 1.05 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 12, ease: 'easeOut' }}
-      >
-        <img
-          src={heroCrossroads}
-          alt=""
-          className="w-full h-full object-cover"
-          style={{ filter: 'brightness(0.25) contrast(1.1)' }}
-        />
-      </motion.div>
+    <div className="min-h-[100dvh] relative flex flex-col items-center justify-center px-6 overflow-hidden hero-gradient-animated">
+      {/* Animated Geometric Lines */}
+      <GeometricHero />
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy-deep/40 to-navy-deep/70 pointer-events-none z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/30 via-transparent to-navy-deep/30 pointer-events-none z-[1]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold/[0.03] rounded-full blur-[180px] pointer-events-none z-[1]" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/10 to-transparent z-[2]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-transparent to-navy-deep/50 pointer-events-none z-[2]" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/10 to-transparent z-[3]" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/8 to-transparent z-[3]" />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}

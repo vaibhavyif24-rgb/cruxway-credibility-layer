@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 40 20% 97%;
+    --background: 42 28% 97%;
     --foreground: 207 65% 12%;
 
-    --card: 40 18% 96%;
+    --card: 42 22% 95%;
     --card-foreground: 207 65% 12%;
 
-    --popover: 0 0% 100%;
+    --popover: 42 20% 98%;
     --popover-foreground: 207 65% 12%;
 
     --primary: 207 65% 12%;
     --primary-foreground: 42 30% 95%;
 
-    --secondary: 210 18% 93%;
+    --secondary: 40 18% 93%;
     --secondary-foreground: 207 65% 12%;
 
-    --muted: 210 14% 94%;
-    --muted-foreground: 210 10% 45%;
+    --muted: 40 16% 93%;
+    --muted-foreground: 210 10% 42%;
 
     --accent: 207 50% 18%;
     --accent-foreground: 42 30% 95%;
@@ -30,8 +30,8 @@
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 16% 90%;
-    --input: 210 16% 90%;
+    --border: 40 14% 88%;
+    --input: 40 14% 88%;
     --ring: 207 65% 12%;
 
     --radius: 0.375rem;
@@ -42,11 +42,11 @@
     --prussian-light: 207 35% 28%;
     --navy-deep: 210 60% 6%;
     --warm-gray: 30 8% 52%;
-    --light-stone: 40 15% 94%;
-    --cream: 40 18% 95%;
-    --gold: 38 45% 55%;
-    --gold-dim: 38 25% 42%;
-    --rule: 210 12% 86%;
+    --light-stone: 42 18% 93%;
+    --cream: 42 22% 94%;
+    --gold: 38 48% 52%;
+    --gold-dim: 38 28% 40%;
+    --rule: 40 12% 85%;
 
     --font-serif: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
     --font-sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
@@ -63,36 +63,39 @@
 
   /* Dark mode */
   .dark {
-    --background: 210 55% 7%;
-    --foreground: 40 20% 92%;
+    --background: 210 50% 5%;
+    --foreground: 42 22% 90%;
 
-    --card: 210 50% 9%;
-    --card-foreground: 40 20% 92%;
+    --card: 210 45% 7%;
+    --card-foreground: 42 22% 90%;
 
-    --popover: 210 55% 8%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 210 50% 6%;
+    --popover-foreground: 42 22% 90%;
 
-    --primary: 207 65% 12%;
-    --primary-foreground: 42 30% 95%;
+    --primary: 210 55% 10%;
+    --primary-foreground: 42 28% 94%;
 
-    --secondary: 210 30% 14%;
-    --secondary-foreground: 40 20% 88%;
+    --secondary: 210 30% 12%;
+    --secondary-foreground: 42 18% 85%;
 
-    --muted: 210 25% 13%;
-    --muted-foreground: 210 12% 62%;
+    --muted: 210 28% 11%;
+    --muted-foreground: 210 14% 58%;
 
-    --accent: 207 40% 20%;
+    --accent: 207 40% 16%;
     --accent-foreground: 42 30% 95%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 22% 16%;
-    --input: 210 22% 16%;
-    --ring: 42 30% 80%;
+    --border: 210 25% 14%;
+    --input: 210 25% 14%;
+    --ring: 38 40% 55%;
 
-    --cream: 210 35% 9%;
-    --rule: 210 18% 18%;
+    --cream: 210 40% 7%;
+    --rule: 210 20% 16%;
+    --light-stone: 210 30% 10%;
+    --gold: 38 50% 55%;
+    --gold-dim: 38 30% 48%;
   }
 }
 
@@ -127,12 +130,12 @@
   }
 
   ::selection {
-    background: hsl(var(--prussian) / 0.12);
+    background: hsl(var(--gold) / 0.15);
     color: hsl(var(--prussian));
   }
 
   .dark ::selection {
-    background: hsl(var(--gold) / 0.2);
+    background: hsl(var(--gold) / 0.25);
     color: hsl(var(--primary-foreground));
   }
 
