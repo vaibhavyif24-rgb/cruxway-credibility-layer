@@ -30,43 +30,66 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
         {variant === 'partnership' ? (
           <>
-            {/* Target rings — clean concentric circles */}
-            <motion.circle cx="200" cy="130" r="90" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.2, 1.4)} opacity={0.14} />
-            <motion.circle cx="200" cy="130" r="66" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.35, 1.2)} opacity={0.18} />
-            <motion.circle cx="200" cy="130" r="42" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.5, 1.0)} opacity={0.24} />
-            <motion.circle cx="200" cy="130" r="18" stroke={goldStroke} strokeWidth="0.6" fill="none" {...draw(0.65, 0.9)} opacity={0.34} />
-            {/* Bullseye center */}
-            <motion.circle cx="200" cy="130" r="4" fill={goldFill} {...nodeAppear(0.85, 0.9)} />
-
-            {/* Dart — clean diagonal from upper-right, tip landing at exact center (200,130) */}
-            <motion.g
-              style={{ filter: 'drop-shadow(0 0 8px hsl(38 45% 55% / 0.2))' }}
-              whileHover={{ scale: 1.04 }}
-              transition={{ duration: 0.2, ease: 'easeOut' }}
-            >
-              {/* Shaft — straight line */}
-              <motion.line x1="200" y1="130" x2="310" y2="20" stroke={goldStroke} strokeWidth="2" strokeLinecap="round" fill="none" {...draw(0.9, 0.8)} opacity={0.7} />
-              {/* Arrowhead tip at center — two lines forming a V pointing into (200,130) */}
-              <motion.line x1="200" y1="130" x2="215" y2="120" stroke={goldStroke} strokeWidth="2" strokeLinecap="round" fill="none" {...draw(1.05, 0.3)} opacity={0.8} />
-              <motion.line x1="200" y1="130" x2="210" y2="140" stroke={goldStroke} strokeWidth="2" strokeLinecap="round" fill="none" {...draw(1.05, 0.3)} opacity={0.8} />
-              {/* Tail fletching — two angled fins */}
-              <motion.line x1="300" y1="28" x2="320" y2="10" stroke={goldStroke} strokeWidth="1.6" strokeLinecap="round" fill="none" {...draw(1.15, 0.3)} opacity={0.55} />
-              <motion.line x1="302" y1="30" x2="318" y2="38" stroke={goldStroke} strokeWidth="1.6" strokeLinecap="round" fill="none" {...draw(1.18, 0.3)} opacity={0.55} />
-            </motion.g>
-
-            {/* Impact ripple */}
-            <motion.circle cx="200" cy="130" r="10" stroke={goldStroke} strokeWidth="0.5" fill="none"
-              initial={{ scale: 0, opacity: 0.6 }}
-              whileInView={{ scale: 3, opacity: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.8, delay: 1.3, ease: 'easeOut' }}
+            {/* Mountain silhouette fill */}
+            <motion.path
+              d="M 0 240 L 60 200 L 110 220 L 160 170 L 200 100 L 240 165 L 290 195 L 340 180 L 400 240 Z"
+              fill={goldFill}
+              initial={{ opacity: 0 }} whileInView={{ opacity: 0.05 }} viewport={{ once: true }}
+              transition={{ duration: 1.2, delay: 0.1 }}
+            />
+            {/* Mountain ridgeline */}
+            <motion.path
+              d="M 0 240 L 60 200 L 110 220 L 160 170 L 200 100 L 240 165 L 290 195 L 340 180 L 400 240"
+              stroke={goldStroke} strokeWidth="0.7" fill="none"
+              {...draw(0.15, 2.0)} opacity={0.3}
+            />
+            {/* Secondary ridge behind */}
+            <motion.path
+              d="M 20 240 L 90 215 L 140 228 L 200 155 L 260 220 L 350 240"
+              stroke={goldStroke} strokeWidth="0.35" fill="none"
+              {...draw(0.4, 1.6)} opacity={0.15}
             />
 
+            {/* Flag on peak — interactive hover group */}
+            <motion.g
+              style={{ filter: 'drop-shadow(0 0 14px hsl(38 45% 55% / 0.28))' }}
+              whileHover={{ scale: 1.06, y: -4 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+            >
+              {/* Pole */}
+              <motion.line x1="200" y1="100" x2="200" y2="34" stroke={goldStroke} strokeWidth="2" strokeLinecap="round" fill="none" {...draw(0.7, 1.0)} opacity={0.8} />
+              {/* Flag pennant outline */}
+              <motion.path
+                d="M 200 36 Q 220 32 232 42 Q 244 52 232 62 Q 220 72 200 68"
+                stroke={goldStroke} strokeWidth="1.4" fill="none"
+                {...draw(1.0, 0.8)} opacity={0.7}
+              />
+              {/* Flag pennant fill */}
+              <motion.path
+                d="M 200 36 Q 220 32 232 42 Q 244 52 232 62 Q 220 72 200 68 Z"
+                fill={goldFill}
+                initial={{ opacity: 0 }} whileInView={{ opacity: 0.22 }}
+                viewport={{ once: true }} transition={{ duration: 0.6, delay: 1.2 }}
+              />
+              {/* Finial ball */}
+              <motion.circle cx="200" cy="32" r="3" fill={goldFill} {...nodeAppear(1.4, 0.85)} />
+              {/* Pole base crossbar */}
+              <motion.line x1="193" y1="100" x2="207" y2="100" stroke={goldStroke} strokeWidth="1.4" strokeLinecap="round" fill="none" {...draw(1.0, 0.3)} opacity={0.5} />
+            </motion.g>
+
+            {/* Wind lines */}
+            <motion.line x1="238" y1="42" x2="262" y2="40" stroke={goldStroke} strokeWidth="0.45" strokeLinecap="round" fill="none" {...draw(1.5, 0.4)} opacity={0.2} />
+            <motion.line x1="240" y1="52" x2="268" y2="50" stroke={goldStroke} strokeWidth="0.4" strokeLinecap="round" fill="none" {...draw(1.6, 0.4)} opacity={0.16} />
+            <motion.line x1="236" y1="62" x2="256" y2="61" stroke={goldStroke} strokeWidth="0.35" strokeLinecap="round" fill="none" {...draw(1.7, 0.4)} opacity={0.12} />
+
+            {/* Ground line */}
+            <motion.line x1="20" y1="240" x2="380" y2="240" stroke={goldStroke} strokeWidth="0.4" fill="none" {...draw(0.1, 1.0)} opacity={0.18} />
+
             {/* Tagline */}
-            <motion.text x="200" y="255" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.4, 0.85)}>
+            <motion.text x="200" y="270" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
               "Aligned ambition. Enduring partnership."
             </motion.text>
-            <motion.line x1="100" y1="267" x2="300" y2="267" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(1.55, 0.5)} opacity={0.18} />
+            <motion.line x1="100" y1="280" x2="300" y2="280" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(2.0, 0.5)} opacity={0.18} />
           </>
         ) : variant === 'industry' ? (
           <>
@@ -92,13 +115,11 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
           </>
         ) : variant === 'criteria' ? (
           <>
-            {/* Title */}
             <motion.text x="200" y="26" fontSize="10" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.18em" {...fadeIn(0.1, 0.7)}>
               FROM DISCOVERY TO PARTNERSHIP
             </motion.text>
             <motion.line x1="90" y1="34" x2="310" y2="34" stroke={goldStroke} strokeWidth="0.4" fill="none" {...draw(0.2, 0.6)} opacity={0.22} />
 
-            {/* 4 stage cards — vertical flow, no sub-pointers */}
             {[
               { num: '01', title: 'DISCOVERY' },
               { num: '02', title: 'EVALUATION' },
@@ -108,24 +129,19 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               const y = 48 + i * 54;
               return (
                 <g key={stage.title}>
-                  {/* Card fill */}
                   <motion.rect x="55" y={y} width="290" height="40" rx="5" stroke={goldStroke} strokeWidth="0.5" fill={goldFill}
                     initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 0.07, y: 0 }} whileHover={{ opacity: 0.14, y: -1 }}
                     viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.25 + i * 0.12 }} />
-                  {/* Card border */}
                   <motion.rect x="55" y={y} width="290" height="40" rx="5" stroke={goldStroke} strokeWidth="0.6" fill="none" {...draw(0.3 + i * 0.12, 0.5)} opacity={0.32} />
-                  {/* Number badge */}
                   <motion.circle cx="82" cy={y + 20} r="12" fill={goldFill}
                     initial={{ scale: 0.6, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.8 }}
                     viewport={{ once: true }} transition={{ duration: 0.35, delay: 0.4 + i * 0.12 }} />
                   <motion.text x="82" y={y + 21} fontSize="7.5" fill="hsl(var(--primary))" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-sans)" fontWeight="700" {...fadeIn(0.5 + i * 0.12, 1)}>
                     {stage.num}
                   </motion.text>
-                  {/* Title */}
                   <motion.text x="108" y={y + 21} fontSize="10" fill={goldStroke} dominantBaseline="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.12em" {...fadeIn(0.55 + i * 0.12, 0.7)}>
                     {stage.title}
                   </motion.text>
-                  {/* Connector arrow */}
                   {i < 3 && (
                     <>
                       <motion.line x1="200" y1={y + 40} x2="200" y2={y + 54} stroke={goldStroke} strokeWidth="0.9" fill="none" {...draw(0.7 + i * 0.12, 0.25)} opacity={0.32} />
@@ -136,12 +152,9 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               );
             })}
 
-            {/* Final connector → Partnership */}
             <motion.line x1="200" y1="250" x2="200" y2="260" stroke={goldStroke} strokeWidth="0.9" fill="none" {...draw(1.2, 0.2)} opacity={0.32} />
-            {/* Diamond accent */}
             <motion.path d="M 192 266 L 200 260 L 208 266 L 200 272 Z" stroke={goldStroke} strokeWidth="0.6" fill={goldFill}
               initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 0.3, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.25 }} />
-            {/* Partnership label */}
             <motion.text x="200" y="288" fontSize="10" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.16em" {...fadeIn(1.4, 0.7)}>
               PARTNERSHIP
             </motion.text>
@@ -178,7 +191,6 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
           </>
         )}
 
-        {/* Corner accents */}
         <motion.line x1="15" y1="15" x2="45" y2="15" {...draw(0.1, 0.6)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.2} />
         <motion.line x1="15" y1="15" x2="15" y2="45" {...draw(0.15, 0.6)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.2} />
         <motion.line x1="385" y1="285" x2="355" y2="285" {...draw(0.2, 0.6)} stroke={goldStroke} strokeWidth="0.3" fill="none" opacity={0.2} />
@@ -188,9 +200,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       <motion.div
         className="absolute left-1/2 top-1/2 h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.06), transparent 70%)' }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         transition={{ duration: 1.5, delay: 0.5 }}
       />
 
