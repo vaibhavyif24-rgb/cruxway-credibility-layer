@@ -3,7 +3,8 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
-import AnimatedAccent from '@/components/AnimatedAccent';
+import CriteriaPipeline from '@/components/CriteriaPipeline';
+import StrengthsWidget from '@/components/StrengthsWidget';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import { motion, useInView } from 'framer-motion';
@@ -165,7 +166,7 @@ const InvestmentCriteria = () => {
               </div>
             </div>
             <FadeIn delay={0.12}>
-              <AnimatedAccent variant="criteria" />
+              <CriteriaPipeline />
             </FadeIn>
           </div>
         </div>
@@ -226,16 +227,16 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Value Creation + Growth SVG */}
+      {/* Our Strengths — interactive widget */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
             <div>
               <FadeIn>
-                <SectionLabel light>Value Creation</SectionLabel>
+                <SectionLabel light>Our Edge</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-primary-foreground leading-[1.15] mb-3">
-                  Our Path to Long-Term Value
+                  What Sets Us Apart
                 </h2>
                 <GoldRule className="mb-5" />
               </FadeIn>
@@ -268,7 +269,7 @@ const InvestmentCriteria = () => {
               </div>
             </div>
             <FadeIn delay={0.15}>
-              <AnimatedAccent variant="growth" />
+              <StrengthsWidget />
             </FadeIn>
           </div>
         </div>
