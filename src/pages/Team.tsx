@@ -433,7 +433,7 @@ const Team = () => {
             <>
               <div className="mb-5 md:mb-7">
                 <FadeIn>
-                  <SectionLabel>Founders</SectionLabel>
+                  <SectionLabel>Managing Partners</SectionLabel>
                   <GoldRule className="mt-1" />
                 </FadeIn>
               </div>
