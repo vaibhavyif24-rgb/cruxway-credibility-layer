@@ -7,8 +7,8 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 
-import heroIndiaImage from '@/assets/hero-india-business.jpg';
-import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
+import heroIndiaHome from '@/assets/hero-india-home.jpg';
+import heroUSHome from '@/assets/hero-us-home.jpg';
 
 import blackrockLogo from '@/assets/logos/blackrock.png';
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
@@ -93,7 +93,7 @@ const Home = () => {
     <div>
       {/* Hero — region-specific cinematic photo with Ken Burns + gold geometric lines */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
         <DarkSectionEffects variant="hero" />
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
@@ -249,65 +249,6 @@ const Home = () => {
                 </div>
               </GlassCard>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Presence — logical region-aware with links */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <FadeIn>
-            <SectionLabel light>Our Presence</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-primary-foreground leading-[1.15] mb-6 md:mb-8">
-              {isIndia ? 'Operating Across India & the U.S.' : 'Headquartered in the U.S., Operating Globally'}
-            </h2>
-          </FadeIn>
-
-          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            <GlassCard index={0} variant="dark" className="p-6 md:p-8">
-              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-1.5">
-                {isIndia ? 'U.S. Headquarters' : 'Headquarters'}
-              </p>
-              <h3 className="font-serif text-[1.2rem] md:text-[1.4rem] text-primary-foreground leading-[1.2] mb-2">
-                San Diego, California
-              </h3>
-              <p className="font-sans text-[13px] text-primary-foreground/40 leading-[1.65] mb-4">
-                {isIndia
-                  ? 'Our founding team operates from San Diego, bringing global PE experience to Indian markets.'
-                  : 'Headquartered on the West Coast with a nationwide investment focus across the United States.'}
-              </p>
-              {isIndia && (
-                <Link
-                  to="/us"
-                  className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-gold/50 hover:text-gold/80 transition-colors duration-300 inline-flex items-center gap-1.5"
-                >
-                  View U.S. Operations →
-                </Link>
-              )}
-            </GlassCard>
-
-            <GlassCard index={1} variant="dark" className="p-6 md:p-8">
-              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-1.5">
-                {isIndia ? 'India Operations' : 'East Coast & India'}
-              </p>
-              <h3 className="font-serif text-[1.2rem] md:text-[1.4rem] text-primary-foreground leading-[1.2] mb-2">
-                {isIndia ? 'GK II, Delhi' : 'New York City & Delhi'}
-              </h3>
-              <p className="font-sans text-[13px] text-primary-foreground/40 leading-[1.65] mb-4">
-                {isIndia
-                  ? 'Our India team operates from Delhi, with a network spanning key industrial regions nationwide.'
-                  : 'East Coast presence for deal sourcing, plus our India team operating from Delhi for cross-border opportunities.'}
-              </p>
-              {!isIndia && (
-                <Link
-                  to="/india"
-                  className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-gold/50 hover:text-gold/80 transition-colors duration-300 inline-flex items-center gap-1.5"
-                >
-                  View India Operations →
-                </Link>
-              )}
-            </GlassCard>
           </div>
         </div>
       </section>

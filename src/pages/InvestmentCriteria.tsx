@@ -7,8 +7,8 @@ import AnimatedAccent from '@/components/AnimatedAccent';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 
-import heroIndiaImage from '@/assets/hero-india-business.jpg';
-import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
+import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
+import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 
 const usSectors = [
   { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
@@ -49,9 +49,9 @@ const InvestmentCriteria = () => {
 
   return (
     <div>
-      {/* Hero — cinematic region-specific photo */}
+      {/* Hero — distinct region-specific cinematic photo */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
@@ -119,9 +119,9 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Target Sectors — US only, glass cards */}
+      {/* Target Sectors — US only */}
       {!isIndia && (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+        <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Target Sectors</SectionLabel>
