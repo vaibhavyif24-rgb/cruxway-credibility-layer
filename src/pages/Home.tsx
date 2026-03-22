@@ -179,7 +179,7 @@ const Home = () => {
               <FadeIn>
                 <SectionLabel light>{isIndia ? 'The Opportunity' : 'Our Thesis'}</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15]">
-                  {isIndia ? 'Why India\'s Lower Middle Market' : 'Why U.S. Essential Services'}
+                  {isIndia ? <>Why <span className="text-gold">India's</span> Lower Middle Market</> : <>Why <span className="text-gold">U.S.</span> Essential Services</>}
                 </h2>
                 <GoldRule className="mt-3" />
               </FadeIn>

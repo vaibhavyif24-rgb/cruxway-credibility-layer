@@ -35,7 +35,7 @@ const GuidingPrinciples = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : 'Guiding Principles'}
+              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : <>Guiding <span className="text-gold">Principles</span></>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
