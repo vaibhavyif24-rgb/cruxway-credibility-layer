@@ -151,8 +151,8 @@ const Home = () => {
                 <SectionLabel>What We Do</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15]">
                   {isIndia
-                    ? 'Investing in & Building Companies Across India'
-                    : 'Investing in & Building Essential U.S. Companies'}
+                    ? <>Investing in & Building Companies Across <span className="text-gold">India</span></>
+                    : <>Investing in & Building Essential <span className="text-gold">U.S.</span> Companies</>}
                 </h2>
                 <GoldRule className="mt-3" />
               </FadeIn>
