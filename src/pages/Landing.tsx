@@ -23,12 +23,12 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-[100dvh] relative flex flex-col items-center justify-center px-6 overflow-hidden hero-gradient-animated">
-      {/* Animated Geometric Lines */}
+    <div className="min-h-[100dvh] relative flex flex-col items-center justify-center px-6 overflow-hidden">
+      {/* Crossroads photo + Ken Burns + geometric gold lines */}
       <GeometricHero />
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-transparent to-navy-deep/50 pointer-events-none z-[2]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/30 via-transparent to-navy-deep/40 pointer-events-none z-[2]" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/10 to-transparent z-[3]" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/8 to-transparent z-[3]" />
 
@@ -38,32 +38,32 @@ const Landing = () => {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 text-center"
       >
-        <h1 className="font-serif text-[clamp(3rem,8vw,5.5rem)] font-normal text-primary-foreground tracking-[-0.035em] leading-[1]">
+        <h1 className="font-serif text-[clamp(3.5rem,9vw,6rem)] font-normal text-primary-foreground tracking-[-0.035em] leading-[1]">
           Cruxway
         </h1>
 
         <div className="flex items-center justify-center gap-3 mt-7 mb-3">
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: 48 }}
+            animate={{ width: 56 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="h-px bg-gold/25"
+            className="h-px bg-gold/30"
           />
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.25, delay: 0.3 }}
-            className="w-1.5 h-1.5 rotate-45 border border-gold/20"
+            className="w-1.5 h-1.5 rotate-45 border border-gold/25"
           />
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: 48 }}
+            animate={{ width: 56 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="h-px bg-gold/25"
+            className="h-px bg-gold/30"
           />
         </div>
 
-        <p className="font-sans text-[11px] md:text-[13px] font-medium uppercase text-primary-foreground/30 tracking-[0.3em]">
+        <p className="font-sans text-[12px] md:text-[14px] font-medium uppercase text-primary-foreground/35 tracking-[0.3em]">
           Investment &amp; Partnership
         </p>
       </motion.div>
@@ -74,7 +74,7 @@ const Landing = () => {
         transition={{ duration: 0.4, delay: 0.2 }}
         className="relative z-10 mt-20 sm:mt-28"
       >
-        <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase text-primary-foreground/20 tracking-[0.3em] text-center mb-10">
+        <p className="font-sans text-[11px] md:text-[12px] font-medium uppercase text-primary-foreground/25 tracking-[0.3em] text-center mb-10">
           Select Region
         </p>
         <div className="flex gap-5 sm:gap-6">
@@ -100,30 +100,30 @@ const Landing = () => {
                 <span className={`
                   absolute inset-0 border transition-all duration-700 ease-out
                   ${isSelected
-                    ? 'border-gold/30'
-                    : 'border-primary-foreground/[0.08] group-hover:border-primary-foreground/[0.16]'
+                    ? 'border-gold/35'
+                    : 'border-primary-foreground/[0.1] group-hover:border-primary-foreground/[0.2]'
                   }
                 `} />
                 <span className={`
-                  absolute inset-[1px] transition-all duration-700 ease-out
+                  absolute inset-[1px] transition-all duration-700 ease-out backdrop-blur-sm
                   ${isSelected
-                    ? 'bg-gold/[0.08]'
-                    : 'bg-primary-foreground/[0.03] group-hover:bg-primary-foreground/[0.06]'
+                    ? 'bg-gold/[0.1]'
+                    : 'bg-primary-foreground/[0.04] group-hover:bg-primary-foreground/[0.08]'
                   }
                 `} />
 
                 {/* Corner accents */}
-                <span className={`absolute top-0 left-0 w-5 h-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 w-10' : 'bg-gold/0 group-hover:bg-gold/25'}`} />
-                <span className={`absolute top-0 left-0 h-5 w-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 h-10' : 'bg-gold/0 group-hover:bg-gold/25'}`} />
-                <span className={`absolute bottom-0 right-0 w-5 h-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 w-10' : 'bg-gold/0 group-hover:bg-gold/25'}`} />
-                <span className={`absolute bottom-0 right-0 h-5 w-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 h-10' : 'bg-gold/0 group-hover:bg-gold/25'}`} />
+                <span className={`absolute top-0 left-0 w-5 h-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 w-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
+                <span className={`absolute top-0 left-0 h-5 w-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 h-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
+                <span className={`absolute bottom-0 right-0 w-5 h-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 w-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
+                <span className={`absolute bottom-0 right-0 h-5 w-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 h-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
 
                 <span className={`
                   relative z-10 font-sans text-[12px] sm:text-[14px] font-semibold uppercase tracking-[0.28em]
                   transition-all duration-500
                   ${isSelected
                     ? 'text-gold'
-                    : 'text-primary-foreground/40 group-hover:text-primary-foreground/75'
+                    : 'text-primary-foreground/45 group-hover:text-primary-foreground/80'
                   }
                 `}>
                   {r.label}
@@ -136,7 +136,7 @@ const Landing = () => {
                       animate={{ opacity: [0, 0.6, 0.3] }}
                       transition={{ duration: 0.8, ease: 'easeOut' }}
                       className="absolute inset-0 pointer-events-none"
-                      style={{ background: 'radial-gradient(ellipse at center, hsl(var(--gold) / 0.1) 0%, transparent 70%)' }}
+                      style={{ background: 'radial-gradient(ellipse at center, hsl(var(--gold) / 0.12) 0%, transparent 70%)' }}
                     />
                   )}
                 </AnimatePresence>
@@ -150,7 +150,7 @@ const Landing = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.4 }}
-        className="absolute bottom-6 font-sans text-[9px] text-primary-foreground/[0.1] tracking-[0.22em] uppercase z-10"
+        className="absolute bottom-6 font-sans text-[9px] text-primary-foreground/[0.12] tracking-[0.22em] uppercase z-10"
       >
         Privileged &amp; Confidential
       </motion.p>
