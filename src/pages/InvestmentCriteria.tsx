@@ -230,45 +230,45 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Our Edge — Value Creation + Strengths */}
+      {/* Our Edge: Value Creation + Strengths */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
-            <div>
-              <FadeIn>
-                <SectionLabel>Our Edge</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-3">
-                  Value Creation Playbook
-                </h2>
-                <GoldRule className="mb-5" />
-              </FadeIn>
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-5">
-                  A disciplined, repeatable framework for building lasting value in every business we partner with.
-                </p>
-              </FadeIn>
-              <div className="space-y-4">
-                {[
-                  { step: '01', title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-                  { step: '02', title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-                  { step: '03', title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-                  { step: '04', title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
-                ].map((item, i) => (
-                  <FadeIn key={item.step} delay={0.12 + i * 0.08}>
-                    <div className="group flex items-start gap-4">
-                      <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-[400ms] tabular-nums leading-none pt-1 shrink-0">
-                        {item.step}
-                      </span>
-                      <div>
-                        <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1">{item.title}</h4>
-                        <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] group-hover:text-foreground/75 transition-colors duration-300">
-                          {item.desc}
-                        </p>
-                      </div>
+          <FadeIn>
+            <SectionLabel>Our Edge</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-3">
+              Value Creation Playbook
+            </h2>
+            <GoldRule className="mb-5" />
+          </FadeIn>
+          <FadeIn delay={0.08}>
+            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-6">
+              A disciplined, repeatable framework for building lasting value in every business we partner with.
+            </p>
+          </FadeIn>
+
+          {/* Unified grid: playbook steps + strengths side by side on desktop, stacked on mobile */}
+          <div className={isIndia ? 'space-y-8' : 'grid lg:grid-cols-2 gap-8 lg:gap-14 items-start'}>
+            <div className={isIndia ? 'grid sm:grid-cols-2 gap-4' : 'space-y-4'}>
+              {[
+                { step: '01', title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+                { step: '02', title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+                { step: '03', title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
+                { step: '04', title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+              ].map((item, i) => (
+                <FadeIn key={item.step} delay={0.12 + i * 0.08}>
+                  <div className="group flex items-start gap-4">
+                    <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-[400ms] tabular-nums leading-none pt-1 shrink-0">
+                      {item.step}
+                    </span>
+                    <div>
+                      <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1">{item.title}</h4>
+                      <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] group-hover:text-foreground/75 transition-colors duration-300">
+                        {item.desc}
+                      </p>
                     </div>
-                  </FadeIn>
-                ))}
-              </div>
+                  </div>
+                </FadeIn>
+              ))}
             </div>
             <FadeIn delay={0.15}>
               <StrengthsWidget />
