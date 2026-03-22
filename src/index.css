@@ -60,6 +60,40 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  /* Dark mode */
+  .dark {
+    --background: 210 55% 7%;
+    --foreground: 40 20% 92%;
+
+    --card: 210 50% 9%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 210 55% 8%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 207 65% 12%;
+    --primary-foreground: 42 30% 95%;
+
+    --secondary: 210 30% 14%;
+    --secondary-foreground: 40 20% 88%;
+
+    --muted: 210 25% 13%;
+    --muted-foreground: 210 12% 62%;
+
+    --accent: 207 40% 20%;
+    --accent-foreground: 42 30% 95%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 22% 16%;
+    --input: 210 22% 16%;
+    --ring: 42 30% 80%;
+
+    --cream: 210 35% 9%;
+    --rule: 210 18% 18%;
+  }
 }
 
 @layer base {
@@ -95,6 +129,11 @@
   ::selection {
     background: hsl(var(--prussian) / 0.12);
     color: hsl(var(--prussian));
+  }
+
+  .dark ::selection {
+    background: hsl(var(--gold) / 0.2);
+    color: hsl(var(--primary-foreground));
   }
 
   :focus-visible {
