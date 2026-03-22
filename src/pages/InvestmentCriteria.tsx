@@ -40,7 +40,7 @@ const usSectors = [
   { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries', icon: '📦' },
 ];
 
-/** Consolidated criteria — no duplication */
+/** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
   { title: 'Founder Succession & Transition', desc: 'Owners planning retirement or next chapters who seek a partner to honour their legacy and professionalise the business for the long term.' },
   { title: 'Essential Services in Regulated Markets', desc: 'B2B businesses in compliance-driven industries with deep client relationships, high switching costs, and recurring revenue models.' },
@@ -90,14 +90,14 @@ const InvestmentCriteria = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[600px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-              {isIndia ? <>Investing Tailored to <span className="text-gold">India's</span> Needs</> : <>Investing Tailored to Each <span className="text-gold">Company's</span> Needs</>}
+              {isIndia ? <>Disciplined Capital for <span className="text-gold">India's</span> Best</> : <>What We Invest In and <span className="text-gold">Why</span></>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[480px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
-                ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
-                : 'Combining long-term capital with operating expertise to help business owners build lasting institutions.'}
+                ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
+                : 'Our disciplined criteria for identifying exceptional founder-led businesses with enduring competitive advantages.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -119,55 +119,27 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Our Thesis + Pipeline */}
+      {/* What We Look For — consolidated criteria */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-            <div>
-              <FadeIn>
-                <SectionLabel>Our Process</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15]">
-                  From Discovery to Partnership
-                </h2>
-                <GoldRule className="mt-3 mb-5" />
-              </FadeIn>
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-4">
-                  {isIndia
-                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage process — from initial discovery through rigorous evaluation — to ensure every partnership is built on alignment, trust, and shared long-term vision.'
-                    : 'Our structured approach ensures every partnership is built on deep understanding, rigorous evaluation, and genuine alignment between our team and the founders we back.'}
-                </p>
-              </FadeIn>
-            </div>
-            <FadeIn delay={0.12}>
-              <CriteriaPipeline />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* What We Look For — consolidated criteria */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <FadeIn>
-            <SectionLabel light>Investment Criteria</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-primary-foreground leading-[1.15] max-w-[480px] mb-2">
+            <SectionLabel>Investment Criteria</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
               What We Look For
             </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/40 leading-[1.75] max-w-[540px] mb-6 md:mb-8">
+            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
               We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
             </p>
-            <GoldRule className="mb-6 md:mb-8" />
+            <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr">
             {whatWeLookFor.map((item, i) => (
-              <GlassCard key={item.title} index={i} variant="dark" className="p-5 md:p-6 h-full">
+              <GlassCard key={item.title} index={i} className="p-5 md:p-6 h-full">
                 <div className="flex items-start gap-3 h-full">
                   <div className="w-1 self-stretch bg-gold/20 group-hover:bg-gold/40 transition-all duration-500 rounded-full shrink-0" />
                   <div className="flex flex-col h-full">
-                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-primary-foreground leading-[1.25] mb-2">{item.title}</h4>
-                    <p className="font-sans text-[12px] md:text-[13px] text-primary-foreground/40 group-hover:text-primary-foreground/60 leading-[1.7] transition-colors duration-300 flex-1">
+                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-2">{item.title}</h4>
+                    <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground group-hover:text-foreground/75 leading-[1.7] transition-colors duration-300 flex-1">
                       {item.desc}
                     </p>
                   </div>
@@ -178,7 +150,35 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* What Sets Us Apart */}
+      {/* Evaluation Framework + Pipeline Widget */}
+      <section className="relative bg-primary text-primary-foreground overflow-hidden">
+        <DarkSectionEffects />
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+            <div>
+              <FadeIn>
+                <SectionLabel light>Evaluation Framework</SectionLabel>
+                <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-primary-foreground leading-[1.15]">
+                  How We Evaluate Opportunities
+                </h2>
+                <GoldRule className="mt-3 mb-5" />
+              </FadeIn>
+              <FadeIn delay={0.08}>
+                <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/45 leading-[1.75] mb-4">
+                  {isIndia
+                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage framework — from initial discovery through rigorous evaluation — to ensure every partnership is built on alignment, trust, and shared long-term vision.'
+                    : 'A structured, multi-stage evaluation ensures every partnership is built on deep understanding, rigorous analysis, and genuine alignment between our team and the founders we back.'}
+                </p>
+              </FadeIn>
+            </div>
+            <FadeIn delay={0.12}>
+              <CriteriaPipeline />
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Edge — Value Creation + Strengths */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
@@ -204,7 +204,7 @@ const InvestmentCriteria = () => {
                 ].map((item, i) => (
                   <FadeIn key={item.step} delay={0.12 + i * 0.08}>
                     <div className="group flex items-start gap-4">
-                      <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-400 tabular-nums leading-none pt-1 shrink-0">
+                      <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-[400ms] tabular-nums leading-none pt-1 shrink-0">
                         {item.step}
                       </span>
                       <div>
