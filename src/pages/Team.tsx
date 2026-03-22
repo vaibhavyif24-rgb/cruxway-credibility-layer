@@ -9,7 +9,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import bensonPhoto from '@/assets/team/benson-zhang.jpg';
-import vaibhavPhoto from '@/assets/team/vaibhav-sharma.webp';
+import vaibhavPhoto from '@/assets/vaibhav-sharma.png';
 
 // Deal logos — Harin
 import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
@@ -104,7 +104,7 @@ const bensonDealLogos: LogoItem[] = [
 const founders: TeamMember[] = [
   {
     name: 'Harin Gupta',
-    role: 'Co-Founder',
+    role: 'Managing Partner',
     photo: harinPhoto,
     linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
@@ -124,7 +124,7 @@ const founders: TeamMember[] = [
   },
   {
     name: 'Benson Zhang',
-    role: 'Co-Founder',
+    role: 'Managing Partner',
     photo: bensonPhoto,
     linkedIn: 'https://www.linkedin.com/in/benson8zhang/',
     summary:
