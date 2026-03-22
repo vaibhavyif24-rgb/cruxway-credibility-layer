@@ -109,7 +109,7 @@ const Home = () => {
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.8rem)] text-white max-w-[680px] leading-[1.08] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
               {isIndia
                 ? <>Investing in <span className="text-gold">India's</span> Next Generation of Essential Companies</>
-                : <>Building the Next Generation of Essential <span className="text-gold">U.S.</span>&nbsp;Companies</>}
+                : <>Building the Next Generation of Essential <span className="text-gold">U.S.</span> Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>

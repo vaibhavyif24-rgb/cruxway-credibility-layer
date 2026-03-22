@@ -3,12 +3,10 @@ import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Sec
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
-import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
-import { Link } from 'react-router-dom';
 
-import heroIndiaAbout from '@/assets/hero-india-about.jpg';
-import heroUSAbout from '@/assets/hero-us-about.jpg';
+import heroIndiaContact from '@/assets/hero-india-contact.jpg';
+import heroUSContact from '@/assets/hero-us-contact.jpg';
 
 const Contact = () => {
   const { region } = useRegion();
@@ -21,7 +19,7 @@ const Contact = () => {
     <div>
       {/* Hero — distinct region-specific */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaContact : heroUSContact} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-18">
           <FadeIn>
