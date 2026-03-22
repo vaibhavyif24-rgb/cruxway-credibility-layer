@@ -37,7 +37,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
     <div className="relative overflow-hidden rounded-sm aspect-[4/3] border border-foreground/[0.04] dark:border-primary-foreground/[0.04] bg-gradient-to-br from-cream to-background dark:from-primary/30 dark:to-navy-deep/40 cursor-pointer group/svg">
       <svg
         viewBox="0 0 400 300"
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 h-full w-full"
         preserveAspectRatio="xMidYMid slice"
       >
         {variant === 'partnership' ? (
@@ -46,77 +46,93 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
             <motion.circle cx="200" cy="126" r="68" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.35, 1.2)} opacity={0.18} />
             <motion.circle cx="200" cy="126" r="44" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.5, 1.0)} opacity={0.24} />
             <motion.circle cx="200" cy="126" r="20" stroke={goldStroke} strokeWidth="0.6" fill="none" {...draw(0.65, 0.9)} opacity={0.34} />
-            <motion.circle cx="200" cy="126" r="4.5" fill={goldFill} {...nodeAppear(0.95, 0.82)} />
+            <motion.circle cx="200" cy="126" r="5" fill={goldFill} {...nodeAppear(0.9, 0.82)} />
 
-            {/* Dart — drawn horizontally, then rotated so the tip lands exactly on the bullseye */}
-            <motion.line
-              x1="130"
-              y1="126"
-              x2="190"
-              y2="126"
+            <motion.g
               transform="rotate(135 200 126)"
-              stroke={goldStroke}
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              fill="none"
-              opacity={0.8}
-              {...draw(1.0, 0.65)}
-            />
-            <motion.path
-              d="M 190 122 L 200 126 L 190 130 Z"
-              transform="rotate(135 200 126)"
-              fill={goldFill}
-              opacity={0.9}
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 0.9, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.25, delay: 1.15 }}
-            />
-            <motion.path
-              d="M 148 123 L 160 123 L 166 126 L 160 129 L 148 129 Z"
-              transform="rotate(135 200 126)"
-              fill={goldFill}
-              opacity={0.32}
-              initial={{ opacity: 0, x: -4 }}
-              whileInView={{ opacity: 0.32, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: 1.08 }}
-            />
-            <motion.line
-              x1="118"
-              y1="126"
-              x2="130"
-              y2="126"
-              transform="rotate(135 200 126)"
-              stroke={goldStroke}
-              strokeWidth="1.2"
-              strokeLinecap="round"
-              fill="none"
-              opacity={0.55}
-              {...draw(1.18, 0.25)}
-            />
-            <motion.path
-              d="M 130 126 L 111 116 L 120 126 Z"
-              transform="rotate(135 200 126)"
-              fill={goldFill}
-              opacity={0.5}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 0.5, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 1.2 }}
-            />
-            <motion.path
-              d="M 130 126 L 111 136 L 120 126 Z"
-              transform="rotate(135 200 126)"
-              fill={goldFill}
-              opacity={0.5}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 0.5, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: 1.24 }}
-            />
+              style={{ transformOrigin: '200px 126px', filter: 'drop-shadow(0 0 10px hsl(38 45% 55% / 0.22))' }}
+              whileHover={{ scale: 1.035 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+            >
+              <motion.path
+                d="M 121 126 L 95 111 L 101 126 L 95 141 Z"
+                fill={goldFill}
+                opacity={0.58}
+                initial={{ opacity: 0, scale: 0.88 }}
+                whileInView={{ opacity: 0.58, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: 1.04 }}
+              />
+              <motion.path
+                d="M 114 126 L 100 116 L 103 126 L 100 136 Z"
+                fill={goldFill}
+                opacity={0.36}
+                initial={{ opacity: 0, scale: 0.88 }}
+                whileInView={{ opacity: 0.36, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: 1.08 }}
+              />
+              <motion.line x1="121" y1="126" x2="136" y2="126" stroke={goldStroke} strokeWidth="1.4" strokeLinecap="round" fill="none" opacity={0.52} {...draw(1.08, 0.24)} />
+              <motion.line x1="136" y1="126" x2="160" y2="126" stroke={goldStroke} strokeWidth="2.1" strokeLinecap="round" fill="none" opacity={0.7} {...draw(1.0, 0.42)} />
+              <motion.rect
+                x="160"
+                y="120"
+                width="22"
+                height="12"
+                rx="6"
+                fill={goldFill}
+                opacity={0.34}
+                initial={{ opacity: 0, scaleX: 0.8 }}
+                whileInView={{ opacity: 0.34, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.32, delay: 1.12 }}
+              />
+              {[164, 168, 172, 176].map((x, index) => (
+                <motion.line
+                  key={x}
+                  x1={x}
+                  y1="121.2"
+                  x2={x + 2.8}
+                  y2="130.8"
+                  stroke={goldStroke}
+                  strokeWidth="0.65"
+                  fill="none"
+                  opacity={0.32}
+                  {...draw(1.16 + index * 0.03, 0.18)}
+                />
+              ))}
+              <motion.path
+                d="M 182 121.8 L 189 126 L 182 130.2 Z"
+                fill={goldFill}
+                opacity={0.76}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 0.76, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.25, delay: 1.18 }}
+              />
+              <motion.path
+                d="M 189 124.2 L 200 126 L 189 127.8 Z"
+                fill={goldFill}
+                opacity={0.95}
+                initial={{ opacity: 0, scaleX: 0.85 }}
+                whileInView={{ opacity: 0.95, scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.18, delay: 1.22 }}
+              />
+            </motion.g>
 
-            <motion.circle cx="200" cy="126" r="12" stroke={goldStroke} strokeWidth="0.4" fill="none" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 2.4, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 1.7, delay: 1.28, ease: 'easeOut' }} />
+            <motion.circle
+              cx="200"
+              cy="126"
+              r="12"
+              stroke={goldStroke}
+              strokeWidth="0.4"
+              fill="none"
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 2.35, opacity: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.7, delay: 1.28, ease: 'easeOut' }}
+            />
 
             <motion.text x="200" y="252" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.38, 0.85)}>
               "Aligned ambition. Enduring partnership."
@@ -133,9 +149,17 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               { x: 310, h: 185 },
               { x: 370, h: 160 },
             ].map((p, i) => (
-              <motion.line key={i} x1={p.x} y1={260} x2={p.x} y2={260 - p.h}
+              <motion.line
+                key={i}
+                x1={p.x}
+                y1={260}
+                x2={p.x}
+                y2={260 - p.h}
                 {...draw(0.15 + i * 0.12, 1.2)}
-                stroke={goldStroke} strokeWidth={i === 2 ? 0.8 : 0.5} fill="none" opacity={i === 2 ? 0.65 : 0.4}
+                stroke={goldStroke}
+                strokeWidth={i === 2 ? 0.8 : 0.5}
+                fill="none"
+                opacity={i === 2 ? 0.65 : 0.4}
               />
             ))}
             <motion.line x1="55" y1="110" x2="385" y2="110" {...draw(0.9, 1.0)} stroke={goldStroke} strokeWidth="0.35" fill="none" opacity={0.3} />
@@ -145,8 +169,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
             <motion.line x1="250" y1="110" x2="190" y2="160" {...draw(1.5, 0.7)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.2} />
             <motion.path d="M 190 30 L 185 42 M 190 30 L 195 42" {...draw(1.2, 0.6)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.45} />
             {['ELEC', 'ENV', 'FAC', 'ENG', 'COMP', 'DIST'].map((label, i) => (
-              <motion.text key={label} x={[70, 130, 190, 250, 310, 370][i]} y={272} fontSize="4.5" fill={goldStroke} textAnchor="middle"
-                {...fadeIn(1.6 + i * 0.05, 0.2)}>
+              <motion.text key={label} x={[70, 130, 190, 250, 310, 370][i]} y={272} fontSize="4.5" fill={goldStroke} textAnchor="middle" {...fadeIn(1.6 + i * 0.05, 0.2)}>
                 {label}
               </motion.text>
             ))}
@@ -160,14 +183,14 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
             <motion.text x="200" y="24" fontSize="9" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.16em" {...fadeIn(0.15, 0.65)}>
               FROM DISCOVERY TO PARTNERSHIP
             </motion.text>
-            <motion.line x1="102" y1="32" x2="298" y2="32" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(0.24, 0.6)} opacity={0.2} />
+            <motion.line x1="104" y1="32" x2="296" y2="32" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(0.24, 0.6)} opacity={0.2} />
 
             {(() => {
               const stages = [
-                { y: 48, num: '01', title: 'DISCOVERY', sub: 'Market mapping • Sector thesis • Origination' },
-                { y: 96, num: '02', title: 'EVALUATION', sub: 'Fit scoring • Management • Growth potential' },
-                { y: 144, num: '03', title: 'DILIGENCE', sub: 'Operations • Financial quality • Risk review' },
-                { y: 192, num: '04', title: 'STRUCTURING', sub: 'Terms design • Governance • Value plan' },
+                { y: 50, num: '01', title: 'DISCOVERY', caption: 'Pipeline origination' },
+                { y: 95, num: '02', title: 'EVALUATION', caption: 'Qualitative fit' },
+                { y: 140, num: '03', title: 'DILIGENCE', caption: 'Underwriting review' },
+                { y: 185, num: '04', title: 'STRUCTURING', caption: 'Transaction design' },
               ];
 
               return (
@@ -178,10 +201,10 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
                     return (
                       <g key={stage.title}>
                         <motion.rect
-                          x="42"
+                          x="48"
                           y={stage.y}
-                          width="316"
-                          height="38"
+                          width="304"
+                          height="34"
                           rx="6"
                           stroke={goldStroke}
                           strokeWidth="0.5"
@@ -189,57 +212,57 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
                           opacity={0.06}
                           initial={{ opacity: 0, y: 8 }}
                           whileInView={{ opacity: 0.08, y: 0 }}
-                          whileHover={{ opacity: 0.15, y: -2 }}
+                          whileHover={{ opacity: 0.14, y: -2 }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.45, delay: 0.28 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                          transition={{ duration: 0.42, delay: 0.28 + index * 0.1, ease: [0.22, 1, 0.36, 1] }}
                         />
                         <motion.rect
-                          x="42"
+                          x="48"
                           y={stage.y}
-                          width="316"
-                          height="38"
+                          width="304"
+                          height="34"
                           rx="6"
                           stroke={goldStroke}
                           strokeWidth="0.6"
                           fill="none"
-                          {...draw(0.34 + index * 0.1, 0.6)}
+                          {...draw(0.34 + index * 0.1, 0.58)}
                           opacity={0.3}
                         />
                         <motion.circle
-                          cx="66"
-                          cy={stage.y + 19}
-                          r="10"
+                          cx="72"
+                          cy={stage.y + 17}
+                          r="9"
                           fill={goldFill}
                           initial={{ scale: 0.7, opacity: 0 }}
                           whileInView={{ scale: 1, opacity: 0.85 }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.38, delay: 0.46 + index * 0.1 }}
+                          transition={{ duration: 0.36, delay: 0.45 + index * 0.1 }}
                         />
-                        <motion.text x="66" y={stage.y + 20} fontSize="5.5" fill="hsl(var(--primary))" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-sans)" fontWeight="700" {...fadeIn(0.56 + index * 0.1, 1)}>
+                        <motion.text x="72" y={stage.y + 18} fontSize="5.3" fill="hsl(var(--primary))" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-sans)" fontWeight="700" {...fadeIn(0.54 + index * 0.1, 1)}>
                           {stage.num}
                         </motion.text>
-                        <motion.text x="84" y={stage.y + 16} fontSize="6.2" fill={goldStroke} fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.08em" {...fadeIn(0.64 + index * 0.1, 0.66)}>
+                        <motion.text x="92" y={stage.y + 15} fontSize="6.3" fill={goldStroke} fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.08em" {...fadeIn(0.64 + index * 0.1, 0.66)}>
                           {stage.title}
                         </motion.text>
-                        <motion.text x="84" y={stage.y + 30} fontSize="5.1" fill={goldStroke} fontFamily="var(--font-sans)" {...fadeIn(0.74 + index * 0.1, 0.46)}>
-                          {stage.sub}
+                        <motion.text x="92" y={stage.y + 27} fontSize="4.9" fill={goldStroke} fontFamily="var(--font-sans)" {...fadeIn(0.74 + index * 0.1, 0.42)}>
+                          {stage.caption}
                         </motion.text>
 
                         {next && (
                           <>
-                            <motion.line x1="200" y1={stage.y + 38} x2="200" y2={next.y - 8} stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(0.78 + index * 0.1, 0.32)} opacity={0.28} />
-                            <motion.path d={`M 196 ${next.y - 12} L 200 ${next.y - 6} L 204 ${next.y - 12}`} stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(0.86 + index * 0.1, 0.22)} opacity={0.34} />
+                            <motion.line x1="200" y1={stage.y + 34} x2="200" y2={next.y - 8} stroke={goldStroke} strokeWidth="0.75" fill="none" {...draw(0.8 + index * 0.1, 0.3)} opacity={0.28} />
+                            <motion.path d={`M 196 ${next.y - 12} L 200 ${next.y - 6} L 204 ${next.y - 12}`} stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(0.88 + index * 0.1, 0.2)} opacity={0.34} />
                           </>
                         )}
                       </g>
                     );
                   })}
 
-                  <motion.line x1="200" y1="230" x2="200" y2="242" stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(1.22, 0.28)} opacity={0.28} />
-                  <motion.path d="M 192 238 L 200 230 L 208 238 L 200 246 Z" stroke={goldStroke} strokeWidth="0.6" fill={goldFill} opacity={0.22} initial={{ scale: 0.8, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.22 }} viewport={{ once: true }} transition={{ duration: 0.35, delay: 1.28 }} />
-                  <motion.rect x="120" y="246" width="160" height="32" rx="6" stroke={goldStroke} strokeWidth="0.6" fill={goldFill} opacity={0.07} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 0.09, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 1.34 }} />
-                  <motion.rect x="120" y="246" width="160" height="32" rx="6" stroke={goldStroke} strokeWidth="0.65" fill="none" {...draw(1.36, 0.5)} opacity={0.34} />
-                  <motion.text x="200" y="266" fontSize="6.6" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.14em" {...fadeIn(1.46, 0.64)}>
+                  <motion.line x1="200" y1="219" x2="200" y2="234" stroke={goldStroke} strokeWidth="0.75" fill="none" {...draw(1.18, 0.28)} opacity={0.28} />
+                  <motion.path d="M 192 230 L 200 222 L 208 230 L 200 238 Z" stroke={goldStroke} strokeWidth="0.6" fill={goldFill} opacity={0.2} initial={{ opacity: 0, scale: 0.82 }} whileInView={{ opacity: 0.2, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.24 }} />
+                  <motion.rect x="116" y="244" width="168" height="34" rx="6" stroke={goldStroke} strokeWidth="0.55" fill={goldFill} opacity={0.07} initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 0.09, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.42, delay: 1.3 }} />
+                  <motion.rect x="116" y="244" width="168" height="34" rx="6" stroke={goldStroke} strokeWidth="0.65" fill="none" {...draw(1.34, 0.48)} opacity={0.34} />
+                  <motion.text x="200" y="265" fontSize="6.7" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.14em" {...fadeIn(1.44, 0.64)}>
                     PARTNERSHIP
                   </motion.text>
                 </>
@@ -250,14 +273,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
           <>
             <motion.line x1="40" y1="260" x2="380" y2="260" {...draw(0.1, 1.0)} stroke={goldStroke} strokeWidth="0.4" fill="none" opacity={0.3} />
             <motion.line x1="40" y1="260" x2="40" y2="30" {...draw(0.2, 1.0)} stroke={goldStroke} strokeWidth="0.4" fill="none" opacity={0.3} />
-            <motion.path
-              d="M 50 245 C 90 240 120 235 150 220 C 180 205 200 185 230 155 C 260 120 290 80 330 40"
-              {...draw(0.5, 2.0)}
-              stroke={goldStroke}
-              strokeWidth="0.8"
-              fill="none"
-              opacity={0.6}
-            />
+            <motion.path d="M 50 245 C 90 240 120 235 150 220 C 180 205 200 185 230 155 C 260 120 290 80 330 40" {...draw(0.5, 2.0)} stroke={goldStroke} strokeWidth="0.8" fill="none" opacity={0.6} />
             {[
               { x: 90, y: 240 },
               { x: 150, y: 220 },
@@ -267,14 +283,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
             ].map((p, i) => (
               <g key={i}>
                 <motion.circle cx={p.x} cy={p.y} r={i === 4 ? 4 : 2.5} fill={goldStroke} {...nodeAppear(1.2 + i * 0.15, i === 4 ? 0.55 : 0.35)} />
-                <motion.line x1={p.x} y1={p.y} x2={p.x} y2={260}
-                  {...draw(1.3 + i * 0.1, 0.6)}
-                  stroke={goldStroke}
-                  strokeWidth="0.15"
-                  fill="none"
-                  opacity={0.12}
-                  strokeDasharray="2 3"
-                />
+                <motion.line x1={p.x} y1={p.y} x2={p.x} y2={260} {...draw(1.3 + i * 0.1, 0.6)} stroke={goldStroke} strokeWidth="0.15" fill="none" opacity={0.12} strokeDasharray="2 3" />
               </g>
             ))}
             <motion.path d="M 260 120 C 275 100 300 80 330 40" stroke={goldStroke} strokeWidth="1.2" fill="none" {...draw(2.0, 0.8)} opacity={0.15} />
@@ -307,7 +316,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       </svg>
 
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] rounded-full"
+        className="absolute left-1/2 top-1/2 h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.06), transparent 70%)' }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -316,7 +325,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       />
 
       <motion.div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] rounded-full border border-gold/[0.06]"
+        className="absolute left-1/2 top-1/2 h-[100px] w-[100px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold/[0.06]"
         animate={{ scale: [1, 1.2, 1], opacity: [0.06, 0.15, 0.06] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
       />
