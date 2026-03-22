@@ -42,46 +42,31 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       >
         {variant === 'partnership' ? (
           <>
-            {/* Target board — cleaner and more legible */}
-            <motion.circle cx="200" cy="126" r="92" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.2, 1.4)} opacity={0.14} />
-            <motion.circle cx="200" cy="126" r="68" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.35, 1.2)} opacity={0.18} />
-            <motion.circle cx="200" cy="126" r="44" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.5, 1.0)} opacity={0.24} />
-            <motion.circle cx="200" cy="126" r="20" stroke={goldStroke} strokeWidth="0.6" fill="none" {...draw(0.65, 0.9)} opacity={0.34} />
-            <motion.circle cx="200" cy="126" r="6.5" fill={goldFill} {...nodeAppear(0.95, 0.65)} />
+            {/* Target board — clean concentric rings, no tick marks */}
+            <motion.circle cx="200" cy="120" r="92" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.2, 1.4)} opacity={0.14} />
+            <motion.circle cx="200" cy="120" r="68" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.35, 1.2)} opacity={0.18} />
+            <motion.circle cx="200" cy="120" r="44" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.5, 1.0)} opacity={0.24} />
+            <motion.circle cx="200" cy="120" r="20" stroke={goldStroke} strokeWidth="0.6" fill="none" {...draw(0.65, 0.9)} opacity={0.34} />
+            <motion.circle cx="200" cy="120" r="5" fill={goldFill} {...nodeAppear(0.95, 0.7)} />
 
-            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-              const rad = (angle * Math.PI) / 180;
-              const x1 = 200 + 89 * Math.cos(rad);
-              const y1 = 126 + 89 * Math.sin(rad);
-              const x2 = 200 + 96 * Math.cos(rad);
-              const y2 = 126 + 96 * Math.sin(rad);
-              return (
-                <motion.line
-                  key={i}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  {...draw(0.28 + i * 0.04, 0.28)}
-                  stroke={goldStroke}
-                  strokeWidth="0.38"
-                  fill="none"
-                  opacity={0.14}
-                />
-              );
-            })}
+            {/* Dart — clear shaft + pointed tip + two fins */}
+            {/* Shaft */}
+            <motion.line x1="258" y1="68" x2="206" y2="116" stroke={goldStroke} strokeWidth="1.8" fill="none" opacity={0.85} {...draw(1.0, 0.7)} />
+            {/* Pointed tip */}
+            <motion.path d="M 206 116 L 200 120" stroke={goldStroke} strokeWidth="2.2" fill="none" strokeLinecap="round" opacity={0.9} {...draw(1.1, 0.3)} />
+            {/* Fin 1 — upper right */}
+            <motion.path d="M 254 72 L 270 58 L 260 78 Z" fill={goldFill} opacity={0.5} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 0.5, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 1.15 }} />
+            {/* Fin 2 — lower right */}
+            <motion.path d="M 254 72 L 274 76 L 258 86 Z" fill={goldFill} opacity={0.5} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 0.5, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 1.2 }} />
 
-            <motion.line x1="251" y1="77" x2="214" y2="115" stroke={goldStroke} strokeWidth="1.5" fill="none" opacity={0.82} {...draw(1.0, 0.7)} />
-            <motion.path d="M 214 115 L 200 126 L 217 123 Z" fill={goldFill} opacity={0.72} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 0.72, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.15 }} />
-            <motion.path d="M 249 79 L 264 64 L 257 84 Z" stroke={goldStroke} strokeWidth="0.85" fill="none" opacity={0.56} {...draw(1.15, 0.45)} />
-            <motion.path d="M 248 79 L 268 84 L 255 93 Z" stroke={goldStroke} strokeWidth="0.85" fill="none" opacity={0.56} {...draw(1.25, 0.45)} />
-            <motion.line x1="241" y1="87" x2="250" y2="78" stroke={goldStroke} strokeWidth="0.55" fill="none" opacity={0.34} {...draw(1.15, 0.35)} />
-            <motion.circle cx="200" cy="126" r="11" stroke={goldStroke} strokeWidth="0.25" fill="none" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1.9, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 1.6, delay: 1.25, ease: 'easeOut' }} />
+            {/* Impact ripple */}
+            <motion.circle cx="200" cy="120" r="11" stroke={goldStroke} strokeWidth="0.3" fill="none" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 2.2, opacity: 0 }} viewport={{ once: true }} transition={{ duration: 1.8, delay: 1.25, ease: 'easeOut' }} />
 
-            <motion.text x="200" y="246" fontSize="10.5" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.01em" {...fadeIn(1.4, 0.62)}>
-              “Aligned ambition. Enduring partnership.”
+            {/* Tagline — large and prominent */}
+            <motion.text x="200" y="248" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.4, 0.82)}>
+              "Aligned ambition. Enduring partnership."
             </motion.text>
-            <motion.line x1="116" y1="258" x2="284" y2="258" stroke={goldStroke} strokeWidth="0.34" fill="none" {...draw(1.55, 0.55)} opacity={0.16} />
+            <motion.line x1="100" y1="260" x2="300" y2="260" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(1.55, 0.55)} opacity={0.18} />
           </>
         ) : variant === 'industry' ? (
           <>
