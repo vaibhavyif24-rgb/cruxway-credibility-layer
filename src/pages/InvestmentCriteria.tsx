@@ -3,7 +3,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CriteriaPipeline from '@/components/CriteriaPipeline';
-import StrengthsWidget from '@/components/StrengthsWidget';
+
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import { motion, useInView } from 'framer-motion';
