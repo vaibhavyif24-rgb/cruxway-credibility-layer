@@ -124,7 +124,7 @@ const founders: TeamMember[] = [
   },
   {
     name: 'Benson Zhang',
-    role: 'Co-Founder',
+    role: 'Managing Partner',
     photo: bensonPhoto,
     linkedIn: 'https://www.linkedin.com/in/benson8zhang/',
     summary:
