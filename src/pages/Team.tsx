@@ -347,7 +347,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
           {/* Bio */}
           <div className="md:col-span-9 overflow-hidden">
-            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground dark:text-primary-foreground/60 leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
               {member.summary}
             </p>
             <ul className="space-y-1.5 md:space-y-2">
