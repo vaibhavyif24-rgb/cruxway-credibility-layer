@@ -28,12 +28,12 @@ const Contact = () => {
             <SectionLabel light>Contact</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[420px] leading-[1.1] tracking-[-0.03em]">
+            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[420px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
               Get in Touch
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[420px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[420px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'We welcome conversations with Indian founders and business owners exploring long-term partnerships.'
                 : 'We welcome conversations with founders and business owners exploring long-term partnerships.'}
@@ -115,58 +115,6 @@ const Contact = () => {
                 </div>
               </motion.div>
             </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* Our Presence — logical with links */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <FadeIn>
-            <SectionLabel light>Our Presence</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-primary-foreground leading-[1.15] mb-6 md:mb-8">
-              {isIndia ? 'Operating Across India & the U.S.' : 'Headquartered in the U.S., Operating Globally'}
-            </h2>
-          </FadeIn>
-          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            <GlassCard index={0} variant="dark" className="p-6 md:p-8">
-              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-1.5">
-                {isIndia ? 'U.S. Headquarters' : 'Headquarters'}
-              </p>
-              <h3 className="font-serif text-[1.2rem] md:text-[1.4rem] text-primary-foreground leading-[1.2] mb-2">
-                San Diego, California
-              </h3>
-              <p className="font-sans text-[13px] text-primary-foreground/45 leading-[1.65] mb-4">
-                {isIndia
-                  ? 'Our founding team brings global PE experience from the U.S. to Indian markets.'
-                  : 'West Coast headquarters with nationwide investment focus across essential B2B services.'}
-              </p>
-              {isIndia && (
-                <Link to="/us" className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-gold/55 hover:text-gold/85 transition-colors duration-300 inline-flex items-center gap-1.5">
-                  View U.S. Operations →
-                </Link>
-              )}
-            </GlassCard>
-
-            <GlassCard index={1} variant="dark" className="p-6 md:p-8">
-              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-1.5">
-                {isIndia ? 'India Operations' : 'East Coast & India'}
-              </p>
-              <h3 className="font-serif text-[1.2rem] md:text-[1.4rem] text-primary-foreground leading-[1.2] mb-2">
-                {isIndia ? 'GK II, Delhi' : 'New York City & Delhi'}
-              </h3>
-              <p className="font-sans text-[13px] text-primary-foreground/45 leading-[1.65] mb-4">
-                {isIndia
-                  ? 'India team based in Delhi with a network spanning key industrial regions nationwide.'
-                  : 'East Coast deal sourcing plus our India team for cross-border opportunities.'}
-              </p>
-              {!isIndia && (
-                <Link to="/india" className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-gold/55 hover:text-gold/85 transition-colors duration-300 inline-flex items-center gap-1.5">
-                  View India Operations →
-                </Link>
-              )}
-            </GlassCard>
           </div>
         </div>
       </section>

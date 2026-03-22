@@ -47,12 +47,12 @@ const About = () => {
             <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em]">
-              {isIndia ? 'Building Enduring Value Across India' : 'Values-Driven Investing'}
+            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : 'Values-Driven Investing'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[460px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[460px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies.'
                 : 'Combining long-term capital with operating expertise to help business owners build lasting institutions.'}
