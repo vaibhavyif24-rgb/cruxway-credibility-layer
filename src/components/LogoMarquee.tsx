@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import React, { forwardRef } from 'react';
 
 interface LogoItem {
   src: string;
