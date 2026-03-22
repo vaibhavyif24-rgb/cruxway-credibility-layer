@@ -32,12 +32,64 @@ const investmentProfile = {
 };
 
 const usSectors = [
-  { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance', icon: '⚡' },
-  { label: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services', icon: '🌿' },
-  { label: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management', icon: '🏢' },
-  { label: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions', icon: '⚙️' },
-  { label: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services', icon: '🛡️' },
-  { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries', icon: '📦' },
+  {
+    label: 'Electrical & Infrastructure',
+    desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Environmental Services',
+    desc: 'Compliance-driven remediation, waste management, and sustainability services',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L12 14l-4 2c.5-2.5 2.5-6 8-8l1-4z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Facility Services',
+    desc: 'Building maintenance, security, and specialised facility management',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <rect x="4" y="2" width="16" height="20" rx="2" />
+        <path d="M9 22v-4h6v4" /><line x1="9" y1="6" x2="10" y2="6" /><line x1="14" y1="6" x2="15" y2="6" />
+        <line x1="9" y1="10" x2="10" y2="10" /><line x1="14" y1="10" x2="15" y2="10" />
+        <line x1="9" y1="14" x2="10" y2="14" /><line x1="14" y1="14" x2="15" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Engineering & Technical',
+    desc: 'Inspection, testing, calibration, and specialised engineering solutions',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Compliance & Safety',
+    desc: 'Regulatory compliance, audit, and risk management services',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Industrial Distribution',
+    desc: 'Specialised parts, equipment, and supply chain solutions for essential industries',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <rect x="1" y="6" width="22" height="12" rx="2" /><path d="M1 10h22" /><path d="M8 6v12" /><path d="M16 6v12" />
+      </svg>
+    ),
+  },
 ];
 
 /** Core criteria — unique to this page, not on Home */
