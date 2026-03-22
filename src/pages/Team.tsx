@@ -4,6 +4,7 @@ import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/componen
 import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
+import DarkSectionEffects from '@/components/DarkSectionEffects';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
@@ -199,7 +200,7 @@ const allLogos = [
 ];
 
 /* ─── Deal Logo Marquee ─── */
-const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration?: number }) => {
+const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-transparent' }: { logos: LogoItem[]; duration?: number; bgClass?: string }) => {
   const [hovered, setHovered] = useState(false);
   const doubled = [...logos, ...logos];
   const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
@@ -210,8 +211,8 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r from-background to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l from-background to-transparent" />
+      <div className={`absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r ${bgClass}`} />
+      <div className={`absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l ${bgClass}`} />
       <motion.div
         className="flex items-center gap-6 md:gap-7 lg:gap-10 w-max"
         animate={{ x: ['0%', '-50%'] }}
@@ -227,50 +228,7 @@ const DealLogoMarquee = ({ logos, duration = 20 }: { logos: LogoItem[]; duration
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[28px] md:h-[34px] lg:h-[40px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain"
-              style={{
-                filter: hovered ? 'none' : goldFilter,
-                opacity: hovered ? 1 : 0.8,
-                transform: logo.scale ? `scale(${logo.scale})` : undefined,
-              }}
-            />
-          </div>
-        ))}
-      </motion.div>
-    </div>
-  );
-};
-
-/* ─── Deal Logo Marquee (cream bg variant) ─── */
-const DealLogoMarqueeCream = ({ logos, duration = 20 }: { logos: LogoItem[]; duration?: number }) => {
-  const [hovered, setHovered] = useState(false);
-  const doubled = [...logos, ...logos];
-  const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
-
-  return (
-    <div
-      className="relative overflow-hidden py-1"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r from-cream to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l from-cream to-transparent" />
-      <motion.div
-        className="flex items-center gap-6 md:gap-20 lg:gap-28 w-max"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
-      >
-        {doubled.map((logo, i) => (
-          <div
-            key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[32px] md:h-[38px] lg:h-[44px]"
-            style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
-          >
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              loading="lazy"
-              className="h-[28px] md:h-[34px] lg:h-[40px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain"
+              className="h-[28px] md:h-[34px] lg:h-[40px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
@@ -295,20 +253,18 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
       <>{children}</>
     );
 
+  const fadeGradientClass = creamBg ? 'from-cream to-transparent' : 'from-background to-transparent';
+
   return (
     <FadeIn ref={ref} delay={index * 0.08}>
-      <motion.div
-        whileHover={{ backgroundColor: creamBg ? 'hsl(40 25% 92% / 0.6)' : 'hsl(40 18% 95% / 0.5)' }}
-        transition={{ duration: 0.3 }}
-        className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden"
-      >
+      <div className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden">
         <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
           {/* Photo + Identity */}
           <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
             <LinkedWrapper className="group shrink-0">
               {member.photo ? (
                 <div className="relative w-[72px] h-[72px] md:w-[120px] md:h-[120px] md:mb-4">
-                  {/* Gold ring on hover */}
+                  {/* Gold ring on hover — only around image */}
                   <motion.div
                     className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/25 transition-colors duration-700"
                     style={{ margin: -3 }}
@@ -332,14 +288,14 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </LinkedWrapper>
             <div>
               <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground dark:text-primary-foreground tracking-[-0.02em] leading-[1.2]">
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
                   {member.name}
                 </h3>
                 {member.linkedIn && (
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
                 )}
               </LinkedWrapper>
-              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim dark:text-gold mt-1">
+              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
                 {member.role}
               </p>
             </div>
@@ -347,14 +303,14 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
           {/* Bio */}
           <div className="md:col-span-9 overflow-hidden">
-            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground dark:text-primary-foreground/60 leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
               {member.summary}
             </p>
             <ul className="space-y-1.5 md:space-y-2">
               {member.highlights.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 dark:text-primary-foreground/50 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
+                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
@@ -368,16 +324,12 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                 <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
                   Select Investments &amp; Deals
                 </p>
-                {creamBg ? (
-                  <DealLogoMarqueeCream logos={member.dealLogos} />
-                ) : (
-                  <DealLogoMarquee logos={member.dealLogos} />
-                )}
+                <DealLogoMarquee logos={member.dealLogos} bgClass={fadeGradientClass} />
               </div>
             )}
           </div>
         </div>
-      </motion.div>
+      </div>
     </FadeIn>
   );
 });
@@ -409,9 +361,7 @@ const Team = () => {
     <div className="overflow-hidden">
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-gold/[0.015] rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute top-1/4 left-1/4 w-[250px] h-[250px] bg-gold/[0.008] rounded-full blur-[80px] pointer-events-none" />
+        <DarkSectionEffects variant="hero" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
           <FadeIn>
             <SectionLabel light>Team</SectionLabel>
@@ -515,7 +465,7 @@ const Team = () => {
       )}
 
       {/* Institutional Experience Marquee */}
-      <div>
+      <div className="bg-background">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 pb-6">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>

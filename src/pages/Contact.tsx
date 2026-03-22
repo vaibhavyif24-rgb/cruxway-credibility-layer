@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import GlassCard from '@/components/GlassCard';
+import CinematicHero from '@/components/CinematicHero';
 import { Link } from 'react-router-dom';
+
+import heroIndiaImage from '@/assets/hero-india-business.jpg';
+import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
 
 const Contact = () => {
   const { region } = useRegion();
@@ -15,20 +19,21 @@ const Contact = () => {
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
+      {/* Hero — cinematic region-specific */}
+      <section className="relative text-primary-foreground overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end">
+        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
         <DarkSectionEffects variant="hero" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-18">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-18">
           <FadeIn>
             <SectionLabel light>Contact</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-primary-foreground max-w-[420px] leading-[1.1] tracking-[-0.03em]">
+            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[420px] leading-[1.1] tracking-[-0.03em]">
               Get in Touch
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.75] mt-5 max-w-[420px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[420px]">
               {isIndia
                 ? 'We welcome conversations with Indian founders and business owners exploring long-term partnerships.'
                 : 'We welcome conversations with founders and business owners exploring long-term partnerships.'}
@@ -53,7 +58,7 @@ const Contact = () => {
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="block group h-full"
               >
-                <div className="relative border border-border rounded-sm p-6 md:p-8 overflow-hidden transition-all duration-500 hover:border-gold/25 bg-background/60 dark:bg-card/40 backdrop-blur-sm h-full glass-card">
+                <div className="relative border border-border rounded-sm p-6 md:p-8 overflow-hidden transition-all duration-500 hover:border-gold/25 bg-background/60 backdrop-blur-sm h-full glass-card">
                   <span className="absolute top-0 left-0 w-0 h-px bg-gold/30 group-hover:w-8 transition-all duration-500" />
                   <span className="absolute top-0 left-0 h-0 w-px bg-gold/30 group-hover:h-8 transition-all duration-500" />
 
@@ -86,7 +91,7 @@ const Contact = () => {
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="group h-full"
               >
-                <div className="relative border border-border rounded-sm p-6 md:p-8 overflow-hidden transition-all duration-500 hover:border-gold/25 bg-background/60 dark:bg-card/40 backdrop-blur-sm h-full glass-card">
+                <div className="relative border border-border rounded-sm p-6 md:p-8 overflow-hidden transition-all duration-500 hover:border-gold/25 bg-background/60 backdrop-blur-sm h-full glass-card">
                   <span className="absolute top-0 left-0 w-0 h-px bg-gold/30 group-hover:w-8 transition-all duration-500" />
                   <span className="absolute top-0 left-0 h-0 w-px bg-gold/30 group-hover:h-8 transition-all duration-500" />
 
