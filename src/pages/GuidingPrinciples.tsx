@@ -91,7 +91,7 @@ const GuidingPrinciples = () => {
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr">
             {principles.map((p, i) => (
-              <GlassCard key={p.t} index={i} className="p-5 md:p-7">
+              <GlassCard key={p.t} index={i} className="p-5 md:p-7 h-full">
                 <motion.span
                   className="font-serif text-[1.5rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-500 block mb-3"
                   initial={{ opacity: 0, scale: 0.8 }}

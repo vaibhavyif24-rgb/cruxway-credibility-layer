@@ -32,7 +32,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           whileHover={hover ? { y: -4 } : {}}
           transition={{ duration: 0.25, ease: 'easeOut' }}
           className={`
-            relative overflow-hidden rounded-sm
+            relative overflow-hidden rounded-sm h-full
             ${isDark
               ? 'bg-primary-foreground/[0.04] border border-primary-foreground/[0.08] hover:border-gold/20'
               : 'bg-background/60 dark:bg-card/40 border border-border/60 hover:border-gold/25 dark:border-primary-foreground/[0.06]'

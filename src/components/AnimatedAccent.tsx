@@ -103,17 +103,18 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
           </>
         ) : variant === 'criteria' ? (
           <>
-            <motion.text x="200" y="24" fontSize="7" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="600" letterSpacing="0.22em" {...fadeIn(0.15, 0.54)}>
+            {/* Title — prominent header */}
+            <motion.text x="200" y="28" fontSize="10" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="600" letterSpacing="0.18em" {...fadeIn(0.15, 0.6)}>
               FROM DISCOVERY TO PARTNERSHIP
             </motion.text>
-            <motion.line x1="106" y1="31" x2="294" y2="31" stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(0.25, 0.75)} opacity={0.2} />
+            <motion.line x1="90" y1="36" x2="310" y2="36" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(0.25, 0.75)} opacity={0.22} />
 
             {(() => {
               const stages = [
-                { x: 24, y: 64, w: 72, h: 112, num: '01', title: 'DISCOVERY', sub: ['Market mapping', 'Sector thesis'] },
-                { x: 110, y: 64, w: 72, h: 112, num: '02', title: 'EVALUATION', sub: ['Fit scoring', 'Cultural alignment'] },
-                { x: 196, y: 64, w: 72, h: 112, num: '03', title: 'DILIGENCE', sub: ['Operational review', 'Financial quality'] },
-                { x: 282, y: 64, w: 72, h: 112, num: '04', title: 'STRUCTURING', sub: ['Terms design', 'Governance plan'] },
+                { x: 12, y: 52, w: 80, h: 130, num: '01', title: 'DISCOVERY', sub: ['Market mapping', 'Sector thesis'] },
+                { x: 104, y: 52, w: 80, h: 130, num: '02', title: 'EVALUATION', sub: ['Fit scoring', 'Cultural alignment'] },
+                { x: 196, y: 52, w: 80, h: 130, num: '03', title: 'DILIGENCE', sub: ['Operational review', 'Financial quality'] },
+                { x: 288, y: 52, w: 80, h: 130, num: '04', title: 'STRUCTURING', sub: ['Terms design', 'Governance plan'] },
               ];
 
               return (
@@ -124,74 +125,83 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
 
                     return (
                       <g key={stage.title}>
+                        {/* Card background */}
                         <motion.rect
                           x={stage.x}
                           y={stage.y}
                           width={stage.w}
                           height={stage.h}
-                          rx="8"
+                          rx="6"
                           stroke={goldStroke}
-                          strokeWidth="0.45"
+                          strokeWidth="0.5"
                           fill={goldFill}
                           opacity={0.06}
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 0.08, y: 0 }}
-                          whileHover={{ opacity: 0.14, y: -4 }}
+                          whileHover={{ opacity: 0.16, y: -4 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.55, delay: 0.3 + index * 0.12, ease: [0.22, 1, 0.36, 1] }}
                         />
+                        {/* Card border */}
                         <motion.rect
                           x={stage.x}
                           y={stage.y}
                           width={stage.w}
                           height={stage.h}
-                          rx="8"
+                          rx="6"
                           stroke={goldStroke}
-                          strokeWidth="0.55"
+                          strokeWidth="0.6"
                           fill="none"
                           {...draw(0.38 + index * 0.12, 0.7)}
-                          opacity={0.28}
+                          opacity={0.3}
                         />
-                        <motion.circle cx={stage.x + 16} cy={stage.y + 16} r="10" fill={goldFill} initial={{ scale: 0.7, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.85 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.45 + index * 0.12 }} />
-                        <motion.text x={stage.x + 16} y={stage.y + 16.5} fontSize="4.8" fill="hsl(var(--primary))" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-sans)" fontWeight="700" {...fadeIn(0.6 + index * 0.12, 1)}>
+                        {/* Number badge */}
+                        <motion.circle cx={stage.x + 18} cy={stage.y + 18} r="11" fill={goldFill} initial={{ scale: 0.7, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.85 }} viewport={{ once: true }} transition={{ duration: 0.45, delay: 0.45 + index * 0.12 }} />
+                        <motion.text x={stage.x + 18} y={stage.y + 19} fontSize="6" fill="hsl(var(--primary))" textAnchor="middle" dominantBaseline="middle" fontFamily="var(--font-sans)" fontWeight="700" {...fadeIn(0.6 + index * 0.12, 1)}>
                           {stage.num}
                         </motion.text>
-                        <motion.text x={stage.x + 14} y={stage.y + 40} fontSize="4.85" fill={goldStroke} fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.08em" {...fadeIn(0.72 + index * 0.12, 0.6)}>
+                        {/* Stage title */}
+                        <motion.text x={stage.x + 14} y={stage.y + 46} fontSize="6.5" fill={goldStroke} fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.08em" {...fadeIn(0.72 + index * 0.12, 0.65)}>
                           {stage.title}
                         </motion.text>
-                        <motion.line x1={stage.x + 14} y1={stage.y + 47} x2={stage.x + stage.w - 14} y2={stage.y + 47} stroke={goldStroke} strokeWidth="0.25" fill="none" {...draw(0.82 + index * 0.12, 0.4)} opacity={0.18} />
+                        {/* Divider */}
+                        <motion.line x1={stage.x + 14} y1={stage.y + 54} x2={stage.x + stage.w - 14} y2={stage.y + 54} stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(0.82 + index * 0.12, 0.4)} opacity={0.2} />
+                        {/* Sub-pointers */}
                         {stage.sub.map((line, subIndex) => (
                           <g key={line}>
-                            <motion.circle cx={stage.x + 14} cy={stage.y + 67 + subIndex * 19} r="1.5" fill={goldFill} {...nodeAppear(0.95 + index * 0.12 + subIndex * 0.06, 0.45)} />
-                            <motion.text x={stage.x + 20} y={stage.y + 69 + subIndex * 19} fontSize="4.1" fill={goldStroke} fontFamily="var(--font-sans)" {...fadeIn(1.0 + index * 0.12 + subIndex * 0.06, 0.34)}>
+                            <motion.circle cx={stage.x + 16} cy={stage.y + 74 + subIndex * 22} r="2" fill={goldFill} {...nodeAppear(0.95 + index * 0.12 + subIndex * 0.06, 0.5)} />
+                            <motion.text x={stage.x + 22} y={stage.y + 76 + subIndex * 22} fontSize="5.5" fill={goldStroke} fontFamily="var(--font-sans)" {...fadeIn(1.0 + index * 0.12 + subIndex * 0.06, 0.42)}>
                               {line}
                             </motion.text>
                           </g>
                         ))}
 
+                        {/* Connecting arrow to next stage */}
                         {next && (
                           <>
-                            <motion.line x1={stage.x + stage.w + 8} y1={centerY} x2={next.x - 8} y2={centerY} stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(0.7 + index * 0.12, 0.45)} opacity={0.28} />
-                            <motion.path d={`M ${next.x - 12} ${centerY - 3} L ${next.x - 7} ${centerY} L ${next.x - 12} ${centerY + 3}`} stroke={goldStroke} strokeWidth="0.48" fill="none" {...draw(0.8 + index * 0.12, 0.25)} opacity={0.28} />
+                            <motion.line x1={stage.x + stage.w + 4} y1={centerY} x2={next.x - 4} y2={centerY} stroke={goldStroke} strokeWidth="1.0" fill="none" {...draw(0.7 + index * 0.12, 0.45)} opacity={0.3} />
+                            <motion.path d={`M ${next.x - 9} ${centerY - 4} L ${next.x - 3} ${centerY} L ${next.x - 9} ${centerY + 4}`} stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(0.8 + index * 0.12, 0.25)} opacity={0.3} />
                           </>
                         )}
                       </g>
                     );
                   })}
 
-                  <motion.path d="M 370 92 L 388 120 L 370 148 L 352 120 Z" stroke={goldStroke} strokeWidth="0.65" fill="none" {...draw(1.15, 0.75)} opacity={0.4} />
-                  <motion.circle cx="370" cy="120" r="5.5" fill={goldFill} {...nodeAppear(1.3, 0.6)} />
-                  <motion.line x1="354" y1="120" x2="350" y2="120" stroke={goldStroke} strokeWidth="0.65" fill="none" {...draw(1.0, 0.2)} opacity={0.28} />
-                  <motion.text x="370" y="164" fontSize="4.8" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.12em" {...fadeIn(1.45, 0.58)}>
+                  {/* Partnership diamond endpoint */}
+                  <motion.path d="M 382 88 L 396 117 L 382 146 L 368 117 Z" stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(1.15, 0.75)} opacity={0.45} />
+                  <motion.circle cx="382" cy="117" r="6" fill={goldFill} {...nodeAppear(1.3, 0.65)} />
+                  <motion.text x="382" y="162" fontSize="6" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="700" letterSpacing="0.12em" {...fadeIn(1.45, 0.6)}>
                     PARTNERSHIP
                   </motion.text>
 
-                  <motion.text x="200" y="219" fontSize="6" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" {...fadeIn(1.55, 0.34)}>
+                  {/* Quote */}
+                  <motion.text x="200" y="210" fontSize="7" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" {...fadeIn(1.55, 0.38)}>
                     Structured process. Disciplined judgment.
                   </motion.text>
-                  <motion.line x1="52" y1="244" x2="348" y2="244" stroke={goldStroke} strokeWidth="0.26" fill="none" {...draw(1.65, 0.65)} opacity={0.12} />
-                  <motion.line x1="52" y1="257" x2="382" y2="257" stroke={goldStroke} strokeWidth="0.32" fill="none" {...draw(1.8, 0.9)} opacity={0.16} />
-                  <motion.line x1="52" y1="257" x2="382" y2="257" stroke={goldStroke} strokeWidth="0.62" fill="none" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.34 }} viewport={{ once: true }} transition={{ duration: 1.8, delay: 1.95, ease: [0.22, 1, 0.36, 1] }} />
+
+                  {/* Progress bar */}
+                  <motion.line x1="12" y1="228" x2="396" y2="228" stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(1.65, 0.65)} opacity={0.14} />
+                  <motion.line x1="12" y1="228" x2="396" y2="228" stroke={goldStroke} strokeWidth="0.7" fill="none" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.35 }} viewport={{ once: true }} transition={{ duration: 1.8, delay: 1.8, ease: [0.22, 1, 0.36, 1] }} />
                 </>
               );
             })()}
