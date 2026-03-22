@@ -332,14 +332,14 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </LinkedWrapper>
             <div>
               <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground dark:text-primary-foreground tracking-[-0.02em] leading-[1.2]">
                   {member.name}
                 </h3>
                 {member.linkedIn && (
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
                 )}
               </LinkedWrapper>
-              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
+              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim dark:text-gold mt-1">
                 {member.role}
               </p>
             </div>
@@ -347,14 +347,14 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
           {/* Bio */}
           <div className="md:col-span-9 overflow-hidden">
-            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
+            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground dark:text-primary-foreground/60 leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
               {member.summary}
             </p>
             <ul className="space-y-1.5 md:space-y-2">
               {member.highlights.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
+                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 dark:text-primary-foreground/50 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>

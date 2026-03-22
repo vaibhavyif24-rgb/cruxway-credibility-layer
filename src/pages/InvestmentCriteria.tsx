@@ -1,12 +1,10 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion, useInView } from 'framer-motion';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import AnimatedAccent from '@/components/AnimatedAccent';
 import GlassCard from '@/components/GlassCard';
-import { useRef } from 'react';
 
 const usSectors = [
   { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
@@ -18,13 +16,13 @@ const usSectors = [
 ];
 
 const investmentCriteria = [
-  { t: 'Target Sectors', d: 'Essential B2B services in regulated, compliance-driven industries where reliability and deep client relationships define long-term value.' },
-  { t: 'All Stages', d: 'We invest across all stages of a company\'s lifecycle, from founder-led transitions to mature businesses seeking growth.' },
-  { t: 'Underserved Markets', d: 'We focus on overlooked segments of the lower middle market where institutional capital has been absent.' },
-  { t: 'Ownership Transition', d: 'We partner with founders navigating succession, providing clean transitions that preserve the legacy they built.' },
-  { t: 'Proven Persistency', d: 'Businesses with demonstrated customer retention, recurring revenue, and trust built over years of consistent delivery.' },
-  { t: 'Cultural Fit', d: 'Alignment of values between Cruxway and management is non-negotiable. We invest in people as much as businesses.' },
-  { t: 'Established Customer Trust', d: 'Companies with long-standing client relationships and high switching costs form our investment thesis foundation.' },
+  { t: 'Target Sectors', d: 'Essential B2B services in regulated, compliance-driven industries with deep client relationships.' },
+  { t: 'All Stages', d: 'From founder-led transitions to mature businesses seeking operational improvement and growth.' },
+  { t: 'Underserved Markets', d: 'Overlooked segments of the lower middle market where institutional capital has been absent.' },
+  { t: 'Ownership Transition', d: 'Clean transitions that preserve the legacy founders built over decades.' },
+  { t: 'Proven Persistency', d: 'Demonstrated customer retention, recurring revenue, and trust built over years.' },
+  { t: 'Cultural Fit', d: 'Alignment of values is non-negotiable. We invest in people as much as businesses.' },
+  { t: 'Customer Trust', d: 'Long-standing client relationships with high switching costs form our thesis foundation.' },
 ];
 
 const InvestmentCriteria = () => {
@@ -33,16 +31,16 @@ const InvestmentCriteria = () => {
 
   const approach = isIndia
     ? [
-        { t: 'Low Market Focus', d: 'We target high-potential businesses in India\'s under-served lower middle market where operational improvement unlocks outsized returns.' },
-        { t: 'Founder Alignment', d: 'We design partnerships around the founder\'s vision and growth timeline, not around fund constraints.' },
-        { t: 'Operational Partnership', d: 'We work closely with management teams to drive meaningful, sustainable outcomes across Indian markets.' },
-        { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We allocate capital toward the highest-return uses with discipline.' },
+        { t: 'Low Market Focus', d: 'High-potential businesses where operational improvement unlocks outsized returns.' },
+        { t: 'Founder Alignment', d: 'Partnerships around the founder\'s vision, not fund constraints.' },
+        { t: 'Operational Partnership', d: 'Driving meaningful, sustainable outcomes across Indian markets.' },
+        { t: 'Disciplined Capital', d: 'Capital allocated toward highest-return uses with discipline.' },
       ]
     : [
-        { t: 'Long-Term Alignment', d: 'We design hold periods around the growth opportunity, not around fund constraints. Our capital is patient by design.' },
-        { t: 'Essential Services', d: 'We focus on regulated, compliance-driven U.S. industries where trust and deep client relationships create lasting advantages.' },
-        { t: 'Operational Partnership', d: 'We work closely with management teams to professionalise operations and drive sustainable growth.' },
-        { t: 'Disciplined Capital', d: 'Leverage is an enabler, not a strategy. We protect downside and invest for long-term upside.' },
+        { t: 'Long-Term Alignment', d: 'Hold periods designed around the growth opportunity. Our capital is patient by design.' },
+        { t: 'Essential Services', d: 'Regulated industries where trust and deep relationships create lasting advantages.' },
+        { t: 'Operational Partnership', d: 'Professionalising operations and driving sustainable growth alongside management.' },
+        { t: 'Disciplined Capital', d: 'Protecting downside and investing for long-term upside.' },
       ];
 
   return (
@@ -60,7 +58,7 @@ const InvestmentCriteria = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/45 leading-[1.75] mt-5 max-w-[480px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.75] mt-5 max-w-[480px]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies.'
                 : 'Combining long-term capital with operating expertise to help business owners build lasting institutions.'}
@@ -76,30 +74,32 @@ const InvestmentCriteria = () => {
       {/* Our Approach */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-14">
-            <div className="lg:col-span-5">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+            <div>
               <FadeIn>
                 <SectionLabel>Our Approach</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15]">
                   How We Partner With Founders
                 </h2>
-                <GoldRule className="mt-3" />
+                <GoldRule className="mt-3 mb-5" />
               </FadeIn>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {approach.map((item, i) => (
+                  <GlassCard key={item.t} index={i} className="p-4 md:p-5" hover={false}>
+                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1.5">{item.t}</h4>
+                    <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65]">{item.d}</p>
+                  </GlassCard>
+                ))}
+              </div>
             </div>
-            <div className="lg:col-span-7">
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8]">
-                  {isIndia
-                    ? 'Cruxway invests in majority stakes in founder-led and family-owned businesses across India\'s lower middle market. We focus on sectors where operational improvement and deep client relationships define long-term value.'
-                    : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
-                </p>
-              </FadeIn>
-            </div>
+            <FadeIn delay={0.12}>
+              <AnimatedAccent variant="industry" />
+            </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* Investment Criteria — dark with glass cards */}
+      {/* Investment Criteria — dark */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
@@ -114,33 +114,7 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Partnership — animated accent */}
-      <section className="relative bg-background overflow-hidden">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <FadeIn>
-              <AnimatedAccent variant="industry" />
-            </FadeIn>
-            <FadeIn delay={0.12}>
-              <SectionLabel>Partnership Model</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-4">
-                Built for Owners Thinking Long-Term
-              </h2>
-              <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mb-4">
-                {isIndia
-                  ? 'We believe the best businesses in India were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, customers, and communities.'
-                  : 'We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, customers, and communities.'}
-              </p>
-              <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8]">
-                Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
-              </p>
-              <GoldRule className="mt-5" />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* Target Sectors — US only, bento glass cards */}
+      {/* Target Sectors — US only, glass cards */}
       {!isIndia && (
         <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <div className="max-w-[1080px] mx-auto">
@@ -178,14 +152,14 @@ const InvestmentCriteria = () => {
               <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15] mb-4">
                 {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/45 leading-[1.8] mb-6">
+              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.8] mb-6">
                 {isIndia
-                  ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                  : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation.'}
+                  ? 'If you\'re building a business meant to last, we\'d welcome a conversation about partnership.'
+                  : 'If you\'re a founder considering your next chapter, we\'d welcome the conversation.'}
               </p>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/45 hover:border-gold/30 hover:text-primary-foreground/70 transition-all duration-300"
+                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75 transition-all duration-300"
               >
                 Get in Touch
               </Link>
