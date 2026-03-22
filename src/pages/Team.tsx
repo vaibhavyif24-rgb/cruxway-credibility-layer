@@ -104,7 +104,7 @@ const bensonDealLogos: LogoItem[] = [
 const founders: TeamMember[] = [
   {
     name: 'Harin Gupta',
-    role: 'Co-Founder',
+    role: 'Managing Partner',
     photo: harinPhoto,
     linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
