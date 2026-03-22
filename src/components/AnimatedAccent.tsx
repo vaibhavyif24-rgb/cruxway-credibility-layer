@@ -38,81 +38,130 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
         {variant === 'partnership' ? (
           <>
             {/* Axes */}
-            <motion.line x1="50" y1="250" x2="370" y2="250" {...draw(0.1, 0.8)} stroke={goldStroke} strokeWidth="0.5" fill="none" opacity={0.3} />
-            <motion.line x1="50" y1="250" x2="50" y2="40" {...draw(0.2, 0.8)} stroke={goldStroke} strokeWidth="0.5" fill="none" opacity={0.3} />
+            <motion.line x1="50" y1="250" x2="370" y2="250" {...draw(0.1, 0.8)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.35} />
+            <motion.line x1="50" y1="250" x2="50" y2="40" {...draw(0.2, 0.8)} stroke={goldStroke} strokeWidth="0.6" fill="none" opacity={0.35} />
 
             {/* Subtle grid lines */}
             {[200, 150, 100].map((y, i) => (
-              <motion.line key={y} x1="50" y1={y} x2="370" y2={y} {...draw(0.3 + i * 0.1, 0.6)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.1} strokeDasharray="4 6" />
+              <motion.line key={y} x1="50" y1={y} x2="370" y2={y} {...draw(0.3 + i * 0.1, 0.6)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.08} strokeDasharray="4 6" />
             ))}
 
-            {/* Area fill under curve */}
+            {/* Vertical grid lines */}
+            {[120, 180, 240, 300].map((x, i) => (
+              <motion.line key={x} x1={x} y1="50" x2={x} y2="250" {...draw(0.35 + i * 0.08, 0.5)} stroke={goldStroke} strokeWidth="0.15" fill="none" opacity={0.06} strokeDasharray="3 5" />
+            ))}
+
+            {/* Area fill under curve with gradient feel */}
             <motion.path
-              d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 45 L 345 250 L 60 250 Z"
+              d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 48 L 345 250 L 60 250 Z"
               fill={goldFill}
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.06 }}
+              whileInView={{ opacity: hovered ? 0.12 : 0.06 }}
               viewport={{ once: true }}
               transition={{ duration: 1.2, delay: 0.5 }}
+              animate={{ opacity: hovered ? 0.12 : 0.06 }}
+            />
+
+            {/* Secondary shadow curve for depth */}
+            <motion.path
+              d="M 60 242 C 90 239 120 232 150 220 C 180 206 210 182 240 152 C 270 118 300 84 345 56"
+              {...draw(0.35, 2.0)}
+              stroke={goldStroke}
+              strokeWidth="0.4"
+              fill="none"
+              opacity={0.1}
             />
 
             {/* Main growth curve */}
             <motion.path
-              d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 45"
+              d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 48"
               {...draw(0.4, 2.2)}
               stroke={goldStroke}
-              strokeWidth="1.2"
+              strokeWidth="1.5"
               fill="none"
-              opacity={0.7}
+              opacity={0.75}
+              strokeLinecap="round"
             />
+
+            {/* Animated tracer dot along curve on hover */}
+            {hovered && (
+              <motion.circle
+                r="2.5"
+                fill={goldFill}
+                opacity={0.8}
+                animate={{
+                  cx: [60, 120, 180, 240, 300, 345],
+                  cy: [238, 228, 200, 145, 75, 48],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              />
+            )}
 
             {/* Data points with hover pulse */}
             {[
               { x: 60, y: 238 }, { x: 120, y: 228 }, { x: 180, y: 200 },
-              { x: 240, y: 145 }, { x: 300, y: 75 }, { x: 345, y: 45 },
+              { x: 240, y: 145 }, { x: 300, y: 75 }, { x: 345, y: 48 },
             ].map((p, i) => (
               <g key={i}>
+                {/* Outer ring on hover */}
+                <motion.circle
+                  cx={p.x} cy={p.y} r="6"
+                  stroke={goldStroke} strokeWidth="0.5" fill="none"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={hovered ? { opacity: 0.2, scale: 1 } : { opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                />
+                {/* Core dot */}
                 <motion.circle
                   cx={p.x} cy={p.y} r="3"
                   fill={goldFill}
-                  {...nodeAppear(1.0 + i * 0.12, 0.6)}
-                  animate={hovered ? { r: [3, 4.5, 3], opacity: [0.6, 0.9, 0.6] } : {}}
-                  transition={hovered ? { duration: 1.5, repeat: Infinity, delay: i * 0.15 } : { duration: 0.5, delay: 1.0 + i * 0.12 }}
+                  {...nodeAppear(1.0 + i * 0.12, 0.65)}
+                  animate={hovered ? { r: [3, 4, 3], opacity: [0.65, 0.95, 0.65] } : {}}
+                  transition={hovered ? { duration: 1.8, repeat: Infinity, delay: i * 0.12 } : { duration: 0.5, delay: 1.0 + i * 0.12 }}
                 />
                 {/* Vertical drop line */}
                 <motion.line
                   x1={p.x} y1={p.y} x2={p.x} y2={250}
                   {...draw(1.2 + i * 0.08, 0.5)}
-                  stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.1} strokeDasharray="2 3"
+                  stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.08} strokeDasharray="2 3"
                 />
               </g>
             ))}
 
             {/* Glow at peak */}
             <motion.circle
-              cx="345" cy="45" r="12"
+              cx="345" cy="48" r="14"
               fill={goldFill}
-              animate={{ opacity: [0.02, 0.1, 0.02], scale: [1, 1.4, 1] }}
+              animate={{ opacity: [0.02, 0.1, 0.02], scale: [1, 1.5, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* Arrow tip at peak */}
-            <motion.path
-              d="M 340 50 L 345 40 L 350 50"
-              {...draw(2.0, 0.6)}
-              stroke={goldStroke} strokeWidth="0.8" fill="none" opacity={0.5}
+            {/* Secondary glow ring */}
+            <motion.circle
+              cx="345" cy="48" r="20"
+              stroke={goldStroke} strokeWidth="0.3" fill="none"
+              animate={{ opacity: [0, 0.08, 0], scale: [0.8, 1.2, 0.8] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
             />
 
-            {/* Axis labels */}
-            <motion.text x="210" y="268" fontSize="5" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" letterSpacing="0.15em" {...fadeIn(2.0, 0.2)}>
+            {/* Axis labels — larger and bolder */}
+            <motion.text x="210" y="270" fontSize="8" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="600" letterSpacing="0.2em" {...fadeIn(2.0, 0.55)}>
               TIME
             </motion.text>
-            <motion.text x="30" y="145" fontSize="5" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" letterSpacing="0.15em" transform="rotate(-90,30,145)" {...fadeIn(2.1, 0.2)}>
+            <motion.text x="28" y="145" fontSize="8" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" fontWeight="600" letterSpacing="0.2em" transform="rotate(-90,28,145)" {...fadeIn(2.1, 0.55)}>
               VALUE
             </motion.text>
 
+            {/* Tick marks on axes */}
+            {[100, 160, 220, 280, 340].map((x, i) => (
+              <motion.line key={`tx${x}`} x1={x} y1="250" x2={x} y2="254" {...draw(0.5 + i * 0.05, 0.3)} stroke={goldStroke} strokeWidth="0.4" opacity={0.2} />
+            ))}
+            {[200, 150, 100].map((y, i) => (
+              <motion.line key={`ty${y}`} x1="46" y1={y} x2="50" y2={y} {...draw(0.5 + i * 0.05, 0.3)} stroke={goldStroke} strokeWidth="0.4" opacity={0.2} />
+            ))}
+
             {/* Tagline */}
-            <motion.text x="200" y="288" fontSize="14" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
+            <motion.text x="200" y="290" fontSize="14" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
               "Building enduring value, together."
             </motion.text>
           </>
