@@ -113,7 +113,7 @@ const Home = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[14px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[520px]">
+            <p className="font-sans text-[14px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[520px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'We invest in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
                 : 'We invest in majority stakes in founder-led companies across the United States in essential B2B services, providing long-term capital and a commitment to preserving what works.'}

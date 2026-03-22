@@ -63,7 +63,7 @@ const InvestmentCriteria = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[480px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[480px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies.'
                 : 'Combining long-term capital with operating expertise to help business owners build lasting institutions.'}

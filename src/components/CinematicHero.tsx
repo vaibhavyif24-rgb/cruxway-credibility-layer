@@ -2,12 +2,11 @@ import { motion } from 'framer-motion';
 
 /**
  * Reusable cinematic hero background with Ken Burns zoom effect,
- * dark gradient overlay, and subtle gold geometric line accents.
- * Used across Home and About pages for consistent premium feel.
+ * dark gradient overlay, subtle gold geometric line accents,
+ * and a slow parallax drift for a premium feel.
  */
 interface CinematicHeroProps {
   imageSrc: string;
-  /** Overlay intensity — 'strong' for hero sections with text, 'medium' for secondary */
   overlay?: 'strong' | 'medium';
 }
 
@@ -28,12 +27,15 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Photo with Ken Burns cinematic zoom */}
+      {/* Photo with Ken Burns cinematic zoom + slow horizontal drift */}
       <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1.02 }}
-        animate={{ scale: 1.12 }}
-        transition={{ duration: 25, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
+        className="absolute inset-[-5%]"
+        initial={{ scale: 1.02, x: 0 }}
+        animate={{ scale: 1.14, x: [0, 12, -8, 0] }}
+        transition={{
+          scale: { duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+          x: { duration: 35, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+        }}
       >
         <img
           src={imageSrc}
@@ -44,14 +46,18 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         />
       </motion.div>
 
-      {/* Dark overlay for text readability */}
+      {/* Dark overlay — stronger gradient for maximum text readability */}
       <div
         className={`absolute inset-0 z-[1] ${
           overlay === 'strong'
-            ? 'bg-gradient-to-t from-navy-deep/90 via-prussian/70 to-navy-deep/60'
-            : 'bg-gradient-to-t from-navy-deep/85 via-prussian/60 to-navy-deep/50'
+            ? 'bg-gradient-to-t from-navy-deep/95 via-prussian/80 to-navy-deep/70'
+            : 'bg-gradient-to-t from-navy-deep/90 via-prussian/65 to-navy-deep/55'
         }`}
       />
+      {/* Extra vignette for edge darkening */}
+      <div className="absolute inset-0 z-[1]" style={{
+        background: 'radial-gradient(ellipse at center, transparent 40%, hsl(214 45% 8% / 0.5) 100%)'
+      }} />
 
       {/* Peripheral geometric gold lines */}
       <svg
@@ -98,6 +104,27 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         animate={{ opacity: [0, 0.7, 0.4] }}
         transition={{ duration: 3, delay: 1.5, ease: 'easeOut' }}
       />
+
+      {/* Floating light particles */}
+      {[...Array(5)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-0.5 h-0.5 rounded-full bg-gold/20 z-[2]"
+          style={{
+            left: `${15 + i * 18}%`,
+            top: `${30 + (i % 3) * 20}%`,
+          }}
+          initial={{ opacity: 0, y: 0 }}
+          animate={{ opacity: [0, 0.4, 0], y: [-10, -30] }}
+          transition={{
+            duration: 4 + i * 0.5,
+            delay: 2 + i * 0.8,
+            repeat: Infinity,
+            repeatDelay: 3 + i,
+            ease: 'easeOut',
+          }}
+        />
+      ))}
     </div>
   );
 };

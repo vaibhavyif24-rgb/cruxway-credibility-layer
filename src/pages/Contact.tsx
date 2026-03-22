@@ -33,7 +33,7 @@ const Contact = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/55 leading-[1.75] mt-5 max-w-[420px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[420px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'We welcome conversations with Indian founders and business owners exploring long-term partnerships.'
                 : 'We welcome conversations with founders and business owners exploring long-term partnerships.'}
