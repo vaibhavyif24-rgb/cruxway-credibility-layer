@@ -89,7 +89,7 @@ const GuidingPrinciples = () => {
             </h2>
             <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr">
             {principles.map((p, i) => (
               <GlassCard key={p.t} index={i} className="p-5 md:p-7">
                 <motion.span
