@@ -155,9 +155,11 @@ const InvestmentCriteria = () => {
               </FadeIn>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {approach.map((item, i) => (
-                  <GlassCard key={item.t} index={i} className="p-4 md:p-5" hover={false}>
-                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1.5">{item.t}</h4>
-                    <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65]">{item.d}</p>
+                  <GlassCard key={item.t} index={i} className="p-4 md:p-5 h-full" hover={false}>
+                    <div className="flex flex-col h-full">
+                      <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1.5">{item.t}</h4>
+                      <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] flex-1">{item.d}</p>
+                    </div>
                   </GlassCard>
                 ))}
               </div>
