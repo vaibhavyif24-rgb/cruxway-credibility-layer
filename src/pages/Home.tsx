@@ -115,8 +115,8 @@ const Home = () => {
           <FadeIn delay={0.14}>
             <p className="font-sans text-[14px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[520px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
-                ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
-                : 'We invest in majority stakes in founder-led companies across the United States in essential B2B services, providing long-term capital and a commitment to preserving what works.'}
+                ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
+                : 'Patient capital and hands-on partnership for founder-led businesses that keep America running.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -151,8 +151,8 @@ const Home = () => {
                 <SectionLabel>What We Do</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15]">
                   {isIndia
-                    ? 'Investing in & Building Companies Across India'
-                    : 'Investing in & Building Essential U.S. Companies'}
+                    ? <>Investing in & Building Companies Across <span className="text-gold">India</span></>
+                    : <>Investing in & Building Essential <span className="text-gold">U.S.</span> Companies</>}
                 </h2>
                 <GoldRule className="mt-3" />
               </FadeIn>
@@ -179,7 +179,7 @@ const Home = () => {
               <FadeIn>
                 <SectionLabel light>{isIndia ? 'The Opportunity' : 'Our Thesis'}</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15]">
-                  {isIndia ? 'Why India\'s Lower Middle Market' : 'Why U.S. Essential Services'}
+                  {isIndia ? <>Why <span className="text-gold">India's</span> Lower Middle Market</> : <>Why <span className="text-gold">U.S.</span> Essential Services</>}
                 </h2>
                 <GoldRule className="mt-3" />
               </FadeIn>

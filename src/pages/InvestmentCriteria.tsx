@@ -59,7 +59,7 @@ const InvestmentCriteria = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[600px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-              Investing Tailored to Each Company's Needs
+              {isIndia ? <>Investing Tailored to <span className="text-gold">India's</span> Needs</> : <>Investing Tailored to Each <span className="text-gold">Company's</span> Needs</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>

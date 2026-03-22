@@ -27,7 +27,7 @@ const Contact = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[420px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-              Get in Touch
+              Get in <span className="text-gold">Touch</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
