@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';

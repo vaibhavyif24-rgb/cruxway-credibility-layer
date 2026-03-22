@@ -89,6 +89,8 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
       </motion.div>
     </div>
   );
-};
+});
+
+LogoMarquee.displayName = 'LogoMarquee';
 
 export default LogoMarquee;
