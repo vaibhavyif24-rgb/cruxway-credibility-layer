@@ -1,45 +1,64 @@
 
+## Plan
 
-## Plan: Fix SVGs and Equalize Box Layouts
+### 1. Fix the About Us SVG in `src/components/AnimatedAccent.tsx`
+The current `partnership` variant is close, but the dart is visually broken into parts and does not read as a single straight hit into the bullseye.
 
-### 1. Partnership (Target/Dart) SVG — About Us Page
+Implementation:
+- Rebuild the dart as one clean, straight composition aimed exactly into the center point of the target.
+- Use a clearer shaft, a sharper symmetric tip, and balanced fins so it reads immediately as a dart.
+- Remove the stray center/extra line treatment that is making the target feel cluttered.
+- Keep the target rings, but simplify the composition so the eye focuses on the center hit.
+- Increase the tagline size and presence further so it feels intentional and legible, not secondary.
 
-**Issues identified:** The dart shape is unclear (just triangles), there are crosshair tick marks around the rings that clutter the design, and the tagline text is too small (fontSize="10.5").
+Design intent:
+- The graphic should communicate precision and partnership, not decoration.
+- The dart should terminate exactly at the bullseye visually, with no ambiguity.
 
-**Fix:**
-- Redesign the dart with a clear, recognizable shape: a long shaft line, a proper pointed tip at center (200,126), and two distinct angled fins/fletching at the tail end
-- Remove the 8 tick marks around the outer ring (the `[0, 45, 90, 135, ...].map` section)
-- Increase tagline font size from `10.5` to `16` and make it bolder with higher opacity (0.8+)
-- Keep the concentric target rings and impact ripple as-is
+### 2. Redesign the Criteria SVG in `src/components/AnimatedAccent.tsx`
+The current `criteria` variant is too cramped horizontally, the hierarchy is weak, and the partnership endpoint floating on the far right makes the layout feel unfinished.
 
-### 2. "What Guides Us" Boxes — GuidingPrinciples Page
+Implementation:
+- Rebuild the layout into a clean top-to-bottom structure:
+  - Title clearly at the top
+  - Four process stages aligned beneath it in a disciplined row/grid
+  - Partnership moved to the bottom center as the natural destination
+- Replace the current right-edge endpoint with a centered bottom partnership node/diamond connected from the full process.
+- Add more subpoints to each stage so the diagram feels substantive:
+  - 3 readable subpoints per stage instead of 2
+- Increase spacing discipline inside each card:
+  - larger title
+  - larger labels
+  - more consistent vertical rhythm
+- Improve alignment of cards, arrows, bullets, and labels so nothing feels raw or improvised.
+- Remove the lower quote and remove the line/progress bar below it entirely.
+- Reduce unused bottom gap by letting the process terminate cleanly at the new partnership section.
 
-**Issue:** GlassCard wraps content in two nested divs (outer `group` div + inner styled div), and has no height enforcement. The grid cells vary based on content length.
+Design intent:
+- It should feel like a polished investment process diagram, not an experimental SVG.
+- The layout should read instantly: top title, structured evaluation flow, bottom partnership outcome.
 
-**Fix in `GuidingPrinciples.tsx`:**
-- Add `h-full` to the GlassCard className prop
-- Ensure the outer GlassCard wrapper also stretches: add `h-full` to the outer `motion.div` in `GlassCard.tsx` (the `group` div)
-- This ensures `auto-rows-fr` on the grid can properly equalize all 6 cards
+### 3. Tighten card alignment for “What Guides Us” in `src/pages/GuidingPrinciples.tsx`
+The remaining desktop misalignment is likely coming from how the card content is flowing inside otherwise full-height cards.
 
-**Fix in `GlassCard.tsx`:**
-- Add `h-full` to the outer `motion.div` (line 24's className="group" → className="group h-full")
-- Add `h-full` to the inner `motion.div` so it stretches to fill
+Implementation:
+- Keep the equal-height grid structure already in place.
+- Wrap each card’s internal content in a `flex flex-col h-full` container so titles, dividers, and body copy align consistently.
+- Apply one shared minimum height across all principle cards at desktop so every box lands on the same visual baseline.
+- Ensure card padding, divider spacing, and paragraph top spacing are identical across all six cards.
 
-### 3. Criteria Pipeline SVG — Investment Criteria Page
+Design intent:
+- Every card should appear as part of one balanced system.
+- No card should look taller just because its title or body copy wraps differently.
 
-**Issues identified:** The SVG viewBox is 400×300 but the pipeline diagram is cramped into a small area, sub-pointers are tiny (fontSize 4.1), the title is tiny (fontSize 7), there's excessive empty space at the bottom with decorative lines.
+### Files to update
+1. `src/components/AnimatedAccent.tsx`
+   - Refine `partnership`
+   - Fully redesign `criteria`
+2. `src/pages/GuidingPrinciples.tsx`
+   - Normalize “What Guides Us” card internals for desktop-perfect alignment
 
-**Fix:**
-- Increase title fontSize from `7` to `10` and make it more prominent
-- Increase stage card sizes: wider boxes (w: 72→80), taller (h: 112→130)
-- Increase all text sizes: stage titles from `4.85` to `6.5`, sub-pointers from `4.1` to `5.5`, number labels from `4.8` to `6`
-- Remove the bottom decorative lines (lines 207-209) that create unnecessary gap
-- Move the quote text up and reduce bottom padding
-- Make connecting arrows thicker and more visible (strokeWidth 0.7→1.0)
-- Increase the PARTNERSHIP diamond and its label size
-
-### Files to Edit
-1. **`src/components/AnimatedAccent.tsx`** — Redesign `partnership` dart, polish `criteria` pipeline
-2. **`src/components/GlassCard.tsx`** — Add `h-full` to both wrapper divs
-3. **`src/pages/GuidingPrinciples.tsx`** — Add `h-full` to GlassCard className for equal height
-
+### Expected result
+- About Us SVG: a clear, straight dart landing exactly in the center, with a stronger tagline and less clutter.
+- Criteria SVG: a professional process graphic with stronger hierarchy, more readable subpoints, partnership centered at the bottom, and no awkward trailing gap.
+- “What Guides Us”: perfectly equal, aligned desktop cards with a cleaner grid rhythm.
