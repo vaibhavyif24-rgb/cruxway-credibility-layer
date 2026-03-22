@@ -84,7 +84,7 @@ const About = () => {
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mb-4">
                   {isIndia
-                    ? 'Cruxway combines long-term capital with operational expertise to help Indian founders transform their businesses into market leaders, while protecting the legacy and values that built them.'
+                    ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise to transform businesses into market leaders.'
                     : 'Cruxway invests in majority stakes in founder-led businesses, combining long-term capital with operating expertise to transform companies into market leaders while protecting the legacy that built them.'}
                 </p>
                 {!isIndia && (

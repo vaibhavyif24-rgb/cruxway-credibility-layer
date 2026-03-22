@@ -109,13 +109,13 @@ const Home = () => {
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.8rem)] text-white max-w-[680px] leading-[1.08] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
               {isIndia
                 ? <>Investing in <span className="text-gold">India's</span> Next Generation of Essential Companies</>
-                : <>Building the Next Generation of Essential <span className="text-gold">U.S.</span>&nbsp;Companies</>}
+                : <>Building the Next Generation of Essential <span className="text-gold">U.S.</span> Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className="font-sans text-[14px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[520px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
-                ? 'We invest in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
+                ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
                 : 'We invest in majority stakes in founder-led companies across the United States in essential B2B services, providing long-term capital and a commitment to preserving what works.'}
             </p>
           </FadeIn>
@@ -160,9 +160,9 @@ const Home = () => {
             <div className="lg:col-span-7">
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mb-4">
-                  {isIndia
-                    ? 'Cruxway invests in majority stakes in founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
-                    : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
+              {isIndia
+                ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
+                : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
                 </p>
               </FadeIn>
             </div>

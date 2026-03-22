@@ -7,8 +7,8 @@ import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import { motion } from 'framer-motion';
 
-import heroIndiaAbout from '@/assets/hero-india-about.jpg';
-import heroUSAbout from '@/assets/hero-us-about.jpg';
+import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
+import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
 
 const principles = [
   { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: '◆' },
@@ -27,7 +27,7 @@ const GuidingPrinciples = () => {
     <div>
       {/* Hero — distinct region-specific cinematic photo */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
@@ -67,7 +67,7 @@ const GuidingPrinciples = () => {
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mt-5 mb-4">
                   {isIndia
-                    ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders, while protecting the legacy and values that built them.'
+                    ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise to help founders transform their businesses into market leaders.'
                     : 'Cruxway invests in majority stakes in founder-led businesses, combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'}
                 </p>
               </FadeIn>
