@@ -26,13 +26,13 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="group"
+        className="group h-full"
       >
         <motion.div
           whileHover={hover ? { y: -4 } : {}}
           transition={{ duration: 0.25, ease: 'easeOut' }}
           className={`
-            relative overflow-hidden rounded-sm
+            relative overflow-hidden rounded-sm h-full
             ${isDark
               ? 'bg-primary-foreground/[0.04] border border-primary-foreground/[0.08] hover:border-gold/20'
               : 'bg-background/60 dark:bg-card/40 border border-border/60 hover:border-gold/25 dark:border-primary-foreground/[0.06]'

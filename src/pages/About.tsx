@@ -127,7 +127,7 @@ const About = () => {
               </FadeIn>
             </div>
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-fr items-stretch">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-fr">
                 {principles.map((p, i) => (
                   <FadeIn key={p.t} delay={i * 0.06} className="h-full">
                     <motion.div
