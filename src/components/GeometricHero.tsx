@@ -47,6 +47,7 @@ const GeometricHero = () => {
           alt=""
           className="w-full h-full object-cover"
           loading="eager"
+          fetchPriority="high"
           aria-hidden="true"
         />
       </motion.div>
