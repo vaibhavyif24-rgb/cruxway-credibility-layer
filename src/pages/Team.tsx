@@ -354,7 +354,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
               {member.highlights.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
+                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 dark:text-primary-foreground/50 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
