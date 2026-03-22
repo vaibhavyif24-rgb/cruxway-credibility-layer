@@ -37,125 +37,83 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
         {variant === 'partnership' ? (
           <>
-            {/* Mountain range background fill */}
+            {/* Axes */}
+            <motion.line x1="50" y1="250" x2="370" y2="250" {...draw(0.1, 0.8)} stroke={goldStroke} strokeWidth="0.5" fill="none" opacity={0.3} />
+            <motion.line x1="50" y1="250" x2="50" y2="40" {...draw(0.2, 0.8)} stroke={goldStroke} strokeWidth="0.5" fill="none" opacity={0.3} />
+
+            {/* Subtle grid lines */}
+            {[200, 150, 100].map((y, i) => (
+              <motion.line key={y} x1="50" y1={y} x2="370" y2={y} {...draw(0.3 + i * 0.1, 0.6)} stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.1} strokeDasharray="4 6" />
+            ))}
+
+            {/* Area fill under curve */}
             <motion.path
-              d="M 0 260 L 60 210 L 95 225 L 140 175 L 170 190 L 200 115 L 230 190 L 260 175 L 305 225 L 340 210 L 400 260 Z"
+              d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 45 L 345 250 L 60 250 Z"
               fill={goldFill}
               initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.04 }}
+              whileInView={{ opacity: 0.06 }}
               viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.2 }}
+              transition={{ duration: 1.2, delay: 0.5 }}
             />
-            {/* Mountain range outline */}
+
+            {/* Main growth curve */}
             <motion.path
-              d="M 0 260 L 80 218 L 120 235 L 160 192 L 200 115 L 240 192 L 280 235 L 320 218 L 400 260 Z"
+              d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 45"
+              {...draw(0.4, 2.2)}
               stroke={goldStroke}
-              strokeWidth="0.6"
+              strokeWidth="1.2"
               fill="none"
-              {...draw(0.3, 1.6)}
-              opacity={0.3}
-            />
-            {/* Main peak */}
-            <motion.path
-              d="M 160 192 L 200 115 L 240 192"
-              stroke={goldStroke}
-              strokeWidth="1"
-              fill="none"
-              {...draw(0.5, 1.2)}
-              opacity={0.5}
-            />
-            {/* Snow cap */}
-            <motion.path
-              d="M 185 148 L 200 115 L 215 148"
-              fill={goldFill}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 0.08 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              opacity={0.7}
             />
 
-            {/* Climbing trail */}
-            <motion.path
-              d="M 230 245 C 225 232, 220 222, 215 212 C 210 202, 212 197, 210 190 C 208 183, 205 175, 206 167 C 207 160, 205 150, 204 140 C 203 132, 201 125, 200 120"
-              stroke={goldStroke}
-              strokeWidth="0.6"
-              strokeDasharray="3 4"
-              fill="none"
-              {...draw(0.8, 1.5)}
-              opacity={0.3}
-            />
+            {/* Data points with hover pulse */}
+            {[
+              { x: 60, y: 238 }, { x: 120, y: 228 }, { x: 180, y: 200 },
+              { x: 240, y: 145 }, { x: 300, y: 75 }, { x: 345, y: 45 },
+            ].map((p, i) => (
+              <g key={i}>
+                <motion.circle
+                  cx={p.x} cy={p.y} r="3"
+                  fill={goldFill}
+                  {...nodeAppear(1.0 + i * 0.12, 0.6)}
+                  animate={hovered ? { r: [3, 4.5, 3], opacity: [0.6, 0.9, 0.6] } : {}}
+                  transition={hovered ? { duration: 1.5, repeat: Infinity, delay: i * 0.15 } : { duration: 0.5, delay: 1.0 + i * 0.12 }}
+                />
+                {/* Vertical drop line */}
+                <motion.line
+                  x1={p.x} y1={p.y} x2={p.x} y2={250}
+                  {...draw(1.2 + i * 0.08, 0.5)}
+                  stroke={goldStroke} strokeWidth="0.2" fill="none" opacity={0.1} strokeDasharray="2 3"
+                />
+              </g>
+            ))}
 
-            {/* Climber standing at the summit */}
-            <motion.g
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              animate={hovered ? { y: -2 } : { y: 0 }}
-            >
-              {/* Head */}
-              <circle cx="200" cy="104" r="2.5" fill={goldFill} opacity={0.75} />
-              {/* Torso */}
-              <line x1="200" y1="106.5" x2="200" y2="114" stroke={goldStroke} strokeWidth="1" opacity={0.7} />
-              {/* Left leg */}
-              <line x1="200" y1="114" x2="197" y2="120" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-              {/* Right leg */}
-              <line x1="200" y1="114" x2="203" y2="120" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-              {/* Arm raised to flag */}
-              <line x1="200" y1="108" x2="196" y2="102" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-              {/* Other arm */}
-              <line x1="200" y1="108" x2="204" y2="111" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-            </motion.g>
-
-            {/* Flag at summit */}
-            <motion.g
-              initial={{ opacity: 0, scale: 0.5 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 1.5 }}
-              style={{ transformOrigin: '196px 102px' }}
-            >
-              <motion.line
-                x1="196" y1="102" x2="196" y2="87"
-                stroke={goldStroke} strokeWidth="1" strokeLinecap="round"
-                opacity={0.7}
-              />
-              <motion.path
-                d="M 196 87 Q 204 89 208 87 Q 212 85 208 92 Q 204 94 196 92 Z"
-                fill={goldFill}
-                animate={hovered
-                  ? { d: ['M 196 87 Q 204 89 208 87 Q 212 85 208 92 Q 204 94 196 92 Z', 'M 196 87 Q 206 85 210 88 Q 214 91 209 93 Q 203 95 196 92 Z', 'M 196 87 Q 204 89 208 87 Q 212 85 208 92 Q 204 94 196 92 Z'] }
-                  : {}
-                }
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                opacity={0.65}
-              />
-            </motion.g>
-
-            {/* Achievement glow */}
+            {/* Glow at peak */}
             <motion.circle
-              cx="200" cy="110" r="8"
+              cx="345" cy="45" r="12"
               fill={goldFill}
-              animate={{ opacity: [0.02, 0.08, 0.02], scale: [1, 1.3, 1] }}
+              animate={{ opacity: [0.02, 0.1, 0.02], scale: [1, 1.4, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* Sparkles */}
-            {[[175, 92], [225, 88], [190, 80]].map(([sx, sy], i) => (
-              <motion.circle
-                key={i} cx={sx} cy={sy} r="1"
-                fill={goldFill}
-                animate={{ opacity: [0, 0.25, 0], scale: [0.5, 1, 0.5] }}
-                transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.8, ease: 'easeInOut' }}
-              />
-            ))}
+            {/* Arrow tip at peak */}
+            <motion.path
+              d="M 340 50 L 345 40 L 350 50"
+              {...draw(2.0, 0.6)}
+              stroke={goldStroke} strokeWidth="0.8" fill="none" opacity={0.5}
+            />
 
-            {/* Ground line */}
-            <motion.line x1="30" y1="260" x2="370" y2="260" stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(0.1, 0.8)} opacity={0.15} />
+            {/* Axis labels */}
+            <motion.text x="210" y="268" fontSize="5" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" letterSpacing="0.15em" {...fadeIn(2.0, 0.2)}>
+              TIME
+            </motion.text>
+            <motion.text x="30" y="145" fontSize="5" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-sans)" letterSpacing="0.15em" transform="rotate(-90,30,145)" {...fadeIn(2.1, 0.2)}>
+              VALUE
+            </motion.text>
 
             {/* Tagline */}
-            <motion.text x="200" y="250" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
-              "Aligned ambition. Enduring partnership."
+            <motion.text x="200" y="288" fontSize="14" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
+              "Building enduring value, together."
             </motion.text>
           </>
         ) : variant === 'industry' ? (
