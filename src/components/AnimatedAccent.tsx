@@ -62,16 +62,6 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               animate={{ opacity: hovered ? 0.12 : 0.06 }}
             />
 
-            {/* Secondary shadow curve for depth */}
-            <motion.path
-              d="M 60 242 C 90 239 120 232 150 220 C 180 206 210 182 240 152 C 270 118 300 84 345 56"
-              {...draw(0.35, 2.0)}
-              stroke={goldStroke}
-              strokeWidth="0.4"
-              fill="none"
-              opacity={0.1}
-            />
-
             {/* Main growth curve */}
             <motion.path
               d="M 60 238 C 90 235 120 228 150 215 C 180 200 210 175 240 145 C 270 110 300 75 345 48"
@@ -90,17 +80,16 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
                 fill={goldFill}
                 opacity={0.8}
                 animate={{
-                  cx: [60, 120, 180, 240, 300, 345],
-                  cy: [238, 228, 200, 145, 75, 48],
+                  cx: [60, 150, 240, 345],
+                  cy: [238, 215, 145, 48],
                 }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               />
             )}
 
-            {/* Data points with hover pulse */}
+            {/* Data points — placed at curve segment endpoints for perfect alignment */}
             {[
-              { x: 60, y: 238 }, { x: 120, y: 228 }, { x: 180, y: 200 },
-              { x: 240, y: 145 }, { x: 300, y: 75 }, { x: 345, y: 48 },
+              { x: 60, y: 238 }, { x: 150, y: 215 }, { x: 240, y: 145 }, { x: 345, y: 48 },
             ].map((p, i) => (
               <g key={i}>
                 {/* Outer ring on hover */}
