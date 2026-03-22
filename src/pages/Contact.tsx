@@ -7,8 +7,8 @@ import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import { Link } from 'react-router-dom';
 
-import heroIndiaImage from '@/assets/hero-india-business.jpg';
-import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
+import heroIndiaAbout from '@/assets/hero-india-about.jpg';
+import heroUSAbout from '@/assets/hero-us-about.jpg';
 
 const Contact = () => {
   const { region } = useRegion();
@@ -19,9 +19,9 @@ const Contact = () => {
 
   return (
     <div>
-      {/* Hero — cinematic region-specific */}
+      {/* Hero — distinct region-specific */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-18">
           <FadeIn>
@@ -46,7 +46,7 @@ const Contact = () => {
         <HeroDivider />
       </section>
 
-      {/* Contact Cards — Glassmorphism */}
+      {/* Contact Cards */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">

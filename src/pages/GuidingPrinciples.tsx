@@ -7,8 +7,8 @@ import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import { motion } from 'framer-motion';
 
-import heroIndiaImage from '@/assets/hero-india-business.jpg';
-import heroUSImage from '@/assets/hero-nyc-skyline.jpg';
+import heroIndiaAbout from '@/assets/hero-india-about.jpg';
+import heroUSAbout from '@/assets/hero-us-about.jpg';
 
 const principles = [
   { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: '◆' },
@@ -25,9 +25,9 @@ const GuidingPrinciples = () => {
 
   return (
     <div>
-      {/* Hero — cinematic region-specific photo */}
+      {/* Hero — distinct region-specific cinematic photo */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaImage : heroUSImage} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
@@ -80,7 +80,7 @@ const GuidingPrinciples = () => {
       </section>
 
       {/* Principles — Bento Glass Cards */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 border-t border-border">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Values</SectionLabel>
