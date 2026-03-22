@@ -381,7 +381,8 @@ const Team = () => {
           <FadeIn delay={0.16}>
             <GoldRule className="mt-4 md:mt-6" />
           </FadeIn>
-        </div>
+
+          <HeroDivider />
 
         {/* Stats Bar */}
         <div className="relative border-t border-primary-foreground/[0.06]">
