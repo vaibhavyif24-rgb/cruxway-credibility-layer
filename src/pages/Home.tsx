@@ -160,9 +160,9 @@ const Home = () => {
             <div className="lg:col-span-7">
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mb-4">
-                  {isIndia
-                    ? 'Cruxway invests in majority stakes in founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
-                    : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
+              {isIndia
+                ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
+                : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
                 </p>
               </FadeIn>
             </div>
