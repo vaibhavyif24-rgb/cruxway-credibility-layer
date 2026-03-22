@@ -26,6 +26,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
 
   return (
     <div
+      ref={ref}
       className={`relative overflow-hidden ${
         isDark ? 'bg-primary py-6 md:py-10 lg:py-14' : 'py-5 md:py-8 lg:py-10'
       }`}
