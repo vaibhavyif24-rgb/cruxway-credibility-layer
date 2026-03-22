@@ -6,17 +6,18 @@ import AnimatedAccent from '@/components/AnimatedAccent';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import { motion } from 'framer-motion';
+import { Shield, Heart, BookOpen, Mountain, Zap, Scale } from 'lucide-react';
 
 import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
 import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
 
 const principles = [
-  { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: '◆' },
-  { t: 'Servant Leadership', d: 'Earn trust through service, not authority.', icon: '◇' },
-  { t: 'Humility', d: 'Stay curious. Never stop learning.', icon: '○' },
-  { t: 'Grit', d: 'Do hard things, especially when things get hard.', icon: '△' },
-  { t: 'Bias to Action', d: 'Execute decisively. Speed matters.', icon: '▽' },
-  { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.', icon: '□' },
+  { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: Shield },
+  { t: 'Servant Leadership', d: 'Earn trust through service, not authority.', icon: Heart },
+  { t: 'Humility', d: 'Stay curious. Never stop learning.', icon: BookOpen },
+  { t: 'Grit', d: 'Do hard things, especially when things get hard.', icon: Mountain },
+  { t: 'Bias to Action', d: 'Execute decisively. Speed matters.', icon: Zap },
+  { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.', icon: Scale },
 ];
 
 const GuidingPrinciples = () => {
