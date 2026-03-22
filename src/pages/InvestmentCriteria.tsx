@@ -4,9 +4,8 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import AnimatedAccent from '@/components/AnimatedAccent';
 import { useRef } from 'react';
-import heroIndustry from '@/assets/hero-industry.jpg';
-import heroPartnership from '@/assets/hero-partnership.jpg';
 
 const usSectors = [
   { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
@@ -42,7 +41,7 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
       <motion.div
         whileHover={{ y: -2 }}
         transition={{ duration: 0.2 }}
-        className="relative h-full py-4 md:py-5 border-t border-foreground/[0.06] hover:border-gold/20 transition-all duration-400"
+        className="relative h-full py-4 border-t border-border hover:border-gold/20 transition-all duration-400"
       >
         <motion.div
           className="absolute top-0 left-0 h-[2px] bg-gold/30"
@@ -53,7 +52,7 @@ const SectorCard = ({ sector, index }: { sector: { label: string; desc: string }
         <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-foreground leading-[1.3] mb-1">
           {sector.label}
         </h4>
-        <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground/60 leading-[1.65] group-hover:text-muted-foreground/85 transition-colors duration-300">
+        <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] group-hover:text-foreground/70 transition-colors duration-300">
           {sector.desc}
         </p>
       </motion.div>
@@ -81,18 +80,10 @@ const InvestmentCriteria = () => {
 
   return (
     <div>
-      {/* Hero with photography */}
+      {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
-        {/* Background photo with overlay */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src={heroIndustry}
-            alt=""
-            className="w-full h-full object-cover opacity-[0.08]"
-          />
-        </div>
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-6 md:pt-32 md:pb-12 lg:pt-36 lg:pb-14">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-24 pb-6 md:pt-32 md:pb-10 lg:pt-36 lg:pb-12">
           <FadeIn>
             <SectionLabel light>{isIndia ? 'Investment Criteria — India' : 'Investment Criteria'}</SectionLabel>
           </FadeIn>
@@ -102,35 +93,35 @@ const InvestmentCriteria = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/35 leading-[1.7] md:leading-[1.75] mt-4 md:mt-5 max-w-[460px]">
+            <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/40 leading-[1.7] mt-4 max-w-[460px]">
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies.'
                 : 'Combining long-term capital with operating expertise to help business owners build lasting institutions in essential B2B services.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <GoldRule className="mt-3 md:mt-5" />
+            <GoldRule className="mt-3 md:mt-4" />
           </FadeIn>
         </div>
         <HeroDivider />
       </section>
 
       {/* Our Approach */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-14">
+          <div className="grid lg:grid-cols-12 gap-5 md:gap-7 lg:gap-12">
             <div className="lg:col-span-5">
               <FadeIn>
                 <SectionLabel>Our Approach</SectionLabel>
                 <h2 className="font-serif text-[clamp(1.4rem,2.5vw,2.1rem)] text-foreground leading-[1.18]">
                   How We Partner With Founders
                 </h2>
-                <GoldRule className="mt-3 md:mt-5" />
+                <GoldRule className="mt-3" />
               </FadeIn>
             </div>
             <div className="lg:col-span-7">
               <FadeIn delay={0.08}>
-                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] md:leading-[1.8] mb-4">
+                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-3">
                   {isIndia
                     ? 'Cruxway invests in majority stakes in founder-led and family-owned businesses across India\'s lower middle market. We focus on manufacturing, industrial services, and essential sectors where operational improvement and deep client relationships define long-term value.'
                     : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
@@ -144,39 +135,31 @@ const InvestmentCriteria = () => {
       {/* Investment Criteria on dark */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
           <FadeIn>
             <SectionLabel light>What We Look For</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.95rem)] text-primary-foreground leading-[1.18] max-w-[480px] mb-1">
               Investment Criteria
             </h2>
-            <GoldRule className="mb-6 md:mb-8" />
+            <GoldRule className="mb-5 md:mb-7" />
           </FadeIn>
           <ApproachTable items={investmentCriteria} variant="dark" />
         </div>
       </section>
 
-      {/* Partnership photo section */}
+      {/* Partnership section with animated accent */}
       <section className="relative bg-background overflow-hidden">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
+          <div className="grid lg:grid-cols-2 gap-7 lg:gap-10 items-center">
             <FadeIn>
-              <div className="relative overflow-hidden rounded-sm aspect-[16/10]">
-                <img
-                  src={heroPartnership}
-                  alt="Business partnership"
-                  className="w-full h-full object-cover grayscale"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/20 to-transparent" />
-              </div>
+              <AnimatedAccent variant="industry" />
             </FadeIn>
             <FadeIn delay={0.12}>
               <SectionLabel>Partnership Model</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.95rem)] text-foreground leading-[1.18] mb-4">
+              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.95rem)] text-foreground leading-[1.18] mb-3">
                 Built for Owners Thinking Long-Term
               </h2>
-              <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-4">
+              <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-3">
                 {isIndia
                   ? 'We believe the best businesses in India were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, customers, and communities.'
                   : 'We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve.'}
@@ -184,7 +167,7 @@ const InvestmentCriteria = () => {
               <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75]">
                 Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.
               </p>
-              <GoldRule className="mt-5" />
+              <GoldRule className="mt-4" />
             </FadeIn>
           </div>
         </div>
@@ -192,14 +175,14 @@ const InvestmentCriteria = () => {
 
       {/* Target Sectors — US only */}
       {!isIndia && (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <section className="bg-cream px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Target Sectors</SectionLabel>
               <h2 className="font-serif text-[clamp(1.2rem,2vw,1.65rem)] text-foreground leading-[1.2] max-w-[480px] mb-1">
                 Essential B2B services across the United States
               </h2>
-              <GoldRule className="mb-5 md:mb-7" />
+              <GoldRule className="mb-4 md:mb-6" />
             </FadeIn>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 lg:gap-x-14 gap-y-0">
               {usSectors.map((sector, i) => (
@@ -211,16 +194,16 @@ const InvestmentCriteria = () => {
       )}
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-7 md:py-10 lg:py-14">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[520px]">
             <FadeIn>
               <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] mb-3 md:mb-4">
+              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,2rem)] text-primary-foreground leading-[1.18] mb-3">
                 {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
               </h2>
-              <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/35 leading-[1.75] md:leading-[1.8] mb-5 md:mb-7">
+              <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/40 leading-[1.75] mb-5 md:mb-6">
                 {isIndia
                   ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder or business owner considering your next chapter, we\'d welcome the conversation. No pressure, no timeline, just an honest discussion about what a long-term partnership could look like.'}
