@@ -32,12 +32,64 @@ const investmentProfile = {
 };
 
 const usSectors = [
-  { label: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance', icon: '⚡' },
-  { label: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services', icon: '🌿' },
-  { label: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management', icon: '🏢' },
-  { label: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions', icon: '⚙️' },
-  { label: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services', icon: '🛡️' },
-  { label: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries', icon: '📦' },
+  {
+    label: 'Electrical & Infrastructure',
+    desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Environmental Services',
+    desc: 'Compliance-driven remediation, waste management, and sustainability services',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L12 14l-4 2c.5-2.5 2.5-6 8-8l1-4z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Facility Services',
+    desc: 'Building maintenance, security, and specialised facility management',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <rect x="4" y="2" width="16" height="20" rx="2" />
+        <path d="M9 22v-4h6v4" /><line x1="9" y1="6" x2="10" y2="6" /><line x1="14" y1="6" x2="15" y2="6" />
+        <line x1="9" y1="10" x2="10" y2="10" /><line x1="14" y1="10" x2="15" y2="10" />
+        <line x1="9" y1="14" x2="10" y2="14" /><line x1="14" y1="14" x2="15" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Engineering & Technical',
+    desc: 'Inspection, testing, calibration, and specialised engineering solutions',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Compliance & Safety',
+    desc: 'Regulatory compliance, audit, and risk management services',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Industrial Distribution',
+    desc: 'Specialised parts, equipment, and supply chain solutions for essential industries',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+        <rect x="1" y="6" width="22" height="12" rx="2" /><path d="M1 10h22" /><path d="M8 6v12" /><path d="M16 6v12" />
+      </svg>
+    ),
+  },
 ];
 
 /** Core criteria — unique to this page, not on Home */
@@ -86,7 +138,7 @@ const InvestmentCriteria = () => {
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'Investment Criteria — India' : 'Investment Criteria'}</SectionLabel>
+            <SectionLabel light>{isIndia ? 'Investment Criteria, India' : 'Investment Criteria'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[600px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
@@ -166,7 +218,7 @@ const InvestmentCriteria = () => {
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/45 leading-[1.75] mb-4">
                   {isIndia
-                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage framework — from initial discovery through rigorous evaluation — to ensure every partnership is built on alignment, trust, and shared long-term vision.'
+                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage framework, from initial discovery through rigorous evaluation, to ensure every partnership is built on alignment, trust, and shared long-term vision.'
                     : 'A structured, multi-stage evaluation ensures every partnership is built on deep understanding, rigorous analysis, and genuine alignment between our team and the founders we back.'}
                 </p>
               </FadeIn>
@@ -178,45 +230,45 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Our Edge — Value Creation + Strengths */}
+      {/* Our Edge: Value Creation + Strengths */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
-            <div>
-              <FadeIn>
-                <SectionLabel>Our Edge</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-3">
-                  Value Creation Playbook
-                </h2>
-                <GoldRule className="mb-5" />
-              </FadeIn>
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-5">
-                  A disciplined, repeatable framework for building lasting value in every business we partner with.
-                </p>
-              </FadeIn>
-              <div className="space-y-4">
-                {[
-                  { step: '01', title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-                  { step: '02', title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-                  { step: '03', title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-                  { step: '04', title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
-                ].map((item, i) => (
-                  <FadeIn key={item.step} delay={0.12 + i * 0.08}>
-                    <div className="group flex items-start gap-4">
-                      <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-[400ms] tabular-nums leading-none pt-1 shrink-0">
-                        {item.step}
-                      </span>
-                      <div>
-                        <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1">{item.title}</h4>
-                        <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] group-hover:text-foreground/75 transition-colors duration-300">
-                          {item.desc}
-                        </p>
-                      </div>
+          <FadeIn>
+            <SectionLabel>Our Edge</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-3">
+              Value Creation Playbook
+            </h2>
+            <GoldRule className="mb-5" />
+          </FadeIn>
+          <FadeIn delay={0.08}>
+            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-6">
+              A disciplined, repeatable framework for building lasting value in every business we partner with.
+            </p>
+          </FadeIn>
+
+          {/* Unified grid: playbook steps + strengths side by side on desktop, stacked on mobile */}
+          <div className={isIndia ? 'space-y-8' : 'grid lg:grid-cols-2 gap-8 lg:gap-14 items-start'}>
+            <div className={isIndia ? 'grid sm:grid-cols-2 gap-4' : 'space-y-4'}>
+              {[
+                { step: '01', title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+                { step: '02', title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+                { step: '03', title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
+                { step: '04', title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+              ].map((item, i) => (
+                <FadeIn key={item.step} delay={0.12 + i * 0.08}>
+                  <div className="group flex items-start gap-4">
+                    <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-[400ms] tabular-nums leading-none pt-1 shrink-0">
+                      {item.step}
+                    </span>
+                    <div>
+                      <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-1">{item.title}</h4>
+                      <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] group-hover:text-foreground/75 transition-colors duration-300">
+                        {item.desc}
+                      </p>
                     </div>
-                  </FadeIn>
-                ))}
-              </div>
+                  </div>
+                </FadeIn>
+              ))}
             </div>
             <FadeIn delay={0.15}>
               <StrengthsWidget />
@@ -244,7 +296,7 @@ const InvestmentCriteria = () => {
               {usSectors.map((sector, i) => (
                 <GlassCard key={sector.label} index={i} variant="dark" className="p-5 md:p-6">
                   <div className="flex items-start gap-3">
-                    <span className="text-lg mt-0.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300">{sector.icon}</span>
+                    <span className="mt-0.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300 text-foreground">{sector.icon}</span>
                     <div>
                       <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-primary-foreground leading-[1.3] mb-2">
                         {sector.label}
