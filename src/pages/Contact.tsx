@@ -2,6 +2,8 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import sanDiegoBeach from '@/assets/cities/san-diego-beach.jpg';
+import newYorkSkyline from '@/assets/cities/new-york-skyline.jpg';
 
 const Contact = () => {
   const { region } = useRegion();
@@ -22,12 +24,12 @@ const Contact = () => {
             <SectionLabel light>Contact</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(1.85rem,4.5vw,3.2rem)] text-primary-foreground max-w-[400px] leading-[1.12] tracking-[-0.025em]">
+            <h1 className="font-serif text-[clamp(2rem,4.5vw,3.4rem)] text-primary-foreground max-w-[400px] leading-[1.12] tracking-[-0.025em]">
               Get in Touch
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[13px] text-primary-foreground/30 leading-[1.75] mt-4 max-w-[380px]">
+            <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/35 leading-[1.75] mt-4 max-w-[400px]">
               {isIndia
                 ? 'We welcome conversations with Indian founders and business owners exploring long-term partnerships.'
                 : 'We welcome conversations with founders and business owners exploring long-term partnerships.'}
@@ -52,7 +54,6 @@ const Contact = () => {
               className="block group h-full"
             >
               <div className="relative border border-foreground/[0.06] rounded-sm p-6 md:p-8 lg:p-10 overflow-hidden transition-colors duration-500 hover:border-gold/20 hover:bg-cream/40 h-full">
-                {/* Corner accent */}
                 <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
                   <div className="absolute top-0 right-0 w-px h-12 bg-gradient-to-b from-gold/20 to-transparent" />
                   <div className="absolute top-0 right-0 h-px w-12 bg-gradient-to-l from-gold/20 to-transparent" />
@@ -65,13 +66,13 @@ const Contact = () => {
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground/20 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                 </div>
 
-                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-muted-foreground/35 mb-3">
+                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground/40 mb-3">
                   Email
                 </p>
-                <p className="font-serif text-[1.1rem] md:text-[1.25rem] text-foreground group-hover:text-gold-dim transition-colors duration-500 tracking-[-0.01em]">
+                <p className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground group-hover:text-gold-dim transition-colors duration-500 tracking-[-0.01em]">
                   {email}
                 </p>
-                <p className="font-sans text-[11px] text-muted-foreground/40 leading-[1.6] mt-3">
+                <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground/45 leading-[1.6] mt-3">
                   {isIndia
                     ? 'For inquiries related to partnerships and opportunities in India.'
                     : 'For general inquiries, partnership discussions, and deal flow.'}
@@ -88,7 +89,6 @@ const Contact = () => {
               className="group"
             >
               <div className="relative border border-foreground/[0.06] rounded-sm p-6 md:p-8 lg:p-10 overflow-hidden transition-colors duration-500 hover:border-gold/20 hover:bg-cream/40 h-full">
-                {/* Corner accent */}
                 <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
                   <div className="absolute top-0 right-0 w-px h-12 bg-gradient-to-b from-gold/20 to-transparent" />
                   <div className="absolute top-0 right-0 h-px w-12 bg-gradient-to-l from-gold/20 to-transparent" />
@@ -100,13 +100,13 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-muted-foreground/35 mb-3">
+                <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-muted-foreground/40 mb-3">
                   Location
                 </p>
-                <p className="font-serif text-[1.1rem] md:text-[1.25rem] text-foreground tracking-[-0.01em]">
+                <p className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.01em]">
                   {location}
                 </p>
-                <p className="font-sans text-[11px] text-muted-foreground/40 leading-[1.6] mt-3">
+                <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground/45 leading-[1.6] mt-3">
                   {isIndia
                     ? 'Our India operations are based out of Delhi, with a network spanning key industrial regions.'
                     : 'Headquartered in San Diego, with a nationwide investment focus across the United States.'}
@@ -117,8 +117,70 @@ const Contact = () => {
         </div>
       </Section>
 
+      {/* City Photography */}
+      <section className="bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-16">
+        <div className="max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel>Our Presence</SectionLabel>
+            <GoldRule className="mt-1 mb-6 md:mb-8" />
+          </FadeIn>
+
+          <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+            <FadeIn delay={0.06}>
+              <div className="group relative overflow-hidden rounded-sm">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <motion.img
+                    src={sanDiegoBeach}
+                    alt="San Diego, California"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ duration: 0.7 }}
+                    loading="lazy"
+                    style={{ filter: 'brightness(0.75)' }}
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold/50 mb-1">
+                    Headquarters
+                  </p>
+                  <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-primary-foreground leading-[1.2]">
+                    San Diego, California
+                  </h3>
+                </div>
+              </div>
+            </FadeIn>
+
+            <FadeIn delay={0.12}>
+              <div className="group relative overflow-hidden rounded-sm">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <motion.img
+                    src={newYorkSkyline}
+                    alt="New York City"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ duration: 0.7 }}
+                    loading="lazy"
+                    style={{ filter: 'brightness(0.75)' }}
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/70 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold/50 mb-1">
+                    {isIndia ? 'India Operations' : 'East Coast'}
+                  </p>
+                  <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-primary-foreground leading-[1.2]">
+                    {isIndia ? 'GK II, Delhi' : 'New York City'}
+                  </h3>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
       {/* Philosophy Strip */}
-      <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-18">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-start">
             <div className="md:col-span-4">
@@ -129,7 +191,7 @@ const Contact = () => {
             </div>
             <div className="md:col-span-8">
               <FadeIn delay={0.08}>
-                <p className="font-serif text-[clamp(1.05rem,2vw,1.35rem)] text-foreground leading-[1.55] tracking-[-0.01em]">
+                <p className="font-serif text-[clamp(1.1rem,2vw,1.4rem)] text-foreground leading-[1.55] tracking-[-0.01em]">
                   {isIndia
                     ? 'Every conversation is treated with discretion and respect. We engage selectively and commit deeply to the founders we partner with across India.'
                     : 'Every conversation is treated with discretion and respect. We engage selectively and commit deeply to the founders we partner with.'}
@@ -157,7 +219,7 @@ const Contact = () => {
       {/* Disclaimer */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-10 border-t border-foreground/[0.04]">
         <div className="max-w-[1080px] mx-auto">
-          <p className="font-sans text-[10px] text-muted-foreground/25 leading-[1.6] max-w-[540px]">
+          <p className="font-sans text-[11px] text-muted-foreground/30 leading-[1.65] max-w-[560px]">
             This website has been prepared by Cruxway LLC solely for informational purposes. It does not constitute an offer, agreement, or commitment to invest. All content is non-binding and subject to change.
           </p>
         </div>

@@ -1,11 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const SiteHeader = () => {
   const { region, setRegion } = useRegion();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -26,7 +28,8 @@ const SiteHeader = () => {
 
   const navItems = [
     { label: 'Home', path: prefix },
-    { label: 'About', path: `${prefix}/about` },
+    { label: 'About Us', path: `${prefix}/about` },
+    { label: 'Investment Criteria', path: `${prefix}/criteria` },
     { label: 'Team', path: `${prefix}/team` },
     { label: 'Contact', path: `${prefix}/contact` },
   ];
@@ -47,22 +50,22 @@ const SiteHeader = () => {
           <div className="flex items-center justify-between h-14 md:h-16">
             <Link
               to={prefix}
-              className="font-serif text-lg md:text-xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75"
+              className="font-serif text-xl md:text-2xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75"
             >
               Cruxway
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center">
-              <div className="flex items-center gap-7 xl:gap-9">
+              <div className="flex items-center gap-6 xl:gap-8">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[10.5px] font-medium uppercase tracking-[0.14em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
+                    className={`relative font-sans text-[11px] font-medium uppercase tracking-[0.14em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
                       isActive(item.path)
                         ? 'text-primary-foreground'
-                        : 'text-primary-foreground/30 hover:text-primary-foreground/60'
+                        : 'text-primary-foreground/35 hover:text-primary-foreground/65'
                     }`}
                   >
                     {item.label}
@@ -77,24 +80,46 @@ const SiteHeader = () => {
                 ))}
               </div>
 
-              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-7" />
+              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-6" />
+
+              {/* Dark mode toggle */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-primary-foreground/30 hover:text-primary-foreground/60 transition-colors duration-300 mr-4"
+                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              >
+                {theme === 'light' ? (
+                  <Moon size={15} strokeWidth={1.5} />
+                ) : (
+                  <Sun size={15} strokeWidth={1.5} />
+                )}
+              </button>
 
               <Link
                 to="/investor-login"
-                className="btn-premium font-sans text-[9.5px] font-medium uppercase tracking-[0.16em] px-5 py-2 border border-gold/12 text-gold/55 hover:border-gold/30 hover:text-gold/85 transition-all duration-300"
+                className="btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-5 py-2.5 border border-gold/12 text-gold/55 hover:border-gold/30 hover:text-gold/85 transition-all duration-300"
               >
                 Investor Login
               </Link>
             </nav>
 
-            {/* Mobile Toggle */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-primary-foreground/40 hover:text-primary-foreground transition-colors p-2 -mr-2"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X size={18} strokeWidth={1.3} /> : <Menu size={18} strokeWidth={1.3} />}
-            </button>
+            {/* Mobile controls */}
+            <div className="lg:hidden flex items-center gap-2">
+              <button
+                onClick={toggleTheme}
+                className="text-primary-foreground/30 hover:text-primary-foreground/60 transition-colors p-2"
+                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              >
+                {theme === 'light' ? <Moon size={16} strokeWidth={1.3} /> : <Sun size={16} strokeWidth={1.3} />}
+              </button>
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="text-primary-foreground/40 hover:text-primary-foreground transition-colors p-2 -mr-2"
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X size={18} strokeWidth={1.3} /> : <Menu size={18} strokeWidth={1.3} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -124,7 +149,7 @@ const SiteHeader = () => {
                   >
                     <Link
                       to={item.path}
-                      className={`font-serif text-[1.4rem] tracking-[-0.02em] transition-colors duration-300 ${
+                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-colors duration-300 ${
                         isActive(item.path) ? 'text-primary-foreground' : 'text-primary-foreground/25 active:text-primary-foreground/50'
                       }`}
                     >
@@ -138,18 +163,18 @@ const SiteHeader = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.25, duration: 0.35 }}
-                className="flex flex-col items-center gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.05] w-40"
+                className="flex flex-col items-center gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.05] w-48"
               >
                 <Link
                   to={`/${otherRegion}`}
                   onClick={() => setRegion(otherRegion)}
-                  className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-primary-foreground/20 active:text-primary-foreground/45"
+                  className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-primary-foreground/20 active:text-primary-foreground/45"
                 >
                   Switch to {otherRegion === 'india' ? 'India' : 'United States'}
                 </Link>
                 <Link
                   to="/investor-login"
-                  className="btn-premium font-sans text-[9px] font-medium uppercase tracking-[0.16em] px-7 py-2.5 border border-gold/12 text-gold/45 active:text-gold/70"
+                  className="btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-7 py-2.5 border border-gold/12 text-gold/45 active:text-gold/70"
                 >
                   Investor Login
                 </Link>

@@ -8,7 +8,8 @@ const SiteFooter = () => {
   const otherRegion = region === 'india' ? 'us' : 'india';
 
   const links = [
-    { label: 'About', path: `${prefix}/about` },
+    { label: 'About Us', path: `${prefix}/about` },
+    { label: 'Investment Criteria', path: `${prefix}/criteria` },
     { label: 'Team', path: `${prefix}/team` },
     { label: 'Contact', path: `${prefix}/contact` },
     { label: 'Investor Login', path: '/investor-login' },
@@ -21,16 +22,16 @@ const SiteFooter = () => {
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
         <div className="flex flex-col md:flex-row justify-between items-start gap-6 md:gap-16 mb-10">
           <div>
-            <p className="font-serif text-lg text-primary-foreground tracking-[-0.02em]">Cruxway</p>
+            <p className="font-serif text-xl text-primary-foreground tracking-[-0.02em]">Cruxway</p>
             <div className="w-6 h-px bg-gold/15 mt-3" />
           </div>
 
-          <div className="grid grid-cols-2 gap-x-10 gap-y-2.5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-3">
             {links.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="font-sans text-[9px] font-medium uppercase tracking-[0.16em] text-primary-foreground/15 hover:text-primary-foreground/35 transition-colors duration-300"
+                className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground/15 hover:text-primary-foreground/35 transition-colors duration-300"
               >
                 {item.label}
               </Link>
@@ -41,14 +42,14 @@ const SiteFooter = () => {
         <div className="h-px bg-primary-foreground/[0.04] mb-5" />
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1.5">
-          <p className="font-sans text-[9px] text-primary-foreground/10 tracking-[0.06em]">
+          <p className="font-sans text-[10px] text-primary-foreground/10 tracking-[0.06em]">
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>
           <div className="flex items-center gap-4">
             <Link
               to={`/${otherRegion}`}
               onClick={() => setRegion(otherRegion)}
-              className="font-sans text-[9px] font-medium uppercase tracking-[0.16em] text-primary-foreground/15 hover:text-primary-foreground/35 transition-colors duration-300"
+              className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground/15 hover:text-primary-foreground/35 transition-colors duration-300"
             >
               Switch to {otherRegion === 'india' ? 'India' : 'United States'}
             </Link>
