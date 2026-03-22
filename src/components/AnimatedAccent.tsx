@@ -30,85 +30,46 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
         {variant === 'partnership' ? (
           <>
-            {/* Far background ridge */}
-            <motion.path
-              d="M 0 250 L 40 235 L 80 240 L 130 225 L 180 215 L 220 220 L 280 210 L 320 230 L 400 250 Z"
-              fill={goldFill}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 0.03 }} viewport={{ once: true }}
-              transition={{ duration: 1.0, delay: 0.05 }}
-            />
-            {/* Mid mountain layer */}
-            <motion.path
-              d="M 0 250 L 50 220 L 100 235 L 150 195 L 200 165 L 250 200 L 310 215 L 360 205 L 400 250 Z"
-              fill={goldFill}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 0.05 }} viewport={{ once: true }}
-              transition={{ duration: 1.0, delay: 0.1 }}
-            />
-            {/* Main peak mountain */}
-            <motion.path
-              d="M 80 250 L 140 200 L 170 210 L 200 110 L 230 208 L 260 195 L 320 250 Z"
-              fill={goldFill}
-              initial={{ opacity: 0 }} whileInView={{ opacity: 0.08 }} viewport={{ once: true }}
-              transition={{ duration: 1.2, delay: 0.15 }}
-            />
-            {/* Main peak outline */}
-            <motion.path
-              d="M 80 250 L 140 200 L 170 210 L 200 110 L 230 208 L 260 195 L 320 250"
-              stroke={goldStroke} strokeWidth="0.8" fill="none"
-              {...draw(0.2, 1.8)} opacity={0.4}
-            />
-            {/* Mid ridge outline */}
-            <motion.path
-              d="M 0 250 L 50 220 L 100 235 L 150 195 L 200 165 L 250 200 L 310 215 L 360 205 L 400 250"
-              stroke={goldStroke} strokeWidth="0.4" fill="none"
-              {...draw(0.3, 1.6)} opacity={0.2}
-            />
-            {/* Far ridge outline */}
-            <motion.path
-              d="M 0 250 L 40 235 L 80 240 L 130 225 L 180 215 L 220 220 L 280 210 L 320 230 L 400 250"
-              stroke={goldStroke} strokeWidth="0.3" fill="none"
-              {...draw(0.4, 1.4)} opacity={0.12}
+            {/* Concentric target rings */}
+            <motion.circle cx="200" cy="126" r="90" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.2, 1.4)} opacity={0.2} />
+            <motion.circle cx="200" cy="126" r="65" stroke={goldStroke} strokeWidth="0.5" fill="none" {...draw(0.35, 1.2)} opacity={0.25} />
+            <motion.circle cx="200" cy="126" r="40" stroke={goldStroke} strokeWidth="0.6" fill="none" {...draw(0.65, 1.0)} opacity={0.35} />
+            <motion.circle cx="200" cy="126" r="18" stroke={goldStroke} strokeWidth="0.7" fill="none" {...draw(0.8, 0.8)} opacity={0.45} />
+
+            {/* Ring fills */}
+            <motion.circle cx="200" cy="126" r="90" fill={goldFill} initial={{ opacity: 0 }} whileInView={{ opacity: 0.02 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.3 }} />
+            <motion.circle cx="200" cy="126" r="65" fill={goldFill} initial={{ opacity: 0 }} whileInView={{ opacity: 0.03 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.45 }} />
+            <motion.circle cx="200" cy="126" r="40" fill={goldFill} initial={{ opacity: 0 }} whileInView={{ opacity: 0.04 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.6 }} />
+
+            {/* Bullseye */}
+            <motion.circle cx="200" cy="126" r="5" fill={goldFill} {...nodeAppear(0.9, 0.7)} />
+
+            {/* Impact ripple */}
+            <motion.circle cx="200" cy="126" r="12" stroke={goldStroke} strokeWidth="0.5" fill="none"
+              animate={{ scale: [1, 1.8, 1], opacity: [0.3, 0, 0.3] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* Flag group — interactive */}
+            {/* Dart — from upper-right, tip at bullseye */}
             <motion.g
-              style={{ filter: 'drop-shadow(0 0 18px hsl(38 45% 55% / 0.3))' }}
-              whileHover={{ scale: 1.08, y: -5 }}
+              style={{ filter: 'drop-shadow(0 0 12px hsl(38 45% 55% / 0.25))' }}
+              whileHover={{ scale: 1.06, x: -2, y: 2 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
             >
-              {/* Flagpole — from peak to top */}
-              <motion.line x1="200" y1="110" x2="200" y2="38" stroke={goldStroke} strokeWidth="1.8" strokeLinecap="round" fill="none" {...draw(0.7, 1.0)} opacity={0.85} />
-              {/* Flag pennant — waving shape */}
-              <motion.path
-                d="M 200 40 Q 215 36 226 44 Q 238 52 226 60 Q 215 68 200 64"
-                stroke={goldStroke} strokeWidth="1.2" fill="none"
-                {...draw(1.0, 0.8)} opacity={0.75}
+              <motion.line x1="200" y1="126" x2="270" y2="56" stroke={goldStroke} strokeWidth="1.8" strokeLinecap="round" fill="none" {...draw(0.8, 1.2)} opacity={0.8} />
+              <motion.path d="M 200 126 L 208 120 L 206 128 Z" fill={goldFill}
+                initial={{ opacity: 0, scale: 0 }} whileInView={{ opacity: 0.85, scale: 1 }}
+                viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.2 }}
               />
-              <motion.path
-                d="M 200 40 Q 215 36 226 44 Q 238 52 226 60 Q 215 68 200 64 Z"
-                fill={goldFill}
-                initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }}
-                viewport={{ once: true }} transition={{ duration: 0.6, delay: 1.2 }}
-              />
-              {/* Finial */}
-              <motion.circle cx="200" cy="36" r="2.5" fill={goldFill} {...nodeAppear(1.4, 0.9)} />
-              {/* Pole base platform */}
-              <motion.line x1="193" y1="110" x2="207" y2="110" stroke={goldStroke} strokeWidth="1.2" strokeLinecap="round" fill="none" {...draw(1.0, 0.3)} opacity={0.5} />
+              <motion.line x1="270" y1="56" x2="282" y2="50" stroke={goldStroke} strokeWidth="1.2" strokeLinecap="round" fill="none" {...draw(1.3, 0.4)} opacity={0.6} />
+              <motion.line x1="270" y1="56" x2="276" y2="44" stroke={goldStroke} strokeWidth="1.2" strokeLinecap="round" fill="none" {...draw(1.35, 0.4)} opacity={0.6} />
             </motion.g>
 
-            {/* Wind lines near flag */}
-            <motion.line x1="232" y1="44" x2="254" y2="42" stroke={goldStroke} strokeWidth="0.4" strokeLinecap="round" fill="none" {...draw(1.5, 0.4)} opacity={0.18} />
-            <motion.line x1="234" y1="52" x2="260" y2="50" stroke={goldStroke} strokeWidth="0.35" strokeLinecap="round" fill="none" {...draw(1.6, 0.4)} opacity={0.14} />
-            <motion.line x1="230" y1="60" x2="250" y2="59" stroke={goldStroke} strokeWidth="0.3" strokeLinecap="round" fill="none" {...draw(1.7, 0.4)} opacity={0.1} />
-
-            {/* Ground line */}
-            <motion.line x1="20" y1="250" x2="380" y2="250" stroke={goldStroke} strokeWidth="0.4" fill="none" {...draw(0.1, 1.0)} opacity={0.15} />
-
             {/* Tagline */}
-            <motion.text x="200" y="275" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
+            <motion.text x="200" y="252" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.5, 0.85)}>
               "Aligned ambition. Enduring partnership."
             </motion.text>
-            <motion.line x1="100" y1="285" x2="300" y2="285" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(2.0, 0.5)} opacity={0.15} />
+            <motion.line x1="100" y1="264" x2="300" y2="264" stroke={goldStroke} strokeWidth="0.35" fill="none" {...draw(1.7, 0.5)} opacity={0.15} />
           </>
         ) : variant === 'industry' ? (
           <>
