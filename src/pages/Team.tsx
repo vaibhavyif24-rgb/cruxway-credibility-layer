@@ -332,7 +332,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </LinkedWrapper>
             <div>
               <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground dark:text-primary-foreground tracking-[-0.02em] leading-[1.2]">
                   {member.name}
                 </h3>
                 {member.linkedIn && (
