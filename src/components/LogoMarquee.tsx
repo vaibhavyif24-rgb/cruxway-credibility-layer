@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import React, { forwardRef } from 'react';
 
 interface LogoItem {
   src: string;
@@ -17,7 +18,7 @@ interface LogoMarqueeProps {
   variant?: 'dark' | 'inline';
 }
 
-const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProps) => {
+const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 28, variant = 'dark' }, ref) => {
   const doubled = [...logos, ...logos];
   const isDark = variant === 'dark';
 
@@ -26,6 +27,7 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
 
   return (
     <div
+      ref={ref}
       className={`relative overflow-hidden ${
         isDark ? 'bg-primary py-6 md:py-10 lg:py-14' : 'py-5 md:py-8 lg:py-10'
       }`}
@@ -88,6 +90,8 @@ const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProp
       </motion.div>
     </div>
   );
-};
+});
+
+LogoMarquee.displayName = 'LogoMarquee';
 
 export default LogoMarquee;
