@@ -1,10 +1,10 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion } from 'framer-motion';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import AnimatedAccent from '@/components/AnimatedAccent';
 import GlassCard from '@/components/GlassCard';
+import { motion } from 'framer-motion';
 
 const principles = [
   { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: '◆' },
@@ -34,7 +34,7 @@ const GuidingPrinciples = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/45 leading-[1.75] mt-5 max-w-[460px]">
+            <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.75] mt-5 max-w-[460px]">
               The values and convictions that shape every partnership and every decision we make.
             </p>
           </FadeIn>
@@ -62,14 +62,9 @@ const GuidingPrinciples = () => {
               <FadeIn delay={0.08}>
                 <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mt-5 mb-4">
                   {isIndia
-                    ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders, while protecting the legacy, culture, and values that built them.'
-                    : 'Cruxway invests in majority stakes in founder-led businesses across the United States, combining long-term capital with operating expertise to help owners transform their companies into market leaders.'}
+                    ? 'Cruxway combines long-term capital with deep operational expertise to help Indian founders transform their businesses into market leaders, while protecting the legacy and values that built them.'
+                    : 'Cruxway invests in majority stakes in founder-led businesses, combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'}
                 </p>
-                {!isIndia && (
-                  <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8]">
-                    We believe the best businesses in America were not built to be sold on a five-year timeline. They were built by people who cared deeply about their employees, their customers, and the communities they serve.
-                  </p>
-                )}
               </FadeIn>
             </div>
             <FadeIn delay={0.15}>
@@ -114,51 +109,7 @@ const GuidingPrinciples = () => {
         </div>
       </section>
 
-      {/* Where We Operate */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <FadeIn>
-            <SectionLabel light>Our Presence</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-primary-foreground leading-[1.15] mb-6 md:mb-8">
-              Where We Operate
-            </h2>
-          </FadeIn>
-
-          <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            {/* San Diego */}
-            <GlassCard index={0} variant="dark" className="p-6 md:p-8">
-              <svg viewBox="0 0 200 80" className="w-full h-[60px] md:h-[70px] mb-4">
-                <motion.path d="M 20 70 Q 60 25 100 35 T 180 20" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.35 }} viewport={{ once: true }} transition={{ duration: 1.5, delay: 0.3 }} stroke="hsl(38 45% 55%)" strokeWidth="0.6" fill="none" />
-                <motion.circle cx="100" cy="35" r="3" fill="hsl(38 45% 55%)" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 1 }} opacity={0.5} />
-              </svg>
-              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-1.5">
-                Headquarters
-              </p>
-              <h3 className="font-serif text-[1.2rem] md:text-[1.4rem] text-primary-foreground leading-[1.2]">
-                San Diego, California
-              </h3>
-            </GlassCard>
-
-            {/* NYC / Delhi */}
-            <GlassCard index={1} variant="dark" className="p-6 md:p-8">
-              <svg viewBox="0 0 200 80" className="w-full h-[60px] md:h-[70px] mb-4">
-                <motion.rect x="55" y="15" width="22" height="55" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.3 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.3 }} stroke="hsl(38 45% 55%)" strokeWidth="0.5" fill="none" />
-                <motion.rect x="85" y="8" width="18" height="62" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.35 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.5 }} stroke="hsl(38 45% 55%)" strokeWidth="0.6" fill="none" />
-                <motion.rect x="110" y="22" width="16" height="48" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.25 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.7 }} stroke="hsl(38 45% 55%)" strokeWidth="0.4" fill="none" />
-              </svg>
-              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-1.5">
-                {isIndia ? 'India Operations' : 'East Coast'}
-              </p>
-              <h3 className="font-serif text-[1.2rem] md:text-[1.4rem] text-primary-foreground leading-[1.2]">
-                {isIndia ? 'GK II, Delhi' : 'New York City'}
-              </h3>
-            </GlassCard>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
+      {/* CTA — single, not duplicated */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
@@ -168,12 +119,12 @@ const GuidingPrinciples = () => {
               <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15] mb-4">
                 {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/45 leading-[1.8] mb-6">
+              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.8] mb-6">
                 If you share our values and are exploring long-term partnership, we'd welcome the conversation.
               </p>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/45 hover:border-gold/30 hover:text-primary-foreground/70 transition-all duration-300"
+                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75 transition-all duration-300"
               >
                 Get in Touch
               </Link>
