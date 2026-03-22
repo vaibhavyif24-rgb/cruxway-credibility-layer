@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import heroImage from '@/assets/hero-crossroads.jpg';
+import heroImage from '@/assets/hero-crossroads.webp';
 
 /**
  * Landing page hero: crossroads photo with Ken Burns cinematic zoom + parallax drift
