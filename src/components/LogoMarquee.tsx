@@ -17,7 +17,7 @@ interface LogoMarqueeProps {
   variant?: 'dark' | 'inline';
 }
 
-const LogoMarquee = ({ logos, duration = 28, variant = 'dark' }: LogoMarqueeProps) => {
+const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 28, variant = 'dark' }, ref) => {
   const doubled = [...logos, ...logos];
   const isDark = variant === 'dark';
 
