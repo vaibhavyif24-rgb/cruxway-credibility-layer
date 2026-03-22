@@ -51,34 +51,10 @@ const CriteriaPipeline = () => {
 
   return (
     <div ref={ref} className="relative">
-      {/* Title */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="text-center mb-8"
-      >
-        <span className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold/60">
-          From Discovery to Partnership
-        </span>
-        <div className="w-12 h-px bg-gold/20 mx-auto mt-2" />
-      </motion.div>
-
       {/* Pipeline stages */}
       <div className="relative flex flex-col gap-0">
         {stages.map((stage, i) => (
           <div key={stage.title} className="relative">
-            {/* Connector line */}
-            {i > 0 && (
-              <motion.div
-                initial={{ scaleY: 0 }}
-                animate={isInView ? { scaleY: 1 } : {}}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.15, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute left-6 -top-0 w-px h-0 origin-top"
-                style={{ height: '1px' }}
-              />
-            )}
-
             {/* Stage card */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
@@ -154,22 +130,6 @@ const CriteriaPipeline = () => {
           </div>
         ))}
       </div>
-
-      {/* Partnership terminus */}
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-2 pt-4 border-t border-gold/10"
-      >
-        <div className="flex items-center justify-center gap-3">
-          <div className="w-8 h-px bg-gold/25" />
-          <span className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold/70">
-            Partnership
-          </span>
-          <div className="w-8 h-px bg-gold/25" />
-        </div>
-      </motion.div>
     </div>
   );
 };

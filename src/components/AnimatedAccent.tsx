@@ -37,36 +37,36 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid slice">
         {variant === 'partnership' ? (
           <>
-            {/* Mountain range background silhouette */}
+            {/* Mountain range background fill */}
             <motion.path
-              d="M 0 280 L 60 220 L 95 240 L 140 180 L 170 200 L 200 120 L 230 200 L 260 180 L 305 240 L 340 220 L 400 280 Z"
+              d="M 0 260 L 60 210 L 95 225 L 140 175 L 170 190 L 200 115 L 230 190 L 260 175 L 305 225 L 340 210 L 400 260 Z"
               fill={goldFill}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 0.04 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.2 }}
             />
-            {/* Mountain range mid */}
+            {/* Mountain range outline */}
             <motion.path
-              d="M 0 280 L 80 230 L 120 250 L 160 200 L 200 120 L 240 200 L 280 250 L 320 230 L 400 280 Z"
+              d="M 0 260 L 80 218 L 120 235 L 160 192 L 200 115 L 240 192 L 280 235 L 320 218 L 400 260 Z"
               stroke={goldStroke}
               strokeWidth="0.6"
               fill="none"
               {...draw(0.3, 1.6)}
               opacity={0.3}
             />
-            {/* Main peak outline */}
+            {/* Main peak */}
             <motion.path
-              d="M 160 200 L 200 120 L 240 200"
+              d="M 160 192 L 200 115 L 240 192"
               stroke={goldStroke}
               strokeWidth="1"
               fill="none"
               {...draw(0.5, 1.2)}
               opacity={0.5}
             />
-            {/* Snow cap / peak highlight */}
+            {/* Snow cap */}
             <motion.path
-              d="M 185 155 L 200 120 L 215 155"
+              d="M 185 148 L 200 115 L 215 148"
               fill={goldFill}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 0.08 }}
@@ -74,9 +74,9 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               transition={{ duration: 0.6, delay: 0.8 }}
             />
 
-            {/* Climbing path (dotted trail up the mountain) */}
+            {/* Climbing trail */}
             <motion.path
-              d="M 230 260 C 225 245, 220 235, 215 225 C 210 215, 212 210, 210 205 C 208 198, 205 190, 206 182 C 207 174, 208 168, 207 160 C 206 152, 205 148, 204 143"
+              d="M 230 245 C 225 232, 220 222, 215 212 C 210 202, 212 197, 210 190 C 208 183, 205 175, 206 167 C 207 160, 205 150, 204 140 C 203 132, 201 125, 200 120"
               stroke={goldStroke}
               strokeWidth="0.6"
               strokeDasharray="3 4"
@@ -85,48 +85,46 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               opacity={0.3}
             />
 
-            {/* Climber figure near the peak */}
+            {/* Climber standing at the summit */}
             <motion.g
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 1.2 }}
-              animate={hovered ? { y: -3 } : { y: 0 }}
+              animate={hovered ? { y: -2 } : { y: 0 }}
             >
-              {/* Body */}
-              <circle cx="204" cy="133" r="2.5" fill={goldFill} opacity={0.75} />
+              {/* Head */}
+              <circle cx="200" cy="104" r="2.5" fill={goldFill} opacity={0.75} />
               {/* Torso */}
-              <line x1="204" y1="135.5" x2="204" y2="143" stroke={goldStroke} strokeWidth="1" opacity={0.7} />
-              {/* Leading leg */}
-              <line x1="204" y1="143" x2="200" y2="149" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-              {/* Trailing leg */}
-              <line x1="204" y1="143" x2="207" y2="149" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-              {/* Arm reaching up to plant flag */}
-              <line x1="204" y1="137" x2="200" y2="131" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
-              {/* Trailing arm */}
-              <line x1="204" y1="137" x2="208" y2="140" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
+              <line x1="200" y1="106.5" x2="200" y2="114" stroke={goldStroke} strokeWidth="1" opacity={0.7} />
+              {/* Left leg */}
+              <line x1="200" y1="114" x2="197" y2="120" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
+              {/* Right leg */}
+              <line x1="200" y1="114" x2="203" y2="120" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
+              {/* Arm raised to flag */}
+              <line x1="200" y1="108" x2="196" y2="102" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
+              {/* Other arm */}
+              <line x1="200" y1="108" x2="204" y2="111" stroke={goldStroke} strokeWidth="0.8" opacity={0.65} />
             </motion.g>
 
-            {/* Flag at the summit */}
+            {/* Flag at summit */}
             <motion.g
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 1.5 }}
-              style={{ transformOrigin: '200px 120px' }}
+              style={{ transformOrigin: '196px 102px' }}
             >
-              {/* Flag pole */}
               <motion.line
-                x1="200" y1="120" x2="200" y2="105"
+                x1="196" y1="102" x2="196" y2="87"
                 stroke={goldStroke} strokeWidth="1" strokeLinecap="round"
                 opacity={0.7}
               />
-              {/* Flag fabric - animated wave */}
               <motion.path
-                d="M 200 105 Q 208 107 212 105 Q 216 103 212 110 Q 208 112 200 110 Z"
+                d="M 196 87 Q 204 89 208 87 Q 212 85 208 92 Q 204 94 196 92 Z"
                 fill={goldFill}
                 animate={hovered
-                  ? { d: ['M 200 105 Q 208 107 212 105 Q 216 103 212 110 Q 208 112 200 110 Z', 'M 200 105 Q 210 103 214 106 Q 218 109 213 111 Q 207 113 200 110 Z', 'M 200 105 Q 208 107 212 105 Q 216 103 212 110 Q 208 112 200 110 Z'] }
+                  ? { d: ['M 196 87 Q 204 89 208 87 Q 212 85 208 92 Q 204 94 196 92 Z', 'M 196 87 Q 206 85 210 88 Q 214 91 209 93 Q 203 95 196 92 Z', 'M 196 87 Q 204 89 208 87 Q 212 85 208 92 Q 204 94 196 92 Z'] }
                   : {}
                 }
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -134,16 +132,16 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
               />
             </motion.g>
 
-            {/* Achievement glow at peak */}
+            {/* Achievement glow */}
             <motion.circle
-              cx="200" cy="118" r="8"
+              cx="200" cy="110" r="8"
               fill={goldFill}
               animate={{ opacity: [0.02, 0.08, 0.02], scale: [1, 1.3, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             />
 
-            {/* Subtle stars / sparkles near peak */}
-            {[[175, 100], [225, 95], [190, 85]].map(([sx, sy], i) => (
+            {/* Sparkles */}
+            {[[175, 92], [225, 88], [190, 80]].map(([sx, sy], i) => (
               <motion.circle
                 key={i} cx={sx} cy={sy} r="1"
                 fill={goldFill}
@@ -153,10 +151,10 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
             ))}
 
             {/* Ground line */}
-            <motion.line x1="30" y1="280" x2="370" y2="280" stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(0.1, 0.8)} opacity={0.15} />
+            <motion.line x1="30" y1="260" x2="370" y2="260" stroke={goldStroke} strokeWidth="0.3" fill="none" {...draw(0.1, 0.8)} opacity={0.15} />
 
             {/* Tagline */}
-            <motion.text x="200" y="268" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
+            <motion.text x="200" y="250" fontSize="16" fill={goldStroke} textAnchor="middle" fontFamily="var(--font-serif)" fontStyle="italic" fontWeight="500" letterSpacing="0.02em" {...fadeIn(1.8, 0.85)}>
               "Aligned ambition. Enduring partnership."
             </motion.text>
           </>
