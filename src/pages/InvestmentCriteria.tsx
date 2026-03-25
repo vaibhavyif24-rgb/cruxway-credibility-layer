@@ -234,32 +234,17 @@ const InvestmentCriteria = () => {
       />
 
       {/* Value Creation Playbook cards */}
+      {/* Value Creation Playbook — Carousel */}
       <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10">
         <div className="max-w-[1080px] mx-auto">
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { step: '01', title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-              { step: '02', title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-              { step: '03', title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-              { step: '04', title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
-            ].map((item, i) => (
-              <FadeIn key={item.step} delay={0.12 + i * 0.08}>
-                <GlassCard index={i} className="p-5 md:p-6 h-full">
-                  <div className="flex flex-col h-full">
-                    <span className="font-serif text-[1.1rem] text-gold/25 group-hover:text-gold/50 transition-colors duration-[400ms] tabular-nums leading-none mb-3">
-                      {item.step}
-                    </span>
-                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-2">{item.title}</h4>
-                    <div className="w-5 h-px bg-gold/20 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-500 mb-2" />
-                    <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground leading-[1.65] group-hover:text-foreground/75 transition-colors duration-300 flex-1">
-                      {item.desc}
-                    </p>
-                  </div>
-                </GlassCard>
-              </FadeIn>
-            ))}
-          </div>
+          <CriteriaCarousel
+            items={[
+              { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+              { title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+              { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
+              { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+            ]}
+          />
         </div>
       </section>
 
