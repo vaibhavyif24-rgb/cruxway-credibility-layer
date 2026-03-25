@@ -492,6 +492,13 @@ const Team = () => {
         </FadeIn>
       </div>
 
+      {/* ScrollRevealText — before network */}
+      <ScrollRevealText
+        label="Network"
+        heading="A curated network built over decades of shared conviction and institutional rigour."
+        variant="dark"
+      />
+
       {/* Network */}
       <Section>
         <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
