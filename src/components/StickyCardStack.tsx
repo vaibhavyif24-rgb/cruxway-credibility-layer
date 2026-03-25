@@ -15,11 +15,11 @@ interface StickyCardStackProps {
 }
 
 /* ─── Constants ─── */
-const MIN_CARD_HEIGHT = 420;
+const MIN_CARD_HEIGHT = 280;
 
 const getCardHeight = () => {
-  if (typeof window === 'undefined') return 560;
-  return Math.max(MIN_CARD_HEIGHT, Math.min(window.innerHeight * 0.7, 620));
+  if (typeof window === 'undefined') return 380;
+  return Math.max(MIN_CARD_HEIGHT, Math.min(window.innerHeight * 0.5, 420));
 };
 
 /* ─── Background palettes ─── */

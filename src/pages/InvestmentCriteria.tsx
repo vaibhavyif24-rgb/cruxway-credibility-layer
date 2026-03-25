@@ -4,8 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import StickyCardStack from '@/components/StickyCardStack';
-
-import CriteriaCarousel from '@/components/CriteriaCarousel';
+import GlassCard from '@/components/GlassCard';
 
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
@@ -182,18 +181,38 @@ const InvestmentCriteria = () => {
         variant="light"
       />
 
-      {/* Value Creation Playbook cards */}
-      {/* Value Creation Playbook — Carousel */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10 overflow-x-hidden">
-        <div className="max-w-[1080px] mx-auto">
-          <CriteriaCarousel
-            items={[
+      {/* Value Creation Playbook — 2×2 Grid */}
+      <section className="bg-primary text-primary-foreground px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 pt-10 md:pt-14 lg:pt-16 overflow-x-hidden">
+        <DarkSectionEffects variant="cta" />
+        <div className="relative max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel light>Value Creation</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-primary-foreground leading-[1.15] mb-2">
+              Our Playbook
+            </h2>
+            <GoldRule className="mt-3 mb-6 md:mb-8" />
+          </FadeIn>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            {[
               { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
               { title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
               { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
               { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
-            ]}
-          />
+            ].map((item, i) => (
+              <GlassCard key={item.title} index={i} variant="dark" className="p-6 md:p-7">
+                <span className="font-serif text-[1.4rem] md:text-[1.6rem] text-gold/20 leading-none mb-3 block">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-primary-foreground leading-[1.25] mb-2.5">
+                  {item.title}
+                </h4>
+                <div className="w-5 h-px bg-gold/20 mb-2.5" />
+                <p className="font-sans text-[12px] md:text-[13px] text-primary-foreground/50 leading-[1.7]">
+                  {item.desc}
+                </p>
+              </GlassCard>
+            ))}
+          </div>
         </div>
       </section>
 
