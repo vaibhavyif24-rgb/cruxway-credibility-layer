@@ -326,6 +326,8 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
               totalMembers={members.length}
               isActive={i === activeIndex}
               cardHeight={cardHeight}
+              isDark={isDark}
+            />
             />
           ))}
         </div>
