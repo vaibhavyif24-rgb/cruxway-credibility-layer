@@ -1,55 +1,31 @@
 
 
-## Criteria Page: Horizontal Sticky Deck + Value Creation Carousel
+## Fix: HorizontalStickyDeck Content Visibility + Horizontal Overflow
 
-### Overview
-Two changes on the Investment Criteria page:
+### Root Cause Analysis
 
-1. **"What We Look For" → Horizontal scroll-triggered sticky deck** (like the vertical StickyCardStack but slides horizontally). Each card fills the viewport width, with scroll driving a `translateX` transition. Includes unique AnimatedAccent-style SVG illustrations per card (different themes from Evaluation Framework).
+**1. Cards invisible**: Each card has `className="w-full"` (100% of parent), but the parent track is `width: ${cards.length * 100}%` = 600% of the viewport. So each card is 6x wider than the viewport, and `left: ${index * 100}%` positions them at multiples of 600% — pushing them far off-screen. The `translateX` animation only shifts by `100/6 = 16.67%` at a time, which doesn't align with where cards actually are.
 
-2. **"Value Creation Playbook" (Stabilise/Optimise/Invest/Compound) → Horizontal scroll carousel** with the `CriteriaCarousel` component, replacing the 4-column grid.
+**2. Horizontal scrollbar**: The 600%-wide track inside a `max-w-[1080px]` container causes overflow. The sticky div has `overflow: hidden` but the outer wrapper doesn't clip properly in all scenarios.
 
----
+### Fix
 
-### 1. New Component: `HorizontalStickyDeck`
+**File: `src/components/HorizontalStickyDeck.tsx`**
 
-**File**: `src/components/HorizontalStickyDeck.tsx`
+- Change card width from `w-full` to `width: ${100 / cards.length}%` so each card fills exactly one "slide" worth of the track
+- Change card `left` to `${(index * 100) / cards.length}%` to match
+- This way `translateX(-${activeIndex * (100 / cards.length)}%)` correctly aligns each card
+- Add `overflow: hidden` on the outer wrapper to prevent any horizontal bleed
 
-A horizontal variant of `StickyCardStack`:
-- Outer wrapper provides scroll runway: `(N-1) * 0.65 * 100vh + cardHeight`
-- Sticky inner frame pinned at `top: 88px`, full width, height = `cardHeight`
-- Cards laid out side-by-side; scroll drives `translateX(-${activeIndex * 100}%)`
-- Smooth 0.6s cubic-bezier transition between cards (feels like changing a slide)
-- Dot indicators on the right side (vertical dots, same as StickyCardStack)
-- Same scroll handler logic: `progress = scrolled / scrollableRange`, `activeIndex = Math.round(progress * (N-1))`
+**File: `src/pages/InvestmentCriteria.tsx`**
 
-**6 unique thematic illustrations** (different from the 4 in StickyCardStack):
-- **01 Founder Succession**: Torch/flame handoff — two hands passing a flame, gold line art
-- **02 Regulated Services**: Shield with compliance checkmarks, regulatory grid
-- **03 Customer Retention**: Circular loyalty loop — arrows forming a cycle with connection nodes
-- **04 Consolidation**: Merge diagram — multiple small circles converging into one large circle
-- **05 Operational Upside**: Ascending bar chart with gear icon overlay
-- **06 Values Alignment**: Concentric circles with a compass/star at center
+- Remove the `max-w-[1080px]` wrapper around `HorizontalStickyDeck` — the deck should span full width (it's a full-viewport experience like `StickyCardStack`)
+- Add `overflow-x: hidden` on the section wrapper to eliminate horizontal scrollbar
 
-Each card auto-cycles between 2 SVG variants every 2 seconds (same crossfade pattern as StickyCardStack's `ThematicIllustration`).
+### Changes Summary
 
-**Card layout**: Same as `CardSurface` — full-height card with step label, serif title, description on the left, illustration on the right. Background colors alternate between the same palettes used in StickyCardStack.
-
-### 2. Value Creation Playbook → CriteriaCarousel
-
-Replace the 4-column grid (lines 227-249) with the existing `CriteriaCarousel` component, passing the 4 items as carousel data.
-
-### 3. Page Updates (`src/pages/InvestmentCriteria.tsx`)
-
-- Import `HorizontalStickyDeck` instead of `CriteriaCarousel` for "What We Look For"
-- Pass `whatWeLookFor` data to `HorizontalStickyDeck` with matching card interface
-- Replace the Value Creation grid with `CriteriaCarousel` using the 4 playbook items
-- Keep everything else (Hero, Stats, Evaluation Framework, Target Sectors, CTA) unchanged
-
-### Files
-
-| File | Action |
-|------|--------|
-| `src/components/HorizontalStickyDeck.tsx` | **Create** — horizontal scroll-driven deck with 6 unique illustrations |
-| `src/pages/InvestmentCriteria.tsx` | **Edit** — swap "What We Look For" to HorizontalStickyDeck, swap Value Creation grid to CriteriaCarousel |
+| File | What |
+|------|------|
+| `src/components/HorizontalStickyDeck.tsx` | Fix card sizing (`w-full` → percentage), fix positioning (`left`), add `overflow: hidden` on outer |
+| `src/pages/InvestmentCriteria.tsx` | Remove `max-w` constraint around deck, add `overflow-x: hidden` on section |
 
