@@ -13,8 +13,9 @@ interface StickyCardStackProps {
 
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
-const CARD_HEIGHT = '52vh';
-const WRAPPER_HEIGHT = '100vh'; // tall enough for real sticky runway
+const CARD_MIN_H = 340;          // px – the visible card surface
+const PEEK = 180;                // px – scroll distance between each card reveal
+const LAST_CARD_RUNWAY = 120;    // px – extra space so last card stays pinned
 
 /* ─── Background palettes ─── */
 const lightBgs = [
@@ -90,42 +91,31 @@ const CardDecoration: React.FC<{ index: number; isDark: boolean }> = ({ index, i
   );
 };
 
-/* ─── Card Surface (inner, receives animation transforms) ─── */
+/* ─── Card Surface ─── */
 const CardSurface: React.FC<{
   card: StickyCard;
   index: number;
   variant: 'light' | 'dark';
-  isVisible: boolean;
-  buriedProgress: number; // 0 = fully visible, 1 = fully buried
-}> = ({ card, index, variant, isVisible, buriedProgress }) => {
+}> = ({ card, index, variant }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
 
-  // Depth cues on the inner surface
-  const scale = 1 - buriedProgress * 0.06;
-  const dimmedOpacity = 1 - buriedProgress * 0.35;
   const shadowBlur = 16 + index * 10;
-  const shadowAlpha = 0.1 + index * 0.06;
+  const shadowAlpha = 0.15 + index * 0.06;
 
   return (
     <div
       className="rounded-2xl md:rounded-3xl overflow-hidden relative"
       style={{
         backgroundColor: bg,
-        minHeight: CARD_HEIGHT,
-        boxShadow: `0 ${shadowBlur}px ${shadowBlur * 2}px -${6 + index * 2}px rgba(0,0,0,${shadowAlpha})`,
-        transform: isVisible ? `scale(${scale})` : 'translateY(80px)',
-        opacity: isVisible ? dimmedOpacity : 0,
-        transition: isVisible
-          ? 'transform 0.18s ease-out, opacity 0.18s ease-out'
-          : 'opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94)',
-        transformOrigin: 'center top',
+        minHeight: `${CARD_MIN_H}px`,
+        boxShadow: `0 -4px ${shadowBlur}px -4px rgba(0,0,0,${shadowAlpha}), 0 ${shadowBlur}px ${shadowBlur * 2}px -${6 + index * 2}px rgba(0,0,0,${shadowAlpha})`,
       }}
     >
       <CardDecoration index={index} isDark={isDark} />
 
-      <div className="relative z-10 flex items-center" style={{ minHeight: CARD_HEIGHT }}>
+      <div className="relative z-10 flex items-center" style={{ minHeight: `${CARD_MIN_H}px` }}>
         <div className="flex-1 px-8 md:px-14 lg:px-20 py-10 md:py-14">
           <div
             className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-5"
@@ -160,83 +150,40 @@ const CardSurface: React.FC<{
   );
 };
 
-/* ─── Stack Container ─── */
+/* ─── Stack Container ───
+ *
+ * Mechanical approach: ONE parent container, all cards are sticky children.
+ * Each card uses negative margin-bottom so it only occupies PEEK px in the
+ * document flow. As the user scrolls, the next card (higher z-index) slides
+ * up and pins at the same top, physically covering the previous card.
+ *
+ * Container height = (cards.length - 1) * PEEK + CARD_MIN_H + LAST_CARD_RUNWAY
+ * This ensures the last card stays pinned long enough before the section ends.
+ */
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light' }) => {
-  const wrapperRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [visibleSet, setVisibleSet] = useState<Set<number>>(() => new Set());
-  const [buriedProgresses, setBuriedProgresses] = useState<number[]>(() => cards.map(() => 0));
-
-  // Entrance observer
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    wrapperRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisibleSet(prev => new Set(prev).add(i));
-            obs.unobserve(el);
-          }
-        },
-        { threshold: 0.15 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach(o => o.disconnect());
-  }, [cards.length]);
-
-  // Scroll-driven buried progress: card i's progress is based on wrapper i+1 approaching sticky top
-  useEffect(() => {
-    const onScroll = () => {
-      const next: number[] = cards.map((_, i) => {
-        if (i >= cards.length - 1) return 0; // last card never buries
-        const nextWrapper = wrapperRefs.current[i + 1];
-        if (!nextWrapper) return 0;
-        const rect = nextWrapper.getBoundingClientRect();
-        // How far the next wrapper's top has passed the sticky top
-        const travel = STICKY_TOP - rect.top;
-        const cardH = nextWrapper.offsetHeight * 0.5;
-        return Math.max(0, Math.min(1, travel / cardH));
-      });
-      setBuriedProgresses(next);
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [cards.length]);
-
-  const setRef = useCallback((el: HTMLDivElement | null, i: number) => {
-    wrapperRefs.current[i] = el;
-  }, []);
+  const containerHeight = (cards.length - 1) * PEEK + CARD_MIN_H + LAST_CARD_RUNWAY;
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      style={{ minHeight: `${containerHeight}px` }}
+    >
       {cards.map((card, i) => (
         <div
           key={card.num}
-          ref={el => setRef(el, i)}
+          className="sticky"
           style={{
-            height: i < cards.length - 1 ? WRAPPER_HEIGHT : 'auto',
-            marginTop: i > 0 ? '-15vh' : 0,
+            top: `${STICKY_TOP}px`,
+            zIndex: (i + 1) * 10,
+            // Each card except the last uses negative margin to only consume PEEK px in flow
+            marginBottom: i < cards.length - 1 ? `${-(CARD_MIN_H - PEEK)}px` : undefined,
           }}
         >
-          <div
-            className="sticky will-change-transform"
-            style={{
-              top: `${STICKY_TOP}px`,
-              zIndex: (i + 1) * 10,
-            }}
-          >
-            <CardSurface
-              card={card}
-              index={i}
-              variant={variant}
-              isVisible={visibleSet.has(i)}
-              buriedProgress={buriedProgresses[i]}
-            />
-          </div>
+          <CardSurface
+            card={card}
+            index={i}
+            variant={variant}
+          />
         </div>
       ))}
     </div>
