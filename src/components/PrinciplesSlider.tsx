@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { SectionLabel, GoldRule } from '@/components/ui/Section';
 
@@ -25,21 +25,19 @@ const PrinciplePanel = ({
   image,
   index,
   total,
-  activeIndex,
 }: {
   principle: Principle;
   image: string;
   index: number;
   total: number;
-  activeIndex: number;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.5 });
+  const isInView = useInView(ref, { amount: 0.4 });
 
   return (
     <div
       ref={ref}
-      className="h-screen w-full snap-start relative flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background image */}
       <img
@@ -80,42 +78,36 @@ const PrinciplePanel = ({
           <div
             key={i}
             className={`w-2 h-2 rounded-full transition-all duration-500 ${
-              i === activeIndex
+              i === index && isInView
                 ? 'bg-gold/80 scale-125'
-                : 'bg-white/20 hover:bg-white/35'
+                : 'bg-white/20'
             }`}
           />
         ))}
       </div>
+
+      {/* Scroll hint on first panel */}
+      {index === 0 && (
+        <motion.div
+          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+        >
+          <motion.div
+            className="w-px h-6 bg-white/20"
+            animate={{ scaleY: [1, 0.5, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </motion.div>
+      )}
     </div>
   );
 };
 
 const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      const scrollTop = container.scrollTop;
-      const panelHeight = container.clientHeight;
-      const index = Math.round(scrollTop / panelHeight);
-      setActiveIndex(Math.min(index, principles.length - 1));
-    };
-
-    container.addEventListener('scroll', handleScroll, { passive: true });
-    return () => container.removeEventListener('scroll', handleScroll);
-  }, [principles.length]);
-
   return (
-    <div
-      ref={containerRef}
-      className="h-screen snap-y snap-mandatory overflow-y-auto"
-      style={{ scrollBehavior: 'smooth' }}
-    >
+    <div>
       {principles.map((p, i) => (
         <PrinciplePanel
           key={p.t}
@@ -123,7 +115,6 @@ const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
           image={images[i]}
           index={i}
           total={principles.length}
-          activeIndex={activeIndex}
         />
       ))}
     </div>
