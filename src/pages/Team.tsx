@@ -105,6 +105,24 @@ const bensonDealLogos: LogoItem[] = [
 
 const founders: TeamMember[] = [
   {
+    name: 'Benson Zhang',
+    role: 'Managing Partner',
+    photo: bensonPhoto,
+    linkedIn: 'https://www.linkedin.com/in/benson8zhang/',
+    summary:
+      'Benson has over a decade of experience in finance and private equity investing across technology and business services sectors. He brings disciplined capital allocation and deep sector knowledge to every partnership.',
+    highlights: [
+      'Most recently invested through BlackRock\'s flagship direct private equity group, where he led the sale of BlackRock\'s stake in Authentic Brands Group',
+      'At HGGC, led the investments in IDERA and RPX where he served as a board observer',
+      'Began his career at Credit Suisse in the Technology Investment Banking Group where he closed 7 deals totaling $30 billion in deal value, primarily in the semiconductor and software spaces',
+    ],
+    logos: [
+      { src: blackrockLogo, alt: 'BlackRock' },
+      { src: creditSuisseLogo, alt: 'Credit Suisse' },
+    ],
+    dealLogos: bensonDealLogos,
+  },
+  {
     name: 'Harin Gupta',
     role: 'Managing Partner',
     photo: harinPhoto,
@@ -123,24 +141,6 @@ const founders: TeamMember[] = [
       { src: deutscheBankLogo, alt: 'Deutsche Bank' },
     ],
     dealLogos: harinDealLogos,
-  },
-  {
-    name: 'Benson Zhang',
-    role: 'Managing Partner',
-    photo: bensonPhoto,
-    linkedIn: 'https://www.linkedin.com/in/benson8zhang/',
-    summary:
-      'Benson has over a decade of experience in finance and private equity investing across technology and business services sectors. He brings disciplined capital allocation and deep sector knowledge to every partnership.',
-    highlights: [
-      'Most recently invested through BlackRock\'s flagship direct private equity group, where he led the sale of BlackRock\'s stake in Authentic Brands Group',
-      'At HGGC, led the investments in IDERA and RPX where he served as a board observer',
-      'Began his career at Credit Suisse in the Technology Investment Banking Group where he closed 7 deals totaling $30 billion in deal value, primarily in the semiconductor and software spaces',
-    ],
-    logos: [
-      { src: blackrockLogo, alt: 'BlackRock' },
-      { src: creditSuisseLogo, alt: 'Credit Suisse' },
-    ],
-    dealLogos: bensonDealLogos,
   },
 ];
 
