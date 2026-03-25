@@ -1,47 +1,66 @@
 
 
-## Plan: Team Deck Cleanup, Theme-Aware Sticky Decks, and Criteria Label Fix
+## Plan: Boundless-Style ScrollTrigger Team Deck
 
-### 1. Remove duplicate logos and "Background" section from TeamStickyDeck
+### What We're Building
 
-**File: `src/components/TeamStickyDeck.tsx`**
-- Remove the "Background" / institutional logos row (lines 225-254) from `TeamCardSurface`. The deal logos marquee stays (it "floats on deck"). The institutional logos are already shown in the separate "Institutional Experience" marquee below.
-- Remove `logos` from `TeamDeckMember` interface since it's no longer used in the deck.
+A complete rewrite of the `TeamStickyDeck` component to use a **stacking cards** pattern inspired by Boundless Ventures' portfolio section. Instead of snapping between cards via `translateY`, each card will be independently `position: sticky` and stack on top of the previous one as the user scrolls — creating a smooth, organic "card peeling" effect.
 
-**File: `src/pages/Team.tsx`**
-- Stop passing `logos` to the `TeamStickyDeck` members array.
+### Architecture
 
-### 2. Theme-aware card backgrounds for all sticky decks
+```text
+Outer container (height = N * scrollRunway)
+├── Card 1 wrapper (position: sticky, top: 88px, z-index: 1)
+│   └── Card surface (full viewport, fades/scales slightly as covered)
+├── Card 2 wrapper (position: sticky, top: 88px, z-index: 2)  
+│   └── Card surface (slides up from below, covers card 1)
+├── Card 3 wrapper (position: sticky, top: 88px, z-index: 3)
+│   └── Card surface (slides up from below, covers card 2)
+```
 
-All three sticky deck components currently hardcode dark HSL backgrounds. They need to respond to light/dark mode.
+Each card is its own sticky element. As you scroll, the next card naturally rises from below and overlaps the previous one. The previous card gets a subtle scale-down and opacity reduction as it's being covered — creating depth.
 
-**File: `src/components/TeamStickyDeck.tsx`**
-- Import `useTheme` from `@/contexts/ThemeContext`.
-- Add light-mode card backgrounds (cream/warm tones matching the site's light palette).
-- Select the palette based on `theme`.
-- Update text colors accordingly (dark text on light cards, light text on dark cards).
+### Key Differences from Current
 
-**File: `src/components/StickyCardStack.tsx`**
-- Already has `lightBgs` and `darkBgs` palettes, but the `variant` prop is set manually per usage. The component should additionally read `useTheme()` and auto-select variant when not explicitly overridden, OR the calling pages should pass the correct variant. Since `StickyCardStack` already supports `variant` prop, the simplest fix is to have calling pages pass `variant` based on current theme.
+| Current | New |
+|---|---|
+| Single sticky frame with `translateY` snap | Each card independently sticky |
+| Discrete snap transitions | Continuous scroll-linked parallax |
+| Cards switch instantly | Cards smoothly slide over each other |
+| Flat card stack | Depth via scale + shadow progression |
 
-**Files: `src/pages/InvestmentCriteria.tsx`, `src/pages/Home.tsx`**
-- Import `useTheme` and pass `variant={theme === 'dark' ? 'dark' : 'light'}` to each `StickyCardStack`.
+### Visual & Typography Upgrades
 
-### 3. Replace "Step XX" with "Criterion XX" on criteria page
+- **Larger name**: `text-[1.8rem] md:text-[2.4rem]` serif with letter-spacing `-0.03em`
+- **Larger photo**: `96px md:120px` with subtle gold ring on hover
+- **Role**: `text-[10px] md:text-[11px]` gold uppercase
+- **Summary**: `text-[13px] md:text-[14px]` with more generous `leading-[1.75]`
+- **Highlights**: cleaner spacing, gold dash markers, `text-[12px] md:text-[13px]`
+- **Deal logos marquee**: stays floating at bottom with refined spacing
+- **Subtle gold radial gradient** in top-right corner of each card
+- **Progressive shadow**: deeper shadow on higher z-index cards for depth
 
-**File: `src/components/StickyCardStack.tsx`**
-- Add a `labelPrefix` prop (default: `'Step'`) to `StickyCardStackProps`.
-- Pass it through to `CardSurface`.
-- In `CardSurface`, replace the hardcoded `Step {card.num}` with `{labelPrefix} {card.num}`.
+### Scroll-Linked Effects (using framer-motion `useScroll` + `useTransform`)
 
-**File: `src/pages/InvestmentCriteria.tsx`**
-- Pass `labelPrefix="Criterion"` to the "What We Look For" `StickyCardStack`.
-- The "How We Evaluate" deck can keep `labelPrefix="Step"` (default).
+For each card:
+1. **Cover effect**: As the next card scrolls over, the current card scales to `0.95` and dims to `0.3` opacity
+2. **Entry**: Each card enters naturally via scroll — no artificial animation triggers
+3. **Content stagger**: Name, role, summary, highlights fade in with `0.05s` stagger delays when card enters viewport
 
-### Summary of files to edit
-- `src/components/TeamStickyDeck.tsx` — remove Background logos section, add theme-aware colors
-- `src/components/StickyCardStack.tsx` — add `labelPrefix` prop, pass theme variant through
-- `src/pages/Team.tsx` — remove `logos` from member data passed to deck
-- `src/pages/InvestmentCriteria.tsx` — pass `labelPrefix="Criterion"`, pass theme-based variant
-- `src/pages/Home.tsx` — pass theme-based variant
+### Technical Details
+
+**File: `src/components/TeamStickyDeck.tsx`** — Full rewrite:
+- Remove the single-sticky-frame + translateY architecture
+- Each card wrapped in a div with `position: sticky; top: 88px` and ascending `z-index`
+- Use `useScroll` per card to track its progress and apply cover transforms
+- Outer container height: `cardHeight * members.length + scrollRunway`
+- Theme-aware: light cream / dark navy backgrounds (existing palettes)
+- Smooth `cubic-bezier(0.22, 1, 0.36, 1)` transitions on all animated properties
+
+**File: `src/pages/Team.tsx`** — Minor:
+- No structural changes, just passes same data to the new deck
+
+### Files to Edit
+1. `src/components/TeamStickyDeck.tsx` — Complete rewrite with stacking card architecture
+2. `src/pages/Team.tsx` — Remove any unused padding/wrapper that conflicts with new sticky behavior
 
