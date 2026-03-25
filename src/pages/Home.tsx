@@ -211,7 +211,7 @@ const Home = () => {
               />
               <h2 className="font-serif text-[clamp(1.3rem,2.8vw,2rem)] italic text-foreground/85 leading-[1.45] max-w-[600px]">
                 {isIndia
-                  ? '"Operators and investors who have built, scaled, and partnered across the world\'s leading institutions — now focused on India."'
+                  ? '"Operators and investors who have built, scaled, and partnered with the world\'s leading institutions to unlock India\'s potential."'
                   : '"Operators and investors who have built, scaled, and partnered across the world\'s leading institutions."'}
               </h2>
               <GoldRule className="mt-4" />
