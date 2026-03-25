@@ -429,10 +429,11 @@ const HorizontalCardSurface: React.FC<{
 };
 
 /* ─── Scroll-Driven Horizontal Deck ─── */
+const SCROLL_STEP_VH = 0.55; // viewport-heights of scroll per slide change
+
 const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, variant = 'light' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
 
   const handleScroll = useCallback(() => {
@@ -440,15 +441,12 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
     if (!outer) return;
 
     const rect = outer.getBoundingClientRect();
-    const outerHeight = outer.offsetHeight;
-    const viewportHeight = window.innerHeight;
     const scrolled = -(rect.top - STICKY_TOP);
-    const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-    const slideProgress = progress * Math.max(cards.length - 1, 0);
+    const stepPx = window.innerHeight * SCROLL_STEP_VH;
+    const rawIndex = scrolled / stepPx;
+    const clamped = Math.max(0, Math.min(cards.length - 1, Math.round(rawIndex)));
 
-    setScrollProgress(progress);
-    setActiveIndex(cards.length <= 1 ? 0 : Math.min(cards.length - 1, Math.round(slideProgress)));
+    setActiveIndex(clamped);
   }, [cards.length]);
 
   useEffect(() => {
@@ -478,14 +476,18 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
     handleScroll();
   }, [cardHeight, handleScroll]);
 
-  const transitionRunwayVh = Math.max(cards.length - 1, 0) * SCROLL_PER_CARD * 100;
-  const translateX = scrollProgress * Math.max(cards.length - 1, 0) * (100 / Math.max(cards.length, 1));
+  // Outer height = card visible area + scroll runway for all transitions
+  const scrollStepPx = typeof window !== 'undefined' ? window.innerHeight * SCROLL_STEP_VH : 400;
+  const outerHeight = cardHeight + (cards.length - 1) * scrollStepPx;
+
+  // Discrete full-slide translation
+  const translateX = activeIndex * (100 / cards.length);
 
   return (
     <div
       ref={outerRef}
       className="relative"
-      style={{ height: `calc(${transitionRunwayVh}vh + ${cardHeight}px)` }}
+      style={{ height: `${outerHeight}px` }}
     >
       <div
         className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
@@ -494,12 +496,14 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
           height: `${cardHeight}px`,
         }}
       >
+        {/* Horizontal track — discrete slide changes */}
         <div
           className="relative will-change-transform"
           style={{
             width: `${cards.length * 100}%`,
             height: `${cardHeight}px`,
             transform: `translateX(-${translateX}%)`,
+            transition: 'transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
           {cards.map((card, i) => (
@@ -514,31 +518,27 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
             />
           ))}
         </div>
-      </div>
 
-      {/* Vertical dot indicators on right side */}
-      <div
-        className="pointer-events-none sticky ml-auto flex w-10 flex-col items-center gap-2"
-        style={{
-          top: `${STICKY_TOP + cardHeight / 2 - (cards.length * 14) / 2}px`,
-          marginTop: `-${cardHeight}px`,
-        }}
-      >
-        {cards.map((_, i) => (
-          <div
-            key={i}
-            className="rounded-full transition-all duration-500"
-            style={{
-              width: i === activeIndex ? '8px' : '5px',
-              height: i === activeIndex ? '8px' : '5px',
-              backgroundColor: i === activeIndex
-                ? 'hsl(38 48% 52%)'
-                : variant === 'dark'
-                  ? 'hsla(40, 30%, 96%, 0.2)'
-                  : 'hsla(210, 8%, 44%, 0.25)',
-            }}
-          />
-        ))}
+        {/* Dot indicators — inside the sticky frame */}
+        <div
+          className="pointer-events-none absolute right-4 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2 md:right-5"
+        >
+          {cards.map((_, i) => (
+            <div
+              key={i}
+              className="rounded-full transition-all duration-500"
+              style={{
+                width: i === activeIndex ? '8px' : '5px',
+                height: i === activeIndex ? '8px' : '5px',
+                backgroundColor: i === activeIndex
+                  ? 'hsl(38 48% 52%)'
+                  : variant === 'dark'
+                    ? 'hsla(40, 30%, 96%, 0.2)'
+                    : 'hsla(210, 8%, 44%, 0.25)',
+              }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
