@@ -1,58 +1,55 @@
 
 
-## Three-Part Update: AnimatedAccent-Style Illustrations, Horizontal Carousel, Team Modernization
+## Criteria Page: Horizontal Sticky Deck + Value Creation Carousel
 
-### 1. StickyCardStack — Thematic SVG Illustrations (AnimatedAccent Style)
+### Overview
+Two changes on the Investment Criteria page:
 
-Replace the current minimal `CardDecoration` patterns with rich, animated gold line-art illustrations matching the `AnimatedAccent` component's aesthetic (gold strokes, data points, growth curves, axes, drop lines, pulsing nodes).
+1. **"What We Look For" → Horizontal scroll-triggered sticky deck** (like the vertical StickyCardStack but slides horizontally). Each card fills the viewport width, with scroll driving a `translateX` transition. Includes unique AnimatedAccent-style SVG illustrations per card (different themes from Evaluation Framework).
 
-**4 thematic illustrations** (one per card):
-- **Discovery** (01): Compass/radar — concentric circles with scanning sweep line, pulsing nodes at cardinal points, gold stroke grid
-- **Evaluation** (02): Scales/balance — two-pan balance with axis lines, weighted data points, equilibrium indicators
-- **Diligence** (03): Magnifying glass with data grid — dotted grid behind a lens outline, highlighted nodes inside the focal area
-- **Structuring** (04): Partnership graph — growth curve with axes (TIME/VALUE), area fill, data points with drop lines (directly adapted from `AnimatedAccent` partnership variant)
-
-**Auto-cycling**: Each card gets 2 illustration variants. A `useState` + `setInterval(2000)` toggles between them with CSS opacity crossfade (0.8s transition). Both layers gated by `isActive`.
-
-**Style**: Gold stroke (`hsl(38 45% 55%)`), low opacity (0.08–0.15), corner accents, ambient glow circle — matching `AnimatedAccent` exactly.
-
-**File**: `src/components/StickyCardStack.tsx` — replace `CardDecoration` with new `ThematicIllustration` component.
+2. **"Value Creation Playbook" (Stabilise/Optimise/Invest/Compound) → Horizontal scroll carousel** with the `CriteriaCarousel` component, replacing the 4-column grid.
 
 ---
 
-### 2. Investment Criteria — Horizontal Carousel for "What We Look For"
+### 1. New Component: `HorizontalStickyDeck`
 
-Replace the 6-card grid with a scroll-snap horizontal carousel.
+**File**: `src/components/HorizontalStickyDeck.tsx`
 
-**Implementation** (`src/pages/InvestmentCriteria.tsx`):
-- Container: `overflow-x-auto`, `scroll-snap-type: x mandatory`, `scrollbar-width: none`
-- Each card: `min-w-[280px] md:min-w-[320px]`, `snap-start`, `GlassCard` wrapper
-- Content: large gold step number (`01`–`06`), bold serif title, single-line subtitle (~15 words max)
-- Navigation: left/right arrow buttons (gold border, `btn-premium` style) + dot indicators
-- Active dot tracked via `IntersectionObserver` on each card
-- Edge fade gradients matching site pattern
+A horizontal variant of `StickyCardStack`:
+- Outer wrapper provides scroll runway: `(N-1) * 0.65 * 100vh + cardHeight`
+- Sticky inner frame pinned at `top: 88px`, full width, height = `cardHeight`
+- Cards laid out side-by-side; scroll drives `translateX(-${activeIndex * 100}%)`
+- Smooth 0.6s cubic-bezier transition between cards (feels like changing a slide)
+- Dot indicators on the right side (vertical dots, same as StickyCardStack)
+- Same scroll handler logic: `progress = scrolled / scrollableRange`, `activeIndex = Math.round(progress * (N-1))`
 
----
+**6 unique thematic illustrations** (different from the 4 in StickyCardStack):
+- **01 Founder Succession**: Torch/flame handoff — two hands passing a flame, gold line art
+- **02 Regulated Services**: Shield with compliance checkmarks, regulatory grid
+- **03 Customer Retention**: Circular loyalty loop — arrows forming a cycle with connection nodes
+- **04 Consolidation**: Merge diagram — multiple small circles converging into one large circle
+- **05 Operational Upside**: Ascending bar chart with gear icon overlay
+- **06 Values Alignment**: Concentric circles with a compass/star at center
 
-### 3. Team Page — Modernization with ScrollRevealText
+Each card auto-cycles between 2 SVG variants every 2 seconds (same crossfade pattern as StickyCardStack's `ThematicIllustration`).
 
-**File**: `src/pages/Team.tsx`
+**Card layout**: Same as `CardSurface` — full-height card with step label, serif title, description on the left, illustration on the right. Background colors alternate between the same palettes used in StickyCardStack.
 
-- **ScrollRevealText after Hero**: Insert between hero and first profile section. Heading: "Operators and investors who've built, scaled, and partnered across cycles."
-- **ScrollRevealText before Network section**: Heading: "A curated network built over decades of shared conviction." (variant="dark" if on dark bg, else "light")
-- **ProfileCard enhancements**:
-  - Photo hover: subtle `scale(1.03)` transform
-  - Name: gold gradient underline on hover
-  - Highlight bullets: `motion.li` with staggered `whileInView` (delay per item)
-- **Gold separators**: `GoldRule` between major sections
+### 2. Value Creation Playbook → CriteriaCarousel
 
----
+Replace the 4-column grid (lines 227-249) with the existing `CriteriaCarousel` component, passing the 4 items as carousel data.
 
-### Files Changed
+### 3. Page Updates (`src/pages/InvestmentCriteria.tsx`)
 
-| File | What |
-|------|------|
-| `src/components/StickyCardStack.tsx` | Replace `CardDecoration` with `ThematicIllustration` (4 rich SVG scenes + 2s auto-cycle crossfade) |
-| `src/pages/InvestmentCriteria.tsx` | Replace criteria grid with horizontal scroll-snap carousel |
-| `src/pages/Team.tsx` | Add 2 `ScrollRevealText` sections, modernize `ProfileCard` hover effects |
+- Import `HorizontalStickyDeck` instead of `CriteriaCarousel` for "What We Look For"
+- Pass `whatWeLookFor` data to `HorizontalStickyDeck` with matching card interface
+- Replace the Value Creation grid with `CriteriaCarousel` using the 4 playbook items
+- Keep everything else (Hero, Stats, Evaluation Framework, Target Sectors, CTA) unchanged
+
+### Files
+
+| File | Action |
+|------|--------|
+| `src/components/HorizontalStickyDeck.tsx` | **Create** — horizontal scroll-driven deck with 6 unique illustrations |
+| `src/pages/InvestmentCriteria.tsx` | **Edit** — swap "What We Look For" to HorizontalStickyDeck, swap Value Creation grid to CriteriaCarousel |
 
