@@ -405,6 +405,13 @@ const Team = () => {
         <HeroDivider />
       </section>
 
+      {/* ScrollRevealText — after hero */}
+      <ScrollRevealText
+        label="Our People"
+        heading="Operators and investors who've built, scaled, and partnered across cycles."
+        variant="light"
+      />
+
       {/* Partner (India only, shown before Founders) */}
       {isIndia && (
         <Section>
