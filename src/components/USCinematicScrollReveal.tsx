@@ -114,7 +114,7 @@ const USCinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
+    <section ref={containerRef} className="relative overflow-x-hidden" style={{ height: '300vh' }}>
       <div
         ref={stickyRef}
         className="cin-sticky sticky top-0 h-screen w-full overflow-hidden"
