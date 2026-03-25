@@ -191,7 +191,7 @@ const InvestmentCriteria = () => {
             </FadeIn>
           </div>
         </div>
-        <HorizontalStickyDeck
+        <StickyCardStack
           cards={whatWeLookFor.map((item, i) => ({
             num: String(i + 1).padStart(2, '0'),
             title: item.title,
