@@ -11,6 +11,7 @@ interface StickyCardStackProps {
   variant?: 'light' | 'dark';
   illustrationSet?: 'process' | 'criteria';
   labelPrefix?: string;
+  mode?: 'sticky' | 'slides';
 }
 
 /* ─── Constants ─── */
