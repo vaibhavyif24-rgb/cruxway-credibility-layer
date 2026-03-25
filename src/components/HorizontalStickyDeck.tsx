@@ -432,6 +432,7 @@ const HorizontalCardSurface: React.FC<{
 const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, variant = 'light' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
 
   const handleScroll = useCallback(() => {
@@ -444,12 +445,10 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
     const scrolled = -(rect.top - STICKY_TOP);
     const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
     const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-    const intervalCount = Math.max(cards.length - 1, 1);
-    const idx = cards.length === 1
-      ? 0
-      : Math.min(cards.length - 1, Math.round(progress * intervalCount));
+    const slideProgress = progress * Math.max(cards.length - 1, 0);
 
-    setActiveIndex(idx);
+    setScrollProgress(progress);
+    setActiveIndex(cards.length <= 1 ? 0 : Math.min(cards.length - 1, Math.round(slideProgress)));
   }, [cards.length]);
 
   useEffect(() => {
@@ -460,10 +459,19 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
   }, []);
 
   useEffect(() => {
-    const onScroll = () => requestAnimationFrame(handleScroll);
+    let frame = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(handleScroll);
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', onScroll);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, [handleScroll]);
 
   useEffect(() => {
@@ -471,6 +479,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
   }, [cardHeight, handleScroll]);
 
   const transitionRunwayVh = Math.max(cards.length - 1, 0) * SCROLL_PER_CARD * 100;
+  const translateX = scrollProgress * Math.max(cards.length - 1, 0) * (100 / Math.max(cards.length, 1));
 
   return (
     <div
@@ -490,8 +499,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
           style={{
             width: `${cards.length * 100}%`,
             height: `${cardHeight}px`,
-            transform: `translateX(-${activeIndex * (100 / cards.length)}%)`,
-            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+            transform: `translateX(-${translateX}%)`,
           }}
         >
           {cards.map((card, i) => (
