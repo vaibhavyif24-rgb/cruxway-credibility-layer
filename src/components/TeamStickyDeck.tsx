@@ -37,7 +37,7 @@ const lightCardBgs = [
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
-/* ─── Inline Logo Marquee (auto-scrolling) ─── */
+/* ─── Inline Logo Marquee (auto-scrolling, no duplicate logos visible) ─── */
 const InlineMarquee: React.FC<{
   logos: TeamDeckMember['dealLogos'];
   isDark: boolean;
@@ -45,7 +45,10 @@ const InlineMarquee: React.FC<{
 }> = ({ logos, isDark, bg }) => {
   const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
-  const doubled = [...logos, ...logos];
+
+  // We need seamless looping — duplicate once for the animation trick,
+  // but each logo only appears once in view at any time
+  const track = [...logos, ...logos];
 
   return (
     <div
@@ -53,25 +56,25 @@ const InlineMarquee: React.FC<{
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: `linear-gradient(to right, ${bg}, transparent)` }} />
-      <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
+      <div className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none" style={{ background: `linear-gradient(to right, ${bg}, transparent)` }} />
+      <div className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none" style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
       <motion.div
-        className="flex items-center gap-5 md:gap-7 w-max"
+        className="flex items-center gap-6 md:gap-8 lg:gap-10 w-max"
         animate={{ x: ['0%', '-50%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 18, ease: 'linear' } }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 22, ease: 'linear' } }}
         style={{ animationPlayState: hovered ? 'paused' : 'running' }}
       >
-        {doubled.map((logo, i) => (
+        {track.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[22px] md:h-[26px]"
+            className="flex items-center justify-center shrink-0 h-[24px] md:h-[30px] lg:h-[34px]"
             style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[17px] md:h-[20px] w-auto max-w-[80px] md:max-w-[100px] object-contain transition-all duration-500"
+              className="h-[20px] md:h-[24px] lg:h-[28px] w-auto max-w-[90px] md:max-w-[110px] lg:max-w-[130px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.7,
@@ -145,7 +148,7 @@ const TeamCard: React.FC<{
         </div>
 
         {/* ─── Right: Content ─── */}
-        <div className="flex-1 flex flex-col justify-between p-6 md:p-8 lg:py-10 lg:pr-10 lg:pl-6">
+        <div className="flex-1 min-w-0 flex flex-col justify-between p-6 md:p-8 lg:py-10 lg:pr-10 lg:pl-6 overflow-hidden">
           {/* Counter */}
           <p
             className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
@@ -154,9 +157,9 @@ const TeamCard: React.FC<{
             {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
           </p>
 
-          {/* Name + Role */}
+          {/* Name + Role + LinkedIn */}
           <div className="mb-3">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h3
                 className="font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
                 style={{ color: isDark ? 'hsl(0 0% 100%)' : 'hsl(var(--foreground))' }}
@@ -168,10 +171,14 @@ const TeamCard: React.FC<{
                   href={member.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors"
-                  style={{ color: isDark ? 'hsl(0 0% 100% / 0.2)' : 'hsl(var(--foreground) / 0.2)' }}
+                  className="shrink-0 inline-flex items-center justify-center w-6 h-6 rounded-full transition-colors cursor-pointer"
+                  style={{
+                    backgroundColor: isDark ? 'hsl(0 0% 100% / 0.06)' : 'hsl(var(--foreground) / 0.06)',
+                    color: isDark ? 'hsl(0 0% 100% / 0.35)' : 'hsl(var(--foreground) / 0.35)',
+                  }}
+                  aria-label={`${member.name} LinkedIn`}
                 >
-                  <ArrowUpRight className="w-4 h-4" />
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               )}
             </div>
@@ -185,7 +192,7 @@ const TeamCard: React.FC<{
 
           {/* Deal logos — directly below name */}
           {member.dealLogos && member.dealLogos.length > 0 && (
-            <div className="mb-4 md:mb-5">
+            <div className="mb-4 md:mb-5 min-w-0 overflow-hidden">
               <p
                 className="font-sans text-[7px] md:text-[8px] font-semibold uppercase tracking-[0.22em] mb-2"
                 style={{ color: 'hsl(38 48% 52% / 0.45)' }}
@@ -196,27 +203,27 @@ const TeamCard: React.FC<{
             </div>
           )}
 
-          {/* Summary */}
+          {/* Summary — proper wrapping */}
           <p
-            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4"
+            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words"
             style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
           >
             {member.summary}
           </p>
 
-          {/* Highlights */}
-          <ul className="space-y-2 flex-1">
+          {/* Highlights — proper wrapping */}
+          <ul className="space-y-2 flex-1 min-w-0">
             {member.highlights.map((line, i) => (
               <li
                 key={i}
-                className="font-sans text-[10.5px] md:text-[11.5px] leading-[1.6] flex gap-2.5 items-start"
+                className="font-sans text-[10.5px] md:text-[11.5px] leading-[1.6] flex gap-2.5 items-start min-w-0"
                 style={{ color: isDark ? 'hsl(0 0% 100% / 0.3)' : 'hsl(var(--foreground) / 0.4)' }}
               >
                 <span
                   className="shrink-0 mt-[6px] w-2 h-px"
                   style={{ backgroundColor: 'hsl(38 48% 52% / 0.3)' }}
                 />
-                <span>{line}</span>
+                <span className="break-words overflow-wrap-anywhere">{line}</span>
               </li>
             ))}
           </ul>
