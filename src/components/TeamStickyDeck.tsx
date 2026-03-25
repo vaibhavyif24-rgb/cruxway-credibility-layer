@@ -169,7 +169,7 @@ const TeamCardSurface: React.FC<{
                   {member.name}
                 </h3>
                 {member.linkedIn && (
-                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-[hsl(38_48%_52%)] transition-colors">
+                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-white/20' : 'text-foreground/20'} hover:text-[hsl(38_48%_52%)] transition-colors`}>
                     <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                   </a>
                 )}
