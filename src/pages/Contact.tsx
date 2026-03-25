@@ -6,6 +6,7 @@ import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import GlassCard from '@/components/GlassCard';
+import ScrollRevealText from '@/components/ScrollRevealText';
 
 import heroIndiaContact from '@/assets/hero-india-contact.jpg';
 import heroUSContact from '@/assets/hero-us-contact.jpg';
