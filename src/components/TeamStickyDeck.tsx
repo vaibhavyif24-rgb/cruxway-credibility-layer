@@ -255,6 +255,8 @@ const TeamCardSurface: React.FC<{
 
 /* ─── Team Sticky Deck ─── */
 const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
