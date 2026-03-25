@@ -7,7 +7,8 @@ const usSectors = [
     category: 'Infrastructure & Industrial',
     items: [
       { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
-      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
+      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
+      { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
     ],
   },
   {
@@ -16,12 +17,6 @@ const usSectors = [
       { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
       { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
       { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
-    ],
-  },
-  {
-    category: 'Specialist Services',
-    items: [
-      { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
     ],
   },
 ];
@@ -42,7 +37,7 @@ const SectorColumn = ({ category, items }: { category: string; items: { name: st
               className="flex-shrink-0 rotate-45 transition-colors duration-200 mt-[5px]"
               style={{ width: '7px', height: '7px', backgroundColor: 'var(--cin-card-bullet)' }}
             />
-            <div>
+            <div className="min-w-0">
               <span
                 className="font-sans text-[12px] leading-[1.9] transition-colors duration-200 block"
                 style={{ color: 'var(--cin-card-text)' }}
@@ -114,7 +109,7 @@ const USCinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
+    <section ref={containerRef} className="relative w-full overflow-x-hidden" style={{ height: '300vh' }}>
       <div
         ref={stickyRef}
         className="cin-sticky sticky top-0 h-screen w-full overflow-hidden"
@@ -191,6 +186,7 @@ const USCinematicScrollReveal = () => {
             zIndex: 3,
             opacity: cardProgress > 0.05 ? 1 : 0,
             transition: 'opacity 0.15s ease',
+            overflowY: 'auto',
           }}
         >
           <div
@@ -201,7 +197,6 @@ const USCinematicScrollReveal = () => {
               WebkitBackdropFilter: 'blur(24px) saturate(160%)',
               borderTop: '1px solid var(--cin-card-border)',
               borderRadius: '24px 24px 0 0',
-              overflowY: 'auto',
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(192,154,89,0.2) transparent',
               transition: 'background 0.3s ease, border-color 0.3s ease',
@@ -231,18 +226,14 @@ const USCinematicScrollReveal = () => {
               Essential B2B services characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.
             </p>
 
-            {/* Three-column grid */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-6 md:gap-0">
+            {/* Two-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-6 md:gap-0">
               <div className="md:pr-5">
                 <SectorColumn category={usSectors[0].category} items={usSectors[0].items} />
               </div>
               <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
-              <div className="md:px-5">
-                <SectorColumn category={usSectors[1].category} items={usSectors[1].items} />
-              </div>
-              <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
               <div className="md:pl-5">
-                <SectorColumn category={usSectors[2].category} items={usSectors[2].items} />
+                <SectorColumn category={usSectors[1].category} items={usSectors[1].items} />
               </div>
             </div>
           </div>

@@ -97,7 +97,7 @@ const CinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
+    <section ref={containerRef} className="relative w-full overflow-x-hidden" style={{ height: '300vh' }}>
       <div
         ref={stickyRef}
         className="cin-sticky sticky top-0 h-screen w-full overflow-hidden"
@@ -174,6 +174,7 @@ const CinematicScrollReveal = () => {
             zIndex: 3,
             opacity: cardProgress > 0.05 ? 1 : 0,
             transition: 'opacity 0.15s ease',
+            overflowY: 'auto',
           }}
         >
           <div
@@ -184,7 +185,6 @@ const CinematicScrollReveal = () => {
               WebkitBackdropFilter: 'blur(24px) saturate(160%)',
               borderTop: '1px solid var(--cin-card-border)',
               borderRadius: '24px 24px 0 0',
-              overflowY: 'auto',
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(192,154,89,0.2) transparent',
               transition: 'background 0.3s ease, border-color 0.3s ease',
