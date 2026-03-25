@@ -87,7 +87,7 @@ const PrincipleCard: React.FC<{
           <div className="flex flex-col items-center max-w-[540px]">
             {/* Overline label */}
             <p
-              className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] text-gold/50 mb-6"
+              className="font-sans text-[10px] md:text-[12px] font-medium uppercase tracking-[0.28em] text-white/60 mb-6"
               style={{
                 opacity: isActive ? 0.6 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
