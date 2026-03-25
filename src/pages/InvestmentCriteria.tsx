@@ -10,6 +10,7 @@ import CriteriaCarousel from '@/components/CriteriaCarousel';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
+import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
