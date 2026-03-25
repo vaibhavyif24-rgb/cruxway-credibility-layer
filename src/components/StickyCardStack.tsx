@@ -347,11 +347,10 @@ const StickyCardSurface: React.FC<{
   card: StickyCard;
   index: number;
   variant: 'light' | 'dark';
-  isActive: boolean;
   cardHeight: number;
   illustrationSet: 'process' | 'criteria';
   labelPrefix: string;
-}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix }) => {
+}> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
@@ -366,41 +365,26 @@ const StickyCardSurface: React.FC<{
       }}
     >
       {illustrationSet === 'criteria'
-        ? <CriteriaIllustration index={index} isDark={isDark} isActive={isActive} />
-        : <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
+        ? <CriteriaIllustration index={index} isDark={isDark} isActive={true} />
+        : <ThematicIllustration index={index} isDark={isDark} isActive={true} />
       }
       <div className="relative z-10 flex h-full items-center">
         <div className="flex-1 px-8 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16">
           <div
             className="mb-5 font-sans text-[10px] font-medium uppercase tracking-[0.22em] md:text-[11px]"
-            style={{
-              color: colors.step,
-              opacity: isActive ? 0.6 : 0,
-              transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-            }}
+            style={{ color: colors.step, opacity: 0.6 }}
           >
             {labelPrefix} {card.num}
           </div>
           <h3
             className="mb-4 font-serif text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.05] tracking-[-0.02em] md:mb-5"
-            style={{
-              color: colors.title,
-              opacity: isActive ? 1 : 0,
-              transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
-            }}
+            style={{ color: colors.title }}
           >
             {card.title.toLowerCase()}.
           </h3>
           <p
             className="max-w-[560px] font-sans text-[15px] leading-[1.8] md:text-[17px]"
-            style={{
-              color: colors.desc,
-              opacity: isActive ? 1 : 0,
-              transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
-            }}
+            style={{ color: colors.desc }}
           >
             {card.description}
           </p>
@@ -419,28 +403,13 @@ const StickyCardItem: React.FC<{
   labelPrefix: string;
   stickyTop: number;
 }> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix, stickyTop }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.5),
-      { threshold: [0, 0.5, 1], rootMargin: '-10% 0px -30% 0px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div
-      ref={ref}
-      className="mb-6 will-change-transform"
+      className="mb-4"
       style={{ position: 'sticky', top: `${stickyTop}px`, zIndex: index + 1 }}
     >
       <StickyCardSurface
-        card={card} index={index} variant={variant} isActive={isActive}
+        card={card} index={index} variant={variant}
         cardHeight={cardHeight} illustrationSet={illustrationSet} labelPrefix={labelPrefix}
       />
     </div>
