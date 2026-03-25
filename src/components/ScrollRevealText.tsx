@@ -5,6 +5,7 @@ interface ScrollRevealTextProps {
   label?: string;
   heading: string;
   subtext?: string;
+  stats?: { value: string; label: string }[];
   variant?: 'dark' | 'light';
   className?: string;
 }
@@ -18,6 +19,7 @@ const ScrollRevealText = ({
   label,
   heading,
   subtext,
+  stats,
   variant = 'dark',
   className = '',
 }: ScrollRevealTextProps) => {
@@ -63,7 +65,7 @@ const ScrollRevealText = ({
         </p>
 
         {/* Subtext */}
-        {subtext && (
+        {subtext && !stats && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
             className={`font-sans text-[13px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-10 md:mt-14 ${
@@ -72,6 +74,17 @@ const ScrollRevealText = ({
           >
             {subtext}
           </motion.p>
+        )}
+
+        {/* Stat blocks */}
+        {stats && stats.length > 0 && (
+          <div className="mt-12 md:mt-16 pt-10 md:pt-12 border-t border-gold/10 w-full max-w-[680px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+              {stats.map((stat, i) => (
+                <StatReveal key={i} stat={stat} index={i} total={stats.length} progress={scrollYProgress} isDark={isDark} />
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </section>
@@ -99,6 +112,36 @@ const Word = ({
     >
       {word}
     </motion.span>
+  );
+};
+
+/* Individual stat with scroll-driven opacity */
+const StatReveal = ({
+  stat,
+  index,
+  total,
+  progress,
+  isDark,
+}: {
+  stat: { value: string; label: string };
+  index: number;
+  total: number;
+  progress: ReturnType<typeof useScroll>['scrollYProgress'];
+  isDark: boolean;
+}) => {
+  const start = 0.65 + (index / total) * 0.15;
+  const end = Math.min(start + 0.2, 1);
+  const opacity = useTransform(progress, [start, end], [0, 1]);
+
+  return (
+    <motion.div style={{ opacity }} className="text-center">
+      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+        {stat.value}
+      </p>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
+        {stat.label}
+      </p>
+    </motion.div>
   );
 };
 
