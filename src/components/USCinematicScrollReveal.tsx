@@ -4,19 +4,24 @@ import usIndustrialReveal from '@/assets/us-industrial-reveal.jpg';
 
 const usSectors = [
   {
-    category: 'Industrials & Infrastructure',
+    category: 'Infrastructure & Industrial',
     items: [
       { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
-      { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
+      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
+    ],
+  },
+  {
+    category: 'Services & Compliance',
+    items: [
       { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
-      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
+      { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
+      { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
     ],
   },
   {
     category: 'Specialist Services',
     items: [
       { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
-      { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
     ],
   },
 ];
@@ -24,7 +29,7 @@ const usSectors = [
 const SectorColumn = ({ category, items }: { category: string; items: { name: string; desc: string }[] }) => (
   <div>
     <h3
-      className="font-serif text-[1.15rem] leading-[1.2] mb-4"
+      className="font-serif text-[0.95rem] leading-[1.2] mb-3"
       style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
@@ -32,20 +37,20 @@ const SectorColumn = ({ category, items }: { category: string; items: { name: st
     <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '14px' }}>
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
-          <li key={item.name} className="flex items-start gap-[10px] group cursor-default" style={{ marginBottom: '12px' }}>
+          <li key={item.name} className="flex items-start gap-[10px] group cursor-default" style={{ marginBottom: '10px' }}>
             <span
-              className="w-2 h-2 flex-shrink-0 rotate-45 transition-colors duration-200 mt-[6px]"
-              style={{ backgroundColor: 'var(--cin-card-bullet)' }}
+              className="flex-shrink-0 rotate-45 transition-colors duration-200 mt-[5px]"
+              style={{ width: '7px', height: '7px', backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <div>
               <span
-                className="font-sans text-[13px] leading-[2] transition-colors duration-200 block"
+                className="font-sans text-[12px] leading-[1.9] transition-colors duration-200 block"
                 style={{ color: 'var(--cin-card-text)' }}
               >
                 {item.name}
               </span>
               <span
-                className="font-sans text-[11px] leading-[1.55] transition-colors duration-200 hidden md:block"
+                className="font-sans text-[10.5px] leading-[1.55] transition-colors duration-200 hidden md:block"
                 style={{ color: 'var(--cin-card-descriptor)', marginTop: '2px' }}
               >
                 {item.desc}
@@ -61,7 +66,19 @@ const SectorColumn = ({ category, items }: { category: string; items: { name: st
 const USCinematicScrollReveal = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
+  const taglineRef = useRef<HTMLHeadingElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
+  const cardWrapperRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+
+  const updateCardMaxHeight = useCallback(() => {
+    const taglineEl = taglineRef.current;
+    const stickyEl = stickyRef.current;
+    const cardEl = cardWrapperRef.current;
+    if (!taglineEl || !stickyEl || !cardEl) return;
+    const taglineBottom = taglineEl.getBoundingClientRect().bottom - stickyEl.getBoundingClientRect().top;
+    cardEl.style.maxHeight = `${stickyEl.offsetHeight - taglineBottom - 24}px`;
+  }, []);
 
   const handleScroll = useCallback(() => {
     const container = containerRef.current;
@@ -70,13 +87,19 @@ const USCinematicScrollReveal = () => {
     const totalScrollable = container.offsetHeight - window.innerHeight;
     if (totalScrollable <= 0) return;
     setProgress(Math.max(0, Math.min(1, -rect.top / totalScrollable)));
-  }, []);
+    updateCardMaxHeight();
+  }, [updateCardMaxHeight]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', updateCardMaxHeight);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+    updateCardMaxHeight();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateCardMaxHeight);
+    };
+  }, [handleScroll, updateCardMaxHeight]);
 
   const imageProgress = Math.min(progress / 0.65, 1);
   const cardProgress = progress > 0.65 ? (progress - 0.65) / 0.35 : 0;
@@ -93,7 +116,8 @@ const USCinematicScrollReveal = () => {
   return (
     <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
       <div
-        className="sticky top-0 h-screen w-full overflow-hidden"
+        ref={stickyRef}
+        className="cin-sticky sticky top-0 h-screen w-full overflow-hidden"
         style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}
       >
         {/* Expanding circle */}
@@ -135,12 +159,14 @@ const USCinematicScrollReveal = () => {
 
         {/* Tagline — static, never moves/fades */}
         <h2
-          className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
+          ref={taglineRef}
+          className="cin-tagline absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
           style={{
             fontSize: 'clamp(2.1rem, 5.2vw, 4rem)',
             color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
             zIndex: 10,
             pointerEvents: 'none',
+            willChange: 'unset' as const,
             transition: 'color 0.3s ease',
             top: '26%',
             left: '50%',
@@ -156,10 +182,10 @@ const USCinematicScrollReveal = () => {
 
         {/* Sectors card */}
         <div
+          ref={cardWrapperRef}
           className="absolute bottom-0 left-0 right-0"
           style={{
-            height: '60vh',
-            maxHeight: '60vh',
+            height: 'auto',
             transform: `translateY(${(1 - cardProgress) * 100}%)`,
             willChange: 'transform',
             zIndex: 3,
@@ -168,7 +194,7 @@ const USCinematicScrollReveal = () => {
           }}
         >
           <div
-            className="cin-card w-full h-full"
+            className="cin-card w-full"
             style={{
               background: 'var(--cin-card-bg)',
               backdropFilter: 'blur(24px) saturate(160%)',
@@ -179,7 +205,7 @@ const USCinematicScrollReveal = () => {
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(192,154,89,0.2) transparent',
               transition: 'background 0.3s ease, border-color 0.3s ease',
-              padding: '40px 56px 44px 56px',
+              padding: '28px 48px 32px 48px',
             }}
           >
             {/* Card header */}
@@ -195,24 +221,40 @@ const USCinematicScrollReveal = () => {
                 height: '1px',
                 backgroundColor: 'var(--cin-card-divider)',
                 marginTop: '8px',
-                marginBottom: '28px',
+                marginBottom: '12px',
               }}
             />
+            <p
+              className="font-sans text-[12px] leading-[1.7]"
+              style={{ color: 'var(--cin-card-subtext)', marginBottom: '24px', maxWidth: '640px' }}
+            >
+              Essential B2B services characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.
+            </p>
 
-            {/* Two-column grid */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-6 md:gap-0">
-              <div className="md:pr-6">
+            {/* Three-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-6 md:gap-0">
+              <div className="md:pr-5">
                 <SectorColumn category={usSectors[0].category} items={usSectors[0].items} />
               </div>
               <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
-              <div className="md:pl-6">
+              <div className="md:px-5">
                 <SectorColumn category={usSectors[1].category} items={usSectors[1].items} />
               </div>
-              <div className="md:hidden h-px w-full" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
+              <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
+              <div className="md:pl-5">
+                <SectorColumn category={usSectors[2].category} items={usSectors[2].items} />
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Mobile card padding override */}
+      <style>{`
+        @media (max-width: 767px) {
+          .cin-card { padding: 20px 18px 24px 18px !important; }
+        }
+      `}</style>
     </section>
   );
 };
