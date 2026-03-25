@@ -114,41 +114,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Principles */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-        <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-14">
-            <div className="lg:col-span-4">
-              <FadeIn>
-                <SectionLabel>Principles</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-foreground leading-[1.2]">
-                  What Guides Us
-                </h2>
-                <GoldRule className="mt-3" />
-              </FadeIn>
-            </div>
-            <div className="lg:col-span-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 auto-rows-fr">
-                {principles.map((p, i) => (
-                  <FadeIn key={p.t} delay={i * 0.06} className="h-full">
-                    <motion.div
-                      whileHover={{ y: -3, borderColor: 'hsl(38 48% 52% / 0.25)' }}
-                      transition={{ duration: 0.2 }}
-                      className="group flex h-full min-h-[188px] flex-col justify-between rounded-sm border border-border/60 bg-background/60 p-4 transition-all duration-300 dark:border-primary-foreground/[0.06] dark:bg-card/40 md:p-5"
-                    >
-                      <div>
-                        <h3 className="font-serif text-[1rem] md:text-[1.1rem] text-foreground mb-1.5 leading-[1.2]">{p.t}</h3>
-                        <div className="w-4 h-px bg-gold/20 group-hover:bg-gold/45 group-hover:w-7 transition-all duration-400 mb-2" />
-                      </div>
-                      <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300 mt-3">{p.d}</p>
-                    </motion.div>
-                  </FadeIn>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Principles — Scroll-triggered vertical slider */}
+      <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
