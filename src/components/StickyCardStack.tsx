@@ -14,7 +14,7 @@ interface StickyCardStackProps {
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
 const CARD_HEIGHT = 380;          // px – visible card surface height
-const SCROLL_PER_CARD = 0.85;     // fraction of viewport per card transition
+const SCROLL_PER_CARD = 0.65;     // fraction of viewport per card transition
 
 /* ─── Background palettes ─── */
 const lightBgs = [
