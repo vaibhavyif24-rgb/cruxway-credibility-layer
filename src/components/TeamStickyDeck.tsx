@@ -20,7 +20,6 @@ interface TeamStickyDeckProps {
 
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
-const SCROLL_RUNWAY = 600; // px of scroll per card transition
 
 /* ─── Backgrounds ─── */
 const darkCardBgs = [
@@ -92,6 +91,8 @@ const StackingCard: React.FC<{
   const bgs = isDark ? darkCardBgs : lightCardBgs;
   const bg = bgs[index % bgs.length];
 
+  const isLast = index === totalMembers - 1;
+
   // Track this card's scroll progress within its wrapper
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -99,22 +100,25 @@ const StackingCard: React.FC<{
   });
 
   // As the NEXT card covers this one, scale down and dim
-  const scale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, 0.92]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.25]);
-  const borderRadius = useTransform(scrollYProgress, [0, 0.6, 1], [16, 16, 24]);
+  const scale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, isLast ? 1 : 0.92]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, isLast ? 1 : 0.25]);
+  const borderRadius = useTransform(scrollYProgress, [0, 0.6, 1], [16, 16, isLast ? 16 : 24]);
 
   const midpoint = Math.ceil(member.highlights.length / 2);
   const col1 = member.highlights.slice(0, midpoint);
   const col2 = member.highlights.slice(midpoint);
 
-  // Progressive shadow for depth
   const shadowDepth = 8 + index * 6;
 
   return (
     <div
       ref={cardRef}
+      className="relative"
       style={{
-        height: `${SCROLL_RUNWAY}px`,
+        /* The wrapper MUST be taller than the sticky element for sticky to work.
+           Card height = 100vh - header. Scroll runway = 80vh gives ~500-600px of
+           pinned scrolling before the next card overlaps. Last card needs no runway. */
+        height: isLast ? `calc(100vh - ${STICKY_TOP}px)` : `calc(100vh - ${STICKY_TOP}px + 80vh)`,
       }}
     >
       <div
@@ -126,12 +130,13 @@ const StackingCard: React.FC<{
         }}
       >
         <motion.div
-          className="relative w-full h-full overflow-hidden"
+          className="relative w-full overflow-hidden"
           style={{
             backgroundColor: bg,
             scale,
             opacity,
             borderRadius,
+            height: '100%',
             boxShadow: `0 -4px ${shadowDepth}px -4px rgba(0,0,0,0.15), 0 ${shadowDepth}px ${shadowDepth * 2}px -${shadowDepth}px rgba(0,0,0,0.2)`,
             transformOrigin: 'top center',
           }}
@@ -179,7 +184,6 @@ const StackingCard: React.FC<{
                         className="w-full h-full object-cover object-top"
                       />
                     </div>
-                    {/* Gold ring on hover */}
                     <div className="absolute inset-[-3px] rounded-full border border-transparent group-hover:border-[hsl(38_48%_52%)]/25 transition-colors duration-700" />
                   </div>
                 ) : (
@@ -297,8 +301,6 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
           isMobile={isMobile}
         />
       ))}
-      {/* Extra space so the last card has room to be fully visible */}
-      <div style={{ height: `calc(100vh - ${STICKY_TOP}px)` }} />
     </div>
   );
 };
