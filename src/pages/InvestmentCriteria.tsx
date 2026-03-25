@@ -199,8 +199,9 @@ const InvestmentCriteria = () => {
             title: item.title,
             description: item.desc,
           }))}
-          variant="light"
+          variant={theme === 'dark' ? 'dark' : 'light'}
           illustrationSet="criteria"
+          labelPrefix="Criterion"
         />
       </section>
 

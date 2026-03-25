@@ -235,7 +235,7 @@ const TeamCardSurface: React.FC<{
         {/* Deal logos — floating on deck */}
         {member.dealLogos && member.dealLogos.length > 0 && (
           <div
-            className="pt-3 md:pt-3 border-t border-white/[0.04]"
+            className={`pt-3 md:pt-3 border-t ${isDark ? 'border-white/[0.04]' : 'border-foreground/[0.06]'}`}
             style={{
               opacity: isActive ? 1 : 0,
               transition: 'opacity 0.6s ease-out',
