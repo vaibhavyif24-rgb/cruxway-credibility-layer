@@ -1,55 +1,46 @@
 
 
-## Sticky Card Reveal for "Our Process" and "Evaluation Framework"
+## Polish StickyCardStack: Professional Depth, Background Art, and True Stacking Feel
 
-### Concept
-Replace the current grid/pipeline layouts with a **sticky stacked card scroll** effect -- each card is `position: sticky` at increasing `top` offsets, so as the user scrolls, cards stack on top of each other like a physical deck being laid out. Each card is a large rounded container following the reference images' aesthetic: Swiss Grid text placement (title left, description below, optional stat/icon right).
+### Problems Identified
+1. Cards have flat, plain HSL backgrounds — looks raw and unfinished
+2. No decorative background elements (geometric lines, subtle patterns, gradients)
+3. Scale/opacity shifting on underlying cards is too subtle (0.96 is barely perceptible)
+4. Cards lack the premium depth cues: inner glow, gradient overlays, border treatments
+5. No opacity dimming on cards as they get buried under the stack
 
-### New Component: `StickyCardStack.tsx`
+### Changes — Single File: `src/components/StickyCardStack.tsx`
 
-A reusable component accepting an array of card items and a variant (light/dark).
+**1. Enhanced Scale + Opacity Shifting**
+- Scale down from `1` to `0.92` (more noticeable depth) as each card scrolls past
+- Add a scroll-driven `opacity` transform: cards fade from `1` to `0.6` as the next card overlaps, creating clear visual hierarchy
+- Increase `top` offset spacing from `24px` to `28px` per card for better stacking visibility
 
-**Scroll mechanics:**
-- Container has enough height for all cards to scroll through (~100vh per card)
-- Each card uses `position: sticky` with incrementally increasing `top` values (e.g., card 0 at `top: 80px`, card 1 at `top: 100px`, card 2 at `top: 120px`, etc.) creating the physical stacking illusion
-- Cards use `useScroll` + `useTransform` to slightly scale down (0.98) as the next card arrives, creating depth
-- Each card has a subtle shadow that intensifies as cards stack
+**2. Rich Background Treatment**
+- Replace flat HSL colors with layered gradient backgrounds:
+  - Light variant: radial gradient from warm cream center to stone edges, plus a subtle diagonal mesh pattern
+  - Dark variant: radial gradient from deep prussian center outward, with subtle blue tonal shifts
+- Add a CSS `::before`-style overlay div with a subtle noise/grain texture (CSS-only radial dot pattern)
 
-**Card visual design (matching reference images):**
-- Large rounded containers (`rounded-2xl` or `rounded-3xl`) with solid background colors from the site palette
-- **Light variant cards** cycle through: warm stone (`hsl(40 25% 96%)`), cream (`hsl(40 20% 93%)`), light gold tint (`hsl(38 20% 90%)`)
-- **Dark variant cards** cycle through: prussian blue shades (`hsl(207 65% 12%)`, `hsl(207 50% 18%)`, `hsl(210 60% 8%)`)
-- Swiss Grid: left column has large serif title + smaller sans description; right column has the step number in oversized serif or a subtle decorative element
-- Min-height ~60-70vh per card, content vertically centered
+**3. Decorative Background Elements (per card)**
+- **Corner geometric accents**: thin gold-tinted SVG lines in top-right and bottom-left corners (matching existing `DarkSectionEffects` geometric accent pattern)
+- **Subtle grid dots**: a repeating radial-gradient dot pattern at very low opacity (`0.02-0.04`) to add texture without distraction
+- **Gold shimmer line**: a thin horizontal accent line near the top of each card with a subtle CSS shimmer animation
+- **Floating abstract shape**: a large, soft radial gradient circle positioned off-center at very low opacity as a depth element
 
-**Typography:**
-- Step number: oversized serif (`text-[clamp(3rem,8vw,6rem)]`) at low opacity on the right side
-- Title: large serif (`text-[clamp(1.4rem,3vw,2.2rem)]`) left-aligned
-- Description: sans `text-[14px] md:text-[16px]` with generous leading, left-aligned below title
+**4. Card Border & Shadow Polish**
+- Add a `border` with `1px solid` at very low opacity (`rgba` white for dark, gold for light) for glass-edge definition
+- Intensify box-shadow progression: first card has minimal shadow, last card has dramatic `0 24px 64px` shadow
+- Add inner `box-shadow` (inset) for subtle bevel effect
 
-### Changes to `src/pages/Home.tsx`
-
-Replace the "Our Process" section (lines 183-215) with the new `StickyCardStack` component. Update the process step data to be more engaging:
-
-- **01 -- Identify.** "We go where others don't. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market."
-- **02 -- Evaluate.** "Every opportunity is stress-tested across financials, operations, culture, and market position. Rigour is our edge."
-- **03 -- Invest.** "Majority stakes structured to preserve what works -- continuity for employees, clients, and the legacy founders built."
-- **04 -- Build.** "Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management."
-
-### Changes to `src/pages/InvestmentCriteria.tsx`
-
-Replace the "Evaluation Framework" section (lines 206-233) which currently uses the `CriteriaPipeline` side-by-side layout. Convert to the same `StickyCardStack` component on dark variant. Update content for more engaging copy:
-
-- **01 -- Discovery.** "We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process."
-- **02 -- Evaluation.** "Strategic fit, market position, culture alignment, and growth vectors -- every dimension is assessed with institutional rigour before we proceed."
-- **03 -- Diligence.** "Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence."
-- **04 -- Structuring.** "Ownership, governance, and capital structures designed for decades -- not exits. Every term reflects our commitment to lasting partnership."
+**5. Typography Enhancement**
+- Make the oversized number on the right larger (`text-[clamp(5rem,12vw,10rem)]`) and slightly more visible (`0.06` opacity instead of `0.04`)
+- Add a subtle text-shadow to the title for depth on dark variant
 
 ### Technical Details
-- `StickyCardStack` uses `position: sticky` with CSS (no JS scroll listeners needed for the stacking)
-- Each card wraps in a div with padding-bottom to create scroll distance
-- `useScroll` per card tracks its progress to apply a subtle scale-down transform as the next card overlaps
-- Background colors assigned via an array index rotation
-- Fully responsive: on mobile, cards use smaller min-height (~50vh) and tighter padding
-- `CriteriaPipeline.tsx` remains in the codebase but is no longer imported by InvestmentCriteria
+- All decorative elements are `pointer-events-none` and `aria-hidden`
+- Grain/dot textures use pure CSS `background-image: radial-gradient(...)` — no image assets needed
+- Gold shimmer uses existing `@keyframes shimmer-line` from `index.css`
+- Fully responsive — decorative elements scale down or hide on mobile
+- No new dependencies
 
