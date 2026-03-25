@@ -2,7 +2,7 @@ import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Sec
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
-import CriteriaPipeline from '@/components/CriteriaPipeline';
+import StickyCardStack from '@/components/StickyCardStack';
 
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
