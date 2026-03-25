@@ -9,6 +9,7 @@ export interface StickyCard {
 interface StickyCardStackProps {
   cards: StickyCard[];
   variant?: 'light' | 'dark';
+  illustrationSet?: 'process' | 'criteria';
 }
 
 /* ─── Constants ─── */
