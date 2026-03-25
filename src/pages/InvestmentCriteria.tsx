@@ -257,42 +257,6 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Target Sectors — US only */}
-      {!isIndia && (
-        <section className="relative bg-primary text-primary-foreground overflow-hidden">
-          <DarkSectionEffects />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-            <FadeIn>
-              <SectionLabel light>Target Sectors</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-primary-foreground leading-[1.2] max-w-[480px] mb-2">
-                Essential B2B Services Across the <span className="text-gold">United States</span>
-              </h2>
-              <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/40 leading-[1.75] max-w-[520px] mb-6 md:mb-8">
-                We focus on sectors characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency.
-              </p>
-              <GoldRule className="mb-6 md:mb-8" />
-            </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {usSectors.map((sector, i) => (
-                <GlassCard key={sector.label} index={i} variant="dark" className="p-5 md:p-6">
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300 text-foreground">{sector.icon}</span>
-                    <div>
-                      <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-primary-foreground leading-[1.3] mb-2">
-                        {sector.label}
-                      </h4>
-                      <div className="w-5 h-px bg-gold/20 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-500 mb-2" />
-                      <p className="font-sans text-[13px] md:text-[14px] text-primary-foreground/40 leading-[1.7] group-hover:text-primary-foreground/60 transition-colors duration-300">
-                        {sector.desc}
-                      </p>
-                    </div>
-                  </div>
-                </GlassCard>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
