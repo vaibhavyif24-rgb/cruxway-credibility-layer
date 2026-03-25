@@ -9,7 +9,7 @@ const usSectors = [
       { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
       { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
       { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
-      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
+      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions for essential industries' },
     ],
   },
   {
@@ -25,28 +25,28 @@ const SectorColumn = ({ category, items }: { category: string; items: { name: st
   <div>
     <h3
       className="font-serif text-[1.15rem] leading-[1.2] mb-4"
-      style={{ color: 'rgba(248,246,242,0.95)' }}
+      style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
     </h3>
-    <div style={{ borderLeft: '2px solid rgba(192,154,89,0.4)', paddingLeft: '14px' }}>
+    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '14px' }}>
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
-          <li key={item.name} className="flex items-start gap-[10px] group cursor-default py-1">
+          <li key={item.name} className="flex items-start gap-[10px] group cursor-default" style={{ marginBottom: '12px' }}>
             <span
-              className="w-1 h-1 flex-shrink-0 rotate-45 transition-colors duration-200 group-hover:!bg-[rgba(192,154,89,0.9)] mt-[7px]"
-              style={{ backgroundColor: 'rgba(192,154,89,0.5)' }}
+              className="w-2 h-2 flex-shrink-0 rotate-45 transition-colors duration-200 mt-[6px]"
+              style={{ backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <div>
               <span
-                className="font-sans text-[13px] leading-[2] transition-colors duration-200 group-hover:!text-[rgba(248,246,242,0.95)] block"
-                style={{ color: 'rgba(248,246,242,0.65)' }}
+                className="font-sans text-[13px] leading-[2] transition-colors duration-200 block"
+                style={{ color: 'var(--cin-card-text)' }}
               >
                 {item.name}
               </span>
               <span
-                className="font-sans text-[11px] leading-[1.6] transition-colors duration-200 group-hover:!text-[rgba(248,246,242,0.55)] hidden md:block"
-                style={{ color: 'rgba(248,246,242,0.35)' }}
+                className="font-sans text-[11px] leading-[1.55] transition-colors duration-200 hidden md:block"
+                style={{ color: 'var(--cin-card-descriptor)', marginTop: '2px' }}
               >
                 {item.desc}
               </span>
@@ -116,8 +116,8 @@ const USCinematicScrollReveal = () => {
             alt="America's industrial landscape"
             className="w-full h-full"
             loading="eager"
-            width={1920}
-            height={1920}
+            width={2400}
+            height={2400}
             style={{
               objectFit: 'cover',
               objectPosition: 'center center',
@@ -133,13 +133,14 @@ const USCinematicScrollReveal = () => {
           />
         </div>
 
-        {/* Tagline */}
+        {/* Tagline — static, never moves/fades */}
         <h2
           className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
           style={{
             fontSize: 'clamp(2.1rem, 5.2vw, 4rem)',
             color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
             zIndex: 10,
+            pointerEvents: 'none',
             transition: 'color 0.3s ease',
             top: '26%',
             left: '50%',
@@ -155,8 +156,10 @@ const USCinematicScrollReveal = () => {
 
         {/* Sectors card */}
         <div
-          className="absolute bottom-0 left-0 right-0 px-4 md:px-8 lg:px-16 flex justify-center"
+          className="absolute bottom-0 left-0 right-0"
           style={{
+            height: '60vh',
+            maxHeight: '60vh',
             transform: `translateY(${(1 - cardProgress) * 100}%)`,
             willChange: 'transform',
             zIndex: 3,
@@ -165,22 +168,24 @@ const USCinematicScrollReveal = () => {
           }}
         >
           <div
-            className="w-full max-w-[820px]"
+            className="cin-card w-full h-full"
             style={{
-              maxHeight: '60vh',
-              overflowY: 'auto',
-              background: 'rgba(14, 22, 34, 0.88)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
+              background: 'var(--cin-card-bg)',
+              backdropFilter: 'blur(24px) saturate(160%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+              borderTop: '1px solid var(--cin-card-border)',
               borderRadius: '24px 24px 0 0',
-              padding: 'clamp(1.8rem, 3vw, 2.8rem)',
-              paddingTop: '40px',
+              overflowY: 'auto',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(192,154,89,0.2) transparent',
+              transition: 'background 0.3s ease, border-color 0.3s ease',
+              padding: '40px 56px 44px 56px',
             }}
           >
             {/* Card header */}
             <p
               className="font-sans text-[10px] font-medium uppercase"
-              style={{ letterSpacing: '0.22em', color: 'hsl(38, 55%, 58%)' }}
+              style={{ letterSpacing: '0.22em', color: 'var(--cin-card-label)' }}
             >
               Sectors We Look At
             </p>
@@ -188,7 +193,7 @@ const USCinematicScrollReveal = () => {
               style={{
                 width: '48px',
                 height: '1px',
-                backgroundColor: 'rgba(192,154,89,0.2)',
+                backgroundColor: 'var(--cin-card-divider)',
                 marginTop: '8px',
                 marginBottom: '28px',
               }}
@@ -199,12 +204,11 @@ const USCinematicScrollReveal = () => {
               <div className="md:pr-6">
                 <SectorColumn category={usSectors[0].category} items={usSectors[0].items} />
               </div>
-              <div className="hidden md:block" style={{ backgroundColor: 'rgba(192,154,89,0.1)' }} />
+              <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
               <div className="md:pl-6">
                 <SectorColumn category={usSectors[1].category} items={usSectors[1].items} />
               </div>
-              {/* Mobile horizontal divider */}
-              <div className="md:hidden h-px w-full" style={{ backgroundColor: 'rgba(192,154,89,0.1)' }} />
+              <div className="md:hidden h-px w-full" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
             </div>
           </div>
         </div>

@@ -7,50 +7,25 @@ const sectors = [
   { category: 'Business Services', items: ['Facility and Support Services', 'Testing, Inspection, and Certification', 'Lab Services and Products', 'Business Process Outsourcing / Contract Manufacturing', 'Insurance Services and Distribution'] },
 ];
 
-const SectorBullet = ({ item }: { item: string }) => (
-  <li className="flex items-center gap-[10px] group cursor-default">
-    <span
-      className="w-1 h-1 flex-shrink-0 rotate-45 transition-colors duration-200"
-      style={{ backgroundColor: 'rgba(192,154,89,0.5)' }}
-    />
-    <span
-      className="font-sans text-[13px] leading-[2] transition-colors duration-200"
-      style={{ color: 'rgba(248,246,242,0.65)' }}
-    />
-    {/* Use a real visible span for hover */}
-    <span
-      className="font-sans text-[13px] leading-[2] transition-colors duration-200 group-hover:!text-[rgba(248,246,242,0.95)]"
-      style={{ color: 'rgba(248,246,242,0.65)' }}
-    >
-      {item}
-    </span>
-  </li>
-);
-
 const SectorColumn = ({ category, items }: { category: string; items: string[] }) => (
   <div>
     <h3
       className="font-serif text-[1.15rem] leading-[1.2] mb-4"
-      style={{ color: 'rgba(248,246,242,0.95)' }}
+      style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
     </h3>
-    <div
-      style={{
-        borderLeft: '2px solid rgba(192,154,89,0.4)',
-        paddingLeft: '14px',
-      }}
-    >
+    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '14px' }}>
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
           <li key={item} className="flex items-center gap-[10px] group cursor-default">
             <span
-              className="w-1 h-1 flex-shrink-0 rotate-45 transition-colors duration-200 group-hover:!bg-[rgba(192,154,89,0.9)]"
-              style={{ backgroundColor: 'rgba(192,154,89,0.5)' }}
+              className="w-1 h-1 flex-shrink-0 rotate-45 transition-colors duration-200"
+              style={{ backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <span
-              className="font-sans text-[13px] leading-[2] transition-colors duration-200 group-hover:!text-[rgba(248,246,242,0.95)]"
-              style={{ color: 'rgba(248,246,242,0.65)' }}
+              className="font-sans text-[13px] leading-[2] transition-colors duration-200"
+              style={{ color: 'var(--cin-card-subtext)' }}
             >
               {item}
             </span>
@@ -81,8 +56,8 @@ const CinematicScrollReveal = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  const imageProgress = Math.min(progress / 0.6, 1);
-  const cardProgress = progress > 0.6 ? (progress - 0.6) / 0.4 : 0;
+  const imageProgress = Math.min(progress / 0.65, 1);
+  const cardProgress = progress > 0.65 ? (progress - 0.65) / 0.35 : 0;
 
   const circleSize = 180;
   const maxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080);
@@ -94,12 +69,12 @@ const CinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '280vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
       <div
         className="sticky top-0 h-screen w-full overflow-hidden"
-        style={{ backgroundColor: isDark ? 'hsl(var(--primary))' : 'hsl(var(--background))' }}
+        style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}
       >
-        {/* Expanding circle — starts at 62% top, moves to center */}
+        {/* Expanding circle */}
         <div
           className="absolute"
           style={{
@@ -118,9 +93,9 @@ const CinematicScrollReveal = () => {
             src={indiaIndustrialReveal}
             alt="India's industrial landscape"
             className="w-full h-full"
-            loading="lazy"
-            width={1920}
-            height={1920}
+            loading="eager"
+            width={2400}
+            height={2400}
             style={{
               objectFit: 'cover',
               objectPosition: 'center center',
@@ -136,13 +111,14 @@ const CinematicScrollReveal = () => {
           />
         </div>
 
-        {/* Tagline — absolutely positioned upper area, z-index 10, never moves */}
+        {/* Tagline — static, never moves/fades */}
         <h2
           className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
           style={{
-            fontSize: 'clamp(2.2rem, 5vw, 3.6rem)',
-            color: textIsLight ? 'white' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
+            fontSize: 'clamp(2.1rem, 5.2vw, 4rem)',
+            color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
             zIndex: 10,
+            pointerEvents: 'none',
             transition: 'color 0.3s ease',
             top: '26%',
             left: '50%',
@@ -153,13 +129,15 @@ const CinematicScrollReveal = () => {
           }}
         >
           Where India's essential industries find their{' '}
-          <span style={{ color: 'hsl(var(--gold))' }}>permanent home.</span>
+          <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent home.</span>
         </h2>
 
-        {/* Sectors card — slides up from bottom, max 60vh */}
+        {/* Sectors card */}
         <div
-          className="absolute bottom-0 left-0 right-0 px-4 md:px-8 lg:px-16 flex justify-center"
+          className="absolute bottom-0 left-0 right-0"
           style={{
+            height: '60vh',
+            maxHeight: '60vh',
             transform: `translateY(${(1 - cardProgress) * 100}%)`,
             willChange: 'transform',
             zIndex: 3,
@@ -168,25 +146,24 @@ const CinematicScrollReveal = () => {
           }}
         >
           <div
-            className="w-full max-w-[820px]"
+            className="cin-card w-full h-full"
             style={{
-              maxHeight: '60vh',
-              overflowY: 'auto',
-              background: 'rgba(14, 22, 34, 0.88)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
+              background: 'var(--cin-card-bg)',
+              backdropFilter: 'blur(24px) saturate(160%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(160%)',
+              borderTop: '1px solid var(--cin-card-border)',
               borderRadius: '24px 24px 0 0',
-              padding: 'clamp(1.8rem, 3vw, 2.8rem)',
-              paddingTop: '40px',
+              overflowY: 'auto',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(192,154,89,0.2) transparent',
+              transition: 'background 0.3s ease, border-color 0.3s ease',
+              padding: '40px 56px 44px 56px',
             }}
           >
             {/* Card header */}
             <p
               className="font-sans text-[10px] font-medium uppercase"
-              style={{
-                letterSpacing: '0.22em',
-                color: 'hsl(38, 55%, 58%)',
-              }}
+              style={{ letterSpacing: '0.22em', color: 'var(--cin-card-label)' }}
             >
               Sectors We Look At
             </p>
@@ -194,28 +171,18 @@ const CinematicScrollReveal = () => {
               style={{
                 width: '48px',
                 height: '1px',
-                backgroundColor: 'rgba(192,154,89,0.2)',
+                backgroundColor: 'var(--cin-card-divider)',
                 marginTop: '8px',
                 marginBottom: '28px',
               }}
             />
 
-            {/* Two-column grid with vertical divider */}
-            <div
-              className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-6 md:gap-0"
-            >
-              {/* Left column */}
+            {/* Two-column grid */}
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] gap-6 md:gap-0">
               <div className="md:pr-6">
                 <SectorColumn category={sectors[0].category} items={sectors[0].items} />
               </div>
-
-              {/* Vertical divider — hidden on mobile */}
-              <div
-                className="hidden md:block"
-                style={{ backgroundColor: 'rgba(192,154,89,0.1)' }}
-              />
-
-              {/* Right column */}
+              <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
               <div className="md:pl-6">
                 <SectorColumn category={sectors[1].category} items={sectors[1].items} />
               </div>

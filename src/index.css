@@ -107,6 +107,17 @@
     --light-stone: 210 28% 10%;
     --gold: 38 50% 55%;
     --gold-dim: 38 30% 48%;
+
+    /* Cinematic card tokens — dark */
+    --cin-card-bg: rgba(10, 17, 28, 0.90);
+    --cin-card-border: rgba(192, 154, 89, 0.22);
+    --cin-card-text: rgba(248, 246, 242, 0.95);
+    --cin-card-subtext: rgba(248, 246, 242, 0.55);
+    --cin-card-heading: rgba(248, 246, 242, 0.95);
+    --cin-card-descriptor: rgba(248, 246, 242, 0.38);
+    --cin-card-bullet: rgba(192, 154, 89, 0.65);
+    --cin-card-divider: rgba(192, 154, 89, 0.12);
+    --cin-card-label: hsl(38, 55%, 58%);
   }
 }
 
