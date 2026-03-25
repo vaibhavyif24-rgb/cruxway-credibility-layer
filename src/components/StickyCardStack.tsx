@@ -213,10 +213,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
   }, [handleScroll]);
 
   // Outer height: enough scroll runway for each card transition
-  // Runway for transitions only (N-1 cards) + card height for the last visible card
   const transitionRunwayVh = (cards.length - 1) * SCROLL_PER_CARD * 100;
-  const cardHeightVh = (CARD_HEIGHT / window.innerHeight) * 100;
-  const outerHeight = transitionRunwayVh + cardHeightVh;
 
   return (
     <div
