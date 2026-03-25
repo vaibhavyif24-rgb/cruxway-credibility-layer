@@ -10,6 +10,7 @@ import CriteriaCarousel from '@/components/CriteriaCarousel';
 
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
+import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -205,6 +206,9 @@ const InvestmentCriteria = () => {
           mode="sticky"
         />
       </section>
+
+      {/* India Cinematic Scroll Reveal — before Evaluation Framework */}
+      {isIndia && <CinematicScrollReveal />}
 
       {/* Evaluation Framework — Sticky Card Stack */}
       <section className="relative bg-primary text-primary-foreground">
