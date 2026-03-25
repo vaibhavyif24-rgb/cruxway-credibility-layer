@@ -5,15 +5,11 @@ import indiaIndustrialReveal from '@/assets/india-industrial-reveal.jpg';
 const indiaSectors = [
   {
     category: 'Industrials',
-    items: ['Process and Flow Control', 'Value-Added Distribution', 'Industrial Services', 'Packaging'],
+    items: ['Process & Flow Control', 'Value-Added Distribution', 'Industrial Services', 'Packaging'],
   },
   {
-    category: 'Industrial Services',
-    items: ['Utility and Infrastructure Services', 'Industrial Technology', 'Aerospace and Defense'],
-  },
-  {
-    category: 'Business Services',
-    items: ['Facility and Support Services', 'Testing, Inspection, and Certification', 'Lab Services and Products', 'Business Process Outsourcing / Contract Manufacturing', 'Insurance Services and Distribution'],
+    category: 'Business & Industrial Services',
+    items: ['Facility & Support Services', 'Testing & Certification', 'Infrastructure Services', 'Industrial Technology', 'Aerospace & Defense'],
   },
 ];
 
@@ -215,17 +211,13 @@ const CinematicScrollReveal = () => {
             </p>
 
             {/* Three-column grid */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-6 md:gap-0">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-[1fr_1px_1fr] md:gap-0">
               <div className="md:pr-5">
                 <SectorColumn category={indiaSectors[0].category} items={indiaSectors[0].items} />
               </div>
               <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
-              <div className="md:px-5">
-                <SectorColumn category={indiaSectors[1].category} items={indiaSectors[1].items} />
-              </div>
-              <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
               <div className="md:pl-5">
-                <SectorColumn category={indiaSectors[2].category} items={indiaSectors[2].items} />
+                <SectorColumn category={indiaSectors[1].category} items={indiaSectors[1].items} />
               </div>
             </div>
           </div>

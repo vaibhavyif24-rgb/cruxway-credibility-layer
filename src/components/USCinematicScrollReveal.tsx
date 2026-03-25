@@ -8,6 +8,7 @@ const usSectors = [
     items: [
       { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
       { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
+      { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
     ],
   },
   {
@@ -16,12 +17,6 @@ const usSectors = [
       { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
       { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
       { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
-    ],
-  },
-  {
-    category: 'Specialist Services',
-    items: [
-      { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
     ],
   },
 ];
@@ -232,17 +227,13 @@ const USCinematicScrollReveal = () => {
             </p>
 
             {/* Three-column grid */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-6 md:gap-0">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-[1fr_1px_1fr] md:gap-0">
               <div className="md:pr-5">
                 <SectorColumn category={usSectors[0].category} items={usSectors[0].items} />
               </div>
               <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
-              <div className="md:px-5">
-                <SectorColumn category={usSectors[1].category} items={usSectors[1].items} />
-              </div>
-              <div className="hidden md:block" style={{ backgroundColor: 'var(--cin-card-divider)' }} />
               <div className="md:pl-5">
-                <SectorColumn category={usSectors[2].category} items={usSectors[2].items} />
+                <SectorColumn category={usSectors[1].category} items={usSectors[1].items} />
               </div>
             </div>
           </div>
