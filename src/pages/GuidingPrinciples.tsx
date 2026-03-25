@@ -51,34 +51,21 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Mission with animated accent */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-        <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-            <div>
-              <FadeIn>
-                <SectionLabel>Mission</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-foreground leading-[1.15]">
-                  {isIndia
-                    ? 'Scale What India Builds. Preserve What Founders Value.'
-                    : 'Preserve What Founders Built.\u00a0Scale What\u00a0Matters.'}
-                </h2>
-                <GoldRule className="mt-3" />
-              </FadeIn>
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mt-5 mb-4">
-                  {isIndia
-                    ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise to help founders transform their businesses into market leaders.'
-                    : 'Cruxway invests in majority stakes in founder-led businesses, combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'}
-                </p>
-              </FadeIn>
-            </div>
-            <FadeIn delay={0.15}>
-              <AnimatedAccent variant="partnership" />
-            </FadeIn>
-          </div>
-        </div>
-      </section>
+      {/* Mission — scroll reveal */}
+      <ScrollRevealText
+        label="Mission"
+        heading={
+          isIndia
+            ? 'Scale what India builds. Preserve what founders value. Partnering with conviction and discipline.'
+            : 'Preserve what founders built. Scale what matters. Values-driven investing for the long term.'
+        }
+        subtext={
+          isIndia
+            ? 'Long-term capital along with operational expertise to help founders transform their businesses into market leaders.'
+            : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
+        }
+        variant="light"
+      />
 
       {/* Principles — Scroll-triggered vertical slider */}
       <PrinciplesSlider principles={principles} />
