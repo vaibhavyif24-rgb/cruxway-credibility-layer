@@ -39,12 +39,12 @@ const investmentProfile = {
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
-  { title: 'Founder Succession & Transition', desc: 'Partnering with owners planning their next chapter while honouring legacy.' },
-  { title: 'Essential Regulated Services', desc: 'Compliance-driven B2B businesses with recurring revenue and high switching costs.' },
-  { title: 'Proven Customer Retention', desc: 'Consistent delivery earning trust that creates durable competitive advantages.' },
-  { title: 'Growth Through Consolidation', desc: 'Platform strategy in fragmented industries driving superior returns.' },
-  { title: 'Operational Upside', desc: 'Professionalisation of systems creating meaningful enterprise value.' },
-  { title: 'Cultural & Values Alignment', desc: 'Integrity, stewardship, and long-term thinking — non-negotiable.' },
+  { title: 'Founder-Led Succession', desc: 'Partnering with owners at an inflection point, preserving legacy while enabling the next chapter of growth.' },
+  { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors where reliability, safety, and recurring demand create natural moats.' },
+  { title: 'Recurring Revenue & Retention', desc: 'Businesses with embedded customer relationships, high switching costs, and predictable cash flows.' },
+  { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where disciplined acquisitions compound value over a long hold period.' },
+  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value.' },
+  { title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
 /** Animated stat counter */
