@@ -9,7 +9,6 @@ export interface TeamDeckMember {
   photo?: string;
   summary: string;
   highlights: string[];
-  logos?: { src: string; alt: string; scale?: number; extraGap?: number }[];
   dealLogos?: { src: string; alt: string; scale?: number; extraGap?: number }[];
   linkedIn?: string;
 }
