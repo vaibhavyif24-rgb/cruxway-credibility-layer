@@ -77,7 +77,7 @@ const InvestmentCriteria = () => {
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
 
   return (
-    <div>
+    <div className="overflow-x-clip">
       {/* Hero */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
@@ -119,7 +119,7 @@ const InvestmentCriteria = () => {
 
       {/* What We Look For — consolidated criteria */}
       {/* What We Look For — Horizontal Sticky Deck */}
-      <section className="bg-background">
+      <section className="bg-background overflow-x-clip">
         <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
@@ -151,7 +151,7 @@ const InvestmentCriteria = () => {
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* Evaluation Framework — Sticky Card Stack */}
-      <section className="relative bg-primary text-primary-foreground">
+      <section className="relative bg-primary text-primary-foreground overflow-x-clip">
         <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
           <FadeIn>
