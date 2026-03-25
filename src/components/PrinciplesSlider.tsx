@@ -11,6 +11,14 @@ import goldenRuleImg from '@/assets/principles/golden-rule.jpg';
 
 const images = [integrityImg, servantLeadershipImg, humilityImg, gritImg, biasToActionImg, goldenRuleImg];
 
+// Preload all images on mount for instant transitions
+const preloadImages = () => {
+  images.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+};
+
 interface Principle {
   t: string;
   d: string;
