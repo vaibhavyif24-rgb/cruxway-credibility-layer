@@ -253,7 +253,7 @@ const USCinematicScrollReveal = () => {
       {/* Mobile card padding override */}
       <style>{`
         @media (max-width: 767px) {
-          .cin-card { padding: 20px 18px 24px 18px !important; }
+          .cin-card { padding: 16px 14px 20px 14px !important; }
         }
       `}</style>
     </section>

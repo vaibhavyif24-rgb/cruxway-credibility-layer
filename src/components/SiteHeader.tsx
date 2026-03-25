@@ -50,7 +50,7 @@ const SiteHeader = () => {
           <div className="flex items-center justify-between h-16 md:h-[72px]">
             <Link
               to={prefix}
-              className="font-serif text-3xl md:text-4xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75 font-bold"
+              className="font-serif text-[2rem] md:text-[2.6rem] text-primary-foreground tracking-[-0.03em] transition-opacity hover:opacity-75 font-bold leading-none"
             >
               Cruxway
             </Link>
