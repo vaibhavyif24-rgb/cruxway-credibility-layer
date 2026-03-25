@@ -184,7 +184,7 @@ const InvestmentCriteria = () => {
 
       {/* Value Creation Playbook cards */}
       {/* Value Creation Playbook — Carousel */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <CriteriaCarousel
             items={[
