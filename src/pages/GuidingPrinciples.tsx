@@ -3,21 +3,20 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import AnimatedAccent from '@/components/AnimatedAccent';
-import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
+import PrinciplesSlider from '@/components/PrinciplesSlider';
 import { motion } from 'framer-motion';
-import { Shield, Heart, BookOpen, Mountain, Zap, Scale } from 'lucide-react';
 
 import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
 import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
 
 const principles = [
-  { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: Shield },
-  { t: 'Servant Leadership', d: 'Earn trust through service, not authority.', icon: Heart },
-  { t: 'Humility', d: 'Stay curious. Never stop learning.', icon: BookOpen },
-  { t: 'Grit', d: 'Do hard things, especially when things get hard.', icon: Mountain },
-  { t: 'Bias to Action', d: 'Execute decisively. Speed matters.', icon: Zap },
-  { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.', icon: Scale },
+  { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.' },
+  { t: 'Servant Leadership', d: 'Earn trust through service, not authority.' },
+  { t: 'Humility', d: 'Stay curious. Never stop learning.' },
+  { t: 'Grit', d: 'Do hard things, especially when things get hard.' },
+  { t: 'Bias to Action', d: 'Execute decisively. Speed matters.' },
+  { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.' },
 ];
 
 const GuidingPrinciples = () => {
@@ -80,45 +79,8 @@ const GuidingPrinciples = () => {
         </div>
       </section>
 
-      {/* Principles — Bento Glass Cards */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 border-t border-border">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Our Values</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-3">
-              What Guides Us
-            </h2>
-            <GoldRule className="mb-8 md:mb-10" />
-          </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr">
-            {principles.map((p, i) => {
-              const Icon = p.icon;
-              return (
-                <GlassCard key={p.t} index={i} className="p-5 md:p-7 h-full">
-                  <div className="flex flex-col h-full">
-                    <motion.div
-                      className="w-10 h-10 rounded-full border border-gold/15 group-hover:border-gold/35 flex items-center justify-center mb-4 transition-colors duration-500"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: i * 0.08 + 0.15 }}
-                    >
-                      <Icon className="w-4 h-4 text-gold/40 group-hover:text-gold/70 transition-colors duration-500" strokeWidth={1.5} />
-                    </motion.div>
-                    <h3 className="font-serif text-[1.1rem] md:text-[1.2rem] text-foreground mb-2 leading-[1.2]">
-                      {p.t}
-                    </h3>
-                    <div className="w-5 h-px bg-gold/15 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-500 mb-3" />
-                    <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300 flex-1">
-                      {p.d}
-                    </p>
-                  </div>
-                </GlassCard>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* Principles — Scroll-triggered vertical slider */}
+      <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
