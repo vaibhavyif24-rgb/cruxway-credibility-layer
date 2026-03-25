@@ -95,7 +95,8 @@ const CardSurface: React.FC<{
   card: StickyCard;
   index: number;
   variant: 'light' | 'dark';
-}> = ({ card, index, variant }) => {
+  isActive: boolean;
+}> = ({ card, index, variant, isActive }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
