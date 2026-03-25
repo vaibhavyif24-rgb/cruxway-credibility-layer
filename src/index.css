@@ -264,13 +264,3 @@
     -webkit-backdrop-filter: blur(8px);
   }
 }
-
-/* FIX 1 — Remove horizontal overflow gap */
-html, body { overflow-x: hidden; max-width: 100%; }
-#root, main, section { max-width: 100%; overflow-x: hidden; }
-
-/* FIX 2 — Mobile: ensure all sector cards visible */
-@media (max-width: 639px) {
-  .grid.grid-cols-1 { display: grid !important; grid-template-columns: 1fr !important; overflow: visible !important; }
-  section:has(.grid.grid-cols-1) { overflow: visible !important; height: auto !important; max-height: none !important; }
-}
