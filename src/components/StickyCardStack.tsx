@@ -403,28 +403,13 @@ const StickyCardItem: React.FC<{
   labelPrefix: string;
   stickyTop: number;
 }> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix, stickyTop }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isActive, setIsActive] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.5),
-      { threshold: [0, 0.5, 1], rootMargin: '-10% 0px -30% 0px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <div
-      ref={ref}
-      className="mb-6 will-change-transform"
+      className="mb-4 will-change-transform"
       style={{ position: 'sticky', top: `${stickyTop}px`, zIndex: index + 1 }}
     >
       <StickyCardSurface
-        card={card} index={index} variant={variant} isActive={isActive}
+        card={card} index={index} variant={variant}
         cardHeight={cardHeight} illustrationSet={illustrationSet} labelPrefix={labelPrefix}
       />
     </div>
