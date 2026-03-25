@@ -413,15 +413,13 @@ const Team = () => {
         variant="light"
       />
 
-      {/* Team Sticky Deck — one card per profile */}
-      <section className="bg-background">
-        <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
-          <div className="max-w-[1080px] mx-auto">
-            <FadeIn>
-              <SectionLabel>{isIndia ? 'Our Team' : 'Managing Partners'}</SectionLabel>
-              <GoldRule className="mt-1 mb-4 md:mb-6" />
-            </FadeIn>
-          </div>
+      {/* Team Sticky Deck — Boundless-style stacking cards */}
+      <section className="bg-background py-10 md:py-16">
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12 mb-8 md:mb-10">
+          <FadeIn>
+            <SectionLabel>{isIndia ? 'Our Team' : 'Managing Partners'}</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
         </div>
         <TeamStickyDeck
           members={
