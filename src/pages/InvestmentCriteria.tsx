@@ -176,7 +176,7 @@ const InvestmentCriteria = () => {
 
       {/* What We Look For — consolidated criteria */}
       {/* What We Look For — Horizontal Sticky Deck */}
-      <section className="bg-background overflow-x-hidden">
+      <section className="bg-background">
         <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
