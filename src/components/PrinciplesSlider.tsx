@@ -111,7 +111,7 @@ const PrincipleCard: React.FC<{
 
             {/* Title */}
             <h2
-              className="font-serif text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[1.05] tracking-[-0.025em] drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]"
+              className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white leading-[1.05] tracking-[-0.025em] drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
