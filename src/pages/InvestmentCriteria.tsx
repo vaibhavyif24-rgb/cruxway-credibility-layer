@@ -2,7 +2,7 @@ import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Sec
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
-import CriteriaPipeline from '@/components/CriteriaPipeline';
+import StickyCardStack from '@/components/StickyCardStack';
 
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
@@ -203,31 +203,26 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Evaluation Framework + Pipeline Widget */}
+      {/* Evaluation Framework — Sticky Card Stack */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
-            <div>
-              <FadeIn>
-                <SectionLabel light>Evaluation Framework</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-primary-foreground leading-[1.15]">
-                  How We Evaluate Opportunities
-                </h2>
-                <GoldRule className="mt-3 mb-5" />
-              </FadeIn>
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/45 leading-[1.75] mb-4">
-                  {isIndia
-                    ? 'Every investment begins with deep understanding. We follow a disciplined, multi-stage framework, from initial discovery through rigorous evaluation, to ensure every partnership is built on alignment, trust, and shared long-term vision.'
-                    : 'A structured, multi-stage evaluation ensures every partnership is built on deep understanding, rigorous analysis, and genuine alignment between our team and the founders we back.'}
-                </p>
-              </FadeIn>
-            </div>
-            <FadeIn delay={0.12}>
-              <CriteriaPipeline />
-            </FadeIn>
-          </div>
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
+          <FadeIn>
+            <SectionLabel light>Evaluation Framework</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-primary-foreground leading-[1.15]">
+              How We Evaluate Opportunities
+            </h2>
+            <GoldRule className="mt-3 mb-6 md:mb-8" />
+          </FadeIn>
+          <StickyCardStack
+            cards={[
+              { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
+              { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors — every dimension is assessed with institutional rigour before we proceed.' },
+              { num: '03', title: 'Diligence', description: 'Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence.' },
+              { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades — not exits. Every term reflects our commitment to lasting partnership.' },
+            ]}
+            variant="dark"
+          />
         </div>
       </section>
 
