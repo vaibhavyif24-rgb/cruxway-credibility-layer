@@ -14,7 +14,7 @@ interface HorizontalStickyDeckProps {
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
 const MIN_CARD_HEIGHT = 420;
-const SCROLL_PER_CARD = 0.45;
+const SCROLL_PER_CARD = 0.28;
 
 const getCardHeight = () => {
   if (typeof window === 'undefined') return 620;
