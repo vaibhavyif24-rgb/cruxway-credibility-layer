@@ -5,6 +5,7 @@ import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesSlider from '@/components/PrinciplesSlider';
+import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion } from 'framer-motion';
 
 import heroIndiaAbout from '@/assets/hero-india-about.jpg';
