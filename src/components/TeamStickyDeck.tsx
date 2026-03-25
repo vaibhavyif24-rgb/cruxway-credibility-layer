@@ -1,7 +1,8 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export interface TeamDeckMember {
   name: string;
@@ -18,32 +19,30 @@ interface TeamStickyDeckProps {
 }
 
 /* ─── Constants ─── */
-const STICKY_TOP = 88;
-const MIN_CARD_HEIGHT = 420;
-const SCROLL_PER_CARD = 0.65;
-
-const getCardHeight = () => {
-  if (typeof window === 'undefined') return 620;
-  return Math.max(MIN_CARD_HEIGHT, window.innerHeight - STICKY_TOP);
-};
+const STICKY_TOP_BASE = 80;
+const STICKY_OFFSET_STEP = 20;
+const CARD_HEIGHT = 680;
 
 /* ─── Backgrounds ─── */
 const darkCardBgs = [
-  'hsl(220 8% 18%)',
-  'hsl(207 55% 14%)',
-  'hsl(210 12% 12%)',
+  'hsl(220 8% 18%)',   // dark charcoal
+  'hsl(207 55% 14%)',  // deep navy
+  'hsl(210 12% 12%)',  // near-black
 ];
 
 const lightCardBgs = [
-  'hsl(40 30% 96%)',
-  'hsl(38 22% 92%)',
-  'hsl(40 25% 94%)',
+  'hsl(40 30% 96%)',   // warm cream
+  'hsl(38 22% 92%)',   // sand
+  'hsl(40 25% 94%)',   // ivory
 ];
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
 /* ─── Inline Logo Marquee ─── */
-const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; bgFrom?: string }> = ({ logos, bgFrom = 'hsl(220_8%_18%)' }) => {
+const InlineMarquee: React.FC<{
+  logos: TeamDeckMember['dealLogos'];
+  isDark: boolean;
+}> = ({ logos, isDark }) => {
   const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
   const doubled = [...logos, ...logos];
@@ -54,8 +53,9 @@ const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; bgFrom?: str
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className={`absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-[${bgFrom}] to-transparent`} />
-      <div className={`absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-[${bgFrom}] to-transparent`} />
+      {/* Edge fades use parent's bg via inherit trick */}
+      <div className={`absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none ${isDark ? 'team-marquee-fade-left-dark' : 'team-marquee-fade-left-light'}`} style={{ background: 'linear-gradient(to right, inherit, transparent)' }} />
+      <div className={`absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none ${isDark ? 'team-marquee-fade-right-dark' : 'team-marquee-fade-right-light'}`} style={{ background: 'linear-gradient(to left, inherit, transparent)' }} />
       <motion.div
         className="flex items-center gap-6 md:gap-8 w-max"
         animate={{ x: ['0%', '-50%'] }}
@@ -85,169 +85,129 @@ const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; bgFrom?: str
   );
 };
 
-/* ─── Team Card Surface ─── */
-const TeamCardSurface: React.FC<{
+/* ─── Team Card (Boundless-style two-column sticky) ─── */
+const TeamCard: React.FC<{
   member: TeamDeckMember;
   index: number;
   totalMembers: number;
-  isActive: boolean;
-  cardHeight: number;
   isDark: boolean;
-}> = ({ member, index, totalMembers, isActive, cardHeight, isDark }) => {
+  isMobile: boolean;
+}> = ({ member, index, totalMembers, isDark, isMobile }) => {
   const bgs = isDark ? darkCardBgs : lightCardBgs;
   const bg = bgs[index % bgs.length];
-  // Split highlights into 2 columns for better density
-  const midpoint = Math.ceil(member.highlights.length / 2);
-  const col1 = member.highlights.slice(0, midpoint);
-  const col2 = member.highlights.slice(midpoint);
+  const stickyTop = STICKY_TOP_BASE + index * STICKY_OFFSET_STEP;
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl"
+      className="rounded-2xl md:rounded-3xl overflow-hidden will-change-transform"
       style={{
+        position: isMobile ? 'relative' : 'sticky',
+        top: isMobile ? undefined : `${stickyTop}px`,
+        zIndex: index + 1,
         backgroundColor: bg,
-        height: `${cardHeight}px`,
-        boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
+        minHeight: isMobile ? undefined : `${CARD_HEIGHT}px`,
+        boxShadow: '0 -8px 30px -4px rgba(0,0,0,0.25), 0 20px 50px -10px rgba(0,0,0,0.2)',
+        marginBottom: isMobile ? '24px' : '0px',
       }}
     >
-      {/* Subtle decorative accent */}
-      <div
-        className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full opacity-[0.03]"
-        style={{
-          background: 'radial-gradient(circle, hsl(38 48% 52%) 0%, transparent 70%)',
-          transform: 'translate(30%, -30%)',
-        }}
-      />
-
-      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-10 md:py-8 lg:px-14 lg:py-10">
-        {/* Counter */}
-        <div
-          className="mb-2 md:mb-3 font-sans text-[10px] font-medium uppercase tracking-[0.22em] md:text-[11px]"
-          style={{
-            color: 'hsl(38 48% 52%)',
-            opacity: isActive ? 0.5 : 0,
-            transform: `translateY(${isActive ? 0 : 12}px)`,
-            transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-          }}
-        >
-          {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
-        </div>
-
-        {/* Main content area */}
-        <div className="flex-1 flex flex-col justify-center min-h-0">
-          {/* Profile header row */}
-          <div
-            className="flex items-center gap-4 md:gap-5 mb-4 md:mb-5"
-            style={{
-              opacity: isActive ? 1 : 0,
-              transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              transitionDelay: '0.05s',
-            }}
+      <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} h-full`} style={{ minHeight: isMobile ? undefined : `${CARD_HEIGHT}px` }}>
+        {/* ─── Left column: content (~40%) ─── */}
+        <div className={`${isMobile ? 'w-full order-2' : 'w-[42%]'} flex flex-col justify-between p-6 md:p-8 lg:p-10`}>
+          {/* Counter */}
+          <p
+            className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-4 md:mb-6"
+            style={{ color: 'hsl(38 48% 52%)', opacity: 0.5 }}
           >
-            {member.photo ? (
-              <div className="relative w-[56px] h-[56px] md:w-[80px] md:h-[80px] shrink-0">
-                <div className={`w-full h-full rounded-full overflow-hidden border ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.06]'} shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]`}>
-                  <img
-                    src={member.photo}
-                    alt={member.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover object-top"
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className={`w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full ${isDark ? 'bg-white/[0.04] border-white/[0.08]' : 'bg-foreground/[0.04] border-foreground/[0.08]'} border border-dashed flex items-center justify-center shrink-0`}>
-                <span className={`font-serif text-[0.9rem] md:text-[1.1rem] ${isDark ? 'text-white/20' : 'text-foreground/20'}`}>
-                  {member.name.split(' ').map(n => n[0]).join('')}
-                </span>
-              </div>
-            )}
-            <div>
-              <div className="flex items-center gap-1.5">
-                <h3 className={`font-serif text-[1.15rem] md:text-[1.5rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.02em] leading-[1.15]`}>
-                  {member.name}
-                </h3>
-                {member.linkedIn && (
-                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-white/20' : 'text-foreground/20'} hover:text-[hsl(38_48%_52%)] transition-colors`}>
-                    <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
-                  </a>
-                )}
-              </div>
-              <p className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.22em] text-[hsl(38_48%_52%)] mt-0.5">
-                {member.role}
-              </p>
+            {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
+          </p>
+
+          {/* Name + role */}
+          <div className="mb-4 md:mb-5">
+            <div className="flex items-center gap-1.5">
+              <h3 className={`font-serif text-[1.4rem] md:text-[1.8rem] lg:text-[2.2rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.025em] leading-[1.1]`}>
+                {member.name}
+              </h3>
+              {member.linkedIn && (
+                <a
+                  href={member.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${isDark ? 'text-white/20 hover:text-white/50' : 'text-foreground/20 hover:text-foreground/50'} transition-colors`}
+                >
+                  <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
+                </a>
+              )}
             </div>
+            <p
+              className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.22em] mt-1"
+              style={{ color: 'hsl(38 48% 52%)' }}
+            >
+              {member.role}
+            </p>
           </div>
 
           {/* Summary */}
-          <div
-            style={{
-              opacity: isActive ? 1 : 0,
-              transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              transitionDelay: '0.1s',
-            }}
-          >
-            <p className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/45' : 'text-foreground/55'} leading-[1.65] mb-3 md:mb-4 max-w-[720px]`}>
-              {member.summary}
-            </p>
-          </div>
+          <p className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/45' : 'text-foreground/55'} leading-[1.65] mb-4 md:mb-5`}>
+            {member.summary}
+          </p>
 
-          {/* Highlights in 2-column grid */}
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 md:gap-y-2"
-            style={{
-              opacity: isActive ? 1 : 0,
-              transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              transitionDelay: '0.15s',
-            }}
-          >
-            <ul className="space-y-1.5 md:space-y-2">
-              {col1.map((line, i) => (
-                <li
-                  key={i}
-                  className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
-                >
-                  <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-            {col2.length > 0 && (
-              <ul className="space-y-1.5 md:space-y-2">
-                {col2.map((line, i) => (
-                  <li
-                    key={i}
-                    className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
-                  >
-                    <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          {/* Highlights */}
+          <ul className="space-y-2 md:space-y-2.5 flex-1">
+            {member.highlights.map((line, i) => (
+              <li
+                key={i}
+                className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/35' : 'text-foreground/45'} leading-[1.6] flex gap-2.5 items-start`}
+              >
+                <span className="shrink-0 mt-[7px] w-2 h-px" style={{ backgroundColor: 'hsl(38 48% 52% / 0.35)' }} />
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
 
+          {/* Deal logos strip */}
+          {member.dealLogos && member.dealLogos.length > 0 && (
+            <div className={`mt-4 md:mt-6 pt-3 md:pt-4 border-t ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.08]'}`}>
+              <p
+                className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] mb-1.5"
+                style={{ color: 'hsl(38 48% 52% / 0.5)' }}
+              >
+                Select Investments &amp; Deals
+              </p>
+              <InlineMarquee logos={member.dealLogos} isDark={isDark} />
+            </div>
+          )}
         </div>
 
-        {/* Deal logos — floating on deck */}
-        {member.dealLogos && member.dealLogos.length > 0 && (
-          <div
-            className={`pt-3 md:pt-3 border-t ${isDark ? 'border-white/[0.04]' : 'border-foreground/[0.06]'}`}
-            style={{
-              opacity: isActive ? 1 : 0,
-              transition: 'opacity 0.6s ease-out',
-              transitionDelay: '0.25s',
-            }}
-          >
-            <p className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-[hsl(38_48%_52%)]/50 mb-1">
-              Select Investments &amp; Deals
-            </p>
-            <InlineMarquee logos={member.dealLogos} bgFrom={bg.replace(/\s/g, '_')} />
-          </div>
-        )}
+        {/* ─── Right column: full-bleed image (~58%) ─── */}
+        <div className={`${isMobile ? 'w-full order-1 h-[280px]' : 'w-[58%]'} relative`} style={{ minHeight: isMobile ? undefined : `${CARD_HEIGHT}px` }}>
+          {member.photo ? (
+            <img
+              src={member.photo}
+              alt={member.name}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          ) : (
+            <div className={`absolute inset-0 flex items-center justify-center ${isDark ? 'bg-white/[0.03]' : 'bg-foreground/[0.03]'}`}>
+              <span className={`font-serif text-[3rem] md:text-[4rem] ${isDark ? 'text-white/10' : 'text-foreground/10'}`}>
+                {member.name.split(' ').map(n => n[0]).join('')}
+              </span>
+            </div>
+          )}
+          {/* Subtle gradient overlay on the image edge closest to text */}
+          {!isMobile && (
+            <div
+              className="absolute inset-y-0 left-0 w-[60px] pointer-events-none"
+              style={{ background: `linear-gradient(to right, ${bg}, transparent)` }}
+            />
+          )}
+          {isMobile && (
+            <div
+              className="absolute inset-x-0 bottom-0 h-[40px] pointer-events-none"
+              style={{ background: `linear-gradient(to top, ${bg}, transparent)` }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
@@ -257,99 +217,22 @@ const TeamCardSurface: React.FC<{
 const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const outerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [cardHeight, setCardHeight] = useState(getCardHeight);
-
-  const handleScroll = useCallback(() => {
-    const outer = outerRef.current;
-    if (!outer) return;
-
-    const rect = outer.getBoundingClientRect();
-    const outerHeight = outer.offsetHeight;
-    const viewportHeight = window.innerHeight;
-    const scrolled = -(rect.top - STICKY_TOP);
-    const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-    const intervalCount = Math.max(members.length - 1, 1);
-    const idx = members.length === 1
-      ? 0
-      : Math.min(members.length - 1, Math.round(progress * intervalCount));
-
-    setActiveIndex(idx);
-  }, [members.length]);
-
-  useEffect(() => {
-    const update = () => setCardHeight(getCardHeight());
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  useEffect(() => {
-    const onScroll = () => requestAnimationFrame(handleScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [handleScroll]);
-
-  useEffect(() => { handleScroll(); }, [cardHeight, handleScroll]);
-
-  const scrollStepPx = (cardHeight + STICKY_TOP) * SCROLL_PER_CARD;
-  const outerHeight = cardHeight + Math.max(members.length - 1, 0) * scrollStepPx;
+  const isMobile = useIsMobile();
 
   return (
-    <div
-      ref={outerRef}
-      className="relative"
-      style={{ height: `${outerHeight}px` }}
-    >
-      <div
-        className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
-        style={{
-          top: `${STICKY_TOP}px`,
-          height: `${cardHeight}px`,
-        }}
-      >
-        <div
-          className="will-change-transform"
-          style={{
-            transform: `translateY(-${activeIndex * cardHeight}px)`,
-            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
-          }}
-        >
-          {members.map((member, i) => (
-            <TeamCardSurface
-              key={member.name}
-              member={member}
-              index={i}
-              totalMembers={members.length}
-              isActive={i === activeIndex}
-              cardHeight={cardHeight}
-              isDark={isDark}
-            />
-          ))}
-        </div>
-
-        {/* Dot indicators */}
-        <div
-          className="pointer-events-none absolute right-4 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2 md:right-5"
-        >
-          {members.map((_, i) => (
-            <div
-              key={i}
-              className="rounded-full transition-all duration-500"
-              style={{
-                width: i === activeIndex ? '8px' : '5px',
-                height: i === activeIndex ? '8px' : '5px',
-                backgroundColor: i === activeIndex
-                  ? 'hsl(38 48% 52%)'
-                  : 'hsla(40, 30%, 96%, 0.2)',
-              }}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="flex flex-col max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
+      {members.map((member, i) => (
+        <TeamCard
+          key={member.name}
+          member={member}
+          index={i}
+          totalMembers={members.length}
+          isDark={isDark}
+          isMobile={isMobile}
+        />
+      ))}
+      {/* Extra scroll clearance so last card can be fully visible */}
+      {!isMobile && <div style={{ height: `${CARD_HEIGHT * 0.3}px` }} />}
     </div>
   );
 };
