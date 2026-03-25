@@ -37,32 +37,50 @@ const lightCardBgs = [
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
-/* ─── Static Logo Grid (fits in view) ─── */
-const LogoGrid: React.FC<{
+/* ─── Inline Logo Marquee (auto-scrolling) ─── */
+const InlineMarquee: React.FC<{
   logos: TeamDeckMember['dealLogos'];
   isDark: boolean;
-}> = ({ logos, isDark }) => {
+  bg: string;
+}> = ({ logos, isDark, bg }) => {
+  const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
+  const doubled = [...logos, ...logos];
 
   return (
-    <div className="flex flex-wrap items-center gap-3 md:gap-4">
-      {logos.map((logo, i) => (
-        <div
-          key={`${logo.alt}-${i}`}
-          className="flex items-center justify-center shrink-0 h-[20px] md:h-[22px]"
-        >
-          <img
-            src={logo.src}
-            alt={logo.alt}
-            loading="lazy"
-            className="h-[16px] md:h-[18px] w-auto max-w-[70px] md:max-w-[80px] object-contain opacity-60 hover:opacity-100 transition-all duration-500"
-            style={{
-              filter: goldFilter,
-              transform: logo.scale ? `scale(${logo.scale})` : undefined,
-            }}
-          />
-        </div>
-      ))}
+    <div
+      className="relative overflow-hidden py-1"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: `linear-gradient(to right, ${bg}, transparent)` }} />
+      <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none" style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
+      <motion.div
+        className="flex items-center gap-5 md:gap-7 w-max"
+        animate={{ x: ['0%', '-50%'] }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 18, ease: 'linear' } }}
+        style={{ animationPlayState: hovered ? 'paused' : 'running' }}
+      >
+        {doubled.map((logo, i) => (
+          <div
+            key={`${logo.alt}-${i}`}
+            className="flex items-center justify-center shrink-0 h-[22px] md:h-[26px]"
+            style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
+          >
+            <img
+              src={logo.src}
+              alt={logo.alt}
+              loading="lazy"
+              className="h-[17px] md:h-[20px] w-auto max-w-[80px] md:max-w-[100px] object-contain transition-all duration-500"
+              style={{
+                filter: hovered ? 'none' : goldFilter,
+                opacity: hovered ? 1 : 0.7,
+                transform: logo.scale ? `scale(${logo.scale})` : undefined,
+              }}
+            />
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 };
