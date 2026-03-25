@@ -356,7 +356,7 @@ const CardSurface: React.FC<{
               transitionDelay: '0s',
             }}
           >
-            Step {card.num}
+            {labelPrefix} {card.num}
           </div>
           <h3
             className="mb-4 font-serif text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.05] tracking-[-0.02em] md:mb-5"
