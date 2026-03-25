@@ -89,7 +89,7 @@ const SiteHeader = () => {
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? (
-                  <Moon size={15} strokeWidth={1.5} />
+                  <Moon size={18} strokeWidth={1.5} />
                 ) : (
                   <Sun size={15} strokeWidth={1.5} />
                 )}
