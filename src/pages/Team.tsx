@@ -264,13 +264,13 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
           <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
             <LinkedWrapper className="group shrink-0">
               {member.photo ? (
-                <div className="relative w-[72px] h-[72px] md:w-[120px] md:h-[120px] md:mb-4">
+                <div className="relative w-[72px] h-[72px] md:w-[140px] md:h-[140px] md:mb-4">
                   {/* Gold ring on hover — only around image */}
                   <motion.div
                     className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/25 transition-colors duration-700"
                     style={{ margin: -3 }}
                   />
-                  <div className="w-full h-full rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] shadow-[0_4px_24px_-4px_hsl(var(--prussian)/0.14)]">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] shadow-[0_4px_24px_-4px_hsl(var(--prussian)/0.14)] transition-transform duration-500 group-hover/card:scale-[1.03]">
                     <img
                       src={member.photo}
                       alt={member.name}
