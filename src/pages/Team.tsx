@@ -6,6 +6,7 @@ import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import ScrollRevealText from '@/components/ScrollRevealText';
+import TeamStickyDeck from '@/components/TeamStickyDeck';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
