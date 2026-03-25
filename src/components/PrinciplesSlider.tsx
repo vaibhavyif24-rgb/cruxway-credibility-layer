@@ -141,14 +141,6 @@ const PrincipleCard: React.FC<{
             >
               {principle.d}
             </p>
-              style={{
-                opacity: isActive ? 1 : 0,
-                transform: `translateY(${isActive ? 0 : 12}px)`,
-                transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
-              }}
-            >
-              {principle.d}
-            </p>
           </div>
         </div>
       </div>
