@@ -243,6 +243,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
               card={card}
               index={i}
               variant={variant}
+              isActive={i === activeIndex}
             />
           ))}
         </div>
