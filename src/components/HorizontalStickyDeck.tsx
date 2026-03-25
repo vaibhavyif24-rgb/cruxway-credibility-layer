@@ -372,11 +372,12 @@ const HorizontalCardSurface: React.FC<{
 
   return (
     <div
-      className="absolute top-0 w-full overflow-hidden rounded-2xl md:rounded-3xl"
+      className="absolute top-0 overflow-hidden rounded-2xl md:rounded-3xl"
       style={{
         backgroundColor: bg,
         height: `${cardHeight}px`,
-        left: `${index * 100}%`,
+        width: `${100 / 6}%`,
+        left: `${(index * 100) / 6}%`,
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
       }}
     >
