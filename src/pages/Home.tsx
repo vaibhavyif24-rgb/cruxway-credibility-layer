@@ -199,7 +199,7 @@ const Home = () => {
 
       {/* Social Proof */}
       <div className="bg-background">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-18 pb-6">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12 pb-6">
           <FadeIn>
             <div className="flex flex-col items-center text-center">
               <motion.div
