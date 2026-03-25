@@ -46,9 +46,9 @@ const InlineMarquee: React.FC<{
   const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
 
-  // We need seamless looping — duplicate once for the animation trick,
-  // but each logo only appears once in view at any time
-  const track = [...logos, ...logos];
+  // Triple the set: the visible container only ever shows ~1 set width,
+  // the animation scrolls by exactly 1/3 (one set) then loops seamlessly
+  const track = [...logos, ...logos, ...logos];
 
   return (
     <div
@@ -60,8 +60,8 @@ const InlineMarquee: React.FC<{
       <div className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none" style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
       <motion.div
         className="flex items-center gap-6 md:gap-8 lg:gap-10 w-max"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 22, ease: 'linear' } }}
+        animate={{ x: ['0%', '-33.333%'] }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 28, ease: 'linear' } }}
         style={{ animationPlayState: hovered ? 'paused' : 'running' }}
       >
         {track.map((logo, i) => (
