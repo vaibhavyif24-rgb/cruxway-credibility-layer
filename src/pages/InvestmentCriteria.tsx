@@ -6,6 +6,7 @@ import CriteriaPipeline from '@/components/CriteriaPipeline';
 
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
+import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -230,21 +231,16 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Our Edge: Value Creation Playbook */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      {/* Our Edge — scroll reveal intro */}
+      <ScrollRevealText
+        label="Our Edge"
+        heading="A disciplined, repeatable framework for building lasting value in every business we partner with."
+        variant="light"
+      />
+
+      {/* Value Creation Playbook cards */}
+      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10">
         <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Our Edge</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-foreground leading-[1.15] mb-3">
-              Value Creation Playbook
-            </h2>
-            <GoldRule className="mb-5" />
-          </FadeIn>
-          <FadeIn delay={0.08}>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] mb-6">
-              A disciplined, repeatable framework for building lasting value in every business we partner with.
-            </p>
-          </FadeIn>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[

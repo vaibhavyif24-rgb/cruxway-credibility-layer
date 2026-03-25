@@ -1,0 +1,105 @@
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+
+interface ScrollRevealTextProps {
+  label?: string;
+  heading: string;
+  subtext?: string;
+  variant?: 'dark' | 'light';
+  className?: string;
+}
+
+/**
+ * Scroll-triggered word-by-word opacity reveal.
+ * Each word transitions from ~15 % opacity to full as the viewport scrolls
+ * through the container, creating a cinematic reading cadence.
+ */
+const ScrollRevealText = ({
+  label,
+  heading,
+  subtext,
+  variant = 'dark',
+  className = '',
+}: ScrollRevealTextProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 0.95', 'end 0.35'],
+  });
+
+  const words = heading.split(' ');
+  const isDark = variant === 'dark';
+
+  return (
+    <section
+      ref={containerRef}
+      className={`relative overflow-hidden ${
+        isDark
+          ? 'bg-primary text-primary-foreground'
+          : 'bg-background text-foreground'
+      } ${className}`}
+    >
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-20 md:py-28 lg:py-36 flex flex-col items-center text-center">
+        {/* Overline label */}
+        {label && (
+          <motion.p
+            style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
+            className={`font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] mb-8 md:mb-10 ${
+              isDark ? 'text-gold/50' : 'text-muted-foreground/50'
+            }`}
+          >
+            {label}
+          </motion.p>
+        )}
+
+        {/* Heading — word-by-word reveal */}
+        <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px]">
+          {words.map((word, i) => {
+            const start = i / words.length;
+            const end = (i + 1) / words.length;
+            return <Word key={i} word={word} range={[start, end]} progress={scrollYProgress} isDark={isDark} />;
+          })}
+        </p>
+
+        {/* Subtext */}
+        {subtext && (
+          <motion.p
+            style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
+            className={`font-sans text-[13px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-10 md:mt-14 ${
+              isDark ? 'text-primary-foreground/45' : 'text-muted-foreground'
+            }`}
+          >
+            {subtext}
+          </motion.p>
+        )}
+      </div>
+    </section>
+  );
+};
+
+/* Individual word with scroll-driven opacity */
+const Word = ({
+  word,
+  range,
+  progress,
+  isDark,
+}: {
+  word: string;
+  range: [number, number];
+  progress: ReturnType<typeof useScroll>['scrollYProgress'];
+  isDark: boolean;
+}) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+
+  return (
+    <motion.span
+      style={{ opacity }}
+      className={`inline-block mr-[0.3em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+    >
+      {word}
+    </motion.span>
+  );
+};
+
+export default ScrollRevealText;
