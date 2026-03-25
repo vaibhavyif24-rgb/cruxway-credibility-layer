@@ -99,7 +99,7 @@ const PrincipleCard: React.FC<{
 
             {/* Numbered index */}
             <span
-              className="font-serif text-[11px] md:text-[12px] tracking-[0.18em] text-white/30 mb-4"
+              className="font-serif text-[13px] md:text-[15px] tracking-[0.18em] text-white/50 mb-4"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
