@@ -95,6 +95,7 @@ StatBlock.displayName = 'StatBlock';
 
 const Home = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
 
   return (
