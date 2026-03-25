@@ -1,46 +1,67 @@
 
 
-## Audit: White Gap on Right Side of Criteria Pages
+## Fix: Sectors Card Layout — Mobile and Desktop
 
-### Root Cause
+### Problems Identified
+1. **Mobile**: All 3 category groups stack vertically creating an excessively long card. India has 12 items across 3 categories; US has 6 items across 3 categories. The vertical list feels unstructured.
+2. **Desktop**: The US card's third column ("Specialist Services") has only 1 item, making it visually unbalanced versus the other two columns.
+3. **Both**: The border-left styling on mobile looks cramped within the tight 18px padding.
 
-The horizontal overflow (white gap on the right) is caused by **DarkSectionEffects** — its absolutely positioned decorative elements (floating orbs up to 500px wide, shimmer lines) extend beyond the viewport. These are inside sections that lack overflow clipping:
+### Solution
 
-1. **"What We Look For" section** (line 122) — `bg-background`, no overflow constraint, contains StickyCardStack in sticky mode
-2. **"Evaluation Framework" section** (line 154) — `bg-primary`, has `DarkSectionEffects` with large orbs, no overflow constraint, contains StickyCardStack in slides mode
-3. **CinematicScrollReveal / USCinematicScrollReveal** — 300vh tall with expanding circle animation, no outer overflow constraint
+**Restructure the data and layout for both components to be more balanced and compact.**
 
-### Why `overflow-hidden` Won't Work
+#### India (`CinematicScrollReveal.tsx`)
 
-Both problematic sections contain **sticky-positioned children** (StickyCardStack). Adding `overflow: hidden` creates a new scroll container, which **breaks `position: sticky`** behavior entirely.
+**Consolidate from 3 categories to 2** for better visual balance:
+- **Industrials**: Process & Flow Control, Value-Added Distribution, Industrial Services, Packaging
+- **Business & Industrial Services**: Facility & Support Services, Testing & Certification, Infrastructure Services, Industrial Technology, Aerospace & Defense
 
-### The Fix: `overflow-x: clip`
+Trim verbose names:
+- "Testing, Inspection, and Certification" → "Testing & Certification"
+- "Utility and Infrastructure Services" → "Infrastructure Services"
+- "Business Process Outsourcing / Contract Manufacturing" and "Insurance Services and Distribution" → Remove (least core to thesis)
+- "Lab Services and Products" → Remove
 
-CSS `overflow-x: clip` clips content visually (like `hidden`) but does **not** create a new scroll container, so sticky positioning is fully preserved. This is the correct modern solution.
+**Mobile layout**: Use a `grid-cols-2` layout with the two categories side by side even on mobile. Remove the vertical dividers on mobile, keep the border-left accent. This halves the vertical height.
 
-### Changes — Single File: `src/pages/InvestmentCriteria.tsx`
+**Desktop layout**: Switch from `grid-cols-[1fr_1px_1fr_1px_1fr]` to `grid-cols-[1fr_1px_1fr]` (two columns with divider).
 
-**1. "What We Look For" section (line 122)**
+#### US (`USCinematicScrollReveal.tsx`)
+
+**Consolidate from 3 categories to 2** for balance:
+- **Infrastructure & Industrial**: Electrical & Infrastructure, Industrial Distribution, Engineering & Technical
+- **Services & Compliance**: Facility Services, Compliance & Safety, Environmental Services
+
+Move "Engineering & Technical" from "Specialist Services" into "Infrastructure & Industrial". Remove the lone third column entirely.
+
+**Mobile layout**: Same `grid-cols-2` approach — two categories side by side. Hide descriptions on mobile (already hidden). Remove the verbose descriptions entirely on mobile for clean compact look.
+
+**Desktop layout**: Switch to `grid-cols-[1fr_1px_1fr]` (two balanced columns).
+
+#### Shared layout changes for both files
+
 ```
-- <section className="bg-background">
-+ <section className="bg-background overflow-x-clip">
+Mobile (< md):
+  grid grid-cols-2 gap-4
+
+Desktop (md+):
+  grid md:grid-cols-[1fr_1px_1fr] md:gap-0
 ```
 
-**2. "Evaluation Framework" section (line 154)**
-```
-- <section className="relative bg-primary text-primary-foreground">
-+ <section className="relative bg-primary text-primary-foreground overflow-x-clip">
-```
+- Remove the third column and its two divider elements
+- Keep the border-left accent on each category
+- Slightly increase mobile font sizes: items from `10px` to `11px`, category headers from `0.85rem` to `0.8rem`
+- Mobile card padding stays at `20px 18px`
 
-**3. CinematicScrollReveal wrapper — add clip to the outer div (line 80)**
-```
-- <div>
-+ <div className="overflow-x-clip">
-```
+### Files Modified
+- `src/components/CinematicScrollReveal.tsx` — restructure data to 2 categories, update grid to 2-column
+- `src/components/USCinematicScrollReveal.tsx` — restructure data to 2 categories, update grid to 2-column
 
-This is the complete fix. No changes to animations, sticky card stacks, carousels, CSS variables, or any other component files.
-
-### Technical Note
-
-`overflow-x: clip` has full browser support in all modern browsers (Chrome 90+, Safari 16+, Firefox 81+). Tailwind CSS v3.3+ includes the `overflow-x-clip` utility class natively.
+### What Stays Unchanged
+- All scroll animations, expanding circle, sticky behavior
+- Card glass background, border, backdrop-filter styling
+- Desktop/mobile padding overrides
+- `src/index.css` — no changes
+- No JS logic changes (scroll handlers, progress calculations)
 
