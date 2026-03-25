@@ -362,10 +362,11 @@ const HorizontalIllustration: React.FC<{ index: number; isDark: boolean; isActiv
 const HorizontalCardSurface: React.FC<{
   card: DeckCard;
   index: number;
+  totalCards: number;
   variant: 'light' | 'dark';
   isActive: boolean;
   cardHeight: number;
-}> = ({ card, index, variant, isActive, cardHeight }) => {
+}> = ({ card, index, totalCards, variant, isActive, cardHeight }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
@@ -376,8 +377,8 @@ const HorizontalCardSurface: React.FC<{
       style={{
         backgroundColor: bg,
         height: `${cardHeight}px`,
-        width: `${100 / 6}%`,
-        left: `${(index * 100) / 6}%`,
+        width: `${100 / totalCards}%`,
+        left: `${(index * 100) / totalCards}%`,
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
       }}
     >
