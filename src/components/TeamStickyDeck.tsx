@@ -28,10 +28,16 @@ const getCardHeight = () => {
 };
 
 /* ─── Backgrounds ─── */
-const cardBgs = [
+const darkCardBgs = [
   'hsl(220 8% 18%)',
   'hsl(207 55% 14%)',
   'hsl(210 12% 12%)',
+];
+
+const lightCardBgs = [
+  'hsl(40 30% 96%)',
+  'hsl(38 22% 92%)',
+  'hsl(40 25% 94%)',
 ];
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';

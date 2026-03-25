@@ -462,6 +462,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
               isActive={i === activeIndex}
               cardHeight={cardHeight}
               illustrationSet={illustrationSet}
+              labelPrefix={labelPrefix}
             />
           ))}
         </div>
