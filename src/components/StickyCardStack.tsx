@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-
+import CriteriaIllustration from './CriteriaIllustrations';
 export interface StickyCard {
   num: string;
   title: string;
@@ -9,6 +9,7 @@ export interface StickyCard {
 interface StickyCardStackProps {
   cards: StickyCard[];
   variant?: 'light' | 'dark';
+  illustrationSet?: 'process' | 'criteria';
 }
 
 /* ─── Constants ─── */
@@ -321,7 +322,8 @@ const CardSurface: React.FC<{
   variant: 'light' | 'dark';
   isActive: boolean;
   cardHeight: number;
-}> = ({ card, index, variant, isActive, cardHeight }) => {
+  illustrationSet: 'process' | 'criteria';
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
@@ -335,7 +337,10 @@ const CardSurface: React.FC<{
         boxShadow: `0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)`,
       }}
     >
-      <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
+      {illustrationSet === 'criteria'
+        ? <CriteriaIllustration index={index} isDark={isDark} isActive={isActive} />
+        : <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
+      }
 
       <div className="relative z-10 flex h-full items-center">
         <div className="flex-1 px-8 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16">
@@ -382,7 +387,7 @@ const CardSurface: React.FC<{
 };
 
 /* ─── Scroll-Driven Vertical Carousel ─── */
-const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light' }) => {
+const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
@@ -423,13 +428,14 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     handleScroll();
   }, [cardHeight, handleScroll]);
 
-  const transitionRunwayVh = Math.max(cards.length - 1, 0) * SCROLL_PER_CARD * 100;
+  const scrollStepPx = (cardHeight + STICKY_TOP) * SCROLL_PER_CARD;
+  const outerHeight = cardHeight + Math.max(cards.length - 1, 0) * scrollStepPx;
 
   return (
     <div
       ref={outerRef}
       className="relative"
-      style={{ height: `calc(${transitionRunwayVh}vh + ${cardHeight}px)` }}
+      style={{ height: `${outerHeight}px` }}
     >
       <div
         className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
@@ -453,6 +459,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
               variant={variant}
               isActive={i === activeIndex}
               cardHeight={cardHeight}
+              illustrationSet={illustrationSet}
             />
           ))}
         </div>

@@ -198,6 +198,7 @@ const InvestmentCriteria = () => {
             description: item.desc,
           }))}
           variant="light"
+          illustrationSet="criteria"
         />
       </section>
 

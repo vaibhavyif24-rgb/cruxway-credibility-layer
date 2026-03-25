@@ -6,6 +6,7 @@ import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import ScrollRevealText from '@/components/ScrollRevealText';
+import TeamStickyDeck from '@/components/TeamStickyDeck';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
@@ -366,7 +367,7 @@ const Team = () => {
   const isIndia = region === 'india';
 
   return (
-    <div className="overflow-hidden">
+    <div>
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
@@ -412,72 +413,30 @@ const Team = () => {
         variant="light"
       />
 
-      {/* Partner (India only, shown before Founders) */}
-      {isIndia && (
-        <Section>
-          <div className="mb-5 md:mb-7">
+      {/* Team Sticky Deck — one card per profile */}
+      <section className="bg-background">
+        <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
+          <div className="max-w-[1080px] mx-auto">
             <FadeIn>
-              <SectionLabel>Partner</SectionLabel>
-              <GoldRule className="mt-1" />
+              <SectionLabel>{isIndia ? 'Our Team' : 'Managing Partners'}</SectionLabel>
+              <GoldRule className="mt-1 mb-4 md:mb-6" />
             </FadeIn>
           </div>
-          <div className="border-t border-foreground/[0.06]">
-            <ProfileCard member={indiaPartner} index={0} />
-          </div>
-        </Section>
-      )}
-
-      {/* Founders */}
-      <section className={isIndia ? 'bg-cream px-5 md:px-10 lg:px-16 py-8 md:py-16 lg:py-20 overflow-hidden' : ''}>
-        <div className={isIndia ? 'max-w-[1080px] mx-auto' : ''}>
-          {!isIndia ? (
-            <Section>
-              <div className="mb-5 md:mb-7">
-                <FadeIn>
-                   <SectionLabel>Managing Partners</SectionLabel>
-                  <GoldRule className="mt-1" />
-                </FadeIn>
-              </div>
-              <div className="border-t border-foreground/[0.06]">
-                {founders.map((m, i) => (
-                  <ProfileCard key={m.name} member={m} index={i} />
-                ))}
-              </div>
-            </Section>
-          ) : (
-            <>
-              <div className="mb-5 md:mb-7">
-                <FadeIn>
-                  <SectionLabel>Managing Partners</SectionLabel>
-                  <GoldRule className="mt-1" />
-                </FadeIn>
-              </div>
-              <div className="border-t border-foreground/[0.06]">
-                {founders.map((m, i) => (
-                  <ProfileCard key={m.name} member={m} index={i} creamBg />
-                ))}
-              </div>
-            </>
-          )}
         </div>
+        <TeamStickyDeck
+          members={
+            isIndia
+              ? [
+                  { ...indiaPartner, dealLogos: vaibhavDealLogos },
+                  ...founders.map(f => ({ ...f, dealLogos: f.dealLogos })),
+                ]
+              : [
+                  ...founders.map(f => ({ ...f, dealLogos: f.dealLogos })),
+                  { ...indiaPartner, dealLogos: vaibhavDealLogos },
+                ]
+          }
+        />
       </section>
-
-      {/* Partner (US view, shown after Founders) */}
-      {!isIndia && (
-        <section className="bg-cream px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
-          <div className="max-w-[1080px] mx-auto">
-            <div className="mb-5 md:mb-7">
-              <FadeIn>
-                <SectionLabel>Partner</SectionLabel>
-                <GoldRule className="mt-1" />
-              </FadeIn>
-            </div>
-            <div className="border-t border-foreground/[0.06]">
-              <ProfileCard member={indiaPartner} index={0} creamBg />
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Institutional Experience Marquee */}
       <div className="bg-background">
