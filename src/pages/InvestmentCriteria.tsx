@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import StickyCardStack from '@/components/StickyCardStack';
 
-import GlassCard from '@/components/GlassCard';
 import CriteriaCarousel from '@/components/CriteriaCarousel';
 
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
+import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -36,66 +36,6 @@ const investmentProfile = {
   ],
 };
 
-const usSectors = [
-  {
-    label: 'Electrical & Infrastructure',
-    desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Environmental Services',
-    desc: 'Compliance-driven remediation, waste management, and sustainability services',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L12 14l-4 2c.5-2.5 2.5-6 8-8l1-4z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Facility Services',
-    desc: 'Building maintenance, security, and specialised facility management',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <rect x="4" y="2" width="16" height="20" rx="2" />
-        <path d="M9 22v-4h6v4" /><line x1="9" y1="6" x2="10" y2="6" /><line x1="14" y1="6" x2="15" y2="6" />
-        <line x1="9" y1="10" x2="10" y2="10" /><line x1="14" y1="10" x2="15" y2="10" />
-        <line x1="9" y1="14" x2="10" y2="14" /><line x1="14" y1="14" x2="15" y2="14" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Engineering & Technical',
-    desc: 'Inspection, testing, calibration, and specialised engineering solutions',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Compliance & Safety',
-    desc: 'Regulatory compliance, audit, and risk management services',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Industrial Distribution',
-    desc: 'Specialised parts, equipment, and supply chain solutions for essential industries',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-        <rect x="1" y="6" width="22" height="12" rx="2" /><path d="M1 10h22" /><path d="M8 6v12" /><path d="M16 6v12" />
-      </svg>
-    ),
-  },
-];
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
@@ -207,8 +147,8 @@ const InvestmentCriteria = () => {
         />
       </section>
 
-      {/* India Cinematic Scroll Reveal — before Evaluation Framework */}
-      {isIndia && <CinematicScrollReveal />}
+      {/* Cinematic Scroll Reveal — before Evaluation Framework */}
+      {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* Evaluation Framework — Sticky Card Stack */}
       <section className="relative bg-primary text-primary-foreground">
@@ -257,42 +197,6 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* Target Sectors — US only */}
-      {!isIndia && (
-        <section className="relative bg-primary text-primary-foreground overflow-hidden">
-          <DarkSectionEffects />
-          <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-            <FadeIn>
-              <SectionLabel light>Target Sectors</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-primary-foreground leading-[1.2] max-w-[480px] mb-2">
-                Essential B2B Services Across the <span className="text-gold">United States</span>
-              </h2>
-              <p className="font-sans text-[14px] md:text-[15px] text-primary-foreground/40 leading-[1.75] max-w-[520px] mb-6 md:mb-8">
-                We focus on sectors characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency.
-              </p>
-              <GoldRule className="mb-6 md:mb-8" />
-            </FadeIn>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {usSectors.map((sector, i) => (
-                <GlassCard key={sector.label} index={i} variant="dark" className="p-5 md:p-6">
-                  <div className="flex items-start gap-3">
-                    <span className="mt-0.5 opacity-60 group-hover:opacity-90 transition-opacity duration-300 text-foreground">{sector.icon}</span>
-                    <div>
-                      <h4 className="font-serif text-[1rem] md:text-[1.1rem] text-primary-foreground leading-[1.3] mb-2">
-                        {sector.label}
-                      </h4>
-                      <div className="w-5 h-px bg-gold/20 group-hover:bg-gold/40 group-hover:w-8 transition-all duration-500 mb-2" />
-                      <p className="font-sans text-[13px] md:text-[14px] text-primary-foreground/40 leading-[1.7] group-hover:text-primary-foreground/60 transition-colors duration-300">
-                        {sector.desc}
-                      </p>
-                    </div>
-                  </div>
-                </GlassCard>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
