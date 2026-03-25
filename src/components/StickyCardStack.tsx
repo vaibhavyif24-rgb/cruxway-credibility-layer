@@ -389,7 +389,7 @@ const CardSurface: React.FC<{
 };
 
 /* ─── Scroll-Driven Vertical Carousel ─── */
-const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process' }) => {
+const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
