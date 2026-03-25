@@ -6,7 +6,7 @@ import StickyCardStack from '@/components/StickyCardStack';
 
 import GlassCard from '@/components/GlassCard';
 import CriteriaCarousel from '@/components/CriteriaCarousel';
-import HorizontalStickyDeck from '@/components/HorizontalStickyDeck';
+
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion, useInView } from 'framer-motion';
@@ -191,7 +191,7 @@ const InvestmentCriteria = () => {
             </FadeIn>
           </div>
         </div>
-        <HorizontalStickyDeck
+        <StickyCardStack
           cards={whatWeLookFor.map((item, i) => ({
             num: String(i + 1).padStart(2, '0'),
             title: item.title,
