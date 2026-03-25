@@ -322,7 +322,8 @@ const CardSurface: React.FC<{
   variant: 'light' | 'dark';
   isActive: boolean;
   cardHeight: number;
-}> = ({ card, index, variant, isActive, cardHeight }) => {
+  illustrationSet: 'process' | 'criteria';
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
@@ -336,7 +337,10 @@ const CardSurface: React.FC<{
         boxShadow: `0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)`,
       }}
     >
-      <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
+      {illustrationSet === 'criteria'
+        ? <CriteriaIllustration index={index} isDark={isDark} isActive={isActive} />
+        : <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
+      }
 
       <div className="relative z-10 flex h-full items-center">
         <div className="flex-1 px-8 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16">
