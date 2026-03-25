@@ -5,6 +5,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import StickyCardStack from '@/components/StickyCardStack';
 
 import GlassCard from '@/components/GlassCard';
+import CriteriaCarousel from '@/components/CriteriaCarousel';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion, useInView } from 'framer-motion';
