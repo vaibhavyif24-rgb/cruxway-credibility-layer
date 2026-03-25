@@ -499,6 +499,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
               key={card.num}
               card={card}
               index={i}
+              totalCards={cards.length}
               variant={variant}
               isActive={i === activeIndex}
               cardHeight={cardHeight}
