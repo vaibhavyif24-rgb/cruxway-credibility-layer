@@ -207,8 +207,8 @@ const InvestmentCriteria = () => {
         />
       </section>
 
-      {/* India Cinematic Scroll Reveal — before Evaluation Framework */}
-      {isIndia && <CinematicScrollReveal />}
+      {/* Cinematic Scroll Reveal — before Evaluation Framework */}
+      {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* Evaluation Framework — Sticky Card Stack */}
       <section className="relative bg-primary text-primary-foreground">
