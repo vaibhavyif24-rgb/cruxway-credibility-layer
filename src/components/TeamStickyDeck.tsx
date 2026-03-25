@@ -111,7 +111,7 @@ const TeamCard: React.FC<{
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -10px rgba(0,0,0,0.15)',
       }}
     >
-      <div className="flex flex-col md:flex-row h-full" style={{ minHeight: `${CARD_MIN_H}px` }}>
+      <div className="flex flex-col md:flex-row h-full">
 
         {/* ─── Left: Photo column ─── */}
         <div className="w-full md:w-[200px] lg:w-[240px] shrink-0 flex items-start justify-center pt-8 md:pt-10 px-6 md:px-0 md:pl-8 lg:pl-10">
