@@ -367,7 +367,7 @@ const Team = () => {
   const isIndia = region === 'india';
 
   return (
-    <div className="overflow-hidden">
+    <div>
       {/* Hero */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="hero" />
