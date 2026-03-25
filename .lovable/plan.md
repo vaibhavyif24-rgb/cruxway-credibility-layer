@@ -1,59 +1,57 @@
 
-Goal: make the cards stack end-to-end like the Boundless reference, where each new card fully takes over the same pinned position and only a thin strip of the previous card remains visible until it is covered.
 
-What is actually wrong now
-- The current stack is mechanically wrong, not just stylistically wrong.
-- `WRAPPER_HEIGHT = 100vh`, `CARD_HEIGHT = 52vh`, and `marginTop = -15vh` create too much vertical separation.
-- Result: the previous card releases before the next card reaches the sticky top, so the user sees “slides in sequence” instead of a true stack.
-- The current buried scale/fade effect also makes the interaction feel softer than the Boundless reference.
+## Fix: Sticky Card Stack - Content Visibility and True Stacking
 
-What I will change
-1. Rebuild the stack geometry in `src/components/StickyCardStack.tsx`
-- Stop using the current “one tall wrapper per card + small negative overlap” rhythm.
-- Switch to a true overlapping deck layout:
-  - all cards share the exact same sticky `top`
-  - cards sit almost on top of each other in document flow
-  - each next card starts higher, so it reaches the sticky line before the previous one releases
-- Expose only a narrow reveal band between cards, similar to the screenshot you attached.
+### Current Problems
+1. **Content invisible**: Cards 1-3 are not visible at all. The negative `marginBottom` approach (`-(CARD_MIN_H - PEEK)` = -160px) collapses cards on top of each other without enough scroll runway, making them invisible.
+2. **No stacking behavior**: The sticky approach has failed across multiple attempts because the container height and card spacing math never provides enough scroll distance for cards to stay pinned while the next one arrives.
 
-Target behavior
+### Root Cause
+The Boundless reference does NOT use CSS `position: sticky` per card. It uses a completely different approach: a **scroll-driven vertical carousel** inside a single sticky/fixed container. A wrapper is pinned to the viewport, and scroll progress drives `translateY` on an inner carousel so cards slide up one-by-one, each fully covering the previous one.
+
+### Solution: Scroll-Linked Vertical Carousel
+Completely rewrite `StickyCardStack.tsx` to use the Boundless approach:
+
+1. **Outer wrapper**: A tall div whose height = `(cards.length) * 100vh` to create scroll runway
+2. **Inner sticky container**: A `position: sticky; top: 88px` div with `overflow: hidden` and a fixed visible height (e.g., 420px)
+3. **Carousel track**: All cards stacked vertically inside, moved via `translateY` based on scroll progress
+4. **Scroll listener**: On scroll, compute which card should be active based on how far through the outer wrapper the user has scrolled, then set `translateY(-${activeIndex * 100}%)` on the carousel track
+5. **Dot indicators**: Optional active card indicator (like Boundless dots)
+
+This guarantees:
+- Each card takes the full visible area
+- Scrolling moves to the next card, which slides up and fully covers the previous
+- All card content is always visible when active
+- The effect is identical to Boundless
+
+### Files to Change
+- **`src/components/StickyCardStack.tsx`** — Complete rewrite to scroll-driven carousel
+- **`src/pages/InvestmentCriteria.tsx`** — Remove any padding/spacing adjustments that conflict
+- **`src/pages/Home.tsx`** — Minor spacing adjustments if needed
+
+### Technical Details
+
 ```text
-card 1 pinned
-card 2 rises into the exact same top position while card 1 is still pinned
-card 2 covers card 1
-card 3 does the same to card 2
+Structure:
+┌─────────────────────────────────┐  ← Outer div (height: N * 100vh)
+│  ┌───────────────────────────┐  │  ← Sticky container (top: 88px, overflow: hidden, fixed height)
+│  │  ┌─────────────────────┐  │  │  ← Carousel track (translateY based on scroll)
+│  │  │  Card 1 (100% h)    │  │  │
+│  │  ├─────────────────────┤  │  │
+│  │  │  Card 2 (100% h)    │  │  │
+│  │  ├─────────────────────┤  │  │
+│  │  │  Card 3 (100% h)    │  │  │
+│  │  ├─────────────────────┤  │  │
+│  │  │  Card 4 (100% h)    │  │  │
+│  │  └─────────────────────┘  │  │
+│  └───────────────────────────┘  │
+└─────────────────────────────────┘
+
+Scroll progress → activeIndex → translateY(-activeIndex * 100%)
 ```
 
-2. Simplify the motion so stacking reads clearly
-- Keep entrance animation with IntersectionObserver (`translateY + opacity`) on an inner surface only.
-- Reduce or remove the current “buried” transform unless it helps readability.
-- Prioritize physical overlap over decorative motion.
+- Smooth CSS transition on translateY for polished card changes
+- Keep existing card surface styling (backgrounds, SVG decorations, typography)
+- Ensure dark variant works for Investment Criteria page
+- Use `requestAnimationFrame` for scroll performance
 
-3. Tighten the visual stack treatment
-- Make every card fully opaque so the active card cleanly obscures the one below.
-- Strengthen the top-edge/shadow separation so the layering is obvious.
-- Use a restrained, premium surface system instead of playful decoration.
-
-4. Adjust page spacing where needed
-- Tune the Home and Investment Criteria section spacing only if the rebuilt stack needs more runway above/below.
-- Ensure the effect works on the current `/india` view first, then preserve mobile behavior.
-
-Files to update
-- `src/components/StickyCardStack.tsx` — full mechanical rebuild
-- Possibly small spacing adjustments in:
-  - `src/pages/Home.tsx`
-  - `src/pages/InvestmentCriteria.tsx`
-
-Implementation approach
-- Replace the current wrapper math with an overlap-based deck formula.
-- Use constants like:
-  - shared sticky top
-  - fixed card min-height
-  - small “peek” amount between cards
-  - final bottom runway so the last card can clear naturally
-- Keep z-index increasing with card order so later cards always pass over earlier ones.
-
-Validation after implementation
-- On Home “Our Process”, each next card must visibly cover the previous one before the previous releases.
-- On `/india` and on Investment Criteria dark variant, the cards must feel like one continuous stacked deck.
-- Only a slim band of the underlying card should remain visible during takeover, matching your screenshot/reference.
