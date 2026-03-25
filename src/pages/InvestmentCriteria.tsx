@@ -175,19 +175,31 @@ const InvestmentCriteria = () => {
       </section>
 
       {/* What We Look For — consolidated criteria */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Investment Criteria</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
-              What We Look For
-            </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
-            </p>
-            <GoldRule className="mb-8 md:mb-10" />
-          </FadeIn>
-          <CriteriaCarousel items={whatWeLookFor} />
+      {/* What We Look For — Horizontal Sticky Deck */}
+      <section className="bg-background">
+        <div className="px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
+          <div className="max-w-[1080px] mx-auto">
+            <FadeIn>
+              <SectionLabel>Investment Criteria</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
+                What We Look For
+              </h2>
+              <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
+                We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
+              </p>
+              <GoldRule className="mt-3 mb-6 md:mb-8" />
+            </FadeIn>
+          </div>
+        </div>
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
+          <HorizontalStickyDeck
+            cards={whatWeLookFor.map((item, i) => ({
+              num: String(i + 1).padStart(2, '0'),
+              title: item.title,
+              description: item.desc,
+            }))}
+            variant="light"
+          />
         </div>
       </section>
 
