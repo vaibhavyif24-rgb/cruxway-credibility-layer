@@ -219,7 +219,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     <div
       ref={outerRef}
       className="relative"
-      style={{ height: `${outerHeight}vh` }}
+      style={{ height: `calc(${transitionRunwayVh}vh + ${CARD_HEIGHT}px)` }}
     >
       {/* Sticky container — pinned in viewport */}
       <div
