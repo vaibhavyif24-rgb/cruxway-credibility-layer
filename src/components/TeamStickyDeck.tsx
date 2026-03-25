@@ -328,7 +328,6 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
               cardHeight={cardHeight}
               isDark={isDark}
             />
-            />
           ))}
         </div>
 
