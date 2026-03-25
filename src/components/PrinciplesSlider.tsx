@@ -80,46 +80,48 @@ const PrincipleCard: React.FC<{
         />
 
         {/* Dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/60" />
 
+        {/* Content — centered */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
-          <div className="flex flex-col items-center max-w-[580px]">
+          <div className="flex flex-col items-center max-w-[540px]">
+            {/* Overline label */}
             <p
-              className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] text-gold/60 mb-6"
+              className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] text-gold/50 mb-6"
               style={{
-                opacity: isActive ? 0.7 : 0,
+                opacity: isActive ? 0.6 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
                 transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-                textShadow: '0 1px 8px rgba(0,0,0,0.5)',
               }}
             >
               What Guides Us
             </p>
 
+            {/* Numbered index */}
             <span
-              className="font-serif text-[13px] md:text-[14px] font-medium tracking-[0.18em] text-white/50 mb-4"
+              className="font-serif text-[11px] md:text-[12px] tracking-[0.18em] text-white/30 mb-4"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
                 transition: 'opacity 0.5s ease-out 0.05s, transform 0.5s ease-out 0.05s',
-                textShadow: '0 1px 6px rgba(0,0,0,0.5)',
               }}
             >
               {String(index + 1).padStart(2, '0')}&nbsp;/&nbsp;{String(total).padStart(2, '0')}
             </span>
 
+            {/* Title */}
             <h2
-              className="font-serif text-[clamp(2.2rem,5.5vw,3.8rem)] text-white leading-[1.05] tracking-[-0.025em]"
+              className="font-serif text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[1.05] tracking-[-0.025em] drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
                 transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
-                textShadow: '0 2px 16px rgba(0,0,0,0.5)',
               }}
             >
               {principle.t}
             </h2>
 
+            {/* Gold rule */}
             <div
               className="my-5 flex justify-center"
               style={{
@@ -130,13 +132,13 @@ const PrincipleCard: React.FC<{
               <GoldRule />
             </div>
 
+            {/* Description */}
             <p
-              className="font-sans text-[14px] md:text-[16px] text-white/55 leading-[1.85] tracking-[0.01em] max-w-[440px]"
+              className="font-sans text-[13px] md:text-[15px] text-white/45 leading-[1.85] tracking-[0.01em] max-w-[380px] drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
                 transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
-                textShadow: '0 1px 10px rgba(0,0,0,0.4)',
               }}
             >
               {principle.d}

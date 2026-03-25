@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import StickyCardStack from '@/components/StickyCardStack';
 
-
 import GlassCard from '@/components/GlassCard';
 import CriteriaCarousel from '@/components/CriteriaCarousel';
 
@@ -137,7 +136,7 @@ const InvestmentCriteria = () => {
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
 
   return (
-    <div className="overflow-x-hidden">
+    <div>
       {/* Hero */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
@@ -177,26 +176,33 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* What We Look For — Carousel */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-        <div className="max-w-[1080px] mx-auto">
-          <FadeIn>
-            <SectionLabel>Investment Criteria</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
-              What We Look For
-            </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
-            </p>
-            <GoldRule className="mt-3 mb-4 md:mb-5" />
-          </FadeIn>
-          <CriteriaCarousel
-            items={whatWeLookFor.map((item) => ({
-              title: item.title,
-              desc: item.desc,
-            }))}
-          />
+      {/* What We Look For — consolidated criteria */}
+      {/* What We Look For — Horizontal Sticky Deck */}
+      <section className="bg-background">
+        <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
+          <div className="max-w-[1080px] mx-auto">
+            <FadeIn>
+              <SectionLabel>Investment Criteria</SectionLabel>
+              <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
+                What We Look For
+              </h2>
+              <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
+                We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
+              </p>
+              <GoldRule className="mt-3 mb-4 md:mb-5" />
+            </FadeIn>
+          </div>
         </div>
+        <StickyCardStack
+          cards={whatWeLookFor.map((item, i) => ({
+            num: String(i + 1).padStart(2, '0'),
+            title: item.title,
+            description: item.desc,
+          }))}
+          variant={theme === 'dark' ? 'dark' : 'light'}
+          illustrationSet="criteria"
+          labelPrefix="Criterion"
+        />
       </section>
 
       {/* Evaluation Framework — Sticky Card Stack */}

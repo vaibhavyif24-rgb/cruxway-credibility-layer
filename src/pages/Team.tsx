@@ -414,7 +414,7 @@ const Team = () => {
       />
 
       {/* Team Sticky Deck — Boundless-style stacking cards */}
-      <section className="bg-background py-10 md:py-12 lg:py-16">
+      <section className="bg-background py-10 md:py-16">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12 mb-8 md:mb-10">
           <FadeIn>
             <SectionLabel>{isIndia ? 'Our Team' : 'Team'}</SectionLabel>
