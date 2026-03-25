@@ -91,7 +91,7 @@ const SiteHeader = () => {
                 {theme === 'light' ? (
                   <Moon size={18} strokeWidth={1.5} />
                 ) : (
-                  <Sun size={15} strokeWidth={1.5} />
+                  <Sun size={18} strokeWidth={1.5} />
                 )}
               </button>
 
