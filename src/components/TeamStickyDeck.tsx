@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 export interface TeamDeckMember {
   name: string;
@@ -20,25 +19,32 @@ interface TeamStickyDeckProps {
 
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
+const MIN_CARD_HEIGHT = 420;
+const SCROLL_PER_CARD = 0.65;
+
+const getCardHeight = () => {
+  if (typeof window === 'undefined') return 620;
+  return Math.max(MIN_CARD_HEIGHT, window.innerHeight - STICKY_TOP);
+};
 
 /* ─── Backgrounds ─── */
 const darkCardBgs = [
-  'hsl(220 8% 15%)',
-  'hsl(207 45% 13%)',
-  'hsl(215 12% 11%)',
+  'hsl(220 8% 18%)',
+  'hsl(207 55% 14%)',
+  'hsl(210 12% 12%)',
 ];
 
 const lightCardBgs = [
   'hsl(40 30% 96%)',
-  'hsl(38 22% 93%)',
-  'hsl(42 28% 95%)',
+  'hsl(38 22% 92%)',
+  'hsl(40 25% 94%)',
 ];
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
 /* ─── Inline Logo Marquee ─── */
-const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; isDark: boolean }> = ({ logos, isDark }) => {
-  const [hovered, setHovered] = React.useState(false);
+const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; bgFrom?: string }> = ({ logos, bgFrom = 'hsl(220_8%_18%)' }) => {
+  const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
   const doubled = [...logos, ...logos];
 
@@ -48,28 +54,28 @@ const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; isDark: bool
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className={`absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none ${isDark ? 'team-marquee-fade-left-dark' : 'team-marquee-fade-left-light'}`} />
-      <div className={`absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none ${isDark ? 'team-marquee-fade-right-dark' : 'team-marquee-fade-right-light'}`} />
+      <div className={`absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-[${bgFrom}] to-transparent`} />
+      <div className={`absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-[${bgFrom}] to-transparent`} />
       <motion.div
-        className="flex items-center gap-7 md:gap-9 w-max"
+        className="flex items-center gap-6 md:gap-8 w-max"
         animate={{ x: ['0%', '-50%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 22, ease: 'linear' } }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 20, ease: 'linear' } }}
       >
         {doubled.map((logo, i) => (
           <div
-            key={`${logo!.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[28px] md:h-[36px]"
-            style={{ marginRight: logo!.extraGap ? `${logo!.extraGap}px` : undefined }}
+            key={`${logo.alt}-${i}`}
+            className="flex items-center justify-center shrink-0 h-[28px] md:h-[34px]"
+            style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
           >
             <img
-              src={logo!.src}
-              alt={logo!.alt}
+              src={logo.src}
+              alt={logo.alt}
               loading="lazy"
-              className="h-[24px] md:h-[30px] w-auto max-w-[110px] md:max-w-[130px] object-contain transition-all duration-500"
+              className="h-[22px] md:h-[28px] w-auto max-w-[100px] md:max-w-[120px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
-                opacity: hovered ? 1 : 0.7,
-                transform: logo!.scale ? `scale(${logo!.scale})` : undefined,
+                opacity: hovered ? 1 : 0.75,
+                transform: logo.scale ? `scale(${logo.scale})` : undefined,
               }}
             />
           </div>
@@ -79,205 +85,169 @@ const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; isDark: bool
   );
 };
 
-/* ─── Single Stacking Card ─── */
-const StackingCard: React.FC<{
+/* ─── Team Card Surface ─── */
+const TeamCardSurface: React.FC<{
   member: TeamDeckMember;
   index: number;
   totalMembers: number;
+  isActive: boolean;
+  cardHeight: number;
   isDark: boolean;
-  isMobile: boolean;
-}> = ({ member, index, totalMembers, isDark, isMobile }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
+}> = ({ member, index, totalMembers, isActive, cardHeight, isDark }) => {
   const bgs = isDark ? darkCardBgs : lightCardBgs;
   const bg = bgs[index % bgs.length];
-
-  const isLast = index === totalMembers - 1;
-
-  // Track this card's scroll progress within its wrapper
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start start', 'end start'],
-  });
-
-  // As the NEXT card covers this one, scale down and dim
-  const scale = useTransform(scrollYProgress, [0, 0.6, 1], [1, 1, isLast ? 1 : 0.92]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, isLast ? 1 : 0.25]);
-  const borderRadius = useTransform(scrollYProgress, [0, 0.6, 1], [16, 16, isLast ? 16 : 24]);
-
+  // Split highlights into 2 columns for better density
   const midpoint = Math.ceil(member.highlights.length / 2);
   const col1 = member.highlights.slice(0, midpoint);
   const col2 = member.highlights.slice(midpoint);
 
-  const shadowDepth = 8 + index * 6;
-
   return (
     <div
-      ref={cardRef}
-      className="relative"
+      className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl"
       style={{
-        /* The wrapper MUST be taller than the sticky element for sticky to work.
-           Card height = 100vh - header. Scroll runway = 80vh gives ~500-600px of
-           pinned scrolling before the next card overlaps. Last card needs no runway. */
-        height: isLast ? `calc(100vh - ${STICKY_TOP}px)` : `calc(100vh - ${STICKY_TOP}px + 80vh)`,
+        backgroundColor: bg,
+        height: `${cardHeight}px`,
+        boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
       }}
     >
+      {/* Subtle decorative accent */}
       <div
-        className="sticky"
+        className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full opacity-[0.03]"
         style={{
-          top: `${STICKY_TOP}px`,
-          zIndex: index + 1,
-          height: `calc(100vh - ${STICKY_TOP}px)`,
+          background: 'radial-gradient(circle, hsl(38 48% 52%) 0%, transparent 70%)',
+          transform: 'translate(30%, -30%)',
         }}
-      >
-        <motion.div
-          className="relative w-full overflow-hidden"
+      />
+
+      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-10 md:py-8 lg:px-14 lg:py-10">
+        {/* Counter */}
+        <div
+          className="mb-2 md:mb-3 font-sans text-[10px] font-medium uppercase tracking-[0.22em] md:text-[11px]"
           style={{
-            backgroundColor: bg,
-            scale,
-            opacity,
-            borderRadius,
-            height: '100%',
-            boxShadow: `0 -4px ${shadowDepth}px -4px rgba(0,0,0,0.15), 0 ${shadowDepth}px ${shadowDepth * 2}px -${shadowDepth}px rgba(0,0,0,0.2)`,
-            transformOrigin: 'top center',
+            color: 'hsl(38 48% 52%)',
+            opacity: isActive ? 0.5 : 0,
+            transform: `translateY(${isActive ? 0 : 12}px)`,
+            transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
           }}
         >
-          {/* Subtle decorative radial accent */}
+          {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
+        </div>
+
+        {/* Main content area */}
+        <div className="flex-1 flex flex-col justify-center min-h-0">
+          {/* Profile header row */}
           <div
-            className="absolute top-0 right-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] rounded-full opacity-[0.035] pointer-events-none"
+            className="flex items-center gap-4 md:gap-5 mb-4 md:mb-5"
             style={{
-              background: 'radial-gradient(circle, hsl(38 48% 52%) 0%, transparent 70%)',
-              transform: 'translate(25%, -25%)',
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0.05s',
             }}
-          />
-
-          {/* Card content */}
-          <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-10 md:py-8 lg:px-14 lg:py-10 max-w-[1080px] mx-auto">
-            {/* Counter */}
-            <motion.div
-              className="mb-3 md:mb-4 font-sans text-[10px] font-medium uppercase tracking-[0.25em] md:text-[11px]"
-              style={{ color: 'hsl(38 48% 52%)', opacity: 0.45 }}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 0.45, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
-            </motion.div>
-
-            {/* Main content */}
-            <div className="flex-1 flex flex-col justify-center min-h-0">
-              {/* Profile header */}
-              <motion.div
-                className="flex items-center gap-5 md:gap-6 mb-5 md:mb-7"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-5%' }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {member.photo ? (
-                  <div className="relative w-[72px] h-[72px] md:w-[120px] md:h-[120px] shrink-0 group">
-                    <div className={`w-full h-full rounded-full overflow-hidden border-2 ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.06]'} shadow-[0_8px_32px_-8px_rgba(0,0,0,0.3)] transition-transform duration-700 group-hover:scale-[1.03]`}>
-                      <img
-                        src={member.photo}
-                        alt={member.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </div>
-                    <div className="absolute inset-[-3px] rounded-full border border-transparent group-hover:border-[hsl(38_48%_52%)]/25 transition-colors duration-700" />
-                  </div>
-                ) : (
-                  <div className={`w-[72px] h-[72px] md:w-[120px] md:h-[120px] rounded-full ${isDark ? 'bg-white/[0.04] border-white/[0.08]' : 'bg-foreground/[0.04] border-foreground/[0.08]'} border border-dashed flex items-center justify-center shrink-0`}>
-                    <span className={`font-serif text-[1.1rem] md:text-[1.5rem] ${isDark ? 'text-white/20' : 'text-foreground/20'}`}>
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                )}
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className={`font-serif text-[1.6rem] md:text-[2.2rem] lg:text-[2.4rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.03em] leading-[1.1]`}>
-                      {member.name}
-                    </h3>
-                    {member.linkedIn && (
-                      <a
-                        href={member.linkedIn}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`${isDark ? 'text-white/15 hover:text-[hsl(38_48%_52%)]' : 'text-foreground/15 hover:text-[hsl(38_48%_52%)]'} transition-colors duration-300`}
-                      >
-                        <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
-                      </a>
-                    )}
-                  </div>
-                  <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.25em] text-[hsl(38_48%_52%)] mt-1.5 md:mt-2">
-                    {member.role}
-                  </p>
+          >
+            {member.photo ? (
+              <div className="relative w-[56px] h-[56px] md:w-[80px] md:h-[80px] shrink-0">
+                <div className={`w-full h-full rounded-full overflow-hidden border ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.06]'} shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]`}>
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-              </motion.div>
-
-              {/* Summary */}
-              <motion.p
-                className={`font-sans text-[13px] md:text-[14px] ${isDark ? 'text-white/40' : 'text-foreground/50'} leading-[1.75] mb-4 md:mb-6 max-w-[780px]`}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-5%' }}
-                transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {member.summary}
-              </motion.p>
-
-              {/* Highlights — 2-column grid */}
-              <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 md:gap-y-2.5"
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-5%' }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <ul className="space-y-2 md:space-y-2.5">
-                  {col1.map((line, i) => (
-                    <li
-                      key={i}
-                      className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/28' : 'text-foreground/38'} leading-[1.6] flex gap-2.5 items-start`}
-                    >
-                      <span className="shrink-0 mt-[7px] w-2 h-px bg-[hsl(38_48%_52%)]/30" />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-                {col2.length > 0 && (
-                  <ul className="space-y-2 md:space-y-2.5">
-                    {col2.map((line, i) => (
-                      <li
-                        key={i}
-                        className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/28' : 'text-foreground/38'} leading-[1.6] flex gap-2.5 items-start`}
-                      >
-                        <span className="shrink-0 mt-[7px] w-2 h-px bg-[hsl(38_48%_52%)]/30" />
-                        <span>{line}</span>
-                      </li>
-                    ))}
-                  </ul>
+              </div>
+            ) : (
+              <div className={`w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full ${isDark ? 'bg-white/[0.04] border-white/[0.08]' : 'bg-foreground/[0.04] border-foreground/[0.08]'} border border-dashed flex items-center justify-center shrink-0`}>
+                <span className={`font-serif text-[0.9rem] md:text-[1.1rem] ${isDark ? 'text-white/20' : 'text-foreground/20'}`}>
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </span>
+              </div>
+            )}
+            <div>
+              <div className="flex items-center gap-1.5">
+                <h3 className={`font-serif text-[1.15rem] md:text-[1.5rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.02em] leading-[1.15]`}>
+                  {member.name}
+                </h3>
+                {member.linkedIn && (
+                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-white/20' : 'text-foreground/20'} hover:text-[hsl(38_48%_52%)] transition-colors`}>
+                    <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                  </a>
                 )}
-              </motion.div>
+              </div>
+              <p className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.22em] text-[hsl(38_48%_52%)] mt-0.5">
+                {member.role}
+              </p>
             </div>
+          </div>
 
-            {/* Deal logos marquee */}
-            {member.dealLogos && member.dealLogos.length > 0 && (
-              <motion.div
-                className={`pt-4 md:pt-5 mt-auto border-t ${isDark ? 'border-white/[0.04]' : 'border-foreground/[0.06]'}`}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <p className="font-sans text-[7.5px] md:text-[8.5px] font-semibold uppercase tracking-[0.22em] text-[hsl(38_48%_52%)]/45 mb-1.5">
-                  Select Investments &amp; Deals
-                </p>
-                <InlineMarquee logos={member.dealLogos} isDark={isDark} />
-              </motion.div>
+          {/* Summary */}
+          <div
+            style={{
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0.1s',
+            }}
+          >
+            <p className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/45' : 'text-foreground/55'} leading-[1.65] mb-3 md:mb-4 max-w-[720px]`}>
+              {member.summary}
+            </p>
+          </div>
+
+          {/* Highlights in 2-column grid */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 md:gap-y-2"
+            style={{
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0.15s',
+            }}
+          >
+            <ul className="space-y-1.5 md:space-y-2">
+              {col1.map((line, i) => (
+                <li
+                  key={i}
+                  className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
+                >
+                  <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            {col2.length > 0 && (
+              <ul className="space-y-1.5 md:space-y-2">
+                {col2.map((line, i) => (
+                  <li
+                    key={i}
+                    className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
+                  >
+                    <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
-        </motion.div>
+
+        </div>
+
+        {/* Deal logos — floating on deck */}
+        {member.dealLogos && member.dealLogos.length > 0 && (
+          <div
+            className={`pt-3 md:pt-3 border-t ${isDark ? 'border-white/[0.04]' : 'border-foreground/[0.06]'}`}
+            style={{
+              opacity: isActive ? 1 : 0,
+              transition: 'opacity 0.6s ease-out',
+              transitionDelay: '0.25s',
+            }}
+          >
+            <p className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-[hsl(38_48%_52%)]/50 mb-1">
+              Select Investments &amp; Deals
+            </p>
+            <InlineMarquee logos={member.dealLogos} bgFrom={bg.replace(/\s/g, '_')} />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -287,20 +257,99 @@ const StackingCard: React.FC<{
 const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const isMobile = useIsMobile();
+  const outerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardHeight, setCardHeight] = useState(getCardHeight);
+
+  const handleScroll = useCallback(() => {
+    const outer = outerRef.current;
+    if (!outer) return;
+
+    const rect = outer.getBoundingClientRect();
+    const outerHeight = outer.offsetHeight;
+    const viewportHeight = window.innerHeight;
+    const scrolled = -(rect.top - STICKY_TOP);
+    const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
+    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+    const intervalCount = Math.max(members.length - 1, 1);
+    const idx = members.length === 1
+      ? 0
+      : Math.min(members.length - 1, Math.round(progress * intervalCount));
+
+    setActiveIndex(idx);
+  }, [members.length]);
+
+  useEffect(() => {
+    const update = () => setCardHeight(getCardHeight());
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => requestAnimationFrame(handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScroll]);
+
+  useEffect(() => { handleScroll(); }, [cardHeight, handleScroll]);
+
+  const scrollStepPx = (cardHeight + STICKY_TOP) * SCROLL_PER_CARD;
+  const outerHeight = cardHeight + Math.max(members.length - 1, 0) * scrollStepPx;
 
   return (
-    <div className="relative">
-      {members.map((member, i) => (
-        <StackingCard
-          key={member.name}
-          member={member}
-          index={i}
-          totalMembers={members.length}
-          isDark={isDark}
-          isMobile={isMobile}
-        />
-      ))}
+    <div
+      ref={outerRef}
+      className="relative"
+      style={{ height: `${outerHeight}px` }}
+    >
+      <div
+        className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
+        style={{
+          top: `${STICKY_TOP}px`,
+          height: `${cardHeight}px`,
+        }}
+      >
+        <div
+          className="will-change-transform"
+          style={{
+            transform: `translateY(-${activeIndex * cardHeight}px)`,
+            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+          }}
+        >
+          {members.map((member, i) => (
+            <TeamCardSurface
+              key={member.name}
+              member={member}
+              index={i}
+              totalMembers={members.length}
+              isActive={i === activeIndex}
+              cardHeight={cardHeight}
+              isDark={isDark}
+            />
+          ))}
+        </div>
+
+        {/* Dot indicators */}
+        <div
+          className="pointer-events-none absolute right-4 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2 md:right-5"
+        >
+          {members.map((_, i) => (
+            <div
+              key={i}
+              className="rounded-full transition-all duration-500"
+              style={{
+                width: i === activeIndex ? '8px' : '5px',
+                height: i === activeIndex ? '8px' : '5px',
+                backgroundColor: i === activeIndex
+                  ? 'hsl(38 48% 52%)'
+                  : 'hsla(40, 30%, 96%, 0.2)',
+              }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

@@ -242,9 +242,3 @@
     -webkit-backdrop-filter: blur(8px);
   }
 }
-
-/* Team deck marquee fades — can't use dynamic Tailwind from-[...] safely */
-.team-marquee-fade-left-dark { background: linear-gradient(to right, hsl(220 8% 15%), transparent); }
-.team-marquee-fade-right-dark { background: linear-gradient(to left, hsl(220 8% 15%), transparent); }
-.team-marquee-fade-left-light { background: linear-gradient(to right, hsl(40 30% 96%), transparent); }
-.team-marquee-fade-right-light { background: linear-gradient(to left, hsl(40 30% 96%), transparent); }
