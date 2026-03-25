@@ -187,7 +187,7 @@ const InvestmentCriteria = () => {
               <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
                 We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
               </p>
-              <GoldRule className="mt-3 mb-6 md:mb-8" />
+              <GoldRule className="mt-3 mb-4 md:mb-5" />
             </FadeIn>
           </div>
         </div>
