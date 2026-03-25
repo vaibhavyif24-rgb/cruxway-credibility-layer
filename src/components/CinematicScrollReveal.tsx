@@ -215,7 +215,7 @@ const CinematicScrollReveal = () => {
             </p>
 
             {/* Three-column grid */}
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-6 md:gap-0">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-3 md:gap-0">
               <div className="md:pr-5">
                 <SectorColumn category={indiaSectors[0].category} items={indiaSectors[0].items} />
               </div>
