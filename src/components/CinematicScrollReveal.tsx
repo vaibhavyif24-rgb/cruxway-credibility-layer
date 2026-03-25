@@ -20,21 +20,21 @@ const indiaSectors = [
 const SectorColumn = ({ category, items }: { category: string; items: string[] }) => (
   <div>
     <h3
-      className="font-serif text-[0.95rem] leading-[1.2] mb-3"
+      className="font-serif text-[0.85rem] md:text-[0.95rem] leading-[1.2] mb-2 md:mb-3"
       style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
     </h3>
-    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '14px' }}>
+    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '10px' }} className="md:pl-[14px]">
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
-          <li key={item} className="flex items-center gap-[10px] group cursor-default">
+          <li key={item} className="flex items-center gap-[6px] md:gap-[10px] group cursor-default">
             <span
               className="flex-shrink-0 rotate-45 transition-colors duration-200"
-              style={{ width: '7px', height: '7px', backgroundColor: 'var(--cin-card-bullet)' }}
+              style={{ width: '5px', height: '5px', backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <span
-              className="font-sans text-[12px] leading-[1.9] transition-colors duration-200"
+              className="font-sans text-[10px] md:text-[12px] leading-[1.7] md:leading-[1.9] transition-colors duration-200"
               style={{ color: 'var(--cin-card-subtext)' }}
             >
               {item}
