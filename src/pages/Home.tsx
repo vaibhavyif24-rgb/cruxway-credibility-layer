@@ -148,33 +148,21 @@ const Home = () => {
         <HeroDivider />
       </section>
 
-      {/* What We Do */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-        <div className="max-w-[1080px] mx-auto">
-          <div className="grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-14">
-            <div className="lg:col-span-5">
-              <FadeIn>
-                <SectionLabel>What We Do</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15]">
-                  {isIndia
-                    ? <>Investing in & Building Companies Across <span className="text-gold">India</span></>
-                    : <>Investing in & Building Essential <span className="text-gold">U.S.</span> Companies</>}
-                </h2>
-                <GoldRule className="mt-3" />
-              </FadeIn>
-            </div>
-            <div className="lg:col-span-7">
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[15px] md:text-[16px] text-muted-foreground leading-[1.8] mb-4">
-              {isIndia
-                ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors, providing long-term capital along with operational expertise.'
-                : 'Cruxway invests in majority stakes in founder-led and family-owned businesses in critical B2B services across the United States. We focus on regulated, compliance-driven sectors where reliability, deep client relationships, and high barriers to entry define long-term value.'}
-                </p>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* What We Do — Scroll-triggered reveal */}
+      <ScrollRevealText
+        label="What We Do"
+        heading={
+          isIndia
+            ? 'Investing in and building the next generation of essential companies across India.'
+            : 'Investing in and building essential U.S. companies across regulated, compliance-driven sectors.'
+        }
+        subtext={
+          isIndia
+            ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
+            : 'We focus on founder-led and family-owned businesses where reliability, deep client relationships, and high barriers to entry define long-term value.'
+        }
+        variant="light"
+      />
 
       {/* Market Thesis — dark section */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
