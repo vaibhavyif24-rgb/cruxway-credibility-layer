@@ -1,46 +1,117 @@
 
+## Sticky Card Stack Rebuild: make cards truly stack and feel senior, not playful
 
-## Polish StickyCardStack: Professional Depth, Background Art, and True Stacking Feel
+### What is wrong now
+The current `StickyCardStack` reads like separate slides, not a physical deck:
+- the `top` value increases per card, so cards stagger downward instead of taking over the same pinned position
+- the imported PNG artwork feels illustrative/childish and disconnected from the site’s PE-style visual language
+- each card wrapper uses full-height spacing, so overlap feels delayed and weak
+- the stack effect is relying more on decoration than on actual sticky/layer mechanics
 
-### Problems Identified
-1. Cards have flat, plain HSL backgrounds — looks raw and unfinished
-2. No decorative background elements (geometric lines, subtle patterns, gradients)
-3. Scale/opacity shifting on underlying cards is too subtle (0.96 is barely perceptible)
-4. Cards lack the premium depth cues: inner glow, gradient overlays, border treatments
-5. No opacity dimming on cards as they get buried under the stack
+### What I will change
 
-### Changes — Single File: `src/components/StickyCardStack.tsx`
+#### 1) Rebuild the stacking logic in `src/components/StickyCardStack.tsx`
+I will convert it to a true deck pattern:
 
-**1. Enhanced Scale + Opacity Shifting**
-- Scale down from `1` to `0.92` (more noticeable depth) as each card scrolls past
-- Add a scroll-driven `opacity` transform: cards fade from `1` to `0.6` as the next card overlaps, creating clear visual hierarchy
-- Increase `top` offset spacing from `24px` to `28px` per card for better stacking visibility
+- **Parent stack section** stays `relative`
+- **Each item wrapper** provides the scroll distance
+- **Each card** uses `position: sticky` at the **same top position** for all cards
+- **Each later card gets a higher z-index**
+- **Each wrapper after the first gets a negative top margin / tighter overlap rhythm**
+- **IntersectionObserver** remains only for entrance animation (`translateY + opacity`), not for the stack itself
 
-**2. Rich Background Treatment**
-- Replace flat HSL colors with layered gradient backgrounds:
-  - Light variant: radial gradient from warm cream center to stone edges, plus a subtle diagonal mesh pattern
-  - Dark variant: radial gradient from deep prussian center outward, with subtle blue tonal shifts
-- Add a CSS `::before`-style overlay div with a subtle noise/grain texture (CSS-only radial dot pattern)
+This creates the effect the user described:
+```text
+scroll area
+  wrapper 1 -> card sticky at top: 88px, z: 10
+  wrapper 2 -> card sticky at top: 88px, z: 20
+  wrapper 3 -> card sticky at top: 88px, z: 30
+```
 
-**3. Decorative Background Elements (per card)**
-- **Corner geometric accents**: thin gold-tinted SVG lines in top-right and bottom-left corners (matching existing `DarkSectionEffects` geometric accent pattern)
-- **Subtle grid dots**: a repeating radial-gradient dot pattern at very low opacity (`0.02-0.04`) to add texture without distraction
-- **Gold shimmer line**: a thin horizontal accent line near the top of each card with a subtle CSS shimmer animation
-- **Floating abstract shape**: a large, soft radial gradient circle positioned off-center at very low opacity as a depth element
+Result: card 2 slides over card 1, card 3 slides over card 2, instead of pushing them apart.
 
-**4. Card Border & Shadow Polish**
-- Add a `border` with `1px solid` at very low opacity (`rgba` white for dark, gold for light) for glass-edge definition
-- Intensify box-shadow progression: first card has minimal shadow, last card has dramatic `0 24px 64px` shadow
-- Add inner `box-shadow` (inset) for subtle bevel effect
+#### 2) Replace the current childish art treatment with professional backgrounds
+I will remove reliance on the four PNG art panels inside the cards and shift to backgrounds that match the existing site palette:
 
-**5. Typography Enhancement**
-- Make the oversized number on the right larger (`text-[clamp(5rem,12vw,10rem)]`) and slightly more visible (`0.06` opacity instead of `0.04`)
-- Add a subtle text-shadow to the title for depth on dark variant
+- **Dark charcoal / prussian cards**: matte surfaces, faint concentric rings, subtle radial highlight, restrained iconography or linework
+- **Cream / sand cards**: large cropped geometric arcs, editorial negative space, no cartoon-like illustration
+- **Dark variant for Criteria page**: deep navy/prussian surfaces with very low-contrast gold/blue structural detail
 
-### Technical Details
-- All decorative elements are `pointer-events-none` and `aria-hidden`
-- Grain/dot textures use pure CSS `background-image: radial-gradient(...)` — no image assets needed
-- Gold shimmer uses existing `@keyframes shimmer-line` from `index.css`
-- Fully responsive — decorative elements scale down or hide on mobile
-- No new dependencies
+These will be built with:
+- layered CSS gradients
+- simple inline SVG linework / circles / arcs
+- optional muted stat block on select cards
+- opaque backgrounds so the top card clearly obscures the one underneath
 
+#### 3) Add real depth cues during takeover
+To reinforce the stack:
+- outgoing/buried card subtly scales down
+- opacity dims slightly
+- shadow deepens progressively by layer
+- border and surface contrast become cleaner so overlap is obvious
+
+The effect will be restrained, not flashy:
+- scale only slightly
+- opacity dim only slightly
+- shadow tailored to the site’s premium aesthetic
+
+#### 4) Tighten the layout to match the attached reference behavior
+I will shift the card composition closer to the reference:
+- strong left-aligned serif title
+- clean sans-serif description
+- larger, quieter visual mass on the right
+- more editorial whitespace
+- more consistent rounded container proportions
+
+The cards will feel like premium presentation boards rather than startup promo graphics.
+
+### Likely implementation details
+
+#### `src/components/StickyCardStack.tsx`
+- remove current raster-art-driven layout as the main visual system
+- keep `IntersectionObserver` for `.is-visible` / entrance class behavior
+- change sticky positioning from:
+```text
+top: 60 + index * 32
+```
+to:
+```text
+top: shared fixed top value
+```
+- move z-index onto the sticky card layer itself
+- adjust wrapper heights and overlap spacing so the next card reaches the same sticky zone while the previous is still pinned
+- add professional background variants with CSS/SVG instead of playful image inserts
+- keep component reusable for both Home and Criteria
+
+#### Optional small updates in:
+- `src/pages/Home.tsx`
+- `src/pages/InvestmentCriteria.tsx`
+
+Only if needed, I may pass small per-card presentation metadata such as:
+- background style variant
+- whether a card shows a metric block
+- whether right side uses rings / arc field / stat layout
+
+### Design direction I will follow
+I will use the attached examples as interaction reference, but align styling to your existing brand system:
+- prussian / navy / charcoal / cream / sand / muted gold
+- editorial serif + disciplined sans pairing
+- restrained PE / institutional feel
+- no playful illustration-heavy treatment
+- no “demo-like” gradients
+
+### Validation after implementation
+I will verify that:
+- cards pin at the same vertical position
+- later cards visibly pass over earlier cards
+- overlap is immediate and unmistakable
+- the card underneath is still partially readable as a buried layer
+- the Home “Our Process” and Criteria “Evaluation Framework” both feel consistent
+- the experience holds on the current viewport and mobile
+
+### Expected outcome
+After this rebuild, the sections should feel like:
+- a real stacked deck
+- premium and composed
+- aligned with the rest of the site
+- visually closer to the attached reference behavior, but with your own brand language instead of copied styling
