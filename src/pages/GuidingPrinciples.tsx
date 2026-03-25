@@ -11,12 +11,12 @@ import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
 import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
 
 const principles = [
-  { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.', icon: Shield },
-  { t: 'Servant Leadership', d: 'Earn trust through service, not authority.', icon: Heart },
-  { t: 'Humility', d: 'Stay curious. Never stop learning.', icon: BookOpen },
-  { t: 'Grit', d: 'Do hard things, especially when things get hard.', icon: Mountain },
-  { t: 'Bias to Action', d: 'Execute decisively. Speed matters.', icon: Zap },
-  { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.', icon: Scale },
+  { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.' },
+  { t: 'Servant Leadership', d: 'Earn trust through service, not authority.' },
+  { t: 'Humility', d: 'Stay curious. Never stop learning.' },
+  { t: 'Grit', d: 'Do hard things, especially when things get hard.' },
+  { t: 'Bias to Action', d: 'Execute decisively. Speed matters.' },
+  { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.' },
 ];
 
 const GuidingPrinciples = () => {
