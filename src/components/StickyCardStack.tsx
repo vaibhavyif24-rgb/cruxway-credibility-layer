@@ -405,7 +405,7 @@ const StickyCardItem: React.FC<{
 }> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix, stickyTop }) => {
   return (
     <div
-      className="mb-4 will-change-transform"
+      className="mb-4"
       style={{ position: 'sticky', top: `${stickyTop}px`, zIndex: index + 1 }}
     >
       <StickyCardSurface
