@@ -147,7 +147,7 @@ const TeamCardSurface: React.FC<{
           >
             {member.photo ? (
               <div className="relative w-[56px] h-[56px] md:w-[80px] md:h-[80px] shrink-0">
-                <div className="w-full h-full rounded-full overflow-hidden border border-white/[0.06] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]">
+                <div className={`w-full h-full rounded-full overflow-hidden border ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.06]'} shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]`}>
                   <img
                     src={member.photo}
                     alt={member.name}
