@@ -3,10 +3,9 @@ import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import AnimatedAccent from '@/components/AnimatedAccent';
-import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
+import PrinciplesSlider from '@/components/PrinciplesSlider';
 import { motion } from 'framer-motion';
-import { Shield, Heart, BookOpen, Mountain, Zap, Scale } from 'lucide-react';
 
 import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
 import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
