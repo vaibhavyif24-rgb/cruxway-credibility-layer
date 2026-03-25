@@ -213,13 +213,13 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
   }, [handleScroll]);
 
   // Outer height: enough scroll runway for each card transition
-  const outerHeight = cards.length * SCROLL_PER_CARD * 100; // in vh units
+  const transitionRunwayVh = (cards.length - 1) * SCROLL_PER_CARD * 100;
 
   return (
     <div
       ref={outerRef}
       className="relative"
-      style={{ height: `${outerHeight}vh` }}
+      style={{ height: `calc(${transitionRunwayVh}vh + ${CARD_HEIGHT}px)` }}
     >
       {/* Sticky container — pinned in viewport */}
       <div
