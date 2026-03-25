@@ -5,15 +5,11 @@ import indiaIndustrialReveal from '@/assets/india-industrial-reveal.jpg';
 const indiaSectors = [
   {
     category: 'Industrials',
-    items: ['Process and Flow Control', 'Value-Added Distribution', 'Industrial Services', 'Packaging'],
+    items: ['Process & Flow Control', 'Value-Added Distribution', 'Industrial Services', 'Packaging'],
   },
   {
-    category: 'Industrial Services',
-    items: ['Utility and Infrastructure Services', 'Industrial Technology', 'Aerospace and Defense'],
-  },
-  {
-    category: 'Business Services',
-    items: ['Facility and Support Services', 'Testing, Inspection, and Certification', 'Lab Services and Products', 'Business Process Outsourcing / Contract Manufacturing', 'Insurance Services and Distribution'],
+    category: 'Business & Industrial Services',
+    items: ['Facility & Support Services', 'Testing & Certification', 'Infrastructure Services', 'Industrial Technology', 'Aerospace & Defense'],
   },
 ];
 
