@@ -13,16 +13,15 @@ interface StickyCardStackProps {
 
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
-const CARD_MIN_H = 340;          // px – the visible card surface
-const PEEK = 180;                // px – scroll distance between each card reveal
-const LAST_CARD_RUNWAY = 120;    // px – extra space so last card stays pinned
+const CARD_HEIGHT = 380;          // px – visible card surface height
+const SCROLL_PER_CARD = 0.85;     // fraction of viewport per card transition
 
 /* ─── Background palettes ─── */
 const lightBgs = [
-  'hsl(220 8% 18%)',   // dark charcoal
-  'hsl(40 30% 96%)',   // warm cream
-  'hsl(38 22% 90%)',   // warm sand
-  'hsl(207 55% 14%)',  // prussian blue
+  'hsl(220 8% 18%)',
+  'hsl(40 30% 96%)',
+  'hsl(38 22% 90%)',
+  'hsl(207 55% 14%)',
 ];
 
 const darkBgs = [
@@ -101,21 +100,18 @@ const CardSurface: React.FC<{
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
 
-  const shadowBlur = 16 + index * 10;
-  const shadowAlpha = 0.15 + index * 0.06;
-
   return (
     <div
-      className="rounded-2xl md:rounded-3xl overflow-hidden relative"
+      className="rounded-2xl md:rounded-3xl overflow-hidden relative w-full"
       style={{
         backgroundColor: bg,
-        minHeight: `${CARD_MIN_H}px`,
-        boxShadow: `0 -4px ${shadowBlur}px -4px rgba(0,0,0,${shadowAlpha}), 0 ${shadowBlur}px ${shadowBlur * 2}px -${6 + index * 2}px rgba(0,0,0,${shadowAlpha})`,
+        height: `${CARD_HEIGHT}px`,
+        boxShadow: `0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)`,
       }}
     >
       <CardDecoration index={index} isDark={isDark} />
 
-      <div className="relative z-10 flex items-center" style={{ minHeight: `${CARD_MIN_H}px` }}>
+      <div className="relative z-10 flex items-center h-full">
         <div className="flex-1 px-8 md:px-14 lg:px-20 py-10 md:py-14">
           <div
             className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-5"
@@ -150,42 +146,110 @@ const CardSurface: React.FC<{
   );
 };
 
-/* ─── Stack Container ───
+/* ─── Scroll-Driven Vertical Carousel ───
  *
- * Mechanical approach: ONE parent container, all cards are sticky children.
- * Each card uses negative margin-bottom so it only occupies PEEK px in the
- * document flow. As the user scrolls, the next card (higher z-index) slides
- * up and pins at the same top, physically covering the previous card.
+ * Outer wrapper: tall div creating scroll runway (cards.length * SCROLL_PER_CARD * 100vh)
+ * Inner sticky: pinned container with overflow:hidden, exactly CARD_HEIGHT tall
+ * Track: all cards stacked vertically, translateY driven by scroll progress
  *
- * Container height = (cards.length - 1) * PEEK + CARD_MIN_H + LAST_CARD_RUNWAY
- * This ensures the last card stays pinned long enough before the section ends.
+ * As user scrolls through the outer wrapper, the track moves up,
+ * each card sliding into the visible window and covering the previous one.
  */
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light' }) => {
-  const containerHeight = (cards.length - 1) * PEEK + CARD_MIN_H + LAST_CARD_RUNWAY;
+  const outerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    const outer = outerRef.current;
+    if (!outer) return;
+
+    const rect = outer.getBoundingClientRect();
+    const outerHeight = outer.offsetHeight;
+    const viewportHeight = window.innerHeight;
+
+    // How far into the outer wrapper we've scrolled (0 to 1)
+    // Start tracking when the top of the outer hits STICKY_TOP
+    const scrolled = -(rect.top - STICKY_TOP);
+    const scrollableRange = outerHeight - viewportHeight + STICKY_TOP;
+    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+
+    // Map progress to card index
+    const idx = Math.min(
+      cards.length - 1,
+      Math.floor(progress * cards.length)
+    );
+    setActiveIndex(idx);
+  }, [cards.length]);
+
+  useEffect(() => {
+    const onScroll = () => requestAnimationFrame(handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    handleScroll(); // initial
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [handleScroll]);
+
+  // Outer height: enough scroll runway for each card transition
+  const outerHeight = cards.length * SCROLL_PER_CARD * 100; // in vh units
 
   return (
     <div
+      ref={outerRef}
       className="relative"
-      style={{ minHeight: `${containerHeight}px` }}
+      style={{ height: `${outerHeight}vh` }}
     >
-      {cards.map((card, i) => (
+      {/* Sticky container — pinned in viewport */}
+      <div
+        className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
+        style={{
+          top: `${STICKY_TOP}px`,
+          height: `${CARD_HEIGHT}px`,
+        }}
+      >
+        {/* Carousel track — slides up based on active index */}
         <div
-          key={card.num}
-          className="sticky"
+          className="will-change-transform"
           style={{
-            top: `${STICKY_TOP}px`,
-            zIndex: (i + 1) * 10,
-            // Each card except the last uses negative margin to only consume PEEK px in flow
-            marginBottom: i < cards.length - 1 ? `${-(CARD_MIN_H - PEEK)}px` : undefined,
+            transform: `translateY(-${activeIndex * CARD_HEIGHT}px)`,
+            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
           }}
         >
-          <CardSurface
-            card={card}
-            index={i}
-            variant={variant}
-          />
+          {cards.map((card, i) => (
+            <CardSurface
+              key={card.num}
+              card={card}
+              index={i}
+              variant={variant}
+            />
+          ))}
         </div>
-      ))}
+      </div>
+
+      {/* Dot indicators — fixed alongside the sticky container */}
+      <div
+        className="sticky flex flex-col items-center gap-2 pointer-events-none"
+        style={{
+          top: `${STICKY_TOP + CARD_HEIGHT / 2 - (cards.length * 14) / 2}px`,
+          marginTop: `-${CARD_HEIGHT}px`,
+          marginLeft: 'auto',
+          width: '40px',
+        }}
+      >
+        {cards.map((_, i) => (
+          <div
+            key={i}
+            className="rounded-full transition-all duration-500"
+            style={{
+              width: i === activeIndex ? '8px' : '5px',
+              height: i === activeIndex ? '8px' : '5px',
+              backgroundColor: i === activeIndex
+                ? 'hsl(38 48% 52%)'
+                : variant === 'dark'
+                  ? 'hsla(40, 30%, 96%, 0.2)'
+                  : 'hsla(210, 8%, 44%, 0.25)',
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };
