@@ -134,7 +134,7 @@ const PrincipleCard: React.FC<{
 
             {/* Description */}
             <p
-              className="font-sans text-[13px] md:text-[15px] text-white/45 leading-[1.85] tracking-[0.01em] max-w-[380px] drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]"
+              className="font-sans text-[14px] md:text-[17px] text-white/60 leading-[1.85] tracking-[0.01em] max-w-[440px] drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,

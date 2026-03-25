@@ -85,7 +85,7 @@ const SiteHeader = () => {
               {/* Dark mode toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-2 text-primary-foreground/30 hover:text-primary-foreground/60 transition-colors duration-300 mr-4"
+                className="p-2 text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors duration-300 mr-4"
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? (
