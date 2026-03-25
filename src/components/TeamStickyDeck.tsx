@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export interface TeamDeckMember {
   name: string;
