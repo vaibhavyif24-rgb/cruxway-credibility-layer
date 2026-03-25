@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import CriteriaIllustration from './CriteriaIllustrations';
 export interface StickyCard {
   num: string;
