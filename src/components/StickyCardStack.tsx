@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import CriteriaIllustration from './CriteriaIllustrations';
 export interface StickyCard {
   num: string;
@@ -420,9 +420,7 @@ const StickyCardItem: React.FC<{
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step', mode = 'slides' }) => {
   const [cardHeight, setCardHeight] = useState(getCardHeight);
   const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const touchStartRef = useRef<number>(0);
-  const isTransitioning = useRef(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateMeasurements = () => setCardHeight(getCardHeight());
@@ -431,43 +429,31 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     return () => window.removeEventListener('resize', updateMeasurements);
   }, []);
 
-  const goTo = useCallback((index: number) => {
-    if (isTransitioning.current) return;
-    const clamped = Math.max(0, Math.min(cards.length - 1, index));
-    if (clamped === activeIndex) return;
-    isTransitioning.current = true;
-    setActiveIndex(clamped);
-    setTimeout(() => { isTransitioning.current = false; }, 500);
-  }, [activeIndex, cards.length]);
-
+  /* ─── Window-level scroll listener for slides mode ─── */
   useEffect(() => {
     if (mode !== 'slides') return;
-    const el = containerRef.current;
-    if (!el) return;
-    let accumulated = 0;
-    const THRESHOLD = 50;
-    const handleWheel = (e: WheelEvent) => {
-      const rect = el.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5;
-      if (!inView) return;
-      if (activeIndex === 0 && e.deltaY < 0) return;
-      if (activeIndex === cards.length - 1 && e.deltaY > 0) return;
-      e.preventDefault();
-      accumulated += e.deltaY;
-      if (Math.abs(accumulated) >= THRESHOLD) {
-        goTo(activeIndex + (accumulated > 0 ? 1 : -1));
-        accumulated = 0;
-      }
-    };
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
-  }, [activeIndex, cards.length, goTo, mode]);
+    const sectionEl = sectionRef.current;
+    if (!sectionEl) return;
 
-  const handleTouchStart = (e: React.TouchEvent) => { touchStartRef.current = e.touches[0].clientY; };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const delta = touchStartRef.current - e.changedTouches[0].clientY;
-    if (Math.abs(delta) > 40) goTo(activeIndex + (delta > 0 ? 1 : -1));
-  };
+    const updateActiveCard = () => {
+      const rect = sectionEl.getBoundingClientRect();
+      const scrollableRange = sectionEl.offsetHeight - window.innerHeight;
+      if (scrollableRange <= 0) return;
+
+      const progress = Math.min(Math.max(-rect.top / scrollableRange, 0), 1);
+      const newIndex = Math.min(Math.round(progress * (cards.length - 1)), cards.length - 1);
+      setActiveIndex(newIndex);
+    };
+
+    window.addEventListener('scroll', updateActiveCard, { passive: true });
+    window.addEventListener('resize', updateActiveCard, { passive: true });
+    updateActiveCard();
+
+    return () => {
+      window.removeEventListener('scroll', updateActiveCard);
+      window.removeEventListener('resize', updateActiveCard);
+    };
+  }, [cards.length, mode]);
 
   const isDark = variant === 'dark';
 
@@ -489,44 +475,54 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
   }
 
   /* ─── Slides mode (default) ─── */
+  /* Tall outer wrapper gives the page enough scroll range for all cards.
+     The sticky inner div stays in view while scroll progress drives activeIndex. */
+  const sectionHeight = cardHeight * cards.length;
+
   return (
-    <div className="relative px-5 md:px-10 lg:px-16 py-6 md:py-8">
-      <div className="max-w-[1080px] mx-auto">
-        <div
-          ref={containerRef}
-          className="relative rounded-2xl md:rounded-3xl overflow-hidden"
-          style={{
-            height: `${cardHeight}px`,
-            boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
-          }}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          {cards.map((card, i) => (
-            <SlideCard
-              key={card.num} card={card} index={i} variant={variant}
-              isActive={i === activeIndex} cardHeight={cardHeight}
-              illustrationSet={illustrationSet} labelPrefix={labelPrefix}
-            />
-          ))}
-          <div className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2.5">
-            {cards.map((_, i) => (
-              <button
-                key={i} onClick={() => goTo(i)}
-                className="group relative w-3 h-3 flex items-center justify-center"
-                aria-label={`Go to slide ${i + 1}`}
-              >
-                <span
-                  className="block rounded-full transition-all duration-300"
-                  style={{
-                    width: i === activeIndex ? 8 : 5,
-                    height: i === activeIndex ? 8 : 5,
-                    backgroundColor: i === activeIndex ? 'hsl(38 48% 52%)' : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
-                    boxShadow: i === activeIndex ? '0 0 8px hsl(38 48% 52% / 0.4)' : 'none',
-                  }}
-                />
-              </button>
+    <div
+      ref={sectionRef}
+      className="relative"
+      style={{ height: `${sectionHeight}px` }}
+    >
+      <div
+        className="sticky top-0 px-5 md:px-10 lg:px-16 py-6 md:py-8"
+        style={{ height: '100vh' }}
+      >
+        <div className="max-w-[1080px] mx-auto h-full flex items-center">
+          <div
+            className="relative rounded-2xl md:rounded-3xl overflow-hidden w-full"
+            style={{
+              height: `${cardHeight}px`,
+              boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
+            }}
+          >
+            {cards.map((card, i) => (
+              <SlideCard
+                key={card.num} card={card} index={i} variant={variant}
+                isActive={i === activeIndex} cardHeight={cardHeight}
+                illustrationSet={illustrationSet} labelPrefix={labelPrefix}
+              />
             ))}
+            <div className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2.5">
+              {cards.map((_, i) => (
+                <button
+                  key={i} onClick={() => setActiveIndex(i)}
+                  className="group relative w-3 h-3 flex items-center justify-center"
+                  aria-label={`Go to slide ${i + 1}`}
+                >
+                  <span
+                    className="block rounded-full transition-all duration-300"
+                    style={{
+                      width: i === activeIndex ? 8 : 5,
+                      height: i === activeIndex ? 8 : 5,
+                      backgroundColor: i === activeIndex ? 'hsl(38 48% 52%)' : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
+                      boxShadow: i === activeIndex ? '0 0 8px hsl(38 48% 52% / 0.4)' : 'none',
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
