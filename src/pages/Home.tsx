@@ -164,54 +164,21 @@ const Home = () => {
         variant="light"
       />
 
-      {/* Market Thesis — dark section */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-          <div className="grid lg:grid-cols-12 gap-6 md:gap-8 lg:gap-14">
-            <div className="lg:col-span-5">
-              <FadeIn>
-                <SectionLabel light>{isIndia ? 'The Opportunity' : 'Our Thesis'}</SectionLabel>
-                <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15]">
-                  {isIndia ? <>Why <span className="text-gold">India's</span> Lower Middle Market</> : <>Why <span className="text-gold">U.S.</span> Essential Services</>}
-                </h2>
-                <GoldRule className="mt-3" />
-              </FadeIn>
-            </div>
-            <div className="lg:col-span-7">
-              <FadeIn delay={0.08}>
-                <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/55 leading-[1.8] mb-4">
-                  {isIndia
-                    ? 'India\'s lower middle market is one of the most under-served segments in global investing. Thousands of founder-led businesses generate strong cash flows and dominate local markets, yet lack access to institutional capital.'
-                    : 'The United States is home to tens of thousands of founder-led businesses in essential B2B services that maintain critical infrastructure and keep the economy running.'}
-                </p>
-                <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/55 leading-[1.8]">
-                  {isIndia
-                    ? 'We believe this gap represents a generational opportunity: companies proven over decades are ready for a partner who can help them scale with discipline.'
-                    : 'Cruxway provides patient capital and operational expertise to preserve what founders built while unlocking the next chapter of growth.'}
-                </p>
-              </FadeIn>
-              <FadeIn delay={0.16}>
-                <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.06]">
-                  {isIndia ? (
-                    <>
-                      <StatBlock val="63M+" lbl="MSMEs in India" delay={0} light />
-                      <StatBlock val="<1%" lbl="Institutionally Backed" delay={0.08} light />
-                      <StatBlock val="$5T" lbl="Economy by 2028" delay={0.16} light />
-                    </>
-                  ) : (
-                    <>
-                      <StatBlock val="10M+" lbl="U.S. Small Businesses" delay={0} light />
-                      <StatBlock val="$10T+" lbl="Transition Value" delay={0.08} light />
-                      <StatBlock val="70%+" lbl="Lack Succession Plans" delay={0.16} light />
-                    </>
-                  )}
-                </div>
-              </FadeIn>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Market Thesis — Scroll reveal on dark */}
+      <ScrollRevealText
+        label={isIndia ? 'The Opportunity' : 'Our Thesis'}
+        heading={
+          isIndia
+            ? 'India\'s lower middle market is one of the most under-served segments in global investing. Companies proven over decades are ready for a partner who can help them scale with discipline.'
+            : 'Tens of thousands of founder-led businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
+        }
+        subtext={
+          isIndia
+            ? '63M+ MSMEs. Less than 1% institutionally backed. A generational opportunity.'
+            : '10M+ small businesses. $10T+ in transition value. 70%+ lack succession plans.'
+        }
+        variant="dark"
+      />
 
       {/* Our Process — Glass Bento */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
