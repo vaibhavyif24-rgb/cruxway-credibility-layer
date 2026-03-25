@@ -474,7 +474,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
   return (
     <div
       ref={outerRef}
-      className="relative"
+      className="relative overflow-hidden"
       style={{ height: `calc(${transitionRunwayVh}vh + ${cardHeight}px)` }}
     >
       <div
