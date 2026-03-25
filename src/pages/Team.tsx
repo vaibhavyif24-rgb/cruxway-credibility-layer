@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import ScrollRevealText from '@/components/ScrollRevealText';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
