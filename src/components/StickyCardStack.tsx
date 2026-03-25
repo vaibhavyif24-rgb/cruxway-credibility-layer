@@ -339,8 +339,116 @@ const SlideCard: React.FC<{
   );
 };
 
-/* ─── Presentation Slide Stack ─── */
-const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step' }) => {
+/* ─── Sticky Card (for sticky stacking mode) ─── */
+const STICKY_BASE = 80;
+const STICKY_STEP = 20;
+
+const StickyCardSurface: React.FC<{
+  card: StickyCard;
+  index: number;
+  variant: 'light' | 'dark';
+  isActive: boolean;
+  cardHeight: number;
+  illustrationSet: 'process' | 'criteria';
+  labelPrefix: string;
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix }) => {
+  const isDark = variant === 'dark';
+  const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
+  const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
+
+  return (
+    <div
+      className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl"
+      style={{
+        backgroundColor: bg,
+        height: `${cardHeight}px`,
+        boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
+      }}
+    >
+      {illustrationSet === 'criteria'
+        ? <CriteriaIllustration index={index} isDark={isDark} isActive={isActive} />
+        : <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
+      }
+      <div className="relative z-10 flex h-full items-center">
+        <div className="flex-1 px-8 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16">
+          <div
+            className="mb-5 font-sans text-[10px] font-medium uppercase tracking-[0.22em] md:text-[11px]"
+            style={{
+              color: colors.step,
+              opacity: isActive ? 0.6 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+            }}
+          >
+            {labelPrefix} {card.num}
+          </div>
+          <h3
+            className="mb-4 font-serif text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.05] tracking-[-0.02em] md:mb-5"
+            style={{
+              color: colors.title,
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
+            }}
+          >
+            {card.title.toLowerCase()}.
+          </h3>
+          <p
+            className="max-w-[560px] font-sans text-[15px] leading-[1.8] md:text-[17px]"
+            style={{
+              color: colors.desc,
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
+            }}
+          >
+            {card.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StickyCardItem: React.FC<{
+  card: StickyCard;
+  index: number;
+  variant: 'light' | 'dark';
+  cardHeight: number;
+  illustrationSet: 'process' | 'criteria';
+  labelPrefix: string;
+  stickyTop: number;
+}> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix, stickyTop }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.5),
+      { threshold: [0, 0.5, 1], rootMargin: '-10% 0px -30% 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="mb-6 will-change-transform"
+      style={{ position: 'sticky', top: `${stickyTop}px`, zIndex: index + 1 }}
+    >
+      <StickyCardSurface
+        card={card} index={index} variant={variant} isActive={isActive}
+        cardHeight={cardHeight} illustrationSet={illustrationSet} labelPrefix={labelPrefix}
+      />
+    </div>
+  );
+};
+
+/* ─── Main Component ─── */
+const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step', mode = 'slides' }) => {
   const [cardHeight, setCardHeight] = useState(getCardHeight);
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -363,51 +471,55 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     setTimeout(() => { isTransitioning.current = false; }, 500);
   }, [activeIndex, cards.length]);
 
-  // Wheel navigation
   useEffect(() => {
+    if (mode !== 'slides') return;
     const el = containerRef.current;
     if (!el) return;
-
     let accumulated = 0;
     const THRESHOLD = 50;
-
     const handleWheel = (e: WheelEvent) => {
-      // Check if this component is in view
       const rect = el.getBoundingClientRect();
       const inView = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5;
       if (!inView) return;
-
-      // If at first slide scrolling up, or last slide scrolling down, let page scroll
       if (activeIndex === 0 && e.deltaY < 0) return;
       if (activeIndex === cards.length - 1 && e.deltaY > 0) return;
-
       e.preventDefault();
       accumulated += e.deltaY;
-
       if (Math.abs(accumulated) >= THRESHOLD) {
         goTo(activeIndex + (accumulated > 0 ? 1 : -1));
         accumulated = 0;
       }
     };
-
     el.addEventListener('wheel', handleWheel, { passive: false });
     return () => el.removeEventListener('wheel', handleWheel);
-  }, [activeIndex, cards.length, goTo]);
+  }, [activeIndex, cards.length, goTo, mode]);
 
-  // Touch navigation
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartRef.current = e.touches[0].clientY;
-  };
-
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartRef.current = e.touches[0].clientY; };
   const handleTouchEnd = (e: React.TouchEvent) => {
     const delta = touchStartRef.current - e.changedTouches[0].clientY;
-    if (Math.abs(delta) > 40) {
-      goTo(activeIndex + (delta > 0 ? 1 : -1));
-    }
+    if (Math.abs(delta) > 40) goTo(activeIndex + (delta > 0 ? 1 : -1));
   };
 
   const isDark = variant === 'dark';
 
+  /* ─── Sticky stacking mode ─── */
+  if (mode === 'sticky') {
+    return (
+      <div className="relative px-5 md:px-10 lg:px-16">
+        <div className="max-w-[1080px] mx-auto">
+          {cards.map((card, i) => (
+            <StickyCardItem
+              key={card.num} card={card} index={i} variant={variant}
+              cardHeight={cardHeight} illustrationSet={illustrationSet}
+              labelPrefix={labelPrefix} stickyTop={STICKY_BASE + i * STICKY_STEP}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  /* ─── Slides mode (default) ─── */
   return (
     <div className="relative px-5 md:px-10 lg:px-16 py-6 md:py-8">
       <div className="max-w-[1080px] mx-auto">
@@ -423,23 +535,15 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
         >
           {cards.map((card, i) => (
             <SlideCard
-              key={card.num}
-              card={card}
-              index={i}
-              variant={variant}
-              isActive={i === activeIndex}
-              cardHeight={cardHeight}
-              illustrationSet={illustrationSet}
-              labelPrefix={labelPrefix}
+              key={card.num} card={card} index={i} variant={variant}
+              isActive={i === activeIndex} cardHeight={cardHeight}
+              illustrationSet={illustrationSet} labelPrefix={labelPrefix}
             />
           ))}
-
-          {/* Dot navigation — right side */}
           <div className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2.5">
             {cards.map((_, i) => (
               <button
-                key={i}
-                onClick={() => goTo(i)}
+                key={i} onClick={() => goTo(i)}
                 className="group relative w-3 h-3 flex items-center justify-center"
                 aria-label={`Go to slide ${i + 1}`}
               >
@@ -448,9 +552,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
                   style={{
                     width: i === activeIndex ? 8 : 5,
                     height: i === activeIndex ? 8 : 5,
-                    backgroundColor: i === activeIndex
-                      ? 'hsl(38 48% 52%)'
-                      : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
+                    backgroundColor: i === activeIndex ? 'hsl(38 48% 52%)' : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
                     boxShadow: i === activeIndex ? '0 0 8px hsl(38 48% 52% / 0.4)' : 'none',
                   }}
                 />
