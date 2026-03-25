@@ -202,6 +202,7 @@ const InvestmentCriteria = () => {
           variant={theme === 'dark' ? 'dark' : 'light'}
           illustrationSet="criteria"
           labelPrefix="Criterion"
+          mode="sticky"
         />
       </section>
 
