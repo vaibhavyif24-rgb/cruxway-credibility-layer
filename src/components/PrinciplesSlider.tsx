@@ -92,24 +92,28 @@ const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-col items-center max-w-[540px]"
           >
-            <SectionLabel light>Principles</SectionLabel>
+            {/* Overline label */}
+            <p className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] text-gold/50 mb-6">
+              What Guides Us
+            </p>
 
-            {/* Numbered badge */}
-            <div className="w-10 h-10 rounded-full bg-black/70 border border-white/10 flex items-center justify-center mt-3 mb-4">
-              <span className="font-sans text-[14px] text-white/90 font-medium">
-                {active + 1}
-              </span>
-            </div>
+            {/* Numbered index */}
+            <span className="font-serif text-[11px] md:text-[12px] tracking-[0.18em] text-white/30 mb-4">
+              {String(active + 1).padStart(2, '0')}&nbsp;/&nbsp;{String(total).padStart(2, '0')}
+            </span>
 
-            <h2 className="font-serif text-[clamp(2rem,5vw,3.2rem)] text-white leading-[1.08] tracking-[-0.02em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]">
+            {/* Title */}
+            <h2 className="font-serif text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[1.05] tracking-[-0.025em] drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]">
               {principle.t}
             </h2>
 
+            {/* Gold rule */}
             <div className="my-5 flex justify-center">
               <GoldRule />
             </div>
 
-            <p className="font-sans text-[15px] md:text-[17px] text-white/55 leading-[1.8] max-w-[420px] drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
+            {/* Description */}
+            <p className="font-sans text-[13px] md:text-[15px] text-white/45 leading-[1.85] tracking-[0.01em] max-w-[380px] drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]">
               {principle.d}
             </p>
           </motion.div>
