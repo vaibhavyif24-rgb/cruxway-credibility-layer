@@ -216,6 +216,8 @@ const InvestmentCriteria = () => {
             </h2>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
+        </div>
+        <div className="relative">
           <StickyCardStack
             cards={[
               { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },

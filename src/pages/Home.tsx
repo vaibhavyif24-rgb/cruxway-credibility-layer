@@ -184,8 +184,8 @@ const Home = () => {
       />
 
       {/* Our Process — Sticky Card Stack */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16 pb-0">
-        <div className="max-w-[1080px] mx-auto">
+      <section className="bg-background pt-10 md:pt-14 lg:pt-16 pb-0">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
           <FadeIn>
             <SectionLabel>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] max-w-[480px] mb-3">
@@ -194,9 +194,7 @@ const Home = () => {
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
         </div>
-        <div className="max-w-[1080px] mx-auto">
-          <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={theme === 'dark' ? 'dark' : 'light'} />
-        </div>
+        <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={theme === 'dark' ? 'dark' : 'light'} />
       </section>
 
       {/* Social Proof */}
