@@ -438,19 +438,6 @@ const Team = () => {
         />
       </section>
 
-      {/* Institutional Experience Marquee */}
-      <div className="bg-background">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-14 md:pt-20 pb-6">
-          <FadeIn>
-            <SectionLabel>Institutional Experience</SectionLabel>
-            <GoldRule className="mt-1" />
-          </FadeIn>
-        </div>
-        <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
-        </FadeIn>
-      </div>
-
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
@@ -458,14 +445,14 @@ const Team = () => {
         variant="dark"
       />
 
-      {/* Network */}
+      {/* Network — Advisors & Operating Partners */}
       <Section>
         <div className="grid lg:grid-cols-12 gap-4 md:gap-6 lg:gap-14">
           <div className="lg:col-span-4">
             <FadeIn>
-              <SectionLabel>Network</SectionLabel>
+              <SectionLabel>Advisors &amp; Operating Partners</SectionLabel>
               <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-foreground leading-[1.18]">
-                Advisors &amp; Operating Partners
+                Our Network
               </h2>
               <GoldRule className="mt-3 md:mt-4" />
             </FadeIn>
@@ -486,6 +473,19 @@ const Team = () => {
           </div>
         </div>
       </Section>
+
+      {/* Institutional Experience Marquee — below network */}
+      <div className="bg-background">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-6">
+          <FadeIn>
+            <SectionLabel>Institutional Experience</SectionLabel>
+            <GoldRule className="mt-1" />
+          </FadeIn>
+        </div>
+        <FadeIn delay={0.1}>
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
+        </FadeIn>
+      </div>
     </div>
   );
 };

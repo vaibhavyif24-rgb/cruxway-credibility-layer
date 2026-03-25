@@ -8,6 +8,7 @@ export interface TeamDeckMember {
   photo?: string;
   summary: string;
   highlights: string[];
+  logos?: { src: string; alt: string; scale?: number; extraGap?: number }[];
   dealLogos?: { src: string; alt: string; scale?: number; extraGap?: number }[];
   linkedIn?: string;
 }
@@ -36,7 +37,7 @@ const cardBgs = [
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
 /* ─── Inline Logo Marquee ─── */
-const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos'] }> = ({ logos }) => {
+const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos']; bgFrom?: string }> = ({ logos, bgFrom = 'hsl(220_8%_18%)' }) => {
   const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
   const doubled = [...logos, ...logos];
@@ -47,8 +48,8 @@ const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos'] }> = ({ logos
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-[hsl(220_8%_18%)] to-transparent" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-[hsl(220_8%_18%)] to-transparent" />
+      <div className={`absolute left-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-r from-[${bgFrom}] to-transparent`} />
+      <div className={`absolute right-0 top-0 bottom-0 w-8 z-10 pointer-events-none bg-gradient-to-l from-[${bgFrom}] to-transparent`} />
       <motion.div
         className="flex items-center gap-6 md:gap-8 w-max"
         animate={{ x: ['0%', '-50%'] }}
@@ -57,14 +58,14 @@ const InlineMarquee: React.FC<{ logos: TeamDeckMember['dealLogos'] }> = ({ logos
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[32px] md:h-[38px]"
+            className="flex items-center justify-center shrink-0 h-[28px] md:h-[34px]"
             style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[26px] md:h-[32px] w-auto max-w-[110px] md:max-w-[130px] object-contain transition-all duration-500"
+              className="h-[22px] md:h-[28px] w-auto max-w-[100px] md:max-w-[120px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.75,
@@ -87,6 +88,10 @@ const TeamCardSurface: React.FC<{
   cardHeight: number;
 }> = ({ member, index, totalMembers, isActive, cardHeight }) => {
   const bg = cardBgs[index % cardBgs.length];
+  // Split highlights into 2 columns for better density
+  const midpoint = Math.ceil(member.highlights.length / 2);
+  const col1 = member.highlights.slice(0, midpoint);
+  const col2 = member.highlights.slice(midpoint);
 
   return (
     <div
@@ -97,10 +102,19 @@ const TeamCardSurface: React.FC<{
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
       }}
     >
-      <div className="relative z-10 flex h-full flex-col justify-center px-6 py-6 md:px-12 md:py-10 lg:px-16 lg:py-12">
+      {/* Subtle decorative accent */}
+      <div
+        className="absolute top-0 right-0 w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full opacity-[0.03]"
+        style={{
+          background: 'radial-gradient(circle, hsl(38 48% 52%) 0%, transparent 70%)',
+          transform: 'translate(30%, -30%)',
+        }}
+      />
+
+      <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-10 md:py-8 lg:px-14 lg:py-10">
         {/* Counter */}
         <div
-          className="mb-4 md:mb-5 font-sans text-[10px] font-medium uppercase tracking-[0.22em] md:text-[11px]"
+          className="mb-2 md:mb-3 font-sans text-[10px] font-medium uppercase tracking-[0.22em] md:text-[11px]"
           style={{
             color: 'hsl(38 48% 52%)',
             opacity: isActive ? 0.5 : 0,
@@ -111,11 +125,11 @@ const TeamCardSurface: React.FC<{
           {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
         </div>
 
-        {/* Profile content */}
-        <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
-          {/* Photo + Identity */}
+        {/* Main content area */}
+        <div className="flex-1 flex flex-col justify-center min-h-0">
+          {/* Profile header row */}
           <div
-            className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0"
+            className="flex items-center gap-4 md:gap-5 mb-4 md:mb-5"
             style={{
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
@@ -124,7 +138,7 @@ const TeamCardSurface: React.FC<{
             }}
           >
             {member.photo ? (
-              <div className="relative w-[64px] h-[64px] md:w-[110px] md:h-[110px] md:mb-3 shrink-0">
+              <div className="relative w-[56px] h-[56px] md:w-[80px] md:h-[80px] shrink-0">
                 <div className="w-full h-full rounded-full overflow-hidden border border-white/[0.06] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]">
                   <img
                     src={member.photo}
@@ -135,32 +149,46 @@ const TeamCardSurface: React.FC<{
                 </div>
               </div>
             ) : (
-              <div className="w-[64px] h-[64px] md:w-[110px] md:h-[110px] rounded-full bg-white/[0.04] border border-dashed border-white/[0.08] md:mb-3 flex items-center justify-center shrink-0">
-                <span className="font-serif text-[1rem] md:text-[1.3rem] text-white/20">
+              <div className="w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full bg-white/[0.04] border border-dashed border-white/[0.08] flex items-center justify-center shrink-0">
+                <span className="font-serif text-[0.9rem] md:text-[1.1rem] text-white/20">
                   {member.name.split(' ').map(n => n[0]).join('')}
                 </span>
               </div>
             )}
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.1rem] md:text-[1.4rem] text-white tracking-[-0.02em] leading-[1.2]">
+                <h3 className="font-serif text-[1.15rem] md:text-[1.5rem] text-white tracking-[-0.02em] leading-[1.15]">
                   {member.name}
                 </h3>
                 {member.linkedIn && (
                   <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-[hsl(38_48%_52%)] transition-colors">
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                   </a>
                 )}
               </div>
-              <p className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.22em] text-[hsl(38_48%_52%)] mt-1">
+              <p className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.22em] text-[hsl(38_48%_52%)] mt-0.5">
                 {member.role}
               </p>
             </div>
           </div>
 
-          {/* Bio + Highlights */}
+          {/* Summary */}
           <div
-            className="md:col-span-9"
+            style={{
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0.1s',
+            }}
+          >
+            <p className="font-sans text-[12px] md:text-[13px] text-white/45 leading-[1.65] mb-3 md:mb-4 max-w-[720px]">
+              {member.summary}
+            </p>
+          </div>
+
+          {/* Highlights in 2-column grid */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1.5 md:gap-y-2"
             style={{
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
@@ -168,37 +196,78 @@ const TeamCardSurface: React.FC<{
               transitionDelay: '0.15s',
             }}
           >
-            <p className="font-sans text-[13px] md:text-[14px] text-white/50 leading-[1.7] mb-3 md:mb-4">
-              {member.summary}
-            </p>
             <ul className="space-y-1.5 md:space-y-2">
-              {member.highlights.map((line, i) => (
+              {col1.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[11.5px] md:text-[12.5px] text-white/35 leading-[1.6] flex gap-2 items-start"
+                  className="font-sans text-[11px] md:text-[12px] text-white/30 leading-[1.55] flex gap-2 items-start"
                 >
-                  <span className="shrink-0 mt-[7px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
+                  <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
                   <span>{line}</span>
                 </li>
               ))}
             </ul>
+            {col2.length > 0 && (
+              <ul className="space-y-1.5 md:space-y-2">
+                {col2.map((line, i) => (
+                  <li
+                    key={i}
+                    className="font-sans text-[11px] md:text-[12px] text-white/30 leading-[1.55] flex gap-2 items-start"
+                  >
+                    <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
+
+          {/* Institutional logos row */}
+          {member.logos && member.logos.length > 0 && (
+            <div
+              className="flex items-center gap-4 md:gap-5 mt-3 md:mt-4 pt-3 border-t border-white/[0.04]"
+              style={{
+                opacity: isActive ? 1 : 0,
+                transition: 'opacity 0.5s ease-out',
+                transitionDelay: '0.2s',
+              }}
+            >
+              <span className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-white/20 shrink-0">
+                Background
+              </span>
+              <div className="flex items-center gap-3 md:gap-4">
+                {member.logos.map((logo, i) => (
+                  <img
+                    key={i}
+                    src={logo.src}
+                    alt={logo.alt}
+                    loading="lazy"
+                    className="h-[16px] md:h-[20px] w-auto object-contain opacity-40 hover:opacity-80 transition-opacity duration-500"
+                    style={{
+                      filter: goldFilter,
+                      transform: logo.scale ? `scale(${logo.scale})` : undefined,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Deal logos — floating on deck */}
         {member.dealLogos && member.dealLogos.length > 0 && (
           <div
-            className="mt-auto pt-3 md:pt-4 border-t border-white/[0.04]"
+            className="pt-3 md:pt-3 border-t border-white/[0.04]"
             style={{
               opacity: isActive ? 1 : 0,
               transition: 'opacity 0.6s ease-out',
               transitionDelay: '0.25s',
             }}
           >
-            <p className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-[hsl(38_48%_52%)]/50 mb-1.5">
+            <p className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-[hsl(38_48%_52%)]/50 mb-1">
               Select Investments &amp; Deals
             </p>
-            <InlineMarquee logos={member.dealLogos} />
+            <InlineMarquee logos={member.dealLogos} bgFrom={bg.replace(/\s/g, '_')} />
           </div>
         )}
       </div>
