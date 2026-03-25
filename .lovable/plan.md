@@ -1,24 +1,69 @@
 
 
-## Plan: US Reveal Image Replacement + Home Page Quote Fix
+## Plan: India Reveal Image + About Heading + Home Scroll Reveal
 
-### 1. Replace US Cinematic Scroll Reveal Image
+### 1. Replace India Cinematic Scroll Reveal Image & Tagline
 
-Copy the uploaded industrial night photo (`american-public-power-association-bv2pvCGMtzg-unsplash.jpg`) to `src/assets/us-industrial-reveal.jpg`, replacing the current image. This ultra-HD photo perfectly matches the "Where America's essential industries find their permanent partner" tagline.
+**File**: `src/assets/india-industrial-reveal.jpg` — overwrite with uploaded image
 
-**File**: `src/assets/us-industrial-reveal.jpg` — overwrite with uploaded image
+**File**: `src/components/CinematicScrollReveal.tsx` (lines 158-159)
 
-No code changes needed in `USCinematicScrollReveal.tsx` since it already imports from this path.
+Update tagline:
+```
+Current:  "Where India's essential industries find their permanent home."
+New:      "Building enduring platforms across India's lower middle market."
+```
 
-### 2. Fix Home Page Social Proof Quote (India)
+### 2. About Page — "What Guides Us" Section Heading
 
-**File**: `src/pages/Home.tsx` (lines 200-220)
+**File**: `src/pages/About.tsx` (before line 102)
 
-Changes:
-- **India quote**: Replace `"Operators and investors who have built, scaled, and partnered across the world's leading institutions — now focused on India."` with a cleaner line without the em dash, e.g.: `"Operators and investors who have built, scaled, and partnered with the world's leading institutions to unlock India's potential."`
-- **Reduce white gap**: Change `pt-14 md:pt-18` to `pt-8 md:pt-12` on the social proof container (line 202)
+Add a section heading block above `PrinciplesSlider`:
+```tsx
+<div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-16 md:pt-20">
+  <FadeIn>
+    <SectionLabel>Our Values</SectionLabel>
+    <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
+      What Guides Us
+    </h2>
+    <GoldRule />
+  </FadeIn>
+</div>
+```
+
+**File**: `src/components/PrinciplesSlider.tsx` (lines 88-98)
+
+Remove the per-card "What Guides Us" overline label since it's now a section heading.
+
+### 3. Home Page — Replace Social Proof with ScrollRevealText
+
+**File**: `src/pages/Home.tsx` (lines 200-224)
+
+Replace the small italic quote block with the existing `ScrollRevealText` component for a large, dramatic word-by-word scroll reveal above the logos:
+
+- **US**: `"Decades of institutional experience. One mission — partnering with founders who built America's essential industries."`
+- **India**: `"Global institutional expertise, applied locally — partnering with the founders shaping India's industrial future."`
+
+```tsx
+<ScrollRevealText
+  heading={isIndia
+    ? "Global institutional expertise, applied locally — partnering with the founders shaping India's industrial future."
+    : "Decades of institutional experience. One mission — partnering with founders who built America's essential industries."
+  }
+  variant="light"
+/>
+<div className="bg-background">
+  <FadeIn delay={0.1}>
+    <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
+  </FadeIn>
+</div>
+```
 
 ### Files Modified
-- `src/assets/us-industrial-reveal.jpg` — replace with uploaded UHD industrial image
-- `src/pages/Home.tsx` — fix India quote text, reduce top padding
+
+1. `src/assets/india-industrial-reveal.jpg` — replace with uploaded UHD image
+2. `src/components/CinematicScrollReveal.tsx` — update tagline (line 158-159)
+3. `src/pages/About.tsx` — add "What Guides Us" section heading above PrinciplesSlider
+4. `src/components/PrinciplesSlider.tsx` — remove per-card "What Guides Us" overline
+5. `src/pages/Home.tsx` — replace social proof with ScrollRevealText + LogoMarquee
 
