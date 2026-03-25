@@ -157,8 +157,8 @@ const TeamCardSurface: React.FC<{
                 </div>
               </div>
             ) : (
-              <div className="w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full bg-white/[0.04] border border-dashed border-white/[0.08] flex items-center justify-center shrink-0">
-                <span className="font-serif text-[0.9rem] md:text-[1.1rem] text-white/20">
+              <div className={`w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full ${isDark ? 'bg-white/[0.04] border-white/[0.08]' : 'bg-foreground/[0.04] border-foreground/[0.08]'} border border-dashed flex items-center justify-center shrink-0`}>
+                <span className={`font-serif text-[0.9rem] md:text-[1.1rem] ${isDark ? 'text-white/20' : 'text-foreground/20'}`}>
                   {member.name.split(' ').map(n => n[0]).join('')}
                 </span>
               </div>
