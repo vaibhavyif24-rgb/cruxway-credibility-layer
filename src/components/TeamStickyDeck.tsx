@@ -208,7 +208,7 @@ const TeamCardSurface: React.FC<{
               {col1.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[11px] md:text-[12px] text-white/30 leading-[1.55] flex gap-2 items-start"
+                  className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
                 >
                   <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
                   <span>{line}</span>
