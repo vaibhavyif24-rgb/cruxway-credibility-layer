@@ -422,17 +422,10 @@ const Team = () => {
           </FadeIn>
         </div>
         <TeamStickyDeck
-          members={
-            isIndia
-              ? [
-                  { ...indiaPartner, dealLogos: vaibhavDealLogos },
-                  ...founders.map(f => ({ ...f })),
-                ]
-              : [
-                  ...founders.map(f => ({ ...f })),
-                  { ...indiaPartner, dealLogos: vaibhavDealLogos },
-                ]
-          }
+          members={[
+            ...founders.map(f => ({ ...f })),
+            { ...indiaPartner, dealLogos: vaibhavDealLogos },
+          ]}
         />
       </section>
 

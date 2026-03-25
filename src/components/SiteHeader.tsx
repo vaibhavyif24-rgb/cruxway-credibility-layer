@@ -57,15 +57,15 @@ const SiteHeader = () => {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center">
-              <div className="flex items-center gap-6 xl:gap-8">
+              <div className="flex items-center gap-5 xl:gap-7">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[11px] font-medium uppercase tracking-[0.14em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
+                    className={`relative font-sans text-[11.5px] font-medium uppercase tracking-[0.12em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
                       isActive(item.path)
                         ? 'text-primary-foreground'
-                        : 'text-primary-foreground/35 hover:text-primary-foreground/65'
+                        : 'text-primary-foreground/40 hover:text-primary-foreground/70'
                     }`}
                   >
                     {item.label}
