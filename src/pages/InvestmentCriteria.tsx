@@ -131,6 +131,7 @@ const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; 
 
 const InvestmentCriteria = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
 
