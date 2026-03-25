@@ -210,7 +210,7 @@ const USCinematicScrollReveal = () => {
           >
             {/* Card header */}
             <p
-              className="font-sans text-[10px] font-medium uppercase"
+              className="font-sans text-[9px] md:text-[10px] font-medium uppercase"
               style={{ letterSpacing: '0.22em', color: 'var(--cin-card-label)' }}
             >
               Sectors We Look At
@@ -220,13 +220,13 @@ const USCinematicScrollReveal = () => {
                 width: '48px',
                 height: '1px',
                 backgroundColor: 'var(--cin-card-divider)',
-                marginTop: '8px',
-                marginBottom: '12px',
+                marginTop: '6px',
+                marginBottom: '8px',
               }}
             />
             <p
-              className="font-sans text-[12px] leading-[1.7]"
-              style={{ color: 'var(--cin-card-subtext)', marginBottom: '24px', maxWidth: '640px' }}
+              className="font-sans text-[10px] md:text-[12px] leading-[1.6] md:leading-[1.7]"
+              style={{ color: 'var(--cin-card-subtext)', marginBottom: '16px', maxWidth: '640px' }}
             >
               Essential B2B services characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.
             </p>

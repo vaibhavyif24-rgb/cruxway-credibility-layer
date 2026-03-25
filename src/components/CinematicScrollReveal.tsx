@@ -193,7 +193,7 @@ const CinematicScrollReveal = () => {
           >
             {/* Card header */}
             <p
-              className="font-sans text-[10px] font-medium uppercase"
+              className="font-sans text-[9px] md:text-[10px] font-medium uppercase"
               style={{ letterSpacing: '0.22em', color: 'var(--cin-card-label)' }}
             >
               Sectors We Look At
@@ -203,13 +203,13 @@ const CinematicScrollReveal = () => {
                 width: '48px',
                 height: '1px',
                 backgroundColor: 'var(--cin-card-divider)',
-                marginTop: '8px',
-                marginBottom: '12px',
+                marginTop: '6px',
+                marginBottom: '8px',
               }}
             />
             <p
-              className="font-sans text-[12px] leading-[1.7]"
-              style={{ color: 'var(--cin-card-subtext)', marginBottom: '24px', maxWidth: '640px' }}
+              className="font-sans text-[10px] md:text-[12px] leading-[1.6] md:leading-[1.7]"
+              style={{ color: 'var(--cin-card-subtext)', marginBottom: '16px', maxWidth: '640px' }}
             >
               Long-term capital partnering with India's essential B2B industries — built around recurring revenue, operational depth, and enduring competitive advantages.
             </p>
