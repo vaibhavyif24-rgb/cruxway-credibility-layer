@@ -499,8 +499,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
           style={{
             width: `${cards.length * 100}%`,
             height: `${cardHeight}px`,
-            transform: `translateX(-${activeIndex * (100 / cards.length)}%)`,
-            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
+            transform: `translateX(-${translateX}%)`,
           }}
         >
           {cards.map((card, i) => (
