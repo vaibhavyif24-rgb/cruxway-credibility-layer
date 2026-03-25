@@ -10,6 +10,7 @@ interface StickyCardStackProps {
   cards: StickyCard[];
   variant?: 'light' | 'dark';
   illustrationSet?: 'process' | 'criteria';
+  labelPrefix?: string;
 }
 
 /* ─── Constants ─── */
