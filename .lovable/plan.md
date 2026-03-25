@@ -1,66 +1,58 @@
 
 
-## Plan: Boundless-Style ScrollTrigger Team Deck
+## Fix: Team Sticky Deck — Proper Stacking Card Scroll Effect
 
-### What We're Building
+### Root Cause
 
-A complete rewrite of the `TeamStickyDeck` component to use a **stacking cards** pattern inspired by Boundless Ventures' portfolio section. Instead of snapping between cards via `translateY`, each card will be independently `position: sticky` and stack on top of the previous one as the user scrolls — creating a smooth, organic "card peeling" effect.
+The stacking effect is broken because `SCROLL_RUNWAY = 600px` is **shorter than the viewport** (704px - 88px header = 616px). For `position: sticky` to work, the card's outer wrapper must be **taller** than the sticky element's height — otherwise the card never actually "sticks" and just scrolls normally.
 
-### Architecture
+### Architecture Fix
 
 ```text
-Outer container (height = N * scrollRunway)
-├── Card 1 wrapper (position: sticky, top: 88px, z-index: 1)
-│   └── Card surface (full viewport, fades/scales slightly as covered)
-├── Card 2 wrapper (position: sticky, top: 88px, z-index: 2)  
-│   └── Card surface (slides up from below, covers card 1)
-├── Card 3 wrapper (position: sticky, top: 88px, z-index: 3)
-│   └── Card surface (slides up from below, covers card 2)
+Card wrapper div (height: 100vh + 500px scroll runway)
+└── Sticky div (position: sticky, top: 88px, height: calc(100vh - 88px))
+    └── motion.div (card surface with scale/opacity transforms)
 ```
 
-Each card is its own sticky element. As you scroll, the next card naturally rises from below and overlaps the previous one. The previous card gets a subtle scale-down and opacity reduction as it's being covered — creating depth.
+Each card needs ~1100-1200px of wrapper height so the sticky element pins for ~500px of scrolling before the next card's sticky element overlaps it.
 
-### Key Differences from Current
+### File: `src/components/TeamStickyDeck.tsx` — Rewrite
 
-| Current | New |
-|---|---|
-| Single sticky frame with `translateY` snap | Each card independently sticky |
-| Discrete snap transitions | Continuous scroll-linked parallax |
-| Cards switch instantly | Cards smoothly slide over each other |
-| Flat card stack | Depth via scale + shadow progression |
+**1. Fix scroll runway calculation**
+- Change `SCROLL_RUNWAY` from 600 to a dynamic value: `window.innerHeight * 0.8` (roughly 560px at 704vh, scales with viewport)
+- Each card wrapper: `height = cardHeight + scrollRunway` where `cardHeight = 100vh - STICKY_TOP`
+- This guarantees the sticky div stays pinned for the full runway distance
 
-### Visual & Typography Upgrades
+**2. Add `position: relative` to the outer container**
+- Fixes the framer-motion warning: "Please ensure that the container has a non-static position"
 
-- **Larger name**: `text-[1.8rem] md:text-[2.4rem]` serif with letter-spacing `-0.03em`
-- **Larger photo**: `96px md:120px` with subtle gold ring on hover
-- **Role**: `text-[10px] md:text-[11px]` gold uppercase
-- **Summary**: `text-[13px] md:text-[14px]` with more generous `leading-[1.75]`
-- **Highlights**: cleaner spacing, gold dash markers, `text-[12px] md:text-[13px]`
-- **Deal logos marquee**: stays floating at bottom with refined spacing
-- **Subtle gold radial gradient** in top-right corner of each card
-- **Progressive shadow**: deeper shadow on higher z-index cards for depth
+**3. Scroll-linked cover transforms (keep existing, they're correct)**
+- `useScroll` per card with `offset: ['start start', 'end start']`
+- Scale: `[1, 1, 0.92]` — previous card shrinks as covered
+- Opacity: `[1, 1, 0.25]` — previous card dims
+- Border radius: `[16, 16, 24]` — softens edges as it recedes
 
-### Scroll-Linked Effects (using framer-motion `useScroll` + `useTransform`)
+**4. Typography and visual polish**
+- Name: `text-[1.8rem] md:text-[2.4rem]` serif, tight tracking
+- Role: gold uppercase `tracking-[0.25em]`
+- Photo: `96px md:120px` with gold ring hover
+- Summary: `text-[13px] md:text-[14px]` with `leading-[1.75]`
+- Highlights: 2-column grid with gold dash markers
+- Counter: gold `01 / 03` format
+- Progressive box-shadow depth per card index
 
-For each card:
-1. **Cover effect**: As the next card scrolls over, the current card scales to `0.95` and dims to `0.3` opacity
-2. **Entry**: Each card enters naturally via scroll — no artificial animation triggers
-3. **Content stagger**: Name, role, summary, highlights fade in with `0.05s` stagger delays when card enters viewport
+**5. Theme-aware backgrounds (keep existing palettes)**
+- Dark: `hsl(220 8% 15%)`, `hsl(207 45% 13%)`, `hsl(215 12% 11%)`
+- Light: `hsl(40 30% 96%)`, `hsl(38 22% 93%)`, `hsl(42 28% 95%)`
 
-### Technical Details
+**6. Last card trailing space**
+- Replace the full-viewport spacer with just `scrollRunway` height so the last card stays visible without excessive blank space
 
-**File: `src/components/TeamStickyDeck.tsx`** — Full rewrite:
-- Remove the single-sticky-frame + translateY architecture
-- Each card wrapped in a div with `position: sticky; top: 88px` and ascending `z-index`
-- Use `useScroll` per card to track its progress and apply cover transforms
-- Outer container height: `cardHeight * members.length + scrollRunway`
-- Theme-aware: light cream / dark navy backgrounds (existing palettes)
-- Smooth `cubic-bezier(0.22, 1, 0.36, 1)` transitions on all animated properties
+### File: `src/pages/Team.tsx` — Minor
 
-**File: `src/pages/Team.tsx`** — Minor:
-- No structural changes, just passes same data to the new deck
+- No changes needed; data and section structure stays the same
 
-### Files to Edit
-1. `src/components/TeamStickyDeck.tsx` — Complete rewrite with stacking card architecture
-2. `src/pages/Team.tsx` — Remove any unused padding/wrapper that conflicts with new sticky behavior
+### Summary
+
+Single file edit: `src/components/TeamStickyDeck.tsx`. The fix is primarily mathematical — making each card wrapper tall enough for sticky positioning to actually engage, creating the smooth "next card slides over previous" stacking effect.
 
