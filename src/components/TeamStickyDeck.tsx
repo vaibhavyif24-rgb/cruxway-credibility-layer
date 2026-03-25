@@ -128,7 +128,7 @@ const TeamCard: React.FC<{
                   src={member.photo}
                   alt={member.name}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-top grayscale"
                 />
               </div>
             </div>

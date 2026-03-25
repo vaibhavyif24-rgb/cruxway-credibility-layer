@@ -47,25 +47,25 @@ const SiteHeader = () => {
         <div className="h-px bg-gradient-to-r from-transparent via-gold/8 to-transparent" />
 
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
-          <div className="flex items-center justify-between h-14 md:h-16">
+          <div className="flex items-center justify-between h-16 md:h-[72px]">
             <Link
               to={prefix}
-              className="font-serif text-2xl md:text-3xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75 font-semibold"
+              className="font-serif text-3xl md:text-4xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75 font-bold"
             >
               Cruxway
             </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center">
-              <div className="flex items-center gap-6 xl:gap-8">
+              <div className="flex items-center gap-5 xl:gap-7">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[11px] font-medium uppercase tracking-[0.14em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
+                    className={`relative font-sans text-[11.5px] font-medium uppercase tracking-[0.12em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
                       isActive(item.path)
                         ? 'text-primary-foreground'
-                        : 'text-primary-foreground/35 hover:text-primary-foreground/65'
+                        : 'text-primary-foreground/40 hover:text-primary-foreground/70'
                     }`}
                   >
                     {item.label}

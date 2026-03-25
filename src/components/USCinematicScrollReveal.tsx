@@ -29,22 +29,22 @@ const usSectors = [
 const SectorColumn = ({ category, items }: { category: string; items: { name: string; desc: string }[] }) => (
   <div>
     <h3
-      className="font-serif text-[0.95rem] leading-[1.2] mb-3"
+      className="font-serif text-[0.85rem] md:text-[0.95rem] leading-[1.2] mb-2 md:mb-3"
       style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
     </h3>
-    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '14px' }}>
+    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '10px' }} className="md:pl-[14px]">
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
-          <li key={item.name} className="flex items-start gap-[10px] group cursor-default" style={{ marginBottom: '10px' }}>
+          <li key={item.name} className="flex items-start gap-[6px] md:gap-[10px] group cursor-default" style={{ marginBottom: '6px' }}>
             <span
-              className="flex-shrink-0 rotate-45 transition-colors duration-200 mt-[5px]"
-              style={{ width: '7px', height: '7px', backgroundColor: 'var(--cin-card-bullet)' }}
+              className="flex-shrink-0 rotate-45 transition-colors duration-200 mt-[4px] md:mt-[5px]"
+              style={{ width: '5px', height: '5px', backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <div>
               <span
-                className="font-sans text-[12px] leading-[1.9] transition-colors duration-200 block"
+                className="font-sans text-[10px] md:text-[12px] leading-[1.7] md:leading-[1.9] transition-colors duration-200 block"
                 style={{ color: 'var(--cin-card-text)' }}
               >
                 {item.name}
@@ -210,7 +210,7 @@ const USCinematicScrollReveal = () => {
           >
             {/* Card header */}
             <p
-              className="font-sans text-[10px] font-medium uppercase"
+              className="font-sans text-[9px] md:text-[10px] font-medium uppercase"
               style={{ letterSpacing: '0.22em', color: 'var(--cin-card-label)' }}
             >
               Sectors We Look At
@@ -220,13 +220,13 @@ const USCinematicScrollReveal = () => {
                 width: '48px',
                 height: '1px',
                 backgroundColor: 'var(--cin-card-divider)',
-                marginTop: '8px',
-                marginBottom: '12px',
+                marginTop: '6px',
+                marginBottom: '8px',
               }}
             />
             <p
-              className="font-sans text-[12px] leading-[1.7]"
-              style={{ color: 'var(--cin-card-subtext)', marginBottom: '24px', maxWidth: '640px' }}
+              className="font-sans text-[10px] md:text-[12px] leading-[1.6] md:leading-[1.7]"
+              style={{ color: 'var(--cin-card-subtext)', marginBottom: '16px', maxWidth: '640px' }}
             >
               Essential B2B services characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.
             </p>
