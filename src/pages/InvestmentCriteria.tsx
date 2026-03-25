@@ -109,7 +109,7 @@ const InvestmentCriteria = () => {
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 md:gap-8 h-auto overflow-visible">
             {profile.map((stat, i) => (
               <StatBlock key={stat.label} label={stat.label} value={stat.value} delay={i * 0.06} />
             ))}
@@ -184,7 +184,7 @@ const InvestmentCriteria = () => {
 
       {/* Value Creation Playbook cards */}
       {/* Value Creation Playbook — Carousel */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <CriteriaCarousel
             items={[
