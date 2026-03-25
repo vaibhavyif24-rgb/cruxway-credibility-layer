@@ -92,8 +92,10 @@ const TeamCardSurface: React.FC<{
   totalMembers: number;
   isActive: boolean;
   cardHeight: number;
-}> = ({ member, index, totalMembers, isActive, cardHeight }) => {
-  const bg = cardBgs[index % cardBgs.length];
+  isDark: boolean;
+}> = ({ member, index, totalMembers, isActive, cardHeight, isDark }) => {
+  const bgs = isDark ? darkCardBgs : lightCardBgs;
+  const bg = bgs[index % bgs.length];
   // Split highlights into 2 columns for better density
   const midpoint = Math.ceil(member.highlights.length / 2);
   const col1 = member.highlights.slice(0, midpoint);
