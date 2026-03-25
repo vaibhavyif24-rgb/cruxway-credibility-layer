@@ -155,8 +155,8 @@ const CinematicScrollReveal = () => {
             textShadow: textIsLight ? '0 2px 12px rgba(0,0,0,0.4)' : 'none',
           }}
         >
-          Where India's essential industries find their{' '}
-          <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent home.</span>
+        Building enduring platforms across India's{' '}
+          <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
         </h2>
 
         {/* Sectors card */}

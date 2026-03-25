@@ -99,6 +99,15 @@ const About = () => {
       </section>
 
       {/* Principles — Scroll-triggered vertical slider */}
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-16 md:pt-20">
+        <FadeIn>
+          <SectionLabel>Our Values</SectionLabel>
+          <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
+            What Guides Us
+          </h2>
+          <GoldRule />
+        </FadeIn>
+      </div>
       <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
