@@ -192,7 +192,7 @@ const TeamCard: React.FC<{
               >
                 Select Investments &amp; Deals
               </p>
-              <LogoGrid logos={member.dealLogos} isDark={isDark} />
+              <InlineMarquee logos={member.dealLogos} isDark={isDark} bg={bg} />
             </div>
           )}
 
