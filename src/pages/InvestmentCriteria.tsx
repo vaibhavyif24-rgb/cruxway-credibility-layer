@@ -6,6 +6,7 @@ import CriteriaPipeline from '@/components/CriteriaPipeline';
 
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
+import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
