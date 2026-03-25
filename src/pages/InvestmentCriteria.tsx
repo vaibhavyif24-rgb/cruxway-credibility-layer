@@ -6,6 +6,7 @@ import StickyCardStack from '@/components/StickyCardStack';
 
 import GlassCard from '@/components/GlassCard';
 import CriteriaCarousel from '@/components/CriteriaCarousel';
+import HorizontalStickyDeck from '@/components/HorizontalStickyDeck';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion, useInView } from 'framer-motion';
