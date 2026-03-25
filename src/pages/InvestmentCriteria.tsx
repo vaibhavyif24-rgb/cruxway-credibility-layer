@@ -207,8 +207,10 @@ const InvestmentCriteria = () => {
         />
       </section>
 
+      {/* India Cinematic Scroll Reveal — before Evaluation Framework */}
+      {isIndia && <CinematicScrollReveal />}
+
       {/* Evaluation Framework — Sticky Card Stack */}
-      <section className="relative bg-primary text-primary-foreground">
         <DarkSectionEffects />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
           <FadeIn>
