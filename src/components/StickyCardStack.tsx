@@ -428,13 +428,14 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     handleScroll();
   }, [cardHeight, handleScroll]);
 
-  const transitionRunwayVh = Math.max(cards.length - 1, 0) * SCROLL_PER_CARD * 100;
+  const scrollStepPx = (cardHeight + STICKY_TOP) * SCROLL_PER_CARD;
+  const outerHeight = cardHeight + Math.max(cards.length - 1, 0) * scrollStepPx;
 
   return (
     <div
       ref={outerRef}
       className="relative"
-      style={{ height: `calc(${transitionRunwayVh}vh + ${cardHeight}px)` }}
+      style={{ height: `${outerHeight}px` }}
     >
       <div
         className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
