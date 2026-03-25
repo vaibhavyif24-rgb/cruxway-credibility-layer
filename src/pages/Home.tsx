@@ -197,27 +197,15 @@ const Home = () => {
         <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={theme === 'dark' ? 'dark' : 'light'} />
       </section>
 
-      {/* Social Proof */}
+      {/* Social Proof — Scroll-triggered reveal */}
+      <ScrollRevealText
+        heading={isIndia
+          ? "Global institutional expertise, applied locally — partnering with the founders shaping India's industrial future."
+          : "Decades of institutional experience. One mission — partnering with founders who built America's essential industries."
+        }
+        variant="light"
+      />
       <div className="bg-background">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12 pb-6">
-          <FadeIn>
-            <div className="flex flex-col items-center text-center">
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                whileInView={{ height: 40, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="w-px bg-gold/25 mb-6"
-              />
-              <h2 className="font-serif text-[clamp(1.3rem,2.8vw,2rem)] italic text-foreground/85 leading-[1.45] max-w-[600px]">
-                {isIndia
-                  ? '"Operators and investors who have built, scaled, and partnered with the world\'s leading institutions to unlock India\'s potential."'
-                  : '"Operators and investors who have built, scaled, and partnered across the world\'s leading institutions."'}
-              </h2>
-              <GoldRule className="mt-4" />
-            </div>
-          </FadeIn>
-        </div>
         <FadeIn delay={0.1}>
           <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>

@@ -85,18 +85,6 @@ const PrincipleCard: React.FC<{
         {/* Content — centered */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
           <div className="flex flex-col items-center max-w-[540px]">
-            {/* Overline label */}
-            <p
-              className="font-sans text-[10px] md:text-[12px] font-medium uppercase tracking-[0.28em] text-white/60 mb-6"
-              style={{
-                opacity: isActive ? 0.6 : 0,
-                transform: `translateY(${isActive ? 0 : 12}px)`,
-                transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              }}
-            >
-              What Guides Us
-            </p>
-
             {/* Numbered index */}
             <span
               className="font-serif text-[13px] md:text-[15px] tracking-[0.18em] text-white/50 mb-4"
