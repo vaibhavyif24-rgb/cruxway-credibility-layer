@@ -189,7 +189,7 @@ const TeamCardSurface: React.FC<{
               transitionDelay: '0.1s',
             }}
           >
-            <p className="font-sans text-[12px] md:text-[13px] text-white/45 leading-[1.65] mb-3 md:mb-4 max-w-[720px]">
+            <p className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/45' : 'text-foreground/55'} leading-[1.65] mb-3 md:mb-4 max-w-[720px]`}>
               {member.summary}
             </p>
           </div>
