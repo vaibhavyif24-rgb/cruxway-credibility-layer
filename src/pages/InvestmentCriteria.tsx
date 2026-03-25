@@ -39,12 +39,12 @@ const investmentProfile = {
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
-  { title: 'Founder Succession & Transition', desc: 'Partnering with owners planning their next chapter while honouring legacy.' },
-  { title: 'Essential Regulated Services', desc: 'Compliance-driven B2B businesses with recurring revenue and high switching costs.' },
-  { title: 'Proven Customer Retention', desc: 'Consistent delivery earning trust that creates durable competitive advantages.' },
-  { title: 'Growth Through Consolidation', desc: 'Platform strategy in fragmented industries driving superior returns.' },
-  { title: 'Operational Upside', desc: 'Professionalisation of systems creating meaningful enterprise value.' },
-  { title: 'Cultural & Values Alignment', desc: 'Integrity, stewardship, and long-term thinking — non-negotiable.' },
+  { title: 'Founder-Led Succession', desc: 'Partnering with owners at an inflection point, preserving legacy while enabling the next chapter of growth.' },
+  { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors where reliability, safety, and recurring demand create natural moats.' },
+  { title: 'Recurring Revenue & Retention', desc: 'Businesses with embedded customer relationships, high switching costs, and predictable cash flows.' },
+  { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where disciplined acquisitions compound value over a long hold period.' },
+  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value.' },
+  { title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
 /** Animated stat counter */
@@ -108,8 +108,15 @@ const InvestmentCriteria = () => {
       {/* Investment Profile — dark stats band */}
       <section className="relative bg-primary text-primary-foreground overflow-hidden">
         <DarkSectionEffects variant="cta" />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 md:gap-8 h-auto overflow-visible">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
+          <FadeIn>
+            <SectionLabel light>Investment Profile</SectionLabel>
+            <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-primary-foreground leading-[1.15] mb-2">
+              {isIndia ? 'Our Target Parameters — India' : 'Our Target Parameters'}
+            </h2>
+            <GoldRule className="mb-6 md:mb-8" />
+          </FadeIn>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 h-auto overflow-visible">
             {profile.map((stat, i) => (
               <StatBlock key={stat.label} label={stat.label} value={stat.value} delay={i * 0.06} />
             ))}
