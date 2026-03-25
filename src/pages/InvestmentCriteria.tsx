@@ -176,7 +176,7 @@ const InvestmentCriteria = () => {
 
       {/* What We Look For — consolidated criteria */}
       {/* What We Look For — Horizontal Sticky Deck */}
-      <section className="bg-background">
+      <section className="bg-background overflow-x-hidden">
         <div className="px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
@@ -191,16 +191,14 @@ const InvestmentCriteria = () => {
             </FadeIn>
           </div>
         </div>
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
-          <HorizontalStickyDeck
-            cards={whatWeLookFor.map((item, i) => ({
-              num: String(i + 1).padStart(2, '0'),
-              title: item.title,
-              description: item.desc,
-            }))}
-            variant="light"
-          />
-        </div>
+        <HorizontalStickyDeck
+          cards={whatWeLookFor.map((item, i) => ({
+            num: String(i + 1).padStart(2, '0'),
+            title: item.title,
+            description: item.desc,
+          }))}
+          variant="light"
+        />
       </section>
 
       {/* Evaluation Framework — Sticky Card Stack */}
