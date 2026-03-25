@@ -324,7 +324,8 @@ const CardSurface: React.FC<{
   isActive: boolean;
   cardHeight: number;
   illustrationSet: 'process' | 'criteria';
-}> = ({ card, index, variant, isActive, cardHeight, illustrationSet }) => {
+  labelPrefix: string;
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
