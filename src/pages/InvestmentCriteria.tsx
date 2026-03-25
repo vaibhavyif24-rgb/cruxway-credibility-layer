@@ -177,7 +177,7 @@ const InvestmentCriteria = () => {
       {/* What We Look For — consolidated criteria */}
       {/* What We Look For — Horizontal Sticky Deck */}
       <section className="bg-background overflow-x-hidden">
-        <div className="px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
+        <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Investment Criteria</SectionLabel>
@@ -187,7 +187,7 @@ const InvestmentCriteria = () => {
               <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
                 We evaluate opportunities through a rigorous lens, seeking businesses with enduring competitive advantages and alignment with our long-term partnership model.
               </p>
-              <GoldRule className="mt-3 mb-6 md:mb-8" />
+              <GoldRule className="mt-3 mb-4 md:mb-5" />
             </FadeIn>
           </div>
         </div>

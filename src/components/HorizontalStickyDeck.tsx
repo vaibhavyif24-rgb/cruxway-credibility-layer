@@ -14,7 +14,7 @@ interface HorizontalStickyDeckProps {
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
 const MIN_CARD_HEIGHT = 420;
-const SCROLL_PER_CARD = 0.65;
+const SCROLL_PER_CARD = 0.45;
 
 const getCardHeight = () => {
   if (typeof window === 'undefined') return 620;
@@ -396,7 +396,7 @@ const HorizontalCardSurface: React.FC<{
               transitionDelay: '0s',
             }}
           >
-            Step {card.num}
+            {card.num}
           </div>
           <h3
             className="mb-4 font-serif text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.05] tracking-[-0.02em] md:mb-5"
