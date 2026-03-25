@@ -165,7 +165,7 @@ const TeamCardSurface: React.FC<{
             )}
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.15rem] md:text-[1.5rem] text-white tracking-[-0.02em] leading-[1.15]">
+                <h3 className={`font-serif text-[1.15rem] md:text-[1.5rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.02em] leading-[1.15]`}>
                   {member.name}
                 </h3>
                 {member.linkedIn && (
