@@ -1,67 +1,76 @@
 
 
-## Fix: Sectors Card Layout — Mobile and Desktop
+## Plan: Criteria Page Redesign + Home Social Proof Fix
 
-### Problems Identified
-1. **Mobile**: All 3 category groups stack vertically creating an excessively long card. India has 12 items across 3 categories; US has 6 items across 3 categories. The vertical list feels unstructured.
-2. **Desktop**: The US card's third column ("Specialist Services") has only 1 item, making it visually unbalanced versus the other two columns.
-3. **Both**: The border-left styling on mobile looks cramped within the tight 18px padding.
+### 1. Stats Band Redesign (InvestmentCriteria.tsx)
 
-### Solution
+Add a proper heading above the numbers and move the "Investment Criteria" label to the top of the stats band:
 
-**Restructure the data and layout for both components to be more balanced and compact.**
-
-#### India (`CinematicScrollReveal.tsx`)
-
-**Consolidate from 3 categories to 2** for better visual balance:
-- **Industrials**: Process & Flow Control, Value-Added Distribution, Industrial Services, Packaging
-- **Business & Industrial Services**: Facility & Support Services, Testing & Certification, Infrastructure Services, Industrial Technology, Aerospace & Defense
-
-Trim verbose names:
-- "Testing, Inspection, and Certification" → "Testing & Certification"
-- "Utility and Infrastructure Services" → "Infrastructure Services"
-- "Business Process Outsourcing / Contract Manufacturing" and "Insurance Services and Distribution" → Remove (least core to thesis)
-- "Lab Services and Products" → Remove
-
-**Mobile layout**: Use a `grid-cols-2` layout with the two categories side by side even on mobile. Remove the vertical dividers on mobile, keep the border-left accent. This halves the vertical height.
-
-**Desktop layout**: Switch from `grid-cols-[1fr_1px_1fr_1px_1fr]` to `grid-cols-[1fr_1px_1fr]` (two columns with divider).
-
-#### US (`USCinematicScrollReveal.tsx`)
-
-**Consolidate from 3 categories to 2** for balance:
-- **Infrastructure & Industrial**: Electrical & Infrastructure, Industrial Distribution, Engineering & Technical
-- **Services & Compliance**: Facility Services, Compliance & Safety, Environmental Services
-
-Move "Engineering & Technical" from "Specialist Services" into "Infrastructure & Industrial". Remove the lone third column entirely.
-
-**Mobile layout**: Same `grid-cols-2` approach — two categories side by side. Hide descriptions on mobile (already hidden). Remove the verbose descriptions entirely on mobile for clean compact look.
-
-**Desktop layout**: Switch to `grid-cols-[1fr_1px_1fr]` (two balanced columns).
-
-#### Shared layout changes for both files
-
-```
-Mobile (< md):
-  grid grid-cols-2 gap-4
-
-Desktop (md+):
-  grid md:grid-cols-[1fr_1px_1fr] md:gap-0
+```text
+Current:          →   New:
+[just numbers]        INVESTMENT PROFILE  (SectionLabel)
+                      Our Target Parameters (heading)
+                      [gold rule]
+                      [6 stat blocks in grid]
 ```
 
-- Remove the third column and its two divider elements
-- Keep the border-left accent on each category
-- Slightly increase mobile font sizes: items from `10px` to `11px`, category headers from `0.85rem` to `0.8rem`
-- Mobile card padding stays at `20px 18px`
+This gives context before the numbers appear, matching the professional PE deck structure from the uploaded PDF.
+
+### 2. Replace "What We Look For" Criteria
+
+Current criteria have some fluffy language. Replace with sharper, PE-logical criteria drawn from the firm's actual approach (from the PDF):
+
+| # | Title | Description |
+|---|-------|-------------|
+| 01 | Founder-Led Succession | Partnering with owners at an inflection point, preserving legacy while enabling the next chapter of growth. |
+| 02 | Essential & Regulated Services | Compliance-driven B2B sectors where reliability, safety, and recurring demand create natural moats. |
+| 03 | Recurring Revenue & Retention | Businesses with embedded customer relationships, high switching costs, and predictable cash flows. |
+| 04 | Platform & Consolidation Potential | Fragmented markets where disciplined acquisitions compound value over a long hold period. |
+| 05 | Operational Improvement Runway | Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value. |
+| 06 | Prudent Capital Structure | Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering. |
+
+### 3. Replace Hero Images (AI-Generated Ultra HD)
+
+Generate 2 new high-resolution images using Nano banana 2 (gemini-3.1-flash):
+- **US Criteria**: Modern American industrial infrastructure, steel and glass, blue hour lighting, cinematic wide angle
+- **India Criteria**: Indian industrial/business district, golden hour, modern infrastructure with cultural elements
+
+These replace `hero-us-criteria.jpg` and `hero-india-criteria.jpg`.
+
+### 4. Home Page: Redesign Social Proof Section
+
+Current: Plain heading "Our team has invested and operated across leading global institutions" — generic and flat.
+
+Redesign as a **quote-style block** with a large italic serif pull-quote and subtle gold vertical rule accent:
+
+```text
+Current layout:
+  INSTITUTIONAL EXPERIENCE
+  "Our team has invested and operated across leading global institutions"
+  [logo marquee]
+
+New layout:
+  [centered layout, no SectionLabel]
+  Gold vertical line accent (40px)
+  "Operators and investors who have built,
+   scaled, and partnered across the world's
+   leading institutions."
+  — large serif italic, muted gold tint
+  [logo marquee unchanged]
+```
+
+This transforms a flat descriptor into a confident, editorial pull-quote that matches the site's premium aesthetic.
 
 ### Files Modified
-- `src/components/CinematicScrollReveal.tsx` — restructure data to 2 categories, update grid to 2-column
-- `src/components/USCinematicScrollReveal.tsx` — restructure data to 2 categories, update grid to 2-column
+
+1. **`src/pages/InvestmentCriteria.tsx`** — Stats band heading, criteria data, image imports
+2. **`src/pages/Home.tsx`** — Social proof section redesign (lines 200-216)
+3. **`src/assets/hero-us-criteria.jpg`** — New AI-generated image
+4. **`src/assets/hero-india-criteria.jpg`** — New AI-generated image
 
 ### What Stays Unchanged
-- All scroll animations, expanding circle, sticky behavior
-- Card glass background, border, backdrop-filter styling
-- Desktop/mobile padding overrides
-- `src/index.css` — no changes
-- No JS logic changes (scroll handlers, progress calculations)
+- All scroll animations (StickyCardStack, CinematicScrollReveal, expanding circle)
+- CriteriaCarousel, Evaluation Framework
+- LogoMarquee component and logo data
+- All CSS variables, DarkSectionEffects, theme system
 
