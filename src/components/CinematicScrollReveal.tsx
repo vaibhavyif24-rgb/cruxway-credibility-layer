@@ -5,36 +5,36 @@ import indiaIndustrialReveal from '@/assets/india-industrial-reveal.jpg';
 const indiaSectors = [
   {
     category: 'Industrials',
-    items: ['Process & Flow Control', 'Value-Added Distribution', 'Industrial Services', 'Packaging'],
+    items: ['Process and Flow Control', 'Value-Added Distribution', 'Industrial Services', 'Packaging'],
   },
   {
     category: 'Industrial Services',
-    items: ['Utility & Infrastructure', 'Industrial Technology', 'Aerospace & Defense'],
+    items: ['Utility and Infrastructure Services', 'Industrial Technology', 'Aerospace and Defense'],
   },
   {
     category: 'Business Services',
-    items: ['Facility & Support Services', 'Testing & Certification', 'Lab Services & Products', 'BPO / Contract Manufacturing', 'Insurance Services'],
+    items: ['Facility and Support Services', 'Testing, Inspection, and Certification', 'Lab Services and Products', 'Business Process Outsourcing / Contract Manufacturing', 'Insurance Services and Distribution'],
   },
 ];
 
 const SectorColumn = ({ category, items }: { category: string; items: string[] }) => (
   <div>
     <h3
-      className="font-serif text-[0.8rem] md:text-[0.95rem] leading-[1.2] mb-1.5 md:mb-3"
+      className="font-serif text-[0.85rem] md:text-[0.95rem] leading-[1.2] mb-2 md:mb-3"
       style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
     </h3>
-    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '8px' }} className="md:pl-[14px]">
+    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '10px' }} className="md:pl-[14px]">
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
-          <li key={item} className="flex items-center gap-1 md:gap-[10px] group cursor-default py-[1px] md:py-0">
+          <li key={item} className="flex items-center gap-[6px] md:gap-[10px] group cursor-default">
             <span
-              className="flex-shrink-0 rotate-45"
-              style={{ width: '4px', height: '4px', backgroundColor: 'var(--cin-card-bullet)' }}
+              className="flex-shrink-0 rotate-45 transition-colors duration-200"
+              style={{ width: '5px', height: '5px', backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <span
-              className="font-sans text-[9px] md:text-[12px] leading-[1.5] md:leading-[1.9]"
+              className="font-sans text-[10px] md:text-[12px] leading-[1.7] md:leading-[1.9] transition-colors duration-200"
               style={{ color: 'var(--cin-card-subtext)' }}
             >
               {item}
@@ -215,7 +215,7 @@ const CinematicScrollReveal = () => {
             </p>
 
             {/* Three-column grid */}
-            <div className="grid grid-cols-3 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-x-2 md:gap-0">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr_1px_1fr] gap-6 md:gap-0">
               <div className="md:pr-5">
                 <SectorColumn category={indiaSectors[0].category} items={indiaSectors[0].items} />
               </div>
@@ -235,7 +235,7 @@ const CinematicScrollReveal = () => {
       {/* Mobile card padding override */}
       <style>{`
         @media (max-width: 767px) {
-          .cin-card { padding: 16px 14px 20px 14px !important; }
+          .cin-card { padding: 20px 18px 24px 18px !important; }
         }
       `}</style>
     </section>
