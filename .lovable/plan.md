@@ -1,88 +1,59 @@
 
-Goal: rebuild the stack so it behaves like the Boundless reference mechanically, while looking like Cruxway visually.
+Goal: make the cards stack end-to-end like the Boundless reference, where each new card fully takes over the same pinned position and only a thin strip of the previous card remains visible until it is covered.
 
-What is actually broken now
-- The cards already share one sticky top (`88px`), but the wrappers are too short (`70vh`) relative to the card height (`~52vh`) plus sticky offset. That leaves almost no sticky runway, so cards do not stay pinned long enough to overlap convincingly.
-- The scale/opacity effect is being applied to the sticky element itself, and progress is based on the current wrapper instead of the next card arriving. That makes the motion feel off and weak.
-- The backgrounds are over-decorated for this brand, which is why the section reads playful instead of institutional.
+What is actually wrong now
+- The current stack is mechanically wrong, not just stylistically wrong.
+- `WRAPPER_HEIGHT = 100vh`, `CARD_HEIGHT = 52vh`, and `marginTop = -15vh` create too much vertical separation.
+- Result: the previous card releases before the next card reaches the sticky top, so the user sees “slides in sequence” instead of a true stack.
+- The current buried scale/fade effect also makes the interaction feel softer than the Boundless reference.
 
 What I will change
-
 1. Rebuild the stack geometry in `src/components/StickyCardStack.tsx`
-- Keep a single parent stack container.
-- Give every card the same sticky top.
-- Make each wrapper substantially taller than the card so the card remains pinned long enough to be overtaken.
-- Add tighter vertical overlap between wrappers so card 2 reaches the sticky zone while card 1 is still pinned.
-- Keep higher `z-index` on later cards so they slide over earlier ones.
+- Stop using the current “one tall wrapper per card + small negative overlap” rhythm.
+- Switch to a true overlapping deck layout:
+  - all cards share the exact same sticky `top`
+  - cards sit almost on top of each other in document flow
+  - each next card starts higher, so it reaches the sticky line before the previous one releases
+- Expose only a narrow reveal band between cards, similar to the screenshot you attached.
 
-Target interaction:
+Target behavior
 ```text
-wrapper 1  -> card pinned at top 88
-wrapper 2  -> reaches same top 88 while card 1 is still pinned
-wrapper 3  -> reaches same top 88 while card 2 is still pinned
+card 1 pinned
+card 2 rises into the exact same top position while card 1 is still pinned
+card 2 covers card 1
+card 3 does the same to card 2
 ```
 
-2. Move animation to an inner card surface
-- Keep the outer node purely sticky.
-- Move `translateY`, `scale`, and `opacity` to an inner panel so sticky math stays stable.
-- Keep IntersectionObserver only for the entrance reveal, matching the Boundless `om-animate` idea.
+2. Simplify the motion so stacking reads clearly
+- Keep entrance animation with IntersectionObserver (`translateY + opacity`) on an inner surface only.
+- Reduce or remove the current “buried” transform unless it helps readability.
+- Prioritize physical overlap over decorative motion.
 
-3. Fix the takeover logic
-- Compute each card’s “buried” progress from the next wrapper’s position, not its own.
-- Start the scale/dim only when the next card begins entering the sticky zone.
-- Keep the effect restrained: slight scale-down, mild dimming, stronger shadow, not flashy.
+3. Tighten the visual stack treatment
+- Make every card fully opaque so the active card cleanly obscures the one below.
+- Strengthen the top-edge/shadow separation so the layering is obvious.
+- Use a restrained, premium surface system instead of playful decoration.
 
-4. Replace the current art direction with professional surfaces
-- Remove the childish/illustrative feel.
-- Use opaque editorial card backgrounds aligned to the site palette:
-  - charcoal / prussian for dark cards
-  - cream / warm stone for light cards
-- Keep only very restrained structural detail: one low-contrast arc, ring field, or dot grid per card.
-- No PNG-style artwork; no busy decorative overlays.
+4. Adjust page spacing where needed
+- Tune the Home and Investment Criteria section spacing only if the rebuilt stack needs more runway above/below.
+- Ensure the effect works on the current `/india` view first, then preserve mobile behavior.
 
-5. Tighten the card composition
-- Strong left-aligned serif title.
-- Clean sans-serif body copy.
-- Larger, quieter right-side numeric mass.
-- More whitespace and cleaner border/shadow hierarchy so overlap reads immediately.
-
-Files I will update
-- `src/components/StickyCardStack.tsx`
-- Possibly small spacing-only adjustments in:
+Files to update
+- `src/components/StickyCardStack.tsx` — full mechanical rebuild
+- Possibly small spacing adjustments in:
   - `src/pages/Home.tsx`
   - `src/pages/InvestmentCriteria.tsx`
 
-Technical implementation details
-- Sticky shell:
-```text
-position: sticky
-top: 88px
-z-index: increasing by card index
-```
-- Wrapper rhythm:
-```text
-min-height: larger than card height + sticky offset
-negative/top overlap between subsequent wrappers
-final wrapper gets enough bottom runway
-```
-- Animation pattern:
-```text
-IntersectionObserver -> add visible state/class
-hidden: translateY(...)
-visible: translateY(0), opacity: 1
-```
-- Takeover progress:
-```text
-progress for card i derived from wrapper i+1 approaching sticky top
-```
+Implementation approach
+- Replace the current wrapper math with an overlap-based deck formula.
+- Use constants like:
+  - shared sticky top
+  - fixed card min-height
+  - small “peek” amount between cards
+  - final bottom runway so the last card can clear naturally
+- Keep z-index increasing with card order so later cards always pass over earlier ones.
 
-Validation I will do after implementation
-- On Home “Our Process”, card 2 must visibly slide over card 1 before card 1 releases.
-- On Investment Criteria “Evaluation Framework”, the same overlap must work in the dark variant.
-- The card underneath should remain partially visible as a buried layer.
-- The effect should feel immediate and obvious at the current viewport first, then hold on mobile.
-
-Expected outcome
-- A true stacked deck, not separate slides.
-- Cleaner, more senior backgrounds.
-- Overlap behavior much closer to Boundless mechanically, but styled for Cruxway rather than copied.
+Validation after implementation
+- On Home “Our Process”, each next card must visibly cover the previous one before the previous releases.
+- On `/india` and on Investment Criteria dark variant, the cards must feel like one continuous stacked deck.
+- Only a slim band of the underlying card should remain visible during takeover, matching your screenshot/reference.
