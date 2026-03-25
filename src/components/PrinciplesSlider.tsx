@@ -44,6 +44,7 @@ const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
   }, [total]);
 
   useEffect(() => {
+    preloadImages();
     resetTimer();
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
