@@ -107,7 +107,7 @@ const TeamCard: React.FC<{
         top: `${stickyTop}px`,
         zIndex: index + 1,
         backgroundColor: bg,
-        minHeight: `${CARD_MIN_H}px`,
+        minHeight: undefined,
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -10px rgba(0,0,0,0.15)',
       }}
     >
