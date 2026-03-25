@@ -388,29 +388,12 @@ const CardSurface: React.FC<{
   );
 };
 
-/* ─── Scroll-Driven Vertical Carousel ─── */
+/* ─── CSS Sticky Stacking (Boundless Ventures style) ─── */
+const STICKY_BASE = 80;
+const STICKY_STEP = 20;
+
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step' }) => {
-  const outerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
-
-  const handleScroll = useCallback(() => {
-    const outer = outerRef.current;
-    if (!outer) return;
-
-    const rect = outer.getBoundingClientRect();
-    const outerHeight = outer.offsetHeight;
-    const viewportHeight = window.innerHeight;
-    const scrolled = -(rect.top - STICKY_TOP);
-    const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-    const intervalCount = Math.max(cards.length - 1, 1);
-    const idx = cards.length === 1
-      ? 0
-      : Math.min(cards.length - 1, Math.round(progress * intervalCount));
-
-    setActiveIndex(idx);
-  }, [cards.length]);
 
   useEffect(() => {
     const updateMeasurements = () => setCardHeight(getCardHeight());
@@ -419,78 +402,69 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     return () => window.removeEventListener('resize', updateMeasurements);
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => requestAnimationFrame(handleScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [handleScroll]);
-
-  useEffect(() => {
-    handleScroll();
-  }, [cardHeight, handleScroll]);
-
-  const scrollStepPx = (cardHeight + STICKY_TOP) * SCROLL_PER_CARD;
-  const outerHeight = cardHeight + Math.max(cards.length - 1, 0) * scrollStepPx;
-
   return (
-    <div
-      ref={outerRef}
-      className="relative"
-      style={{ height: `${outerHeight}px` }}
-    >
-      <div
-        className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
-        style={{
-          top: `${STICKY_TOP}px`,
-          height: `${cardHeight}px`,
-        }}
-      >
-        <div
-          className="will-change-transform"
-          style={{
-            transform: `translateY(-${activeIndex * cardHeight}px)`,
-            transition: 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
-          }}
-        >
-          {cards.map((card, i) => (
-            <CardSurface
-              key={card.num}
-              card={card}
-              index={i}
-              variant={variant}
-              isActive={i === activeIndex}
-              cardHeight={cardHeight}
-              illustrationSet={illustrationSet}
-              labelPrefix={labelPrefix}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div
-        className="pointer-events-none sticky ml-auto flex w-10 flex-col items-center gap-2"
-        style={{
-          top: `${STICKY_TOP + cardHeight / 2 - (cards.length * 14) / 2}px`,
-          marginTop: `-${cardHeight}px`,
-        }}
-      >
-        {cards.map((_, i) => (
-          <div
-            key={i}
-            className="rounded-full transition-all duration-500"
-            style={{
-              width: i === activeIndex ? '8px' : '5px',
-              height: i === activeIndex ? '8px' : '5px',
-              backgroundColor: i === activeIndex
-                ? 'hsl(38 48% 52%)'
-                : variant === 'dark'
-                  ? 'hsla(40, 30%, 96%, 0.2)'
-                  : 'hsla(210, 8%, 44%, 0.25)',
-            }}
+    <div className="relative px-5 md:px-10 lg:px-16">
+      <div className="max-w-[1080px] mx-auto">
+        {cards.map((card, i) => (
+          <StickyCardItem
+            key={card.num}
+            card={card}
+            index={i}
+            variant={variant}
+            cardHeight={cardHeight}
+            illustrationSet={illustrationSet}
+            labelPrefix={labelPrefix}
+            stickyTop={STICKY_BASE + i * STICKY_STEP}
           />
         ))}
       </div>
+    </div>
+  );
+};
+
+const StickyCardItem: React.FC<{
+  card: StickyCard;
+  index: number;
+  variant: 'light' | 'dark';
+  cardHeight: number;
+  illustrationSet: 'process' | 'criteria';
+  labelPrefix: string;
+  stickyTop: number;
+}> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix, stickyTop }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.5),
+      { threshold: [0, 0.5, 1], rootMargin: '-10% 0px -30% 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="mb-6 will-change-transform"
+      style={{
+        position: 'sticky',
+        top: `${stickyTop}px`,
+        zIndex: index + 1,
+      }}
+    >
+      <CardSurface
+        card={card}
+        index={index}
+        variant={variant}
+        isActive={isActive}
+        cardHeight={cardHeight}
+        illustrationSet={illustrationSet}
+        labelPrefix={labelPrefix}
+      />
     </div>
   );
 };

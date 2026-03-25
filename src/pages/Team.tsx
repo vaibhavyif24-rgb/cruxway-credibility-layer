@@ -417,7 +417,7 @@ const Team = () => {
       <section className="bg-background py-10 md:py-16">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12 mb-8 md:mb-10">
           <FadeIn>
-            <SectionLabel>{isIndia ? 'Our Team' : 'Managing Partners'}</SectionLabel>
+            <SectionLabel>{isIndia ? 'Our Team' : 'Team'}</SectionLabel>
             <GoldRule className="mt-1" />
           </FadeIn>
         </div>
