@@ -7,6 +7,7 @@ import LogoMarquee from '@/components/LogoMarquee';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
+import ScrollRevealText from '@/components/ScrollRevealText';
 
 import heroIndiaHome from '@/assets/hero-india-home.jpg';
 import heroUSHome from '@/assets/hero-us-home.jpg';
