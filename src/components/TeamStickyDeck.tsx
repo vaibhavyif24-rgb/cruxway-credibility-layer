@@ -230,36 +230,6 @@ const TeamCardSurface: React.FC<{
             )}
           </div>
 
-          {/* Institutional logos row */}
-          {member.logos && member.logos.length > 0 && (
-            <div
-              className="flex items-center gap-4 md:gap-5 mt-3 md:mt-4 pt-3 border-t border-white/[0.04]"
-              style={{
-                opacity: isActive ? 1 : 0,
-                transition: 'opacity 0.5s ease-out',
-                transitionDelay: '0.2s',
-              }}
-            >
-              <span className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-white/20 shrink-0">
-                Background
-              </span>
-              <div className="flex items-center gap-3 md:gap-4">
-                {member.logos.map((logo, i) => (
-                  <img
-                    key={i}
-                    src={logo.src}
-                    alt={logo.alt}
-                    loading="lazy"
-                    className="h-[16px] md:h-[20px] w-auto object-contain opacity-40 hover:opacity-80 transition-opacity duration-500"
-                    style={{
-                      filter: goldFilter,
-                      transform: logo.scale ? `scale(${logo.scale})` : undefined,
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Deal logos — floating on deck */}
