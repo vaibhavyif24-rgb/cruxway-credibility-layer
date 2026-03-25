@@ -65,7 +65,7 @@ const ScrollRevealText = ({
         </p>
 
         {/* Subtext */}
-        {subtext && (
+        {subtext && !stats && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
             className={`font-sans text-[13px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-10 md:mt-14 ${
@@ -74,6 +74,17 @@ const ScrollRevealText = ({
           >
             {subtext}
           </motion.p>
+        )}
+
+        {/* Stat blocks */}
+        {stats && stats.length > 0 && (
+          <div className="mt-12 md:mt-16 pt-10 md:pt-12 border-t border-gold/10 w-full max-w-[680px]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
+              {stats.map((stat, i) => (
+                <StatReveal key={i} stat={stat} index={i} total={stats.length} progress={scrollYProgress} isDark={isDark} />
+              ))}
+            </div>
+          </div>
         )}
       </div>
     </section>
