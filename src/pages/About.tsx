@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
+import PrinciplesSlider from '@/components/PrinciplesSlider';
 import { motion } from 'framer-motion';
 
 import heroIndiaAbout from '@/assets/hero-india-about.jpg';
