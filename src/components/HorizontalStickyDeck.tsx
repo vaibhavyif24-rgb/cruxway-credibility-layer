@@ -429,8 +429,6 @@ const HorizontalCardSurface: React.FC<{
 };
 
 /* ─── Scroll-Driven Horizontal Deck ─── */
-const SCROLL_STEP_VH = 0.55; // viewport-heights of scroll per slide change
-
 const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, variant = 'light' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -441,12 +439,17 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
     if (!outer) return;
 
     const rect = outer.getBoundingClientRect();
+    const outerHeight = outer.offsetHeight;
+    const viewportHeight = window.innerHeight;
     const scrolled = -(rect.top - STICKY_TOP);
-    const stepPx = window.innerHeight * SCROLL_STEP_VH;
-    const rawIndex = scrolled / stepPx;
-    const clamped = Math.max(0, Math.min(cards.length - 1, Math.round(rawIndex)));
+    const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
+    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
+    const intervalCount = Math.max(cards.length - 1, 1);
+    const idx = cards.length === 1
+      ? 0
+      : Math.min(cards.length - 1, Math.round(progress * intervalCount));
 
-    setActiveIndex(clamped);
+    setActiveIndex(idx);
   }, [cards.length]);
 
   useEffect(() => {
@@ -476,9 +479,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
     handleScroll();
   }, [cardHeight, handleScroll]);
 
-  // Outer height = card visible area + scroll runway for all transitions
-  const scrollStepPx = typeof window !== 'undefined' ? window.innerHeight * SCROLL_STEP_VH : 400;
-  const outerHeight = cardHeight + (cards.length - 1) * scrollStepPx;
+  const transitionRunwayVh = Math.max(cards.length - 1, 0) * SCROLL_PER_CARD * 100;
 
   // Discrete full-slide translation
   const translateX = activeIndex * (100 / cards.length);
@@ -487,7 +488,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
     <div
       ref={outerRef}
       className="relative"
-      style={{ height: `${outerHeight}px` }}
+      style={{ height: `calc(${transitionRunwayVh}vh + ${cardHeight}px)` }}
     >
       <div
         className="sticky overflow-hidden rounded-2xl md:rounded-3xl"
