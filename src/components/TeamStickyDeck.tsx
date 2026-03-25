@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 export interface TeamDeckMember {
   name: string;
@@ -19,112 +17,131 @@ interface TeamStickyDeckProps {
 }
 
 /* ─── Constants ─── */
-const STICKY_TOP_BASE = 80;
-const STICKY_OFFSET_STEP = 20;
-const CARD_HEIGHT = 680;
+const STICKY_TOP_BASE = 72;
+const STICKY_OFFSET_STEP = 16;
+const CARD_MIN_H = 520;
 
 /* ─── Backgrounds ─── */
 const darkCardBgs = [
-  'hsl(220 8% 18%)',   // dark charcoal
-  'hsl(207 55% 14%)',  // deep navy
-  'hsl(210 12% 12%)',  // near-black
+  'hsl(220 8% 14%)',
+  'hsl(207 50% 12%)',
+  'hsl(210 12% 10%)',
 ];
 
 const lightCardBgs = [
-  'hsl(40 30% 96%)',   // warm cream
-  'hsl(38 22% 92%)',   // sand
-  'hsl(40 25% 94%)',   // ivory
+  'hsl(40 30% 97%)',
+  'hsl(38 22% 94%)',
+  'hsl(40 25% 95.5%)',
 ];
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
-/* ─── Inline Logo Marquee ─── */
-const InlineMarquee: React.FC<{
+/* ─── Static Logo Grid (fits in view) ─── */
+const LogoGrid: React.FC<{
   logos: TeamDeckMember['dealLogos'];
   isDark: boolean;
 }> = ({ logos, isDark }) => {
-  const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
-  const doubled = [...logos, ...logos];
 
   return (
-    <div
-      className="relative overflow-hidden py-1"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {/* Edge fades use parent's bg via inherit trick */}
-      <div className={`absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none ${isDark ? 'team-marquee-fade-left-dark' : 'team-marquee-fade-left-light'}`} style={{ background: 'linear-gradient(to right, inherit, transparent)' }} />
-      <div className={`absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none ${isDark ? 'team-marquee-fade-right-dark' : 'team-marquee-fade-right-light'}`} style={{ background: 'linear-gradient(to left, inherit, transparent)' }} />
-      <motion.div
-        className="flex items-center gap-6 md:gap-8 w-max"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 20, ease: 'linear' } }}
-      >
-        {doubled.map((logo, i) => (
-          <div
-            key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[28px] md:h-[34px]"
-            style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
-          >
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              loading="lazy"
-              className="h-[22px] md:h-[28px] w-auto max-w-[100px] md:max-w-[120px] object-contain transition-all duration-500"
-              style={{
-                filter: hovered ? 'none' : goldFilter,
-                opacity: hovered ? 1 : 0.75,
-                transform: logo.scale ? `scale(${logo.scale})` : undefined,
-              }}
-            />
-          </div>
-        ))}
-      </motion.div>
+    <div className="flex flex-wrap items-center gap-3 md:gap-4">
+      {logos.map((logo, i) => (
+        <div
+          key={`${logo.alt}-${i}`}
+          className="flex items-center justify-center shrink-0 h-[20px] md:h-[22px]"
+        >
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            loading="lazy"
+            className="h-[16px] md:h-[18px] w-auto max-w-[70px] md:max-w-[80px] object-contain opacity-60 hover:opacity-100 transition-all duration-500"
+            style={{
+              filter: goldFilter,
+              transform: logo.scale ? `scale(${logo.scale})` : undefined,
+            }}
+          />
+        </div>
+      ))}
     </div>
   );
 };
 
-/* ─── Team Card (Boundless-style two-column sticky) ─── */
+/* ─── Team Card ─── */
 const TeamCard: React.FC<{
   member: TeamDeckMember;
   index: number;
   totalMembers: number;
   isDark: boolean;
-  isMobile: boolean;
-}> = ({ member, index, totalMembers, isDark, isMobile }) => {
+}> = ({ member, index, totalMembers, isDark }) => {
   const bgs = isDark ? darkCardBgs : lightCardBgs;
   const bg = bgs[index % bgs.length];
   const stickyTop = STICKY_TOP_BASE + index * STICKY_OFFSET_STEP;
 
   return (
     <div
-      className="rounded-2xl md:rounded-3xl overflow-hidden will-change-transform"
+      className="rounded-2xl overflow-hidden will-change-transform"
       style={{
-        position: isMobile ? 'relative' : 'sticky',
-        top: isMobile ? undefined : `${stickyTop}px`,
+        position: 'sticky',
+        top: `${stickyTop}px`,
         zIndex: index + 1,
         backgroundColor: bg,
-        minHeight: isMobile ? undefined : `${CARD_HEIGHT}px`,
-        boxShadow: '0 -8px 30px -4px rgba(0,0,0,0.25), 0 20px 50px -10px rgba(0,0,0,0.2)',
-        marginBottom: isMobile ? '24px' : '0px',
+        minHeight: `${CARD_MIN_H}px`,
+        boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -10px rgba(0,0,0,0.15)',
       }}
     >
-      <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} h-full`} style={{ minHeight: isMobile ? undefined : `${CARD_HEIGHT}px` }}>
-        {/* ─── Left column: content (~40%) ─── */}
-        <div className={`${isMobile ? 'w-full order-2' : 'w-[42%]'} flex flex-col justify-between p-6 md:p-8 lg:p-10`}>
+      <div className="flex flex-col md:flex-row h-full" style={{ minHeight: `${CARD_MIN_H}px` }}>
+
+        {/* ─── Left: Photo column ─── */}
+        <div className="w-full md:w-[200px] lg:w-[240px] shrink-0 flex items-start justify-center pt-8 md:pt-10 px-6 md:px-0 md:pl-8 lg:pl-10">
+          {member.photo ? (
+            <div className="relative">
+              <div
+                className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] rounded-full overflow-hidden border-2 shadow-lg"
+                style={{
+                  borderColor: isDark ? 'hsl(38 48% 52% / 0.15)' : 'hsl(38 48% 52% / 0.12)',
+                  boxShadow: `0 8px 32px -8px ${isDark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
+                }}
+              >
+                <img
+                  src={member.photo}
+                  alt={member.name}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+            </div>
+          ) : (
+            <div
+              className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] rounded-full flex items-center justify-center"
+              style={{ backgroundColor: isDark ? 'hsl(0 0% 100% / 0.04)' : 'hsl(0 0% 0% / 0.03)' }}
+            >
+              <span
+                className="font-serif text-[2rem] md:text-[2.5rem]"
+                style={{ color: isDark ? 'hsl(0 0% 100% / 0.1)' : 'hsl(0 0% 0% / 0.08)' }}
+              >
+                {member.name.split(' ').map(n => n[0]).join('')}
+              </span>
+            </div>
+          )}
+        </div>
+
+        {/* ─── Right: Content ─── */}
+        <div className="flex-1 flex flex-col justify-between p-6 md:p-8 lg:py-10 lg:pr-10 lg:pl-6">
           {/* Counter */}
           <p
-            className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-4 md:mb-6"
-            style={{ color: 'hsl(38 48% 52%)', opacity: 0.5 }}
+            className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
+            style={{ color: 'hsl(38 48% 52% / 0.4)' }}
           >
             {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
           </p>
 
-          {/* Name + role */}
-          <div className="mb-4 md:mb-5">
-            <div className="flex items-center gap-1.5">
-              <h3 className={`font-serif text-[1.4rem] md:text-[1.8rem] lg:text-[2.2rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.025em] leading-[1.1]`}>
+          {/* Name + Role */}
+          <div className="mb-3">
+            <div className="flex items-center gap-2">
+              <h3
+                className="font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
+                style={{ color: isDark ? 'hsl(0 0% 100%)' : 'hsl(var(--foreground))' }}
+              >
                 {member.name}
               </h3>
               {member.linkedIn && (
@@ -132,81 +149,58 @@ const TeamCard: React.FC<{
                   href={member.linkedIn}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${isDark ? 'text-white/20 hover:text-white/50' : 'text-foreground/20 hover:text-foreground/50'} transition-colors`}
+                  className="transition-colors"
+                  style={{ color: isDark ? 'hsl(0 0% 100% / 0.2)' : 'hsl(var(--foreground) / 0.2)' }}
                 >
-                  <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
               )}
             </div>
             <p
-              className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.22em] mt-1"
+              className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mt-1.5"
               style={{ color: 'hsl(38 48% 52%)' }}
             >
               {member.role}
             </p>
           </div>
 
+          {/* Deal logos — directly below name */}
+          {member.dealLogos && member.dealLogos.length > 0 && (
+            <div className="mb-4 md:mb-5">
+              <p
+                className="font-sans text-[7px] md:text-[8px] font-semibold uppercase tracking-[0.22em] mb-2"
+                style={{ color: 'hsl(38 48% 52% / 0.45)' }}
+              >
+                Select Investments &amp; Deals
+              </p>
+              <LogoGrid logos={member.dealLogos} isDark={isDark} />
+            </div>
+          )}
+
           {/* Summary */}
-          <p className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/45' : 'text-foreground/55'} leading-[1.65] mb-4 md:mb-5`}>
+          <p
+            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4"
+            style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
+          >
             {member.summary}
           </p>
 
           {/* Highlights */}
-          <ul className="space-y-2 md:space-y-2.5 flex-1">
+          <ul className="space-y-2 flex-1">
             {member.highlights.map((line, i) => (
               <li
                 key={i}
-                className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/35' : 'text-foreground/45'} leading-[1.6] flex gap-2.5 items-start`}
+                className="font-sans text-[10.5px] md:text-[11.5px] leading-[1.6] flex gap-2.5 items-start"
+                style={{ color: isDark ? 'hsl(0 0% 100% / 0.3)' : 'hsl(var(--foreground) / 0.4)' }}
               >
-                <span className="shrink-0 mt-[7px] w-2 h-px" style={{ backgroundColor: 'hsl(38 48% 52% / 0.35)' }} />
+                <span
+                  className="shrink-0 mt-[6px] w-2 h-px"
+                  style={{ backgroundColor: 'hsl(38 48% 52% / 0.3)' }}
+                />
                 <span>{line}</span>
               </li>
             ))}
           </ul>
-
-          {/* Deal logos strip */}
-          {member.dealLogos && member.dealLogos.length > 0 && (
-            <div className={`mt-4 md:mt-6 pt-3 md:pt-4 border-t ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.08]'}`}>
-              <p
-                className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] mb-1.5"
-                style={{ color: 'hsl(38 48% 52% / 0.5)' }}
-              >
-                Select Investments &amp; Deals
-              </p>
-              <InlineMarquee logos={member.dealLogos} isDark={isDark} />
-            </div>
-          )}
-        </div>
-
-        {/* ─── Right column: full-bleed image (~58%) ─── */}
-        <div className={`${isMobile ? 'w-full order-1 h-[280px]' : 'w-[58%]'} relative`} style={{ minHeight: isMobile ? undefined : `${CARD_HEIGHT}px` }}>
-          {member.photo ? (
-            <img
-              src={member.photo}
-              alt={member.name}
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover object-top"
-            />
-          ) : (
-            <div className={`absolute inset-0 flex items-center justify-center ${isDark ? 'bg-white/[0.03]' : 'bg-foreground/[0.03]'}`}>
-              <span className={`font-serif text-[3rem] md:text-[4rem] ${isDark ? 'text-white/10' : 'text-foreground/10'}`}>
-                {member.name.split(' ').map(n => n[0]).join('')}
-              </span>
-            </div>
-          )}
-          {/* Subtle gradient overlay on the image edge closest to text */}
-          {!isMobile && (
-            <div
-              className="absolute inset-y-0 left-0 w-[60px] pointer-events-none"
-              style={{ background: `linear-gradient(to right, ${bg}, transparent)` }}
-            />
-          )}
-          {isMobile && (
-            <div
-              className="absolute inset-x-0 bottom-0 h-[40px] pointer-events-none"
-              style={{ background: `linear-gradient(to top, ${bg}, transparent)` }}
-            />
-          )}
         </div>
       </div>
     </div>
@@ -217,10 +211,9 @@ const TeamCard: React.FC<{
 const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const isMobile = useIsMobile();
 
   return (
-    <div className="flex flex-col max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12">
+    <div className="flex flex-col max-w-[1080px] mx-auto px-4 md:px-6 lg:px-10">
       {members.map((member, i) => (
         <TeamCard
           key={member.name}
@@ -228,11 +221,10 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
           index={i}
           totalMembers={members.length}
           isDark={isDark}
-          isMobile={isMobile}
         />
       ))}
-      {/* Extra scroll clearance so last card can be fully visible */}
-      {!isMobile && <div style={{ height: `${CARD_HEIGHT * 0.3}px` }} />}
+      {/* Scroll clearance for last card */}
+      <div style={{ height: `${CARD_MIN_H * 0.35}px` }} />
     </div>
   );
 };
