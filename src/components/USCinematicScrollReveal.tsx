@@ -30,28 +30,28 @@ const usSectors = [
 const SectorColumn = ({ category, items }: { category: string; items: { name: string; desc: string }[] }) => (
   <div>
     <h3
-      className="font-serif text-[0.85rem] md:text-[0.95rem] leading-[1.2] mb-2 md:mb-3"
+      className="font-serif text-[0.8rem] md:text-[0.95rem] leading-[1.2] mb-1.5 md:mb-3"
       style={{ color: 'var(--cin-card-heading)' }}
     >
       {category}
     </h3>
-    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '10px' }} className="md:pl-[14px]">
+    <div style={{ borderLeft: '2px solid var(--cin-card-bullet)', paddingLeft: '8px' }} className="md:pl-[14px]">
       <ul className="list-none p-0 m-0 flex flex-col">
         {items.map((item) => (
-          <li key={item.name} className="flex items-start gap-[6px] md:gap-[10px] group cursor-default" style={{ marginBottom: '6px' }}>
+          <li key={item.name} className="flex items-start gap-1 md:gap-[10px] group cursor-default" style={{ marginBottom: '4px' }}>
             <span
-              className="flex-shrink-0 rotate-45 transition-colors duration-200 mt-[4px] md:mt-[5px]"
-              style={{ width: '5px', height: '5px', backgroundColor: 'var(--cin-card-bullet)' }}
+              className="flex-shrink-0 rotate-45 mt-[3px] md:mt-[5px]"
+              style={{ width: '4px', height: '4px', backgroundColor: 'var(--cin-card-bullet)' }}
             />
             <div>
               <span
-                className="font-sans text-[10px] md:text-[12px] leading-[1.7] md:leading-[1.9] transition-colors duration-200 block"
+                className="font-sans text-[9px] md:text-[12px] leading-[1.5] md:leading-[1.9] block"
                 style={{ color: 'var(--cin-card-text)' }}
               >
                 {item.name}
               </span>
               <span
-                className="font-sans text-[10.5px] leading-[1.55] transition-colors duration-200 hidden md:block"
+                className="font-sans text-[10.5px] leading-[1.55] hidden md:block"
                 style={{ color: 'var(--cin-card-descriptor)', marginTop: '2px' }}
               >
                 {item.desc}
