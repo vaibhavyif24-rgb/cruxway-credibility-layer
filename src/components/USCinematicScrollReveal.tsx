@@ -4,24 +4,25 @@ import usIndustrialReveal from '@/assets/us-industrial-reveal.jpg';
 
 const usSectors = [
   {
-    category: 'Infrastructure & Industrial',
+    category: 'Infrastructure',
     items: [
-      { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
-      { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
+      { name: 'Electrical & Grid', desc: 'High-voltage services and critical infrastructure' },
+      { name: 'Industrial Distribution', desc: 'Specialised parts and supply chain solutions' },
     ],
   },
   {
-    category: 'Services & Compliance',
+    category: 'Services',
     items: [
-      { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
-      { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
-      { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
+      { name: 'Facility Services', desc: 'Building maintenance and facility management' },
+      { name: 'Compliance & Safety', desc: 'Regulatory compliance and risk management' },
+      { name: 'Environmental', desc: 'Remediation, waste management, sustainability' },
     ],
   },
   {
-    category: 'Specialist Services',
+    category: 'Specialist',
     items: [
-      { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
+      { name: 'Engineering', desc: 'Inspection, testing, and calibration' },
+      { name: 'Technical Services', desc: 'Specialised engineering solutions' },
     ],
   },
 ];
