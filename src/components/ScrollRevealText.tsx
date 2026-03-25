@@ -115,4 +115,34 @@ const Word = ({
   );
 };
 
+/* Individual stat with scroll-driven opacity */
+const StatReveal = ({
+  stat,
+  index,
+  total,
+  progress,
+  isDark,
+}: {
+  stat: { value: string; label: string };
+  index: number;
+  total: number;
+  progress: ReturnType<typeof useScroll>['scrollYProgress'];
+  isDark: boolean;
+}) => {
+  const start = 0.65 + (index / total) * 0.15;
+  const end = Math.min(start + 0.2, 1);
+  const opacity = useTransform(progress, [start, end], [0, 1]);
+
+  return (
+    <motion.div style={{ opacity }} className="text-center">
+      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+        {stat.value}
+      </p>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
+        {stat.label}
+      </p>
+    </motion.div>
+  );
+};
+
 export default ScrollRevealText;
