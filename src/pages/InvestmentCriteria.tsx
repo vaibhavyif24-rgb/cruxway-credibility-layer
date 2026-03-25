@@ -96,12 +96,12 @@ const usSectors = [
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
-  { title: 'Founder Succession & Transition', desc: 'Owners planning retirement or next chapters who seek a partner to honour their legacy and professionalise the business for the long term.' },
-  { title: 'Essential Services in Regulated Markets', desc: 'B2B businesses in compliance-driven industries with deep client relationships, high switching costs, and recurring revenue models.' },
-  { title: 'Proven Customer Retention', desc: 'Demonstrated persistency through years of consistent delivery, earning trust that creates durable competitive advantages and predictable cash flows.' },
-  { title: 'Growth Through Consolidation', desc: 'Fragmented industries where a platform strategy and patient capital can drive superior returns through add-on acquisitions and organic expansion.' },
-  { title: 'Operational Upside', desc: 'Companies where professionalisation of systems, processes, and management creates meaningful enterprise value beyond what the founder built alone.' },
-  { title: 'Cultural & Values Alignment', desc: 'Non-negotiable alignment on integrity, stewardship, and long-term thinking. We invest in people and culture as much as in business fundamentals.' },
+  { title: 'Founder Succession & Transition', desc: 'Partnering with owners planning their next chapter while honouring legacy.' },
+  { title: 'Essential Regulated Services', desc: 'Compliance-driven B2B businesses with recurring revenue and high switching costs.' },
+  { title: 'Proven Customer Retention', desc: 'Consistent delivery earning trust that creates durable competitive advantages.' },
+  { title: 'Growth Through Consolidation', desc: 'Platform strategy in fragmented industries driving superior returns.' },
+  { title: 'Operational Upside', desc: 'Professionalisation of systems creating meaningful enterprise value.' },
+  { title: 'Cultural & Values Alignment', desc: 'Integrity, stewardship, and long-term thinking — non-negotiable.' },
 ];
 
 /** Animated stat counter */
