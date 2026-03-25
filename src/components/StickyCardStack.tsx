@@ -474,7 +474,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
   /* ─── Sticky stacking mode ─── */
   if (mode === 'sticky') {
     return (
-      <div className="relative px-5 md:px-10 lg:px-16">
+      <div className="relative px-5 md:px-10 lg:px-16" style={{ minHeight: '200px', outline: '2px solid red' }}>
         <div className="max-w-[1080px] mx-auto">
           {cards.map((card, i) => (
             <StickyCardItem
