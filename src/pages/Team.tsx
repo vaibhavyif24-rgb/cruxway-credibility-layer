@@ -289,8 +289,11 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </LinkedWrapper>
             <div>
               <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
-                  {member.name}
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2] relative">
+                  <span className="relative">
+                    {member.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-gold/60 to-gold/20 group-hover/card:w-full transition-all duration-500" />
+                  </span>
                 </h3>
                 {member.linkedIn && (
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
