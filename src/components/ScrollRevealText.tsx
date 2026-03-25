@@ -19,6 +19,7 @@ const ScrollRevealText = ({
   label,
   heading,
   subtext,
+  stats,
   variant = 'dark',
   className = '',
 }: ScrollRevealTextProps) => {

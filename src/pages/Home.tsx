@@ -172,10 +172,10 @@ const Home = () => {
             ? 'India\'s lower middle market is one of the most under-served segments in global investing. Companies proven over decades are ready for a partner who can help them scale with discipline.'
             : 'Tens of thousands of founder-led businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
         }
-        subtext={
+        stats={
           isIndia
-            ? '63M+ MSMEs. Less than 1% institutionally backed. A generational opportunity.'
-            : '10M+ small businesses. $10T+ in transition value. 70%+ lack succession plans.'
+            ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
+            : [{ value: '10M+', label: 'Small Businesses' }, { value: '$10T+', label: 'Transition Value' }, { value: '70%+', label: 'Lack Succession Plans' }]
         }
         variant="dark"
       />
