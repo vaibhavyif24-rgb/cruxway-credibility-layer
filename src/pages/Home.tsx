@@ -181,37 +181,19 @@ const Home = () => {
         variant="dark"
       />
 
-      {/* Our Process — Glass Bento */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      {/* Our Process — Sticky Card Stack */}
+      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Our Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] max-w-[480px] mb-3">
               From Discovery to Partnership
             </h2>
-            <GoldRule className="mb-8 md:mb-10" />
+            <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-            {(isIndia ? processStepsIndia : processStepsUS).map((step, i) => (
-              <GlassCard key={step.num} index={i} className="p-5 md:p-7">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full border border-gold/15 group-hover:border-gold/35 flex items-center justify-center transition-colors duration-500">
-                    <span className="font-sans text-[10px] font-semibold tracking-wider text-gold/40 group-hover:text-gold/65 transition-colors duration-300">
-                      {step.num}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.01em] mb-2">
-                      {step.title}
-                    </h3>
-                    <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] group-hover:text-foreground/75 transition-colors duration-300">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
+        </div>
+        <div className="max-w-[1080px] mx-auto">
+          <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant="light" />
         </div>
       </section>
 
