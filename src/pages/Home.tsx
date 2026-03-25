@@ -58,17 +58,17 @@ const allLogos = [
 ];
 
 const processStepsUS = [
-  { num: '01', title: 'Identify', description: 'Source founder-led businesses in essential B2B sectors with durable competitive advantages.' },
-  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes preserving continuity for employees, clients, and stakeholders.' },
-  { num: '04', title: 'Build', description: 'Hands-on operational partnership to accelerate growth and professionalise systems.' },
+  { num: '01', title: 'Identify', description: 'We go where others don\'t. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position. Rigour is our edge.' },
+  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works — continuity for employees, clients, and the legacy founders built.' },
+  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const processStepsIndia = [
-  { num: '01', title: 'Identify', description: 'Source founder-led businesses with strong fundamentals and operational upside.' },
-  { num: '02', title: 'Evaluate', description: 'Rigorous due diligence across financials, operations, and culture.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes preserving continuity for employees, clients, and stakeholders.' },
-  { num: '04', title: 'Build', description: 'Hands-on partnership to professionalise systems and accelerate growth.' },
+  { num: '01', title: 'Identify', description: 'Deep networks across India\'s industrial heartland surface founder-led businesses with strong fundamentals and operational upside.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigour.' },
+  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works — continuity for employees, clients, and the legacy founders built.' },
+  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
