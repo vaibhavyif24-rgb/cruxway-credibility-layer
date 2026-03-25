@@ -195,7 +195,7 @@ const Home = () => {
           </FadeIn>
         </div>
         <div className="max-w-[1080px] mx-auto">
-          <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant="light" />
+          <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={theme === 'dark' ? 'dark' : 'light'} />
         </div>
       </section>
 
