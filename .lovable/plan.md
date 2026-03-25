@@ -1,47 +1,46 @@
 
 
-## Plan: Team Deck Cleanup, Theme-Aware Sticky Decks, and Criteria Label Fix
+## Audit: White Gap on Right Side of Criteria Pages
 
-### 1. Remove duplicate logos and "Background" section from TeamStickyDeck
+### Root Cause
 
-**File: `src/components/TeamStickyDeck.tsx`**
-- Remove the "Background" / institutional logos row (lines 225-254) from `TeamCardSurface`. The deal logos marquee stays (it "floats on deck"). The institutional logos are already shown in the separate "Institutional Experience" marquee below.
-- Remove `logos` from `TeamDeckMember` interface since it's no longer used in the deck.
+The horizontal overflow (white gap on the right) is caused by **DarkSectionEffects** — its absolutely positioned decorative elements (floating orbs up to 500px wide, shimmer lines) extend beyond the viewport. These are inside sections that lack overflow clipping:
 
-**File: `src/pages/Team.tsx`**
-- Stop passing `logos` to the `TeamStickyDeck` members array.
+1. **"What We Look For" section** (line 122) — `bg-background`, no overflow constraint, contains StickyCardStack in sticky mode
+2. **"Evaluation Framework" section** (line 154) — `bg-primary`, has `DarkSectionEffects` with large orbs, no overflow constraint, contains StickyCardStack in slides mode
+3. **CinematicScrollReveal / USCinematicScrollReveal** — 300vh tall with expanding circle animation, no outer overflow constraint
 
-### 2. Theme-aware card backgrounds for all sticky decks
+### Why `overflow-hidden` Won't Work
 
-All three sticky deck components currently hardcode dark HSL backgrounds. They need to respond to light/dark mode.
+Both problematic sections contain **sticky-positioned children** (StickyCardStack). Adding `overflow: hidden` creates a new scroll container, which **breaks `position: sticky`** behavior entirely.
 
-**File: `src/components/TeamStickyDeck.tsx`**
-- Import `useTheme` from `@/contexts/ThemeContext`.
-- Add light-mode card backgrounds (cream/warm tones matching the site's light palette).
-- Select the palette based on `theme`.
-- Update text colors accordingly (dark text on light cards, light text on dark cards).
+### The Fix: `overflow-x: clip`
 
-**File: `src/components/StickyCardStack.tsx`**
-- Already has `lightBgs` and `darkBgs` palettes, but the `variant` prop is set manually per usage. The component should additionally read `useTheme()` and auto-select variant when not explicitly overridden, OR the calling pages should pass the correct variant. Since `StickyCardStack` already supports `variant` prop, the simplest fix is to have calling pages pass `variant` based on current theme.
+CSS `overflow-x: clip` clips content visually (like `hidden`) but does **not** create a new scroll container, so sticky positioning is fully preserved. This is the correct modern solution.
 
-**Files: `src/pages/InvestmentCriteria.tsx`, `src/pages/Home.tsx`**
-- Import `useTheme` and pass `variant={theme === 'dark' ? 'dark' : 'light'}` to each `StickyCardStack`.
+### Changes — Single File: `src/pages/InvestmentCriteria.tsx`
 
-### 3. Replace "Step XX" with "Criterion XX" on criteria page
+**1. "What We Look For" section (line 122)**
+```
+- <section className="bg-background">
++ <section className="bg-background overflow-x-clip">
+```
 
-**File: `src/components/StickyCardStack.tsx`**
-- Add a `labelPrefix` prop (default: `'Step'`) to `StickyCardStackProps`.
-- Pass it through to `CardSurface`.
-- In `CardSurface`, replace the hardcoded `Step {card.num}` with `{labelPrefix} {card.num}`.
+**2. "Evaluation Framework" section (line 154)**
+```
+- <section className="relative bg-primary text-primary-foreground">
++ <section className="relative bg-primary text-primary-foreground overflow-x-clip">
+```
 
-**File: `src/pages/InvestmentCriteria.tsx`**
-- Pass `labelPrefix="Criterion"` to the "What We Look For" `StickyCardStack`.
-- The "How We Evaluate" deck can keep `labelPrefix="Step"` (default).
+**3. CinematicScrollReveal wrapper — add clip to the outer div (line 80)**
+```
+- <div>
++ <div className="overflow-x-clip">
+```
 
-### Summary of files to edit
-- `src/components/TeamStickyDeck.tsx` — remove Background logos section, add theme-aware colors
-- `src/components/StickyCardStack.tsx` — add `labelPrefix` prop, pass theme variant through
-- `src/pages/Team.tsx` — remove `logos` from member data passed to deck
-- `src/pages/InvestmentCriteria.tsx` — pass `labelPrefix="Criterion"`, pass theme-based variant
-- `src/pages/Home.tsx` — pass theme-based variant
+This is the complete fix. No changes to animations, sticky card stacks, carousels, CSS variables, or any other component files.
+
+### Technical Note
+
+`overflow-x: clip` has full browser support in all modern browsers (Chrome 90+, Safari 16+, Firefox 81+). Tailwind CSS v3.3+ includes the `overflow-x-clip` utility class natively.
 
