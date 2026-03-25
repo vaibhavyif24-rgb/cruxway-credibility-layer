@@ -5,6 +5,7 @@ interface ScrollRevealTextProps {
   label?: string;
   heading: string;
   subtext?: string;
+  stats?: { value: string; label: string }[];
   variant?: 'dark' | 'light';
   className?: string;
 }
