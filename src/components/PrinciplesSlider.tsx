@@ -87,7 +87,7 @@ const PrincipleCard: React.FC<{
           <div className="flex flex-col items-center max-w-[540px]">
             {/* Overline label */}
             <p
-              className="font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] text-gold/50 mb-6"
+              className="font-sans text-[10px] md:text-[12px] font-medium uppercase tracking-[0.28em] text-white/60 mb-6"
               style={{
                 opacity: isActive ? 0.6 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
@@ -99,7 +99,7 @@ const PrincipleCard: React.FC<{
 
             {/* Numbered index */}
             <span
-              className="font-serif text-[11px] md:text-[12px] tracking-[0.18em] text-white/30 mb-4"
+              className="font-serif text-[13px] md:text-[15px] tracking-[0.18em] text-white/50 mb-4"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
@@ -111,7 +111,7 @@ const PrincipleCard: React.FC<{
 
             {/* Title */}
             <h2
-              className="font-serif text-[clamp(1.8rem,4.5vw,3rem)] text-white leading-[1.05] tracking-[-0.025em] drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]"
+              className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white leading-[1.05] tracking-[-0.025em] drop-shadow-[0_2px_20px_rgba(0,0,0,0.45)]"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
@@ -134,7 +134,7 @@ const PrincipleCard: React.FC<{
 
             {/* Description */}
             <p
-              className="font-sans text-[13px] md:text-[15px] text-white/45 leading-[1.85] tracking-[0.01em] max-w-[380px] drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]"
+              className="font-sans text-[14px] md:text-[17px] text-white/60 leading-[1.85] tracking-[0.01em] max-w-[440px] drop-shadow-[0_1px_10px_rgba(0,0,0,0.35)]"
               style={{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,

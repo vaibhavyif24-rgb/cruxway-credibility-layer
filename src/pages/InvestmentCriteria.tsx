@@ -136,7 +136,7 @@ const InvestmentCriteria = () => {
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
 
   return (
-    <div>
+    <div className="overflow-x-hidden">
       {/* Hero */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />

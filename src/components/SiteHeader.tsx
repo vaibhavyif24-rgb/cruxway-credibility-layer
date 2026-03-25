@@ -50,7 +50,7 @@ const SiteHeader = () => {
           <div className="flex items-center justify-between h-14 md:h-16">
             <Link
               to={prefix}
-              className="font-serif text-xl md:text-2xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75"
+              className="font-serif text-2xl md:text-3xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75 font-semibold"
             >
               Cruxway
             </Link>
@@ -85,13 +85,13 @@ const SiteHeader = () => {
               {/* Dark mode toggle */}
               <button
                 onClick={toggleTheme}
-                className="p-2 text-primary-foreground/30 hover:text-primary-foreground/60 transition-colors duration-300 mr-4"
+                className="p-2 text-primary-foreground/40 hover:text-primary-foreground/70 transition-colors duration-300 mr-4"
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? (
-                  <Moon size={15} strokeWidth={1.5} />
+                  <Moon size={18} strokeWidth={1.5} />
                 ) : (
-                  <Sun size={15} strokeWidth={1.5} />
+                  <Sun size={18} strokeWidth={1.5} />
                 )}
               </button>
 

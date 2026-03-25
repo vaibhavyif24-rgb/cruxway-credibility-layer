@@ -14,13 +14,11 @@ interface StickyCardStackProps {
 }
 
 /* ─── Constants ─── */
-const STICKY_TOP = 88;
 const MIN_CARD_HEIGHT = 420;
-const SCROLL_PER_CARD = 0.65;
 
 const getCardHeight = () => {
-  if (typeof window === 'undefined') return 620;
-  return Math.max(MIN_CARD_HEIGHT, window.innerHeight - STICKY_TOP);
+  if (typeof window === 'undefined') return 560;
+  return Math.max(MIN_CARD_HEIGHT, Math.min(window.innerHeight * 0.7, 620));
 };
 
 /* ─── Background palettes ─── */
@@ -66,7 +64,6 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
   const baseOpacity = isDark ? 0.12 : 0.1;
 
   const illustrations: Record<number, [React.ReactNode, React.ReactNode]> = {
-    // Discovery — Radar / Compass
     0: [
       <svg key="0a" viewBox="0 0 300 300" className="w-full h-full">
         {[50, 90, 130].map(r => (
@@ -74,35 +71,28 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
         ))}
         <line x1="150" y1="20" x2="150" y2="280" stroke={gold} strokeWidth="0.4" opacity={baseOpacity * 0.6} />
         <line x1="20" y1="150" x2="280" y2="150" stroke={gold} strokeWidth="0.4" opacity={baseOpacity * 0.6} />
-        {/* Sweep line */}
         <line x1="150" y1="150" x2="250" y2="60" stroke={gold} strokeWidth="1" opacity={baseOpacity * 1.5}>
           <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="6s" repeatCount="indefinite" />
         </line>
-        {/* Nodes */}
         {[[200, 80], [100, 220], [230, 200], [80, 90]].map(([cx, cy], i) => (
           <circle key={i} cx={cx} cy={cy} r="4" fill={gold} opacity={baseOpacity * 1.8}>
             <animate attributeName="r" values="3;5;3" dur="2.5s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
             <animate attributeName="opacity" values={`${baseOpacity};${baseOpacity * 2.5};${baseOpacity}`} dur="2.5s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
           </circle>
         ))}
-        {/* Corner accents */}
         <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
-      // Variant 2 — Compass rose
       <svg key="0b" viewBox="0 0 300 300" className="w-full h-full">
         <circle cx="150" cy="150" r="120" fill="none" stroke={gold} strokeWidth="0.5" opacity={baseOpacity} />
         <circle cx="150" cy="150" r="80" fill="none" stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.7} />
-        {/* Cardinal lines */}
         {[0, 45, 90, 135].map(angle => (
           <line key={angle} x1="150" y1="30" x2="150" y2="270" stroke={gold} strokeWidth={angle % 90 === 0 ? '0.6' : '0.3'} opacity={baseOpacity * 0.5} transform={`rotate(${angle} 150 150)`} />
         ))}
-        {/* Compass diamond */}
         <path d="M 150 50 L 170 150 L 150 250 L 130 150 Z" fill="none" stroke={gold} strokeWidth="0.8" opacity={baseOpacity * 1.2} />
         <path d="M 150 50 L 170 150 L 150 150 Z" fill={gold} opacity={baseOpacity * 0.4} />
-        {/* Pulsing center */}
         <circle cx="150" cy="150" r="5" fill={gold} opacity={baseOpacity * 2}>
           <animate attributeName="r" values="4;7;4" dur="3s" repeatCount="indefinite" />
         </circle>
@@ -110,31 +100,23 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
         <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
     ],
-
-    // Evaluation — Balance / Scales
     1: [
       <svg key="1a" viewBox="0 0 300 300" className="w-full h-full">
-        {/* Fulcrum */}
         <polygon points="150,100 165,250 135,250" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity} />
-        {/* Balance beam */}
         <line x1="40" y1="120" x2="260" y2="100" stroke={gold} strokeWidth="1" opacity={baseOpacity * 1.3}>
           <animateTransform attributeName="transform" type="rotate" values="-2 150 110;2 150 110;-2 150 110" dur="4s" repeatCount="indefinite" />
         </line>
-        {/* Left pan */}
         <path d="M 40 120 Q 40 145 70 145 L 90 145 Q 120 145 120 120" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity}>
           <animateTransform attributeName="transform" type="rotate" values="-2 150 110;2 150 110;-2 150 110" dur="4s" repeatCount="indefinite" />
         </path>
-        {/* Right pan */}
         <path d="M 180 100 Q 180 125 210 125 L 230 125 Q 260 125 260 100" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity}>
           <animateTransform attributeName="transform" type="rotate" values="-2 150 110;2 150 110;-2 150 110" dur="4s" repeatCount="indefinite" />
         </path>
-        {/* Data points on pans */}
         {[[65, 130], [95, 128], [210, 112], [240, 108]].map(([cx, cy], i) => (
           <circle key={i} cx={cx} cy={cy} r="3.5" fill={gold} opacity={baseOpacity * 1.6}>
             <animate attributeName="opacity" values={`${baseOpacity};${baseOpacity * 2.2};${baseOpacity}`} dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
           </circle>
         ))}
-        {/* Grid lines behind */}
         {[60, 120, 180, 240].map(x => (
           <line key={x} x1={x} y1="50" x2={x} y2="270" stroke={gold} strokeWidth="0.2" opacity={baseOpacity * 0.3} />
         ))}
@@ -143,16 +125,13 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
         <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
-      // Variant 2 — Grid with weighted indicators
       <svg key="1b" viewBox="0 0 300 300" className="w-full h-full">
-        {/* Grid */}
         {Array.from({ length: 7 }).map((_, i) => (
           <React.Fragment key={i}>
             <line x1={30 + i * 40} y1="30" x2={30 + i * 40} y2="270" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.3} />
             <line x1="30" y1={30 + i * 40} x2="270" y2={30 + i * 40} stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.3} />
           </React.Fragment>
         ))}
-        {/* Bars */}
         {[
           [70, 190, 40], [110, 150, 40], [150, 110, 40], [190, 130, 40], [230, 90, 40]
         ].map(([x, y, w], i) => (
@@ -160,44 +139,34 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
             <animate attributeName="opacity" values={`${baseOpacity * 0.3};${baseOpacity * 0.7};${baseOpacity * 0.3}`} dur="3s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
           </rect>
         ))}
-        {/* Equilibrium line */}
         <line x1="30" y1="150" x2="270" y2="150" stroke={gold} strokeWidth="0.8" strokeDasharray="4 4" opacity={baseOpacity * 0.8} />
         <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
     ],
-
-    // Diligence — Magnifying glass with data
     2: [
       <svg key="2a" viewBox="0 0 300 300" className="w-full h-full">
-        {/* Dot grid */}
         {Array.from({ length: 8 }).map((_, r) =>
           Array.from({ length: 8 }).map((_, c) => (
             <circle key={`${r}-${c}`} cx={50 + c * 30} cy={50 + r * 30} r="1.5" fill={gold} opacity={baseOpacity * 0.4} />
           ))
         )}
-        {/* Magnifying glass */}
         <circle cx="160" cy="140" r="65" fill="none" stroke={gold} strokeWidth="1.2" opacity={baseOpacity * 1.5} />
         <line x1="206" y1="186" x2="260" y2="240" stroke={gold} strokeWidth="2.5" strokeLinecap="round" opacity={baseOpacity * 1.3} />
-        {/* Highlighted nodes inside lens */}
         {[[135, 120], [170, 110], [150, 150], [180, 145], [140, 160]].map(([cx, cy], i) => (
           <circle key={i} cx={cx} cy={cy} r="4" fill={gold} opacity={baseOpacity * 2}>
             <animate attributeName="r" values="3;5.5;3" dur="2s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
             <animate attributeName="opacity" values={`${baseOpacity * 1.5};${baseOpacity * 3};${baseOpacity * 1.5}`} dur="2s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
           </circle>
         ))}
-        {/* Connecting lines inside lens */}
         <path d="M 135 120 L 170 110 L 180 145 L 150 150 L 140 160" fill="none" stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.8} />
         <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
-      // Variant 2 — Data checklist
       <svg key="2b" viewBox="0 0 300 300" className="w-full h-full">
-        {/* Document outline */}
         <rect x="60" y="30" width="180" height="240" rx="6" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity} />
-        {/* Check rows */}
         {[70, 110, 150, 190, 230].map((y, i) => (
           <React.Fragment key={i}>
             <rect x="85" y={y} width="12" height="12" rx="2" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity * 1.2} />
@@ -207,7 +176,6 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
             <line x1="110" y1={y + 6} x2={180 + (i % 2) * 30} y2={y + 6} stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.6} />
           </React.Fragment>
         ))}
-        {/* Ambient glow */}
         <circle cx="150" cy="150" r="80" fill={gold} opacity={baseOpacity * 0.08}>
           <animate attributeName="r" values="75;85;75" dur="4s" repeatCount="indefinite" />
         </circle>
@@ -215,25 +183,17 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
         <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
     ],
-
-    // Structuring — Partnership growth graph (adapted from AnimatedAccent)
     3: [
       <svg key="3a" viewBox="0 0 300 300" className="w-full h-full">
-        {/* Axes */}
         <line x1="50" y1="250" x2="270" y2="250" stroke={gold} strokeWidth="0.8" opacity={baseOpacity * 1.2} />
         <line x1="50" y1="250" x2="50" y2="40" stroke={gold} strokeWidth="0.8" opacity={baseOpacity * 1.2} />
-        {/* Axis labels */}
         <text x="160" y="275" textAnchor="middle" fill={gold} fontSize="8" fontFamily="sans-serif" letterSpacing="0.15em" opacity={baseOpacity * 1.5}>TIME</text>
         <text x="25" y="145" textAnchor="middle" fill={gold} fontSize="8" fontFamily="sans-serif" letterSpacing="0.15em" opacity={baseOpacity * 1.5} transform="rotate(-90 25 145)">VALUE</text>
-        {/* Grid */}
         {[100, 150, 200].map(y => (
           <line key={y} x1="50" y1={y} x2="270" y2={y} stroke={gold} strokeWidth="0.2" opacity={baseOpacity * 0.3} />
         ))}
-        {/* Growth curve */}
         <path d="M 50 240 Q 100 235 130 210 Q 160 180 190 130 Q 220 80 260 55" fill="none" stroke={gold} strokeWidth="1.2" opacity={baseOpacity * 1.8} />
-        {/* Area fill */}
         <path d="M 50 240 Q 100 235 130 210 Q 160 180 190 130 Q 220 80 260 55 L 260 250 L 50 250 Z" fill={gold} opacity={baseOpacity * 0.15} />
-        {/* Data points with drop lines */}
         {[[90, 232], [130, 210], [170, 165], [210, 105], [250, 60]].map(([cx, cy], i) => (
           <React.Fragment key={i}>
             <line x1={cx} y1={cy as number + 5} x2={cx} y2="250" stroke={gold} strokeWidth="0.4" strokeDasharray="3 3" opacity={baseOpacity * 0.5} />
@@ -242,7 +202,6 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
             </circle>
           </React.Fragment>
         ))}
-        {/* Peak glow */}
         <circle cx="250" cy="60" r="15" fill={gold} opacity={baseOpacity * 0.15}>
           <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
         </circle>
@@ -251,14 +210,10 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
         <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
         <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
       </svg>,
-      // Variant 2 — Handshake / partnership nodes
       <svg key="3b" viewBox="0 0 300 300" className="w-full h-full">
-        {/* Network graph */}
-        {/* Central node */}
         <circle cx="150" cy="150" r="8" fill={gold} opacity={baseOpacity * 1.5}>
           <animate attributeName="r" values="7;10;7" dur="3s" repeatCount="indefinite" />
         </circle>
-        {/* Outer nodes */}
         {[[80, 80], [220, 80], [60, 200], [240, 200], [150, 50], [150, 250]].map(([cx, cy], i) => (
           <React.Fragment key={i}>
             <line x1="150" y1="150" x2={cx} y2={cy} stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.6} />
@@ -267,12 +222,10 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
             </circle>
           </React.Fragment>
         ))}
-        {/* Cross connections */}
         <line x1="80" y1="80" x2="220" y2="80" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
         <line x1="60" y1="200" x2="240" y2="200" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
         <line x1="80" y1="80" x2="60" y2="200" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
         <line x1="220" y1="80" x2="240" y2="200" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
-        {/* Ambient glow */}
         <circle cx="150" cy="150" r="90" fill={gold} opacity={baseOpacity * 0.06}>
           <animate attributeName="r" values="85;95;85" dur="4s" repeatCount="indefinite" />
         </circle>
@@ -290,7 +243,6 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
       <div className="absolute right-0 top-0 h-full w-[45%] flex items-center justify-center">
         <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px]">
-          {/* Variant A */}
           <div
             className="absolute inset-0"
             style={{
@@ -300,7 +252,6 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
           >
             {variantA}
           </div>
-          {/* Variant B */}
           <div
             className="absolute inset-0"
             style={{
@@ -316,8 +267,8 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
   );
 };
 
-/* ─── Card Surface ─── */
-const CardSurface: React.FC<{
+/* ─── Presentation Slide Card ─── */
+const SlideCard: React.FC<{
   card: StickyCard;
   index: number;
   variant: 'light' | 'dark';
@@ -332,11 +283,13 @@ const CardSurface: React.FC<{
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl"
+      className="absolute inset-0 w-full overflow-hidden rounded-2xl md:rounded-3xl"
       style={{
         backgroundColor: bg,
-        height: `${cardHeight}px`,
-        boxShadow: `0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)`,
+        opacity: isActive ? 1 : 0,
+        transform: `translateY(${isActive ? 0 : 20}px)`,
+        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+        pointerEvents: isActive ? 'auto' : 'none',
       }}
     >
       {illustrationSet === 'criteria'
@@ -352,8 +305,7 @@ const CardSurface: React.FC<{
               color: colors.step,
               opacity: isActive ? 0.6 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              transitionDelay: '0s',
+              transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
             }}
           >
             {labelPrefix} {card.num}
@@ -364,8 +316,7 @@ const CardSurface: React.FC<{
               color: colors.title,
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              transitionDelay: '0.1s',
+              transition: 'opacity 0.5s ease-out 0.15s, transform 0.5s ease-out 0.15s',
             }}
           >
             {card.title.toLowerCase()}.
@@ -376,8 +327,7 @@ const CardSurface: React.FC<{
               color: colors.desc,
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-              transitionDelay: '0.2s',
+              transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
             }}
           >
             {card.description}
@@ -388,12 +338,13 @@ const CardSurface: React.FC<{
   );
 };
 
-/* ─── CSS Sticky Stacking (Boundless Ventures style) ─── */
-const STICKY_BASE = 80;
-const STICKY_STEP = 20;
-
+/* ─── Presentation Slide Stack ─── */
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step' }) => {
   const [cardHeight, setCardHeight] = useState(getCardHeight);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartRef = useRef<number>(0);
+  const isTransitioning = useRef(false);
 
   useEffect(() => {
     const updateMeasurements = () => setCardHeight(getCardHeight());
@@ -402,69 +353,111 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
     return () => window.removeEventListener('resize', updateMeasurements);
   }, []);
 
-  return (
-    <div className="relative px-5 md:px-10 lg:px-16">
-      <div className="max-w-[1080px] mx-auto">
-        {cards.map((card, i) => (
-          <StickyCardItem
-            key={card.num}
-            card={card}
-            index={i}
-            variant={variant}
-            cardHeight={cardHeight}
-            illustrationSet={illustrationSet}
-            labelPrefix={labelPrefix}
-            stickyTop={STICKY_BASE + i * STICKY_STEP}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
+  const goTo = useCallback((index: number) => {
+    if (isTransitioning.current) return;
+    const clamped = Math.max(0, Math.min(cards.length - 1, index));
+    if (clamped === activeIndex) return;
+    isTransitioning.current = true;
+    setActiveIndex(clamped);
+    setTimeout(() => { isTransitioning.current = false; }, 500);
+  }, [activeIndex, cards.length]);
 
-const StickyCardItem: React.FC<{
-  card: StickyCard;
-  index: number;
-  variant: 'light' | 'dark';
-  cardHeight: number;
-  illustrationSet: 'process' | 'criteria';
-  labelPrefix: string;
-  stickyTop: number;
-}> = ({ card, index, variant, cardHeight, illustrationSet, labelPrefix, stickyTop }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isActive, setIsActive] = useState(false);
-
+  // Wheel navigation
   useEffect(() => {
-    const el = ref.current;
+    const el = containerRef.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.5),
-      { threshold: [0, 0.5, 1], rootMargin: '-10% 0px -30% 0px' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    let accumulated = 0;
+    const THRESHOLD = 50;
+
+    const handleWheel = (e: WheelEvent) => {
+      // Check if this component is in view
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.5 && rect.bottom > window.innerHeight * 0.5;
+      if (!inView) return;
+
+      // If at first slide scrolling up, or last slide scrolling down, let page scroll
+      if (activeIndex === 0 && e.deltaY < 0) return;
+      if (activeIndex === cards.length - 1 && e.deltaY > 0) return;
+
+      e.preventDefault();
+      accumulated += e.deltaY;
+
+      if (Math.abs(accumulated) >= THRESHOLD) {
+        goTo(activeIndex + (accumulated > 0 ? 1 : -1));
+        accumulated = 0;
+      }
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [activeIndex, cards.length, goTo]);
+
+  // Touch navigation
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const delta = touchStartRef.current - e.changedTouches[0].clientY;
+    if (Math.abs(delta) > 40) {
+      goTo(activeIndex + (delta > 0 ? 1 : -1));
+    }
+  };
+
+  const isDark = variant === 'dark';
 
   return (
-    <div
-      ref={ref}
-      className="mb-6 will-change-transform"
-      style={{
-        position: 'sticky',
-        top: `${stickyTop}px`,
-        zIndex: index + 1,
-      }}
-    >
-      <CardSurface
-        card={card}
-        index={index}
-        variant={variant}
-        isActive={isActive}
-        cardHeight={cardHeight}
-        illustrationSet={illustrationSet}
-        labelPrefix={labelPrefix}
-      />
+    <div className="relative px-5 md:px-10 lg:px-16 py-6 md:py-8">
+      <div className="max-w-[1080px] mx-auto">
+        <div
+          ref={containerRef}
+          className="relative rounded-2xl md:rounded-3xl overflow-hidden"
+          style={{
+            height: `${cardHeight}px`,
+            boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
+          }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {cards.map((card, i) => (
+            <SlideCard
+              key={card.num}
+              card={card}
+              index={i}
+              variant={variant}
+              isActive={i === activeIndex}
+              cardHeight={cardHeight}
+              illustrationSet={illustrationSet}
+              labelPrefix={labelPrefix}
+            />
+          ))}
+
+          {/* Dot navigation — right side */}
+          <div className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2.5">
+            {cards.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                className="group relative w-3 h-3 flex items-center justify-center"
+                aria-label={`Go to slide ${i + 1}`}
+              >
+                <span
+                  className="block rounded-full transition-all duration-300"
+                  style={{
+                    width: i === activeIndex ? 8 : 5,
+                    height: i === activeIndex ? 8 : 5,
+                    backgroundColor: i === activeIndex
+                      ? 'hsl(38 48% 52%)'
+                      : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
+                    boxShadow: i === activeIndex ? '0 0 8px hsl(38 48% 52% / 0.4)' : 'none',
+                  }}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
