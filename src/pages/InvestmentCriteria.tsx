@@ -5,6 +5,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import StickyCardStack from '@/components/StickyCardStack';
 
 import GlassCard from '@/components/GlassCard';
+import CriteriaCarousel from '@/components/CriteriaCarousel';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import { motion, useInView } from 'framer-motion';
@@ -95,12 +96,12 @@ const usSectors = [
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
-  { title: 'Founder Succession & Transition', desc: 'Owners planning retirement or next chapters who seek a partner to honour their legacy and professionalise the business for the long term.' },
-  { title: 'Essential Services in Regulated Markets', desc: 'B2B businesses in compliance-driven industries with deep client relationships, high switching costs, and recurring revenue models.' },
-  { title: 'Proven Customer Retention', desc: 'Demonstrated persistency through years of consistent delivery, earning trust that creates durable competitive advantages and predictable cash flows.' },
-  { title: 'Growth Through Consolidation', desc: 'Fragmented industries where a platform strategy and patient capital can drive superior returns through add-on acquisitions and organic expansion.' },
-  { title: 'Operational Upside', desc: 'Companies where professionalisation of systems, processes, and management creates meaningful enterprise value beyond what the founder built alone.' },
-  { title: 'Cultural & Values Alignment', desc: 'Non-negotiable alignment on integrity, stewardship, and long-term thinking. We invest in people and culture as much as in business fundamentals.' },
+  { title: 'Founder Succession & Transition', desc: 'Partnering with owners planning their next chapter while honouring legacy.' },
+  { title: 'Essential Regulated Services', desc: 'Compliance-driven B2B businesses with recurring revenue and high switching costs.' },
+  { title: 'Proven Customer Retention', desc: 'Consistent delivery earning trust that creates durable competitive advantages.' },
+  { title: 'Growth Through Consolidation', desc: 'Platform strategy in fragmented industries driving superior returns.' },
+  { title: 'Operational Upside', desc: 'Professionalisation of systems creating meaningful enterprise value.' },
+  { title: 'Cultural & Values Alignment', desc: 'Integrity, stewardship, and long-term thinking — non-negotiable.' },
 ];
 
 /** Animated stat counter */
@@ -185,21 +186,7 @@ const InvestmentCriteria = () => {
             </p>
             <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 auto-rows-fr">
-            {whatWeLookFor.map((item, i) => (
-              <GlassCard key={item.title} index={i} className="p-5 md:p-6 h-full">
-                <div className="flex items-start gap-3 h-full">
-                  <div className="w-1 self-stretch bg-gold/20 group-hover:bg-gold/40 transition-all duration-500 rounded-full shrink-0" />
-                  <div className="flex flex-col h-full">
-                    <h4 className="font-serif text-[0.95rem] md:text-[1.05rem] text-foreground leading-[1.25] mb-2">{item.title}</h4>
-                    <p className="font-sans text-[12px] md:text-[13px] text-muted-foreground group-hover:text-foreground/75 leading-[1.7] transition-colors duration-300 flex-1">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
+          <CriteriaCarousel items={whatWeLookFor} />
         </div>
       </section>
 

@@ -49,47 +49,266 @@ const darkTextColors = {
   step: 'hsl(38 48% 52%)',
 };
 
-/* ─── Minimal SVG decoration ─── */
-const CardDecoration: React.FC<{ index: number; isDark: boolean }> = ({ index, isDark }) => {
-  const opacity = isDark ? 0.05 : 0.06;
-  const stroke = isDark ? 'hsl(38 48% 52%)' : 'hsl(210 8% 55%)';
+/* ─── Thematic Illustrations (AnimatedAccent style) ─── */
+const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive: boolean }> = ({ index, isDark, isActive }) => {
+  const [phase, setPhase] = useState(0);
 
-  const patterns: Record<number, React.ReactNode> = {
-    0: (
-      <svg viewBox="0 0 400 400" className="w-full h-full">
-        {[100, 150, 200].map(r => (
-          <circle key={r} cx="200" cy="200" r={r} fill="none" stroke={stroke} strokeWidth="0.5" opacity={opacity} />
+  useEffect(() => {
+    if (!isActive) return;
+    const timer = setInterval(() => setPhase(p => (p === 0 ? 1 : 0)), 2000);
+    return () => clearInterval(timer);
+  }, [isActive]);
+
+  const gold = 'hsl(38 45% 55%)';
+  const goldDim = 'hsl(38 35% 45%)';
+  const baseOpacity = isDark ? 0.12 : 0.1;
+
+  const illustrations: Record<number, [React.ReactNode, React.ReactNode]> = {
+    // Discovery — Radar / Compass
+    0: [
+      <svg key="0a" viewBox="0 0 300 300" className="w-full h-full">
+        {[50, 90, 130].map(r => (
+          <circle key={r} cx="150" cy="150" r={r} fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity} />
         ))}
-      </svg>
-    ),
-    1: (
-      <svg viewBox="0 0 400 400" className="w-full h-full">
-        <path d="M 400 400 A 320 320 0 0 0 80 400" fill="none" stroke={stroke} strokeWidth="0.6" opacity={opacity} />
-        <path d="M 400 400 A 220 220 0 0 0 180 400" fill="none" stroke={stroke} strokeWidth="0.4" opacity={opacity * 0.7} />
-      </svg>
-    ),
-    2: (
-      <svg viewBox="0 0 400 400" className="w-full h-full">
-        {Array.from({ length: 6 }).map((_, r) =>
-          Array.from({ length: 6 }).map((_, c) => (
-            <circle key={`${r}-${c}`} cx={60 + c * 56} cy={60 + r * 56} r="1.2" fill={stroke} opacity={opacity} />
+        <line x1="150" y1="20" x2="150" y2="280" stroke={gold} strokeWidth="0.4" opacity={baseOpacity * 0.6} />
+        <line x1="20" y1="150" x2="280" y2="150" stroke={gold} strokeWidth="0.4" opacity={baseOpacity * 0.6} />
+        {/* Sweep line */}
+        <line x1="150" y1="150" x2="250" y2="60" stroke={gold} strokeWidth="1" opacity={baseOpacity * 1.5}>
+          <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="6s" repeatCount="indefinite" />
+        </line>
+        {/* Nodes */}
+        {[[200, 80], [100, 220], [230, 200], [80, 90]].map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r="4" fill={gold} opacity={baseOpacity * 1.8}>
+            <animate attributeName="r" values="3;5;3" dur="2.5s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" values={`${baseOpacity};${baseOpacity * 2.5};${baseOpacity}`} dur="2.5s" begin={`${i * 0.6}s`} repeatCount="indefinite" />
+          </circle>
+        ))}
+        {/* Corner accents */}
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+      // Variant 2 — Compass rose
+      <svg key="0b" viewBox="0 0 300 300" className="w-full h-full">
+        <circle cx="150" cy="150" r="120" fill="none" stroke={gold} strokeWidth="0.5" opacity={baseOpacity} />
+        <circle cx="150" cy="150" r="80" fill="none" stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.7} />
+        {/* Cardinal lines */}
+        {[0, 45, 90, 135].map(angle => (
+          <line key={angle} x1="150" y1="30" x2="150" y2="270" stroke={gold} strokeWidth={angle % 90 === 0 ? '0.6' : '0.3'} opacity={baseOpacity * 0.5} transform={`rotate(${angle} 150 150)`} />
+        ))}
+        {/* Compass diamond */}
+        <path d="M 150 50 L 170 150 L 150 250 L 130 150 Z" fill="none" stroke={gold} strokeWidth="0.8" opacity={baseOpacity * 1.2} />
+        <path d="M 150 50 L 170 150 L 150 150 Z" fill={gold} opacity={baseOpacity * 0.4} />
+        {/* Pulsing center */}
+        <circle cx="150" cy="150" r="5" fill={gold} opacity={baseOpacity * 2}>
+          <animate attributeName="r" values="4;7;4" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+    ],
+
+    // Evaluation — Balance / Scales
+    1: [
+      <svg key="1a" viewBox="0 0 300 300" className="w-full h-full">
+        {/* Fulcrum */}
+        <polygon points="150,100 165,250 135,250" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity} />
+        {/* Balance beam */}
+        <line x1="40" y1="120" x2="260" y2="100" stroke={gold} strokeWidth="1" opacity={baseOpacity * 1.3}>
+          <animateTransform attributeName="transform" type="rotate" values="-2 150 110;2 150 110;-2 150 110" dur="4s" repeatCount="indefinite" />
+        </line>
+        {/* Left pan */}
+        <path d="M 40 120 Q 40 145 70 145 L 90 145 Q 120 145 120 120" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity}>
+          <animateTransform attributeName="transform" type="rotate" values="-2 150 110;2 150 110;-2 150 110" dur="4s" repeatCount="indefinite" />
+        </path>
+        {/* Right pan */}
+        <path d="M 180 100 Q 180 125 210 125 L 230 125 Q 260 125 260 100" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity}>
+          <animateTransform attributeName="transform" type="rotate" values="-2 150 110;2 150 110;-2 150 110" dur="4s" repeatCount="indefinite" />
+        </path>
+        {/* Data points on pans */}
+        {[[65, 130], [95, 128], [210, 112], [240, 108]].map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r="3.5" fill={gold} opacity={baseOpacity * 1.6}>
+            <animate attributeName="opacity" values={`${baseOpacity};${baseOpacity * 2.2};${baseOpacity}`} dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+          </circle>
+        ))}
+        {/* Grid lines behind */}
+        {[60, 120, 180, 240].map(x => (
+          <line key={x} x1={x} y1="50" x2={x} y2="270" stroke={gold} strokeWidth="0.2" opacity={baseOpacity * 0.3} />
+        ))}
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+      // Variant 2 — Grid with weighted indicators
+      <svg key="1b" viewBox="0 0 300 300" className="w-full h-full">
+        {/* Grid */}
+        {Array.from({ length: 7 }).map((_, i) => (
+          <React.Fragment key={i}>
+            <line x1={30 + i * 40} y1="30" x2={30 + i * 40} y2="270" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.3} />
+            <line x1="30" y1={30 + i * 40} x2="270" y2={30 + i * 40} stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.3} />
+          </React.Fragment>
+        ))}
+        {/* Bars */}
+        {[
+          [70, 190, 40], [110, 150, 40], [150, 110, 40], [190, 130, 40], [230, 90, 40]
+        ].map(([x, y, w], i) => (
+          <rect key={i} x={x as number - 15} y={y as number} width="30" height={270 - (y as number)} fill={gold} opacity={baseOpacity * 0.5} rx="2">
+            <animate attributeName="opacity" values={`${baseOpacity * 0.3};${baseOpacity * 0.7};${baseOpacity * 0.3}`} dur="3s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+          </rect>
+        ))}
+        {/* Equilibrium line */}
+        <line x1="30" y1="150" x2="270" y2="150" stroke={gold} strokeWidth="0.8" strokeDasharray="4 4" opacity={baseOpacity * 0.8} />
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+    ],
+
+    // Diligence — Magnifying glass with data
+    2: [
+      <svg key="2a" viewBox="0 0 300 300" className="w-full h-full">
+        {/* Dot grid */}
+        {Array.from({ length: 8 }).map((_, r) =>
+          Array.from({ length: 8 }).map((_, c) => (
+            <circle key={`${r}-${c}`} cx={50 + c * 30} cy={50 + r * 30} r="1.5" fill={gold} opacity={baseOpacity * 0.4} />
           ))
         )}
-      </svg>
-    ),
-    3: (
-      <svg viewBox="0 0 400 400" className="w-full h-full">
-        {[0, 80, 160, 240].map(o => (
-          <line key={o} x1={o} y1="0" x2={o + 200} y2="400" stroke={stroke} strokeWidth="0.4" opacity={opacity * 0.8} />
+        {/* Magnifying glass */}
+        <circle cx="160" cy="140" r="65" fill="none" stroke={gold} strokeWidth="1.2" opacity={baseOpacity * 1.5} />
+        <line x1="206" y1="186" x2="260" y2="240" stroke={gold} strokeWidth="2.5" strokeLinecap="round" opacity={baseOpacity * 1.3} />
+        {/* Highlighted nodes inside lens */}
+        {[[135, 120], [170, 110], [150, 150], [180, 145], [140, 160]].map(([cx, cy], i) => (
+          <circle key={i} cx={cx} cy={cy} r="4" fill={gold} opacity={baseOpacity * 2}>
+            <animate attributeName="r" values="3;5.5;3" dur="2s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
+            <animate attributeName="opacity" values={`${baseOpacity * 1.5};${baseOpacity * 3};${baseOpacity * 1.5}`} dur="2s" begin={`${i * 0.35}s`} repeatCount="indefinite" />
+          </circle>
         ))}
-      </svg>
-    ),
+        {/* Connecting lines inside lens */}
+        <path d="M 135 120 L 170 110 L 180 145 L 150 150 L 140 160" fill="none" stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.8} />
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+      // Variant 2 — Data checklist
+      <svg key="2b" viewBox="0 0 300 300" className="w-full h-full">
+        {/* Document outline */}
+        <rect x="60" y="30" width="180" height="240" rx="6" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity} />
+        {/* Check rows */}
+        {[70, 110, 150, 190, 230].map((y, i) => (
+          <React.Fragment key={i}>
+            <rect x="85" y={y} width="12" height="12" rx="2" fill="none" stroke={gold} strokeWidth="0.6" opacity={baseOpacity * 1.2} />
+            {i < 3 && <path d={`M 88 ${y + 7} L 91 ${y + 10} L 97 ${y + 3}`} fill="none" stroke={gold} strokeWidth="1.2" opacity={baseOpacity * 2}>
+              <animate attributeName="opacity" values={`0;${baseOpacity * 2.5};${baseOpacity * 2.5}`} dur="0.5s" begin={`${i * 0.8 + 0.5}s`} fill="freeze" />
+            </path>}
+            <line x1="110" y1={y + 6} x2={180 + (i % 2) * 30} y2={y + 6} stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.6} />
+          </React.Fragment>
+        ))}
+        {/* Ambient glow */}
+        <circle cx="150" cy="150" r="80" fill={gold} opacity={baseOpacity * 0.08}>
+          <animate attributeName="r" values="75;85;75" dur="4s" repeatCount="indefinite" />
+        </circle>
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+    ],
+
+    // Structuring — Partnership growth graph (adapted from AnimatedAccent)
+    3: [
+      <svg key="3a" viewBox="0 0 300 300" className="w-full h-full">
+        {/* Axes */}
+        <line x1="50" y1="250" x2="270" y2="250" stroke={gold} strokeWidth="0.8" opacity={baseOpacity * 1.2} />
+        <line x1="50" y1="250" x2="50" y2="40" stroke={gold} strokeWidth="0.8" opacity={baseOpacity * 1.2} />
+        {/* Axis labels */}
+        <text x="160" y="275" textAnchor="middle" fill={gold} fontSize="8" fontFamily="sans-serif" letterSpacing="0.15em" opacity={baseOpacity * 1.5}>TIME</text>
+        <text x="25" y="145" textAnchor="middle" fill={gold} fontSize="8" fontFamily="sans-serif" letterSpacing="0.15em" opacity={baseOpacity * 1.5} transform="rotate(-90 25 145)">VALUE</text>
+        {/* Grid */}
+        {[100, 150, 200].map(y => (
+          <line key={y} x1="50" y1={y} x2="270" y2={y} stroke={gold} strokeWidth="0.2" opacity={baseOpacity * 0.3} />
+        ))}
+        {/* Growth curve */}
+        <path d="M 50 240 Q 100 235 130 210 Q 160 180 190 130 Q 220 80 260 55" fill="none" stroke={gold} strokeWidth="1.2" opacity={baseOpacity * 1.8} />
+        {/* Area fill */}
+        <path d="M 50 240 Q 100 235 130 210 Q 160 180 190 130 Q 220 80 260 55 L 260 250 L 50 250 Z" fill={gold} opacity={baseOpacity * 0.15} />
+        {/* Data points with drop lines */}
+        {[[90, 232], [130, 210], [170, 165], [210, 105], [250, 60]].map(([cx, cy], i) => (
+          <React.Fragment key={i}>
+            <line x1={cx} y1={cy as number + 5} x2={cx} y2="250" stroke={gold} strokeWidth="0.4" strokeDasharray="3 3" opacity={baseOpacity * 0.5} />
+            <circle cx={cx} cy={cy} r="4" fill={gold} opacity={baseOpacity * 1.8}>
+              <animate attributeName="r" values="3;5;3" dur="3s" begin={`${i * 0.5}s`} repeatCount="indefinite" />
+            </circle>
+          </React.Fragment>
+        ))}
+        {/* Peak glow */}
+        <circle cx="250" cy="60" r="15" fill={gold} opacity={baseOpacity * 0.15}>
+          <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
+        </circle>
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+      // Variant 2 — Handshake / partnership nodes
+      <svg key="3b" viewBox="0 0 300 300" className="w-full h-full">
+        {/* Network graph */}
+        {/* Central node */}
+        <circle cx="150" cy="150" r="8" fill={gold} opacity={baseOpacity * 1.5}>
+          <animate attributeName="r" values="7;10;7" dur="3s" repeatCount="indefinite" />
+        </circle>
+        {/* Outer nodes */}
+        {[[80, 80], [220, 80], [60, 200], [240, 200], [150, 50], [150, 250]].map(([cx, cy], i) => (
+          <React.Fragment key={i}>
+            <line x1="150" y1="150" x2={cx} y2={cy} stroke={gold} strokeWidth="0.5" opacity={baseOpacity * 0.6} />
+            <circle cx={cx} cy={cy} r="5" fill={gold} opacity={baseOpacity * 1.3}>
+              <animate attributeName="opacity" values={`${baseOpacity};${baseOpacity * 2};${baseOpacity}`} dur="2.5s" begin={`${i * 0.4}s`} repeatCount="indefinite" />
+            </circle>
+          </React.Fragment>
+        ))}
+        {/* Cross connections */}
+        <line x1="80" y1="80" x2="220" y2="80" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
+        <line x1="60" y1="200" x2="240" y2="200" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
+        <line x1="80" y1="80" x2="60" y2="200" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
+        <line x1="220" y1="80" x2="240" y2="200" stroke={gold} strokeWidth="0.3" opacity={baseOpacity * 0.4} />
+        {/* Ambient glow */}
+        <circle cx="150" cy="150" r="90" fill={gold} opacity={baseOpacity * 0.06}>
+          <animate attributeName="r" values="85;95;85" dur="4s" repeatCount="indefinite" />
+        </circle>
+        <path d="M 10 30 L 10 10 L 30 10" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 10 L 290 10 L 290 30" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 10 270 L 10 290 L 30 290" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+        <path d="M 270 290 L 290 290 L 290 270" fill="none" stroke={goldDim} strokeWidth="0.8" opacity={baseOpacity * 0.8} />
+      </svg>,
+    ],
   };
+
+  const [variantA, variantB] = illustrations[index % 4] || illustrations[0];
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      <div className="absolute right-0 top-0 h-full w-[40%] flex items-center justify-center">
-        {patterns[index % 4]}
+      <div className="absolute right-0 top-0 h-full w-[45%] flex items-center justify-center">
+        <div className="relative w-[280px] h-[280px] md:w-[320px] md:h-[320px]">
+          {/* Variant A */}
+          <div
+            className="absolute inset-0"
+            style={{
+              opacity: isActive ? (phase === 0 ? 1 : 0) : 0,
+              transition: 'opacity 0.8s ease-in-out',
+            }}
+          >
+            {variantA}
+          </div>
+          {/* Variant B */}
+          <div
+            className="absolute inset-0"
+            style={{
+              opacity: isActive ? (phase === 1 ? 1 : 0) : 0,
+              transition: 'opacity 0.8s ease-in-out',
+            }}
+          >
+            {variantB}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -116,7 +335,7 @@ const CardSurface: React.FC<{
         boxShadow: `0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)`,
       }}
     >
-      <CardDecoration index={index} isDark={isDark} />
+      <ThematicIllustration index={index} isDark={isDark} isActive={isActive} />
 
       <div className="relative z-10 flex h-full items-center">
         <div className="flex-1 px-8 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16">
@@ -157,31 +376,12 @@ const CardSurface: React.FC<{
             {card.description}
           </p>
         </div>
-
-        <div className="hidden w-[35%] items-center justify-center pr-8 md:flex lg:w-[40%] lg:pr-12" aria-hidden="true">
-          <span
-            className="select-none font-serif text-[clamp(7rem,16vw,14rem)] leading-none tracking-[-0.04em]"
-            style={{
-              color: colors.step,
-              opacity: isActive ? 0.06 : 0,
-              transition: 'opacity 0.5s ease-out',
-              transitionDelay: '0.15s',
-            }}
-          >
-            {card.num}
-          </span>
-        </div>
       </div>
     </div>
   );
 };
 
-/* ─── Scroll-Driven Vertical Carousel ───
- *
- * Outer wrapper: tall div creating scroll runway ((cards.length - 1) * SCROLL_PER_CARD * 100vh + cardHeight)
- * Inner sticky: pinned container with overflow:hidden, filling the available viewport below the header
- * Track: all cards stacked vertically, translateY driven by active index
- */
+/* ─── Scroll-Driven Vertical Carousel ─── */
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);

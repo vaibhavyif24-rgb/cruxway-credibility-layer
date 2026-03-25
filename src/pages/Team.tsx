@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import ScrollRevealText from '@/components/ScrollRevealText';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
@@ -257,19 +258,19 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
   return (
     <FadeIn ref={ref} delay={index * 0.08}>
-      <div className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden">
+      <div className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden group/card">
         <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
           {/* Photo + Identity */}
           <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
             <LinkedWrapper className="group shrink-0">
               {member.photo ? (
-                <div className="relative w-[72px] h-[72px] md:w-[120px] md:h-[120px] md:mb-4">
+                <div className="relative w-[72px] h-[72px] md:w-[140px] md:h-[140px] md:mb-4">
                   {/* Gold ring on hover — only around image */}
                   <motion.div
                     className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/25 transition-colors duration-700"
                     style={{ margin: -3 }}
                   />
-                  <div className="w-full h-full rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] shadow-[0_4px_24px_-4px_hsl(var(--prussian)/0.14)]">
+                  <div className="w-full h-full rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] shadow-[0_4px_24px_-4px_hsl(var(--prussian)/0.14)] transition-transform duration-500 group-hover/card:scale-[1.03]">
                     <img
                       src={member.photo}
                       alt={member.name}
@@ -279,7 +280,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                   </div>
                 </div>
               ) : (
-                <div className="w-[72px] h-[72px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] md:mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
+                <div className="w-[72px] h-[72px] md:w-[140px] md:h-[140px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] md:mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)] transition-transform duration-500 group-hover/card:scale-[1.03]">
                   <span className="font-serif text-[1.2rem] md:text-[1.5rem] text-muted-foreground/30">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </span>
@@ -288,8 +289,11 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </LinkedWrapper>
             <div>
               <LinkedWrapper className="hover:opacity-80 transition-opacity group inline-flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2]">
-                  {member.name}
+                <h3 className="font-serif text-[1.05rem] md:text-[1.3rem] text-foreground tracking-[-0.02em] leading-[1.2] relative">
+                  <span className="relative">
+                    {member.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gradient-to-r from-gold/60 to-gold/20 group-hover/card:w-full transition-all duration-500" />
+                  </span>
                 </h3>
                 {member.linkedIn && (
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
@@ -308,13 +312,17 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </p>
             <ul className="space-y-1.5 md:space-y-2">
               {member.highlights.map((line, i) => (
-                <li
+                <motion.li
                   key={i}
+                  initial={{ opacity: 0, x: -8 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                   className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
 
@@ -397,6 +405,13 @@ const Team = () => {
         <HeroDivider />
       </section>
 
+      {/* ScrollRevealText — after hero */}
+      <ScrollRevealText
+        label="Our People"
+        heading="Operators and investors who've built, scaled, and partnered across cycles."
+        variant="light"
+      />
+
       {/* Partner (India only, shown before Founders) */}
       {isIndia && (
         <Section>
@@ -476,6 +491,13 @@ const Team = () => {
           <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
         </FadeIn>
       </div>
+
+      {/* ScrollRevealText — before network */}
+      <ScrollRevealText
+        label="Network"
+        heading="A curated network built over decades of shared conviction and institutional rigour."
+        variant="dark"
+      />
 
       {/* Network */}
       <Section>
