@@ -280,7 +280,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                   </div>
                 </div>
               ) : (
-                <div className="w-[72px] h-[72px] md:w-[120px] md:h-[120px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] md:mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)]">
+                <div className="w-[72px] h-[72px] md:w-[140px] md:h-[140px] rounded-full bg-muted border-2 border-dashed border-foreground/[0.08] md:mb-4 flex items-center justify-center shadow-[0_4px_20px_-4px_hsl(var(--prussian)/0.08)] transition-transform duration-500 group-hover/card:scale-[1.03]">
                   <span className="font-serif text-[1.2rem] md:text-[1.5rem] text-muted-foreground/30">
                     {member.name.split(' ').map(n => n[0]).join('')}
                   </span>
