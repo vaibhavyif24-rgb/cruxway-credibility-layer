@@ -249,8 +249,8 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
           isDark={isDark}
         />
       ))}
-      {/* Scroll clearance for last card */}
-      <div style={{ height: `${CARD_MIN_H * 0.35}px` }} />
+      {/* Scroll clearance for last card — reduced on desktop */}
+      <div className="h-[120px] lg:h-[80px]" />
     </div>
   );
 };
