@@ -258,7 +258,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 
   return (
     <FadeIn ref={ref} delay={index * 0.08}>
-      <div className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden">
+      <div className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden group/card">
         <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
           {/* Photo + Identity */}
           <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
