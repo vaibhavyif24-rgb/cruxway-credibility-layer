@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRegion } from '@/contexts/RegionContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
@@ -94,6 +95,7 @@ StatBlock.displayName = 'StatBlock';
 
 const Home = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
 
   return (
@@ -193,7 +195,7 @@ const Home = () => {
           </FadeIn>
         </div>
         <div className="max-w-[1080px] mx-auto">
-          <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant="light" />
+          <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={theme === 'dark' ? 'dark' : 'light'} />
         </div>
       </section>
 

@@ -10,6 +10,7 @@ interface StickyCardStackProps {
   cards: StickyCard[];
   variant?: 'light' | 'dark';
   illustrationSet?: 'process' | 'criteria';
+  labelPrefix?: string;
 }
 
 /* ─── Constants ─── */
@@ -323,7 +324,8 @@ const CardSurface: React.FC<{
   isActive: boolean;
   cardHeight: number;
   illustrationSet: 'process' | 'criteria';
-}> = ({ card, index, variant, isActive, cardHeight, illustrationSet }) => {
+  labelPrefix: string;
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
@@ -354,7 +356,7 @@ const CardSurface: React.FC<{
               transitionDelay: '0s',
             }}
           >
-            Step {card.num}
+            {labelPrefix} {card.num}
           </div>
           <h3
             className="mb-4 font-serif text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.05] tracking-[-0.02em] md:mb-5"
@@ -387,7 +389,7 @@ const CardSurface: React.FC<{
 };
 
 /* ─── Scroll-Driven Vertical Carousel ─── */
-const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process' }) => {
+const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step' }) => {
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
@@ -460,6 +462,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
               isActive={i === activeIndex}
               cardHeight={cardHeight}
               illustrationSet={illustrationSet}
+              labelPrefix={labelPrefix}
             />
           ))}
         </div>

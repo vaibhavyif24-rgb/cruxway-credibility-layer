@@ -1,5 +1,6 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { useRegion } from '@/contexts/RegionContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import StickyCardStack from '@/components/StickyCardStack';
@@ -130,6 +131,7 @@ const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; 
 
 const InvestmentCriteria = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
 
@@ -197,8 +199,9 @@ const InvestmentCriteria = () => {
             title: item.title,
             description: item.desc,
           }))}
-          variant="light"
+          variant={theme === 'dark' ? 'dark' : 'light'}
           illustrationSet="criteria"
+          labelPrefix="Criterion"
         />
       </section>
 

@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export interface TeamDeckMember {
   name: string;
@@ -8,7 +9,6 @@ export interface TeamDeckMember {
   photo?: string;
   summary: string;
   highlights: string[];
-  logos?: { src: string; alt: string; scale?: number; extraGap?: number }[];
   dealLogos?: { src: string; alt: string; scale?: number; extraGap?: number }[];
   linkedIn?: string;
 }
@@ -28,10 +28,16 @@ const getCardHeight = () => {
 };
 
 /* ─── Backgrounds ─── */
-const cardBgs = [
+const darkCardBgs = [
   'hsl(220 8% 18%)',
   'hsl(207 55% 14%)',
   'hsl(210 12% 12%)',
+];
+
+const lightCardBgs = [
+  'hsl(40 30% 96%)',
+  'hsl(38 22% 92%)',
+  'hsl(40 25% 94%)',
 ];
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
@@ -86,8 +92,10 @@ const TeamCardSurface: React.FC<{
   totalMembers: number;
   isActive: boolean;
   cardHeight: number;
-}> = ({ member, index, totalMembers, isActive, cardHeight }) => {
-  const bg = cardBgs[index % cardBgs.length];
+  isDark: boolean;
+}> = ({ member, index, totalMembers, isActive, cardHeight, isDark }) => {
+  const bgs = isDark ? darkCardBgs : lightCardBgs;
+  const bg = bgs[index % bgs.length];
   // Split highlights into 2 columns for better density
   const midpoint = Math.ceil(member.highlights.length / 2);
   const col1 = member.highlights.slice(0, midpoint);
@@ -139,7 +147,7 @@ const TeamCardSurface: React.FC<{
           >
             {member.photo ? (
               <div className="relative w-[56px] h-[56px] md:w-[80px] md:h-[80px] shrink-0">
-                <div className="w-full h-full rounded-full overflow-hidden border border-white/[0.06] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]">
+                <div className={`w-full h-full rounded-full overflow-hidden border ${isDark ? 'border-white/[0.06]' : 'border-foreground/[0.06]'} shadow-[0_4px_20px_-4px_rgba(0,0,0,0.3)]`}>
                   <img
                     src={member.photo}
                     alt={member.name}
@@ -149,19 +157,19 @@ const TeamCardSurface: React.FC<{
                 </div>
               </div>
             ) : (
-              <div className="w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full bg-white/[0.04] border border-dashed border-white/[0.08] flex items-center justify-center shrink-0">
-                <span className="font-serif text-[0.9rem] md:text-[1.1rem] text-white/20">
+              <div className={`w-[56px] h-[56px] md:w-[80px] md:h-[80px] rounded-full ${isDark ? 'bg-white/[0.04] border-white/[0.08]' : 'bg-foreground/[0.04] border-foreground/[0.08]'} border border-dashed flex items-center justify-center shrink-0`}>
+                <span className={`font-serif text-[0.9rem] md:text-[1.1rem] ${isDark ? 'text-white/20' : 'text-foreground/20'}`}>
                   {member.name.split(' ').map(n => n[0]).join('')}
                 </span>
               </div>
             )}
             <div>
               <div className="flex items-center gap-1.5">
-                <h3 className="font-serif text-[1.15rem] md:text-[1.5rem] text-white tracking-[-0.02em] leading-[1.15]">
+                <h3 className={`font-serif text-[1.15rem] md:text-[1.5rem] ${isDark ? 'text-white' : 'text-foreground'} tracking-[-0.02em] leading-[1.15]`}>
                   {member.name}
                 </h3>
                 {member.linkedIn && (
-                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className="text-white/20 hover:text-[hsl(38_48%_52%)] transition-colors">
+                  <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`${isDark ? 'text-white/20' : 'text-foreground/20'} hover:text-[hsl(38_48%_52%)] transition-colors`}>
                     <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4" />
                   </a>
                 )}
@@ -181,7 +189,7 @@ const TeamCardSurface: React.FC<{
               transitionDelay: '0.1s',
             }}
           >
-            <p className="font-sans text-[12px] md:text-[13px] text-white/45 leading-[1.65] mb-3 md:mb-4 max-w-[720px]">
+            <p className={`font-sans text-[12px] md:text-[13px] ${isDark ? 'text-white/45' : 'text-foreground/55'} leading-[1.65] mb-3 md:mb-4 max-w-[720px]`}>
               {member.summary}
             </p>
           </div>
@@ -200,7 +208,7 @@ const TeamCardSurface: React.FC<{
               {col1.map((line, i) => (
                 <li
                   key={i}
-                  className="font-sans text-[11px] md:text-[12px] text-white/30 leading-[1.55] flex gap-2 items-start"
+                  className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
                 >
                   <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
                   <span>{line}</span>
@@ -212,7 +220,7 @@ const TeamCardSurface: React.FC<{
                 {col2.map((line, i) => (
                   <li
                     key={i}
-                    className="font-sans text-[11px] md:text-[12px] text-white/30 leading-[1.55] flex gap-2 items-start"
+                    className={`font-sans text-[11px] md:text-[12px] ${isDark ? 'text-white/30' : 'text-foreground/40'} leading-[1.55] flex gap-2 items-start`}
                   >
                     <span className="shrink-0 mt-[6px] w-1.5 h-px bg-[hsl(38_48%_52%)]/30" />
                     <span>{line}</span>
@@ -222,42 +230,12 @@ const TeamCardSurface: React.FC<{
             )}
           </div>
 
-          {/* Institutional logos row */}
-          {member.logos && member.logos.length > 0 && (
-            <div
-              className="flex items-center gap-4 md:gap-5 mt-3 md:mt-4 pt-3 border-t border-white/[0.04]"
-              style={{
-                opacity: isActive ? 1 : 0,
-                transition: 'opacity 0.5s ease-out',
-                transitionDelay: '0.2s',
-              }}
-            >
-              <span className="font-sans text-[7px] md:text-[8px] font-medium uppercase tracking-[0.2em] text-white/20 shrink-0">
-                Background
-              </span>
-              <div className="flex items-center gap-3 md:gap-4">
-                {member.logos.map((logo, i) => (
-                  <img
-                    key={i}
-                    src={logo.src}
-                    alt={logo.alt}
-                    loading="lazy"
-                    className="h-[16px] md:h-[20px] w-auto object-contain opacity-40 hover:opacity-80 transition-opacity duration-500"
-                    style={{
-                      filter: goldFilter,
-                      transform: logo.scale ? `scale(${logo.scale})` : undefined,
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Deal logos — floating on deck */}
         {member.dealLogos && member.dealLogos.length > 0 && (
           <div
-            className="pt-3 md:pt-3 border-t border-white/[0.04]"
+            className={`pt-3 md:pt-3 border-t ${isDark ? 'border-white/[0.04]' : 'border-foreground/[0.06]'}`}
             style={{
               opacity: isActive ? 1 : 0,
               transition: 'opacity 0.6s ease-out',
@@ -277,6 +255,8 @@ const TeamCardSurface: React.FC<{
 
 /* ─── Team Sticky Deck ─── */
 const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
@@ -346,6 +326,7 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
               totalMembers={members.length}
               isActive={i === activeIndex}
               cardHeight={cardHeight}
+              isDark={isDark}
             />
           ))}
         </div>

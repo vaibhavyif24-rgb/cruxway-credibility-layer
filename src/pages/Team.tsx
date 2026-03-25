@@ -427,12 +427,12 @@ const Team = () => {
           members={
             isIndia
               ? [
-                  { ...indiaPartner, dealLogos: vaibhavDealLogos, logos: indiaPartner.logos },
-                  ...founders.map(f => ({ ...f, dealLogos: f.dealLogos, logos: f.logos })),
+                  { ...indiaPartner, dealLogos: vaibhavDealLogos },
+                  ...founders.map(f => ({ ...f })),
                 ]
               : [
-                  ...founders.map(f => ({ ...f, dealLogos: f.dealLogos, logos: f.logos })),
-                  { ...indiaPartner, dealLogos: vaibhavDealLogos, logos: indiaPartner.logos },
+                  ...founders.map(f => ({ ...f })),
+                  { ...indiaPartner, dealLogos: vaibhavDealLogos },
                 ]
           }
         />
