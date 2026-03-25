@@ -116,19 +116,37 @@ const CardSurface: React.FC<{
         <div className="flex-1 px-8 md:px-14 lg:px-20 py-10 md:py-14">
           <div
             className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-5"
-            style={{ color: colors.step, opacity: 0.6 }}
+            style={{
+              color: colors.step,
+              opacity: isActive ? 0.6 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0s',
+            }}
           >
             Step {card.num}
           </div>
           <h3
             className="font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.1] tracking-[-0.02em] mb-4 md:mb-5"
-            style={{ color: colors.title }}
+            style={{
+              color: colors.title,
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0.1s',
+            }}
           >
             {card.title.toLowerCase()}.
           </h3>
           <p
             className="font-sans text-[14px] md:text-[16px] leading-[1.75] max-w-[480px]"
-            style={{ color: colors.desc }}
+            style={{
+              color: colors.desc,
+              opacity: isActive ? 1 : 0,
+              transform: `translateY(${isActive ? 0 : 12}px)`,
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+              transitionDelay: '0.2s',
+            }}
           >
             {card.description}
           </p>
@@ -137,7 +155,12 @@ const CardSurface: React.FC<{
         <div className="hidden md:flex items-center justify-center w-[35%] lg:w-[40%] pr-8 lg:pr-12" aria-hidden="true">
           <span
             className="font-serif text-[clamp(6rem,12vw,10rem)] leading-none tracking-[-0.04em] select-none"
-            style={{ color: colors.step, opacity: 0.06 }}
+            style={{
+              color: colors.step,
+              opacity: isActive ? 0.06 : 0,
+              transition: 'opacity 0.5s ease-out',
+              transitionDelay: '0.15s',
+            }}
           >
             {card.num}
           </span>
