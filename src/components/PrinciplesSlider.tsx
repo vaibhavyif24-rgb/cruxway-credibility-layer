@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SectionLabel, GoldRule } from '@/components/ui/Section';
 
 import integrityImg from '@/assets/principles/integrity.jpg';
@@ -20,78 +20,115 @@ interface PrinciplesSliderProps {
   principles: Principle[];
 }
 
-const PrinciplePanel = ({
-  principle,
-  image,
-  index,
-  total,
-}: {
-  principle: Principle;
-  image: string;
-  index: number;
-  total: number;
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.4 });
+const AUTOPLAY_MS = 4000;
+
+const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
+  const [active, setActive] = useState(0);
+  const total = principles.length;
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const resetTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActive((prev) => (prev + 1) % total);
+    }, AUTOPLAY_MS);
+  }, [total]);
+
+  useEffect(() => {
+    resetTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [resetTimer]);
+
+  const goTo = (i: number) => {
+    setActive(i);
+    resetTimer();
+  };
+
+  const principle = principles[active];
+  const image = images[active];
 
   return (
     <div
-      ref={ref}
-      className="relative w-full h-screen flex items-center justify-center overflow-hidden"
+      ref={containerRef}
+      className="relative w-full h-screen overflow-hidden select-none"
     >
-      {/* Background image */}
-      <img
-        src={image}
-        alt={principle.t}
-        loading={index === 0 ? undefined : 'lazy'}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      {/* Background image with crossfade */}
+      <AnimatePresence mode="sync">
+        <motion.img
+          key={active}
+          src={image}
+          alt={principle.t}
+          className="absolute inset-0 w-full h-full object-cover"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        />
+      </AnimatePresence>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/50 to-black/65" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/60" />
 
       {/* Content — dead center */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex flex-col items-center text-center px-6 max-w-[540px]"
-      >
-        <SectionLabel light>Principles</SectionLabel>
+      <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center max-w-[540px]"
+          >
+            <SectionLabel light>Principles</SectionLabel>
 
-        <h2 className="font-serif text-[clamp(1.6rem,4vw,2.8rem)] text-white leading-[1.1] tracking-[-0.02em] mt-2 drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]">
-          {principle.t}
-        </h2>
+            {/* Numbered badge */}
+            <div className="w-10 h-10 rounded-full bg-black/70 border border-white/10 flex items-center justify-center mt-3 mb-4">
+              <span className="font-sans text-[14px] text-white/90 font-medium">
+                {active + 1}
+              </span>
+            </div>
 
-        <div className="my-4 flex justify-center">
-          <GoldRule />
-        </div>
+            <h2 className="font-serif text-[clamp(2rem,5vw,3.2rem)] text-white leading-[1.08] tracking-[-0.02em] drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)]">
+              {principle.t}
+            </h2>
 
-        <p className="font-sans text-[14px] md:text-[16px] text-white/60 leading-[1.8] max-w-[400px] drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
-          {principle.d}
-        </p>
-      </motion.div>
+            <div className="my-5 flex justify-center">
+              <GoldRule />
+            </div>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2.5">
+            <p className="font-sans text-[15px] md:text-[17px] text-white/55 leading-[1.8] max-w-[420px] drop-shadow-[0_1px_8px_rgba(0,0,0,0.4)]">
+              {principle.d}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Right-side vertical dot indicators */}
+      <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
         {Array.from({ length: total }).map((_, i) => (
-          <div
+          <button
             key={i}
-            className={`w-2 h-2 rounded-full transition-all duration-500 ${
-              i === index && isInView
-                ? 'bg-gold/80 scale-125'
-                : 'bg-white/20'
+            onClick={() => goTo(i)}
+            aria-label={`Go to principle ${i + 1}`}
+            className={`w-3 h-3 rounded-full border transition-all duration-500 cursor-pointer ${
+              i === active
+                ? 'bg-white border-white scale-110'
+                : 'bg-transparent border-white/40 hover:border-white/70'
             }`}
           />
         ))}
       </div>
 
-      {/* Scroll hint on first panel */}
-      {index === 0 && (
+      {/* Scroll hint on first active */}
+      {active === 0 && (
         <motion.div
-          className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.6 }}
         >
           <motion.div
@@ -101,22 +138,6 @@ const PrinciplePanel = ({
           />
         </motion.div>
       )}
-    </div>
-  );
-};
-
-const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
-  return (
-    <div>
-      {principles.map((p, i) => (
-        <PrinciplePanel
-          key={p.t}
-          principle={p}
-          image={images[i]}
-          index={i}
-          total={principles.length}
-        />
-      ))}
     </div>
   );
 };
