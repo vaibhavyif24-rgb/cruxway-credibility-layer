@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const US_IMG = 'https://images.unsplash.com/photo-1647427060118-4911c9821b82?w=4000&q=90&auto=format&fit=crop&dpr=2';
 

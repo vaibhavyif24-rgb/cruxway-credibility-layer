@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const INDIA_IMG = 'https://images.unsplash.com/photo-1764115424737-25aca6f47835?w=4000&q=90&auto=format&fit=crop&dpr=2';
 
