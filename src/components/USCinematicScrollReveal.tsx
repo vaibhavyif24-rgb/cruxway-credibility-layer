@@ -134,7 +134,7 @@ const USCinematicScrollReveal = () => {
               transform: `translate(-50%, -50%) scale(${currentScale})`,
               willChange: 'transform',
               zIndex: 1,
-              top: `${62 + (50 - 62) * imageProgress}%`,
+              top: `${circleTop}%`,
               left: '50%',
             }}
           >
