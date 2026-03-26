@@ -1,53 +1,52 @@
 
 
-## Plan: Mobile Cinematic Scroll Reveal with Full Sector Visibility
+## Plan: Compact Mobile Cinematic with Tagline on Image + Sectors Below
 
 ### Problem
-Currently on mobile, the cinematic scroll animation is completely skipped — it early-returns a plain static section with no image, no animation, and poor light-mode visibility (white text on light background). The user wants a condensed cinematic effect on mobile while ensuring all sector text is fully visible and readable in both themes.
+On mobile (390px), the current cinematic scroll has three issues:
+1. Tagline floats at `top: 30%` while the circle starts at `top: 62%` — creating a large blank gap between text and image
+2. The 150vh scroll distance is too long for a simple circle-expand, making it feel empty
+3. Sectors appear as a disconnected dark block below with no visual relationship to the cinematic image
 
-### Approach
-Replace the static early-return with a **compact mobile cinematic scroll** that uses the same sticky-scroll architecture but adapted for small screens:
+### Design (Senior UI/UX approach)
 
-- **Phase 1 (image reveal)**: Circle expands to fill screen over a shorter scroll distance (150vh total instead of 250vh). Tagline visible over the image.
-- **Phase 2 (sectors)**: Instead of overlaying sectors inside the sticky viewport (which clips), sectors render as a **normal-flow section below** the sticky container, with the background image still visible via a dark overlay. This guarantees all content is scrollable.
+**Short, punchy cinematic**: Reduce to `120vh` total. The circle starts centered at `50%` (not 62%), begins expanding immediately, and the tagline sits ON TOP of the image from the start — no floating text above blank space.
+
+**Layout**: Tagline is vertically centered over the circle/image. As the user scrolls, the circle expands to fill the screen. The tagline stays centered with text shadow for readability. No phase 2 inside the sticky — it's just a clean image reveal with text overlay.
+
+**Sectors seamlessly below**: The mobile sectors section gets a top gradient that blends from the image into the dark background, creating visual continuity rather than a hard cut.
 
 ### Changes to both `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`
 
-**Remove the early-return `if (isMobile)` block entirely.** Instead, adjust the existing render to handle mobile:
-
-1. **Container height**: `isMobile ? '150vh' : '250vh'` — shorter cinematic scroll on mobile
-2. **Circle animation**: Use a smaller initial circle (200px on mobile) with the same expand logic
-3. **Tagline positioning**: Adjust `top` percentages and font size for mobile
-4. **Sector overlay**: Wrap the absolute-positioned sector `<div>` with `{!isMobile && (...)}` to hide it from the sticky container on mobile
-5. **Mobile sectors below sticky**: After the sticky `<div>`, add a mobile-only block that renders inside the same `<section>` but in normal document flow:
-   - Full-width dark background with the background image (blurred, heavily overlaid) for cinematic feel
-   - "Sectors We Look At" gold label
-   - Both sector columns stacked vertically with generous spacing
-   - Proper text colors that work in both light and dark mode (always light text on dark image background)
+1. **Container height**: `isMobile ? '120vh' : '250vh'` — snappier scroll
+2. **Circle initial position**: `top: 50%` on mobile (centered), not 62%
+3. **Tagline position**: `top: 38%` on mobile — sits directly over the circle/image center, moves up slightly as image expands
+4. **Image progress mapping**: `progress / 0.9` on mobile — image fills screen over 90% of the short scroll
+5. **Mobile sectors section**: Add a top border/gradient transition so it flows from the expanded image into the dark sector block seamlessly; keep the blurred background image approach but tighten padding
 
 ### Technical Details
 
+```text
+Mobile scroll journey (120vh):
+┌─────────────────────┐
+│ sticky h-screen     │
+│                     │
+│    ┌──────────┐     │  ← circle starts at 50%, tagline centered ON it
+│    │  image   │     │
+│    │ +tagline │     │
+│    └──────────┘     │
+│         ↓ scroll    │
+│  ┌─────────────────┐│  ← circle fills screen, tagline still on image
+│  │    full image    ││
+│  │    + tagline     ││
+│  └─────────────────┘│
+└─────────────────────┘
+┌─────────────────────┐
+│  SECTORS WE LOOK AT │  ← normal flow, dark bg, fully scrollable
+│  Industrials        │
+│  Business Services  │
+└─────────────────────┘
 ```
-Mobile layout structure:
-┌──────────────────────────┐
-│  <section height=150vh>  │
-│  ┌────────────────────┐  │
-│  │ sticky h-screen    │  │
-│  │  - circle → expand │  │
-│  │  - tagline overlay  │  │
-│  └────────────────────┘  │
-│  ┌────────────────────┐  │
-│  │ mobile sectors     │  │  ← normal flow, NOT sticky
-│  │  - bg image + dark │  │
-│  │  - "Sectors We..."  │  │
-│  │  - Column 1        │  │
-│  │  - Column 2        │  │
-│  │  (fully scrollable)│  │
-│  └────────────────────┘  │
-└──────────────────────────┘
-```
-
-The mobile sectors block uses `position: relative` with a background image and heavy dark overlay, ensuring white/gold text is always legible regardless of light/dark theme.
 
 ### Files Modified
 - `src/components/CinematicScrollReveal.tsx`
