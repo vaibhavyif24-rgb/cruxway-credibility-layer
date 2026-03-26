@@ -146,7 +146,7 @@ const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
   const total = principles.length;
 
   return (
-    <div className="relative px-5 md:px-10 lg:px-16 py-10 md:py-14">
+    <div className="relative px-5 md:px-10 lg:px-16 pt-6 md:pt-8 pb-10 md:pb-14">
       <div className="max-w-[1080px] mx-auto">
         {principles.map((principle, i) => (
           <PrincipleCard

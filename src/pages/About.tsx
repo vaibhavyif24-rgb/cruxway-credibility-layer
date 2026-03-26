@@ -46,7 +46,7 @@ const About = () => {
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'About — India' : 'About'}</SectionLabel>
+            <SectionLabel light>{isIndia ? 'About, India' : 'About'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
@@ -99,7 +99,7 @@ const About = () => {
       </section>
 
       {/* Principles — Scroll-triggered vertical slider */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-16 md:pt-20">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-12 md:pt-16">
         <FadeIn>
           <SectionLabel>Our Values</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">

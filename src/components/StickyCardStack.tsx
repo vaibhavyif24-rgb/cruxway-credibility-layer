@@ -62,7 +62,7 @@ const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive:
 
   const gold = 'hsl(38 45% 55%)';
   const goldDim = 'hsl(38 35% 45%)';
-  const baseOpacity = isDark ? 0.12 : 0.1;
+  const baseOpacity = isDark ? 0.15 : 0.25;
 
   const illustrations: Record<number, [React.ReactNode, React.ReactNode]> = {
     0: [

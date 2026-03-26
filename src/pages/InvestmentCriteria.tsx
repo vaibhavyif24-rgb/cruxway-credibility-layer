@@ -112,7 +112,7 @@ const InvestmentCriteria = () => {
           <FadeIn>
             <SectionLabel light>Investment Profile</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-primary-foreground leading-[1.15] mb-2">
-              {isIndia ? 'Our Target Parameters — India' : 'Our Target Parameters'}
+              {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
@@ -127,7 +127,7 @@ const InvestmentCriteria = () => {
       {/* What We Look For — consolidated criteria */}
       {/* What We Look For — Horizontal Sticky Deck */}
       <section className="bg-background overflow-x-clip">
-        <div className="px-5 md:px-10 lg:px-16 pt-6 md:pt-8 lg:pt-10">
+        <div className="px-5 md:px-10 lg:px-16 pt-4 md:pt-6 lg:pt-8">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Investment Criteria</SectionLabel>
@@ -173,9 +173,9 @@ const InvestmentCriteria = () => {
           <StickyCardStack
             cards={[
               { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
-              { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors — every dimension is assessed with institutional rigour before we proceed.' },
+              { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors. Every dimension is assessed with institutional rigour before we proceed.' },
               { num: '03', title: 'Diligence', description: 'Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence.' },
-              { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades — not exits. Every term reflects our commitment to lasting partnership.' },
+              { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades, not exits. Every term reflects our commitment to lasting partnership.' },
             ]}
             variant="dark"
           />

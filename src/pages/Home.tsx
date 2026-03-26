@@ -61,14 +61,14 @@ const allLogos = [
 const processStepsUS = [
   { num: '01', title: 'Identify', description: 'We go where others don\'t. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market.' },
   { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position. Rigour is our edge.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works — continuity for employees, clients, and the legacy founders built.' },
+  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
   { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'Deep networks across India\'s industrial heartland surface founder-led businesses with strong fundamentals and operational upside.' },
   { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigour.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works — continuity for employees, clients, and the legacy founders built.' },
+  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
   { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
@@ -200,8 +200,8 @@ const Home = () => {
       {/* Social Proof — Scroll-triggered reveal */}
       <ScrollRevealText
         heading={isIndia
-          ? "Global institutional expertise, applied locally — partnering with the founders shaping India's industrial future."
-          : "Decades of institutional experience. One mission — partnering with founders who built America's essential industries."
+          ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
+          : "Decades of institutional experience dedicated to partnering with the founders who built America's essential industries."
         }
         variant="light"
       />
