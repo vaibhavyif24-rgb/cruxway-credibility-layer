@@ -88,7 +88,7 @@ const PrincipleCard: React.FC<{
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
                 transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
-                textShadow: '0 2px 20px rgba(0,0,0,0.45)',
+                textShadow: '0 2px 30px rgba(0,0,0,0.7)',
               }}
             >
               {principle.t}
