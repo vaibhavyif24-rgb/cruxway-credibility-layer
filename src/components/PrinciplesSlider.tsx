@@ -109,11 +109,11 @@ const PrincipleCard: React.FC<{
             <p
               className="font-sans text-[14px] md:text-[17px] leading-[1.85] tracking-[0.01em] max-w-[440px]"
               style={{
-                color: 'rgba(248,246,242,0.6)',
+                color: 'rgba(248,246,242,0.7)',
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
                 transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
-                textShadow: '0 1px 10px rgba(0,0,0,0.35)',
+                textShadow: '0 2px 20px rgba(0,0,0,0.6)',
               }}
             >
               {principle.d}
