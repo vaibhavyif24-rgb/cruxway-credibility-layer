@@ -173,7 +173,7 @@ const InvestmentCriteria = () => {
           <StickyCardStack
             cards={[
               { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
-              { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors — every dimension is assessed with institutional rigour before we proceed.' },
+              { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors. Every dimension is assessed with institutional rigour before we proceed.' },
               { num: '03', title: 'Diligence', description: 'Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence.' },
               { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades — not exits. Every term reflects our commitment to lasting partnership.' },
             ]}
