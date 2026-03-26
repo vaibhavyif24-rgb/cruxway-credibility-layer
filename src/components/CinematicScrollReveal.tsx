@@ -25,7 +25,7 @@ const indiaSectors = {
   },
 };
 
-const OVERLAY_GRADIENT = 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.55) 30%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.82) 100%)';
+const OVERLAY_GRADIENT = 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%)';
 
 const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; items: { name: string; desc: string }[]; side: 'left' | 'right'; isMobile: boolean }) => (
   <div className={isMobile ? '' : side === 'left' ? 'pr-12' : 'pl-12'}>
@@ -33,7 +33,7 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
       className="font-serif leading-tight"
       style={{
         color: '#F8F6F2',
-        fontSize: isMobile ? '1.15rem' : '1.8rem',
+        fontSize: isMobile ? '1.25rem' : '1.8rem',
         marginBottom: isMobile ? '0.75rem' : '1rem',
         textShadow: '0 2px 12px rgba(0,0,0,0.7)',
       }}
@@ -55,13 +55,13 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
           <div>
             <span
               className="font-serif leading-[1.3] block"
-              style={{ color: '#F8F6F2', fontSize: isMobile ? '1rem' : '1.5rem', textShadow: '0 2px 12px rgba(0,0,0,0.7)' }}
+              style={{ color: '#F8F6F2', fontSize: isMobile ? '1.05rem' : '1.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
             >
               {item.name}
             </span>
             <span
               className="block font-sans leading-[1.4]"
-              style={{ color: 'rgba(248,246,242,0.65)', fontSize: isMobile ? '13px' : '17px', textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
+              style={{ color: 'rgba(248,246,242,0.65)', fontSize: isMobile ? '13px' : '17px', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}
             >
               {item.desc}
             </span>
@@ -96,7 +96,7 @@ const CinematicScrollReveal = () => {
   const imageProgress = Math.min(progress / 0.55, 1);
   const sectorProgress = Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
 
-  const circleSize = 180;
+  const circleSize = 300;
   const maxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080);
   const targetScale = (maxDim * 1.5) / circleSize;
   const currentScale = 1 + (targetScale - 1) * imageProgress;
@@ -106,10 +106,10 @@ const CinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   const taglineTop = 26 - (sectorProgress * 20);
-  const overlayOffset = isMobile ? 24 : 18;
+  const overlayOffset = isMobile ? 26 : 18;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: isMobile ? '320vh' : '250vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: isMobile ? '350vh' : '250vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
         <div
           className="absolute"
