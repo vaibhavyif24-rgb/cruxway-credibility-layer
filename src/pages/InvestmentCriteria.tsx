@@ -39,11 +39,11 @@ const investmentProfile = {
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
-  { title: 'Founder-Led Succession', desc: 'Partnering with owners at an inflection point, preserving legacy while enabling the next chapter of growth.' },
-  { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors where reliability, safety, and recurring demand create natural moats.' },
-  { title: 'Recurring Revenue & Retention', desc: 'Businesses with embedded customer relationships, high switching costs, and predictable cash flows.' },
-  { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where disciplined acquisitions compound value over a long hold period.' },
-  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value.' },
+  { title: 'Founder-Led Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
+  { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
+  { title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
+  { title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
+  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
   { title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
