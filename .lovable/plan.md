@@ -1,76 +1,44 @@
 
 
-## Plan: Full-Page Sectors Showcase (India & US)
+## Plan: Integrate Sector Showcase into Cinematic Scroll Reveal
 
-### Problem
-The "Sectors We Look At" content is buried in a small slide-up card at the bottom of the cinematic reveal with tiny fonts. It's the most important component but currently the least readable.
-
-### New Design Concept: Full-Screen Staggered Sector Reveal
-
-Remove the card entirely from the cinematic scroll reveal. Instead, place a dedicated full-viewport section **immediately after** the cinematic reveal that showcases sectors with large, readable typography and scroll-triggered stagger animations.
+### Concept
+Instead of sectors being a separate section below the cinematic reveal, they become part of the same sticky viewport — sliding up beneath the tagline as the image expands to full bleed. One continuous, cinematic experience.
 
 ```text
-┌──────────────────────────────────┐
-│  SECTORS WE LOOK AT  (label)    │
-│  ─────                          │
-│                                 │
-│  ┌─────────────┐ ┌────────────┐ │
-│  │ INDUSTRIALS │ │ BUSINESS & │ │
-│  │             │ │ INDUSTRIAL │ │
-│  │ ◆ Process   │ │            │ │
-│  │   & Flow    │ │ ◆ Facility │ │
-│  │   Control   │ │   & Support│ │
-│  │             │ │            │ │
-│  │ ◆ Value-Add │ │ ◆ Testing  │ │
-│  │   Distrib.  │ │   & Cert.  │ │
-│  │             │ │            │ │
-│  │ ◆ Indust.   │ │ ◆ Infra    │ │
-│  │   Services  │ │   Services │ │
-│  │             │ │            │ │
-│  │ ◆ Packaging │ │ ◆ Indust.  │ │
-│  │             │ │   Tech     │ │
-│  └─────────────┘ └────────────┘ │
-│                                 │
-│  (brief descriptor line)        │
-└──────────────────────────────────┘
+Progress 0%:        Progress 50%:         Progress 100%:
+┌────────────┐     ┌────────────────┐     ┌────────────────┐
+│             │     │  "Building..."  │     │  "Building..."  │
+│  "Building  │     │                 │     │  ─────────────  │
+│   enduring  │     │    ●●●●●●●●    │     │  Industrials    │
+│  platforms" │     │  (image grows)  │     │  ◆ Process...   │
+│             │     │                 │     │  ◆ Value-Add... │
+│      ○      │     │                 │     │  Services       │
+│  (small     │     │                 │     │  ◆ Facility...  │
+│   circle)   │     │                 │     │  ◆ Testing...   │
+└────────────┘     └────────────────┘     └────────────────┘
 ```
-
-**Desktop**: Two-column layout with a gold vertical divider. Each sector item is a large row with a gold diamond bullet, name in ~20px serif font, and a one-line descriptor in 15px sans.
-
-**Mobile**: Single-column stacked layout, each item full-width, generous vertical spacing.
-
-**Animation**: Each sector item fades in and slides up with a staggered delay (framer-motion `whileInView`), creating a cascading reveal as the user scrolls into the section.
 
 ### Changes
 
-**1. `CinematicScrollReveal.tsx` (India)**
-- Remove the entire slide-up card (the `cardWrapperRef` div and `SectorColumn` component, lines 16-43, 162-224)
-- Remove `cardProgress` logic and `cardWrapperRef`
-- Keep the expanding circle + tagline intact (the cinematic reveal itself)
-- Reduce container height from `300vh` to `200vh` (no longer need extra scroll for card)
+**1. `CinematicScrollReveal.tsx` & `USCinematicScrollReveal.tsx`**
+- Increase container height to `300vh` (need scroll room for the sector reveal phase)
+- Split progress into two phases:
+  - Phase 1 (0–60%): Image circle expands to full bleed (existing behavior)
+  - Phase 2 (60–100%): Sector content fades in and slides up from bottom, positioning below the tagline
+- Import sector data inline (same data currently in SectorShowcase)
+- Render a sector overlay `div` inside the sticky container with `opacity` and `translateY` driven by phase 2 progress
+- Sector content: two-column grid with category headings, gold diamond bullets, large readable names + descriptions — same markup as SectorShowcase but positioned absolutely within the sticky viewport
+- The tagline shifts up slightly during phase 2 to make room
 
-**2. `USCinematicScrollReveal.tsx` (US)**
-- Same removal of the slide-up card
-- Same simplification
+**2. `InvestmentCriteria.tsx`**
+- Remove `<SectorShowcase />` import and usage (line 14, line 159)
 
-**3. New component: `SectorShowcase.tsx`**
-- Accepts `region: 'us' | 'india'` prop
-- Contains sector data for both regions
-- Full-viewport min-height section with theme-aware background (dark navy / light cream)
-- Section label "Sectors We Look At" at top with gold rule
-- Two-column grid (desktop) / single column (mobile)
-- Each sector category gets a large serif heading (~1.5rem)
-- Each item: gold diamond bullet + large readable name (18-20px) + descriptor (14-15px muted)
-- Items animate in with `framer-motion` staggered `whileInView`
-- Gold vertical divider between columns on desktop
-- Brief regional descriptor paragraph below the heading
-
-**4. `InvestmentCriteria.tsx`**
-- Import and place `<SectorShowcase region={...} />` immediately after the cinematic scroll reveal (line 157)
+**3. `SectorShowcase.tsx`**
+- Keep file (may be useful elsewhere), but it's no longer rendered on the criteria page
 
 ### Files Modified
-1. `src/components/CinematicScrollReveal.tsx` — remove card, simplify to image + tagline only
-2. `src/components/USCinematicScrollReveal.tsx` — same
-3. `src/components/SectorShowcase.tsx` — new full-page sector display
-4. `src/pages/InvestmentCriteria.tsx` — add SectorShowcase after cinematic reveal
+1. `src/components/CinematicScrollReveal.tsx` — add sector content overlay with scroll-driven reveal
+2. `src/components/USCinematicScrollReveal.tsx` — same treatment
+3. `src/pages/InvestmentCriteria.tsx` — remove SectorShowcase
 
