@@ -205,7 +205,7 @@ const Home = () => {
           ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
           : "Decades of institutional experience dedicated to partnering with the owners who built America's essential industries."
         }
-        highlights={isIndia ? ['institutional', 'industrial'] : ['institutional', 'essential']}
+        highlights={isIndia ? ['institutional', 'shaping'] : ['institutional', 'essential']}
         variant="light"
       />
       <div className="bg-background">
