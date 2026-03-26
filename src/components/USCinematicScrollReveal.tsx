@@ -108,8 +108,35 @@ const USCinematicScrollReveal = () => {
   const taglineTop = 26 - (sectorProgress * 20);
   const overlayOffset = isMobile ? 26 : 18;
 
+  // On mobile, skip the cinematic scroll animation entirely and render sectors as a static section
+  if (isMobile) {
+    return (
+      <section
+        style={{
+          background: isDark ? '#0B131E' : 'hsl(var(--background))',
+          padding: '3rem 1.25rem 3.5rem',
+        }}
+      >
+        <div className="text-center mb-8">
+          <span
+            className="font-sans font-semibold uppercase"
+            style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}
+          >
+            Sectors We Look At
+          </span>
+          <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+        </div>
+
+        <div className="space-y-10">
+          <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={true} />
+          <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={true} />
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section ref={containerRef} className="relative" style={{ height: isMobile ? '250vh' : '250vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: '250vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
         <div
           className="absolute"
@@ -143,7 +170,7 @@ const USCinematicScrollReveal = () => {
         <h2
           className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
           style={{
-            fontSize: isMobile ? 'clamp(1.3rem, 5vw, 2rem)' : 'clamp(2.1rem, 5.2vw, 4rem)',
+            fontSize: 'clamp(2.1rem, 5.2vw, 4rem)',
             color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
             zIndex: 10,
             pointerEvents: 'none',
@@ -160,63 +187,36 @@ const USCinematicScrollReveal = () => {
           <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
         </h2>
 
-        {!isMobile && (
-          <div
-            className="absolute left-1/2 w-full"
-            style={{
-              zIndex: 10,
-              pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
-              transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
-              opacity: sectorProgress,
-              top: `${taglineTop + overlayOffset}%`,
-              maxWidth: '1100px',
-              padding: '0 2.5rem',
-              transition: 'opacity 0.1s ease',
-            }}
-          >
-            <div className="text-center mb-10">
-              <span
-                className="font-sans font-semibold uppercase"
-                style={{ color: 'hsl(38, 55%, 62%)', fontSize: '14px', letterSpacing: '0.28em' }}
-              >
-                Sectors We Look At
-              </span>
-              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
-            </div>
-
-            <div className="grid grid-cols-2 gap-8 relative">
-              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
-              <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={false} />
-              <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={false} />
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Mobile-only static sectors section */}
-      {isMobile && (
         <div
+          className="absolute left-1/2 w-full"
           style={{
-            background: isDark ? '#0B131E' : 'hsl(var(--background))',
-            padding: '3rem 1.25rem 3.5rem',
+            zIndex: 10,
+            pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
+            transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
+            opacity: sectorProgress,
+            top: `${taglineTop + overlayOffset}%`,
+            maxWidth: '1100px',
+            padding: '0 2.5rem',
+            transition: 'opacity 0.1s ease',
           }}
         >
-          <div className="text-center mb-8">
+          <div className="text-center mb-10">
             <span
               className="font-sans font-semibold uppercase"
-              style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}
+              style={{ color: 'hsl(38, 55%, 62%)', fontSize: '14px', letterSpacing: '0.28em' }}
             >
               Sectors We Look At
             </span>
             <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
           </div>
 
-          <div className="space-y-10">
-            <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={true} />
-            <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={true} />
+          <div className="grid grid-cols-2 gap-8 relative">
+            <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
+            <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={false} />
+            <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={false} />
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 };
