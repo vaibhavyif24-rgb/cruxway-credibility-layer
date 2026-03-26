@@ -1,22 +1,35 @@
 
 
-## Plan: Replace Landing Page Background with Road/Decision Point Image
+## Plan: Generate Cinematic Reveal Images for India & US Criteria Pages
 
-### Concept
-Replace the current `hero-crossroads.webp` background with a cinematic image of a road leading toward a promising horizon with a visible fork or decision point. This metaphor directly reinforces the "Cruxway" brand name (crux = critical decision point, way = the path forward). The message: every business reaches a crossroads, and Cruxway is the partner who helps navigate it.
+### Context
+The CinematicScrollReveal (India) and USCinematicScrollReveal (US) components each use a single hero image that starts as a small circle and expands to fill the viewport during scroll. These images need to be high-quality, cinematic photographs that reinforce the regional taglines.
 
-### Approach
+### Image Generation
 
-**Step 1: Generate the hero image**
-Use the AI image generation API (Nano banana pro for highest quality) to create a cinematic, atmospheric photograph of a road through dramatic landscape reaching a fork, with one path leading toward a golden-lit horizon. Style: moody, dark tones with warm golden light ahead (matching the site's navy/gold palette). Save to `src/assets/hero-crossroads-road.webp`.
+**Step 1: Generate India image**
+Use AI image generation (Nano banana pro for highest quality) to create a cinematic industrial photograph for India's lower middle market.
 
-Prompt direction: "Cinematic aerial/eye-level photograph of a long road through dramatic landscape reaching a fork in the road, one path leading toward golden sunrise light on the horizon. Dark moody blue tones, warm golden light ahead. No text, no people. Professional landscape photography, wide aspect ratio."
+Prompt: "Cinematic aerial photograph of India's industrial heartland at golden hour. Vast manufacturing facilities, steel plants, and warehouses stretching across a river valley with dramatic warm golden light cutting through atmospheric haze. Deep navy blue shadows contrasting with amber industrial glow. No text, no people visible. Ultra high definition professional industrial photography, moody and aspirational. Square composition."
 
-**Step 2: Update GeometricHero.tsx**
-- Change the import from `hero-crossroads.webp` to the new road image
-- All existing effects (Ken Burns zoom, parallax drift, dark overlay, gold geometric lines, corner frames, floating particles, ambient glow, vignette) remain completely untouched
+Save to `src/assets/india-industrial-reveal.jpg` (replacing existing).
+
+**Step 2: Generate US image**
+Create a cinematic photograph representing America's essential industries and permanent partnership.
+
+Prompt: "Cinematic wide photograph of American industrial infrastructure at dawn. A major highway interchange leading toward a sprawling industrial complex with grain silos, distribution centers, and manufacturing plants under a dramatic sky with golden sunrise breaking through deep blue clouds. Heartland America, essential industries. No text, no people. Ultra high definition professional landscape photography, moody navy tones with warm golden highlights. Square composition."
+
+Save to `src/assets/us-industrial-reveal.jpg` (replacing existing).
+
+**Step 3: No code changes needed**
+Both components already import from these exact file paths. All existing effects (expanding circle, Ken Burns-like scroll zoom, dark overlay gradient, tagline positioning, sector card slide-up) remain completely untouched.
 
 ### Files Modified
-1. `src/assets/` — new hero image file (generated via AI)
-2. `src/components/GeometricHero.tsx` — update import path (line 2 only)
+1. `src/assets/india-industrial-reveal.jpg` — new AI-generated image (replace)
+2. `src/assets/us-industrial-reveal.jpg` — new AI-generated image (replace)
+
+### Technical Notes
+- Images are rendered at 2400x2400 in the components with `object-fit: cover`, so square or near-square composition works best
+- The dark gradient overlay (`rgba(0,0,0,0.35)` to `rgba(0,0,0,0.5)`) is applied on top, so the image can be vibrant
+- Color palette should match the site's navy/gold brand identity
 
