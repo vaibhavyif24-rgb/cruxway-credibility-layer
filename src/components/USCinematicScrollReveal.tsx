@@ -73,6 +73,42 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
   </div>
 );
 
+const MobileWordReveal = ({ words, goldWords, containerRef }: { words: string[]; goldWords: string[]; containerRef: React.RefObject<HTMLDivElement> }) => {
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center px-7" style={{ zIndex: 10 }}>
+      <h2
+        className="font-serif text-center leading-[1.08] tracking-[-0.03em] flex flex-wrap justify-center gap-x-[0.3em]"
+        style={{ fontSize: 'clamp(2.4rem, 11vw, 3.4rem)', maxWidth: '360px' }}
+      >
+        {words.map((word, i) => {
+          const start = i / words.length;
+          const end = (i + 1) / words.length;
+          return (
+            <MobileWord key={i} word={word} range={[start, end]} progress={scrollYProgress} isGold={goldWords.includes(word)} />
+          );
+        })}
+      </h2>
+    </div>
+  );
+};
+
+const MobileWord = ({ word, range, progress, isGold }: { word: string; range: [number, number]; progress: any; isGold: boolean }) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  return (
+    <motion.span
+      style={{
+        opacity,
+        color: isGold ? 'hsl(38, 55%, 62%)' : '#F8F6F2',
+        textShadow: '0 3px 24px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.6)',
+      }}
+    >
+      {word}
+    </motion.span>
+  );
+};
+
 const USCinematicScrollReveal = () => {
   const { theme } = useTheme();
   const isMobile = useIsMobile();
