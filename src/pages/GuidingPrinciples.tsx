@@ -57,7 +57,7 @@ const GuidingPrinciples = () => {
         heading={
           isIndia
             ? 'Scale what India builds. Preserve what founders value. Partnering with conviction and discipline.'
-            : 'Preserve what founders built. Scale what matters. Values-driven investing for the long term.'
+            : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
         }
         subtext={
           isIndia

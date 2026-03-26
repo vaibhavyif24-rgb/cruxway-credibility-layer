@@ -50,7 +50,7 @@ const About = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
-              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : <>Values-Driven <span className="text-gold">Investing</span></>}
+              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : <>Investing Tailored to Each <span className="text-gold">Company's Needs</span></>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
@@ -77,7 +77,7 @@ const About = () => {
         }
         subtext={
           isIndia
-            ? 'Cruxway invests in and acquires majority stakes in founder-led companies across India\'s essential sectors.'
+            ? 'Cruxway invests in and takes majority stakes in founder-led companies across India\'s essential sectors.'
             : 'Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.'
         }
         variant="light"
