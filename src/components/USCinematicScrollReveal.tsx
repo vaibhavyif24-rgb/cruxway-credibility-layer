@@ -95,13 +95,16 @@ const MobileWordReveal = ({ words, goldWords, containerRef }: { words: string[];
 };
 
 const MobileWord = ({ word, range, progress, isGold }: { word: string; range: [number, number]; progress: any; isGold: boolean }) => {
-  const opacity = useTransform(progress, range, [0.15, 1]);
+  const rawOpacity = useTransform(progress, range, [0.15, 1]);
+  // Clamp so words never fade back once revealed
+  const opacity = useTransform(rawOpacity, (v) => Math.max(v, 0.15));
   return (
     <motion.span
       style={{
         opacity,
         color: isGold ? 'hsl(38, 55%, 62%)' : '#F8F6F2',
-        textShadow: '0 3px 24px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.6)',
+        textShadow: '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)',
+        fontWeight: 500,
       }}
     >
       {word}
