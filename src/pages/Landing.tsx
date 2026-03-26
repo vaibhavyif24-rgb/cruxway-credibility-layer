@@ -14,6 +14,10 @@ const Landing = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
 
+  useEffect(() => {
+    setRegion(null);
+  }, [setRegion]);
+
   const selectRegion = (region: 'india' | 'us') => {
     setSelected(region);
     setTimeout(() => {
