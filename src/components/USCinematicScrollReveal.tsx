@@ -136,24 +136,24 @@ const USCinematicScrollReveal = () => {
               />
             </div>
 
-            <h2
-              className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
-              style={{
-                fontSize: 'clamp(1.5rem, 6.5vw, 2.1rem)',
-                color: mTextIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
-                zIndex: 10,
-                pointerEvents: 'none',
-                transition: 'color 0.3s ease',
-                top: '42%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '88%',
-                textShadow: mTextIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : 'none',
-              }}
+            <div
+              className="absolute inset-0 flex items-center justify-center px-6"
+              style={{ zIndex: 10, pointerEvents: 'none' }}
             >
-              Where America's essential industries find their{' '}
-              <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
-            </h2>
+              <h2
+                className="font-serif text-center leading-[1.08] tracking-[-0.03em]"
+                style={{
+                  fontSize: 'clamp(2.2rem, 10vw, 3.2rem)',
+                  color: mTextIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
+                  transition: 'color 0.3s ease',
+                  maxWidth: '340px',
+                  textShadow: mTextIsLight ? '0 4px 30px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5)' : 'none',
+                }}
+              >
+                Where America's essential industries find their{' '}
+                <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
+              </h2>
+            </div>
           </div>
         </section>
 
