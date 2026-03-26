@@ -109,7 +109,7 @@ const USCinematicScrollReveal = () => {
   const overlayOffset = isMobile ? 26 : 18;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: isMobile ? '320vh' : '250vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: isMobile ? '350vh' : '250vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
         <div
           className="absolute"
