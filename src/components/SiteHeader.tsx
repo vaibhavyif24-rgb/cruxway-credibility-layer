@@ -104,7 +104,7 @@ const SiteHeader = () => {
             </nav>
 
             {/* Mobile controls */}
-            <div className="lg:hidden flex items-center gap-2">
+            <div className="md:hidden flex items-center gap-2">
               <button
                 onClick={toggleTheme}
                 className="text-primary-foreground/30 hover:text-primary-foreground/60 transition-colors p-2"
