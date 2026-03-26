@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const INDIA_IMG = 'https://images.unsplash.com/photo-1764115424737-25aca6f47835?w=4000&q=90&auto=format&fit=crop&dpr=2';
 
@@ -72,6 +73,42 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
   </div>
 );
 
+const MobileWordReveal = ({ words, goldWords, containerRef }: { words: string[]; goldWords: string[]; containerRef: React.RefObject<HTMLDivElement> }) => {
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center px-7" style={{ zIndex: 10 }}>
+      <h2
+        className="font-serif text-center leading-[1.08] tracking-[-0.03em] flex flex-wrap justify-center gap-x-[0.3em]"
+        style={{ fontSize: 'clamp(2.4rem, 11vw, 3.4rem)', maxWidth: '360px' }}
+      >
+        {words.map((word, i) => {
+          const start = i / words.length;
+          const end = (i + 1) / words.length;
+          return (
+            <MobileWord key={i} word={word} range={[start, end]} progress={scrollYProgress} isGold={goldWords.includes(word)} />
+          );
+        })}
+      </h2>
+    </div>
+  );
+};
+
+const MobileWord = ({ word, range, progress, isGold }: { word: string; range: [number, number]; progress: any; isGold: boolean }) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  return (
+    <motion.span
+      style={{
+        opacity,
+        color: isGold ? 'hsl(38, 55%, 62%)' : '#F8F6F2',
+        textShadow: '0 3px 24px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.6)',
+      }}
+    >
+      {word}
+    </motion.span>
+  );
+};
+
 const CinematicScrollReveal = () => {
   const { theme } = useTheme();
   const isMobile = useIsMobile();
@@ -95,75 +132,29 @@ const CinematicScrollReveal = () => {
 
   const isDark = theme === 'dark';
 
-  // ── Mobile: short scroll circle-expand + sectors below ──
+  // ── Mobile: full-bleed image with scroll-triggered word reveal ──
   if (isMobile) {
-    const mCircleSize = 180;
-    const mImageProgress = Math.min(progress / 0.85, 1);
-    const mMaxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 390, typeof window !== 'undefined' ? window.innerHeight : 844);
-    const mTargetScale = (mMaxDim * 1.6) / mCircleSize;
-    const mCurrentScale = 1 + (mTargetScale - 1) * mImageProgress;
-    const mBorderRadius = 50 * (1 - mImageProgress);
-    const mTextIsLight = mImageProgress > 0.15;
-
-    // Text scales from small to large as image expands
-    const minFont = 1.4; // rem
-    const maxFont = 2.8; // rem
-    const currentFont = minFont + (maxFont - minFont) * mImageProgress;
+    const words = ['Building', 'enduring', 'platforms', 'across', "India's", 'lower', 'middle', 'market.'];
+    const goldWords = ['enduring', 'lower', 'middle', 'market.'];
 
     return (
       <>
-        <section ref={containerRef} className="relative" style={{ height: '130vh' }}>
-          <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
+        <section ref={containerRef} className="relative" style={{ height: '180vh' }}>
+          <div className="sticky top-0 h-screen w-full overflow-hidden">
+            <img
+              src={INDIA_IMG}
+              alt="India's industrial landscape"
+              className="absolute inset-0 w-full h-full"
+              loading="eager"
+              width={4000}
+              height={2667}
+              style={{ objectFit: 'cover', objectPosition: 'center 40%', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
+            />
             <div
-              className="absolute"
-              style={{
-                width: `${mCircleSize}px`,
-                height: `${mCircleSize}px`,
-                borderRadius: `${mBorderRadius}%`,
-                overflow: 'hidden',
-                transform: `translate(-50%, -50%) scale(${mCurrentScale})`,
-                willChange: 'transform',
-                zIndex: 1,
-                top: '50%',
-                left: '50%',
-              }}
-            >
-              <img
-                src={INDIA_IMG}
-                alt="India's industrial landscape"
-                className="w-full h-full"
-                loading="eager"
-                width={4000}
-                height={2667}
-                style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.55) 100%)', opacity: 0.4 + mImageProgress * 0.45 }}
-              />
-            </div>
-
-            <h2
-              className="absolute font-serif text-center px-5 leading-[1.08] tracking-[-0.03em]"
-              style={{
-                fontSize: `${currentFont}rem`,
-                color: mTextIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
-                zIndex: 10,
-                pointerEvents: 'none',
-                transition: 'color 0.2s ease',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '92%',
-                maxWidth: '380px',
-                textShadow: mTextIsLight
-                  ? '0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.5)'
-                  : 'none',
-              }}
-            >
-              Building enduring platforms across India's{' '}
-              <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
-            </h2>
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.65) 100%)' }}
+            />
+            <MobileWordReveal words={words} goldWords={goldWords} containerRef={containerRef} />
           </div>
         </section>
 
