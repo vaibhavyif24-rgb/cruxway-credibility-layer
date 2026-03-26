@@ -39,7 +39,7 @@ const investmentProfile = {
 
 /** Core criteria — unique to this page, not on Home */
 const whatWeLookFor = [
-  { title: 'Founder-Led Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
+  { title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
   { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
   { title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
   { title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
@@ -95,7 +95,7 @@ const InvestmentCriteria = () => {
             <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[480px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
-                : 'Our disciplined criteria for identifying exceptional founder-led businesses with enduring competitive advantages.'}
+                : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>

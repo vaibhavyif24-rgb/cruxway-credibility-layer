@@ -125,7 +125,7 @@ const Home = () => {
             <p className="font-sans text-[14px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[520px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
               {isIndia
                 ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
-                : 'Patient capital and hands-on partnership for founder-led businesses that keep America running.'}
+                : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -159,10 +159,11 @@ const Home = () => {
             ? 'Investing in and building the next generation of essential companies across India.'
             : 'Investing in and building essential U.S. companies across regulated, compliance-driven sectors.'
         }
+        highlights={isIndia ? ['essential', 'India'] : ['essential', 'regulated']}
         subtext={
           isIndia
             ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
-            : 'We focus on founder-led and family-owned businesses where reliability, deep client relationships, and high barriers to entry define long-term value.'
+            : 'We focus on owner-operated and family-held businesses where reliability, deep client relationships, and high barriers to entry define long-term value.'
         }
         variant="light"
       />
@@ -173,8 +174,9 @@ const Home = () => {
         heading={
           isIndia
             ? 'India\'s lower middle market is one of the most under-served segments in global investing. Companies proven over decades are ready for a partner who can help them scale with discipline.'
-            : 'Tens of thousands of founder-led businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
+            : 'Tens of thousands of essential businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
         }
+        highlights={isIndia ? ['under-served', 'discipline'] : ['essential', 'Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
@@ -201,8 +203,9 @@ const Home = () => {
       <ScrollRevealText
         heading={isIndia
           ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
-          : "Decades of institutional experience dedicated to partnering with the founders who built America's essential industries."
+          : "Decades of institutional experience dedicated to partnering with the owners who built America's essential industries."
         }
+        highlights={isIndia ? ['institutional', 'industrial'] : ['institutional', 'essential']}
         variant="light"
       />
       <div className="bg-background">

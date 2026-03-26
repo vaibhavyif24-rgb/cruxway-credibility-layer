@@ -1,7 +1,7 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GeometricHero from '@/components/GeometricHero';
 
 const regions = [
@@ -13,6 +13,10 @@ const Landing = () => {
   const { setRegion } = useRegion();
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
+
+  useEffect(() => {
+    setRegion(null);
+  }, [setRegion]);
 
   const selectRegion = (region: 'india' | 'us') => {
     setSelected(region);

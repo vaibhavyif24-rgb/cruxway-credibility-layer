@@ -75,6 +75,7 @@ const About = () => {
             ? 'Scale what India builds. Preserve what founders value. Long-term capital for companies meant to last.'
             : 'Preserve what founders built. Scale what matters. Long-term capital with operating expertise.'
         }
+        highlights={isIndia ? ['India', 'founders'] : ['founders', 'Scale']}
         subtext={
           isIndia
             ? 'Cruxway invests in and takes majority stakes in founder-led companies across India\'s essential sectors.'

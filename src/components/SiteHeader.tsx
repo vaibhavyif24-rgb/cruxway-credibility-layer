@@ -49,8 +49,8 @@ const SiteHeader = () => {
         <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
           <div className="flex items-center justify-between h-16 md:h-[72px]">
             <Link
-              to={prefix}
-              className="font-serif text-3xl md:text-4xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75 font-bold"
+              to="/"
+              className="font-serif text-3xl md:text-4xl text-primary-foreground tracking-[-0.02em] transition-opacity hover:opacity-75 font-normal"
             >
               Cruxway
             </Link>

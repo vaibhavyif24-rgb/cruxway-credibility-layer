@@ -59,6 +59,7 @@ const GuidingPrinciples = () => {
             ? 'Scale what India builds. Preserve what founders value. Partnering with conviction and discipline.'
             : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
         }
+        highlights={isIndia ? ['India', 'conviction'] : ['founders', 'long']}
         subtext={
           isIndia
             ? 'Long-term capital along with operational expertise to help founders transform their businesses into market leaders.'

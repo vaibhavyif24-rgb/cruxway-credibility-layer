@@ -320,7 +320,7 @@ const SlideCard: React.FC<{
               transition: 'opacity 0.5s ease-out 0.15s, transform 0.5s ease-out 0.15s',
             }}
           >
-            {card.title.toLowerCase()}.
+{card.title}.
           </h3>
           <p
             className="max-w-[560px] font-sans text-[15px] leading-[1.8] md:text-[17px]"
@@ -380,7 +380,7 @@ const StickyCardSurface: React.FC<{
             className="mb-4 font-serif text-[clamp(1.9rem,4vw,3.3rem)] leading-[1.05] tracking-[-0.02em] md:mb-5"
             style={{ color: colors.title }}
           >
-            {card.title.toLowerCase()}.
+            {card.title}.
           </h3>
           <p
             className="max-w-[560px] font-sans text-[15px] leading-[1.8] md:text-[17px]"
