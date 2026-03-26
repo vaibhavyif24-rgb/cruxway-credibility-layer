@@ -56,8 +56,8 @@ const SiteHeader = () => {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center">
-              <div className="flex items-center gap-4 lg:gap-5 xl:gap-7">
+            <nav className="hidden lg:flex items-center">
+              <div className="flex items-center gap-5 xl:gap-7">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
@@ -80,7 +80,7 @@ const SiteHeader = () => {
                 ))}
               </div>
 
-              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-4 lg:mx-6" />
+              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-6" />
 
               {/* Dark mode toggle */}
               <button
@@ -104,7 +104,7 @@ const SiteHeader = () => {
             </nav>
 
             {/* Mobile controls */}
-            <div className="md:hidden flex items-center gap-2">
+            <div className="lg:hidden flex items-center gap-2">
               <button
                 onClick={toggleTheme}
                 className="text-primary-foreground/30 hover:text-primary-foreground/60 transition-colors p-2"
