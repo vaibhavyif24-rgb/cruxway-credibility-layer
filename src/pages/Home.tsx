@@ -159,10 +159,11 @@ const Home = () => {
             ? 'Investing in and building the next generation of essential companies across India.'
             : 'Investing in and building essential U.S. companies across regulated, compliance-driven sectors.'
         }
+        highlights={isIndia ? ['essential', 'India'] : ['essential', 'regulated']}
         subtext={
           isIndia
             ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
-            : 'We focus on founder-led and family-owned businesses where reliability, deep client relationships, and high barriers to entry define long-term value.'
+            : 'We focus on owner-operated and family-held businesses where reliability, deep client relationships, and high barriers to entry define long-term value.'
         }
         variant="light"
       />
