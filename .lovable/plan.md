@@ -1,50 +1,42 @@
 
 
-## Plan: Reduce Cinematic Pixelation + Vintage Principle Illustrations
+## Plan: Rich Celestial Illustrations for Principles Cards
 
-### Part 1: Cinematic Reveal — Reduce Pixelation
+### What We're Building
 
-**Problem**: The 180px circle scales up ~16x (`maxDim * 1.5 / 180`). On a 1920px screen, that's `(1920 * 1.5) / 180 = 16x`. At 16x, even a 4000px image gets stretched to an effective 2880px container from a 250px source area — causing visible pixelation.
+Replace the current small, geometric SVG illustrations with full-card, immersive celestial/painterly SVG backgrounds inspired by the reference images. Each card gets a deep navy-to-midnight gradient background with gold celestial elements (stars, constellations, nebulae, swirls) plus thematic figurative elements matching each principle.
 
-**Fix**: Increase circle size from 180px to 300px. This reduces max scale to ~9.6x (`(1920 * 1.5) / 300`), keeping the image sharp. The circle starts slightly larger but the expand animation remains smooth.
+### Design per Principle
 
-**Additional readability improvements**:
-- Strengthen overlay to 5-stop gradient: `rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%`
-- Increase text shadow intensity on all sector text
-- Mobile: increase container height to `350vh`, increase `overlayOffset` to `26%` for more breathing room between heading and sectors
-- Mobile: bump sector heading to `1.25rem`, item names to `1.05rem`, descriptions to `13px`
+1. **Integrity** — A celestial compass rose with gold constellation lines forming cardinal directions, scattered stars, and a radiant north star at top center
+2. **Servant Leadership** — An upward arch/bridge formed by constellation lines, with radiating light from the keystone and scattered gold stars, a figure silhouette at the base looking upward
+3. **Humility** — Van Gogh-style spiral galaxy swirl (like reference image), gold nebula curves, a figure on a cliff edge gazing at the cosmos
+4. **Grit** — A mountain peak with constellation patterns, gold lightning/forge sparks, rugged terrain silhouette with stars above
+5. **Bias to Action** — A comet/arrow streaking across a starfield, trailing gold particles, constellation rings it passes through
+6. **The Golden Rule** — Two reaching hands (Sistine Chapel style, like reference image) with gold stardust between them, constellation patterns surrounding
 
-**Files**: `CinematicScrollReveal.tsx`, `USCinematicScrollReveal.tsx` — identical structural changes, different image URLs
+### Technical Changes in `PrinciplesSlider.tsx`
 
----
+**Card background**: Change from warm brown gradient to deep navy:
+```
+background: linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(225, 45%, 5%) 50%, hsl(215, 35%, 10%) 100%)
+```
 
-### Part 2: Principles — Vintage/Retro Sci-Fi Illustrations
+**SVG container**: Expand from 70% centered to full-bleed (`inset-0`, `w-full h-full`) so illustrations fill the entire card
 
-**Problem**: Current principle cards use AI-generated photographic JPGs. One image shows "rockets through an asteroid field" which doesn't match the professional PE tone. User wants distinct vintage/retro sci-fi art style illustrations that match each principle's theme.
+**SVG complexity**: Each illustration uses:
+- `<defs>` with radialGradient for nebula glows
+- Procedurally generated star fields (50-80 small circles at random positions)
+- Gold constellation lines connecting star groups
+- Thematic figurative silhouettes as paths
+- Multiple opacity layers for depth (0.1 to 0.6)
+- Palette: gold `hsl(38, 55%, 60%)`, warm white `hsl(40, 30%, 85%)`, deep navy fills
 
-**Fix**: Replace the 6 JPG photo backgrounds with inline SVG illustrations rendered directly in the component. Each illustration uses a vintage/retro aesthetic with:
-- Muted gold, sepia, and warm tones
-- Art deco geometric patterns and line work
-- Thematic imagery matching each principle:
-  1. **Integrity** — A compass rose with radiating geometric lines (truth/direction)
-  2. **Servant Leadership** — Hands supporting an upward arch/bridge (service/elevation)
-  3. **Humility** — An open book with radiating light rays (continuous learning)
-  4. **Grit** — An anvil with hammer and sparks (forging/perseverance)
-  5. **Bias to Action** — Forward-pointing arrow through concentric rings (momentum/decisiveness)
-  6. **The Golden Rule** — A balanced scale with interconnected figures (fairness/reciprocity)
+**Texture overlay**: Update radial gradient to work with navy base instead of brown
 
-- Remove all JPG imports and the `src/assets/principles/` dependency
-- Render SVGs as background elements behind the dark overlay, replacing `<img>` tags
-- Keep the existing card layout, overlay gradient, and text animation system intact
-- Each SVG uses the same gold palette (`hsl(38, 45%, 55%)`) with low opacity for a subtle vintage etched-print feel
+**Text shadow**: Increase to `0 2px 30px rgba(0,0,0,0.7)` for readability against busier backgrounds
 
-**File**: `PrinciplesSlider.tsx`
+### File Modified
 
----
-
-### Files Modified
-
-1. `src/components/CinematicScrollReveal.tsx` — larger circle (300px), stronger overlay, mobile spacing
-2. `src/components/USCinematicScrollReveal.tsx` — same changes as above
-3. `src/components/PrinciplesSlider.tsx` — replace JPG imports with inline SVG illustrations
+`src/components/PrinciplesSlider.tsx` — complete rewrite of `VintageIllustration` component + card background color change
 
