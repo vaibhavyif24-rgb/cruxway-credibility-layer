@@ -159,7 +159,7 @@ const Home = () => {
             ? 'Investing in and building the next generation of essential companies across India.'
             : 'Investing in and building essential U.S. companies across regulated, compliance-driven sectors.'
         }
-        highlights={isIndia ? ['essential', 'India'] : ['essential', 'regulated']}
+        highlights={isIndia ? ['essential', 'building'] : ['essential', 'regulated']}
         subtext={
           isIndia
             ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
