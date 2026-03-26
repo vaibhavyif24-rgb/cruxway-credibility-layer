@@ -184,7 +184,7 @@ const Home = () => {
       />
 
       {/* Our Process — Sticky Card Stack */}
-      <section className="bg-background pt-10 md:pt-14 lg:pt-16 pb-0">
+      <section className="bg-background pt-10 md:pt-14 lg:pt-16 pb-4">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
           <FadeIn>
             <SectionLabel>Our Process</SectionLabel>

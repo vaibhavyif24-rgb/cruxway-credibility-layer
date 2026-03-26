@@ -109,32 +109,6 @@ const Contact = () => {
         variant="light"
       />
 
-      {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-        <DarkSectionEffects variant="cta" />
-        <div className="relative max-w-[1080px] mx-auto">
-          <div className="max-w-[540px]">
-            <FadeIn>
-              <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15] mb-4">
-                {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
-              </h2>
-              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.8] mb-6">
-                {isIndia
-                  ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                  : 'If you\'re a founder considering your next chapter, we\'d welcome an honest discussion about long-term partnership.'}
-              </p>
-              <Link
-                to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75 transition-all duration-300"
-              >
-                Get in Touch
-              </Link>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
       {/* Disclaimer */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-6 md:py-8 border-t border-border">
         <div className="max-w-[1080px] mx-auto">

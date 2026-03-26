@@ -124,7 +124,6 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-      {/* What We Look For — consolidated criteria */}
       {/* What We Look For — Horizontal Sticky Deck */}
       <section className="bg-background overflow-x-clip">
         <div className="px-5 md:px-10 lg:px-16 pt-4 md:pt-6 lg:pt-8">
@@ -203,7 +202,6 @@ const InvestmentCriteria = () => {
           />
         </div>
       </section>
-
 
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
