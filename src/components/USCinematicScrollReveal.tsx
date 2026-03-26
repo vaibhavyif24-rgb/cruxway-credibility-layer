@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
-import usIndustrialReveal from '@/assets/us-industrial-reveal.jpg';
+import { useIsMobile } from '@/hooks/use-mobile';
+
+const US_IMAGE_URL = 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=2400&q=90&auto=format&fit=crop';
 
 const usSectors = {
   left: {
@@ -25,6 +27,7 @@ const usSectors = {
 
 const USCinematicScrollReveal = () => {
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
 
@@ -55,7 +58,8 @@ const USCinematicScrollReveal = () => {
   const isDark = theme === 'dark';
   const textIsLight = imageProgress > 0.3;
 
-  const taglineTop = 26 - (sectorProgress * 14);
+  const taglineTop = 26 - (sectorProgress * 18);
+  const overlayOffset = isMobile ? 18 : 15;
 
   return (
     <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
@@ -75,18 +79,18 @@ const USCinematicScrollReveal = () => {
           }}
         >
           <img
-            src={usIndustrialReveal}
+            src={US_IMAGE_URL}
             alt="America's industrial landscape"
             className="w-full h-full"
             loading="eager"
             width={2400}
-            height={2400}
-            style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' }}
+            height={1600}
+            style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
           />
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.5))',
+              background: 'linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55))',
               opacity: imageProgress,
             }}
           />
@@ -114,58 +118,111 @@ const USCinematicScrollReveal = () => {
 
         {/* Sector content overlay */}
         <div
-          className="absolute left-1/2 px-5 md:px-10 w-full"
+          className="absolute left-1/2 w-full"
           style={{
             zIndex: 10,
             pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
             transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
             opacity: sectorProgress,
-            top: `${taglineTop + 12}%`,
-            maxWidth: '900px',
+            top: `${taglineTop + overlayOffset}%`,
+            maxWidth: isMobile ? 'none' : '1000px',
+            padding: isMobile ? '0 1.5rem' : '0 2.5rem',
             transition: 'opacity 0.1s ease',
           }}
         >
-          <div className="text-center mb-4 md:mb-6">
+          <div className={`text-center ${isMobile ? 'mb-6' : 'mb-8 md:mb-10'}`}>
             <span
-              className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em]"
-              style={{ color: 'hsl(38, 55%, 62%)' }}
+              className="font-sans font-semibold uppercase tracking-[0.22em]"
+              style={{ color: 'hsl(38, 55%, 62%)', fontSize: isMobile ? '12px' : '13px' }}
             >
               Sectors We Look At
             </span>
-            <div className="mx-auto mt-2 w-8 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+            <div className="mx-auto mt-2.5 w-10 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative">
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
+          <div className={`grid ${isMobile ? 'grid-cols-1 gap-8' : 'grid-cols-2 gap-0'} relative`}>
+            {!isMobile && (
+              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
+            )}
 
-            <div className="md:pr-8">
-              <h3 className="font-serif text-[1.1rem] md:text-[1.25rem] mb-3 leading-tight" style={{ color: '#F8F6F2' }}>
+            <div className={isMobile ? '' : 'pr-10'}>
+              <h3
+                className="font-serif leading-tight"
+                style={{
+                  color: '#F8F6F2',
+                  fontSize: isMobile ? '1.3rem' : '1.6rem',
+                  marginBottom: isMobile ? '1rem' : '0.875rem',
+                }}
+              >
                 {usSectors.left.heading}
               </h3>
-              <ul className="space-y-3">
+              <ul className={isMobile ? 'space-y-5' : 'space-y-4'}>
                 {usSectors.left.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="mt-[7px] w-[7px] h-[7px] rotate-45 flex-shrink-0" style={{ background: 'hsl(38, 55%, 62%, 0.7)' }} />
+                  <li key={i} className="flex items-start gap-3.5">
+                    <span
+                      className="flex-shrink-0 rotate-45"
+                      style={{
+                        background: 'hsl(38, 55%, 62%, 0.7)',
+                        width: isMobile ? '8px' : '9px',
+                        height: isMobile ? '8px' : '9px',
+                        marginTop: '8px',
+                      }}
+                    />
                     <div>
-                      <span className="font-serif text-[0.95rem] md:text-[1.1rem] leading-[1.3]" style={{ color: '#F8F6F2' }}>{item.name}</span>
-                      <span className="block font-sans text-[12px] md:text-[13px] leading-[1.5]" style={{ color: 'rgba(248,246,242,0.45)' }}>{item.desc}</span>
+                      <span
+                        className="font-serif leading-[1.3] block"
+                        style={{ color: '#F8F6F2', fontSize: isMobile ? '1.15rem' : '1.4rem' }}
+                      >
+                        {item.name}
+                      </span>
+                      <span
+                        className="block font-sans leading-[1.6]"
+                        style={{ color: 'rgba(248,246,242,0.5)', fontSize: isMobile ? '14px' : '16px' }}
+                      >
+                        {item.desc}
+                      </span>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="md:pl-8">
-              <h3 className="font-serif text-[1.1rem] md:text-[1.25rem] mb-3 leading-tight" style={{ color: '#F8F6F2' }}>
+            <div className={isMobile ? '' : 'pl-10'}>
+              <h3
+                className="font-serif leading-tight"
+                style={{
+                  color: '#F8F6F2',
+                  fontSize: isMobile ? '1.3rem' : '1.6rem',
+                  marginBottom: isMobile ? '1rem' : '0.875rem',
+                }}
+              >
                 {usSectors.right.heading}
               </h3>
-              <ul className="space-y-3">
+              <ul className={isMobile ? 'space-y-5' : 'space-y-4'}>
                 {usSectors.right.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="mt-[7px] w-[7px] h-[7px] rotate-45 flex-shrink-0" style={{ background: 'hsl(38, 55%, 62%, 0.7)' }} />
+                  <li key={i} className="flex items-start gap-3.5">
+                    <span
+                      className="flex-shrink-0 rotate-45"
+                      style={{
+                        background: 'hsl(38, 55%, 62%, 0.7)',
+                        width: isMobile ? '8px' : '9px',
+                        height: isMobile ? '8px' : '9px',
+                        marginTop: '8px',
+                      }}
+                    />
                     <div>
-                      <span className="font-serif text-[0.95rem] md:text-[1.1rem] leading-[1.3]" style={{ color: '#F8F6F2' }}>{item.name}</span>
-                      <span className="block font-sans text-[12px] md:text-[13px] leading-[1.5]" style={{ color: 'rgba(248,246,242,0.45)' }}>{item.desc}</span>
+                      <span
+                        className="font-serif leading-[1.3] block"
+                        style={{ color: '#F8F6F2', fontSize: isMobile ? '1.15rem' : '1.4rem' }}
+                      >
+                        {item.name}
+                      </span>
+                      <span
+                        className="block font-sans leading-[1.6]"
+                        style={{ color: 'rgba(248,246,242,0.5)', fontSize: isMobile ? '14px' : '16px' }}
+                      >
+                        {item.desc}
+                      </span>
                     </div>
                   </li>
                 ))}
