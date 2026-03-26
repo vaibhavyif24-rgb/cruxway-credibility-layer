@@ -117,8 +117,8 @@ const Home = () => {
           <FadeIn delay={0.08}>
             <h1 className="font-serif text-[clamp(2.2rem,5vw,3.8rem)] text-white max-w-[680px] leading-[1.08] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
               {isIndia
-                ? <>Investing in <span className="text-gold">India's</span> Next Generation of Essential Companies</>
-                : <>Building the Next Generation of Essential <span className="text-gold">U.S.</span> Companies</>}
+                ? <>Investing in India's Next Generation of <span className="text-gold">Essential</span> Companies</>
+                : <>Building the <span className="text-gold">Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
@@ -159,7 +159,7 @@ const Home = () => {
             ? 'Investing in and building the next generation of essential companies across India.'
             : 'Investing in and building essential U.S. companies across regulated, compliance-driven sectors.'
         }
-        highlights={isIndia ? ['essential', 'India'] : ['essential', 'regulated']}
+        highlights={isIndia ? ['essential', 'building'] : ['essential', 'regulated']}
         subtext={
           isIndia
             ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
@@ -205,7 +205,7 @@ const Home = () => {
           ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
           : "Decades of institutional experience dedicated to partnering with the owners who built America's essential industries."
         }
-        highlights={isIndia ? ['institutional', 'industrial'] : ['institutional', 'essential']}
+        highlights={isIndia ? ['institutional', 'shaping'] : ['institutional', 'essential']}
         variant="light"
       />
       <div className="bg-background">

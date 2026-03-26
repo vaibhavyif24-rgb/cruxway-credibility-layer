@@ -30,12 +30,12 @@ const About = () => {
       ];
 
   const principles = [
-    { t: 'Integrity', d: 'Transparency and intellectual honesty in every interaction.' },
-    { t: 'Servant Leadership', d: 'Earn trust through service, not authority.' },
-    { t: 'Humility', d: 'Stay curious. Never stop learning.' },
-    { t: 'Grit', d: 'Do hard things, especially when things get hard.' },
-    { t: 'Bias to Action', d: 'Execute decisively. Speed matters.' },
-    { t: 'The Golden Rule', d: 'Treat people with respect, fairness, and compassion.' },
+    { t: 'Integrity', d: 'We say what we mean and follow through. Transparency and intellectual honesty in every interaction, even when the truth is uncomfortable.' },
+    { t: 'Servant Leadership', d: 'Leadership is earned through service, not authority. We succeed when the people around us succeed.' },
+    { t: 'Humility', d: 'The best investors never stop learning. We approach every situation with curiosity and an open mind.' },
+    { t: 'Grit', d: 'Building lasting businesses requires perseverance. We do hard things, especially when things get hard.' },
+    { t: 'Bias to Action', d: 'Analysis has its place, but progress demands execution. We move decisively and learn in motion.' },
+    { t: 'The Golden Rule', d: 'Treat every person, from founder to frontline employee, with respect, fairness, and genuine compassion.' },
   ];
 
   return (
@@ -102,9 +102,9 @@ const About = () => {
       {/* Principles — Scroll-triggered vertical slider */}
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-12 md:pt-16">
         <FadeIn>
-          <SectionLabel>Our Values</SectionLabel>
+          <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
-            What Guides Us
+            What We Stand For
           </h2>
           <GoldRule />
         </FadeIn>
