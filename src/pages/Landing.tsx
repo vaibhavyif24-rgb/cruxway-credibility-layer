@@ -1,7 +1,7 @@
 import { useRegion } from '@/contexts/RegionContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GeometricHero from '@/components/GeometricHero';
 
 const regions = [
