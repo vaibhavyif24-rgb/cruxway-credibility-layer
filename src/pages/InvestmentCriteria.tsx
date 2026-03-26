@@ -112,7 +112,7 @@ const InvestmentCriteria = () => {
           <FadeIn>
             <SectionLabel light>Investment Profile</SectionLabel>
             <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-primary-foreground leading-[1.15] mb-2">
-              {isIndia ? 'Our Target Parameters — India' : 'Our Target Parameters'}
+              {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
