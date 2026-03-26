@@ -155,7 +155,6 @@ const InvestmentCriteria = () => {
 
       {/* Cinematic Scroll Reveal — before Evaluation Framework */}
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
-      <SectorShowcase region={isIndia ? 'india' : 'us'} />
 
       {/* Evaluation Framework — Sticky Card Stack */}
       <section className="relative bg-primary text-primary-foreground overflow-x-clip">
