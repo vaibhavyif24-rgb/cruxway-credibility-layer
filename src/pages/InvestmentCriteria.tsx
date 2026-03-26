@@ -203,7 +203,6 @@ const InvestmentCriteria = () => {
         </div>
       </section>
 
-
       {/* CTA */}
       <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <DarkSectionEffects variant="cta" />

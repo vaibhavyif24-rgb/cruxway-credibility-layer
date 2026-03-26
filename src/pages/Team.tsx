@@ -467,7 +467,7 @@ const Team = () => {
 
       {/* Institutional Experience Marquee — below network */}
       <div className="bg-background">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-6">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <GoldRule className="mt-1" />
