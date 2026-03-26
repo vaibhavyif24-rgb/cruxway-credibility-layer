@@ -11,6 +11,7 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
+import SectorShowcase from '@/components/SectorShowcase';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
