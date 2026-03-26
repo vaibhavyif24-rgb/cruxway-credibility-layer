@@ -106,7 +106,7 @@ const CinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   const taglineTop = 26 - (sectorProgress * 20);
-  const overlayOffset = isMobile ? 24 : 18;
+  const overlayOffset = isMobile ? 26 : 18;
 
   return (
     <section ref={containerRef} className="relative" style={{ height: isMobile ? '320vh' : '250vh' }}>
