@@ -1,33 +1,45 @@
 
 
-## Plan: Fix Cinematic Reveal — Local Images, Spacing, Mobile Layout
+## Plan: High-Res Unsplash Images + Mobile Text Fix + Spacing
 
-### Problems Found
+### What Changes
 
-1. **Images not loading**: Unsplash URLs (`images.unsplash.com`) are blocked/not loading in the sandbox — the section renders as flat grey. The project already has local high-res assets: `india-industrial-reveal.jpg` and `us-industrial-reveal.jpg`.
-2. **Tagline/sector overlap**: "Sectors We Look At" label collides with "lower middle market." heading during scroll.
-3. **Mobile text overflow**: Sector content overflows and is unreadable on small screens.
-4. **Desktop blank space**: Too much empty scroll at the end of the 300vh section.
+**1. Replace images with user-specified high-res Unsplash URLs (2400px)**
 
-### Changes
+- India: `https://images.unsplash.com/photo-1764115424737-25aca6f47835?w=2400&q=90&auto=format&fit=crop` (industrial workshop)
+- US: `https://images.unsplash.com/photo-1647427060118-4911c9821b82?w=2400&q=90&auto=format&fit=crop` (orange factory machines)
 
-**1. `CinematicScrollReveal.tsx` (India)**
+Remove local JPG imports entirely. Use direct URLs in `<img src>`.
 
-- Replace Unsplash URL with local import: `import indiaRevealImg from '@/assets/india-industrial-reveal.jpg'`
-- Increase `taglineTop` shift: `26 - (sectorProgress * 20)` (was `* 18`) — pushes heading higher to clear room
-- Increase overlay offset: mobile `22%`, desktop `18%` (was `18%`/`15%`) — bigger gap between heading and sectors
-- Reduce container height to `250vh` (from `300vh`) — less blank trailing space on desktop
-- Mobile: reduce sector font sizes slightly to prevent overflow (`1rem` item names, `12px` descriptions), reduce spacing to `space-y-3`, reduce category heading size to `1.1rem`
-- Mobile: reduce tagline font size clamp to `clamp(1.6rem, 4.5vw, 4rem)`
-- Add `mb-4 md:mb-8` between "Sectors We Look At" label and the grid
+**2. Stronger overlay gradient for text readability**
 
-**2. `USCinematicScrollReveal.tsx` (US)**
+Current gradient is too weak (`rgba(0,0,0,0.35)` to `rgba(0,0,0,0.55)`). Change to a heavier multi-stop gradient:
+```
+linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.7) 100%)
+```
+This ensures all text — heading and sectors — is crisp against the image.
 
-- Same local import swap: `import usRevealImg from '@/assets/us-industrial-reveal.jpg'`
-- Same spacing, font, and height fixes as India component
+**3. Mobile: more scroll room + smaller text to fit**
+
+- Increase container height on mobile to `280vh` (keep desktop at `250vh`) — gives more scroll distance so sectors have time to fully appear
+- Reduce mobile tagline font: `clamp(1.4rem, 4vw, 2.4rem)`
+- Reduce mobile sector item names to `0.9rem`, descriptions to `11px`
+- Reduce mobile category heading to `1rem`
+- Tighten mobile spacing: `space-y-2`, `gap-3` between columns
+- Reduce mobile overlay offset to `20%` (from `22%`)
+
+**4. Desktop: reduce trailing blank space**
+
+Keep `250vh` on desktop (already reduced from `300vh`). No further change needed.
 
 ### Files Modified
 
 1. `src/components/CinematicScrollReveal.tsx`
 2. `src/components/USCinematicScrollReveal.tsx`
+
+### Technical Details
+
+- Both files get the same structural changes; only the image URL, alt text, and tagline text differ
+- The `indiaRevealImg` / `usRevealImg` imports are removed; replaced with string URL constants
+- Overlay gradient strengthened for professional text contrast on both images
 
