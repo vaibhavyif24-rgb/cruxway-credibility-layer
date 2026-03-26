@@ -93,131 +93,163 @@ const CinematicScrollReveal = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  const imageProgress = Math.min(progress / 0.55, 1);
-  const sectorProgress = Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
+  const isDark = theme === 'dark';
 
-  const circleSize = 300;
+  // Mobile: shorter scroll, image-only cinematic, sectors below in normal flow
+  // Desktop: full 250vh with sector overlay inside sticky
+  const containerHeight = isMobile ? '150vh' : '250vh';
+  const circleSize = isMobile ? 200 : 300;
+
+  const imageProgress = isMobile
+    ? Math.min(progress / 0.85, 1)   // most of scroll is image reveal on mobile
+    : Math.min(progress / 0.55, 1);
+  const sectorProgress = isMobile
+    ? 0  // sectors are not inside the sticky on mobile
+    : Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
+
   const maxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080);
   const targetScale = (maxDim * 1.5) / circleSize;
   const currentScale = 1 + (targetScale - 1) * imageProgress;
   const currentBorderRadius = 50 * (1 - imageProgress);
 
-  const isDark = theme === 'dark';
   const textIsLight = imageProgress > 0.3;
 
-  const taglineTop = 26 - (sectorProgress * 20);
-  const overlayOffset = isMobile ? 26 : 18;
-
-  // On mobile, skip the cinematic scroll animation entirely and render sectors as a static section
-  if (isMobile) {
-    return (
-      <section
-        style={{
-          background: isDark ? '#0B131E' : 'hsl(var(--background))',
-          padding: '3rem 1.25rem 3.5rem',
-        }}
-      >
-        <div className="text-center mb-8">
-          <span
-            className="font-sans font-semibold uppercase"
-            style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}
-          >
-            Sectors We Look At
-          </span>
-          <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
-        </div>
-
-        <div className="space-y-10">
-          <SectorColumn heading={indiaSectors.left.heading} items={indiaSectors.left.items} side="left" isMobile={true} />
-          <SectorColumn heading={indiaSectors.right.heading} items={indiaSectors.right.items} side="right" isMobile={true} />
-        </div>
-      </section>
-    );
-  }
+  const taglineTop = isMobile
+    ? 30 - (imageProgress * 8)
+    : 26 - (sectorProgress * 20);
+  const overlayOffset = 18;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '250vh' }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
-        <div
-          className="absolute"
-          style={{
-            width: `${circleSize}px`,
-            height: `${circleSize}px`,
-            borderRadius: `${currentBorderRadius}%`,
-            overflow: 'hidden',
-            transform: `translate(-50%, -50%) scale(${currentScale})`,
-            willChange: 'transform',
-            zIndex: 1,
-            top: `${62 + (50 - 62) * imageProgress}%`,
-            left: '50%',
-          }}
-        >
-          <img
-            src={INDIA_IMG}
-            alt="India's industrial landscape — cluttered workshop"
-            className="w-full h-full"
-            loading="eager"
-            width={4000}
-            height={2667}
-            style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
-          />
+    <>
+      <section ref={containerRef} className="relative" style={{ height: containerHeight }}>
+        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
+          {/* Expanding circle image */}
           <div
-            className="absolute inset-0"
-            style={{ background: OVERLAY_GRADIENT, opacity: imageProgress }}
-          />
-        </div>
+            className="absolute"
+            style={{
+              width: `${circleSize}px`,
+              height: `${circleSize}px`,
+              borderRadius: `${currentBorderRadius}%`,
+              overflow: 'hidden',
+              transform: `translate(-50%, -50%) scale(${currentScale})`,
+              willChange: 'transform',
+              zIndex: 1,
+              top: `${62 + (50 - 62) * imageProgress}%`,
+              left: '50%',
+            }}
+          >
+            <img
+              src={INDIA_IMG}
+              alt="India's industrial landscape — cluttered workshop"
+              className="w-full h-full"
+              loading="eager"
+              width={4000}
+              height={2667}
+              style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: OVERLAY_GRADIENT, opacity: imageProgress }}
+            />
+          </div>
 
-        <h2
-          className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
-          style={{
-            fontSize: 'clamp(2.1rem, 5.2vw, 4rem)',
-            color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
-            zIndex: 10,
-            pointerEvents: 'none',
-            transition: 'color 0.3s ease',
-            top: `${taglineTop}%`,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '90%',
-            maxWidth: '820px',
-            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : 'none',
-          }}
-        >
-          Building enduring platforms across India's{' '}
-          <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
-        </h2>
+          {/* Tagline */}
+          <h2
+            className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
+            style={{
+              fontSize: isMobile ? 'clamp(1.6rem, 7vw, 2.2rem)' : 'clamp(2.1rem, 5.2vw, 4rem)',
+              color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
+              zIndex: 10,
+              pointerEvents: 'none',
+              transition: 'color 0.3s ease',
+              top: `${taglineTop}%`,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '90%',
+              maxWidth: '820px',
+              textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : 'none',
+            }}
+          >
+            Building enduring platforms across India's{' '}
+            <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
+          </h2>
 
-        <div
-          className="absolute left-1/2 w-full"
-          style={{
-            zIndex: 10,
-            pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
-            transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
-            opacity: sectorProgress,
-            top: `${taglineTop + overlayOffset}%`,
-            maxWidth: '1100px',
-            padding: '0 2.5rem',
-            transition: 'opacity 0.1s ease',
-          }}
-        >
-          <div className="text-center mb-10">
-            <span
-              className="font-sans font-semibold uppercase"
-              style={{ color: 'hsl(38, 55%, 62%)', fontSize: '14px', letterSpacing: '0.28em' }}
+          {/* Desktop-only: sector overlay inside sticky */}
+          {!isMobile && (
+            <div
+              className="absolute left-1/2 w-full"
+              style={{
+                zIndex: 10,
+                pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
+                transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
+                opacity: sectorProgress,
+                top: `${taglineTop + overlayOffset}%`,
+                maxWidth: '1100px',
+                padding: '0 2.5rem',
+                transition: 'opacity 0.1s ease',
+              }}
             >
-              Sectors We Look At
-            </span>
-            <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+              <div className="text-center mb-10">
+                <span
+                  className="font-sans font-semibold uppercase"
+                  style={{ color: 'hsl(38, 55%, 62%)', fontSize: '14px', letterSpacing: '0.28em' }}
+                >
+                  Sectors We Look At
+                </span>
+                <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+              </div>
+
+              <div className="grid grid-cols-2 gap-8 relative">
+                <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
+                <SectorColumn heading={indiaSectors.left.heading} items={indiaSectors.left.items} side="left" isMobile={false} />
+                <SectorColumn heading={indiaSectors.right.heading} items={indiaSectors.right.items} side="right" isMobile={false} />
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Mobile-only: sectors in normal document flow with cinematic backdrop */}
+      {isMobile && (
+        <div
+          className="relative overflow-hidden"
+          style={{ padding: '2.5rem 1.25rem 3rem' }}
+        >
+          {/* Background image with heavy overlay for cinematic feel */}
+          <div className="absolute inset-0" style={{ zIndex: 0 }}>
+            <img
+              src={INDIA_IMG}
+              alt=""
+              aria-hidden="true"
+              className="w-full h-full"
+              style={{ objectFit: 'cover', filter: 'blur(8px)', transform: 'scale(1.1)' }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to bottom, rgba(11,19,30,0.92) 0%, rgba(11,19,30,0.96) 50%, rgba(11,19,30,0.98) 100%)' }}
+            />
           </div>
 
-          <div className="grid grid-cols-2 gap-8 relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
-            <SectorColumn heading={indiaSectors.left.heading} items={indiaSectors.left.items} side="left" isMobile={false} />
-            <SectorColumn heading={indiaSectors.right.heading} items={indiaSectors.right.items} side="right" isMobile={false} />
+          {/* Content */}
+          <div className="relative" style={{ zIndex: 1 }}>
+            <div className="text-center mb-8">
+              <span
+                className="font-sans font-semibold uppercase"
+                style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}
+              >
+                Sectors We Look At
+              </span>
+              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+            </div>
+
+            <div className="space-y-10">
+              <SectorColumn heading={indiaSectors.left.heading} items={indiaSectors.left.items} side="left" isMobile={true} />
+              <SectorColumn heading={indiaSectors.right.heading} items={indiaSectors.right.items} side="right" isMobile={true} />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      )}
+    </>
   );
 };
 
