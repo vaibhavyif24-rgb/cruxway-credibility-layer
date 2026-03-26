@@ -320,7 +320,7 @@ const SlideCard: React.FC<{
               transition: 'opacity 0.5s ease-out 0.15s, transform 0.5s ease-out 0.15s',
             }}
           >
-            {card.title.toLowerCase()}.
+{card.title}.
           </h3>
           <p
             className="max-w-[560px] font-sans text-[15px] leading-[1.8] md:text-[17px]"
