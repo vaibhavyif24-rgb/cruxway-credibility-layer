@@ -96,7 +96,7 @@ const USCinematicScrollReveal = () => {
   const imageProgress = Math.min(progress / 0.55, 1);
   const sectorProgress = Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
 
-  const circleSize = 180;
+  const circleSize = 300;
   const maxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080);
   const targetScale = (maxDim * 1.5) / circleSize;
   const currentScale = 1 + (targetScale - 1) * imageProgress;
