@@ -62,10 +62,10 @@ const SiteHeader = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[11.5px] font-medium uppercase tracking-[0.12em] py-1 transition-all duration-300 active:scale-95 active:text-gold/70 ${
+                    className={`relative font-sans text-[11.5px] font-medium uppercase tracking-[0.12em] py-1.5 px-2.5 rounded-sm transition-all duration-200 active:scale-[0.93] active:bg-gold/[0.06] ${
                       isActive(item.path)
-                        ? 'text-primary-foreground'
-                        : 'text-primary-foreground/40 hover:text-primary-foreground/70'
+                        ? 'text-primary-foreground bg-primary-foreground/[0.04]'
+                        : 'text-primary-foreground/40 hover:text-primary-foreground/70 hover:bg-primary-foreground/[0.03]'
                     }`}
                   >
                     {item.label}
