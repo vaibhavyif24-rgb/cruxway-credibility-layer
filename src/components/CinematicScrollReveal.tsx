@@ -25,7 +25,7 @@ const indiaSectors = {
   },
 };
 
-const OVERLAY_GRADIENT = 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.55) 30%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.82) 100%)';
+const OVERLAY_GRADIENT = 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%)';
 
 const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; items: { name: string; desc: string }[]; side: 'left' | 'right'; isMobile: boolean }) => (
   <div className={isMobile ? '' : side === 'left' ? 'pr-12' : 'pl-12'}>
