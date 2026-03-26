@@ -4,7 +4,7 @@ import React from 'react';
 const CriteriaIllustration: React.FC<{ index: number; isDark: boolean; isActive: boolean }> = ({ index, isDark, isActive }) => {
   const gold = 'hsl(38 45% 55%)';
   const goldDim = 'hsl(38 35% 45%)';
-  const baseOpacity = isDark ? 0.12 : 0.1;
+  const baseOpacity = isDark ? 0.15 : 0.25;
 
   const cornerAccents = (
     <>

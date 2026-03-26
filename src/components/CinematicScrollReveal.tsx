@@ -207,7 +207,7 @@ const CinematicScrollReveal = () => {
               className="font-sans text-[10px] md:text-[12px] leading-[1.6] md:leading-[1.7]"
               style={{ color: 'var(--cin-card-subtext)', marginBottom: '16px', maxWidth: '640px' }}
             >
-              Long-term capital partnering with India's essential B2B industries — built around recurring revenue, operational depth, and enduring competitive advantages.
+              Long-term capital partnering with India's essential B2B industries, built around recurring revenue, operational depth, and enduring competitive advantages.
             </p>
 
             {/* Three-column grid */}

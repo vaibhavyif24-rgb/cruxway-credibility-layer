@@ -200,8 +200,8 @@ const Home = () => {
       {/* Social Proof — Scroll-triggered reveal */}
       <ScrollRevealText
         heading={isIndia
-          ? "Global institutional expertise, applied locally — partnering with the founders shaping India's industrial future."
-          : "Decades of institutional experience. One mission — partnering with founders who built America's essential industries."
+          ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
+          : "Decades of institutional experience dedicated to partnering with the founders who built America's essential industries."
         }
         variant="light"
       />
