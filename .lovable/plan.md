@@ -1,51 +1,42 @@
 
 
-## Plan: Compact Mobile Cinematic with Tagline on Image + Sectors Below
+## Plan: Ultra-Compact Mobile Cinematic — Text on Image, No Dead Space
 
-### Problem
-On mobile (390px), the current cinematic scroll has three issues:
-1. Tagline floats at `top: 30%` while the circle starts at `top: 62%` — creating a large blank gap between text and image
-2. The 150vh scroll distance is too long for a simple circle-expand, making it feel empty
-3. Sectors appear as a disconnected dark block below with no visual relationship to the cinematic image
+### Current Problem
+At 55% scroll on mobile, the cinematic shows a full-screen image with the tagline pushed to the very top edge and ~80% of the viewport is just empty image. The `120vh` container still creates unnecessary scroll distance for mobile.
 
-### Design (Senior UI/UX approach)
+### Design
 
-**Short, punchy cinematic**: Reduce to `120vh` total. The circle starts centered at `50%` (not 62%), begins expanding immediately, and the tagline sits ON TOP of the image from the start — no floating text above blank space.
+**No-scroll cinematic on mobile**: Replace the 120vh sticky scroll with a simple **100vh static full-bleed hero** — the image is already full-screen, no circle animation needed on mobile. The tagline sits centered vertically on the image (around 40% from top). This is cleaner, faster, and more professional on small screens.
 
-**Layout**: Tagline is vertically centered over the circle/image. As the user scrolls, the circle expands to fill the screen. The tagline stays centered with text shadow for readability. No phase 2 inside the sticky — it's just a clean image reveal with text overlay.
-
-**Sectors seamlessly below**: The mobile sectors section gets a top gradient that blends from the image into the dark background, creating visual continuity rather than a hard cut.
+**Circle animation is desktop-only**: On mobile, skip the sticky/scroll mechanics entirely. Just render a full-viewport image with the tagline overlaid, then sectors flow below naturally.
 
 ### Changes to both `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`
 
-1. **Container height**: `isMobile ? '120vh' : '250vh'` — snappier scroll
-2. **Circle initial position**: `top: 50%` on mobile (centered), not 62%
-3. **Tagline position**: `top: 38%` on mobile — sits directly over the circle/image center, moves up slightly as image expands
-4. **Image progress mapping**: `progress / 0.9` on mobile — image fills screen over 90% of the short scroll
-5. **Mobile sectors section**: Add a top border/gradient transition so it flows from the expanded image into the dark sector block seamlessly; keep the blurred background image approach but tighten padding
+**Mobile early-return** — when `isMobile`, render:
+
+1. **Full-bleed image hero** (`height: 70vh`): The HD image covers the section with the dark gradient overlay. Tagline is absolutely positioned at ~40% vertically, centered horizontally. No scroll animation, no circle — just a clean cinematic image with text.
+
+2. **Sectors section below**: Same as current — blurred background, dark overlay, "Sectors We Look At" heading, both columns stacked vertically. Seamless visual flow from the hero image.
+
+**Desktop unchanged** — keeps the full 250vh sticky circle-expand animation.
 
 ### Technical Details
 
 ```text
-Mobile scroll journey (120vh):
+Mobile layout (no scroll animation):
 ┌─────────────────────┐
-│ sticky h-screen     │
-│                     │
-│    ┌──────────┐     │  ← circle starts at 50%, tagline centered ON it
-│    │  image   │     │
-│    │ +tagline │     │
-│    └──────────┘     │
-│         ↓ scroll    │
-│  ┌─────────────────┐│  ← circle fills screen, tagline still on image
-│  │    full image    ││
-│  │    + tagline     ││
-│  └─────────────────┘│
-└─────────────────────┘
+│  70vh full-bleed img │
+│                      │
+│   "Where America's   │  ← tagline centered on image
+│    essential..."     │
+│                      │
+└──────────────────────┘
 ┌─────────────────────┐
-│  SECTORS WE LOOK AT │  ← normal flow, dark bg, fully scrollable
-│  Industrials        │
-│  Business Services  │
-└─────────────────────┘
+│  SECTORS WE LOOK AT │  ← normal flow, dark bg
+│  Industrials         │
+│  Business Services   │
+└──────────────────────┘
 ```
 
 ### Files Modified
