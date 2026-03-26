@@ -1,54 +1,50 @@
 
 
-## Plan: Professional Cinematic Reveal — Max Resolution, Readability, Mobile Fix
+## Plan: Reduce Cinematic Pixelation + Vintage Principle Illustrations
 
-### Root Causes
+### Part 1: Cinematic Reveal — Reduce Pixelation
 
-1. **Pixelation**: The 180px circle scales up ~16x. At `w=2400`, the image is only 2400px wide — but the scaled container can reach 4000px+. Need to request the highest possible resolution.
-2. **Text hard to read**: Overlay gradient isn't strong enough; text lacks sufficient contrast on busy industrial images.
-3. **Mobile content overflow**: Sector items get cut off because the container height (280vh) doesn't give enough room and the overlay starts too high.
-4. **"Sectors We Look At" label too small and cramped**: Needs bigger gap from heading and larger font.
+**Problem**: The 180px circle scales up ~16x (`maxDim * 1.5 / 180`). On a 1920px screen, that's `(1920 * 1.5) / 180 = 16x`. At 16x, even a 4000px image gets stretched to an effective 2880px container from a 250px source area — causing visible pixelation.
 
-### Changes
+**Fix**: Increase circle size from 180px to 300px. This reduces max scale to ~9.6x (`(1920 * 1.5) / 300`), keeping the image sharp. The circle starts slightly larger but the expand animation remains smooth.
 
-**Both `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`:**
+**Additional readability improvements**:
+- Strengthen overlay to 5-stop gradient: `rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%`
+- Increase text shadow intensity on all sector text
+- Mobile: increase container height to `350vh`, increase `overlayOffset` to `26%` for more breathing room between heading and sectors
+- Mobile: bump sector heading to `1.25rem`, item names to `1.05rem`, descriptions to `13px`
 
-**A. Maximum resolution images**
-- Change URL param from `w=2400` to `w=4000&q=90` — Unsplash serves up to 4000px wide
-- Add `&dpr=2` for retina displays
-- India: `https://images.unsplash.com/photo-1764115424737-25aca6f47835?w=4000&q=90&auto=format&fit=crop&dpr=2`
-- US: `https://images.unsplash.com/photo-1647427060118-4911c9821b82?w=4000&q=90&auto=format&fit=crop&dpr=2`
+**Files**: `CinematicScrollReveal.tsx`, `USCinematicScrollReveal.tsx` — identical structural changes, different image URLs
 
-**B. Much stronger overlay for text readability**
-- Replace current gradient with a heavier 4-stop gradient:
-  `linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.55) 30%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.82) 100%)`
-- This creates a dark scrim that makes white text pop against any image
+---
 
-**C. Desktop layout improvements**
-- Increase "Sectors We Look At" label font to `14px` with `tracking-[0.28em]`
-- Increase gap between label and grid: `mb-10` on desktop
-- Increase sector grid `maxWidth` to `1100px` and use `gap-8` between columns
-- Category headings: `1.8rem` on desktop
-- Item names: `1.5rem` on desktop
-- Descriptions: `17px` on desktop with `rgba(248,246,242,0.65)` (brighter)
+### Part 2: Principles — Vintage/Retro Sci-Fi Illustrations
 
-**D. Mobile layout — use all space, fully readable**
-- Increase mobile container height to `320vh` — plenty of scroll room
-- Increase mobile overlay offset to `24%` — clear gap from heading
-- "Sectors We Look At" label: `12px`
-- Category headings: `1.15rem` on mobile
-- Item names: `1rem` on mobile  
-- Descriptions: `13px` on mobile with `rgba(248,246,242,0.6)`
-- Use `space-y-3` between items, `gap-5` between columns
-- Full width with `padding: 0 1.25rem`
-- Add `mb-5` between label and grid on mobile
-- Tagline font: `clamp(1.3rem, 5vw, 2rem)` — fits without breaking
+**Problem**: Current principle cards use AI-generated photographic JPGs. One image shows "rockets through an asteroid field" which doesn't match the professional PE tone. User wants distinct vintage/retro sci-fi art style illustrations that match each principle's theme.
 
-**E. Text shadow enhancement**
-- All sector text gets `textShadow: '0 2px 12px rgba(0,0,0,0.7)'` for crisp readability
-- Heading gets `textShadow: '0 3px 20px rgba(0,0,0,0.8)'`
+**Fix**: Replace the 6 JPG photo backgrounds with inline SVG illustrations rendered directly in the component. Each illustration uses a vintage/retro aesthetic with:
+- Muted gold, sepia, and warm tones
+- Art deco geometric patterns and line work
+- Thematic imagery matching each principle:
+  1. **Integrity** — A compass rose with radiating geometric lines (truth/direction)
+  2. **Servant Leadership** — Hands supporting an upward arch/bridge (service/elevation)
+  3. **Humility** — An open book with radiating light rays (continuous learning)
+  4. **Grit** — An anvil with hammer and sparks (forging/perseverance)
+  5. **Bias to Action** — Forward-pointing arrow through concentric rings (momentum/decisiveness)
+  6. **The Golden Rule** — A balanced scale with interconnected figures (fairness/reciprocity)
+
+- Remove all JPG imports and the `src/assets/principles/` dependency
+- Render SVGs as background elements behind the dark overlay, replacing `<img>` tags
+- Keep the existing card layout, overlay gradient, and text animation system intact
+- Each SVG uses the same gold palette (`hsl(38, 45%, 55%)`) with low opacity for a subtle vintage etched-print feel
+
+**File**: `PrinciplesSlider.tsx`
+
+---
 
 ### Files Modified
-1. `src/components/CinematicScrollReveal.tsx`
-2. `src/components/USCinematicScrollReveal.tsx`
+
+1. `src/components/CinematicScrollReveal.tsx` — larger circle (300px), stronger overlay, mobile spacing
+2. `src/components/USCinematicScrollReveal.tsx` — same changes as above
+3. `src/components/PrinciplesSlider.tsx` — replace JPG imports with inline SVG illustrations
 
