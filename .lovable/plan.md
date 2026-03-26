@@ -1,25 +1,53 @@
 
 
-## Plan: Fix Sectors Visibility on Mobile
+## Plan: Mobile Cinematic Scroll Reveal with Full Sector Visibility
 
 ### Problem
-In `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`, the "Sectors We Look At" content is positioned absolutely inside a `sticky top-0 h-screen overflow-hidden` container. On mobile, the two columns stack vertically (`grid-cols-1`), creating content taller than the viewport. The overflow is clipped, so the second column ("Business & Industrial Services") is never visible.
+Currently on mobile, the cinematic scroll animation is completely skipped — it early-returns a plain static section with no image, no animation, and poor light-mode visibility (white text on light background). The user wants a condensed cinematic effect on mobile while ensuring all sector text is fully visible and readable in both themes.
 
-### Fix: Separate Mobile Sectors Section
+### Approach
+Replace the static early-return with a **compact mobile cinematic scroll** that uses the same sticky-scroll architecture but adapted for small screens:
 
-On mobile, stop rendering sectors inside the sticky cinematic container. Instead, render them as a standalone full-width section immediately below the cinematic reveal. This guarantees all content is visible and scrollable.
+- **Phase 1 (image reveal)**: Circle expands to fill screen over a shorter scroll distance (150vh total instead of 250vh). Tagline visible over the image.
+- **Phase 2 (sectors)**: Instead of overlaying sectors inside the sticky viewport (which clips), sectors render as a **normal-flow section below** the sticky container, with the background image still visible via a dark overlay. This guarantees all content is scrollable.
 
-**Changes to both `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`:**
+### Changes to both `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`
 
-1. **Hide sector overlay on mobile**: Wrap the absolute-positioned sector `<div>` with a condition `{!isMobile && (...)}` so it only renders inside the sticky container on desktop
-2. **Reduce mobile container height**: Change from `350vh` to `250vh` on mobile since we no longer need extra scroll distance for sectors
-3. **Add a mobile-only static section after the sticky container**: Render a new `<div>` (only when `isMobile`) below the `</section>` close tag — or better, inside a wrapper — that contains:
-   - Dark navy background (`#0B131E` in dark mode)
-   - "Sectors We Look At" gold label + divider
-   - Both sector columns stacked with proper spacing
-   - Full padding and no overflow constraints
-   - Same text styling (gold headings, white names, muted descriptions)
-4. **Extract `SectorColumn` as shared component** — it's already defined identically in both files; keep it inline but ensure mobile styles have generous padding and spacing
+**Remove the early-return `if (isMobile)` block entirely.** Instead, adjust the existing render to handle mobile:
+
+1. **Container height**: `isMobile ? '150vh' : '250vh'` — shorter cinematic scroll on mobile
+2. **Circle animation**: Use a smaller initial circle (200px on mobile) with the same expand logic
+3. **Tagline positioning**: Adjust `top` percentages and font size for mobile
+4. **Sector overlay**: Wrap the absolute-positioned sector `<div>` with `{!isMobile && (...)}` to hide it from the sticky container on mobile
+5. **Mobile sectors below sticky**: After the sticky `<div>`, add a mobile-only block that renders inside the same `<section>` but in normal document flow:
+   - Full-width dark background with the background image (blurred, heavily overlaid) for cinematic feel
+   - "Sectors We Look At" gold label
+   - Both sector columns stacked vertically with generous spacing
+   - Proper text colors that work in both light and dark mode (always light text on dark image background)
+
+### Technical Details
+
+```
+Mobile layout structure:
+┌──────────────────────────┐
+│  <section height=150vh>  │
+│  ┌────────────────────┐  │
+│  │ sticky h-screen    │  │
+│  │  - circle → expand │  │
+│  │  - tagline overlay  │  │
+│  └────────────────────┘  │
+│  ┌────────────────────┐  │
+│  │ mobile sectors     │  │  ← normal flow, NOT sticky
+│  │  - bg image + dark │  │
+│  │  - "Sectors We..."  │  │
+│  │  - Column 1        │  │
+│  │  - Column 2        │  │
+│  │  (fully scrollable)│  │
+│  └────────────────────┘  │
+└──────────────────────────┘
+```
+
+The mobile sectors block uses `position: relative` with a background image and heavy dark overlay, ensuring white/gold text is always legible regardless of light/dark theme.
 
 ### Files Modified
 - `src/components/CinematicScrollReveal.tsx`
