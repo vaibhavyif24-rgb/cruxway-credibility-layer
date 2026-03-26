@@ -95,11 +95,11 @@ const USCinematicScrollReveal = () => {
 
   const isDark = theme === 'dark';
 
-  const containerHeight = isMobile ? '150vh' : '250vh';
+  const containerHeight = isMobile ? '120vh' : '250vh';
   const circleSize = isMobile ? 200 : 300;
 
   const imageProgress = isMobile
-    ? Math.min(progress / 0.85, 1)
+    ? Math.min(progress / 0.9, 1)
     : Math.min(progress / 0.55, 1);
   const sectorProgress = isMobile
     ? 0
@@ -113,9 +113,12 @@ const USCinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   const taglineTop = isMobile
-    ? 30 - (imageProgress * 8)
+    ? 38 - (imageProgress * 6)
     : 26 - (sectorProgress * 20);
   const overlayOffset = 18;
+  const circleTop = isMobile
+    ? 50
+    : 62 + (50 - 62) * imageProgress;
 
   return (
     <>
