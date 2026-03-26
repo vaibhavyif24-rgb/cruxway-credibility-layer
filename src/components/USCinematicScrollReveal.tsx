@@ -109,7 +109,7 @@ const USCinematicScrollReveal = () => {
   const overlayOffset = isMobile ? 26 : 18;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: isMobile ? '350vh' : '250vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: isMobile ? '250vh' : '250vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
         <div
           className="absolute"
@@ -160,38 +160,63 @@ const USCinematicScrollReveal = () => {
           <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
         </h2>
 
+        {!isMobile && (
+          <div
+            className="absolute left-1/2 w-full"
+            style={{
+              zIndex: 10,
+              pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
+              transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
+              opacity: sectorProgress,
+              top: `${taglineTop + overlayOffset}%`,
+              maxWidth: '1100px',
+              padding: '0 2.5rem',
+              transition: 'opacity 0.1s ease',
+            }}
+          >
+            <div className="text-center mb-10">
+              <span
+                className="font-sans font-semibold uppercase"
+                style={{ color: 'hsl(38, 55%, 62%)', fontSize: '14px', letterSpacing: '0.28em' }}
+              >
+                Sectors We Look At
+              </span>
+              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+            </div>
+
+            <div className="grid grid-cols-2 gap-8 relative">
+              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
+              <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={false} />
+              <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={false} />
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Mobile-only static sectors section */}
+      {isMobile && (
         <div
-          className="absolute left-1/2 w-full"
           style={{
-            zIndex: 10,
-            pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
-            transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
-            opacity: sectorProgress,
-            top: `${taglineTop + overlayOffset}%`,
-            maxWidth: isMobile ? 'none' : '1100px',
-            padding: isMobile ? '0 1.25rem' : '0 2.5rem',
-            transition: 'opacity 0.1s ease',
+            background: isDark ? '#0B131E' : 'hsl(var(--background))',
+            padding: '3rem 1.25rem 3.5rem',
           }}
         >
-          <div className={`text-center ${isMobile ? 'mb-5' : 'mb-10'}`}>
+          <div className="text-center mb-8">
             <span
               className="font-sans font-semibold uppercase"
-              style={{ color: 'hsl(38, 55%, 62%)', fontSize: isMobile ? '12px' : '14px', letterSpacing: '0.28em' }}
+              style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}
             >
               Sectors We Look At
             </span>
             <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
           </div>
 
-          <div className={`grid ${isMobile ? 'grid-cols-1 gap-5' : 'grid-cols-2 gap-8'} relative`}>
-            {!isMobile && (
-              <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
-            )}
-            <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={isMobile} />
-            <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={isMobile} />
+          <div className="space-y-10">
+            <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={true} />
+            <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={true} />
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };
