@@ -80,7 +80,7 @@ const SiteHeader = () => {
                 ))}
               </div>
 
-              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-6" />
+              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-4 lg:mx-6" />
 
               {/* Dark mode toggle */}
               <button
