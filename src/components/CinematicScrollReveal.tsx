@@ -2,6 +2,27 @@ import { useRef, useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import indiaIndustrialReveal from '@/assets/india-industrial-reveal.jpg';
 
+const indiaSectors = {
+  left: {
+    heading: 'Industrials',
+    items: [
+      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
+      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
+      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
+      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
+    ],
+  },
+  right: {
+    heading: 'Business & Industrial Services',
+    items: [
+      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
+      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
+      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
+      { name: 'Industrial Technology', desc: 'Automation & process software' },
+    ],
+  },
+};
+
 const CinematicScrollReveal = () => {
   const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,7 +43,9 @@ const CinematicScrollReveal = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
 
-  const imageProgress = Math.min(progress / 0.85, 1);
+  // Phase 1: image expands (0–0.55), Phase 2: sectors reveal (0.55–1)
+  const imageProgress = Math.min(progress / 0.55, 1);
+  const sectorProgress = Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
 
   const circleSize = 180;
   const maxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080);
@@ -33,8 +56,11 @@ const CinematicScrollReveal = () => {
   const isDark = theme === 'dark';
   const textIsLight = imageProgress > 0.3;
 
+  // Tagline shifts up during phase 2
+  const taglineTop = 26 - (sectorProgress * 14);
+
   return (
-    <section ref={containerRef} className="relative" style={{ height: '200vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
         {/* Expanding circle */}
         <div
@@ -78,7 +104,7 @@ const CinematicScrollReveal = () => {
             zIndex: 10,
             pointerEvents: 'none',
             transition: 'color 0.3s ease',
-            top: '26%',
+            top: `${taglineTop}%`,
             left: '50%',
             transform: 'translateX(-50%)',
             width: '90%',
@@ -89,6 +115,73 @@ const CinematicScrollReveal = () => {
           Building enduring platforms across India's{' '}
           <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
         </h2>
+
+        {/* Sector content overlay */}
+        <div
+          className="absolute left-1/2 px-5 md:px-10 w-full"
+          style={{
+            zIndex: 10,
+            pointerEvents: sectorProgress > 0.1 ? 'auto' : 'none',
+            transform: `translateX(-50%) translateY(${40 * (1 - sectorProgress)}px)`,
+            opacity: sectorProgress,
+            top: `${taglineTop + 12}%`,
+            maxWidth: '900px',
+            transition: 'opacity 0.1s ease',
+          }}
+        >
+          {/* Section label */}
+          <div className="text-center mb-4 md:mb-6">
+            <span
+              className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.22em]"
+              style={{ color: 'hsl(38, 55%, 62%)' }}
+            >
+              Sectors We Look At
+            </span>
+            <div className="mx-auto mt-2 w-8 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+          </div>
+
+          {/* Two-column grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 relative">
+            {/* Gold vertical divider (desktop) */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
+
+            {/* Left column */}
+            <div className="md:pr-8">
+              <h3 className="font-serif text-[1.1rem] md:text-[1.25rem] mb-3 leading-tight" style={{ color: '#F8F6F2' }}>
+                {indiaSectors.left.heading}
+              </h3>
+              <ul className="space-y-3">
+                {indiaSectors.left.items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="mt-[7px] w-[7px] h-[7px] rotate-45 flex-shrink-0" style={{ background: 'hsl(38, 55%, 62%, 0.7)' }} />
+                    <div>
+                      <span className="font-serif text-[0.95rem] md:text-[1.1rem] leading-[1.3]" style={{ color: '#F8F6F2' }}>{item.name}</span>
+                      <span className="block font-sans text-[12px] md:text-[13px] leading-[1.5]" style={{ color: 'rgba(248,246,242,0.45)' }}>{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Right column */}
+            <div className="md:pl-8">
+              <h3 className="font-serif text-[1.1rem] md:text-[1.25rem] mb-3 leading-tight" style={{ color: '#F8F6F2' }}>
+                {indiaSectors.right.heading}
+              </h3>
+              <ul className="space-y-3">
+                {indiaSectors.right.items.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="mt-[7px] w-[7px] h-[7px] rotate-45 flex-shrink-0" style={{ background: 'hsl(38, 55%, 62%, 0.7)' }} />
+                    <div>
+                      <span className="font-serif text-[0.95rem] md:text-[1.1rem] leading-[1.3]" style={{ color: '#F8F6F2' }}>{item.name}</span>
+                      <span className="block font-sans text-[12px] md:text-[13px] leading-[1.5]" style={{ color: 'rgba(248,246,242,0.45)' }}>{item.desc}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
