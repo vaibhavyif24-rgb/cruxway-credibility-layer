@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-const INDIA_IMAGE_URL = 'https://images.unsplash.com/photo-1513361926429-1f826c1ba4ab?w=2400&q=90&auto=format&fit=crop';
+import indiaRevealImg from '@/assets/india-industrial-reveal.jpg';
 
 const indiaSectors = {
   left: {
@@ -58,11 +57,11 @@ const CinematicScrollReveal = () => {
   const isDark = theme === 'dark';
   const textIsLight = imageProgress > 0.3;
 
-  const taglineTop = 26 - (sectorProgress * 18);
-  const overlayOffset = isMobile ? 18 : 15;
+  const taglineTop = 26 - (sectorProgress * 20);
+  const overlayOffset = isMobile ? 22 : 18;
 
   return (
-    <section ref={containerRef} className="relative" style={{ height: '300vh' }}>
+    <section ref={containerRef} className="relative" style={{ height: '250vh' }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
         <div
           className="absolute"
@@ -79,12 +78,12 @@ const CinematicScrollReveal = () => {
           }}
         >
           <img
-            src={INDIA_IMAGE_URL}
+            src={indiaRevealImg}
             alt="India's industrial landscape"
             className="w-full h-full"
             loading="eager"
-            width={2400}
-            height={1600}
+            width={1920}
+            height={1280}
             style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
           />
           <div
@@ -96,11 +95,10 @@ const CinematicScrollReveal = () => {
           />
         </div>
 
-        {/* Tagline */}
         <h2
           className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
           style={{
-            fontSize: 'clamp(2.1rem, 5.2vw, 4rem)',
+            fontSize: isMobile ? 'clamp(1.6rem, 4.5vw, 4rem)' : 'clamp(2.1rem, 5.2vw, 4rem)',
             color: textIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
             zIndex: 10,
             pointerEvents: 'none',
@@ -127,61 +125,58 @@ const CinematicScrollReveal = () => {
             opacity: sectorProgress,
             top: `${taglineTop + overlayOffset}%`,
             maxWidth: isMobile ? 'none' : '1000px',
-            padding: isMobile ? '0 1.5rem' : '0 2.5rem',
+            padding: isMobile ? '0 1.25rem' : '0 2.5rem',
             transition: 'opacity 0.1s ease',
           }}
         >
-          {/* Section label */}
-          <div className={`text-center ${isMobile ? 'mb-6' : 'mb-8 md:mb-10'}`}>
+          <div className={`text-center ${isMobile ? 'mb-4' : 'mb-8'}`}>
             <span
               className="font-sans font-semibold uppercase tracking-[0.22em]"
-              style={{ color: 'hsl(38, 55%, 62%)', fontSize: isMobile ? '12px' : '13px' }}
+              style={{ color: 'hsl(38, 55%, 62%)', fontSize: isMobile ? '11px' : '13px' }}
             >
               Sectors We Look At
             </span>
             <div className="mx-auto mt-2.5 w-10 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
           </div>
 
-          {/* Two-column grid */}
-          <div className={`grid ${isMobile ? 'grid-cols-1 gap-8' : 'grid-cols-2 gap-0'} relative`}>
+          <div className={`grid ${isMobile ? 'grid-cols-1 gap-5' : 'grid-cols-2 gap-0'} relative`}>
             {!isMobile && (
               <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
             )}
 
-            {/* Left column */}
             <div className={isMobile ? '' : 'pr-10'}>
               <h3
                 className="font-serif leading-tight"
                 style={{
                   color: '#F8F6F2',
-                  fontSize: isMobile ? '1.3rem' : '1.6rem',
-                  marginBottom: isMobile ? '1rem' : '0.875rem',
+                  fontSize: isMobile ? '1.1rem' : '1.6rem',
+                  marginBottom: isMobile ? '0.75rem' : '0.875rem',
                 }}
               >
                 {indiaSectors.left.heading}
               </h3>
-              <ul className={isMobile ? 'space-y-5' : 'space-y-4'}>
+              <ul className={isMobile ? 'space-y-3' : 'space-y-4'}>
                 {indiaSectors.left.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3.5">
+                  <li key={i} className="flex items-start gap-3">
                     <span
                       className="flex-shrink-0 rotate-45"
                       style={{
                         background: 'hsl(38, 55%, 62%, 0.7)',
-                        width: isMobile ? '8px' : '9px',
-                        height: isMobile ? '8px' : '9px',
-                        marginTop: '8px',
+                        width: isMobile ? '7px' : '9px',
+                        height: isMobile ? '7px' : '9px',
+                        marginTop: isMobile ? '6px' : '8px',
                       }}
                     />
                     <div>
                       <span
                         className="font-serif leading-[1.3] block"
-                        style={{ color: '#F8F6F2', fontSize: isMobile ? '1.15rem' : '1.4rem' }}
+                        style={{ color: '#F8F6F2', fontSize: isMobile ? '1rem' : '1.4rem' }}
                       >
                         {item.name}
                       </span>
                       <span
-                        className="block font-sans leading-[1.6]"
-                        style={{ color: 'rgba(248,246,242,0.5)', fontSize: isMobile ? '14px' : '16px' }}
+                        className="block font-sans leading-[1.5]"
+                        style={{ color: 'rgba(248,246,242,0.5)', fontSize: isMobile ? '12px' : '16px' }}
                       >
                         {item.desc}
                       </span>
@@ -191,40 +186,39 @@ const CinematicScrollReveal = () => {
               </ul>
             </div>
 
-            {/* Right column */}
             <div className={isMobile ? '' : 'pl-10'}>
               <h3
                 className="font-serif leading-tight"
                 style={{
                   color: '#F8F6F2',
-                  fontSize: isMobile ? '1.3rem' : '1.6rem',
-                  marginBottom: isMobile ? '1rem' : '0.875rem',
+                  fontSize: isMobile ? '1.1rem' : '1.6rem',
+                  marginBottom: isMobile ? '0.75rem' : '0.875rem',
                 }}
               >
                 {indiaSectors.right.heading}
               </h3>
-              <ul className={isMobile ? 'space-y-5' : 'space-y-4'}>
+              <ul className={isMobile ? 'space-y-3' : 'space-y-4'}>
                 {indiaSectors.right.items.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3.5">
+                  <li key={i} className="flex items-start gap-3">
                     <span
                       className="flex-shrink-0 rotate-45"
                       style={{
                         background: 'hsl(38, 55%, 62%, 0.7)',
-                        width: isMobile ? '8px' : '9px',
-                        height: isMobile ? '8px' : '9px',
-                        marginTop: '8px',
+                        width: isMobile ? '7px' : '9px',
+                        height: isMobile ? '7px' : '9px',
+                        marginTop: isMobile ? '6px' : '8px',
                       }}
                     />
                     <div>
                       <span
                         className="font-serif leading-[1.3] block"
-                        style={{ color: '#F8F6F2', fontSize: isMobile ? '1.15rem' : '1.4rem' }}
+                        style={{ color: '#F8F6F2', fontSize: isMobile ? '1rem' : '1.4rem' }}
                       >
                         {item.name}
                       </span>
                       <span
-                        className="block font-sans leading-[1.6]"
-                        style={{ color: 'rgba(248,246,242,0.5)', fontSize: isMobile ? '14px' : '16px' }}
+                        className="block font-sans leading-[1.5]"
+                        style={{ color: 'rgba(248,246,242,0.5)', fontSize: isMobile ? '12px' : '16px' }}
                       >
                         {item.desc}
                       </span>
