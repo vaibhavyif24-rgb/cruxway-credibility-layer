@@ -56,8 +56,8 @@ const SiteHeader = () => {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center">
-              <div className="flex items-center gap-5 xl:gap-7">
+            <nav className="hidden md:flex items-center">
+              <div className="flex items-center gap-4 lg:gap-5 xl:gap-7">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
