@@ -105,6 +105,11 @@ const CinematicScrollReveal = () => {
     const mBorderRadius = 50 * (1 - mImageProgress);
     const mTextIsLight = mImageProgress > 0.15;
 
+    // Text scales from small to large as image expands
+    const minFont = 1.4; // rem
+    const maxFont = 2.8; // rem
+    const currentFont = minFont + (maxFont - minFont) * mImageProgress;
+
     return (
       <>
         <section ref={containerRef} className="relative" style={{ height: '130vh' }}>
@@ -128,32 +133,37 @@ const CinematicScrollReveal = () => {
                 alt="India's industrial landscape"
                 className="w-full h-full"
                 loading="eager"
-                style={{ objectFit: 'cover', objectPosition: 'center center' }}
+                width={4000}
+                height={2667}
+                style={{ objectFit: 'cover', objectPosition: 'center center', imageRendering: '-webkit-optimize-contrast' } as React.CSSProperties}
               />
               <div
                 className="absolute inset-0"
-                style={{ background: OVERLAY_GRADIENT, opacity: mImageProgress * 0.7 }}
+                style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.55) 100%)', opacity: 0.4 + mImageProgress * 0.45 }}
               />
             </div>
 
-            <div
-              className="absolute inset-0 flex items-center justify-center px-6"
-              style={{ zIndex: 10, pointerEvents: 'none' }}
+            <h2
+              className="absolute font-serif text-center px-5 leading-[1.08] tracking-[-0.03em]"
+              style={{
+                fontSize: `${currentFont}rem`,
+                color: mTextIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
+                zIndex: 10,
+                pointerEvents: 'none',
+                transition: 'color 0.2s ease',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '92%',
+                maxWidth: '380px',
+                textShadow: mTextIsLight
+                  ? '0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.5)'
+                  : 'none',
+              }}
             >
-              <h2
-                className="font-serif text-center leading-[1.08] tracking-[-0.03em]"
-                style={{
-                  fontSize: 'clamp(2.2rem, 10vw, 3.2rem)',
-                  color: mTextIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
-                  transition: 'color 0.3s ease',
-                  maxWidth: '340px',
-                  textShadow: mTextIsLight ? '0 4px 30px rgba(0,0,0,0.7), 0 1px 4px rgba(0,0,0,0.5)' : 'none',
-                }}
-              >
-                Building enduring platforms across India's{' '}
-                <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
-              </h2>
-            </div>
+              Building enduring platforms across India's{' '}
+              <span style={{ color: 'hsl(38, 55%, 62%)' }}>lower middle market.</span>
+            </h2>
           </div>
         </section>
 
