@@ -8,12 +8,14 @@ interface ScrollRevealTextProps {
   stats?: { value: string; label: string }[];
   variant?: 'dark' | 'light';
   className?: string;
+  highlights?: string[];
 }
 
 /**
  * Scroll-triggered word-by-word opacity reveal.
  * Each word transitions from ~15 % opacity to full as the viewport scrolls
  * through the container, creating a cinematic reading cadence.
+ * Words matching the `highlights` array render in gold for emphasis.
  */
 const ScrollRevealText = ({
   label,
@@ -22,6 +24,7 @@ const ScrollRevealText = ({
   stats,
   variant = 'dark',
   className = '',
+  highlights = [],
 }: ScrollRevealTextProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -32,6 +35,9 @@ const ScrollRevealText = ({
 
   const words = heading.split(' ');
   const isDark = variant === 'dark';
+
+  // Normalise highlights for matching
+  const normHighlights = highlights.map(h => h.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, ''));
 
   return (
     <section
@@ -60,7 +66,9 @@ const ScrollRevealText = ({
           {words.map((word, i) => {
             const start = i / words.length;
             const end = (i + 1) / words.length;
-            return <Word key={i} word={word} range={[start, end]} progress={scrollYProgress} isDark={isDark} />;
+            const cleanWord = word.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, '');
+            const isHighlighted = normHighlights.includes(cleanWord);
+            return <Word key={i} word={word} range={[start, end]} progress={scrollYProgress} isDark={isDark} isHighlighted={isHighlighted} />;
           })}
         </p>
 
@@ -97,18 +105,24 @@ const Word = ({
   range,
   progress,
   isDark,
+  isHighlighted = false,
 }: {
   word: string;
   range: [number, number];
   progress: ReturnType<typeof useScroll>['scrollYProgress'];
   isDark: boolean;
+  isHighlighted?: boolean;
 }) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
 
   return (
     <motion.span
       style={{ opacity }}
-      className={`inline-block mr-[0.3em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+      className={`inline-block mr-[0.3em] ${
+        isHighlighted
+          ? 'text-gold'
+          : isDark ? 'text-primary-foreground' : 'text-foreground'
+      }`}
     >
       {word}
     </motion.span>

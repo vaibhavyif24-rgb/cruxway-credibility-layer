@@ -203,8 +203,9 @@ const Home = () => {
       <ScrollRevealText
         heading={isIndia
           ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
-          : "Decades of institutional experience dedicated to partnering with the founders who built America's essential industries."
+          : "Decades of institutional experience dedicated to partnering with the owners who built America's essential industries."
         }
+        highlights={isIndia ? ['institutional', 'industrial'] : ['institutional', 'essential']}
         variant="light"
       />
       <div className="bg-background">
