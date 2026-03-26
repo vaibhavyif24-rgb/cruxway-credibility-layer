@@ -88,73 +88,86 @@ const USCinematicScrollReveal = () => {
   }, []);
 
   useEffect(() => {
-    if (isMobile) return;
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [handleScroll, isMobile]);
+  }, [handleScroll]);
 
   const isDark = theme === 'dark';
 
-  // ── Mobile: static full-bleed hero + sectors below ──
+  // ── Mobile: short scroll circle-expand + sectors below ──
   if (isMobile) {
+    const mCircleSize = 180;
+    const mImageProgress = Math.min(progress / 0.85, 1);
+    const mMaxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 390, typeof window !== 'undefined' ? window.innerHeight : 844);
+    const mTargetScale = (mMaxDim * 1.6) / mCircleSize;
+    const mCurrentScale = 1 + (mTargetScale - 1) * mImageProgress;
+    const mBorderRadius = 50 * (1 - mImageProgress);
+    const mTextIsLight = mImageProgress > 0.15;
+
     return (
       <>
-        <div className="relative overflow-hidden" style={{ height: '70vh' }}>
-          <img
-            src={US_IMG}
-            alt="American factory with industrial machinery"
-            className="absolute inset-0 w-full h-full"
-            loading="eager"
-            style={{ objectFit: 'cover', objectPosition: 'center center' }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.75) 100%)' }}
-          />
-          <h2
-            className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
-            style={{
-              fontSize: 'clamp(1.6rem, 7vw, 2.2rem)',
-              color: '#F8F6F2',
-              zIndex: 2,
-              top: '40%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '90%',
-              textShadow: '0 3px 20px rgba(0,0,0,0.8)',
-            }}
-          >
-            Where America's essential industries find their{' '}
-            <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
-          </h2>
-        </div>
+        <section ref={containerRef} className="relative" style={{ height: '130vh' }}>
+          <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}>
+            <div
+              className="absolute"
+              style={{
+                width: `${mCircleSize}px`,
+                height: `${mCircleSize}px`,
+                borderRadius: `${mBorderRadius}%`,
+                overflow: 'hidden',
+                transform: `translate(-50%, -50%) scale(${mCurrentScale})`,
+                willChange: 'transform',
+                zIndex: 1,
+                top: '50%',
+                left: '50%',
+              }}
+            >
+              <img
+                src={US_IMG}
+                alt="American factory with industrial machinery"
+                className="w-full h-full"
+                loading="eager"
+                style={{ objectFit: 'cover', objectPosition: 'center center' }}
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: OVERLAY_GRADIENT, opacity: mImageProgress * 0.7 }}
+              />
+            </div>
+
+            <h2
+              className="absolute font-serif text-center px-6 leading-[1.1] tracking-[-0.03em]"
+              style={{
+                fontSize: 'clamp(1.5rem, 6.5vw, 2.1rem)',
+                color: mTextIsLight ? '#F8F6F2' : isDark ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))',
+                zIndex: 10,
+                pointerEvents: 'none',
+                transition: 'color 0.3s ease',
+                top: '42%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: '88%',
+                textShadow: mTextIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : 'none',
+              }}
+            >
+              Where America's essential industries find their{' '}
+              <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
+            </h2>
+          </div>
+        </section>
 
         <div
           className="relative overflow-hidden"
           style={{ padding: '2.5rem 1.25rem 3rem' }}
         >
           <div className="absolute inset-0" style={{ zIndex: 0 }}>
-            <img
-              src={US_IMG}
-              alt=""
-              aria-hidden="true"
-              className="w-full h-full"
-              style={{ objectFit: 'cover', filter: 'blur(8px)', transform: 'scale(1.1)' }}
-            />
-            <div
-              className="absolute inset-0"
-              style={{ background: 'linear-gradient(to bottom, rgba(11,19,30,0.92) 0%, rgba(11,19,30,0.96) 50%, rgba(11,19,30,0.98) 100%)' }}
-            />
+            <img src={US_IMG} alt="" aria-hidden="true" className="w-full h-full" style={{ objectFit: 'cover', filter: 'blur(8px)', transform: 'scale(1.1)' }} />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(11,19,30,0.92) 0%, rgba(11,19,30,0.96) 50%, rgba(11,19,30,0.98) 100%)' }} />
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
             <div className="text-center mb-8">
-              <span
-                className="font-sans font-semibold uppercase"
-                style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}
-              >
-                Sectors We Look At
-              </span>
+              <span className="font-sans font-semibold uppercase" style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}>Sectors We Look At</span>
               <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
             </div>
             <div className="space-y-10">
