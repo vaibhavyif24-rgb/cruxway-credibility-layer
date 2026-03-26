@@ -95,16 +95,14 @@ const CinematicScrollReveal = () => {
 
   const isDark = theme === 'dark';
 
-  // Mobile: shorter scroll, image-only cinematic, sectors below in normal flow
-  // Desktop: full 250vh with sector overlay inside sticky
-  const containerHeight = isMobile ? '150vh' : '250vh';
+  const containerHeight = isMobile ? '120vh' : '250vh';
   const circleSize = isMobile ? 200 : 300;
 
   const imageProgress = isMobile
-    ? Math.min(progress / 0.85, 1)   // most of scroll is image reveal on mobile
+    ? Math.min(progress / 0.9, 1)
     : Math.min(progress / 0.55, 1);
   const sectorProgress = isMobile
-    ? 0  // sectors are not inside the sticky on mobile
+    ? 0
     : Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
 
   const maxDim = Math.max(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080);
@@ -115,9 +113,12 @@ const CinematicScrollReveal = () => {
   const textIsLight = imageProgress > 0.3;
 
   const taglineTop = isMobile
-    ? 30 - (imageProgress * 8)
+    ? 38 - (imageProgress * 6)
     : 26 - (sectorProgress * 20);
   const overlayOffset = 18;
+  const circleTop = isMobile
+    ? 50
+    : 62 + (50 - 62) * imageProgress;
 
   return (
     <>
@@ -134,7 +135,7 @@ const CinematicScrollReveal = () => {
               transform: `translate(-50%, -50%) scale(${currentScale})`,
               willChange: 'transform',
               zIndex: 1,
-              top: `${62 + (50 - 62) * imageProgress}%`,
+              top: `${circleTop}%`,
               left: '50%',
             }}
           >
