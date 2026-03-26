@@ -51,19 +51,17 @@ const PrincipleCard: React.FC<{
         style={{
           height: CARD_HEIGHT,
           boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
-          background: 'linear-gradient(135deg, hsl(25, 15%, 12%) 0%, hsl(30, 12%, 8%) 50%, hsl(20, 18%, 10%) 100%)',
+          background: 'linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(225, 45%, 5%) 50%, hsl(215, 35%, 10%) 100%)',
         }}
       >
-        {/* Vintage SVG illustration as background */}
-        <div className="absolute inset-0 flex items-center justify-center" style={{ opacity: 0.6 }}>
-          <div className="w-[70%] h-[70%] max-w-[320px] max-h-[320px]">
-            <VintageIllustration index={index} />
-          </div>
+        {/* Celestial SVG illustration as full-bleed background */}
+        <div className="absolute inset-0 w-full h-full">
+          <CelestialIllustration index={index} />
         </div>
 
         {/* Subtle texture overlay */}
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 30%, hsl(25, 15%, 8%) 80%)',
+          background: 'radial-gradient(ellipse at center, transparent 20%, hsl(220, 40%, 5%) 85%)',
         }} />
 
         {/* Content — centered */}
