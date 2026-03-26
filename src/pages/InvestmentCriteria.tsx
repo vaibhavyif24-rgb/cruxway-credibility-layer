@@ -11,6 +11,7 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
+import SectorShowcase from '@/components/SectorShowcase';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -155,6 +156,7 @@ const InvestmentCriteria = () => {
 
       {/* Cinematic Scroll Reveal — before Evaluation Framework */}
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
+      <SectorShowcase region={isIndia ? 'india' : 'us'} />
 
       {/* Evaluation Framework — Sticky Card Stack */}
       <section className="relative bg-primary text-primary-foreground overflow-x-clip">
