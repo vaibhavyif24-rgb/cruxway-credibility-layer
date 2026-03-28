@@ -167,7 +167,7 @@ const OurFocus = () => {
       </section>
 
       {/* What We Look For — 2×3 Criteria Grid */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
