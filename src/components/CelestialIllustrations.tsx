@@ -104,7 +104,8 @@ const IntegrityIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
       <circle key={`cd-${i}`} cx={cx} cy={cy} r="3" fill={WARM_WHITE} opacity="0.4" />
     ))}
   </svg>
-);
+));
+IntegrityIllustration.displayName = 'IntegrityIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    1 — SERVANT LEADERSHIP: Constellation Arch with Figure
