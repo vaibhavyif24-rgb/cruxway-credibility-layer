@@ -6,8 +6,9 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const Landing = lazy(() => import("./pages/Landing"));
 const Home = lazy(() => import("./pages/Home"));
-const InvestmentCriteria = lazy(() => import("./pages/InvestmentCriteria"));
 const GuidingPrinciples = lazy(() => import("./pages/GuidingPrinciples"));
+const OurFocus = lazy(() => import("./pages/OurFocus"));
+const OurPlaybook = lazy(() => import("./pages/OurPlaybook"));
 const Team = lazy(() => import("./pages/Team"));
 const Contact = lazy(() => import("./pages/Contact"));
 const InvestorLogin = lazy(() => import("./pages/InvestorLogin"));
@@ -26,8 +27,9 @@ const App = () => (
               <Route path="/investor-login" element={<InvestorLogin />} />
               <Route path="/:region" element={<RegionLayout />}>
                 <Route index element={<Home />} />
-                <Route path="about" element={<GuidingPrinciples />} />
-                <Route path="criteria" element={<InvestmentCriteria />} />
+                <Route path="principles" element={<GuidingPrinciples />} />
+                <Route path="focus" element={<OurFocus />} />
+                <Route path="playbook" element={<OurPlaybook />} />
                 <Route path="team" element={<Team />} />
                 <Route path="contact" element={<Contact />} />
               </Route>

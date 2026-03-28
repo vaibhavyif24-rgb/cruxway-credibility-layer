@@ -34,7 +34,7 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
       className="font-serif leading-tight"
       style={{
         color: '#F8F6F2',
-        fontSize: isMobile ? '1.25rem' : '1.8rem',
+        fontSize: isMobile ? '1.5rem' : '2rem',
         marginBottom: isMobile ? '0.75rem' : '1rem',
         textShadow: '0 2px 12px rgba(0,0,0,0.7)',
       }}
@@ -56,13 +56,13 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
           <div>
             <span
               className="font-serif leading-[1.3] block"
-              style={{ color: '#F8F6F2', fontSize: isMobile ? '1.05rem' : '1.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
+              style={{ color: '#F8F6F2', fontSize: isMobile ? '1.2rem' : '1.7rem', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
             >
               {item.name}
             </span>
             <span
               className="block font-sans leading-[1.4]"
-              style={{ color: 'rgba(248,246,242,0.65)', fontSize: isMobile ? '13px' : '17px', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}
+              style={{ color: 'rgba(248,246,242,0.65)', fontSize: isMobile ? '15px' : '18px', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}
             >
               {item.desc}
             </span>

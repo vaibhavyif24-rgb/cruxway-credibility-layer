@@ -64,8 +64,8 @@ const ScrollRevealText = ({
         {/* Heading — word-by-word reveal */}
         <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px]">
           {words.map((word, i) => {
-            const start = i / words.length;
-            const end = (i + 1) / words.length;
+            const start = (i / words.length) * 0.8;
+            const end = ((i + 1) / words.length) * 0.8;
             const cleanWord = word.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, '');
             const isHighlighted = normHighlights.includes(cleanWord);
             return <Word key={i} word={word} range={[start, end]} progress={scrollYProgress} isDark={isDark} isHighlighted={isHighlighted} />;

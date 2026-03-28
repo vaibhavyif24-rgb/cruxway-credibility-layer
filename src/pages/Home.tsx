@@ -134,10 +134,10 @@ const Home = () => {
           <FadeIn delay={0.28}>
             <div className="mt-6 md:mt-8 flex flex-wrap gap-3">
               <Link
-                to={`/${region}/criteria`}
+                to={`/${region}/focus`}
                 className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80 transition-all duration-300"
               >
-                Our Approach
+                Our Focus
               </Link>
               <Link
                 to={`/${region}/contact`}
