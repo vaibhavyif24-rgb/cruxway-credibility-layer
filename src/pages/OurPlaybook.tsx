@@ -8,8 +8,8 @@ import ScrollRevealText from '@/components/ScrollRevealText';
 import CriteriaCarousel from '@/components/CriteriaCarousel';
 import StickyCardStack from '@/components/StickyCardStack';
 
-import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
-import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
+import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
+import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
@@ -34,7 +34,7 @@ const OurPlaybook = () => {
     <div className="overflow-x-clip">
       {/* Hero */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaPlaybook : heroUSPlaybook} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
@@ -86,11 +86,11 @@ const OurPlaybook = () => {
       />
 
       {/* Value Creation Playbook */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10 overflow-x-hidden">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pb-14 md:pb-20 lg:pb-24 -mt-10 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] mb-2">
+            <h2 className="font-serif text-[clamp(1.4rem,2.6vw,2rem)] text-foreground leading-[1.15] mb-2">
               How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">

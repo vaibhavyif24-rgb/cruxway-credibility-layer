@@ -6,7 +6,6 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
-import GlassCard from '@/components/GlassCard';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -33,12 +32,12 @@ const investmentProfile = {
 };
 
 const whatWeLookFor = [
-  { num: '01', title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.', icon: '◆' },
-  { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.', icon: '◈' },
-  { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.', icon: '◇' },
-  { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.', icon: '⬡' },
-  { num: '05', title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.', icon: '△' },
-  { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.', icon: '○' },
+  { num: '01', title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
+  { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
+  { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
+  { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
+  { num: '05', title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
+  { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
 const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; delay?: number }) => {
@@ -66,38 +65,49 @@ const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; 
 const CriterionCard = ({ item, index }: { item: typeof whatWeLookFor[0]; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const isEven = index % 2 === 0;
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ opacity: 0, x: isEven ? -30 : 30, y: 20 }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, scale: 1.01 }}
+      className="group relative"
     >
-      <GlassCard index={index} hover className="h-full">
-        <div className="p-6 md:p-8 flex flex-col h-full">
-          {/* Number + Icon */}
-          <div className="flex items-center justify-between mb-5">
-            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/50">
-              Criterion {item.num}
-            </span>
-            <span className="text-gold/30 text-lg">{item.icon}</span>
-          </div>
+      <div className="relative h-full overflow-hidden rounded-sm border border-border/40 bg-card/50 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/20 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--gold)/0.15)]">
+        {/* Animated gold accent line — left edge */}
+        <div className="absolute left-0 top-0 w-[2px] h-0 bg-gold/60 transition-all duration-700 ease-out group-hover:h-full" />
+
+        {/* Subtle inner glow on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--gold)/0.04),transparent_70%)]" />
+
+        {/* Watermark number */}
+        <span className="absolute -right-2 -bottom-4 font-serif text-[6rem] md:text-[7rem] leading-none text-gold/[0.04] italic select-none pointer-events-none transition-colors duration-500 group-hover:text-gold/[0.08]">
+          {item.num}
+        </span>
+
+        <div className="relative p-7 md:p-8 lg:p-10 flex flex-col h-full">
+          {/* Criterion label */}
+          <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-5 md:mb-6 block">
+            Criterion {item.num}
+          </span>
 
           {/* Title */}
-          <h3 className="font-serif text-[clamp(1.15rem,2vw,1.4rem)] text-foreground leading-[1.2] tracking-[-0.02em] mb-3">
+          <h3 className="font-serif text-[clamp(1.2rem,2.2vw,1.5rem)] text-foreground leading-[1.2] tracking-[-0.02em] mb-4">
             {item.title}
           </h3>
 
           {/* Gold divider */}
-          <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+          <div className="w-10 h-[1.5px] bg-gold/25 mb-5 transition-all duration-500 group-hover:w-16 group-hover:bg-gold/40" />
 
           {/* Description */}
-          <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.75] flex-1">
+          <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] flex-1">
             {item.desc}
           </p>
         </div>
-      </GlassCard>
+      </div>
     </motion.div>
   );
 };
@@ -157,7 +167,7 @@ const OurFocus = () => {
       </section>
 
       {/* What We Look For — 2×3 Criteria Grid */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
