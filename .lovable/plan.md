@@ -1,45 +1,75 @@
 
 
-## Plan: Ultra-Compact Mobile Cinematic — Text on Image, No Dead Space
+## Plan: Site Reorganization & UI Fixes
 
-### Current Problem
-At 55% scroll on mobile, the cinematic shows a full-screen image with the tagline pushed to the very top edge and ~80% of the viewport is just empty image. The `120vh` container still creates unnecessary scroll distance for mobile.
+### Problem Summary
+1. **ScrollRevealText bug**: Last words in long sentences don't fully light up because their opacity ranges end at the very tail of scroll progress (near 1.0), which users rarely reach completely.
+2. **Investment Criteria page**: The 6 criteria use a StickyCardStack slides animation that feels heavy; user wants all 6 visible in a polished grid/card layout.
+3. **Site restructure**: Current nav (Home / About Us / Investment Criteria / Team / Contact) needs to become (Home / Our Principles / Our Focus / Our Playbook / Team / Contact), splitting current Investment Criteria content across "Our Focus" and "Our Playbook."
+4. **Sector font size**: Too small in the cinematic reveal sections.
 
-### Design
+---
 
-**No-scroll cinematic on mobile**: Replace the 120vh sticky scroll with a simple **100vh static full-bleed hero** — the image is already full-screen, no circle animation needed on mobile. The tagline sits centered vertically on the image (around 40% from top). This is cleaner, faster, and more professional on small screens.
+### Changes
 
-**Circle animation is desktop-only**: On mobile, skip the sticky/scroll mechanics entirely. Just render a full-viewport image with the tagline overlaid, then sectors flow below naturally.
+#### 1. Fix ScrollRevealText word reveal (ScrollRevealText.tsx)
+- Compress word ranges to `[0, 0.8]` instead of `[0, 1]` so all words reach full opacity well before the user finishes scrolling through the section.
+- Change: `const start = (i / words.length) * 0.8` and `const end = ((i + 1) / words.length) * 0.8`.
+- This ensures the last word hits 100% opacity at 80% scroll progress, leaving comfortable buffer.
 
-### Changes to both `CinematicScrollReveal.tsx` and `USCinematicScrollReveal.tsx`
+#### 2. Replace StickyCardStack with a 2×3 criteria grid (InvestmentCriteria.tsx → becomes OurFocus.tsx)
+- Remove `StickyCardStack` for the "What We Look For" section.
+- Create a responsive `2×3` grid (mobile: single column) of `GlassCard` components, each showing the criterion number, title, gold divider, and description.
+- Staggered fade-in entrance animations using `FadeIn` with incremental delays.
+- Each card gets a subtle hover effect (border glow, gold accent line expansion) consistent with existing `GlassCard` patterns.
 
-**Mobile early-return** — when `isMobile`, render:
+#### 3. Reorganize navigation and pages
 
-1. **Full-bleed image hero** (`height: 70vh`): The HD image covers the section with the dark gradient overlay. Tagline is absolutely positioned at ~40% vertically, centered horizontally. No scroll animation, no circle — just a clean cinematic image with text.
-
-2. **Sectors section below**: Same as current — blurred background, dark overlay, "Sectors We Look At" heading, both columns stacked vertically. Seamless visual flow from the hero image.
-
-**Desktop unchanged** — keeps the full 250vh sticky circle-expand animation.
-
-### Technical Details
-
-```text
-Mobile layout (no scroll animation):
-┌─────────────────────┐
-│  70vh full-bleed img │
-│                      │
-│   "Where America's   │  ← tagline centered on image
-│    essential..."     │
-│                      │
-└──────────────────────┘
-┌─────────────────────┐
-│  SECTORS WE LOOK AT │  ← normal flow, dark bg
-│  Industrials         │
-│  Business Services   │
-└──────────────────────┘
+**New nav structure** (SiteHeader.tsx):
+```
+Home | Our Principles | Our Focus | Our Playbook | Team | Contact
 ```
 
-### Files Modified
-- `src/components/CinematicScrollReveal.tsx`
-- `src/components/USCinematicScrollReveal.tsx`
+**Route changes** (App.tsx):
+- `/:region/about` → `/:region/principles` (Our Principles, existing GuidingPrinciples page)
+- `/:region/criteria` → `/:region/focus` (Our Focus, new page)
+- `/:region/playbook` → new page (Our Playbook)
+
+**Our Focus page** (new `src/pages/OurFocus.tsx`):
+- Hero section (reuse existing criteria hero imagery)
+- Investment Profile stats band
+- "What We Look For" 2×3 criteria grid (all 6 criteria visible)
+- Cinematic Scroll Reveal with sectors (existing component, unchanged)
+- CTA section
+
+**Our Playbook page** (new `src/pages/OurPlaybook.tsx`):
+- Hero section with distinct imagery
+- "How We Evaluate Opportunities" section (Discovery → Evaluation → Diligence → Structuring) using the existing `CriteriaPipeline` vertical timeline component (not StickyCardStack slides)
+- ScrollRevealText "Our Edge" section
+- "Value Creation" section using the existing `CriteriaCarousel` (Stabilise, Optimise, Invest, Compound)
+- CTA section
+
+#### 4. Increase sector font sizes (CinematicScrollReveal.tsx, USCinematicScrollReveal.tsx)
+- Mobile sector heading: `1.25rem` → `1.5rem`
+- Mobile sector item name: `1.05rem` → `1.2rem`
+- Mobile sector item desc: `13px` → `15px`
+- Desktop sector heading: `1.8rem` → `2rem`
+- Desktop sector item name: `1.5rem` → `1.7rem`
+- Desktop sector item desc: `17px` → `18px`
+
+---
+
+### Files to create/modify
+| File | Action |
+|------|--------|
+| `src/components/ScrollRevealText.tsx` | Fix word range compression |
+| `src/pages/OurFocus.tsx` | New page (criteria grid + sectors) |
+| `src/pages/OurPlaybook.tsx` | New page (pipeline + value creation) |
+| `src/pages/InvestmentCriteria.tsx` | Remove (replaced by OurFocus + OurPlaybook) |
+| `src/components/SiteHeader.tsx` | Update nav items |
+| `src/App.tsx` | Update routes |
+| `src/components/CinematicScrollReveal.tsx` | Increase sector font sizes |
+| `src/components/USCinematicScrollReveal.tsx` | Increase sector font sizes |
+| `src/pages/Home.tsx` | Update CTA links from `/criteria` to `/focus` |
+| `src/pages/GuidingPrinciples.tsx` | Rename route reference if needed |
 
