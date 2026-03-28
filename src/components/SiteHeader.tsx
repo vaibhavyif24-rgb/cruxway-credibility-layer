@@ -58,12 +58,12 @@ const SiteHeader = () => {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center">
-              <div className="flex items-center gap-5 xl:gap-7">
+              <div className="flex items-center gap-3 xl:gap-5">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[11.5px] font-medium uppercase tracking-[0.12em] py-1.5 px-2.5 rounded-sm transition-all duration-200 active:scale-[0.93] active:bg-gold/[0.06] ${
+                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.08em] py-1.5 px-1.5 rounded-sm transition-all duration-200 active:scale-[0.93] active:bg-gold/[0.06] ${
                       isActive(item.path)
                         ? 'text-primary-foreground bg-primary-foreground/[0.04]'
                         : 'text-primary-foreground/40 hover:text-primary-foreground/70 hover:bg-primary-foreground/[0.03]'
@@ -81,7 +81,7 @@ const SiteHeader = () => {
                 ))}
               </div>
 
-              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-6" />
+              <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-4" />
 
               {/* Dark mode toggle */}
               <button

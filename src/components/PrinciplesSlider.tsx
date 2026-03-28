@@ -54,13 +54,62 @@ const PrincipleCard: React.FC<{
           background: 'linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(225, 45%, 5%) 50%, hsl(215, 35%, 10%) 100%)',
         }}
       >
+        {/* Animated background effects */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Slow-rotating radial glow */}
+          <div
+            className="absolute w-[140%] h-[140%] top-1/2 left-1/2"
+            style={{
+              transform: 'translate(-50%, -50%)',
+              background: 'radial-gradient(ellipse at center, hsl(38, 45%, 55%, 0.08) 0%, transparent 60%)',
+              animation: 'celestial-rotate 20s linear infinite',
+            }}
+          />
+          {/* Pulsing nebula glow */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at 40% 45%, hsl(207, 50%, 30%, 0.15) 0%, transparent 50%), radial-gradient(circle at 65% 60%, hsl(38, 48%, 52%, 0.1) 0%, transparent 45%)',
+              animation: 'nebula-pulse 6s ease-in-out infinite',
+            }}
+          />
+          {/* Floating gold particles */}
+          {[
+            { top: '20%', left: '15%', delay: '0s', size: 3 },
+            { top: '70%', left: '80%', delay: '4s', size: 2 },
+            { top: '45%', left: '90%', delay: '8s', size: 2.5 },
+          ].map((p, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full float-orb-slow"
+              style={{
+                top: p.top,
+                left: p.left,
+                width: p.size,
+                height: p.size,
+                background: 'hsl(38, 45%, 55%)',
+                animationDelay: p.delay,
+                opacity: 0.5,
+              }}
+            />
+          ))}
+          {/* Shimmer sweep */}
+          <div
+            className="absolute top-1/2 left-0 w-full h-px shimmer-effect"
+            style={{
+              background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.15), transparent)',
+              animationDuration: '6s',
+            }}
+          />
+        </div>
+
         {/* Celestial SVG illustration as full-bleed background */}
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full z-[1]">
           <CelestialIllustration index={index} />
         </div>
 
         {/* Subtle texture overlay */}
-        <div className="absolute inset-0" style={{
+        <div className="absolute inset-0 z-[2]" style={{
           background: 'radial-gradient(ellipse at center, transparent 20%, hsl(220, 40%, 5%) 85%)',
         }} />
 
