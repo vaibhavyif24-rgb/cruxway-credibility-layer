@@ -42,9 +42,10 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
   return (
     <section
       ref={(node) => {
-        (containerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
-        if (typeof ref === 'function') ref(node);
-        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (containerRef as any).current = node;
+        if (typeof ref === 'function') ref(node as any);
+        else if (ref) (ref as any).current = node;
       }}
       className={`relative overflow-hidden ${
         isDark
