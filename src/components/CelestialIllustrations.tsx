@@ -36,7 +36,7 @@ StarField.displayName = 'StarField';
 /* ═══════════════════════════════════════════════════════════
    0 — INTEGRITY: Celestial Compass Rose
    ═══════════════════════════════════════════════════════════ */
-const IntegrityIllustration = () => (
+const IntegrityIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="int-nebula" cx="50%" cy="35%" r="45%">
@@ -104,12 +104,13 @@ const IntegrityIllustration = () => (
       <circle key={`cd-${i}`} cx={cx} cy={cy} r="3" fill={WARM_WHITE} opacity="0.4" />
     ))}
   </svg>
-);
+));
+IntegrityIllustration.displayName = 'IntegrityIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    1 — SERVANT LEADERSHIP: Constellation Arch with Figure
    ═══════════════════════════════════════════════════════════ */
-const LeadershipIllustration = () => (
+const LeadershipIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="lead-glow" cx="50%" cy="30%" r="40%">
@@ -169,12 +170,13 @@ const LeadershipIllustration = () => (
 
     <line x1="100" y1="530" x2="700" y2="530" stroke={GOLD} strokeWidth="0.5" opacity="0.1" />
   </svg>
-);
+));
+LeadershipIllustration.displayName = 'LeadershipIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    2 — HUMILITY: Spiral Galaxy with Cliff Figure
    ═══════════════════════════════════════════════════════════ */
-const HumilityIllustration = () => (
+const HumilityIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="hum-nebula" cx="45%" cy="40%" r="50%">
@@ -230,12 +232,13 @@ const HumilityIllustration = () => (
     <circle cx="610" cy="360" r="1.5" fill={WARM_WHITE} opacity="0.4" />
     <circle cx="640" cy="330" r="1.8" fill={GOLD} opacity="0.45" />
   </svg>
-);
+));
+HumilityIllustration.displayName = 'HumilityIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    3 — GRIT: The Anvil & Hammer (Forging Through Adversity)
    ═══════════════════════════════════════════════════════════ */
-const GritIllustration = () => (
+const GritIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="grit-strike" cx="50%" cy="48%" r="25%">
@@ -298,12 +301,13 @@ const GritIllustration = () => (
     {/* Ground line */}
     <line x1="120" y1="570" x2="680" y2="570" stroke={GOLD} strokeWidth="0.5" opacity="0.08" />
   </svg>
-);
+));
+GritIllustration.displayName = 'GritIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    4 — BIAS TO ACTION: The Arrow Released (Decisive Motion)
    ═══════════════════════════════════════════════════════════ */
-const ActionIllustration = () => (
+const ActionIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="act-target" cx="82%" cy="42%" r="20%">
@@ -370,12 +374,13 @@ const ActionIllustration = () => (
     <line x1="695" y1="310" x2="630" y2="330" stroke={GOLD} strokeWidth="0.4" opacity="0.08" />
     <line x1="625" y1="195" x2="580" y2="200" stroke={GOLD} strokeWidth="0.4" opacity="0.08" />
   </svg>
-);
+));
+ActionIllustration.displayName = 'ActionIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    5 — THE GOLDEN RULE: Mirror of Reciprocity
    ═══════════════════════════════════════════════════════════ */
-const GoldenRuleIllustration = () => (
+const GoldenRuleIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="gr-orb" cx="50%" cy="45%" r="20%">
@@ -467,7 +472,8 @@ const GoldenRuleIllustration = () => (
     <rect x="330" y="472" width="20" height="6" rx="1" fill={GOLD} opacity="0.06" />
     <rect x="450" y="472" width="20" height="6" rx="1" fill={GOLD} opacity="0.06" />
   </svg>
-);
+));
+GoldenRuleIllustration.displayName = 'GoldenRuleIllustration';
 
 /* ─── Export map ─── */
 const illustrations = [

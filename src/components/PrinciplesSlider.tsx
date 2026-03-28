@@ -33,8 +33,8 @@ const getCardBg = (isDark: boolean, index: number) => {
 
 /* ─── Vignette colors (must match card bg edges) ─── */
 const darkVignette = 'radial-gradient(ellipse at center, transparent 20%, hsl(220, 40%, 5%) 85%)';
-const lightVignetteEven = 'radial-gradient(ellipse at center, transparent 30%, hsl(40, 25%, 96%) 90%)';
-const lightVignetteOdd = 'radial-gradient(ellipse at center, transparent 30%, hsl(38, 18%, 91%) 90%)';
+const lightVignetteEven = 'radial-gradient(ellipse at center, transparent 25%, hsl(40, 25%, 96%) 88%)';
+const lightVignetteOdd = 'radial-gradient(ellipse at center, transparent 25%, hsl(38, 18%, 91%) 88%)';
 
 const getVignette = (isDark: boolean, index: number) => {
   if (isDark) return darkVignette;
@@ -92,7 +92,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
       : '0 -2px 10px -2px rgba(0,0,0,0.04), 0 6px 16px -4px rgba(0,0,0,0.06)';
 
     /* Effect opacity multiplier: full in dark, 40% in light */
-    const fxOpacity = isDark ? 1 : 0.4;
+    const fxOpacity = isDark ? 1 : 0.55;
 
     return (
       <div
@@ -162,7 +162,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
           {/* Celestial SVG illustration — both modes, opacity-adjusted */}
           <div
             className="absolute inset-0 w-full h-full z-[1]"
-            style={{ opacity: isDark ? 1 : 0.25 }}
+            style={{ opacity: isDark ? 1 : 0.35 }}
           >
             <MemoizedCelestial index={index} />
           </div>
