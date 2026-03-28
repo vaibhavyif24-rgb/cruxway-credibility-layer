@@ -86,7 +86,7 @@ const OurPlaybook = () => {
       />
 
       {/* Value Creation Playbook */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24 overflow-x-hidden">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-18 pb-10 md:pb-14 lg:pb-18 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
