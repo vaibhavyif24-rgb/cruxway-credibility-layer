@@ -63,37 +63,58 @@ const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; 
   );
 };
 
-const CriterionCard = ({ item, index }: { item: typeof whatWeLookFor[0]; index: number }) => {
+/* ─── Sophisticated Criterion Card ─── */
+const CriterionCard = ({ item, index, span }: { item: typeof whatWeLookFor[0]; index: number; span: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 24 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      className={span}
+      initial={{ opacity: 0, y: 32, x: index % 2 === 0 ? -16 : 16 }}
+      animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }}
     >
-      <GlassCard index={index} hover className="h-full">
-        <div className="p-6 md:p-8 flex flex-col h-full">
-          {/* Number + Icon */}
-          <div className="flex items-center justify-between mb-5">
-            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/50">
+      <GlassCard index={index} hover className="h-full group/card">
+        <div className="relative p-7 md:p-9 flex flex-col h-full overflow-hidden">
+          {/* Watermark number */}
+          <span className="absolute top-3 right-4 font-serif text-[4.5rem] md:text-[5.5rem] leading-none text-foreground/[0.04] select-none pointer-events-none tracking-[-0.04em] group-hover/card:text-gold/[0.07] transition-colors duration-500">
+            {item.num}
+          </span>
+
+          {/* Gold left accent bar */}
+          <motion.div
+            className="absolute left-0 top-6 bottom-6 w-[2px] bg-gold/20 group-hover/card:bg-gold/50 transition-colors duration-500 rounded-full"
+            initial={{ scaleY: 0 }}
+            animate={isInView ? { scaleY: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.3 + index * 0.09 }}
+            style={{ originY: 0 }}
+          />
+
+          {/* Label */}
+          <div className="flex items-center gap-2.5 mb-4">
+            <span className="text-gold/40 text-base">{item.icon}</span>
+            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/45">
               Criterion {item.num}
             </span>
-            <span className="text-gold/30 text-lg">{item.icon}</span>
           </div>
 
           {/* Title */}
-          <h3 className="font-serif text-[clamp(1.15rem,2vw,1.4rem)] text-foreground leading-[1.2] tracking-[-0.02em] mb-3">
+          <h3 className="font-serif text-[clamp(1.2rem,2.2vw,1.5rem)] text-foreground leading-[1.2] tracking-[-0.02em] mb-4 group-hover/card:text-gold/90 transition-colors duration-400">
             {item.title}
           </h3>
 
           {/* Gold divider */}
-          <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+          <motion.div
+            className="h-[1.5px] bg-gold/20 mb-5 group-hover/card:bg-gold/40 transition-colors duration-500"
+            initial={{ width: 0 }}
+            animate={isInView ? { width: '2.5rem' } : {}}
+            transition={{ duration: 0.5, delay: 0.4 + index * 0.09 }}
+          />
 
           {/* Description */}
-          <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.75] flex-1">
+          <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.8] flex-1">
             {item.desc}
           </p>
         </div>
@@ -101,6 +122,16 @@ const CriterionCard = ({ item, index }: { item: typeof whatWeLookFor[0]; index: 
     </motion.div>
   );
 };
+
+/* ─── Card span mapping: 2 wide → 3 equal → 1 full ─── */
+const cardSpans = [
+  'md:col-span-3',  // Card 1 — half
+  'md:col-span-3',  // Card 2 — half
+  'md:col-span-2',  // Card 3 — third
+  'md:col-span-2',  // Card 4 — third
+  'md:col-span-2',  // Card 5 — third
+  'md:col-span-6',  // Card 6 — full width
+];
 
 const OurFocus = () => {
   const { region } = useRegion();
@@ -156,8 +187,8 @@ const OurFocus = () => {
         </div>
       </section>
 
-      {/* What We Look For — 2×3 Criteria Grid */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+      {/* What We Look For — Sophisticated Alternating Grid */}
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
@@ -170,9 +201,9 @@ const OurFocus = () => {
             <GoldRule className="mt-3 mb-10 md:mb-14" />
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-5 md:gap-6">
             {whatWeLookFor.map((item, i) => (
-              <CriterionCard key={item.num} item={item} index={i} />
+              <CriterionCard key={item.num} item={item} index={i} span={cardSpans[i]} />
             ))}
           </div>
         </div>
@@ -182,7 +213,7 @@ const OurFocus = () => {
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
