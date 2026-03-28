@@ -374,7 +374,8 @@ const ActionIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
     <line x1="695" y1="310" x2="630" y2="330" stroke={GOLD} strokeWidth="0.4" opacity="0.08" />
     <line x1="625" y1="195" x2="580" y2="200" stroke={GOLD} strokeWidth="0.4" opacity="0.08" />
   </svg>
-);
+));
+ActionIllustration.displayName = 'ActionIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    5 — THE GOLDEN RULE: Mirror of Reciprocity
