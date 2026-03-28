@@ -301,7 +301,8 @@ const GritIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
     {/* Ground line */}
     <line x1="120" y1="570" x2="680" y2="570" stroke={GOLD} strokeWidth="0.5" opacity="0.08" />
   </svg>
-);
+));
+GritIllustration.displayName = 'GritIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    4 — BIAS TO ACTION: The Arrow Released (Decisive Motion)
