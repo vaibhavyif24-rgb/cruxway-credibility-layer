@@ -27,8 +27,9 @@ const App = () => (
               <Route path="/investor-login" element={<InvestorLogin />} />
               <Route path="/:region" element={<RegionLayout />}>
                 <Route index element={<Home />} />
-                <Route path="about" element={<GuidingPrinciples />} />
-                <Route path="criteria" element={<InvestmentCriteria />} />
+                <Route path="principles" element={<GuidingPrinciples />} />
+                <Route path="focus" element={<OurFocus />} />
+                <Route path="playbook" element={<OurPlaybook />} />
                 <Route path="team" element={<Team />} />
                 <Route path="contact" element={<Contact />} />
               </Route>

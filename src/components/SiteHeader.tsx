@@ -28,8 +28,9 @@ const SiteHeader = () => {
 
   const navItems = [
     { label: 'Home', path: prefix },
-    { label: 'About Us', path: `${prefix}/about` },
-    { label: 'Investment Criteria', path: `${prefix}/criteria` },
+    { label: 'Our Principles', path: `${prefix}/principles` },
+    { label: 'Our Focus', path: `${prefix}/focus` },
+    { label: 'Our Playbook', path: `${prefix}/playbook` },
     { label: 'Team', path: `${prefix}/team` },
     { label: 'Contact', path: `${prefix}/contact` },
   ];
