@@ -266,7 +266,8 @@ const ThematicIllustration = React.forwardRef<HTMLDivElement, { index: number; i
       </div>
     </div>
   );
-};
+});
+ThematicIllustration.displayName = 'ThematicIllustration';
 
 /* ─── Presentation Slide Card ─── */
 const SlideCard: React.FC<{

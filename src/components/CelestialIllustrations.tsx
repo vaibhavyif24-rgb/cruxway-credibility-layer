@@ -30,7 +30,8 @@ const StarField = React.memo(({ seed, count = 60 }: { seed: number; count?: numb
       <circle key={i} cx={s.x} cy={s.y} r={s.r} fill={WARM_WHITE} opacity={s.o} />
     ))}
   </>
-);
+));
+StarField.displayName = 'StarField';
 
 /* ═══════════════════════════════════════════════════════════
    0 — INTEGRITY: Celestial Compass Rose
