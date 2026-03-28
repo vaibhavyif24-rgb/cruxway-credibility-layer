@@ -56,7 +56,7 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
           <div>
             <span
               className="font-serif leading-[1.3] block"
-              style={{ color: '#F8F6F2', fontSize: isMobile ? '1.05rem' : '1.5rem', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
+              style={{ color: '#F8F6F2', fontSize: isMobile ? '1.2rem' : '1.7rem', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
             >
               {item.name}
             </span>
