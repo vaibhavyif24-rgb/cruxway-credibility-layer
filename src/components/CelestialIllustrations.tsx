@@ -232,7 +232,8 @@ const HumilityIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
     <circle cx="610" cy="360" r="1.5" fill={WARM_WHITE} opacity="0.4" />
     <circle cx="640" cy="330" r="1.8" fill={GOLD} opacity="0.45" />
   </svg>
-);
+));
+HumilityIllustration.displayName = 'HumilityIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    3 — GRIT: The Anvil & Hammer (Forging Through Adversity)
