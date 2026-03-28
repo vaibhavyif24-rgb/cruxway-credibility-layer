@@ -110,7 +110,7 @@ IntegrityIllustration.displayName = 'IntegrityIllustration';
 /* ═══════════════════════════════════════════════════════════
    1 — SERVANT LEADERSHIP: Constellation Arch with Figure
    ═══════════════════════════════════════════════════════════ */
-const LeadershipIllustration = () => (
+const LeadershipIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="lead-glow" cx="50%" cy="30%" r="40%">
