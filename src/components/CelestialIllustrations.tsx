@@ -238,7 +238,7 @@ HumilityIllustration.displayName = 'HumilityIllustration';
 /* ═══════════════════════════════════════════════════════════
    3 — GRIT: The Anvil & Hammer (Forging Through Adversity)
    ═══════════════════════════════════════════════════════════ */
-const GritIllustration = () => (
+const GritIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="grit-strike" cx="50%" cy="48%" r="25%">
