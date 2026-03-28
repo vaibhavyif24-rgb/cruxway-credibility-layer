@@ -1,75 +1,55 @@
 
 
-## Plan: Site Reorganization & UI Fixes
+## Plan: Polish Investment Criteria Cards, Fix Playbook, Add Unique Hero Images
 
-### Problem Summary
-1. **ScrollRevealText bug**: Last words in long sentences don't fully light up because their opacity ranges end at the very tail of scroll progress (near 1.0), which users rarely reach completely.
-2. **Investment Criteria page**: The 6 criteria use a StickyCardStack slides animation that feels heavy; user wants all 6 visible in a polished grid/card layout.
-3. **Site restructure**: Current nav (Home / About Us / Investment Criteria / Team / Contact) needs to become (Home / Our Principles / Our Focus / Our Playbook / Team / Contact), splitting current Investment Criteria content across "Our Focus" and "Our Playbook."
-4. **Sector font size**: Too small in the cinematic reveal sections.
+### 1. Redesign Investment Criteria Cards (OurFocus.tsx)
 
----
+Replace the current simple `GlassCard` grid with a more sophisticated design:
 
-### Changes
+- **Numbered accent**: Large serif gold number (`01`–`06`) as a background watermark element behind each card, creating visual depth
+- **Animated gold accent line** on left edge of each card that expands on hover
+- **Staggered reveal**: Cards animate in with alternating slide directions (left/right) for visual interest
+- **Better spacing**: Increase card padding to `p-8 md:p-10`, add more breathing room between number label and title
+- **Refined typography**: Larger titles at `clamp(1.2rem, 2.2vw, 1.5rem)`, slightly larger descriptions at `14px md:15px`
+- **Remove unicode icons** (◆, ◈, etc.) — replace with the large watermark number for a cleaner institutional look
+- **Add subtle inner glow** on hover using a radial gradient overlay
 
-#### 1. Fix ScrollRevealText word reveal (ScrollRevealText.tsx)
-- Compress word ranges to `[0, 0.8]` instead of `[0, 1]` so all words reach full opacity well before the user finishes scrolling through the section.
-- Change: `const start = (i / words.length) * 0.8` and `const end = ((i + 1) / words.length) * 0.8`.
-- This ensures the last word hits 100% opacity at 80% scroll progress, leaving comfortable buffer.
+### 2. Fix "How We Build Value" Title Breaking (OurPlaybook.tsx)
 
-#### 2. Replace StickyCardStack with a 2×3 criteria grid (InvestmentCriteria.tsx → becomes OurFocus.tsx)
-- Remove `StickyCardStack` for the "What We Look For" section.
-- Create a responsive `2×3` grid (mobile: single column) of `GlassCard` components, each showing the criterion number, title, gold divider, and description.
-- Staggered fade-in entrance animations using `FadeIn` with incremental delays.
-- Each card gets a subtle hover effect (border glow, gold accent line expansion) consistent with existing `GlassCard` patterns.
+- Line 93-94: Add `whitespace-nowrap` or increase `max-w` to prevent the title from wrapping awkwardly
+- Alternatively, adjust the clamp to a smaller max: `text-[clamp(1.4rem,2.6vw,2rem)]`
 
-#### 3. Reorganize navigation and pages
+### 3. Unique Hero Images for Playbook Pages
 
-**New nav structure** (SiteHeader.tsx):
-```
-Home | Our Principles | Our Focus | Our Playbook | Team | Contact
-```
+Currently both OurFocus and OurPlaybook use the same `hero-india-criteria.jpg` / `hero-us-criteria.jpg`. Will add distinct Unsplash images for the Playbook:
 
-**Route changes** (App.tsx):
-- `/:region/about` → `/:region/principles` (Our Principles, existing GuidingPrinciples page)
-- `/:region/criteria` → `/:region/focus` (Our Focus, new page)
-- `/:region/playbook` → new page (Our Playbook)
+- **US Playbook**: A professional boardroom/strategy image (e.g., modern office with city view) — sourced from Unsplash at 2400px+
+- **India Playbook**: A professional workspace/growth image (e.g., modern Indian business district or collaborative workspace)
 
-**Our Focus page** (new `src/pages/OurFocus.tsx`):
-- Hero section (reuse existing criteria hero imagery)
-- Investment Profile stats band
-- "What We Look For" 2×3 criteria grid (all 6 criteria visible)
-- Cinematic Scroll Reveal with sectors (existing component, unchanged)
-- CTA section
+New assets:
+- `src/assets/hero-us-playbook.jpg` — Unsplash HD image of a professional strategy/boardroom setting
+- `src/assets/hero-india-playbook.jpg` — Unsplash HD image of a modern Indian business environment
 
-**Our Playbook page** (new `src/pages/OurPlaybook.tsx`):
-- Hero section with distinct imagery
-- "How We Evaluate Opportunities" section (Discovery → Evaluation → Diligence → Structuring) using the existing `CriteriaPipeline` vertical timeline component (not StickyCardStack slides)
-- ScrollRevealText "Our Edge" section
-- "Value Creation" section using the existing `CriteriaCarousel` (Stabilise, Optimise, Invest, Compound)
-- CTA section
+Update `OurPlaybook.tsx` imports to use these new images instead of the criteria hero images.
 
-#### 4. Increase sector font sizes (CinematicScrollReveal.tsx, USCinematicScrollReveal.tsx)
-- Mobile sector heading: `1.25rem` → `1.5rem`
-- Mobile sector item name: `1.05rem` → `1.2rem`
-- Mobile sector item desc: `13px` → `15px`
-- Desktop sector heading: `1.8rem` → `2rem`
-- Desktop sector item name: `1.5rem` → `1.7rem`
-- Desktop sector item desc: `17px` → `18px`
+### 4. Ensure All Hero Images Have Cinematic Motion
+
+The `CinematicHero` component already applies Ken Burns zoom, horizontal drift, gold geometric overlays, floating particles, and shimmer effects. The new playbook hero images will use this same component, so they automatically get the full cinematic treatment. No additional motion work needed — just verify the new images work well with the existing `overlay="strong"` setting.
+
+### 5. Overall Polish Pass
+
+- **OurFocus.tsx**: Increase section vertical padding for criteria grid from `py-14` to `py-16 md:py-24 lg:py-28` for more gravitas
+- **OurPlaybook.tsx**: Ensure consistent section spacing matches OurFocus
+- **CriterionCard hover**: Add a subtle scale transform (`scale: 1.01`) on hover alongside the existing `y: -4` lift
 
 ---
 
-### Files to create/modify
-| File | Action |
+### Files to modify
+
+| File | Change |
 |------|--------|
-| `src/components/ScrollRevealText.tsx` | Fix word range compression |
-| `src/pages/OurFocus.tsx` | New page (criteria grid + sectors) |
-| `src/pages/OurPlaybook.tsx` | New page (pipeline + value creation) |
-| `src/pages/InvestmentCriteria.tsx` | Remove (replaced by OurFocus + OurPlaybook) |
-| `src/components/SiteHeader.tsx` | Update nav items |
-| `src/App.tsx` | Update routes |
-| `src/components/CinematicScrollReveal.tsx` | Increase sector font sizes |
-| `src/components/USCinematicScrollReveal.tsx` | Increase sector font sizes |
-| `src/pages/Home.tsx` | Update CTA links from `/criteria` to `/focus` |
-| `src/pages/GuidingPrinciples.tsx` | Rename route reference if needed |
+| `src/pages/OurFocus.tsx` | Redesign `CriterionCard` with watermark numbers, refined typography, animated accent lines, better spacing |
+| `src/pages/OurPlaybook.tsx` | Fix title wrapping, swap hero images to new playbook-specific assets |
+| `src/assets/hero-us-playbook.jpg` | New HD Unsplash image (professional US strategy/boardroom) |
+| `src/assets/hero-india-playbook.jpg` | New HD Unsplash image (modern Indian business) |
 
