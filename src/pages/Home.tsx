@@ -186,7 +186,7 @@ const Home = () => {
       />
 
       {/* Our Process — Sticky Card Stack */}
-      <section className="bg-background pt-10 md:pt-14 lg:pt-16 pb-4">
+      <section className="bg-background pt-8 md:pt-10 lg:pt-12 pb-2">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
           <FadeIn>
             <SectionLabel>Our Process</SectionLabel>
@@ -215,7 +215,10 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      {/* Shimmer divider */}
+      <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.15), transparent)', animationDuration: '5s' }} />
+
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">

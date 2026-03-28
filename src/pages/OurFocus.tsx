@@ -167,7 +167,7 @@ const OurFocus = () => {
       </section>
 
       {/* What We Look For — 2×3 Criteria Grid */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
@@ -177,7 +177,7 @@ const OurFocus = () => {
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
               We evaluate opportunities through a rigorous lens: target sectors, ownership transitions, cultural fit, and enduring competitive advantages.
             </p>
-            <GoldRule className="mt-3 mb-10 md:mb-14" />
+            <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
@@ -192,7 +192,7 @@ const OurFocus = () => {
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">

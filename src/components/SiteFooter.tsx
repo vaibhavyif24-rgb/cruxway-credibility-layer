@@ -23,8 +23,9 @@ const SiteFooter = () => {
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 relative z-10">
         <FadeIn>
           <div className="flex flex-col md:flex-row justify-between items-start gap-5 md:gap-14 mb-8">
-            <div>
-              <p className="font-serif text-xl text-primary-foreground tracking-[-0.02em]">Cruxway</p>
+            <div className="relative">
+              <div className="absolute -inset-8 rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, hsl(38, 45%, 55%, 0.06) 0%, transparent 70%)' }} />
+              <p className="font-serif text-xl text-primary-foreground tracking-[-0.02em] relative">Cruxway</p>
               <GoldRule className="mt-3" />
             </div>
 

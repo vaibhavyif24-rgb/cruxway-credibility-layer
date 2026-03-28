@@ -69,7 +69,7 @@ const GuidingPrinciples = () => {
       />
 
       {/* Principles — Scroll-triggered vertical slider */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-12 md:pt-16">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12">
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
@@ -81,7 +81,10 @@ const GuidingPrinciples = () => {
       <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      {/* Shimmer divider */}
+      <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.12), transparent)', animationDuration: '5s' }} />
+
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { GoldRule } from '@/components/ui/Section';
 import CelestialIllustration from '@/components/CelestialIllustrations';
 
@@ -13,8 +13,10 @@ interface PrinciplesSliderProps {
 
 /* ─── Constants ─── */
 const STICKY_BASE = 80;
-const STICKY_STEP = 20;
-const CARD_HEIGHT = 'min(85vh, 600px)';
+const STICKY_STEP = 16;
+const CARD_HEIGHT = 'min(75vh, 520px)';
+
+const MemoizedCelestial = React.memo(CelestialIllustration);
 
 const PrincipleCard: React.FC<{
   principle: Principle;
@@ -30,7 +32,20 @@ const PrincipleCard: React.FC<{
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => setIsActive(entry.isIntersecting && entry.intersectionRatio > 0.5),
-      { threshold: [0, 0.5, 1], rootMargin: '-10% 0px -30% 0px' }
+      { threshold: [0, 0.5, 1], rootMargin: '-15% 0px -25% 0px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // will-change cleanup
+  const [isNearViewport, setIsNearViewport] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsNearViewport(entry.isIntersecting),
+      { rootMargin: '200px 0px 200px 0px' }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -39,18 +54,21 @@ const PrincipleCard: React.FC<{
   return (
     <div
       ref={ref}
-      className="mb-6 will-change-transform"
+      className="mb-3"
       style={{
         position: 'sticky',
         top: `${stickyTop}px`,
         zIndex: index + 1,
+        willChange: isNearViewport ? 'transform' : 'auto',
+        contain: 'layout style paint',
       }}
     >
       <div
-        className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl"
+        className={`relative w-full overflow-hidden rounded-2xl md:rounded-3xl transition-shadow duration-500 ${
+          isActive ? 'shadow-[0_-6px_30px_-4px_rgba(0,0,0,0.25),0_20px_50px_-10px_rgba(0,0,0,0.22)]' : 'shadow-[0_-4px_16px_-4px_rgba(0,0,0,0.15),0_8px_24px_-6px_rgba(0,0,0,0.12)]'
+        }`}
         style={{
           height: CARD_HEIGHT,
-          boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -8px rgba(0,0,0,0.18)',
           background: 'linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(225, 45%, 5%) 50%, hsl(215, 35%, 10%) 100%)',
         }}
       >
@@ -105,13 +123,22 @@ const PrincipleCard: React.FC<{
 
         {/* Celestial SVG illustration as full-bleed background */}
         <div className="absolute inset-0 w-full h-full z-[1]">
-          <CelestialIllustration index={index} />
+          <MemoizedCelestial index={index} />
         </div>
 
         {/* Subtle texture overlay */}
         <div className="absolute inset-0 z-[2]" style={{
           background: 'radial-gradient(ellipse at center, transparent 20%, hsl(220, 40%, 5%) 85%)',
         }} />
+
+        {/* Active gold glow pulse on edges */}
+        <div
+          className="absolute inset-0 z-[3] pointer-events-none rounded-2xl md:rounded-3xl transition-opacity duration-700"
+          style={{
+            opacity: isActive ? 1 : 0,
+            boxShadow: 'inset 0 0 60px -20px hsl(38, 45%, 55%, 0.06)',
+          }}
+        />
 
         {/* Content — centered */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
@@ -123,7 +150,7 @@ const PrincipleCard: React.FC<{
                 color: 'hsl(38, 45%, 55%, 0.5)',
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
-                transition: 'opacity 0.5s ease-out 0.05s, transform 0.5s ease-out 0.05s',
+                transition: 'opacity 0.4s ease-out 0.05s, transform 0.4s ease-out 0.05s',
               }}
             >
               {String(index + 1).padStart(2, '0')}&nbsp;/&nbsp;{String(total).padStart(2, '0')}
@@ -136,7 +163,7 @@ const PrincipleCard: React.FC<{
                 color: '#F8F6F2',
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
-                transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
+                transition: 'opacity 0.4s ease-out 0.1s, transform 0.4s ease-out 0.1s',
                 textShadow: '0 2px 30px rgba(0,0,0,0.7)',
               }}
             >
@@ -145,10 +172,10 @@ const PrincipleCard: React.FC<{
 
             {/* Gold rule */}
             <div
-              className="my-5 flex justify-center"
+              className="my-4 flex justify-center"
               style={{
                 opacity: isActive ? 1 : 0,
-                transition: 'opacity 0.5s ease-out 0.15s',
+                transition: 'opacity 0.4s ease-out 0.15s',
               }}
             >
               <GoldRule />
@@ -161,7 +188,7 @@ const PrincipleCard: React.FC<{
                 color: 'rgba(248,246,242,0.7)',
                 opacity: isActive ? 1 : 0,
                 transform: `translateY(${isActive ? 0 : 12}px)`,
-                transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
+                transition: 'opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s',
                 textShadow: '0 2px 20px rgba(0,0,0,0.6)',
               }}
             >
@@ -178,7 +205,10 @@ const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
   const total = principles.length;
 
   return (
-    <div className="relative px-5 md:px-10 lg:px-16 pt-6 md:pt-8 pb-10 md:pb-14">
+    <div
+      className="relative px-5 md:px-10 lg:px-16 pt-4 md:pt-6 pb-6 md:pb-10"
+      style={{ contain: 'layout style paint' }}
+    >
       <div className="max-w-[1080px] mx-auto">
         {principles.map((principle, i) => (
           <PrincipleCard
@@ -189,6 +219,8 @@ const PrinciplesSlider = ({ principles }: PrinciplesSliderProps) => {
             stickyTop={STICKY_BASE + i * STICKY_STEP}
           />
         ))}
+        {/* Scroll clearance after last card */}
+        <div className="h-[80px] md:h-[50px]" />
       </div>
     </div>
   );

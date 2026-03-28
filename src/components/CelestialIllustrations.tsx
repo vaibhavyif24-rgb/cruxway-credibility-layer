@@ -478,9 +478,11 @@ const illustrations = [
   GoldenRuleIllustration,
 ];
 
-const CelestialIllustration = ({ index }: { index: number }) => {
+const CelestialIllustration = React.memo(({ index }: { index: number }) => {
   const Comp = illustrations[index % illustrations.length];
   return <Comp />;
-};
+});
+
+CelestialIllustration.displayName = 'CelestialIllustration';
 
 export default CelestialIllustration;

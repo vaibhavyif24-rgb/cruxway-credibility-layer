@@ -48,7 +48,7 @@ const Contact = () => {
       </section>
 
       {/* Contact Cards */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">
             {/* Email Card */}
