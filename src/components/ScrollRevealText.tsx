@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface ScrollRevealTextProps {
@@ -17,7 +17,7 @@ interface ScrollRevealTextProps {
  * through the container, creating a cinematic reading cadence.
  * Words matching the `highlights` array render in gold for emphasis.
  */
-const ScrollRevealText = ({
+const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>(({
   label,
   heading,
   subtext,
@@ -25,7 +25,7 @@ const ScrollRevealText = ({
   variant = 'dark',
   className = '',
   highlights = [],
-}: ScrollRevealTextProps) => {
+}, ref) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -41,19 +41,24 @@ const ScrollRevealText = ({
 
   return (
     <section
-      ref={containerRef}
+      ref={(node) => {
+        (containerRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        if (typeof ref === 'function') ref(node);
+        else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+      }}
       className={`relative overflow-hidden ${
         isDark
           ? 'bg-primary text-primary-foreground'
           : 'bg-background text-foreground'
       } ${className}`}
+      style={{ contentVisibility: 'auto' }}
     >
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-20 md:py-28 lg:py-36 flex flex-col items-center text-center">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24 flex flex-col items-center text-center">
         {/* Overline label */}
         {label && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
-            className={`font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] mb-8 md:mb-10 ${
+            className={`font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] mb-5 md:mb-7 ${
               isDark ? 'text-gold/50' : 'text-muted-foreground/50'
             }`}
           >
@@ -76,7 +81,7 @@ const ScrollRevealText = ({
         {subtext && !stats && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
-            className={`font-sans text-[13px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-10 md:mt-14 ${
+            className={`font-sans text-[13px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
               isDark ? 'text-primary-foreground/45' : 'text-muted-foreground'
             }`}
           >
@@ -86,7 +91,7 @@ const ScrollRevealText = ({
 
         {/* Stat blocks */}
         {stats && stats.length > 0 && (
-          <div className="mt-12 md:mt-16 pt-10 md:pt-12 border-t border-gold/10 w-full max-w-[680px]">
+          <div className="mt-8 md:mt-12 pt-8 md:pt-10 border-t border-gold/10 w-full max-w-[680px]">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
               {stats.map((stat, i) => (
                 <StatReveal key={i} stat={stat} index={i} total={stats.length} progress={scrollYProgress} isDark={isDark} />
@@ -97,7 +102,9 @@ const ScrollRevealText = ({
       </div>
     </section>
   );
-};
+});
+
+ScrollRevealText.displayName = 'ScrollRevealText';
 
 /* Individual word with scroll-driven opacity */
 const Word = ({
