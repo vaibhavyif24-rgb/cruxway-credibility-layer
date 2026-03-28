@@ -170,7 +170,8 @@ const LeadershipIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
 
     <line x1="100" y1="530" x2="700" y2="530" stroke={GOLD} strokeWidth="0.5" opacity="0.1" />
   </svg>
-);
+));
+LeadershipIllustration.displayName = 'LeadershipIllustration';
 
 /* ═══════════════════════════════════════════════════════════
    2 — HUMILITY: Spiral Galaxy with Cliff Figure
