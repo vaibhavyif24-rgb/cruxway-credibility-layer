@@ -69,7 +69,7 @@ const GuidingPrinciples = () => {
       />
 
       {/* Principles — Scroll-triggered vertical slider */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-12 md:pt-16">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12">
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
