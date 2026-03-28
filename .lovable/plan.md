@@ -1,91 +1,52 @@
 
 
-## Plan: Gap Reduction, Principles Stacking Deck, Effects Enhancement, and Performance
+## Plan: Fix Principles Page — Transitions, Theme Awareness, Border Gaps, and Right Space
 
-### Summary
-Four workstreams: tighten excess vertical spacing site-wide, rebuild the Principles slider as a smooth stacking deck (matching Team page pattern), fix console errors, and add subtle polish effects while improving runtime performance.
+### Issues Identified
 
----
+1. **Border gap at card start** (user's screenshot): The rounded corners on principle cards expose the light page background behind them, creating a visible cream/white gap at corners. Fix: remove border-radius from cards OR add a matching background wrapper.
 
-### 1. Reduce Excess Vertical Gaps Across All Pages
+2. **Right space gap**: The `px-5 md:px-10 lg:px-16` padding on the slider wrapper creates asymmetric spacing on some viewports. The `contain: layout style paint` may also cause overflow clipping issues.
 
-Targeted padding/margin reductions that preserve content hierarchy but remove excess whitespace:
+3. **Transition errors**: `StarField` component inside `CelestialIllustrations.tsx` triggers "Function components cannot be given refs" warnings because `React.memo` on the parent `CelestialIllustration` propagates ref attempts. Multiple other components also trigger this.
 
-| Location | Current | Proposed |
-|---|---|---|
-| **ScrollRevealText** container | `py-20 md:py-28 lg:py-36` | `py-14 md:py-20 lg:py-24` |
-| **ScrollRevealText** label mb | `mb-8 md:mb-10` | `mb-5 md:mb-7` |
-| **ScrollRevealText** subtext mt | `mt-10 md:mt-14` | `mt-7 md:mt-10` |
-| **ScrollRevealText** stats mt/pt | `mt-12 md:mt-16 pt-10 md:pt-12` | `mt-8 md:mt-12 pt-8 md:pt-10` |
-| **Home** "Our Process" section | `pt-10 md:pt-14 lg:pt-16 pb-4` | `pt-8 md:pt-10 lg:pt-12 pb-2` |
-| **Home** CTA section | `py-10 md:py-14 lg:py-16` | `py-8 md:py-12 lg:py-14` |
-| **OurFocus** criteria section | `py-16 md:py-24 lg:py-28` | `py-12 md:py-16 lg:py-20` |
-| **OurFocus** criteria GoldRule mb | `mb-10 md:mb-14` | `mb-8 md:mb-10` |
-| **OurPlaybook** value creation | `pt-14 md:pt-20 lg:pt-24 pb-14 md:pb-20 lg:pb-24` | `pt-10 md:pt-14 lg:pt-18 pb-10 md:pb-14 lg:pb-18` |
-| **Team** institutional exp | `pt-10 md:pt-14 pb-10 md:pb-14` | `pt-8 md:pt-10 pb-8 md:pb-10` |
-| **Contact** cards section | `py-10 md:py-14 lg:py-16` | `py-8 md:py-12 lg:py-14` |
-| **GuidingPrinciples** section header | `pt-12 md:pt-16` | `pt-8 md:pt-12` |
-| All CTA sections (all pages) | `py-10 md:py-14 lg:py-16` | `py-8 md:py-12 lg:py-14` |
-
-Files: `ScrollRevealText.tsx`, `Home.tsx`, `OurFocus.tsx`, `OurPlaybook.tsx`, `Team.tsx`, `Contact.tsx`, `GuidingPrinciples.tsx`
+4. **No theme awareness**: Cards always render with dark navy gradient regardless of light/dark mode. Need light-mode variant.
 
 ---
 
-### 2. Rebuild Principles Slider as Stacking Deck
+### Changes
 
-Replace the current `PrinciplesSlider` with a stacking deck that mirrors the `TeamStickyDeck` pattern:
+#### A. `PrinciplesSlider.tsx` — Fix borders, spacing, transitions
 
-- **Same sticky mechanics**: `position: sticky` with incremental `top` offsets (base 80px, step 16px)
-- **Same box shadow**: lifted card shadow matching team cards
-- **Smooth content transitions**: CSS transitions on opacity/transform driven by IntersectionObserver (same as current, but tuned for snappier response with `rootMargin: '-15% 0px -25% 0px'`)
-- **Preserve celestial backgrounds**: Keep the deep navy gradient, celestial SVG illustrations, nebula pulse, rotating glow, floating particles, and shimmer sweep
-- **Card height**: Reduce from `min(85vh, 600px)` to `min(75vh, 520px)` for tighter stacking
-- **Card margin-bottom**: Reduce from `mb-6` to `mb-3` for smoother overlap
-- **Scroll clearance**: Add `h-[100px] md:h-[60px]` after last card (matching team deck)
-- **Rounded corners**: Keep `rounded-2xl md:rounded-3xl`
+- Remove `rounded-2xl md:rounded-3xl` from cards (or reduce to `rounded-xl`) and ensure the outer sticky wrapper has `overflow: hidden` to prevent corner bleed
+- Remove `contain: layout style paint` from outer wrapper (causes right-side clipping)
+- Accept `isDark` prop from theme context to switch card backgrounds
+- In light mode: use warm ivory/cream card backgrounds with dark text; in dark mode: keep existing deep navy
+- Smooth transitions: increase IntersectionObserver threshold sensitivity, use CSS `transition` with longer easing for content elements
+- Set first card `isActive` to `true` by default so content is immediately visible
 
-File: `PrinciplesSlider.tsx`
+#### B. `CelestialIllustrations.tsx` — Fix ref warnings
 
----
+- The `React.memo` wrapper on `CelestialIllustration` doesn't need `forwardRef` since no ref is being used. The warning comes from `StarField` being a function component rendered inside SVG — React's dev mode sometimes flags these. Fix: convert `StarField` to use `React.memo` or wrap with `forwardRef` to suppress warnings.
 
-### 3. Fix Console Errors
+#### C. `GuidingPrinciples.tsx` — Pass theme, fix spacing
 
-Two warnings found:
+- Import `useTheme` and pass `isDark` down to `PrinciplesSlider`
+- Remove excess top padding on the "Principles" header section
+- Ensure the page wrapper has `overflow-x: hidden` to prevent horizontal scroll from the right gap
 
-**A. `ThematicIllustration` cannot be given refs**
-- In `StickyCardStack.tsx`, `SlideCard` is passing a ref to `ThematicIllustration` which is a plain function component
-- Fix: The warning is about React internals trying to assign ref; no actual ref is being passed in code. The warning comes from the component being rendered inside an array without `forwardRef`. Non-blocking but clean it up by wrapping `ThematicIllustration` with `React.forwardRef`.
+#### D. `StickyCardStack.tsx` — Fix ThematicIllustration ref warning
 
-**B. `ScrollRevealText` cannot be given refs**
-- Same issue: `ScrollRevealText` is used as a direct child and React tries to assign a ref
-- Fix: Wrap `ScrollRevealText` component with `React.forwardRef`
-
-Files: `StickyCardStack.tsx`, `ScrollRevealText.tsx`
+- The previous plan said to wrap `ThematicIllustration` in `forwardRef` but it wasn't done. Apply it now.
 
 ---
 
-### 4. Add Subtle Effects and Improve Performance
+### Technical Summary
 
-**New effects (lightweight, CSS-only where possible):**
-- **Section divider shimmer**: Add a thin gold gradient shimmer line between major sections (reuse existing `shimmer-effect` class) in `GuidingPrinciples.tsx`, `Home.tsx`, `OurFocus.tsx`
-- **Card hover lift on CriterionCards**: Already exists; add subtle gold glow pulse on active/hovered principle cards
-- **Footer subtle gradient**: Add a faint radial gold glow behind the Cruxway wordmark in the footer
-
-**Performance improvements:**
-- Add `will-change: auto` cleanup — several components set `will-change-transform` permanently; add `will-change: auto` when elements leave viewport via IntersectionObserver in `PrinciplesSlider`
-- Wrap `CelestialIllustration` in `React.memo` to prevent re-renders on parent state changes
-- Add `content-visibility: auto` to off-screen sections (`ScrollRevealText`, criteria grid) for rendering performance
-- Use `contain: layout style paint` on sticky card containers for compositor optimization
-
-Files: `PrinciplesSlider.tsx`, `CelestialIllustrations.tsx`, `StickyCardStack.tsx`, `index.css`, `SiteFooter.tsx`, `Home.tsx`
-
----
-
-### Technical Details
-
-- All gap changes are pure Tailwind class adjustments — no structural changes
-- The principles deck rebuild reuses the exact same sticky CSS pattern proven in `TeamStickyDeck` (sticky positioning with incremental top offsets)
-- `React.forwardRef` wrapping for error fixes is non-breaking
-- `content-visibility: auto` is a progressive enhancement (ignored by unsupported browsers)
-- `React.memo` on `CelestialIllustration` prevents unnecessary SVG re-renders during scroll
+| File | Change |
+|---|---|
+| `PrinciplesSlider.tsx` | Accept `isDark` prop; theme-aware backgrounds/text; remove `contain` from wrapper; fix border-radius gap; improve transition timing; default first card active |
+| `CelestialIllustrations.tsx` | Wrap `StarField` in `React.memo` to suppress ref warning |
+| `GuidingPrinciples.tsx` | Add `overflow-x: hidden` to root div; pass `isDark` to slider; tighten header spacing |
+| `StickyCardStack.tsx` | Wrap `ThematicIllustration` in `React.forwardRef` |
 
