@@ -6,6 +6,7 @@ import AnimatedAccent from '@/components/AnimatedAccent';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesSlider from '@/components/PrinciplesSlider';
 import ScrollRevealText from '@/components/ScrollRevealText';
+import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
 import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
