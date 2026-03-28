@@ -36,7 +36,7 @@ StarField.displayName = 'StarField';
 /* ═══════════════════════════════════════════════════════════
    0 — INTEGRITY: Celestial Compass Rose
    ═══════════════════════════════════════════════════════════ */
-const IntegrityIllustration = () => (
+const IntegrityIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="int-nebula" cx="50%" cy="35%" r="45%">
