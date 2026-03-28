@@ -92,7 +92,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
       : '0 -2px 10px -2px rgba(0,0,0,0.04), 0 6px 16px -4px rgba(0,0,0,0.06)';
 
     /* Effect opacity multiplier: full in dark, 40% in light */
-    const fxOpacity = isDark ? 1 : 0.4;
+    const fxOpacity = isDark ? 1 : 0.55;
 
     return (
       <div
