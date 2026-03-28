@@ -22,6 +22,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <main>
+          <ScrollToTop />
           <Suspense fallback={null}>
             <Routes>
               <Route path="/" element={<Landing />} />
