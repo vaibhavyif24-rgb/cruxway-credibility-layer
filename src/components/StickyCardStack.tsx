@@ -51,7 +51,7 @@ const darkTextColors = {
 };
 
 /* ─── Thematic Illustrations (AnimatedAccent style) ─── */
-const ThematicIllustration: React.FC<{ index: number; isDark: boolean; isActive: boolean }> = ({ index, isDark, isActive }) => {
+const ThematicIllustration = React.forwardRef<HTMLDivElement, { index: number; isDark: boolean; isActive: boolean }>(({ index, isDark, isActive }, _ref) => {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
