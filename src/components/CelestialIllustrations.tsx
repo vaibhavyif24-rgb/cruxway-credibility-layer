@@ -307,7 +307,7 @@ GritIllustration.displayName = 'GritIllustration';
 /* ═══════════════════════════════════════════════════════════
    4 — BIAS TO ACTION: The Arrow Released (Decisive Motion)
    ═══════════════════════════════════════════════════════════ */
-const ActionIllustration = () => (
+const ActionIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
   <svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
     <defs>
       <radialGradient id="act-target" cx="82%" cy="42%" r="20%">
