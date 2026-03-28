@@ -34,7 +34,7 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
       className="font-serif leading-tight"
       style={{
         color: '#F8F6F2',
-        fontSize: isMobile ? '1.25rem' : '1.8rem',
+        fontSize: isMobile ? '1.5rem' : '2rem',
         marginBottom: isMobile ? '0.75rem' : '1rem',
         textShadow: '0 2px 12px rgba(0,0,0,0.7)',
       }}
