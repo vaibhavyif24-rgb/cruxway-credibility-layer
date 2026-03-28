@@ -6,10 +6,17 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import CriteriaCarousel from '@/components/CriteriaCarousel';
-import CriteriaPipeline from '@/components/CriteriaPipeline';
+import StickyCardStack from '@/components/StickyCardStack';
 
-import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
-import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
+import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
+import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
+
+const evaluationSteps = [
+  { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
+  { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors. Every dimension is assessed with institutional rigour before we proceed.' },
+  { num: '03', title: 'Diligence', description: 'Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence.' },
+  { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades, not exits. Every term reflects our commitment to lasting partnership.' },
+];
 
 const valueCreationItems = [
   { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
@@ -27,7 +34,7 @@ const OurPlaybook = () => {
     <div className="overflow-x-clip">
       {/* Hero */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
-        <CinematicHero imageSrc={isIndia ? heroIndiaPlaybook : heroUSPlaybook} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
@@ -50,18 +57,23 @@ const OurPlaybook = () => {
         <HeroDivider />
       </section>
 
-      {/* How We Evaluate Opportunities — CriteriaPipeline */}
+      {/* How We Evaluate Opportunities */}
       <section className="relative bg-primary text-primary-foreground overflow-x-clip">
         <DarkSectionEffects />
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
           <FadeIn>
             <SectionLabel light>Deal Process</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-primary-foreground leading-[1.15]">
               How We Evaluate Opportunities
             </h2>
-            <GoldRule className="mt-3 mb-8 md:mb-12" />
+            <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
-          <CriteriaPipeline />
+        </div>
+        <div className="relative">
+          <StickyCardStack
+            cards={evaluationSteps}
+            variant="dark"
+          />
         </div>
       </section>
 
@@ -73,25 +85,25 @@ const OurPlaybook = () => {
         variant="light"
       />
 
-      {/* Value Creation Framework */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-16 md:py-24 lg:py-28 overflow-x-hidden">
+      {/* Value Creation Playbook */}
+      <section className="bg-background px-5 md:px-10 lg:px-16 pb-10 md:pb-14 lg:pb-16 -mt-10 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.2rem)] text-foreground leading-[1.15] mb-2 md:whitespace-nowrap">
-              The Value Creation Framework
+            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] mb-2">
+              How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
               Our four-phase approach to professionalising operations and compounding long-term value.
             </p>
-            <GoldRule className="mt-3 mb-8 md:mb-12" />
+            <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
           <CriteriaCarousel items={valueCreationItems} />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24">
+      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
