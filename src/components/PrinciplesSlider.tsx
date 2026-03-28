@@ -162,7 +162,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
           {/* Celestial SVG illustration — both modes, opacity-adjusted */}
           <div
             className="absolute inset-0 w-full h-full z-[1]"
-            style={{ opacity: isDark ? 1 : 0.25 }}
+            style={{ opacity: isDark ? 1 : 0.35 }}
           >
             <MemoizedCelestial index={index} />
           </div>
