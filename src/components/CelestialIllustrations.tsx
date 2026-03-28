@@ -472,7 +472,8 @@ const GoldenRuleIllustration = React.forwardRef<SVGSVGElement>((_, ref) => (
     <rect x="330" y="472" width="20" height="6" rx="1" fill={GOLD} opacity="0.06" />
     <rect x="450" y="472" width="20" height="6" rx="1" fill={GOLD} opacity="0.06" />
   </svg>
-);
+));
+GoldenRuleIllustration.displayName = 'GoldenRuleIllustration';
 
 /* ─── Export map ─── */
 const illustrations = [

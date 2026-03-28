@@ -33,8 +33,8 @@ const getCardBg = (isDark: boolean, index: number) => {
 
 /* ─── Vignette colors (must match card bg edges) ─── */
 const darkVignette = 'radial-gradient(ellipse at center, transparent 20%, hsl(220, 40%, 5%) 85%)';
-const lightVignetteEven = 'radial-gradient(ellipse at center, transparent 30%, hsl(40, 25%, 96%) 90%)';
-const lightVignetteOdd = 'radial-gradient(ellipse at center, transparent 30%, hsl(38, 18%, 91%) 90%)';
+const lightVignetteEven = 'radial-gradient(ellipse at center, transparent 25%, hsl(40, 25%, 96%) 88%)';
+const lightVignetteOdd = 'radial-gradient(ellipse at center, transparent 25%, hsl(38, 18%, 91%) 88%)';
 
 const getVignette = (isDark: boolean, index: number) => {
   if (isDark) return darkVignette;
