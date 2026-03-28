@@ -177,7 +177,7 @@ const OurFocus = () => {
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
               We evaluate opportunities through a rigorous lens: target sectors, ownership transitions, cultural fit, and enduring competitive advantages.
             </p>
-            <GoldRule className="mt-3 mb-10 md:mb-14" />
+            <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
