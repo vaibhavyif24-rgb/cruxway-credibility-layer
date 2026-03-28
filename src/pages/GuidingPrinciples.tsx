@@ -6,6 +6,7 @@ import AnimatedAccent from '@/components/AnimatedAccent';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesSlider from '@/components/PrinciplesSlider';
 import ScrollRevealText from '@/components/ScrollRevealText';
+import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
 import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
@@ -22,10 +23,12 @@ const principles = [
 
 const GuidingPrinciples = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
+  const isDark = theme === 'dark';
 
   return (
-    <div>
+    <div style={{ overflowX: 'clip' }}>
       {/* Hero — distinct region-specific cinematic photo */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
         <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
@@ -69,7 +72,7 @@ const GuidingPrinciples = () => {
       />
 
       {/* Principles — Scroll-triggered vertical slider */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-6 md:pt-8">
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
@@ -78,7 +81,7 @@ const GuidingPrinciples = () => {
           <GoldRule />
         </FadeIn>
       </div>
-      <PrinciplesSlider principles={principles} />
+      <PrinciplesSlider principles={principles} isDark={isDark} />
 
       {/* CTA */}
       {/* Shimmer divider */}

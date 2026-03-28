@@ -24,13 +24,14 @@ const starSeed = (count: number, seed: number) => {
   return stars;
 };
 
-const StarField = ({ seed, count = 60 }: { seed: number; count?: number }) => (
+const StarField = React.memo(({ seed, count = 60 }: { seed: number; count?: number }) => (
   <>
     {starSeed(count, seed).map((s, i) => (
       <circle key={i} cx={s.x} cy={s.y} r={s.r} fill={WARM_WHITE} opacity={s.o} />
     ))}
   </>
-);
+));
+StarField.displayName = 'StarField';
 
 /* ═══════════════════════════════════════════════════════════
    0 — INTEGRITY: Celestial Compass Rose
