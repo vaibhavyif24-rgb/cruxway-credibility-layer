@@ -23,10 +23,12 @@ const principles = [
 
 const GuidingPrinciples = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
+  const isDark = theme === 'dark';
 
   return (
-    <div>
+    <div style={{ overflowX: 'clip' }}>
       {/* Hero — distinct region-specific cinematic photo */}
       <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
         <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
