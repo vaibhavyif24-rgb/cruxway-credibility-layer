@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import AnimatedAccent from '@/components/AnimatedAccent';
 import CinematicHero from '@/components/CinematicHero';
-import PrinciplesSlider from '@/components/PrinciplesSlider';
+import PrinciplesDeck from '@/components/PrinciplesDeck';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
@@ -81,7 +81,7 @@ const GuidingPrinciples = () => {
           <GoldRule />
         </FadeIn>
       </div>
-      <PrinciplesSlider principles={principles} isDark={isDark} />
+      <PrinciplesDeck principles={principles} isDark={isDark} />
 
       {/* CTA */}
       {/* Shimmer divider */}
