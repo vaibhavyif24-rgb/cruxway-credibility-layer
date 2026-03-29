@@ -253,26 +253,14 @@ const SiteHeader = () => {
                 transition={{ delay: 0.25, duration: 0.35 }}
                 className="flex flex-col items-center gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.05] w-48"
               >
-                {/* Mobile country switcher with flags */}
+                {/* Mobile country switcher — text link */}
                 {region && (
-                  <div className="flex items-center gap-3">
-                    {(['india', 'us'] as const).map((r) => (
-                      <button
-                        key={r}
-                        onClick={() => { handleRegionSwitch(r); setMobileOpen(false); }}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm transition-all duration-200 ${
-                          region === r
-                            ? 'bg-primary-foreground/[0.06] text-primary-foreground/70'
-                            : 'text-primary-foreground/25 active:text-primary-foreground/50'
-                        }`}
-                      >
-                        <FlagForRegion region={r} size={14} />
-                        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.16em]">
-                          {r === 'india' ? 'India' : 'US'}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
+                  <button
+                    onClick={() => { handleRegionSwitch(otherRegion as 'india' | 'us'); setMobileOpen(false); }}
+                    className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-primary-foreground/25 active:text-primary-foreground/50 transition-colors duration-200 py-1"
+                  >
+                    Switch to {otherRegion === 'india' ? 'India' : 'United States'}
+                  </button>
                 )}
                 <Link
                   to="/investor-login"
