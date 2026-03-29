@@ -16,7 +16,7 @@ interface PrinciplesDeckProps {
 
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
-const SCROLL_PER_CARD = 0.8;
+const SCROLL_PER_CARD = 0.65;
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
 const MemoizedCelestial = React.memo(CelestialIllustration);
@@ -50,13 +50,12 @@ interface DeckCardProps {
   total: number;
   isDark: boolean;
   isActive: boolean;
-  stagger: number; // 0 or 0.08
   cardHeight: number;
   isMobile: boolean;
 }
 
 const DeckCard: React.FC<DeckCardProps> = ({
-  principle, index, total, isDark, isActive, stagger, cardHeight, isMobile,
+  principle, index, total, isDark, isActive, cardHeight, isMobile,
 }) => {
   const fxOpacity = isDark ? 1 : 0.55;
   const titleColor = isDark ? '#F8F6F2' : 'hsl(207, 65%, 12%)';
@@ -70,16 +69,18 @@ const DeckCard: React.FC<DeckCardProps> = ({
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-xl"
+      className="absolute inset-0 w-full overflow-hidden rounded-xl"
       style={{
         height: isMobile ? 'auto' : `${cardHeight}px`,
-        minHeight: isMobile ? '50vh' : undefined,
+        minHeight: isMobile ? '55vh' : undefined,
         background: getCardBg(isDark, index),
         boxShadow: isActive ? shadowActive : 'none',
         border: `1px solid ${borderColor}`,
         opacity: isActive ? 1 : 0,
-        transform: `translateY(${isActive ? 0 : 8}px)`,
-        transition: `opacity 0.55s ${EASE} ${stagger}s, transform 0.55s ${EASE} ${stagger}s, box-shadow 0.5s ease`,
+        transform: `translateY(${isActive ? 0 : 12}px)`,
+        transition: `opacity 0.55s ${EASE}, transform 0.55s ${EASE}, box-shadow 0.5s ease`,
+        pointerEvents: isActive ? 'auto' : 'none',
+        zIndex: isActive ? 10 : 1,
       }}
     >
       {/* Background effects */}
@@ -190,19 +191,13 @@ const DeckCard: React.FC<DeckCardProps> = ({
   );
 };
 
-/* ─── PrinciplesDeck ─── */
+/* ─── PrinciplesDeck — Single-slide scroll-driven ─── */
 const PrinciplesDeck: React.FC<PrinciplesDeckProps> = ({ principles, isDark = true }) => {
   const total = principles.length;
   const isMobile = useIsMobile();
   const outerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cardHeight, setCardHeight] = useState(getCardHeight);
-
-  // Group into pairs
-  const pairs: Principle[][] = [];
-  for (let i = 0; i < principles.length; i += 2) {
-    pairs.push(principles.slice(i, i + 2));
-  }
 
   const handleScroll = useCallback(() => {
     const outer = outerRef.current;
@@ -213,10 +208,9 @@ const PrinciplesDeck: React.FC<PrinciplesDeckProps> = ({ principles, isDark = tr
     const scrolled = -(rect.top - STICKY_TOP);
     const scrollableRange = Math.max(1, outerHeight - viewportHeight + STICKY_TOP);
     const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-    const intervalCount = Math.max(pairs.length - 1, 1);
-    const idx = Math.min(pairs.length - 1, Math.round(progress * intervalCount));
+    const idx = Math.min(total - 1, Math.round(progress * (total - 1)));
     setActiveIndex(idx);
-  }, [pairs.length]);
+  }, [total]);
 
   useEffect(() => {
     const update = () => setCardHeight(getCardHeight());
@@ -241,63 +235,42 @@ const PrinciplesDeck: React.FC<PrinciplesDeckProps> = ({ principles, isDark = tr
 
   useEffect(() => { handleScroll(); }, [cardHeight, handleScroll]);
 
-  const scrollStepPx = (cardHeight + STICKY_TOP) * SCROLL_PER_CARD;
-  const outerHeight = cardHeight + Math.max(pairs.length - 1, 0) * scrollStepPx;
-
-  // Mobile: card height for each card in the pair
-  const mobileCardH = Math.min(window.innerHeight * 0.42, 360);
-  const mobileStickyH = mobileCardH * 2 + 16; // 2 cards + gap
-  const mobileOuterH = mobileStickyH + Math.max(pairs.length - 1, 0) * (mobileStickyH * SCROLL_PER_CARD);
+  const mobileCardH = Math.min(window.innerHeight * 0.55, 400);
+  const scrollStepPx = ((isMobile ? mobileCardH : cardHeight) + STICKY_TOP) * SCROLL_PER_CARD;
+  const outerHeight = (isMobile ? mobileCardH : cardHeight) + Math.max(total - 1, 0) * scrollStepPx;
 
   return (
     <div
       ref={outerRef}
-      className="relative px-5 md:px-10 lg:px-16 pt-4 md:pt-6"
-      style={{ height: isMobile ? `${mobileOuterH}px` : `${outerHeight}px` }}
+      className="relative px-5 md:px-10 lg:px-16 pt-2 md:pt-4"
+      style={{ height: `${outerHeight}px` }}
     >
       <div
-        className="sticky max-w-[1080px] mx-auto"
+        className="sticky max-w-[720px] mx-auto"
         style={{
           top: `${STICKY_TOP}px`,
-          height: isMobile ? `${mobileStickyH}px` : `${cardHeight}px`,
+          height: isMobile ? `${mobileCardH}px` : `${cardHeight}px`,
         }}
       >
-        {/* Pairs as stacked layers */}
-        {pairs.map((pair, pairIdx) => {
-          const isActive = pairIdx === activeIndex;
-          const globalOffset = pairIdx * 2; // base index for this pair
-
-          return (
-            <div
-              key={pairIdx}
-              className="absolute inset-0"
-              style={{
-                pointerEvents: isActive ? 'auto' : 'none',
-                zIndex: isActive ? 10 : 1,
-              }}
-            >
-              <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-2 gap-3'} h-full`}>
-                {pair.map((principle, cardIdx) => (
-                  <DeckCard
-                    key={globalOffset + cardIdx}
-                    principle={principle}
-                    index={globalOffset + cardIdx}
-                    total={total}
-                    isDark={isDark}
-                    isActive={isActive}
-                    stagger={cardIdx * 0.08}
-                    cardHeight={isMobile ? mobileCardH : cardHeight}
-                    isMobile={isMobile}
-                  />
-                ))}
-              </div>
-            </div>
-          );
-        })}
+        {/* Single card layers */}
+        <div className="relative w-full h-full">
+          {principles.map((principle, idx) => (
+            <DeckCard
+              key={idx}
+              principle={principle}
+              index={idx}
+              total={total}
+              isDark={isDark}
+              isActive={idx === activeIndex}
+              cardHeight={isMobile ? mobileCardH : cardHeight}
+              isMobile={isMobile}
+            />
+          ))}
+        </div>
 
         {/* Dot indicators */}
         <div className="pointer-events-none absolute right-2 md:right-4 top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2">
-          {pairs.map((_, i) => (
+          {principles.map((_, i) => (
             <div
               key={i}
               className="rounded-full transition-all duration-500"

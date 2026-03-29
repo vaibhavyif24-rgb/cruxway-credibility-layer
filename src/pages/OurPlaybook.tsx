@@ -58,12 +58,12 @@ const OurPlaybook = () => {
       </section>
 
       {/* How We Evaluate Opportunities */}
-      <section className="relative bg-primary text-primary-foreground overflow-x-clip">
-        <DarkSectionEffects />
+      <section className={`relative overflow-x-clip ${theme === 'dark' ? 'bg-primary text-primary-foreground' : 'bg-background text-foreground'}`}>
+        {theme === 'dark' && <DarkSectionEffects />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16">
           <FadeIn>
-            <SectionLabel light>Deal Process</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-primary-foreground leading-[1.15]">
+            <SectionLabel light={theme === 'dark'}>Deal Process</SectionLabel>
+            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
               How We Evaluate Opportunities
             </h2>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
@@ -72,7 +72,7 @@ const OurPlaybook = () => {
         <div className="relative">
           <StickyCardStack
             cards={evaluationSteps}
-            variant="dark"
+            variant={theme === 'dark' ? 'dark' : 'light'}
           />
         </div>
       </section>
