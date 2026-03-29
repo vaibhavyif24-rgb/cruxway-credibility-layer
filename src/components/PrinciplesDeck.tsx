@@ -16,12 +16,13 @@ interface PrinciplesDeckProps {
 
 /* ─── Constants ─── */
 const STICKY_TOP = 88;
-const SCROLL_PER_CARD = 0.65;
+const SCROLL_PER_CARD = 0.5;
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
 const MemoizedCelestial = React.memo(CelestialIllustration);
 
 const getCardHeight = () => Math.min(window.innerHeight * 0.65, 480);
+const getMobileCardHeight = () => Math.min(window.innerHeight * 0.6, 420);
 
 /* ─── Alternating palettes ─── */
 const darkBgEven = 'linear-gradient(135deg, hsl(220, 40%, 8%) 0%, hsl(225, 45%, 5%) 50%, hsl(215, 35%, 10%) 100%)';
@@ -58,6 +59,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
   principle, index, total, isDark, isActive, cardHeight, isMobile,
 }) => {
   const fxOpacity = isDark ? 1 : 0.55;
+  const shimmerOpacity = isDark ? 0.15 * fxOpacity : 0.25 * fxOpacity;
   const titleColor = isDark ? '#F8F6F2' : 'hsl(207, 65%, 12%)';
   const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(210, 8%, 38%)';
   const indexColor = isDark ? 'hsl(38, 45%, 55%, 0.5)' : 'hsl(38, 48%, 42%, 0.6)';
@@ -77,7 +79,9 @@ const DeckCard: React.FC<DeckCardProps> = ({
         boxShadow: isActive ? shadowActive : 'none',
         border: `1px solid ${borderColor}`,
         opacity: isActive ? 1 : 0,
-        transform: `translateY(${isActive ? 0 : 12}px)`,
+        transform: isActive
+          ? 'translateY(0) scale(1) rotate(0deg)'
+          : 'translateY(20px) scale(0.97) rotate(0.5deg)',
         transition: `opacity 0.55s ${EASE}, transform 0.55s ${EASE}, box-shadow 0.5s ease`,
         pointerEvents: isActive ? 'auto' : 'none',
         zIndex: isActive ? 10 : 1,
@@ -120,7 +124,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
         <div
           className="absolute top-1/2 left-0 w-full h-px shimmer-effect"
           style={{
-            background: `linear-gradient(90deg, transparent, hsl(38, 45%, 55%, ${0.15 * fxOpacity}), transparent)`,
+            background: `linear-gradient(90deg, transparent, hsl(38, 45%, 55%, ${shimmerOpacity}), transparent)`,
             animationDuration: '6s',
           }}
         />
@@ -152,7 +156,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
       <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-5 py-8">
         <motion.div
           className="flex flex-col items-center max-w-[440px]"
-          animate={isActive ? { y: [0, -4, 0] } : { y: 0 }}
+          animate={isActive ? { y: [0, -6, 0] } : { y: 0 }}
           transition={isActive ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.3 }}
         >
           <span
@@ -235,24 +239,24 @@ const PrinciplesDeck: React.FC<PrinciplesDeckProps> = ({ principles, isDark = tr
 
   useEffect(() => { handleScroll(); }, [cardHeight, handleScroll]);
 
-  const mobileCardH = Math.min(window.innerHeight * 0.55, 400);
-  const scrollStepPx = ((isMobile ? mobileCardH : cardHeight) + STICKY_TOP) * SCROLL_PER_CARD;
-  const outerHeight = (isMobile ? mobileCardH : cardHeight) + Math.max(total - 1, 0) * scrollStepPx;
+  const mobileCardH = getMobileCardHeight();
+  const stickyH = isMobile ? mobileCardH : cardHeight;
+  const scrollStepPx = stickyH * SCROLL_PER_CARD;
+  const outerHeight = stickyH + Math.max(total - 1, 0) * scrollStepPx;
 
   return (
     <div
       ref={outerRef}
-      className="relative px-5 md:px-10 lg:px-16 pt-2 md:pt-4"
+      className="relative px-5 md:px-10 lg:px-16 pt-2 md:pt-3"
       style={{ height: `${outerHeight}px` }}
     >
       <div
         className="sticky max-w-[720px] mx-auto"
         style={{
           top: `${STICKY_TOP}px`,
-          height: isMobile ? `${mobileCardH}px` : `${cardHeight}px`,
+          height: `${stickyH}px`,
         }}
       >
-        {/* Single card layers */}
         <div className="relative w-full h-full">
           {principles.map((principle, idx) => (
             <DeckCard
@@ -262,7 +266,7 @@ const PrinciplesDeck: React.FC<PrinciplesDeckProps> = ({ principles, isDark = tr
               total={total}
               isDark={isDark}
               isActive={idx === activeIndex}
-              cardHeight={isMobile ? mobileCardH : cardHeight}
+              cardHeight={stickyH}
               isMobile={isMobile}
             />
           ))}
