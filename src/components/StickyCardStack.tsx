@@ -24,10 +24,10 @@ const getCardHeight = () => {
 
 /* ─── Background palettes ─── */
 const lightBgs = [
-  'hsl(220 8% 18%)',
+  'hsl(40 25% 96%)',
   'hsl(40 30% 96%)',
   'hsl(38 22% 90%)',
-  'hsl(207 55% 14%)',
+  'hsl(38 22% 90%)',
 ];
 
 const darkBgs = [
@@ -38,10 +38,10 @@ const darkBgs = [
 ];
 
 const lightTextColors = [
-  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(38 48% 52%)' },
   { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
   { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
-  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(38 48% 52%)' },
+  { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
+  { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
 ];
 
 const darkTextColors = {

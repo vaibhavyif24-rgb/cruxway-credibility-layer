@@ -161,7 +161,7 @@ const CinematicScrollReveal = () => {
         </section>
 
         <div
-          className="relative overflow-hidden"
+          className="relative overflow-hidden mt-4"
           style={{ padding: '2.5rem 1.25rem 3rem' }}
         >
           <div className="absolute inset-0" style={{ zIndex: 0 }}>
@@ -194,7 +194,7 @@ const CinematicScrollReveal = () => {
   const currentBorderRadius = 50 * (1 - imageProgress);
   const textIsLight = imageProgress > 0.3;
   const taglineTop = 22 - (sectorProgress * 20);
-  const overlayOffset = 22;
+  const overlayOffset = 28;
   const circleTop = 62 + (50 - 62) * imageProgress;
 
   return (
