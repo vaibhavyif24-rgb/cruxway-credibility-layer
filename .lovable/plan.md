@@ -1,40 +1,66 @@
+## Plan: Five Issues — Text Positioning, Country Flag Switcher, Mobile Dark Mode, Principles Mobile, Theme Consistency
+
+### 1. India CinematicScrollReveal — Text Overlap Fix
+
+**Problem**: The tagline "Building enduring platforms across India's lower middle market" overlaps with "Sectors We Look At" because the India tagline is longer than the US version, causing collision at the same `taglineTop` + `overlayOffset` positioning.
+
+**Fix in `CinematicScrollReveal.tsx**`:
+
+- Change initial `taglineTop` from `26` to `22` (move text higher)
+- Increase `overlayOffset` from `18` to `22` to give more vertical space between tagline and sectors
+- This matches the visual balance of the US sheet
+
+### 2. Country Flag Indicator in Desktop Header
+
+**Add to `SiteHeader.tsx**`:
+
+- Place a premium country flag indicator between the nav items and the theme toggle (after the vertical divider, before the Moon/Sun icon)
+- Use inline SVG flag icons (India: saffron-white-green tricolor, US: stars-and-stripes simplified) — tiny, 16x12px, with rounded corners and subtle border
+- On click, show a minimal dropdown (using `AnimatePresence` from framer-motion) with both country options showing flag + label
+- Clicking a country navigates to `/${otherRegion}` and calls `setRegion`
+- Styling: `text-primary-foreground/40` opacity, gold hover accent, consistent with existing nav aesthetics
+- On mobile menu: replace the current "Switch to India/United States" text link with flag + label row
+
+### 3. Mobile Homepage — Dark Mode Whitespace Fix
+
+**Problem**: Right-side whitespace gap on mobile homepages in dark mode.
+
+**Fix in `Home.tsx**`:
+
+- Add `overflow-x: clip` to the root `<div>` wrapper (same pattern as `OurFocus.tsx` and `GuidingPrinciples.tsx` which already have it)
+- This prevents `DarkSectionEffects` floating orbs and `StickyCardStack` from causing horizontal overflow
+
+### 4. Our Principles — Mobile Layout Fix
+
+**Problem**: On mobile (390px), the sticky card stack `PrinciplesSlider` creates layout breaks because cards use `position: sticky` with fixed heights, which doesn't work well on small screens.
+
+**Fix in `PrinciplesSlider.tsx**`:
+
+- On mobile (`< 768px`), switch from sticky-card-stack to a simpler vertical scroll layout:
+  - Remove `position: sticky` and reduce card height from `min(75vh, 520px)` to `auto` with `min-height: 60vh`
+  - Cards stack normally with margin between them
+  - Content is always visible (no IntersectionObserver gating on mobile)
+  - This mirrors the "pitch deck" feel but without the sticky positioning that breaks on small screens
+- Keep all animations, illustrations, and alternating backgrounds
+- Desktop remains unchanged (sticky card stack)
+
+### 5. Theme Consistency — Light Mode Dark Elements Fix
+
+**Problem**: Several sections use hardcoded dark colors even in light mode (e.g., `hero-gradient-animated` class on header always renders dark navy).
+
+**Fixes**:
+
+- `DarkSectionEffects.tsx`: Add theme awareness — in light mode, reduce orb/particle opacity to near-zero or use light-appropriate colors. Currently the floating navy orbs (`hsl(207 50% 18% / 0.3)`) and shimmer effects render against light backgrounds inappropriately
+- `ScrollRevealText.tsx`: The `variant="dark"` sections use `bg-primary` which maps to dark navy in light mode. This is intentional (dark band). But add a subtle gradient transition border at top/bottom edges for smoother visual flow in light mode
+- `index.css`: The `hero-gradient-animated` utility uses `--prussian` and `--navy-deep` which are always dark navy. Since the header and CTA sections intentionally stay dark in both modes, this is correct. No change needed here.
+
+### Files Modified
 
 
-## Plan: Fix Principles Cards — Illustrations, Alternating Dark BG, Transitions & Console Errors
-
-### Issues Found
-
-1. **Console ref warnings**: `React.memo` on `CelestialIllustration` wraps plain function components (`ActionIllustration`, `GoldenRuleIllustration`, etc.) — React dev mode warns about refs. Each illustration needs `forwardRef`.
-2. **Current code already has**: alternating light backgrounds, illustrations in both modes, staggered transitions — these are working correctly in the current `PrinciplesSlider.tsx`.
-3. **Dark mode alternating backgrounds already defined** (`darkBgEven`/`darkBgOdd`) — already functional.
-
-### Changes
-
-#### A. `CelestialIllustrations.tsx` — Fix ref warnings
-
-Wrap all 6 illustration components (`IntegrityIllustration`, `LeadershipIllustration`, `HumilityIllustration`, `GritIllustration`, `ActionIllustration`, `GoldenRuleIllustration`) with `React.forwardRef` so `React.memo` on the parent doesn't trigger warnings. Each becomes:
-
-```tsx
-const IntegrityIllustration = forwardRef<SVGSVGElement>((_, ref) => (
-  <svg ref={ref} viewBox="0 0 800 600" ...>
-```
-
-Also wrap `StarField` with `forwardRef` since it's rendered inside these SVGs and `React.memo` propagates the ref check.
-
-#### B. `PrinciplesSlider.tsx` — Minor polish
-
-- Increase light-mode illustration opacity from `0.25` to `0.35` for better visibility
-- Increase light-mode effect opacity multiplier from `0.4` to `0.55` for more visible effects
-- Slightly stronger light-mode vignette (reduce transparent center from 30% to 25%) so illustrations blend more naturally
-
-#### C. No other changes needed
-
-The alternating dark backgrounds, staggered transitions (0.08s→0.12s→0.18s→0.24s), and theme-aware text colors are already correctly implemented.
-
-### Files
-
-| File | Change |
-|---|---|
-| `CelestialIllustrations.tsx` | Wrap all 6 illustrations + `StarField` with `forwardRef` to fix console warnings |
-| `PrinciplesSlider.tsx` | Bump light-mode illustration opacity to 0.35, effects multiplier to 0.55, tighten vignette |
-
+| File                        | Changes                                                                           |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `CinematicScrollReveal.tsx` | Adjust `taglineTop` from 26→22, `overlayOffset` from 18→22                        |
+| `SiteHeader.tsx`            | Add country flag indicator with dropdown switcher (desktop + mobile)              |
+| `Home.tsx`                  | Add `overflow-x: clip` to root div                                                |
+| `PrinciplesSlider.tsx`      | Mobile-specific layout: disable sticky, auto-height cards, always-visible content |
+| `DarkSectionEffects.tsx`    | Theme-aware opacity reduction for light mode backgrounds                          |
