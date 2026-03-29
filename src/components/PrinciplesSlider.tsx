@@ -248,6 +248,7 @@ PrincipleCard.displayName = 'PrincipleCard';
 /* ─── PrinciplesSlider ─── */
 const PrinciplesSlider = ({ principles, isDark = true }: PrinciplesSliderProps) => {
   const total = principles.length;
+  const isMobile = useIsMobile();
 
   return (
     <div className="relative px-5 md:px-10 lg:px-16 pt-4 md:pt-6 pb-6 md:pb-10">
@@ -260,6 +261,7 @@ const PrinciplesSlider = ({ principles, isDark = true }: PrinciplesSliderProps) 
             total={total}
             stickyTop={STICKY_BASE + i * STICKY_STEP}
             isDark={isDark}
+            isMobile={isMobile}
           />
         ))}
         <div className="h-[80px] md:h-[50px]" />

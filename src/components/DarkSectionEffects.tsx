@@ -58,7 +58,7 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
             animate={{
               y: [0, -30, -10, -40, 0],
               x: [0, 10, -5, 15, 0],
-              opacity: [0, 0.25, 0.15, 0.3, 0],
+              opacity: [0, 0.25 * fx, 0.15 * fx, 0.3 * fx, 0],
               scale: [0, 1, 0.8, 1.2, 0],
             }}
             transition={{

@@ -193,8 +193,8 @@ const CinematicScrollReveal = () => {
   const currentScale = 1 + (targetScale - 1) * imageProgress;
   const currentBorderRadius = 50 * (1 - imageProgress);
   const textIsLight = imageProgress > 0.3;
-  const taglineTop = 26 - (sectorProgress * 20);
-  const overlayOffset = 18;
+  const taglineTop = 22 - (sectorProgress * 20);
+  const overlayOffset = 22;
   const circleTop = 62 + (50 - 62) * imageProgress;
 
   return (
