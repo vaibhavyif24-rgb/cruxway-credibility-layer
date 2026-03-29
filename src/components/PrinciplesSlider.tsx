@@ -51,12 +51,13 @@ interface PrincipleCardProps {
   isDark: boolean;
 }
 
-const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
-  ({ principle, index, total, stickyTop, isDark }, _forwardedRef) => {
+const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile?: boolean }>(
+  ({ principle, index, total, stickyTop, isDark, isMobile = false }, _forwardedRef) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [isActive, setIsActive] = useState(index === 0);
+    const [isActive, setIsActive] = useState(isMobile || index === 0);
 
     useEffect(() => {
+      if (isMobile) { setIsActive(true); return; }
       const el = ref.current;
       if (!el) return;
       const observer = new IntersectionObserver(
@@ -65,11 +66,12 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
       );
       observer.observe(el);
       return () => observer.disconnect();
-    }, []);
+    }, [isMobile]);
 
     // will-change cleanup
     const [isNearViewport, setIsNearViewport] = useState(false);
     useEffect(() => {
+      if (isMobile) return;
       const el = ref.current;
       if (!el) return;
       const observer = new IntersectionObserver(
@@ -78,7 +80,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
       );
       observer.observe(el);
       return () => observer.disconnect();
-    }, []);
+    }, [isMobile]);
 
     const titleColor = isDark ? '#F8F6F2' : 'hsl(207, 65%, 12%)';
     const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(210, 8%, 38%)';
