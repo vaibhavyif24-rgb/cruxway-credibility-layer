@@ -24,10 +24,10 @@ const getCardHeight = () => {
 
 /* ─── Background palettes ─── */
 const lightBgs = [
-  'hsl(220 8% 18%)',
+  'hsl(40 25% 96%)',
   'hsl(40 30% 96%)',
   'hsl(38 22% 90%)',
-  'hsl(207 55% 14%)',
+  'hsl(38 22% 90%)',
 ];
 
 const darkBgs = [
