@@ -1,16 +1,42 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+/* ─── Minimal SVG flag icons ─── */
+const IndiaFlag = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size * 0.67} viewBox="0 0 24 16" className="rounded-[2px]" style={{ border: '0.5px solid rgba(255,255,255,0.08)' }}>
+    <rect width="24" height="5.33" fill="#FF9933" />
+    <rect y="5.33" width="24" height="5.34" fill="#FFFFFF" />
+    <rect y="10.67" width="24" height="5.33" fill="#138808" />
+    <circle cx="12" cy="8" r="1.8" fill="none" stroke="#000080" strokeWidth="0.4" />
+  </svg>
+);
+
+const USFlag = ({ size = 16 }: { size?: number }) => (
+  <svg width={size} height={size * 0.67} viewBox="0 0 24 16" className="rounded-[2px]" style={{ border: '0.5px solid rgba(255,255,255,0.08)' }}>
+    <rect width="24" height="16" fill="#B22234" />
+    {[1, 3, 5, 7, 9, 11].map(i => (
+      <rect key={i} y={i * (16 / 13)} width="24" height={16 / 13} fill="#FFFFFF" />
+    ))}
+    <rect width="9.6" height="8.6" fill="#3C3B6E" />
+  </svg>
+);
+
+const FlagForRegion = ({ region, size }: { region: string; size?: number }) =>
+  region === 'india' ? <IndiaFlag size={size} /> : <USFlag size={size} />;
 
 const SiteHeader = () => {
   const { region, setRegion } = useRegion();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [flagOpen, setFlagOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const flagRef = useRef<HTMLDivElement>(null);
   const prefix = `/${region}`;
 
   useEffect(() => {
@@ -19,12 +45,22 @@ const SiteHeader = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
+  useEffect(() => { setMobileOpen(false); setFlagOpen(false); }, [location.pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
+
+  // Close flag dropdown on outside click
+  useEffect(() => {
+    if (!flagOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (flagRef.current && !flagRef.current.contains(e.target as Node)) setFlagOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [flagOpen]);
 
   const navItems = [
     { label: 'Home', path: prefix },
@@ -37,6 +73,12 @@ const SiteHeader = () => {
 
   const isActive = (path: string) => location.pathname === path;
   const otherRegion = region === 'india' ? 'us' : 'india';
+
+  const handleRegionSwitch = (target: 'india' | 'us') => {
+    setRegion(target);
+    navigate(`/${target}`);
+    setFlagOpen(false);
+  };
 
   return (
     <>
@@ -82,6 +124,51 @@ const SiteHeader = () => {
               </div>
 
               <div className="w-px h-3.5 bg-primary-foreground/[0.06] mx-4" />
+
+              {/* Country Flag Switcher */}
+              {region && (
+                <div ref={flagRef} className="relative mr-3">
+                  <button
+                    onClick={() => setFlagOpen(!flagOpen)}
+                    className="flex items-center gap-1.5 p-1.5 rounded-sm text-primary-foreground/40 hover:text-primary-foreground/70 transition-all duration-200 hover:bg-primary-foreground/[0.03]"
+                    aria-label="Switch country"
+                  >
+                    <FlagForRegion region={region} size={16} />
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="none" className="opacity-40">
+                      <path d="M1 1L4 4L7 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <AnimatePresence>
+                    {flagOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -4, scale: 0.97 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                        transition={{ duration: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                        className="absolute top-full right-0 mt-1.5 min-w-[140px] rounded-md border border-primary-foreground/[0.06] shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]"
+                        style={{ background: 'hsl(215, 50%, 8%)' }}
+                      >
+                        {(['india', 'us'] as const).map((r) => (
+                          <button
+                            key={r}
+                            onClick={() => handleRegionSwitch(r)}
+                            className={`flex items-center gap-2.5 w-full px-3 py-2 text-left transition-colors duration-150 first:rounded-t-md last:rounded-b-md ${
+                              region === r
+                                ? 'bg-primary-foreground/[0.06] text-primary-foreground/80'
+                                : 'text-primary-foreground/40 hover:text-primary-foreground/70 hover:bg-primary-foreground/[0.03]'
+                            }`}
+                          >
+                            <FlagForRegion region={r} size={14} />
+                            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.12em]">
+                              {r === 'india' ? 'India' : 'United States'}
+                            </span>
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              )}
 
               {/* Dark mode toggle */}
               <button
@@ -166,13 +253,27 @@ const SiteHeader = () => {
                 transition={{ delay: 0.25, duration: 0.35 }}
                 className="flex flex-col items-center gap-4 mt-8 pt-6 border-t border-primary-foreground/[0.05] w-48"
               >
-                <Link
-                  to={`/${otherRegion}`}
-                  onClick={() => setRegion(otherRegion)}
-                  className="font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-primary-foreground/20 active:text-primary-foreground/45"
-                >
-                  Switch to {otherRegion === 'india' ? 'India' : 'United States'}
-                </Link>
+                {/* Mobile country switcher with flags */}
+                {region && (
+                  <div className="flex items-center gap-3">
+                    {(['india', 'us'] as const).map((r) => (
+                      <button
+                        key={r}
+                        onClick={() => { handleRegionSwitch(r); setMobileOpen(false); }}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-sm transition-all duration-200 ${
+                          region === r
+                            ? 'bg-primary-foreground/[0.06] text-primary-foreground/70'
+                            : 'text-primary-foreground/25 active:text-primary-foreground/50'
+                        }`}
+                      >
+                        <FlagForRegion region={r} size={14} />
+                        <span className="font-sans text-[9px] font-medium uppercase tracking-[0.16em]">
+                          {r === 'india' ? 'India' : 'US'}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <Link
                   to="/investor-login"
                   className="btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-7 py-2.5 border border-gold/12 text-gold/45 active:text-gold/70"

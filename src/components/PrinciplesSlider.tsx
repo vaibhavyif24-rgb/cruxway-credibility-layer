@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, forwardRef } from 'react';
 import { GoldRule } from '@/components/ui/Section';
 import CelestialIllustration from '@/components/CelestialIllustrations';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Principle {
   t: string;
@@ -50,12 +51,13 @@ interface PrincipleCardProps {
   isDark: boolean;
 }
 
-const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
-  ({ principle, index, total, stickyTop, isDark }, _forwardedRef) => {
+const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile?: boolean }>(
+  ({ principle, index, total, stickyTop, isDark, isMobile = false }, _forwardedRef) => {
     const ref = useRef<HTMLDivElement>(null);
-    const [isActive, setIsActive] = useState(index === 0);
+    const [isActive, setIsActive] = useState(isMobile || index === 0);
 
     useEffect(() => {
+      if (isMobile) { setIsActive(true); return; }
       const el = ref.current;
       if (!el) return;
       const observer = new IntersectionObserver(
@@ -64,11 +66,12 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
       );
       observer.observe(el);
       return () => observer.disconnect();
-    }, []);
+    }, [isMobile]);
 
     // will-change cleanup
     const [isNearViewport, setIsNearViewport] = useState(false);
     useEffect(() => {
+      if (isMobile) return;
       const el = ref.current;
       if (!el) return;
       const observer = new IntersectionObserver(
@@ -77,7 +80,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
       );
       observer.observe(el);
       return () => observer.disconnect();
-    }, []);
+    }, [isMobile]);
 
     const titleColor = isDark ? '#F8F6F2' : 'hsl(207, 65%, 12%)';
     const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(210, 8%, 38%)';
@@ -97,10 +100,10 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
     return (
       <div
         ref={ref}
-        className="mb-3"
+        className={isMobile ? 'mb-4' : 'mb-3'}
         style={{
-          position: 'sticky',
-          top: `${stickyTop}px`,
+          position: isMobile ? 'relative' : 'sticky',
+          top: isMobile ? undefined : `${stickyTop}px`,
           zIndex: index + 1,
           willChange: isNearViewport ? 'transform' : 'auto',
         }}
@@ -108,7 +111,8 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps>(
         <div
           className="relative w-full overflow-hidden rounded-xl transition-shadow duration-500"
           style={{
-            height: CARD_HEIGHT,
+            height: isMobile ? 'auto' : CARD_HEIGHT,
+            minHeight: isMobile ? '55vh' : undefined,
             background: getCardBg(isDark, index),
             boxShadow: isActive ? shadowActive : shadowInactive,
             border: `1px solid ${borderColor}`,
@@ -244,6 +248,7 @@ PrincipleCard.displayName = 'PrincipleCard';
 /* ─── PrinciplesSlider ─── */
 const PrinciplesSlider = ({ principles, isDark = true }: PrinciplesSliderProps) => {
   const total = principles.length;
+  const isMobile = useIsMobile();
 
   return (
     <div className="relative px-5 md:px-10 lg:px-16 pt-4 md:pt-6 pb-6 md:pb-10">
@@ -256,6 +261,7 @@ const PrinciplesSlider = ({ principles, isDark = true }: PrinciplesSliderProps) 
             total={total}
             stickyTop={STICKY_BASE + i * STICKY_STEP}
             isDark={isDark}
+            isMobile={isMobile}
           />
         ))}
         <div className="h-[80px] md:h-[50px]" />

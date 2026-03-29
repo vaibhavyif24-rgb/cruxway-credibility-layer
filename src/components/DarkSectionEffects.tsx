@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 /**
  * Animated background effects for dark/blue sections.
  * Renders floating orbs, shimmer lines, animated particles,
  * and subtle geometric accents for depth and life.
+ * Theme-aware: reduces intensity in light mode for clean contrast.
  */
 const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'hero' | 'cta' }>(
   ({ variant = 'default' }, ref) => {
+    const { theme } = useTheme();
+    // These effects sit inside intentionally-dark sections (header, CTA, hero)
+    // so they should always render, but with slightly reduced intensity in light mode
+    const fx = theme === 'light' ? 0.6 : 1;
     return (
       <div ref={ref}>
         {/* Base gradient overlay */}
@@ -28,7 +34,7 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
         {/* Central pulsing glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full pointer-events-none pulse-glow-effect"
-          style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 1), transparent 60%)' }}
+          style={{ background: `radial-gradient(circle, hsl(38 45% 55% / ${fx}), transparent 60%)` }}
         />
 
         {/* Horizontal shimmer line - upper */}
@@ -52,7 +58,7 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
             animate={{
               y: [0, -30, -10, -40, 0],
               x: [0, 10, -5, 15, 0],
-              opacity: [0, 0.25, 0.15, 0.3, 0],
+              opacity: [0, 0.25 * fx, 0.15 * fx, 0.3 * fx, 0],
               scale: [0, 1, 0.8, 1.2, 0],
             }}
             transition={{
