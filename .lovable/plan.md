@@ -1,66 +1,72 @@
-## Plan: Five Issues — Text Positioning, Country Flag Switcher, Mobile Dark Mode, Principles Mobile, Theme Consistency
-
-### 1. India CinematicScrollReveal — Text Overlap Fix
-
-**Problem**: The tagline "Building enduring platforms across India's lower middle market" overlaps with "Sectors We Look At" because the India tagline is longer than the US version, causing collision at the same `taglineTop` + `overlayOffset` positioning.
-
-**Fix in `CinematicScrollReveal.tsx**`:
-
-- Change initial `taglineTop` from `26` to `22` (move text higher)
-- Increase `overlayOffset` from `18` to `22` to give more vertical space between tagline and sectors
-- This matches the visual balance of the US sheet
-
-### 2. Country Flag Indicator in Desktop Header
-
-**Add to `SiteHeader.tsx**`:
-
-- Place a premium country flag indicator between the nav items and the theme toggle (after the vertical divider, before the Moon/Sun icon)
-- Use inline SVG flag icons (India: saffron-white-green tricolor, US: stars-and-stripes simplified) — tiny, 16x12px, with rounded corners and subtle border
-- On click, show a minimal dropdown (using `AnimatePresence` from framer-motion) with both country options showing flag + label
-- Clicking a country navigates to `/${otherRegion}` and calls `setRegion`
-- Styling: `text-primary-foreground/40` opacity, gold hover accent, consistent with existing nav aesthetics
-- On mobile menu: replace the current "Switch to India/United States" text link with flag + label row
-
-### 3. Mobile Homepage — Dark Mode Whitespace Fix
-
-**Problem**: Right-side whitespace gap on mobile homepages in dark mode.
-
-**Fix in `Home.tsx**`:
-
-- Add `overflow-x: clip` to the root `<div>` wrapper (same pattern as `OurFocus.tsx` and `GuidingPrinciples.tsx` which already have it)
-- This prevents `DarkSectionEffects` floating orbs and `StickyCardStack` from causing horizontal overflow
-
-### 4. Our Principles — Mobile Layout Fix
-
-**Problem**: On mobile (390px), the sticky card stack `PrinciplesSlider` creates layout breaks because cards use `position: sticky` with fixed heights, which doesn't work well on small screens.
-
-**Fix in `PrinciplesSlider.tsx**`:
-
-- On mobile (`< 768px`), switch from sticky-card-stack to a simpler vertical scroll layout:
-  - Remove `position: sticky` and reduce card height from `min(75vh, 520px)` to `auto` with `min-height: 60vh`
-  - Cards stack normally with margin between them
-  - Content is always visible (no IntersectionObserver gating on mobile)
-  - This mirrors the "pitch deck" feel but without the sticky positioning that breaks on small screens
-- Keep all animations, illustrations, and alternating backgrounds
-- Desktop remains unchanged (sticky card stack)
-
-### 5. Theme Consistency — Light Mode Dark Elements Fix
-
-**Problem**: Several sections use hardcoded dark colors even in light mode (e.g., `hero-gradient-animated` class on header always renders dark navy).
-
-**Fixes**:
-
-- `DarkSectionEffects.tsx`: Add theme awareness — in light mode, reduce orb/particle opacity to near-zero or use light-appropriate colors. Currently the floating navy orbs (`hsl(207 50% 18% / 0.3)`) and shimmer effects render against light backgrounds inappropriately
-- `ScrollRevealText.tsx`: The `variant="dark"` sections use `bg-primary` which maps to dark navy in light mode. This is intentional (dark band). But add a subtle gradient transition border at top/bottom edges for smoother visual flow in light mode
-- `index.css`: The `hero-gradient-animated` utility uses `--prussian` and `--navy-deep` which are always dark navy. Since the header and CTA sections intentionally stay dark in both modes, this is correct. No change needed here.
-
-### Files Modified
 
 
-| File                        | Changes                                                                           |
-| --------------------------- | --------------------------------------------------------------------------------- |
-| `CinematicScrollReveal.tsx` | Adjust `taglineTop` from 26→22, `overlayOffset` from 18→22                        |
-| `SiteHeader.tsx`            | Add country flag indicator with dropdown switcher (desktop + mobile)              |
-| `Home.tsx`                  | Add `overflow-x: clip` to root div                                                |
-| `PrinciplesSlider.tsx`      | Mobile-specific layout: disable sticky, auto-height cards, always-visible content |
-| `DarkSectionEffects.tsx`    | Theme-aware opacity reduction for light mode backgrounds                          |
+## Plan: Principles Section Redesign — Paired Deck Layout + Mobile QA
+
+### What's changing
+
+Replace the current single-card sticky stack in "What We Stand For" with a **scroll-driven paired deck** that shows 2 principles side-by-side (3 pairs total), transitioning simultaneously as the user scrolls. On mobile, stack vertically as a 1-column pair.
+
+### Architecture
+
+**New component: `PrinciplesDeck.tsx`** (replaces `PrinciplesSlider`)
+
+```text
+┌─────────────────────────────────────────────┐
+│  ┌──────────────────┐ ┌──────────────────┐  │
+│  │  01 / 06         │ │  02 / 06         │  │
+│  │  Integrity       │ │  Servant         │  │
+│  │  ─── gold rule   │ │  Leadership      │  │
+│  │  Description...  │ │  ─── gold rule   │  │
+│  │                  │ │  Description...  │  │
+│  │  [celestial bg]  │ │  [celestial bg]  │  │
+│  └──────────────────┘ └──────────────────┘  │
+│                 • • •                       │
+└─────────────────────────────────────────────┘
+  ↕ scroll triggers pair 1→2→3 transition
+```
+
+**Desktop**: Sticky container with tall outer wrapper. Scroll progress maps to 3 pairs. Each pair crossfades in/out with `0.55s cubic-bezier(0.22, 1, 0.36, 1)` — same easing as HorizontalStickyDeck.
+
+**Mobile**: Same paired transitions but cards stack vertically (1 column, 2 cards per "slide"). The sticky container approach works here since it's a single viewport-height frame.
+
+### Detailed implementation
+
+#### 1. `PrinciplesDeck.tsx` — New component
+
+- **Pair grouping**: Split 6 principles into 3 pairs: `[[0,1], [2,3], [4,5]]`
+- **Scroll mechanics**: Reuse the proven pattern from `HorizontalStickyDeck` / `StickyCardStack`:
+  - Tall outer `div` (height = `cardHeight * 3 * SCROLL_PER_CARD`)
+  - Inner `sticky` container at `top: 88px`, `height: 100vh`
+  - `IntersectionObserver`-free — use `window scroll → progress → activeIndex` (0, 1, 2)
+- **Card rendering**: Each pair renders 2 cards in a `grid grid-cols-2` (desktop) / `grid-cols-1` (mobile) with `gap-3`
+- **Transitions**: All 3 pairs rendered as absolute-positioned layers; active pair has `opacity: 1, translateY: 0`; others have `opacity: 0, translateY: 8px` with staggered delays (left card 0s, right card 0.08s)
+- **Card visuals**: Keep existing celestial illustrations, alternating backgrounds, vignettes, gold effects — ported from `PrincipleCard`
+- **Dot indicators**: 3 dots on the right edge (same style as `StickyCardStack`)
+- **Moving effect**: Subtle `translateY` micro-animation on card content using `framer-motion`'s `animate` with a slow float (4s cycle, ±4px) while active
+
+#### 2. `GuidingPrinciples.tsx` — Swap component
+
+- Replace `<PrinciplesSlider>` with `<PrinciplesDeck>`
+- No content changes
+
+#### 3. Mobile QA fixes
+
+- Verify `overflow-x: clip` on all page root wrappers (`Home.tsx` already done)
+- The new deck component uses `sticky` + scroll-driven approach (not individual sticky cards), which avoids the mobile layout breaks of the old slider
+
+### Files modified
+
+| File | Change |
+|---|---|
+| `src/components/PrinciplesDeck.tsx` | **New** — Paired scroll-driven deck with 2-up layout |
+| `src/pages/GuidingPrinciples.tsx` | Swap `PrinciplesSlider` → `PrinciplesDeck` |
+| `src/components/PrinciplesSlider.tsx` | No changes (kept for reference, unused) |
+
+### Technical notes
+
+- Easing: `cubic-bezier(0.22, 1, 0.36, 1)` — matches existing deck components
+- Card height: `min(65vh, 480px)` per card — slightly shorter than full-bleed to show the pair comfortably
+- Scroll multiplier: `0.8` per pair — gives enough scroll range for 3 transitions
+- Gold floating particles, celestial-rotate, nebula-pulse, shimmer — all carried over with `fxOpacity` multiplier (1.0 dark, 0.55 light)
+- `will-change: transform` only when near viewport (same pattern as current code)
+
