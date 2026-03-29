@@ -100,10 +100,10 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
     return (
       <div
         ref={ref}
-        className="mb-3"
+        className={isMobile ? 'mb-4' : 'mb-3'}
         style={{
-          position: 'sticky',
-          top: `${stickyTop}px`,
+          position: isMobile ? 'relative' : 'sticky',
+          top: isMobile ? undefined : `${stickyTop}px`,
           zIndex: index + 1,
           willChange: isNearViewport ? 'transform' : 'auto',
         }}
@@ -111,7 +111,8 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
         <div
           className="relative w-full overflow-hidden rounded-xl transition-shadow duration-500"
           style={{
-            height: CARD_HEIGHT,
+            height: isMobile ? 'auto' : CARD_HEIGHT,
+            minHeight: isMobile ? '55vh' : undefined,
             background: getCardBg(isDark, index),
             boxShadow: isActive ? shadowActive : shadowInactive,
             border: `1px solid ${borderColor}`,
