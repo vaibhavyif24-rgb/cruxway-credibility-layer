@@ -34,7 +34,7 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
         {/* Central pulsing glow */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full pointer-events-none pulse-glow-effect"
-          style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 1), transparent 60%)' }}
+          style={{ background: `radial-gradient(circle, hsl(38 45% 55% / ${fx}), transparent 60%)` }}
         />
 
         {/* Horizontal shimmer line - upper */}
