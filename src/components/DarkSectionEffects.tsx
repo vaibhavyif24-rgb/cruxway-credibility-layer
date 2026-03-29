@@ -1,13 +1,19 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 /**
  * Animated background effects for dark/blue sections.
  * Renders floating orbs, shimmer lines, animated particles,
  * and subtle geometric accents for depth and life.
+ * Theme-aware: reduces intensity in light mode for clean contrast.
  */
 const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'hero' | 'cta' }>(
   ({ variant = 'default' }, ref) => {
+    const { theme } = useTheme();
+    // These effects sit inside intentionally-dark sections (header, CTA, hero)
+    // so they should always render, but with slightly reduced intensity in light mode
+    const fx = theme === 'light' ? 0.6 : 1;
     return (
       <div ref={ref}>
         {/* Base gradient overlay */}
