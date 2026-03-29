@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, forwardRef } from 'react';
 import { GoldRule } from '@/components/ui/Section';
 import CelestialIllustration from '@/components/CelestialIllustrations';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface Principle {
   t: string;
