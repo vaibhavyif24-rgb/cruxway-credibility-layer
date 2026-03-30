@@ -51,8 +51,27 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
         />
 
         {/* Subtle diagonal line pattern overlay */}
+        {/* Warm white ambient blob */}
+        <motion.div
+          className="absolute w-[600px] h-[500px] rounded-full"
+          style={{
+            top: '30%',
+            left: '20%',
+            background: `radial-gradient(ellipse at center, hsl(40 30% 97% / ${0.08 * intensity}), transparent 70%)`,
+          }}
+          animate={{
+            x: [0, 35, -20, 0],
+            y: [0, -20, 30, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+
         <div
-          className="absolute inset-0 opacity-[0.008]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(38 45% 55%) 40px, hsl(38 45% 55%) 40.5px)',
           }}

@@ -56,6 +56,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       } ${className}`}
       style={{ contentVisibility: 'auto' }}
     >
+      {isActuallyDark && <WaveBackground variant="section" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
 

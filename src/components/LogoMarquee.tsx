@@ -86,8 +86,8 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
                 alt={logo.alt}
                 className={`w-auto object-contain ${logoOpacity}`}
                 style={{
-                  height: `${Math.round(s * 40)}px`,
-                  maxWidth: `${Math.round(s * 140)}px`,
+                  height: `${Math.round(s * baseHeight)}px`,
+                  maxWidth: `${Math.round(s * baseMaxWidth)}px`,
                   filter: goldFilter,
                   mixBlendMode: blendMode as any,
                   transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
