@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -48,22 +49,27 @@ export const Section = ({ children, className = '', dark = false, narrow = false
 );
 
 export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.ReactNode; light?: boolean }>(
-  ({ children, light = false }, ref) => (
-    <motion.p
-      ref={ref}
-      initial={{ letterSpacing: '0.15em' }}
-      whileInView={{ letterSpacing: '0.28em' }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className={`
-        font-sans text-[9.5px] md:text-[10px] font-medium uppercase
-        mb-2.5 md:mb-3
-        ${light ? 'text-gold/45' : 'text-[hsl(228,45%,45%)]/50'}
-      `}
-    >
-      {children}
-    </motion.p>
-  )
+  ({ children, light }, ref) => {
+    const { theme } = useTheme();
+    const shouldUseGold = light !== undefined ? light : theme === 'dark';
+
+    return (
+      <motion.p
+        ref={ref}
+        initial={{ letterSpacing: '0.15em' }}
+        whileInView={{ letterSpacing: '0.28em' }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className={`
+          font-sans text-[9.5px] md:text-[10px] font-medium uppercase
+          mb-2.5 md:mb-3
+          ${shouldUseGold ? 'text-gold/45' : 'text-[hsl(228,45%,45%)]/50'}
+        `}
+      >
+        {children}
+      </motion.p>
+    );
+  }
 );
 SectionLabel.displayName = 'SectionLabel';
 
@@ -82,6 +88,7 @@ export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: 0.3 }}
+        whileHover={{ rotate: 180, scale: 1.4 }}
         className="w-1 h-1 rotate-45 border border-gold/15"
       />
     </div>

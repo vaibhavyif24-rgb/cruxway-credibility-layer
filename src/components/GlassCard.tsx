@@ -46,6 +46,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
             ${className}
           `}
           style={{
+            transformPerspective: 1200,
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
           }}

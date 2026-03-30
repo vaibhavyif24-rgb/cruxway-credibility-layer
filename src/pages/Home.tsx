@@ -100,7 +100,7 @@ const Home = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
-        <WaveBackground variant="hero" />
+        
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
@@ -211,9 +211,7 @@ const Home = () => {
         variant="light"
       />
       <div className="bg-background">
-        <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
-        </FadeIn>
+        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 
       {/* CTA */}

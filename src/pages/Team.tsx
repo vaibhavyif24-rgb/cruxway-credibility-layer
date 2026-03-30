@@ -9,7 +9,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import TeamStickyDeck from '@/components/TeamStickyDeck';
-import WaveBackground from '@/components/WaveBackground';
+
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
@@ -358,7 +358,7 @@ const Team = () => {
     <div>
       {/* Hero */}
       <section className={`relative overflow-hidden ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'}`}>
-        <WaveBackground variant="hero" />
+        
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-14 lg:pt-36 lg:pb-14">
           <FadeIn>
@@ -383,7 +383,7 @@ const Team = () => {
 
         {/* Stats Bar */}
         <div className={`relative border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
-          <WaveBackground variant="section" />
+          
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />

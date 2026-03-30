@@ -54,31 +54,10 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
             ? 'bg-[hsl(38,18%,93%)] text-foreground'
             : 'bg-background text-foreground'
       } ${className}`}
-      style={{ contentVisibility: 'auto' }}
     >
       {isActuallyDark && <WaveBackground variant="section" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
-
-      {/* Gold gradient bands for contrast sections */}
-      {isContrastLight && (
-        <>
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
-          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
-        </>
-      )}
-
-      {/* Section entry gold wipe for contrast sections */}
-      {isContrastLight && (
-        <motion.div
-          className="absolute top-1/2 left-0 right-0 h-px z-10"
-          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.15), transparent)' }}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        />
-      )}
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
         {label && (
