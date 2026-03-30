@@ -82,8 +82,8 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
       return () => observer.disconnect();
     }, [isMobile]);
 
-    const titleColor = isDark ? '#F8F6F2' : 'hsl(207, 65%, 12%)';
-    const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(210, 8%, 38%)';
+    const titleColor = isDark ? '#F8F6F2' : 'hsl(228, 58%, 18%)';
+    const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(228, 8%, 38%)';
     const indexColor = isDark ? 'hsl(38, 45%, 55%, 0.5)' : 'hsl(38, 48%, 42%, 0.6)';
     const borderColor = isDark ? 'hsl(38, 45%, 55%, 0.06)' : 'hsl(38, 30%, 60%, 0.12)';
 

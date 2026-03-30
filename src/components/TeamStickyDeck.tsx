@@ -25,8 +25,8 @@ const CARD_MIN_H = 520;
 /* ─── Backgrounds ─── */
 const darkCardBgs = [
   'hsl(220 8% 14%)',
-  'hsl(207 50% 12%)',
-  'hsl(210 12% 10%)',
+  'hsl(228 48% 14%)',
+  'hsl(228 12% 10%)',
 ];
 
 const lightCardBgs = [
