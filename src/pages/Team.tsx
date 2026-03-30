@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useRegion } from '@/contexts/RegionContext';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
