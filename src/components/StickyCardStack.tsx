@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import CriteriaIllustration from './CriteriaIllustrations';
+import { useIsMobile } from '@/hooks/use-mobile';
 export interface StickyCard {
   num: string;
   title: string;
