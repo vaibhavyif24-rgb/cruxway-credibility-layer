@@ -111,7 +111,7 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold">Essential</span> Companies</>
                 : <>Building the <span className="text-gold">Next Generation</span> of Essential U.S. Companies</>}
