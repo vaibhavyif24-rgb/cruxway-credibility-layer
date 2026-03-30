@@ -363,7 +363,7 @@ const Team = () => {
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(1.6rem,4.5vw,3rem)] max-w-[460px] leading-[1.12] tracking-[-0.025em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(1.6rem,4.5vw,3rem)] max-w-[460px] leading-[1.12] tracking-[-0.025em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
