@@ -122,8 +122,14 @@ const OurFocus = () => {
             ))}
           </div>
 
-          {/* Thin gold divider */}
-          <div className="h-px bg-gold/15 mb-8 md:mb-10" />
+          {/* Animated gold divider */}
+          <motion.div
+            className="h-px bg-gold/15 mb-8 md:mb-10 origin-left"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          />
 
           {/* Bottom section: Structure, Hold Period, Aligned Partnerships */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

@@ -22,6 +22,41 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
   const isLeft = index % 2 === 0;
   const itemRef = useRef<HTMLDivElement>(null);
 
+  // Mobile: simple whileInView instead of scroll-linked tracking
+  if (isMobile) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className="relative pl-14"
+      >
+        {/* Timeline dot */}
+        <div className="absolute top-1 left-[calc(1.5rem-5px)]">
+          <div className="w-3 h-3 rounded-full border-2 border-gold/30 bg-background" />
+        </div>
+
+        <span className="block font-serif text-[3rem] leading-none text-gold select-none opacity-20">
+          {num}
+        </span>
+
+        <h3 className={`font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mt-1 ${
+          isDark ? 'text-primary-foreground' : 'text-foreground'
+        }`}>
+          {principle.t}
+        </h3>
+
+        <p className={`font-sans text-[13.5px] md:text-[14px] leading-[1.75] mt-2 max-w-[400px] ${
+          isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
+        }`}>
+          {principle.d}
+        </p>
+      </motion.div>
+    );
+  }
+
+  // Desktop: full scroll-linked version
   const { scrollYProgress } = useScroll({
     target: itemRef,
     offset: ['start 0.85', 'center center', 'end 0.15'],
@@ -37,22 +72,14 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
     <motion.div
       ref={itemRef}
       style={{ opacity: glowOpacity }}
-      className={`relative group ${
-        isMobile
-          ? 'pl-14'
-          : isLeft
-            ? 'md:pr-[calc(50%+2.5rem)] md:text-right'
-            : 'md:pl-[calc(50%+2.5rem)] md:text-left'
+      className={`relative ${
+        isLeft
+          ? 'md:pr-[calc(50%+2.5rem)] md:text-right'
+          : 'md:pl-[calc(50%+2.5rem)] md:text-left'
       }`}
     >
       {/* Timeline dot with glow */}
-      <div
-        className={`absolute top-1 ${
-          isMobile
-            ? 'left-[calc(1.5rem-5px)]'
-            : 'left-[calc(50%-6px)]'
-        }`}
-      >
+      <div className="absolute top-1 left-[calc(50%-6px)]">
         <motion.div
           style={{ scale: dotScale }}
           className="w-3 h-3 rounded-full border-2 border-gold/30 bg-background transition-colors duration-500"
@@ -67,7 +94,7 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
       <motion.span
         style={{ opacity: numberColor }}
         className={`block font-serif text-[3rem] md:text-[3.5rem] leading-none text-gold select-none ${
-          isMobile ? '' : isLeft ? 'md:text-right' : 'md:text-left'
+          isLeft ? 'md:text-right' : 'md:text-left'
         }`}
       >
         {num}

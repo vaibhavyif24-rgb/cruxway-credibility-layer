@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -10,18 +11,21 @@ interface FadeInProps {
 }
 
 export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
-  ({ children, delay = 0, className = '', y = 14 }, ref) => (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y, filter: 'blur(4px)' }}
-      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  )
+  ({ children, delay = 0, className = '', y = 14 }, ref) => {
+    const isMobile = useIsMobile();
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: isMobile ? 10 : y, scale: 0.98, filter: isMobile ? 'none' : 'blur(3px)' }}
+        whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+        viewport={{ once: true, margin: isMobile ? '-30px' : '-60px' }}
+        transition={{ duration: isMobile ? 0.4 : 0.6, delay: isMobile ? delay * 0.5 : delay, ease: [0.22, 1, 0.36, 1] }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    );
+  }
 );
 
 FadeIn.displayName = 'FadeIn';

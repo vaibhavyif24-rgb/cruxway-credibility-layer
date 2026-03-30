@@ -235,7 +235,13 @@ const InvestmentCriteria = () => {
             ))}
           </div>
 
-          <div className="h-px bg-gold/15 mb-8 md:mb-10" />
+          <motion.div
+            className="h-px bg-gold/15 mb-8 md:mb-10 origin-left"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {textCards.map((stat, i) => (

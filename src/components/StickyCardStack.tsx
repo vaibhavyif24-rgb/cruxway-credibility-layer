@@ -291,7 +291,7 @@ const SlideCard: React.FC<{
         backgroundColor: bg,
         opacity: isActive ? 1 : 0,
         transform: `translateY(${isActive ? 0 : 20}px)`,
-        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+        transition: `opacity 0.5s ease-out, transform 0.5s ease-out`,
         pointerEvents: isActive ? 'auto' : 'none',
       }}
     >
