@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useRegion } from '@/contexts/RegionContext';
 import { Section, SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, animate } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
@@ -107,14 +107,14 @@ const founders: TeamMember[] = [
 ];
 
 const vaibhavDealLogos: LogoItem[] = [
-  { src: porterLogo, alt: 'Porter', scale: 1.3 },
-  { src: lohumLogo, alt: 'Lohum', scale: 2.4 },
-  { src: wareeLogo, alt: 'Waaree', scale: 0.88 },
-  { src: otplessLogo, alt: 'OTPless', scale: 1.3 },
-  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 2.4 },
+  { src: porterLogo, alt: 'Porter' },
+  { src: lohumLogo, alt: 'Lohum' },
+  { src: wareeLogo, alt: 'Waaree' },
+  { src: otplessLogo, alt: 'OTPless' },
+  { src: cohomaLogo, alt: 'Cohoma Coffee' },
   { src: bytepeLogo, alt: 'BytePe' },
-  { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.4 },
-  { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.05, extraGap: -8 },
+  { src: tractorfactoryLogo, alt: 'TractorFactory' },
+  { src: sonicLambLogo, alt: 'Sonic Lamb' },
 ];
 
 const indiaPartner: TeamMember = {
@@ -141,20 +141,20 @@ const indiaPartner: TeamMember = {
 const foundersLogos = [
   { src: warburgLogo, alt: 'Warburg Pincus' },
   { src: neosPartnersLogo, alt: 'Neos Partners' },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank', small: true },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: saltwaterLogo, alt: 'Saltwater Capital' },
   { src: lamResearchLogo, alt: 'Lam Research' },
   { src: evercoreLogo, alt: 'Evercore' },
   { src: dunesPointLogo, alt: 'Dunes Point Capital' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', small: true },
-  { src: depaulLogo, alt: 'DePaul University', small: true },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
+  { src: depaulLogo, alt: 'DePaul University' },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University', small: true },
+  { src: ashokaLogo, alt: 'Ashoka University' },
   { src: nitiAayogLogo, alt: 'NITI Aayog' },
-  { src: iicLogo, alt: 'Impact Investors Council', small: true },
+  { src: iicLogo, alt: 'Impact Investors Council' },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
   { src: swishinLogo, alt: 'Swishin Ventures' },
@@ -182,18 +182,17 @@ const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-t
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[32px] md:h-[38px] lg:h-[44px]"
+            className="flex items-center justify-center shrink-0 h-[32px] md:h-[40px] lg:h-[48px]"
             style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[28px] md:h-[34px] lg:h-[40px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
+              className="h-[28px] md:h-[36px] lg:h-[44px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
               style={{
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
-                transform: logo.scale ? `scale(${logo.scale})` : undefined,
               }}
             />
           </div>
@@ -299,18 +298,48 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 });
 ProfileCard.displayName = 'ProfileCard';
 
-/* ─── Stats Bar ─── */
-const StatItem = ({ value, label, delay = 0, isDark }: { value: string; label: string; delay?: number; isDark: boolean }) => (
-  <FadeIn delay={delay} className="text-center">
+/* ─── Counting Stat ─── */
+const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => {
+  const numMatch = value.match(/^(\d+)/);
+  const motionVal = useMotionValue(0);
+  const [display, setDisplay] = useState(value);
+
+  useEffect(() => {
+    if (!numMatch) return;
+    const target = parseInt(numMatch[1], 10);
+    const suffix = value.slice(numMatch[1].length);
+    const controls = animate(motionVal, target, {
+      duration: 1.5,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setDisplay(`${Math.round(v)}${suffix}`),
+    });
+    return () => controls.stop();
+  }, [value]);
+
+  return (
     <motion.p
-      className={`font-serif text-[clamp(1.2rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+      className={`font-serif text-[clamp(1.2rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-gold'}`}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: delay + 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      {value}
+      {display}
     </motion.p>
+  );
+};
+
+/* ─── Stats Bar ─── */
+const StatItem = ({ value, label, delay = 0, isDark }: { value: string; label: string; delay?: number; isDark: boolean }) => (
+  <FadeIn delay={delay} className="text-center">
+    <CountingStat value={value} isDark={isDark} />
+    <motion.div
+      initial={{ width: 0 }}
+      whileInView={{ width: 24 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
+      className="h-[1.5px] bg-gold/30 mx-auto mt-2"
+    />
     <p className={`font-sans text-[7.5px] md:text-[9px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-1.5 md:mt-2 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
       {label}
     </p>
@@ -329,7 +358,7 @@ const Team = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'}`}>
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-14 lg:pt-36 lg:pb-16">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
@@ -372,7 +401,7 @@ const Team = () => {
       />
 
       {/* Team Sticky Deck */}
-      <section className="bg-background pt-0 pb-10 md:pb-16">
+      <section className="bg-background pt-0 pb-10 md:pb-14">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12 mb-8 md:mb-10">
           <FadeIn>
             <SectionLabel>{isIndia ? 'Our Team' : 'Team'}</SectionLabel>

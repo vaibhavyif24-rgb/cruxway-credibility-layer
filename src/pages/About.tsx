@@ -106,7 +106,7 @@ const About = () => {
       </section>
 
       {/* Principles */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-12 md:pt-16">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14">
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
@@ -119,7 +119,7 @@ const About = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">

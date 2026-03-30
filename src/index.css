@@ -267,18 +267,25 @@
   .shimmer-effect { animation: shimmer-line 4s ease-in-out infinite; }
   .pulse-glow-effect { animation: pulse-glow 6s ease-in-out infinite; }
 
+  /* Premium button with gold shimmer sweep */
   .btn-premium {
     @apply relative overflow-hidden transition-all duration-300;
   }
 
   .btn-premium::after {
     content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: linear-gradient(135deg, hsl(var(--gold) / 0.08), transparent);
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.08), transparent);
+    transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
   }
 
   .btn-premium:hover::after {
-    @apply opacity-100;
+    left: 100%;
   }
 
   .btn-premium:active {
@@ -308,5 +315,17 @@
 
   .gold-shimmer-border {
     animation: gold-border-pulse 3s ease-in-out infinite;
+  }
+
+  /* Gold link underline animation */
+  .gold-underline-hover {
+    background-image: linear-gradient(hsl(38 48% 52% / 0.3), hsl(38 48% 52% / 0.3));
+    background-size: 0% 1px;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .gold-underline-hover:hover {
+    background-size: 100% 1px;
   }
 }

@@ -73,12 +73,11 @@ const GuidingPrinciples = () => {
       />
 
       {/* Principles — refined heading + grid */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-4 md:pt-6">
+      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10">
         <FadeIn>
           <SectionLabel>Core Values</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] mb-1">
-            <span className="text-foreground">What We</span>
-            <br />
+            <span className="text-foreground">What We </span>
             <span className="text-gold">Stand For</span>
           </h2>
           <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-2">
@@ -100,7 +99,7 @@ const GuidingPrinciples = () => {
       <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.12), transparent)', animationDuration: '5s' }} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-6 md:py-10 lg:py-12 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">

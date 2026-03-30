@@ -15,17 +15,14 @@ import StickyCardStack from '@/components/StickyCardStack';
 import heroIndiaHome from '@/assets/hero-india-home.jpg';
 import heroUSHome from '@/assets/hero-us-home.jpg';
 
-import blackrockLogo from '@/assets/logos/blackrock.png';
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
 import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
 import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
-import creditSuisseLogo from '@/assets/logos/credit-suisse.png';
 import lamResearchLogo from '@/assets/logos/lam-research.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
-import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import depaulLogo from '@/assets/logos/depaul.png';
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
@@ -35,25 +32,22 @@ import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
-  { src: blackrockLogo, alt: 'BlackRock' },
-  { src: warburgLogo, alt: 'Warburg Pincus', large: true },
+  { src: warburgLogo, alt: 'Warburg Pincus' },
   { src: neosPartnersLogo, alt: 'Neos Partners' },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank', small: true },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
   { src: saltwaterLogo, alt: 'Saltwater Capital' },
-  { src: creditSuisseLogo, alt: 'Credit Suisse' },
   { src: lamResearchLogo, alt: 'Lam Research' },
   { src: evercoreLogo, alt: 'Evercore' },
   { src: dunesPointLogo, alt: 'Dunes Point Capital' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', small: true },
-  { src: berkeleyHaasLogo, alt: 'UC Berkeley Haas' },
-  { src: depaulLogo, alt: 'DePaul University', small: true },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
+  { src: depaulLogo, alt: 'DePaul University' },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University', small: true },
+  { src: ashokaLogo, alt: 'Ashoka University' },
   { src: nitiAayogLogo, alt: 'NITI Aayog' },
-  { src: iicLogo, alt: 'Impact Investors Council', small: true },
+  { src: iicLogo, alt: 'Impact Investors Council' },
   { src: treeforestLogo, alt: 'TreeForest Capital' },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
   { src: swishinLogo, alt: 'Swishin Ventures' },
@@ -192,7 +186,7 @@ const Home = () => {
       />
 
       {/* Our Process */}
-      <section className="bg-background pt-8 md:pt-10 lg:pt-12 pb-2">
+      <section className="bg-background pt-6 md:pt-8 lg:pt-10 pb-0">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
           <FadeIn>
             <SectionLabel>Our Process</SectionLabel>
@@ -221,10 +215,10 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.15), transparent)', animationDuration: '5s' }} />
+      <div className="h-px w-full shimmer-effect mt-0" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.15), transparent)', animationDuration: '5s' }} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">

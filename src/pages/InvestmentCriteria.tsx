@@ -61,12 +61,12 @@ const StatCard = ({ label, value, delay = 0, isDark, isCompact = false, currency
           ? `border-t-2 border-gold/30 border-x border-b p-5 md:p-6 ${
               isDark
                 ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-x-border/30 border-b-border/30'
-                : 'bg-white border-x-[hsl(38,15%,90%)] border-b-[hsl(38,15%,90%)] hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
+                : 'bg-white border-x-[hsl(38,15%,90%)] border-b-[hsl(38,15%,90%)] hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)] hover:border-t-gold/70'
             }`
           : `border-l-2 border-gold/20 group-hover:border-gold/50 border-y border-r p-5 md:p-6 ${
               isDark
                 ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-y-border/30 border-r-border/30'
-                : 'bg-white border-y-[hsl(38,15%,90%)] border-r-[hsl(38,15%,90%)] hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
+                : 'bg-white border-y-[hsl(38,15%,90%)] border-r-[hsl(38,15%,90%)] hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)]'
             }`
       }`}
     >
@@ -86,16 +86,24 @@ const StatCard = ({ label, value, delay = 0, isDark, isCompact = false, currency
           {label}
         </div>
         {isCompact ? (
-          <div
-            className="font-serif text-[clamp(1.5rem,3vw,2rem)] text-gold leading-none tracking-[-0.02em] group-hover:text-gold/90 transition-all duration-300"
-            style={{ textShadow: 'none' }}
-            onMouseEnter={(e) => { (e.target as HTMLElement).style.textShadow = '0 0 30px hsl(38,48%,52%,0.15)'; }}
-            onMouseLeave={(e) => { (e.target as HTMLElement).style.textShadow = 'none'; }}
-          >
-            {value}
-          </div>
+          <>
+            <div
+              className="font-serif text-[clamp(1.5rem,3vw,2rem)] text-gold leading-none tracking-[-0.02em] group-hover:text-gold/90 transition-all duration-300"
+              style={{ textShadow: 'none' }}
+              onMouseEnter={(e) => { (e.target as HTMLElement).style.textShadow = '0 0 30px hsl(38,48%,52%,0.15)'; }}
+              onMouseLeave={(e) => { (e.target as HTMLElement).style.textShadow = 'none'; }}
+            >
+              {value}
+            </div>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={isInView ? { width: 40 } : {}}
+              transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="h-[1.5px] bg-gold/30 mt-2"
+            />
+          </>
         ) : (
-          <p className={`font-sans text-[14px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
+          <p className={`font-sans text-[14.5px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
             {value}
           </p>
         )}
@@ -149,6 +157,17 @@ const InvestmentCriteria = () => {
         isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="section" />}
+        {/* Shimmer sweep */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(105deg, transparent 40%, hsl(38,48%,52%,0.03) 50%, transparent 60%)',
+              backgroundSize: '300% 100%',
+              animation: 'shimmer-sweep 8s linear infinite',
+            }}
+          />
+        </div>
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Investment Profile</SectionLabel>
@@ -252,7 +271,7 @@ const InvestmentCriteria = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">

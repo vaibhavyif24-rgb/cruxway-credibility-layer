@@ -53,7 +53,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
           : isContrastLight
-            ? 'bg-[hsl(40,16%,94%)] text-foreground'
+            ? 'bg-[hsl(38,18%,93%)] text-foreground'
             : 'bg-background text-foreground'
       } ${className}`}
       style={{ contentVisibility: 'auto' }}
@@ -62,7 +62,15 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
 
-      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24 flex flex-col items-center text-center">
+      {/* Gold gradient bands for contrast sections */}
+      {isContrastLight && (
+        <>
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
+        </>
+      )}
+
+      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 flex flex-col items-center text-center">
         {label && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
@@ -164,7 +172,7 @@ const StatReveal = ({
 
   return (
     <motion.div style={{ opacity }} className="text-center">
-      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-gold'}`}>
         {stat.value}
       </p>
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>

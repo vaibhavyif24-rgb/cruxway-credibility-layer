@@ -12,8 +12,8 @@ export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
   ({ children, delay = 0, className = '', y = 14 }, ref) => (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y, filter: 'blur(4px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
@@ -36,7 +36,7 @@ export const Section = ({ children, className = '', dark = false, narrow = false
   <section
     className={`
       px-5 md:px-10 lg:px-16
-      py-10 md:py-14 lg:py-18
+      py-10 md:py-14 lg:py-16
       ${dark ? 'hero-gradient-animated text-primary-foreground' : 'bg-background text-foreground'}
       ${className}
     `}
@@ -49,16 +49,20 @@ export const Section = ({ children, className = '', dark = false, narrow = false
 
 export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.ReactNode; light?: boolean }>(
   ({ children, light = false }, ref) => (
-    <p
+    <motion.p
       ref={ref}
+      initial={{ letterSpacing: '0.15em' }}
+      whileInView={{ letterSpacing: '0.28em' }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={`
-        font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.2em]
+        font-sans text-[9.5px] md:text-[10px] font-medium uppercase
         mb-2.5 md:mb-3
         ${light ? 'text-gold/45' : 'text-muted-foreground/50'}
       `}
     >
       {children}
-    </p>
+    </motion.p>
   )
 );
 SectionLabel.displayName = 'SectionLabel';

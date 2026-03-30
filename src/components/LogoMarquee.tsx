@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
+import LightSectionEffects from '@/components/LightSectionEffects';
 
 interface LogoItem {
   src: string;
@@ -28,25 +29,36 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const bgClass = isActuallyDark
     ? 'bg-primary py-6 md:py-10 lg:py-14'
     : isContrastLight
-      ? 'bg-[hsl(40,16%,94%)] py-6 md:py-10 lg:py-14'
+      ? 'bg-[hsl(38,16%,92%)] py-6 md:py-10 lg:py-14'
       : 'py-5 md:py-8 lg:py-10';
 
   const fadeFromClass = isActuallyDark
     ? 'from-primary'
     : isContrastLight
-      ? 'from-[hsl(40,16%,94%)]'
+      ? 'from-[hsl(38,16%,92%)]'
       : 'from-background';
 
   const logoOpacity = isActuallyDark
-    ? 'opacity-75 hover:opacity-95'
+    ? 'opacity-80 hover:opacity-100'
     : isContrastLight
-      ? 'opacity-50 hover:opacity-75'
-      : 'opacity-60 hover:opacity-80';
+      ? 'opacity-65 hover:opacity-90'
+      : 'opacity-65 hover:opacity-85';
 
   const blendMode = isActuallyDark ? 'screen' : undefined;
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${bgClass}`}>
+      {/* Gold border accents for contrast light */}
+      {isContrastLight && (
+        <>
+          <div className="absolute top-0 left-0 right-0 h-px bg-gold/10" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gold/10" />
+        </>
+      )}
+
+      {/* Light section effects */}
+      {isContrastLight && <LightSectionEffects variant="section" />}
+
       <div className={`absolute left-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-r ${fadeFromClass} to-transparent`} />
       <div className={`absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-l ${fadeFromClass} to-transparent`} />
 
@@ -58,21 +70,17 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className={`flex items-center justify-center shrink-0 ${
-              logo.large ? 'h-[52px] md:h-[80px] lg:h-[92px]' : 'h-[44px] md:h-[72px] lg:h-[80px]'
-            }`}
+            className="flex items-center justify-center shrink-0 h-[48px] md:h-[72px] lg:h-[80px] transition-transform duration-500 hover:scale-110"
           >
             <img
               src={logo.src}
               alt={logo.alt}
-              className={`w-auto object-contain transition-opacity duration-300 ${
-                logo.large
-                  ? 'h-[48px] md:h-[76px] lg:h-[88px] max-w-[170px] md:max-w-[280px] lg:max-w-[320px]'
-                  : logo.small
-                    ? 'h-[36px] md:h-[56px] lg:h-[64px] max-w-[130px] md:max-w-[210px] lg:max-w-[240px]'
-                    : 'h-[36px] md:h-[60px] lg:h-[72px] max-w-[130px] md:max-w-[220px] lg:max-w-[260px]'
-              } ${logoOpacity}`}
-              style={{ filter: goldFilter, mixBlendMode: blendMode as any }}
+              className={`w-auto object-contain h-[40px] md:h-[64px] lg:h-[72px] max-w-[140px] md:max-w-[240px] lg:max-w-[280px] ${logoOpacity}`}
+              style={{
+                filter: goldFilter,
+                mixBlendMode: blendMode as any,
+                transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+              }}
               loading="lazy"
             />
           </div>
