@@ -20,7 +20,8 @@ const Contact = () => {
   const isIndia = region === 'india';
 
   const email = isIndia ? 'india@cruxway.com' : 'info@cruxway.com';
-  const location = isIndia ? 'GK II, Delhi, India' : 'San Diego, California';
+  const location = isIndia ? 'E-97, GK II, Delhi, India' : 'San Diego, California';
+  const mapsUrl = isIndia ? 'https://maps.google.com/?q=E-97+GK+II+Delhi+India' : 'https://maps.google.com/?q=San+Diego+California';
 
   return (
     <div>
@@ -33,7 +34,7 @@ const Contact = () => {
             <SectionLabel light={isDark}>Contact</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[420px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[420px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               Get in <span className="text-gold">Touch</span>
             </h1>
           </FadeIn>
@@ -80,11 +81,13 @@ const Contact = () => {
             </FadeIn>
 
             <FadeIn delay={0.08}>
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
               <GlassCard index={1} className="p-6 md:p-8 h-full">
                 <div className="flex items-start justify-between mb-6">
                   <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center group-hover:border-gold/25 transition-colors duration-500">
                     <MapPin className="w-4 h-4 text-muted-foreground group-hover:text-gold-dim transition-colors duration-500" />
                   </div>
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                 </div>
                 <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/55 mb-2">
                   Location
@@ -98,6 +101,7 @@ const Contact = () => {
                     : 'Headquartered in San Diego, with a nationwide investment focus.'}
                 </p>
               </GlassCard>
+              </a>
             </FadeIn>
           </div>
         </div>

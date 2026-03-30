@@ -73,14 +73,14 @@ interface TeamMember {
 }
 
 const harinDealLogos: LogoItem[] = [
-  { src: rmsEnergyLogo, alt: 'RMS Energy' },
-  { src: bbcElectricLogo, alt: 'BBC Electric' },
-  { src: pwrLogo, alt: 'PWR' },
-  { src: flexrayLogo, alt: 'FlexRay' },
-  { src: alignLogo, alt: 'A-LIGN' },
-  { src: alliedUniversalLogo, alt: 'Allied Universal' },
-  { src: energizerLogo, alt: 'Energizer' },
-  { src: broadcomLogo, alt: 'Broadcom' },
+  { src: rmsEnergyLogo, alt: 'RMS Energy', scale: 1.0 },
+  { src: bbcElectricLogo, alt: 'BBC Electric', scale: 1.0 },
+  { src: pwrLogo, alt: 'PWR', scale: 1.0 },
+  { src: flexrayLogo, alt: 'FlexRay', scale: 1.0 },
+  { src: alignLogo, alt: 'A-LIGN', scale: 1.0 },
+  { src: alliedUniversalLogo, alt: 'Allied Universal', scale: 1.0 },
+  { src: energizerLogo, alt: 'Energizer', scale: 1.0 },
+  { src: broadcomLogo, alt: 'Broadcom', scale: 1.0 },
 ];
 
 const founders: TeamMember[] = [
@@ -107,14 +107,14 @@ const founders: TeamMember[] = [
 ];
 
 const vaibhavDealLogos: LogoItem[] = [
-  { src: porterLogo, alt: 'Porter' },
-  { src: lohumLogo, alt: 'Lohum' },
-  { src: wareeLogo, alt: 'Waaree' },
-  { src: otplessLogo, alt: 'OTPless' },
-  { src: cohomaLogo, alt: 'Cohoma Coffee' },
-  { src: bytepeLogo, alt: 'BytePe' },
-  { src: tractorfactoryLogo, alt: 'TractorFactory' },
-  { src: sonicLambLogo, alt: 'Sonic Lamb' },
+  { src: porterLogo, alt: 'Porter', scale: 1.0 },
+  { src: lohumLogo, alt: 'Lohum', scale: 1.0 },
+  { src: wareeLogo, alt: 'Waaree', scale: 1.0 },
+  { src: otplessLogo, alt: 'OTPless', scale: 1.0 },
+  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 1.0 },
+  { src: bytepeLogo, alt: 'BytePe', scale: 1.0 },
+  { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.0 },
+  { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.0 },
 ];
 
 const indiaPartner: TeamMember = {
@@ -139,25 +139,25 @@ const indiaPartner: TeamMember = {
 };
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus' },
-  { src: neosPartnersLogo, alt: 'Neos Partners' },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
-  { src: saltwaterLogo, alt: 'Saltwater Capital' },
-  { src: lamResearchLogo, alt: 'Lam Research' },
-  { src: evercoreLogo, alt: 'Evercore' },
-  { src: dunesPointLogo, alt: 'Dunes Point Capital' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
-  { src: depaulLogo, alt: 'DePaul University' },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.6 },
+  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.1 },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
+  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.1 },
+  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
+  { src: evercoreLogo, alt: 'Evercore', scale: 1.1 },
+  { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
+  { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University' },
-  { src: nitiAayogLogo, alt: 'NITI Aayog' },
-  { src: iicLogo, alt: 'Impact Investors Council' },
-  { src: treeforestLogo, alt: 'TreeForest Capital' },
-  { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
-  { src: swishinLogo, alt: 'Swishin Ventures' },
+  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 1.5 },
+  { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
+  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.1 },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.1 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 1.5 },
 ];
 
 /* ─── Deal Logo Marquee ─── */
@@ -175,22 +175,22 @@ const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-t
       <div className={`absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r ${bgClass}`} />
       <div className={`absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l ${bgClass}`} />
       <motion.div
-        className="flex items-center gap-6 md:gap-7 lg:gap-10 w-max"
+        className="flex items-center gap-8 md:gap-10 lg:gap-12 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[32px] md:h-[40px] lg:h-[48px]"
-            style={{ marginRight: logo.extraGap ? `${logo.extraGap}px` : undefined }}
+            className="flex items-center justify-center shrink-0 h-[36px] md:h-[44px] lg:h-[52px]"
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="h-[28px] md:h-[36px] lg:h-[44px] w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
+              className="w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
               style={{
+                height: `${(logo.scale || 1) * 36}px`,
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
               }}
@@ -363,7 +363,7 @@ const Team = () => {
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(1.6rem,4.5vw,3rem)] max-w-[460px] leading-[1.12] tracking-[-0.025em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(1.6rem,4.5vw,3rem)] max-w-[460px] leading-[1.12] tracking-[-0.025em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
@@ -461,7 +461,7 @@ const Team = () => {
           </FadeIn>
         </div>
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={48} variant="dark" />
         </FadeIn>
       </div>
     </div>

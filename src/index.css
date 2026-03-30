@@ -218,6 +218,12 @@
   100% { background-position: 200% 0; }
 }
 
+@keyframes shimmer-line-pulse {
+  0%, 100% { background-position: 0% 0%; opacity: 0; }
+  50% { background-position: 0% 100%; opacity: 1; }
+}
+}
+
 @keyframes warm-pulse {
   0%, 100% { opacity: 0; }
   50% { opacity: 1; }

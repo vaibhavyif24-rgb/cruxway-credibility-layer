@@ -32,25 +32,25 @@ import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus' },
-  { src: neosPartnersLogo, alt: 'Neos Partners' },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank' },
-  { src: saltwaterLogo, alt: 'Saltwater Capital' },
-  { src: lamResearchLogo, alt: 'Lam Research' },
-  { src: evercoreLogo, alt: 'Evercore' },
-  { src: dunesPointLogo, alt: 'Dunes Point Capital' },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America' },
-  { src: depaulLogo, alt: 'DePaul University' },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.6 },
+  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.1 },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
+  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.1 },
+  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
+  { src: evercoreLogo, alt: 'Evercore', scale: 1.1 },
+  { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
+  { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University' },
-  { src: nitiAayogLogo, alt: 'NITI Aayog' },
-  { src: iicLogo, alt: 'Impact Investors Council' },
-  { src: treeforestLogo, alt: 'TreeForest Capital' },
-  { src: lodhaGeniusLogo, alt: 'Lodha Genius' },
-  { src: swishinLogo, alt: 'Swishin Ventures' },
+  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 1.5 },
+  { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
+  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.1 },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.1 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 1.5 },
 ];
 
 const processStepsUS = [
@@ -111,7 +111,7 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold">Essential</span> Companies</>
                 : <>Building the <span className="text-gold">Next Generation</span> of Essential U.S. Companies</>}
@@ -210,7 +210,7 @@ const Home = () => {
       />
       <div className="bg-background">
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={40} variant="dark" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={48} variant="dark" />
         </FadeIn>
       </div>
 
