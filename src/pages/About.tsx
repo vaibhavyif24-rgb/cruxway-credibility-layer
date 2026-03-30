@@ -1,6 +1,7 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
+import { useTheme } from '@/contexts/ThemeContext';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
@@ -13,7 +14,9 @@ import heroUSAbout from '@/assets/hero-us-about.jpg';
 
 const About = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
+  const isDark = theme === 'dark';
 
   const approach = isIndia
     ? [
@@ -41,20 +44,20 @@ const About = () => {
   return (
     <div>
       {/* Hero — distinct region-specific cinematic photo */}
-      <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
+      <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'About, India' : 'About'}</SectionLabel>
+            <SectionLabel light={isDark}>{isIndia ? 'About, India' : 'About'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[540px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[540px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : <>Investing Tailored to Each <span className="text-gold">Company's Needs</span></>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[460px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[460px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'Long-term capital and operational expertise for India\'s most promising founder-led companies.'
                 : 'Combining long-term capital with operating expertise to help business owners build lasting institutions.'}
@@ -112,23 +115,27 @@ const About = () => {
       <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
             <FadeIn>
-              <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15] mb-4">
+              <SectionLabel light={isDark}>Connect</SectionLabel>
+              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 Built for Owners Thinking Long-Term
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.8] mb-6">
+              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
                 {isIndia
                   ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder considering your next chapter, we\'d welcome the conversation.'}
               </p>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75 transition-all duration-300"
+                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
+                  isDark
+                    ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
+                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
+                }`}
               >
                 Start a Conversation
               </Link>

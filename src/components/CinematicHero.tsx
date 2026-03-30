@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+import { useTheme } from '@/contexts/ThemeContext';
 
 /**
  * Reusable cinematic hero background with Ken Burns zoom effect,
- * dark gradient overlay, gold geometric line overlays,
+ * theme-aware gradient overlay, gold geometric line overlays,
  * floating particles, soft vignette, and ambient motion.
  */
 interface CinematicHeroProps {
@@ -11,6 +12,9 @@ interface CinematicHeroProps {
 }
 
 const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   const lineStyle = {
     stroke: 'hsl(38 45% 55%)',
     strokeWidth: 0.3,
@@ -24,6 +28,19 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
     viewport: { once: true },
     transition: { duration: dur, delay, ease: [0.22, 1, 0.36, 1] as const },
   });
+
+  // Theme-aware overlay gradients
+  const overlayClass = isDark
+    ? overlay === 'strong'
+      ? 'bg-gradient-to-t from-navy-deep/95 via-prussian/80 to-navy-deep/70'
+      : 'bg-gradient-to-t from-navy-deep/90 via-prussian/65 to-navy-deep/55'
+    : overlay === 'strong'
+      ? 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.92] via-[hsl(40,25%,96%)]/[0.82] to-[hsl(40,20%,93%)]/[0.72]'
+      : 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.85] via-[hsl(40,25%,96%)]/[0.70] to-[hsl(40,20%,93%)]/[0.55]';
+
+  const vignetteColor = isDark
+    ? 'radial-gradient(ellipse at center, transparent 40%, hsl(214 45% 8% / 0.5) 100%)'
+    : 'radial-gradient(ellipse at center, transparent 40%, hsl(40 20% 90% / 0.4) 100%)';
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -47,19 +64,11 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         />
       </motion.div>
 
-      {/* Dark overlay */}
-      <div
-        className={`absolute inset-0 z-[1] ${
-          overlay === 'strong'
-            ? 'bg-gradient-to-t from-navy-deep/95 via-prussian/80 to-navy-deep/70'
-            : 'bg-gradient-to-t from-navy-deep/90 via-prussian/65 to-navy-deep/55'
-        }`}
-      />
+      {/* Theme-aware overlay */}
+      <div className={`absolute inset-0 z-[1] ${overlayClass}`} />
 
-      {/* Vignette for edge darkening */}
-      <div className="absolute inset-0 z-[1]" style={{
-        background: 'radial-gradient(ellipse at center, transparent 40%, hsl(214 45% 8% / 0.5) 100%)'
-      }} />
+      {/* Vignette for edge depth */}
+      <div className="absolute inset-0 z-[1]" style={{ background: vignetteColor }} />
 
       {/* Gold geometric overlay — corner frames */}
       <svg

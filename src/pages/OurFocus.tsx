@@ -120,20 +120,20 @@ const OurFocus = () => {
   return (
     <div className="overflow-x-clip">
       {/* Hero */}
-      <section className="relative text-primary-foreground overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end">
+      <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
         <DarkSectionEffects variant="hero" />
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
+            <SectionLabel light={theme === 'dark'}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[600px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${theme === 'dark' ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia ? <><span className="text-gold">Disciplined</span> Capital for India's Best</> : <>Where <span className="text-gold">Conviction</span> Meets Capital</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[480px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${theme === 'dark' ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
                 : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}
@@ -191,23 +191,27 @@ const OurFocus = () => {
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* CTA */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${theme === 'dark' ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
         <DarkSectionEffects variant="cta" />
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
             <FadeIn>
-              <SectionLabel light>Connect</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.4rem,3vw,2.2rem)] text-primary-foreground leading-[1.15] mb-4">
+              <SectionLabel light={theme === 'dark'}>Connect</SectionLabel>
+              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
                 {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
               </h2>
-              <p className="font-sans text-[15px] md:text-[16px] text-primary-foreground/50 leading-[1.8] mb-6">
+              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${theme === 'dark' ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
                 {isIndia
                   ? 'If you\'re building a business meant to last, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder considering your next chapter, we\'d welcome the conversation.'}
               </p>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75 transition-all duration-300"
+                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
+                  theme === 'dark'
+                    ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
+                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
+                }`}
               >
                 Get in Touch
               </Link>
