@@ -11,7 +11,6 @@ import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import StickyCardStack from '@/components/StickyCardStack';
-import WaveBackground from '@/components/WaveBackground';
 
 import heroIndiaHome from '@/assets/hero-india-home.jpg';
 import heroUSHome from '@/assets/hero-us-home.jpg';
