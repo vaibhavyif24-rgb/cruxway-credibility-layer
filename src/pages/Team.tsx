@@ -383,6 +383,7 @@ const Team = () => {
 
         {/* Stats Bar */}
         <div className={`relative border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
+          <WaveBackground variant="section" />
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />
