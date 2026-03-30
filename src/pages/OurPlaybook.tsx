@@ -26,7 +26,61 @@ const valueCreationItems = [
   { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
 ];
 
-const OurPlaybook = () => {
+const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
+  const [active, setActive] = useState(0);
+
+  return (
+    <div>
+      {/* Tab buttons */}
+      <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
+        {steps.map((step, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border
+              ${active === i
+                ? 'bg-gold/15 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
+                : isDark
+                  ? 'border-primary-foreground/10 text-primary-foreground/40 hover:border-gold/20 hover:text-primary-foreground/60'
+                  : 'border-border/40 text-muted-foreground hover:border-gold/20 hover:text-foreground/70'
+              }
+            `}
+          >
+            <span className="text-gold/60 mr-1.5">{step.num}</span>
+            <span className="hidden sm:inline">{step.title}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Content panel */}
+      <div className="relative min-h-[120px]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className={`rounded-sm border p-7 md:p-10 ${isDark ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]' : 'border-border/40 bg-card/50'}`}
+          >
+            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-3 block">
+              Step {steps[active].num}
+            </span>
+            <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              {steps[active].title}
+            </h3>
+            <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+              {steps[active].description}
+            </p>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+
   const { region } = useRegion();
   const { theme } = useTheme();
   const isIndia = region === 'india';
