@@ -1,6 +1,7 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
+import { useTheme } from '@/contexts/ThemeContext';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
