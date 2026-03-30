@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import LightSectionEffects from '@/components/LightSectionEffects';
-import WaveBackground from '@/components/WaveBackground';
+import DarkSectionEffects from '@/components/DarkSectionEffects';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface ScrollRevealTextProps {
@@ -56,12 +56,12 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       } ${className}`}
       style={{ contentVisibility: 'auto' }}
     >
-      {isActuallyDark && <WaveBackground variant="section" />}
+      {isActuallyDark && <DarkSectionEffects variant="default" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
 
       {/* Gold gradient bands for contrast sections */}
-      {isContrastLight && (
+      {(isContrastLight || isActuallyDark) && (
         <>
           <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
           <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
@@ -171,12 +171,40 @@ const StatReveal = ({
   const end = Math.min(start + 0.2, 1);
   const opacity = useTransform(progress, [start, end], [0, 1]);
 
+  const counterRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(counterRef, { once: true });
+  const [displayValue, setDisplayValue] = useState(stat.value);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const numMatch = stat.value.match(/[\d.]+/);
+    if (!numMatch) return;
+    const target = parseFloat(numMatch[0]);
+    const prefix = stat.value.slice(0, stat.value.indexOf(numMatch[0]));
+    const suffix = stat.value.slice(stat.value.indexOf(numMatch[0]) + numMatch[0].length);
+
+    let frame = 0;
+    const totalFrames = 40;
+    const interval = setInterval(() => {
+      frame++;
+      const p = frame / totalFrames;
+      const eased = 1 - Math.pow(1 - p, 3);
+      const current = Math.round(target * eased * 10) / 10;
+      setDisplayValue(`${prefix}${current % 1 === 0 ? current.toFixed(0) : current}${suffix}`);
+      if (frame >= totalFrames) {
+        setDisplayValue(stat.value);
+        clearInterval(interval);
+      }
+    }, 30);
+    return () => clearInterval(interval);
+  }, [isInView, stat.value]);
+
   return (
-    <motion.div style={{ opacity }} className="text-center">
-      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-gold'}`}>
-        {stat.value}
+    <motion.div ref={counterRef} style={{ opacity }} className="text-center">
+      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-gold' : 'text-gold'}`}>
+        {displayValue}
       </p>
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-[hsl(228,45%,45%)]/40'}`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/45' : 'text-[hsl(228,45%,45%)]/40'}`}>
         {stat.label}
       </p>
     </motion.div>

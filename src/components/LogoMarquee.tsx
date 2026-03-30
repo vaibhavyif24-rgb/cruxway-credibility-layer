@@ -18,14 +18,14 @@ interface LogoMarqueeProps {
   variant?: 'dark' | 'inline';
 }
 
-const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 55, variant = 'dark' }, ref) => {
+const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 60, variant = 'dark' }, ref) => {
   const doubled = [...logos, ...logos];
   const { theme } = useTheme();
   const isMobile = useIsMobile();
 
-  const baseHeight = isMobile ? 48 : 80;
-  const baseMaxWidth = isMobile ? 160 : 280;
-  const containerHeight = isMobile ? 56 : 96;
+  const baseHeight = isMobile ? 56 : 96;
+  const baseMaxWidth = isMobile ? 200 : 400;
+  const containerHeight = isMobile ? 64 : 112;
 
   const isDarkVariant = variant === 'dark';
   const isActuallyDark = isDarkVariant && theme === 'dark';

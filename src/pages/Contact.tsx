@@ -9,7 +9,6 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import GlassCard from '@/components/GlassCard';
 import ScrollRevealText from '@/components/ScrollRevealText';
-import WaveBackground from '@/components/WaveBackground';
 
 import heroIndiaContact from '@/assets/hero-india-contact.jpg';
 import heroUSContact from '@/assets/hero-us-contact.jpg';
@@ -31,7 +30,6 @@ const Contact = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaContact : heroUSContact} overlay="strong" />
-        <WaveBackground variant="hero" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>

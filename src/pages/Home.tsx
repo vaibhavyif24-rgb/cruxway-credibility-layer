@@ -11,7 +11,6 @@ import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import StickyCardStack from '@/components/StickyCardStack';
-import WaveBackground from '@/components/WaveBackground';
 
 import heroIndiaHome from '@/assets/hero-india-home.jpg';
 import heroUSHome from '@/assets/hero-us-home.jpg';
@@ -33,25 +32,25 @@ import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.0 },
-  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
-  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
-  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
-  { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
-  { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
-  { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.2 },
+  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.3 },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.2 },
+  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.3 },
+  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.2 },
+  { src: evercoreLogo, alt: 'Evercore', scale: 1.3 },
+  { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.2 },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.2 },
+  { src: depaulLogo, alt: 'DePaul University', scale: 1.2 },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
-  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.0 },
-  { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
-  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.2 },
-  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.2 },
-  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.0 },
+  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.2 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.2 },
+  { src: iicLogo, alt: 'Impact Investors Council', scale: 1.2 },
+  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.3 },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.3 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.2 },
 ];
 
 const processStepsUS = [
@@ -100,7 +99,6 @@ const Home = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
-        <WaveBackground variant="hero" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
@@ -212,7 +210,7 @@ const Home = () => {
       />
       <div className="bg-background">
         <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={60} variant="dark" />
         </FadeIn>
       </div>
 
@@ -222,7 +220,6 @@ const Home = () => {
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
-        <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
