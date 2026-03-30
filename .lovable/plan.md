@@ -1,163 +1,121 @@
-## Plan: Definitive Light-Mode Fix + Content Updates (14 Fixes)
 
----
 
-### Fix 1: ScrollRevealText Theme-Awareness
+## Plan: Surgical Polish Pass — 12 Fixes
 
-**File: `src/components/ScrollRevealText.tsx**`
+### Fix 1: Remove Berkeley Haas Logo
+**File: `src/pages/Home.tsx`**
+- Delete line 28: `import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';`
+- Delete line 48: `{ src: berkeleyHaasLogo, alt: 'UC Berkeley Haas' },` from `foundersLogos`
+- No other files reference it (search confirmed only Home.tsx)
 
-Import `useTheme`. Replace the simple `isDark = variant === 'dark'` with a 3-way classification:
+### Fix 2: LogoMarquee Uniform Sizing + Bolder Appearance
+**File: `src/components/LogoMarquee.tsx`**
+- Replace all conditional sizing (lines 61-74) with uniform height: container `h-[48px] md:h-[72px] lg:h-[80px]`, img `h-[40px] md:h-[64px] lg:h-[72px] max-w-[140px] md:max-w-[240px] lg:max-w-[280px]`
+- Boost opacity: `isActuallyDark ? 'opacity-80 hover:opacity-100'`, `isContrastLight ? 'opacity-65 hover:opacity-90'`, inline `'opacity-65 hover:opacity-85'`
+- Add `transition-transform duration-500 hover:scale-110` on container div
+- Add `transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)'` to img style
 
-- `isActuallyDark` = variant is dark AND theme is dark → keep existing navy bg + cream text
-- `isContrastLight` = variant is dark AND theme is light → warm stone bg `bg-[hsl(40,16%,94%)]`, dark text, gold highlights, LightSectionEffects
-- `isLight` = variant is light → existing behavior
+**File: `src/pages/Team.tsx`** (DealLogoMarquee, ~line 164-203)
+- Uniform deal logo sizing: `h-[32px] md:h-[40px] lg:h-[48px]` container, img `h-[28px] md:h-[36px] lg:h-[44px]`
+- Remove `logo.scale` transform from img style
 
-Update: section className, label color, word text color, stat colors, subtext color, stats border, and ambient overlay. Pass the correct `isDark` boolean to Word and StatReveal sub-components.
+### Fix 3: "What We Stand For" Single Line
+**File: `src/pages/GuidingPrinciples.tsx`** (lines 79-83)
+- Replace the two-line heading with single line: `<h2>What We <span className="text-gold">Stand For</span></h2>` — remove the `<br />` tag
 
----
+### Fix 4: Reduce Vertical Gaps Globally
 
-### Fix 2: LogoMarquee Theme-Awareness
+**A. `src/components/ScrollRevealText.tsx`** (line 65)
+- Change `py-14 md:py-20 lg:py-24` → `py-10 md:py-14 lg:py-16`
 
-**File: `src/components/LogoMarquee.tsx**`
+**B. `src/pages/Home.tsx`** (line 195)
+- Change `pt-8 md:pt-10 lg:pt-12 pb-2` → `pt-6 md:pt-8 lg:pt-10 pb-0`
 
-Import `useTheme`. When `variant === 'dark'` but `theme === 'light'`:
+**C. `src/pages/GuidingPrinciples.tsx`** (line 76)
+- Change `pt-4 md:pt-6` → `pt-8 md:pt-10`
+- `PrinciplesGrid.tsx` line 81: change `pb-8 md:pb-12` → `pb-6 md:pb-8`
 
-- Background: `bg-[hsl(40,16%,94%)]` instead of `bg-primary`
-- Edge fades: `from-[hsl(40,16%,94%)]` instead of `from-primary`
-- mixBlendMode: `undefined` (not `screen`)
-- Opacity: `opacity-50 hover:opacity-75`
+**D. `src/pages/OurFocus.tsx`** (line 226)
+- Change `py-12 md:py-16 lg:py-20` → `py-8 md:py-12 lg:py-14`
 
-Dark theme + dark variant: unchanged.
+**E. Scan all pages**: Cap maximum vertical padding at `py-10 md:py-14 lg:py-16`. Reduce any `py-20`, `py-24` values found in section-level elements across all pages.
 
----
+### Fix 5: Investment Profile Card Polish
+**Files: `src/pages/OurFocus.tsx`, `src/pages/InvestmentCriteria.tsx`**
 
-### Fix 3: Team StatItem Visibility
+Number cards (isCompact):
+- Add animated gold underline beneath value: `motion.div` from `width: 0` → `width: 40px`, `h-[1.5px] bg-gold/30`, on viewport entry with 0.6s duration
+- Hover shadow upgrade: `hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)]` and `hover:border-t-gold/70`
 
-**File: `src/pages/Team.tsx**` (StatItem component, ~line 350-365)
+Text cards:
+- Value text: update to `text-[14.5px] md:text-[15px] leading-[1.7] text-foreground/85`
 
-Make StatItem accept `isDark` prop. Change:
+Add shimmer sweep on stat band container: a `div` overlay with `background: linear-gradient(105deg, transparent 40%, hsl(38,48%,52%,0.03) 50%, transparent 60%)`, `background-size: 300% 100%`, animated via `shimmer-sweep` keyframe at 8s.
 
-- Value: `isDark ? 'text-primary-foreground' : 'text-foreground'`
-- Label: `isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'`
+### Fix 6: Light-Mode Animation & Color Elevation
 
-Update the 3 StatItem usages in the stats bar to pass `isDark`.
+**A. `src/components/ui/Section.tsx`** — GoldRule already has viewport-triggered width animation (confirmed in code). No change needed.
 
----
+**B. SectionLabel** (Section.tsx line 50-63): Add letter-spacing animation — wrap in `motion.p` with `initial={{ letterSpacing: '0.15em' }}` and `whileInView={{ letterSpacing: '0.28em' }}`, `viewport={{ once: true }}`, duration 0.5s.
 
-### Fix 4: Remove Benson Zhang Entirely
+**C. FadeIn** (Section.tsx line 11-24): Add blur focus-pull: `initial={{ opacity: 0, y, filter: 'blur(4px)' }}` and `whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}`.
 
-**File: `src/pages/Team.tsx**`
+**D. ScrollRevealText contrast sections**: Change `bg-[hsl(40,16%,94%)]` → `bg-[hsl(38,18%,93%)]` for richer warm tone. Add decorative gold gradient bands at top and bottom when `isContrastLight`.
 
-- Delete `bensonPhoto` import (line 15)
-- Delete all Benson deal logo imports (lines 28-35: abgLogo, rpxLogo, ideraLogo, westernDigitalLogo, mindbodyLogo, selligentLogo, micronLogo)
-- Delete `bensonDealLogos` array (lines 98-106)
-- Delete the Benson entry from `founders` array (lines 109-126), keeping only Harin
-- Update stats bar:
-  - `"25+"` → `"15+"`
-  - `"$30B+"` → `"$15B+"`
-  - US third stat: keep `"50+"` / `"Transactions"`
-- Remove Benson-related logos from `foundersLogos` array: remove `creditSuisseLogo` entry (line 187) since it was Benson's — actually check: Harin also lists Credit Suisse? No, Harin's logos are Warburg, Evercore, Deutsche Bank. Credit Suisse was Benson's. Remove Credit Suisse from `foundersLogos` (line 187). Also remove `blackrockLogo` from `foundersLogos` (line 182) — BlackRock was Benson's institution. Keep: Warburg Pincus, Neos Partners, Deutsche Bank, Saltwater, Lam Research, Evercore, Dunes Point, Culinary Institute, DePaul.   
-  
-REMOVE Bekley Haas logo too.
+**E. StatReveal in ScrollRevealText**: When not dark, stat values use `text-gold` instead of `text-foreground`.
 
----
+**F. CTA sections across all pages**: Change light-mode bg from `bg-[hsl(40,18%,96%)]` to `bg-[hsl(38,16%,92%)]` and add `border-t border-gold/10`. Affects: Home, GuidingPrinciples, OurFocus, InvestmentCriteria, OurPlaybook, About, Contact, Team.
 
-### Fix 5: Investment Profile Currency — Remove Subtitles
+**G. `src/index.css`**: Add `.btn-premium` shimmer sweep CSS with `::after` pseudo-element. Add `.gold-underline-hover` utility. Verify all keyframes exist (they do from prior rounds). Add `gold-border-pulse` keyframe + `.gold-shimmer-border` utility if missing.
 
-**Files: `src/pages/OurFocus.tsx`, `src/pages/InvestmentCriteria.tsx**`
+### Fix 7: PrincipleCard Hover Enhancement
+**File: `src/components/PrinciplesGrid.tsx`**
+- Add `y: -4` to `whileHover` alongside `scale: 1.02`
+- Gold left-edge: start at `h-[30%] bg-gold/10` (visible by default), expand to `h-full bg-gold/50` on hover
+- Watermark: light mode default `text-gold/[0.06]`, hover `text-gold/[0.12]`
+- Add shimmer bottom border: `border-b-2 border-transparent group-hover:border-gold/20 transition-all duration-500`
 
-US region: Remove `subtitle` from Revenue and EBITDA entries.
-India region: Remove `subtitle` from Revenue and EBITDA entries.
-Remove the `subtitle` rendering logic from StatCard in both files (the `{subtitle && ...}` block). Remove `subtitle` from StatCard props.
+### Fix 8: LogoMarquee Light-Mode Background
+**File: `src/components/LogoMarquee.tsx`**
+- Change `bg-[hsl(40,16%,94%)]` → `bg-[hsl(38,16%,92%)]`
+- Add gold border accents (1px gold/10 top and bottom) when `isContrastLight`
+- Import and render `<LightSectionEffects variant="section" />` inside the band when `isContrastLight`
 
----
+### Fix 9: Team Stats Bar Visual Upgrade
+**File: `src/pages/Team.tsx`** (StatItem component, lines 303-318)
+- Light mode: value color `text-gold` instead of `text-foreground`
+- Add animated gold underline: `motion.div` from `width: 0` → `width: 24px`, `h-[1.5px] bg-gold/30 mx-auto mt-2`, staggered delays
+- Counting animation: parse numeric portion with `useMotionValue` + `animate` for count-up effect, fallback to static text
 
-### Fix 6: StatCard Design Upgrade
+### Fix 10: CSS Additions
+**File: `src/index.css`**
+- Add `.btn-premium` shimmer sweep (position: relative, overflow: hidden, ::after pseudo-element with gold gradient)
+- Add `.gold-underline-hover` utility
+- Add `gold-border-pulse` keyframe + `.gold-shimmer-border` if not already present
+- Verify all existing keyframes are intact
+- Add button active press effect: `button:not([disabled]):active { transform: scale(0.97) }`
 
-**Files: `src/pages/OurFocus.tsx`, `src/pages/InvestmentCriteria.tsx**`
+### Fix 11: CinematicScrollReveal Bottom Transition
+**Files: `src/components/CinematicScrollReveal.tsx`, `src/components/USCinematicScrollReveal.tsx`**
+- Add a decorative gold gradient line at the bottom of each component's render output: `<div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.15), transparent)' }} />`
 
-Enhance number cards (isCompact):
+### Files Modified (Total: ~12)
+
+| File | Key Changes |
+|---|---|
+| `src/pages/Home.tsx` | Remove Berkeley Haas, tighten Our Process padding, CTA bg update |
+| `src/components/LogoMarquee.tsx` | Uniform sizing, bolder opacity, hover scale, warmer bg, LightSectionEffects |
+| `src/pages/GuidingPrinciples.tsx` | Single-line heading, tighten padding, CTA bg |
+| `src/components/ScrollRevealText.tsx` | Tighter padding, warmer contrast bg, gold stat values, decorative borders |
+| `src/components/ui/Section.tsx` | FadeIn blur effect, SectionLabel letter-spacing animation |
+| `src/components/PrinciplesGrid.tsx` | Hover lift, visible default gold accent, bolder watermark, bottom border |
+| `src/pages/OurFocus.tsx` | StatCard gold underline, shimmer sweep, tighter gaps, CTA bg |
+| `src/pages/InvestmentCriteria.tsx` | Same StatCard upgrades, CTA bg |
+| `src/pages/Team.tsx` | Gold stat values, counting animation, gold underlines, DealLogoMarquee uniform sizing |
+| `src/index.css` | btn-premium shimmer, gold-underline-hover, gold-border-pulse, button press |
+| `src/components/CinematicScrollReveal.tsx` | Gold gradient bottom line |
+| `src/components/USCinematicScrollReveal.tsx` | Gold gradient bottom line |
+| `src/pages/About.tsx` | CTA bg update |
+| `src/pages/Contact.tsx` | CTA bg update |
+| `src/pages/OurPlaybook.tsx` | CTA bg update |
 
-- Gold top-border: `border-t-2 border-gold/30` that shimmers on hover
-- Value: `font-serif text-[clamp(1.5rem,3vw,2rem)] text-gold` with hover text-shadow
-- Currency watermark: region-based `$` or `₹` at `absolute top-3 right-4 text-[3rem] text-gold/[0.05] font-serif italic`
-
-Enhance text cards:
-
-- Gold left-border: `border-l-2 border-gold/20 hover:border-gold/50`
-- Gold dot before label: `<span className="text-gold mr-1">•</span>`
-- Value text: `text-[14px] md:text-[15px] text-foreground/85 leading-[1.7]`
-- Hover: lift 4px + radial gold inner glow
-
-Add shimmer sweep pseudo-element on the stat band container.
-
----
-
-### Fix 7 + 8: Home & Team Page Verification
-
-These are auto-fixed by Fixes 1-4. No additional code changes needed — ScrollRevealText and LogoMarquee will now be theme-aware.
-
----
-
-### Fix 9: CSS Keyframes Completeness
-
-**File: `src/index.css**`
-
-Add missing keyframe:
-
-```css
-@keyframes gold-border-pulse {
-  0%, 100% { border-color: hsl(38 48% 52% / 0.15); }
-  50% { border-color: hsl(38 48% 52% / 0.35); }
-}
-```
-
-Add utility class `.gold-shimmer-border`.
-
-All other keyframes already exist.
-
----
-
-### Fix 10: Section Ambient Effects Audit
-
-Pages to verify/update: All pages already have conditional `{isDark ? <DarkSectionEffects> : <LightSectionEffects>}` from the previous round. Quick audit confirms this is done in Home, About, GuidingPrinciples, OurFocus, InvestmentCriteria, OurPlaybook, Team, Contact.
-
----
-
-### Fix 11: CinematicScrollReveal & USCinematicScrollReveal
-
-**Files: `src/components/CinematicScrollReveal.tsx`, `src/components/USCinematicScrollReveal.tsx**`
-
-Both components use full-bleed photographic images with dark gradient overlays — this is intentional cinematic photography, not a "dark section" that should flip. These are image-based reveals (like hero banners) where the dark overlay ensures text readability over the photo. No changes needed — the image always needs a dark overlay regardless of theme.
-
----
-
-### Fix 12: SiteFooter — Already Theme-Aware
-
-The footer already uses `isDark ? 'bg-primary' : 'bg-card'` conditional. Footer conventionally stays dark/navy even in light mode on PE sites. Current implementation is correct. No changes.
-
----
-
-### Fix 13: GlassCard — Already Updated
-
-GlassCard already has the light-mode spec from the previous round (warm bg, visible border, boosted gold accents). No changes needed.
-
----
-
-### Fix 14: Mobile Responsiveness
-
-Verified by structural review. All grid layouts use responsive breakpoints. No additional changes needed.
-
----
-
-### Files Modified
-
-
-| File                                  | Changes                                                                          |
-| ------------------------------------- | -------------------------------------------------------------------------------- |
-| `src/components/ScrollRevealText.tsx` | Import useTheme, 3-way theme logic, warm stone bg for dark-variant-in-light-mode |
-| `src/components/LogoMarquee.tsx`      | Import useTheme, warm stone bg for dark-variant-in-light-mode                    |
-| `src/pages/Team.tsx`                  | Remove all Benson traces, fix StatItem visibility, update stats                  |
-| `src/pages/OurFocus.tsx`              | Remove subtitles, upgrade StatCard design                                        |
-| `src/pages/InvestmentCriteria.tsx`    | Remove subtitles, upgrade StatCard design                                        |
-| `src/index.css`                       | Add gold-border-pulse keyframe + utility class                                   |
