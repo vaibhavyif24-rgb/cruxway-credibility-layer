@@ -14,7 +14,9 @@ import heroUSAbout from '@/assets/hero-us-about.jpg';
 
 const About = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
   const isIndia = region === 'india';
+  const isDark = theme === 'dark';
 
   const approach = isIndia
     ? [
