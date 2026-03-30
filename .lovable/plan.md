@@ -1,139 +1,94 @@
 
 
-## Plan: Remove WaveBackground + Footer Light Mode + Dark Mode Text + Logo Sizes + Light Effects + Animations
+## Plan: Precision Polish Pass — ScrollRevealText Box Fix + Carousel Tightening + Light Mode Effects + Micro-Animations
 
-7 sections, ~14 files modified, 1 file deleted.
-
----
-
-### Section 1: Remove WaveBackground Everywhere
-
-**Delete:** `src/components/WaveBackground.tsx`
-
-**Remove import line + JSX usage from 10 files:**
-
-| File | Import line | JSX lines to remove |
-|---|---|---|
-| `Home.tsx` | line 14 | line 103, line 225 |
-| `Team.tsx` | line 12 | line 361, line 386 |
-| `OurFocus.tsx` | line 10 | line 58, line 163 |
-| `InvestmentCriteria.tsx` | line 13 | line 112, line 270 |
-| `OurPlaybook.tsx` | line 10 | line 98, line 184 |
-| `GuidingPrinciples.tsx` | line 10 | line 37, line 106 |
-| `About.tsx` | line 11 | line 51, line 126 |
-| `Contact.tsx` | line 12 | line 34 |
-| `ScrollRevealText.tsx` | line 4 | line 59 |
-| `SiteFooter.tsx` | line 5 | line 26 |
-
-For `ScrollRevealText.tsx`, also add `DarkSectionEffects` import and render `{isActuallyDark && <DarkSectionEffects variant="default" />}` in place of the wave, plus gold gradient lines for dark variant.
+8 files modified, no files created or deleted.
 
 ---
 
-### Section 2: Footer — Theme-Aware (White in Light, Dark in Dark)
-
-**File: `src/components/SiteFooter.tsx`** — Full rewrite
-
-- Replace `bg-[hsl(228,58%,18%)]` with `${isDark ? 'bg-primary' : 'bg-background'}`
-- Add `LightSectionEffects` import, render `{!isDark && <LightSectionEffects variant="section" />}`
-- Add gold glow behind logo: `radial-gradient` div, theme-conditional color
-- Add shimmer line at top of footer
-- All text colors become theme-conditional:
-  - Logo: `isDark ? 'text-[hsl(40,28%,95%)]' : 'text-foreground'`
-  - Links: `isDark ? 'text-[hsl(40,28%,95%)]/15 hover:...' : 'text-muted-foreground/60 hover:text-foreground/70'`
-  - Dividers: `isDark ? 'bg-[hsl(40,28%,95%)]/[0.04]' : 'bg-border/40'`
-  - Copyright, confidential, separator: similar ternaries
-- Add link hover underline animation (gold slide-in)
-
----
-
-### Section 3: Dark Mode Text Visibility Fixes
-
-**File: `src/components/ui/Section.tsx`**
-- Add `import { useTheme } from '@/contexts/ThemeContext'`
-- `SectionLabel`: add `useTheme()`, auto-detect dark mode: `const useGold = light !== undefined ? light : theme === 'dark'`
-- Color class: `useGold ? 'text-gold/45' : 'text-[hsl(228,45%,45%)]/60'` (bump light mode from /50 to /60)
-
-**File: `src/index.css`**
-- Dark mode `--muted-foreground`: change `228 12% 55%` → `228 10% 62%`
+### Section 1: Remove Box Artifacts from ScrollRevealText
 
 **File: `src/components/ScrollRevealText.tsx`**
-- Stat labels line 179: `text-primary-foreground/35` → `text-primary-foreground/45`
 
-**Files: `src/pages/OurFocus.tsx` + `src/pages/InvestmentCriteria.tsx`**
-- `TypographicText` value: `isDark ? 'text-primary-foreground/70' : 'text-foreground/85'`
+- **Delete lines 63-81**: Remove gold gradient bands (top/bottom h-px lines) AND the gold wipe at top-1/2. These create the visible "box frame" and mid-text line.
+- **Delete line 57**: Remove `style={{ contentVisibility: 'auto' }}` from the section element.
+- **Change line 54**: `bg-[hsl(38,18%,93%)]` → `bg-background` for `isContrastLight`. This eliminates the hard-edged contrast block; differentiation comes from LightSectionEffects ambient blobs.
+- **Add gradient fades** (lines ~59-62 area, after effects): For `!isActuallyDark` variants, add top/bottom `h-12 md:h-16` gradient fades (`bg-gradient-to-b from-background to-transparent` and inverse) to smooth section transitions.
+- **Stat value hover**: In `StatReveal`, change the `<p>` for value to `<motion.p>` with `whileHover={{ scale: 1.05, textShadow: '0 0 20px hsl(38,48%,52%,0.3)' }}`.
 
 ---
 
-### Section 4: Logo Sizes — Increase Base + Scales
+### Section 2: Logo Carousel — Tighter Gaps + Compact Padding
 
 **File: `src/components/LogoMarquee.tsx`**
-- `baseHeight`: `isMobile ? 56 : 96` (was 48/80)
-- `baseMaxWidth`: `isMobile ? 200 : 400` (was 160/280)
-- `containerHeight`: `isMobile ? 64 : 112` (was 56/96)
 
-**Files: `Home.tsx` + `Team.tsx`** — Update both `foundersLogos` and `allLogos`:
-- Warburg: `2.2`, NITI Aayog: `2.2`, Swishin: `2.2`
-- Neos/Saltwater/Evercore/TreeForest/Lodha: `1.3`
-- Deutsche Bank/Lam Research/Dunes Point/CIA/DePaul/Ashoka/IIC: `1.2`
-- All `duration={55}` → `duration={60}`
+- **Line 70**: Change gap from `gap-12 md:gap-16 lg:gap-24` → `gap-6 md:gap-10 lg:gap-14`
+- **Lines 37-40**: Reduce bgClass padding:
+  - Dark: `py-6 md:py-10 lg:py-14` → `py-4 md:py-6 lg:py-8`
+  - Contrast light: same reduction
+  - Default: `py-5 md:py-8 lg:py-10` → `py-3 md:py-5 lg:py-6`
 
 ---
 
-### Section 5: LightSectionEffects Enhancement
+### Section 3: LightSectionEffects — Aurora Ribbon + Ripple Rings + Stronger Wash
 
 **File: `src/components/LightSectionEffects.tsx`**
-- Gold blob opacity: `0.10 * intensity` (was 0.07)
-- Persian blue blob opacity: `0.07 * intensity` (was 0.05)
-- White blob opacity: `0.15 * intensity` (was 0.08)
-- Diagonal pattern: `opacity-[0.025]` (was 0.02)
-- Add drifting golden wash: large horizontal gradient with 30s x-drift animation
-- Add `noise-overlay` class to container div
 
-**File: `src/index.css`** — Add CSS rules:
-- `.noise-overlay::before` with SVG fractal noise at opacity 0.03
-- `@keyframes grain` for animated noise
-- `.light-grain::before` for global page grain effect
-- `.btn-premium::before` radial ripple on hover
+- **Add aurora ribbon**: After existing golden wash (after line 82), add a large blurred `motion.div` with multi-color gold/blue gradient, `filter: blur(60px)`, animating x from -15% to 15% over 25s with slight rotation.
+- **Add ripple rings**: For `variant === 'hero'` only, add concentric circle borders (3 nested `div`s with `border-gold/[0.06]`) that scale/pulse 1→1.3 over 8s. Positioned top-right.
+- **Increase golden wash amplitude**: Change x animation from `['-20%', '20%', '-20%']` → `['-30%', '30%', '-30%']`, duration from 30 → 22.
 
 ---
 
-### Section 6: Premium Animations
+### Section 4: Scroll Progress Bar Gradient
+
+**File: `src/components/SiteHeader.tsx`**
+
+- **Line 96**: Change `className="... bg-gold/40 ..."` + remove `bg-gold/40`, add `style={{ scaleX: scrollYProgress, background: 'linear-gradient(90deg, hsl(38,48%,52%,0.2), hsl(38,48%,52%,0.5), hsl(38,48%,52%,0.2))' }}`
+
+---
+
+### Section 5: Footer Entrance Animation
+
+**File: `src/components/SiteFooter.tsx`**
+
+- Wrap `<div className="max-w-[1080px]...">` content in a `<motion.div>` with `initial={{ opacity: 0 }}`, `whileInView={{ opacity: 1 }}`, `viewport={{ once: true, margin: '-50px' }}`, `transition={{ duration: 0.8 }}`.
+
+---
+
+### Section 6: Investment Profile Gold Glow Pulse
+
+**Files: `src/pages/OurFocus.tsx` + `src/pages/InvestmentCriteria.tsx`**
+
+- In `TypographicNumber`, change the value `<p>` to `<motion.p>` with `initial={{ textShadow: 'none' }}`, `whileInView={{ textShadow: ['none', '0 0 30px hsl(38,48%,52%,0.25)', 'none'] }}`, `viewport={{ once: true }}`, `transition={{ duration: 2, delay: 0.5 }}`.
+
+---
+
+### Section 7: CSS Enhancements
 
 **File: `src/index.css`**
-- Add `.btn-premium::before` radial ripple effect (width 0→300% on hover)
-- Keep existing `::after` shimmer sweep
 
-**File: `src/components/ScrollRevealText.tsx`** — StatReveal counter animation:
-- Add `useRef`, `useInView`, `useState`, `useEffect`
-- Animate stat values counting up from 0 on viewport entry (40 frames, ease-out cubic)
-
-**File: `src/components/GlassCard.tsx`** — Already has tilt, no changes needed.
+- Add `.btn-premium::before` radial ripple effect (width 0→300% on hover, `radial-gradient(circle, hsl(38 48% 52% / 0.08), transparent 70%)`).
+- Ensure existing `::after` shimmer sweep is present.
 
 ---
 
-### Section 7: Wave Visibility Refinement
+### Section 8: contentVisibility Global Removal
 
-**File: `src/components/WaveBackground.tsx`** — **DELETED** in Section 1. No refinement needed.
+Already only in `ScrollRevealText.tsx` (confirmed via search). Handled in Section 1.
 
 ---
 
-### Technical Details
+### Technical Summary
 
 | File | Changes |
 |---|---|
-| `WaveBackground.tsx` | **Deleted** |
-| `SiteFooter.tsx` | Theme-aware bg/text, LightSectionEffects, shimmer line, link hover underlines |
-| `ui/Section.tsx` | SectionLabel auto-detects dark mode, useTheme import |
-| `ScrollRevealText.tsx` | Remove wave, add DarkSectionEffects for dark variant, stat counter animation, brighter labels |
-| `LogoMarquee.tsx` | Larger base sizes (96/56px), wider maxWidth (400/200px) |
-| `LightSectionEffects.tsx` | Larger blobs, golden wash, noise overlay |
-| `index.css` | Brighter muted-foreground dark, noise/grain CSS, btn-premium ripple |
-| `Home.tsx` | Remove wave, logo scales 2.2/1.3/1.2, duration 60 |
-| `Team.tsx` | Remove wave ×2, logo scales, duration 60 |
-| `OurFocus.tsx` | Remove wave ×2, TypographicText dark fix |
-| `InvestmentCriteria.tsx` | Remove wave ×2, TypographicText dark fix |
-| `Contact.tsx` | Remove wave |
-| `About.tsx` | Remove wave ×2 |
-| `GuidingPrinciples.tsx` | Remove wave ×2 |
-| `OurPlaybook.tsx` | Remove wave ×2 |
+| `ScrollRevealText.tsx` | Remove gold bands, gold wipe, contentVisibility; soften contrast bg; add gradient fades; stat hover |
+| `LogoMarquee.tsx` | Tighter gaps, compact padding |
+| `LightSectionEffects.tsx` | Aurora ribbon, ripple rings, stronger wash |
+| `SiteHeader.tsx` | Gradient scroll progress bar |
+| `SiteFooter.tsx` | Entrance animation wrapper |
+| `OurFocus.tsx` | TypographicNumber gold glow pulse |
+| `InvestmentCriteria.tsx` | TypographicNumber gold glow pulse |
+| `index.css` | btn-premium radial ripple |
 
