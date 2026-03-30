@@ -1,9 +1,11 @@
 import { useRegion } from '@/contexts/RegionContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import GlassCard from '@/components/GlassCard';
 import ScrollRevealText from '@/components/ScrollRevealText';
@@ -13,6 +15,8 @@ import heroUSContact from '@/assets/hero-us-contact.jpg';
 
 const Contact = () => {
   const { region } = useRegion();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const isIndia = region === 'india';
 
   const email = isIndia ? 'india@cruxway.com' : 'info@cruxway.com';
@@ -21,20 +25,20 @@ const Contact = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative text-primary-foreground overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end">
+      <section className={`relative overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaContact : heroUSContact} overlay="strong" />
-        <DarkSectionEffects variant="hero" />
+        {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-16 lg:pt-40 lg:pb-18">
           <FadeIn>
-            <SectionLabel light>Contact</SectionLabel>
+            <SectionLabel light={isDark}>Contact</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.6rem)] text-white max-w-[420px] leading-[1.1] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[420px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               Get in <span className="text-gold">Touch</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[15px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[420px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'We welcome conversations with Indian founders and business owners exploring long-term partnerships.'
                 : 'We welcome conversations with founders and business owners exploring long-term partnerships.'}
@@ -51,7 +55,6 @@ const Contact = () => {
       <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-            {/* Email Card */}
             <FadeIn>
               <a href={`mailto:${email}`} className="block h-full">
                 <GlassCard index={0} className="p-6 md:p-8 h-full">
@@ -76,7 +79,6 @@ const Contact = () => {
               </a>
             </FadeIn>
 
-            {/* Location Card */}
             <FadeIn delay={0.08}>
               <GlassCard index={1} className="p-6 md:p-8 h-full">
                 <div className="flex items-start justify-between mb-6">
@@ -101,7 +103,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Commitment — scroll reveal */}
+      {/* Commitment */}
       <ScrollRevealText
         label="Our Commitment"
         heading="Every conversation is treated with discretion and respect. We engage selectively and commit deeply to the founders we partner with."

@@ -374,8 +374,8 @@ const Team = () => {
   return (
     <div>
       {/* Hero */}
-      <section className={`relative overflow-hidden ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
-        <DarkSectionEffects variant="hero" />
+      <section className={`relative overflow-hidden ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'}`}>
+        {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
