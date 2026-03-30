@@ -57,7 +57,7 @@ const StatCard = ({ label, value, delay = 0, isDark, isCompact = false, currency
         isCompact
           ? `border-t-2 border-gold/30 border-x border-b p-5 md:p-6 ${
               isDark
-                ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-x-border/30 border-b-border/30'
+                ? 'bg-[hsl(228,42%,11%)]/80 backdrop-blur-sm border-x-border/30 border-b-border/30'
                 : 'bg-white border-x-[hsl(38,15%,90%)] border-b-[hsl(38,15%,90%)] hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)] hover:border-t-gold/70'
             }`
           : `border-l-2 border-gold/20 group-hover:border-gold/50 border-y border-r p-5 md:p-6 ${
