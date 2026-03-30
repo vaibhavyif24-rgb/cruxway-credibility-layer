@@ -140,12 +140,12 @@ const indiaPartner: TeamMember = {
 };
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.6 },
-  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.1 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.0 },
+  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
-  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.1 },
+  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
   { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
-  { src: evercoreLogo, alt: 'Evercore', scale: 1.1 },
+  { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
   { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
   { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
   { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
@@ -154,11 +154,11 @@ const foundersLogos = [
 const allLogos = [
   ...foundersLogos,
   { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
-  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 1.5 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.0 },
   { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
-  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.1 },
-  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.1 },
-  { src: swishinLogo, alt: 'Swishin Ventures', scale: 1.5 },
+  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.2 },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.2 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.0 },
 ];
 
 /* ─── Deal Logo Marquee ─── */
