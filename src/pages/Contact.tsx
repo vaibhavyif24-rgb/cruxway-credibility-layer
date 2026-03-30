@@ -20,7 +20,8 @@ const Contact = () => {
   const isIndia = region === 'india';
 
   const email = isIndia ? 'india@cruxway.com' : 'info@cruxway.com';
-  const location = isIndia ? 'GK II, Delhi, India' : 'San Diego, California';
+  const location = isIndia ? 'E-97, GK II, Delhi, India' : 'San Diego, California';
+  const mapsUrl = isIndia ? 'https://maps.google.com/?q=E-97+GK+II+Delhi+India' : 'https://maps.google.com/?q=San+Diego+California';
 
   return (
     <div>
