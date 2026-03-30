@@ -3,32 +3,44 @@ import React, { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
- * Animated background effects for dark/blue sections.
- * Renders floating orbs, shimmer lines, animated particles,
- * and subtle geometric accents for depth and life.
- * Theme-aware: reduces intensity in light mode for clean contrast.
+ * Animated background effects for hero/CTA sections.
+ * Theme-aware: uses warm gold/cream tones in light mode,
+ * dark navy tones in dark mode. All animations preserved.
  */
 const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'hero' | 'cta' }>(
   ({ variant = 'default' }, ref) => {
     const { theme } = useTheme();
-    // These effects sit inside intentionally-dark sections (header, CTA, hero)
-    // so they should always render, but with slightly reduced intensity in light mode
-    const fx = theme === 'light' ? 0.6 : 1;
+    const isDark = theme === 'dark';
+    const fx = isDark ? 1 : 0.6;
+
+    // Theme-aware colors for orbs and gradients
+    const baseGradient = isDark
+      ? 'bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20'
+      : 'bg-gradient-to-b from-[hsl(38,20%,85%)]/20 via-transparent to-[hsl(38,20%,85%)]/10';
+
+    const orbTopRight = isDark
+      ? 'radial-gradient(circle, hsl(38 45% 55% / 0.03), transparent 70%)'
+      : 'radial-gradient(circle, hsl(38 45% 55% / 0.06), transparent 70%)';
+
+    const orbBottomLeft = isDark
+      ? 'radial-gradient(circle, hsl(207 50% 18% / 0.3), transparent 70%)'
+      : 'radial-gradient(circle, hsl(38 30% 70% / 0.12), transparent 70%)';
+
     return (
       <div ref={ref}>
         {/* Base gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/40 via-transparent to-navy-deep/20 pointer-events-none" />
+        <div className={`absolute inset-0 ${baseGradient} pointer-events-none`} />
 
         {/* Floating gold orb - top right */}
         <div
           className="absolute top-[10%] right-[5%] w-[200px] h-[200px] md:w-[350px] md:h-[250px] rounded-full pointer-events-none float-orb-slow"
-          style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.03), transparent 70%)' }}
+          style={{ background: orbTopRight }}
         />
 
-        {/* Floating prussian orb - bottom left */}
+        {/* Floating orb - bottom left */}
         <div
           className="absolute bottom-[5%] left-[2%] w-[250px] h-[180px] md:w-[400px] md:h-[280px] rounded-full pointer-events-none float-orb-medium"
-          style={{ background: 'radial-gradient(circle, hsl(207 50% 18% / 0.3), transparent 70%)' }}
+          style={{ background: orbBottomLeft }}
         />
 
         {/* Central pulsing glow */}
