@@ -3,7 +3,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 
 /* ─── Minimal SVG flag icons ─── */
 const IndiaFlag = ({ size = 16 }: { size?: number }) => (
@@ -39,6 +39,8 @@ const SiteHeader = () => {
   const flagRef = useRef<HTMLDivElement>(null);
   const prefix = `/${region}`;
   const isDark = theme === 'dark';
+
+  const { scrollYProgress } = useScroll();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -85,10 +87,16 @@ const SiteHeader = () => {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isDark
-            ? `hero-gradient-animated ${scrolled ? 'shadow-[0_2px_16px_-2px_hsl(210_60%_4%/0.5)]' : ''}`
+            ? `hero-gradient-animated ${scrolled ? 'shadow-[0_2px_16px_-2px_hsl(228_55%_6%/0.5)]' : ''}`
             : `bg-white/90 backdrop-blur-xl ${scrolled ? 'shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'border-b border-transparent'}`
         }`}
       >
+        {/* Scroll progress bar */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-[2px] bg-gold/40 origin-left z-50"
+          style={{ scaleX: scrollYProgress }}
+        />
+
         {/* Animated shimmer line */}
         <div
           className="h-px w-full"
@@ -106,7 +114,7 @@ const SiteHeader = () => {
               className={`font-serif text-3xl md:text-4xl tracking-[-0.02em] transition-colors duration-300 font-normal ${
                 isDark
                   ? 'text-primary-foreground hover:opacity-75'
-                  : 'text-[hsl(207,65%,12%)] hover:text-gold'
+                  : 'text-[hsl(228,58%,18%)] hover:text-gold'
               }`}
             >
               Cruxway
@@ -123,17 +131,17 @@ const SiteHeader = () => {
                       isActive(item.path)
                         ? isDark
                           ? 'text-primary-foreground bg-primary-foreground/[0.04]'
-                          : 'text-[hsl(207,65%,12%)] bg-foreground/[0.03]'
+                          : 'text-[hsl(228,58%,18%)] bg-foreground/[0.03]'
                         : isDark
                           ? 'text-primary-foreground/40 hover:text-primary-foreground/70 hover:bg-primary-foreground/[0.03]'
-                          : 'text-[hsl(210,8%,46%)] hover:text-foreground hover:bg-foreground/[0.02]'
+                          : 'text-[hsl(228,8%,46%)] hover:text-foreground hover:bg-foreground/[0.02]'
                     }`}
                   >
                     {item.label}
                     {isActive(item.path) && (
                       <motion.span
                         layoutId="nav-underline"
-                        className="absolute -bottom-0.5 left-0 right-0 h-px bg-gold/30"
+                        className={`absolute -bottom-0.5 left-0 right-0 h-px ${isDark ? 'bg-gold/30' : 'bg-[hsl(228,45%,45%)]/30'}`}
                         transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                       />
                     )}
@@ -172,7 +180,7 @@ const SiteHeader = () => {
                             ? 'border-primary-foreground/[0.06] shadow-[0_8px_24px_-6px_rgba(0,0,0,0.4)]'
                             : 'border-border bg-white shadow-lg'
                         }`}
-                        style={isDark ? { background: 'hsl(215, 50%, 8%)' } : undefined}
+                        style={isDark ? { background: 'hsl(228, 48%, 10%)' } : undefined}
                       >
                         {(['india', 'us'] as const).map((r) => (
                           <button

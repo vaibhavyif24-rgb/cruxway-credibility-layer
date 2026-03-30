@@ -32,12 +32,9 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
   const words = heading.split(' ');
 
-  // 3-way classification
   const isActuallyDark = variant === 'dark' && theme === 'dark';
   const isContrastLight = variant === 'dark' && theme === 'light';
   const isLight = variant === 'light';
-
-  // For sub-components: isDark means "use light text on dark bg"
   const isDarkText = isActuallyDark;
 
   const normHighlights = highlights.map(h => h.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, ''));
@@ -58,7 +55,6 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       } ${className}`}
       style={{ contentVisibility: 'auto' }}
     >
-      {/* Ambient effects */}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
 
@@ -70,7 +66,19 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         </>
       )}
 
-      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 flex flex-col items-center text-center">
+      {/* Section entry gold wipe for contrast sections */}
+      {isContrastLight && (
+        <motion.div
+          className="absolute top-1/2 left-0 right-0 h-px z-10"
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.15), transparent)' }}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        />
+      )}
+
+      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
         {label && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
@@ -122,11 +130,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 ScrollRevealText.displayName = 'ScrollRevealText';
 
 const Word = ({
-  word,
-  range,
-  progress,
-  isDark,
-  isHighlighted = false,
+  word, range, progress, isDark, isHighlighted = false,
 }: {
   word: string;
   range: [number, number];
@@ -135,7 +139,6 @@ const Word = ({
   isHighlighted?: boolean;
 }) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
-
   return (
     <motion.span
       style={{
@@ -154,11 +157,7 @@ const Word = ({
 };
 
 const StatReveal = ({
-  stat,
-  index,
-  total,
-  progress,
-  isDark,
+  stat, index, total, progress, isDark,
 }: {
   stat: { value: string; label: string };
   index: number;
@@ -175,7 +174,7 @@ const StatReveal = ({
       <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-gold'}`}>
         {stat.value}
       </p>
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-[hsl(228,45%,45%)]/40'}`}>
         {stat.label}
       </p>
     </motion.div>

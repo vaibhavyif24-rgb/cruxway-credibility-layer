@@ -7,24 +7,24 @@
 @layer base {
   :root {
     --background: 40 25% 96%;
-    --foreground: 207 65% 12%;
+    --foreground: 228 58% 18%;
 
     --card: 40 20% 94%;
-    --card-foreground: 207 65% 12%;
+    --card-foreground: 228 58% 18%;
 
     --popover: 40 18% 97%;
-    --popover-foreground: 207 65% 12%;
+    --popover-foreground: 228 58% 18%;
 
-    --primary: 207 65% 12%;
+    --primary: 228 58% 18%;
     --primary-foreground: 40 28% 95%;
 
     --secondary: 38 14% 91%;
-    --secondary-foreground: 207 65% 12%;
+    --secondary-foreground: 228 58% 18%;
 
     --muted: 38 12% 91%;
-    --muted-foreground: 210 8% 46%;
+    --muted-foreground: 228 8% 46%;
 
-    --accent: 207 50% 18%;
+    --accent: 228 45% 24%;
     --accent-foreground: 40 28% 95%;
 
     --destructive: 0 65% 50%;
@@ -32,15 +32,15 @@
 
     --border: 38 12% 86%;
     --input: 38 12% 86%;
-    --ring: 207 65% 12%;
+    --ring: 228 58% 18%;
 
     --radius: 0.375rem;
 
     /* Brand tokens */
-    --prussian: 207 65% 12%;
-    --prussian-mid: 207 50% 18%;
-    --prussian-light: 207 35% 28%;
-    --navy-deep: 210 60% 6%;
+    --prussian: 228 58% 18%;
+    --prussian-mid: 228 45% 24%;
+    --prussian-light: 228 35% 32%;
+    --navy-deep: 228 55% 8%;
     --warm-gray: 30 8% 52%;
     --light-stone: 40 16% 92%;
     --cream: 40 20% 93%;
@@ -74,37 +74,37 @@
 
   /* Dark mode */
   .dark {
-    --background: 210 50% 5%;
+    --background: 228 45% 6%;
     --foreground: 40 18% 88%;
 
-    --card: 210 45% 7%;
+    --card: 228 40% 8%;
     --card-foreground: 40 18% 88%;
 
-    --popover: 210 50% 6%;
+    --popover: 228 45% 7%;
     --popover-foreground: 40 18% 88%;
 
-    --primary: 210 55% 10%;
+    --primary: 228 50% 12%;
     --primary-foreground: 40 25% 93%;
 
-    --secondary: 210 30% 12%;
+    --secondary: 228 30% 12%;
     --secondary-foreground: 40 14% 82%;
 
-    --muted: 210 28% 11%;
-    --muted-foreground: 210 12% 55%;
+    --muted: 228 28% 12%;
+    --muted-foreground: 228 12% 55%;
 
-    --accent: 207 40% 16%;
+    --accent: 228 38% 18%;
     --accent-foreground: 40 28% 93%;
 
     --destructive: 0 65% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 22% 15%;
-    --input: 210 22% 15%;
+    --border: 228 22% 16%;
+    --input: 228 22% 16%;
     --ring: 38 40% 55%;
 
-    --cream: 210 40% 7%;
-    --rule: 210 18% 17%;
-    --light-stone: 210 28% 10%;
+    --cream: 228 40% 7%;
+    --rule: 228 18% 17%;
+    --light-stone: 228 28% 10%;
     --gold: 38 50% 55%;
     --gold-dim: 38 30% 48%;
 
@@ -244,6 +244,12 @@
   50% { border-color: hsl(38 48% 52% / 0.35); }
 }
 
+/* Text shimmer for hero headings */
+@keyframes text-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -252,14 +258,14 @@
   .hero-gradient-animated {
     background: linear-gradient(
       135deg,
-      hsl(var(--prussian)) 0%,
-      hsl(var(--navy-deep)) 25%,
-      hsl(var(--prussian-mid)) 50%,
-      hsl(var(--navy-deep)) 75%,
-      hsl(var(--prussian)) 100%
+      hsl(228 58% 18%) 0%,
+      hsl(228 50% 14%) 25%,
+      hsl(228 45% 24%) 50%,
+      hsl(228 42% 20%) 75%,
+      hsl(228 58% 18%) 100%
     );
     background-size: 400% 400%;
-    animation: hero-gradient-shift 16s ease infinite;
+    animation: hero-gradient-shift 20s ease infinite;
   }
 
   .float-orb-slow { animation: float-slow 12s ease-in-out infinite; }
@@ -327,5 +333,23 @@
   }
   .gold-underline-hover:hover {
     background-size: 100% 1px;
+  }
+
+  /* Text shimmer gold — one-time sweep on hero headings */
+  .text-shimmer-gold {
+    background: linear-gradient(
+      90deg,
+      currentColor 0%,
+      currentColor 40%,
+      hsl(38 55% 65%) 50%,
+      currentColor 60%,
+      currentColor 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: text-shimmer 3s ease-in-out 0.5s 1;
+    animation-fill-mode: forwards;
   }
 }
