@@ -7,7 +7,6 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import GlassCard from '@/components/GlassCard';
-import WaveBackground from '@/components/WaveBackground';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
