@@ -422,6 +422,7 @@ const StickyCardItem: React.FC<{
 
 /* ─── Main Component ─── */
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step', mode = 'slides' }) => {
+  const isMobile = useIsMobile();
   const [cardHeight, setCardHeight] = useState(getCardHeight);
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
