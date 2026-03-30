@@ -11,7 +11,7 @@ import ScrollRevealText from '@/components/ScrollRevealText';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import WaveBackground from '@/components/WaveBackground';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
@@ -54,13 +54,27 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      className="relative pl-4"
     >
+      {/* Gold accent line */}
+      <motion.div
+        className="absolute left-0 top-0 w-[2px] bg-gold/30"
+        initial={{ height: 0 }}
+        animate={isInView ? { height: '100%' } : {}}
+        transition={{ duration: 0.6, delay: delay + 0.2, ease: [0.22, 1, 0.36, 1] }}
+      />
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 text-gold/50`}>
         {label}
       </p>
-      <p className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]">
+      <motion.p
+        className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]"
+        animate={isInView ? {
+          textShadow: ['0 0 0px hsl(38 48% 52% / 0)', '0 0 30px hsl(38 48% 52% / 0.4)', '0 0 0px hsl(38 48% 52% / 0)'],
+        } : {}}
+        transition={{ duration: 2, delay: delay + 0.5, ease: 'easeInOut' }}
+      >
         {value}
-      </p>
+      </motion.p>
       <motion.div
         initial={{ width: 0 }}
         animate={isInView ? { width: 32 } : {}}
@@ -89,6 +103,53 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
       </p>
       <p className={`font-sans text-[14.5px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
         {value}
+      </p>
+    </motion.div>
+  );
+};
+
+/* ─── Eval Step (Horizontal Timeline) ─── */
+const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string; desc: string }; index: number; isDark: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.9', 'center center', 'end 0.1'],
+  });
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.4, 0.5, 0.6, 1], [0.4, 0.9, 1, 0.9, 0.4]);
+  const dotScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.5, 1]);
+  const dotGlow = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.8, 0]);
+
+  return (
+    <motion.div ref={ref} style={{ opacity: glowOpacity }} className="relative pt-10">
+      {/* Timeline dot */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center">
+        <motion.div
+          style={{
+            scale: dotScale,
+            boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(38 48% 52% / ${v * 0.5})`),
+          }}
+          className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
+        />
+      </div>
+
+      {/* Step number */}
+      <motion.p
+        className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mt-4 mb-2"
+      >
+        Step {step.num}
+      </motion.p>
+
+      {/* Title */}
+      <h3 className={`text-center font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+        {step.title}
+      </h3>
+
+      {/* Gold underline */}
+      <div className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3" />
+
+      {/* Description */}
+      <p className={`text-center font-sans text-[13px] md:text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+        {step.desc}
       </p>
     </motion.div>
   );
@@ -190,7 +251,7 @@ const InvestmentCriteria = () => {
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Investment Criteria</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
+              <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 What We Look For
               </h2>
               <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
@@ -216,10 +277,10 @@ const InvestmentCriteria = () => {
       {/* Cinematic Scroll Reveal */}
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
-      {/* Evaluation Framework */}
+      {/* Evaluation Framework — Horizontal Timeline */}
       <section className={`relative overflow-x-clip ${isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'}`}>
         {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Evaluation Framework</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
@@ -227,17 +288,23 @@ const InvestmentCriteria = () => {
             </h2>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
-        </div>
-        <div className="relative">
-          <StickyCardStack
-            cards={[
-              { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
-              { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors. Every dimension is assessed with institutional rigour before we proceed.' },
-              { num: '03', title: 'Diligence', description: 'Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence.' },
-              { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades, not exits. Every term reflects our commitment to lasting partnership.' },
-            ]}
-            variant={isDark ? 'dark' : 'light'}
-          />
+
+          {/* Timeline container */}
+          <div className="relative">
+            {/* Horizontal connecting line */}
+            <div className="absolute top-[6px] left-0 right-0 h-px bg-gold/10 hidden md:block" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
+              {[
+                { num: '01', title: 'Discovery', desc: 'Proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
+                { num: '02', title: 'Evaluation', desc: 'Strategic fit, market position, culture alignment, and growth vectors assessed with institutional rigour.' },
+                { num: '03', title: 'Diligence', desc: 'Deep financial, operational, legal, and commercial analysis. Conviction requires evidence.' },
+                { num: '04', title: 'Structuring', desc: 'Ownership, governance, and capital structures designed for decades, not exits.' },
+              ].map((step, i) => (
+                <EvalStep key={i} step={step} index={i} isDark={isDark} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -283,7 +350,7 @@ const InvestmentCriteria = () => {
               </p>
               <Link
                 to={`/${region}/contact`}
-                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
+                className={`btn-premium btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
                   isDark
                     ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
                     : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'

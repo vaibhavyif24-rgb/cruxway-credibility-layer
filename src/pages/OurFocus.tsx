@@ -8,7 +8,7 @@ import CinematicHero from '@/components/CinematicHero';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import WaveBackground from '@/components/WaveBackground';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
@@ -139,7 +139,7 @@ const OurFocus = () => {
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
+            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               What We Look For
             </h2>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
@@ -176,7 +176,7 @@ const OurFocus = () => {
               </p>
               <Link
                 to={`/${region}/contact`}
-                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
+                className={`btn-premium btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
                   isDark
                     ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
                     : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
@@ -203,13 +203,27 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      className="relative pl-4"
     >
+      {/* Gold accent line */}
+      <motion.div
+        className="absolute left-0 top-0 w-[2px] bg-gold/30"
+        initial={{ height: 0 }}
+        animate={isInView ? { height: '100%' } : {}}
+        transition={{ duration: 0.6, delay: delay + 0.2, ease: [0.22, 1, 0.36, 1] }}
+      />
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 ${isDark ? 'text-gold/50' : 'text-gold/50'}`}>
         {label}
       </p>
-      <p className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]">
+      <motion.p
+        className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]"
+        animate={isInView ? {
+          textShadow: ['0 0 0px hsl(38 48% 52% / 0)', '0 0 30px hsl(38 48% 52% / 0.4)', '0 0 0px hsl(38 48% 52% / 0)'],
+        } : {}}
+        transition={{ duration: 2, delay: delay + 0.5, ease: 'easeInOut' }}
+      >
         {value}
-      </p>
+      </motion.p>
       <motion.div
         initial={{ width: 0 }}
         animate={isInView ? { width: 32 } : {}}
@@ -243,50 +257,65 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
   );
 };
 
-/* ─── Criterion Row (Numbered Prose) ─── */
+/* ─── Criterion Row (Scroll-Linked Glow) ─── */
 const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean; isLast: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-40px' });
-  const isEven = index % 2 === 0;
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.85', 'center center', 'end 0.15'],
+  });
+
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
+  const numberIntensity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.35, 0.1]);
+  const underlineWidth = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '60%', '0%']);
+  const dividerOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.05, 0.25, 0.05]);
 
   return (
     <div ref={ref}>
       <motion.div
-        initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-        animate={isInView ? { opacity: 1, x: 0 } : {}}
-        transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+        style={{ opacity: glowOpacity }}
         className="grid grid-cols-12 gap-3 md:gap-6 py-6 md:py-8 group"
       >
         {/* Number */}
         <div className="col-span-2 md:col-span-1">
-          <span className="font-serif text-[2.5rem] md:text-[3.5rem] leading-none text-gold/15 group-hover:text-gold/30 transition-colors duration-500">
+          <motion.span
+            className="font-serif text-[2.5rem] md:text-[3.5rem] leading-none"
+            style={{ opacity: numberIntensity, color: 'hsl(var(--gold))' }}
+          >
             {item.num}
-          </span>
+          </motion.span>
         </div>
 
         {/* Title */}
         <div className="col-span-10 md:col-span-3 flex items-start pt-2 md:pt-3">
-          <h3 className="font-serif text-[1.1rem] md:text-[1.25rem] text-foreground leading-[1.2] tracking-[-0.02em] group-hover:text-gold transition-colors duration-500">
-            {item.title}
-          </h3>
+          <div>
+            <h3 className={`font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.2] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              {item.title}
+            </h3>
+            <motion.div
+              className="h-[1.5px] bg-gold/30 mt-1"
+              style={{ width: underlineWidth }}
+            />
+          </div>
         </div>
 
         {/* Description */}
         <div className="col-span-12 md:col-span-8 pt-0 md:pt-3">
-          <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75]">
+          <p className={`font-sans text-[14px] md:text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
             {item.desc}
           </p>
         </div>
       </motion.div>
 
-      {/* Animated gold divider */}
+      {/* Divider with scroll-linked opacity */}
       {!isLast && (
         <motion.div
           className="h-px origin-left"
-          style={{ background: 'linear-gradient(90deg, hsl(38 48% 52% / 0.2), hsl(38 48% 52% / 0.05), transparent)' }}
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: index * 0.08 + 0.3, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            background: 'linear-gradient(90deg, hsl(38 48% 52% / 0.2), hsl(38 48% 52% / 0.05), transparent)',
+            opacity: dividerOpacity,
+          }}
         />
       )}
     </div>

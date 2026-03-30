@@ -229,11 +229,15 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                     style={{ margin: -3 }}
                   />
                   <div className="w-full h-full rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] shadow-[0_4px_24px_-4px_hsl(var(--prussian)/0.14)] transition-transform duration-500 group-hover/card:scale-[1.03]">
-                    <img
+                    <motion.img
                       src={member.photo}
                       alt={member.name}
                       loading="lazy"
-                      className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700"
+                      className="w-full h-full object-cover object-top"
+                      initial={{ filter: 'grayscale(100%)' }}
+                      whileInView={{ filter: 'grayscale(0%)' }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     />
                   </div>
                 </div>
