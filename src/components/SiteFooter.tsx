@@ -62,7 +62,7 @@ const SiteFooter = () => {
                     }`}
                   >
                     {item.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 hover:w-full transition-all duration-500" />
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 group-hover:w-full transition-all duration-500" />
                   </Link>
                 </motion.div>
               ))}
