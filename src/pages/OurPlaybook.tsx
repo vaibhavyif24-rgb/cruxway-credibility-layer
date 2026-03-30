@@ -7,6 +7,7 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import GlassCard from '@/components/GlassCard';
+import WaveBackground from '@/components/WaveBackground';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -94,8 +95,9 @@ const OurPlaybook = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaPlaybook : heroUSPlaybook} overlay="strong" />
+        <WaveBackground variant="hero" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
             <SectionLabel light={isDark}>{isIndia ? 'Our Playbook, India' : 'Our Playbook'}</SectionLabel>
           </FadeIn>
@@ -121,7 +123,7 @@ const OurPlaybook = () => {
         isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
       }`}>
         {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16 pb-10 md:pb-14">
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14">
           <FadeIn>
             <SectionLabel light={isDark}>Deal Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
@@ -142,7 +144,7 @@ const OurPlaybook = () => {
       />
 
       {/* Value Creation Playbook */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16 pb-10 md:pb-14 lg:pb-16 overflow-x-hidden">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
@@ -179,6 +181,7 @@ const OurPlaybook = () => {
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
+        <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
