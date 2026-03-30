@@ -117,7 +117,7 @@ const SectorShowcase = ({ region }: { region: 'us' | 'india' }) => {
 
   return (
     <section
-      className="relative min-h-screen w-full px-5 md:px-10 lg:px-16 py-14 md:py-16 lg:py-16"
+      className="relative min-h-screen w-full px-5 md:px-10 lg:px-16 py-14 md:py-14 lg:py-14"
       style={{ backgroundColor: isDark ? '#0B131E' : 'hsl(var(--background))' }}
     >
       {/* Subtle background pattern */}

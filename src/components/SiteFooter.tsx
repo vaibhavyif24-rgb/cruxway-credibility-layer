@@ -55,7 +55,7 @@ const SiteFooter = () => {
                 >
                   <Link
                     to={item.path}
-                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
+                    className={`group relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
                       isDark
                         ? 'text-primary-foreground/15 hover:text-primary-foreground/35'
                         : 'text-muted-foreground/50 hover:text-foreground/60'

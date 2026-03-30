@@ -41,7 +41,7 @@ export const Section = ({ children, className = '', dark = false, narrow = false
   <section
     className={`
       px-5 md:px-10 lg:px-16
-      py-10 md:py-14 lg:py-16
+      py-10 md:py-14 lg:py-14
       ${dark ? 'hero-gradient-animated text-primary-foreground' : 'bg-background text-foreground'}
       ${className}
     `}
