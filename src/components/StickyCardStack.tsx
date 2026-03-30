@@ -310,7 +310,7 @@ const SlideCard: React.FC<{
               color: colors.step,
               opacity: isActive ? 0.6 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
+              transition: `opacity ${dur} ease-out 0.1s, transform ${dur} ease-out 0.1s`,
             }}
           >
             {labelPrefix} {card.num}
