@@ -239,6 +239,11 @@
   100% { transform: translateX(200%); }
 }
 
+@keyframes gold-border-pulse {
+  0%, 100% { border-color: hsl(38 48% 52% / 0.15); }
+  50% { border-color: hsl(38 48% 52% / 0.35); }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
