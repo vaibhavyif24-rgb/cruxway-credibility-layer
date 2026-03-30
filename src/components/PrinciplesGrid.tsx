@@ -27,17 +27,21 @@ const PrincipleCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ scale: 1.02 }}
-      className={`group relative rounded-sm border transition-all duration-500 overflow-hidden
+      whileHover={{ scale: 1.02, y: -4 }}
+      className={`group relative rounded-sm border border-b-2 border-b-transparent transition-all duration-500 overflow-hidden
+        group-hover:border-b-gold/20
         ${isDark
           ? 'bg-card/60 backdrop-blur-sm border-border/30 hover:border-gold/20 hover:shadow-[0_8px_32px_-8px_hsl(var(--gold)/0.15)]'
           : 'bg-[hsl(40,20%,97%)]/80 backdrop-blur-sm border-[hsl(38,15%,90%)]/50 hover:border-gold/20 hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
         }
       `}
+      style={{ borderBottomColor: 'transparent' }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderBottomColor = 'hsl(38 48% 52% / 0.2)'; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderBottomColor = 'transparent'; }}
     >
-      {/* Gold left-edge accent — height animates on hover */}
-      <div className={`absolute left-0 top-0 w-[2.5px] h-0 transition-all duration-500 ease-out group-hover:h-full ${
-        isDark ? 'bg-gold/15 group-hover:bg-gold/50' : 'bg-gold/20 group-hover:bg-gold/50'
+      {/* Gold left-edge accent — visible by default, expands on hover */}
+      <div className={`absolute left-0 top-0 w-[2.5px] h-[30%] transition-all duration-500 ease-out group-hover:h-full ${
+        isDark ? 'bg-gold/10 group-hover:bg-gold/50' : 'bg-gold/10 group-hover:bg-gold/50'
       }`} />
 
       {/* Subtle inner glow on hover */}
@@ -45,7 +49,7 @@ const PrincipleCard = ({
 
       {/* Watermark number */}
       <span className={`absolute -right-2 -bottom-3 font-serif text-[5.5rem] leading-none italic select-none pointer-events-none transition-colors duration-500 ${
-        isDark ? 'text-gold/[0.03] group-hover:text-gold/[0.07]' : 'text-gold/[0.04] group-hover:text-gold/[0.08]'
+        isDark ? 'text-gold/[0.03] group-hover:text-gold/[0.07]' : 'text-gold/[0.06] group-hover:text-gold/[0.12]'
       }`}>
         {num}
       </span>
@@ -78,7 +82,7 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
   const isDark = theme === 'dark';
 
   return (
-    <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-8 md:pb-12">
+    <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-6 md:pb-8">
       {/* Ambient gold shimmer sweep */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div

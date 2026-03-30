@@ -278,6 +278,8 @@ const CinematicScrollReveal = () => {
           </div>
         </div>
       </div>
+      {/* Gold gradient transition line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.15), transparent)' }} />
     </section>
   );
 };

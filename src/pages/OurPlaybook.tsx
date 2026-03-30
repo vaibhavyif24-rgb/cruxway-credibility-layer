@@ -142,7 +142,7 @@ const OurPlaybook = () => {
       />
 
       {/* Value Creation Playbook */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-18 pb-10 md:pb-14 lg:pb-18 overflow-x-hidden">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 lg:pt-16 pb-10 md:pb-14 lg:pb-16 overflow-x-hidden">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
@@ -177,7 +177,7 @@ const OurPlaybook = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
