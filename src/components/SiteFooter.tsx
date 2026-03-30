@@ -27,7 +27,7 @@ const SiteFooter = () => {
       {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
 
       {/* Top shimmer line */}
-      <div className="absolute top-0 left-0 right-0 h-px z-10" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,62%,46%,0.18), transparent)' }} />
+      <div className="absolute top-0 left-0 right-0 h-px z-10" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
 
       <div className={`h-px ${isDark ? 'bg-primary-foreground/[0.04]' : 'bg-border/30'}`} />
 
@@ -38,7 +38,7 @@ const SiteFooter = () => {
               {/* Pulsing gold glow behind wordmark */}
               <div
                 className="absolute -inset-8 rounded-full pointer-events-none animate-pulse"
-                style={{ background: 'radial-gradient(ellipse at center, hsl(38, 62%, 46%, 0.08) 0%, transparent 70%)' }}
+                style={{ background: 'radial-gradient(ellipse at center, hsl(38, 45%, 55%, 0.06) 0%, transparent 70%)' }}
               />
               <p className={`font-serif text-xl tracking-[-0.02em] relative ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>Cruxway</p>
               <GoldRule className="mt-3" />

@@ -10,8 +10,8 @@ const WaveBackground = ({ variant = 'section', className = '' }: WaveBackgroundP
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
-  const lineColor = isDark ? 'hsl(228 50% 30%)' : 'hsl(228 40% 70%)';
-  const lineOpacity = isDark ? 0.25 : 0.06;
+  const lineColor = isDark ? 'hsl(228 50% 25%)' : 'hsl(228 45% 75%)';
+  const lineOpacity = isDark ? 0.3 : 0.08;
   const lineCount = variant === 'hero' ? 7 : variant === 'full' ? 6 : 4;
 
   const waves = Array.from({ length: lineCount }, (_, i) => {
@@ -19,7 +19,7 @@ const WaveBackground = ({ variant = 'section', className = '' }: WaveBackgroundP
     const amplitude = 8 + (i % 3) * 4;
     const phase = i * 0.4;
     const duration = 14 + i * 1.2;
-    const strokeW = 1.2 + (i % 3) * 0.3;
+    const strokeW = 0.8 + (i % 3) * 0.2;
     return { baseY, amplitude, phase, i, duration, strokeW };
   });
 
