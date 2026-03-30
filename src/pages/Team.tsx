@@ -73,14 +73,14 @@ interface TeamMember {
 }
 
 const harinDealLogos: LogoItem[] = [
-  { src: rmsEnergyLogo, alt: 'RMS Energy' },
-  { src: bbcElectricLogo, alt: 'BBC Electric' },
-  { src: pwrLogo, alt: 'PWR' },
-  { src: flexrayLogo, alt: 'FlexRay' },
-  { src: alignLogo, alt: 'A-LIGN' },
-  { src: alliedUniversalLogo, alt: 'Allied Universal' },
-  { src: energizerLogo, alt: 'Energizer' },
-  { src: broadcomLogo, alt: 'Broadcom' },
+  { src: rmsEnergyLogo, alt: 'RMS Energy', scale: 1.0 },
+  { src: bbcElectricLogo, alt: 'BBC Electric', scale: 1.0 },
+  { src: pwrLogo, alt: 'PWR', scale: 1.0 },
+  { src: flexrayLogo, alt: 'FlexRay', scale: 1.0 },
+  { src: alignLogo, alt: 'A-LIGN', scale: 1.0 },
+  { src: alliedUniversalLogo, alt: 'Allied Universal', scale: 1.0 },
+  { src: energizerLogo, alt: 'Energizer', scale: 1.0 },
+  { src: broadcomLogo, alt: 'Broadcom', scale: 1.0 },
 ];
 
 const founders: TeamMember[] = [
