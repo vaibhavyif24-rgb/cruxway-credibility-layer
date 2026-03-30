@@ -204,9 +204,15 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 ${isDark ? 'text-gold/50' : 'text-gold/50'}`}>
         {label}
       </p>
-      <p className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]">
+      <motion.p
+        initial={{ textShadow: 'none' }}
+        whileInView={{ textShadow: ['none', '0 0 30px hsl(38,48%,52%,0.25)', 'none'] }}
+        viewport={{ once: true }}
+        transition={{ duration: 2, delay: 0.5, ease: 'easeInOut' }}
+        className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]"
+      >
         {value}
-      </p>
+      </motion.p>
       <motion.div
         initial={{ width: 0 }}
         animate={isInView ? { width: 32 } : {}}

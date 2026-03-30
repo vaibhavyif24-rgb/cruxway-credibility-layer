@@ -108,7 +108,7 @@ const SiteFooter = () => {
             </div>
           </div>
         </FadeIn>
-      </div>
+      </motion.div>
     </footer>
   );
 };
