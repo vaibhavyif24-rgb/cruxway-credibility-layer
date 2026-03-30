@@ -101,7 +101,6 @@ const GuidingPrinciples = () => {
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-6 md:py-10 lg:py-12 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
-        <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">

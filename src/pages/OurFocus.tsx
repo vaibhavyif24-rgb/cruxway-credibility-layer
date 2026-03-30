@@ -233,7 +233,7 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
         <span className="w-1.5 h-1.5 rounded-full bg-gold/30" />
         {label}
       </p>
-      <p className={`font-sans text-[14.5px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
+      <p className={`font-sans text-[14.5px] leading-[1.7] ${isDark ? 'text-primary-foreground/70' : 'text-foreground/85'}`}>
         {value}
       </p>
     </motion.div>

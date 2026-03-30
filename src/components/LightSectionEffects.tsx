@@ -1,24 +1,20 @@
 import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 
-/**
- * Enhanced ambient effects for light-mode sections.
- * Features drifting gradient blobs, varied particles, diagonal pattern, shimmer lines.
- */
 const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'section' | 'cta' }>(
   ({ variant = 'section' }, ref) => {
     const intensity = variant === 'hero' ? 1.4 : variant === 'cta' ? 1.2 : 1;
     const particleCount = variant === 'hero' ? 8 : variant === 'cta' ? 6 : 4;
 
     return (
-      <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden noise-overlay">
         {/* Drifting gradient blob 1 — warm gold */}
         <motion.div
           className="absolute w-[800px] h-[700px] rounded-full"
           style={{
             top: '-10%',
             right: '-15%',
-            background: `radial-gradient(ellipse at center, hsl(38 48% 52% / ${0.07 * intensity}), transparent 70%)`,
+            background: `radial-gradient(ellipse at center, hsl(38 48% 52% / ${0.10 * intensity}), transparent 70%)`,
           }}
           animate={{
             x: [0, 40, -20, 0],
@@ -37,7 +33,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
           style={{
             bottom: '-15%',
             left: '-10%',
-            background: `radial-gradient(ellipse at center, hsl(228 45% 55% / ${0.05 * intensity}), transparent 70%)`,
+            background: `radial-gradient(ellipse at center, hsl(228 45% 55% / ${0.07 * intensity}), transparent 70%)`,
           }}
           animate={{
             x: [0, -30, 25, 0],
@@ -50,14 +46,13 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
           }}
         />
 
-        {/* Subtle diagonal line pattern overlay */}
         {/* Warm white ambient blob */}
         <motion.div
           className="absolute w-[600px] h-[500px] rounded-full"
           style={{
             top: '30%',
             left: '20%',
-            background: `radial-gradient(ellipse at center, hsl(40 30% 97% / ${0.08 * intensity}), transparent 70%)`,
+            background: `radial-gradient(ellipse at center, hsl(40 30% 97% / ${0.15 * intensity}), transparent 70%)`,
           }}
           animate={{
             x: [0, 35, -20, 0],
@@ -70,8 +65,25 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
           }}
         />
 
+        {/* Drifting golden wash — horizontal ambient light */}
+        <motion.div
+          className="absolute w-full h-[60%] top-[20%]"
+          style={{
+            background: `linear-gradient(90deg, transparent 0%, hsl(38 48% 52% / ${0.04 * intensity}) 30%, hsl(38 48% 52% / ${0.06 * intensity}) 50%, hsl(38 48% 52% / ${0.04 * intensity}) 70%, transparent 100%)`,
+          }}
+          animate={{
+            x: ['-20%', '20%', '-20%'],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+
+        {/* Subtle diagonal line pattern overlay */}
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.025]"
           style={{
             backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(38 45% 55%) 40px, hsl(38 45% 55%) 40.5px)',
           }}
