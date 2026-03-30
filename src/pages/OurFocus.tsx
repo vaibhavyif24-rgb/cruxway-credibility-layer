@@ -14,12 +14,11 @@ import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 
 const investmentProfile = {
   us: [
-    { label: 'Revenue Range', value: '$5M – $50M' },
-    { label: 'EBITDA Range', value: '$1.5M – $10M' },
-    { label: 'Enterprise Value', value: '$5M – $75M' },
-    { label: 'Structure', value: 'Majority control' },
-    { label: 'Hold Period', value: 'Long-term / permanent' },
-    { label: 'Geography', value: 'United States' },
+    { label: 'Revenue Range', value: '$1M – $10M (₹10Cr – ₹100Cr)' },
+    { label: 'EBITDA Range', value: '$500K – $2.5M (₹5Cr – ₹25Cr)' },
+    { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
+    { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
+    { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place.' },
   ],
   india: [
     { label: 'Revenue Range', value: '₹20Cr – ₹500Cr' },
