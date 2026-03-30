@@ -65,6 +65,14 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
             }}
           />
 
+          {/* Inner gold glow on hover */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-sm"
+            style={{
+              boxShadow: `inset 0 0 40px -12px hsl(38 45% 55% / ${isLight ? '0.06' : '0.05'})`,
+            }}
+          />
+
           {children}
         </motion.div>
       </motion.div>

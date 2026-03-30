@@ -187,6 +187,15 @@ const TeamCard: React.FC<{
               >
                 {member.name}
               </h3>
+              {/* Gold underline sweep */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="h-px w-full origin-left mt-1 mb-1"
+                style={{ background: 'linear-gradient(90deg, hsl(38 48% 52% / 0.3), transparent)' }}
+              />
               {member.linkedIn && (
                 <a
                   href={member.linkedIn}

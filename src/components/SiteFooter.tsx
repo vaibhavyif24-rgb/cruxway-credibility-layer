@@ -55,14 +55,14 @@ const SiteFooter = () => {
                 >
                   <Link
                     to={item.path}
-                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
+                    className={`group relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
                       isDark
                         ? 'text-primary-foreground/15 hover:text-primary-foreground/35'
                         : 'text-muted-foreground/50 hover:text-foreground/60'
                     }`}
                   >
                     {item.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 hover:w-full transition-all duration-500" />
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 group-hover:w-full transition-all duration-500" />
                   </Link>
                 </motion.div>
               ))}

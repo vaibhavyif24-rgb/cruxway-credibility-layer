@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import CriteriaIllustration from './CriteriaIllustrations';
 import { useIsMobile } from '@/hooks/use-mobile';
 export interface StickyCard {
@@ -526,6 +527,15 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
                       boxShadow: i === activeIndex ? '0 0 8px hsl(38 48% 52% / 0.4)' : 'none',
                     }}
                   />
+                  {i === activeIndex && (
+                    <motion.span
+                      layoutId="dot-ring"
+                      className="absolute inset-[-3px] rounded-full border border-gold/30"
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
                 </button>
               ))}
             </div>
