@@ -321,7 +321,7 @@ const SlideCard: React.FC<{
               color: colors.title,
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.15s, transform 0.5s ease-out 0.15s',
+              transition: `opacity ${dur} ease-out 0.15s, transform ${dur} ease-out 0.15s`,
             }}
           >
 {card.title}.
