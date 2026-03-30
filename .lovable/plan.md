@@ -1,94 +1,135 @@
 
 
-## Plan: Precision Polish Pass — ScrollRevealText Box Fix + Carousel Tightening + Light Mode Effects + Micro-Animations
+## Plan: Wave Background + Logo Sizing + Layout Diversification + Polish Pass
 
-8 files modified, no files created or deleted.
-
----
-
-### Section 1: Remove Box Artifacts from ScrollRevealText
-
-**File: `src/components/ScrollRevealText.tsx`**
-
-- **Delete lines 63-81**: Remove gold gradient bands (top/bottom h-px lines) AND the gold wipe at top-1/2. These create the visible "box frame" and mid-text line.
-- **Delete line 57**: Remove `style={{ contentVisibility: 'auto' }}` from the section element.
-- **Change line 54**: `bg-[hsl(38,18%,93%)]` → `bg-background` for `isContrastLight`. This eliminates the hard-edged contrast block; differentiation comes from LightSectionEffects ambient blobs.
-- **Add gradient fades** (lines ~59-62 area, after effects): For `!isActuallyDark` variants, add top/bottom `h-12 md:h-16` gradient fades (`bg-gradient-to-b from-background to-transparent` and inverse) to smooth section transitions.
-- **Stat value hover**: In `StatReveal`, change the `<p>` for value to `<motion.p>` with `whileHover={{ scale: 1.05, textShadow: '0 0 20px hsl(38,48%,52%,0.3)' }}`.
+10 sections touching ~12 files. Creates animated SVG wave background, doubles logo sizes, replaces box layouts with typographic/prose alternatives, and applies polish across the site.
 
 ---
 
-### Section 2: Logo Carousel — Tighter Gaps + Compact Padding
+### 1. Create WaveBackground Component
+
+**New file: `src/components/WaveBackground.tsx`**
+
+- SVG overlay component with 4-7 flowing cubic bezier wave paths
+- Theme-aware: dark mode lines at `hsl(228 50% 25%)` opacity 0.3, light mode at `hsl(228 45% 75%)` opacity 0.08
+- Stroke width 0.8-1.2px, animated via Framer Motion `d` attribute morph over 12-18s cycles
+- Variant prop: `hero` (7 waves), `section` (4 waves), `full` (6 waves)
+- Absolutely positioned, pointer-events-none, preserveAspectRatio="none"
+- Each wave has unique baseY, amplitude, and phase offset for organic feel
+
+### 2. Integrate WaveBackground Everywhere
+
+**Files: All 8 page files + `ScrollRevealText.tsx` + `SiteFooter.tsx`**
+
+- **Hero sections** (Home, GuidingPrinciples, OurFocus, InvestmentCriteria, OurPlaybook, Team, Contact, About): Add `<WaveBackground variant="hero" />` inside hero `<section>` after CinematicHero, before content z-10 div
+- **CTA sections** on all pages: Add `<WaveBackground variant="section" />` inside CTA sections
+- **ScrollRevealText.tsx**: When `isActuallyDark`, add `<WaveBackground variant="section" />` as first child
+- **SiteFooter.tsx**: Add `<WaveBackground variant="section" />` inside footer
+- **Team stats bar**: Add `<WaveBackground variant="section" />` to the stats bar div
+
+### 3. Logo Carousel: Double Base Sizes
 
 **File: `src/components/LogoMarquee.tsx`**
 
-- **Line 70**: Change gap from `gap-12 md:gap-16 lg:gap-24` → `gap-6 md:gap-10 lg:gap-14`
-- **Lines 37-40**: Reduce bgClass padding:
-  - Dark: `py-6 md:py-10 lg:py-14` → `py-4 md:py-6 lg:py-8`
-  - Contrast light: same reduction
-  - Default: `py-5 md:py-8 lg:py-10` → `py-3 md:py-5 lg:py-6`
+- Import `useIsMobile` from `@/hooks/use-mobile`
+- Change base sizing: `const baseHeight = isMobile ? 48 : 80`, `baseMaxWidth = isMobile ? 160 : 280`, `containerHeight = isMobile ? 56 : 96`
+- Apply: `height: Math.round(s * baseHeight)`, `maxWidth: Math.round(s * baseMaxWidth)`, container `height: Math.round(s * containerHeight)`
+- Update gap to `gap-12 md:gap-16 lg:gap-24`
+- Default duration change from 28 to 55
 
----
+**Files: `src/pages/Home.tsx`, `src/pages/Team.tsx`**
 
-### Section 3: LightSectionEffects — Aurora Ribbon + Ripple Rings + Stronger Wash
+Update scale values:
+- Warburg: 2.0, NITI Aayog: 2.0, Swishin: 2.0
+- Neos/Saltwater/Evercore: 1.2, TreeForest/Lodha: 1.2
+- Others: 1.0
+- Change `duration={48}` → `duration={55}`
+
+### 4. Fix Google Maps Link
+
+**File: `src/pages/Contact.tsx`** (line 24)
+
+Change: `'https://maps.google.com/?q=E-97+GK+II+Delhi+India'` → `'https://maps.app.goo.gl/C4V6nKknHo7vPrrj9'`
+
+### 5. Investment Profile: Typographic Term Sheet
+
+**Files: `src/pages/OurFocus.tsx`, `src/pages/InvestmentCriteria.tsx`**
+
+Replace StatCard component with borderless typographic layout:
+- Delete StatCard component from both files
+- Number cards (Revenue/EBITDA): label as `text-[10px] uppercase tracking-[0.22em] text-gold/50`, value as `font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold`, animated gold underline (`width: 0→32px, h-[1.5px] bg-gold/25`)
+- Text cards (Structure/Hold/Partnerships): gold dot before label, value as `text-[14.5px] text-foreground/85 leading-[1.7]`
+- Layout: 2-col grid top (Revenue+EBITDA), thin gold divider, 3-col grid bottom (Structure+Hold+Partnerships)
+- No borders, no card backgrounds, no boxes
+- Staggered `whileInView` entrance with increasing delays
+- Add shimmer sweep overlay on section container (existing code kept)
+
+### 6. OurFocus Criteria: Numbered Prose Blocks
+
+**File: `src/pages/OurFocus.tsx`**
+
+Replace CriterionCard component and the 3-col grid with numbered prose rows:
+- Each row: `grid grid-cols-12` — col-span-1 for number, col-span-3 for title, col-span-8 for description
+- Number: `text-[3.5rem] font-serif text-gold/15`, title: `font-serif text-foreground`, desc: `font-sans text-muted-foreground`
+- Between rows: animated gold gradient divider (`scaleX: 0→1` on viewport entry)
+- Alternating slide direction: odd from left, even from right
+- On mobile: full-width stack (number + title on one line, desc below)
+- No boxes, no borders, no card backgrounds
+
+### 7. LightSectionEffects Enhancement
 
 **File: `src/components/LightSectionEffects.tsx`**
 
-- **Add aurora ribbon**: After existing golden wash (after line 82), add a large blurred `motion.div` with multi-color gold/blue gradient, `filter: blur(60px)`, animating x from -15% to 15% over 25s with slight rotation.
-- **Add ripple rings**: For `variant === 'hero'` only, add concentric circle borders (3 nested `div`s with `border-gold/[0.06]`) that scale/pulse 1→1.3 over 8s. Positioned top-right.
-- **Increase golden wash amplitude**: Change x animation from `['-20%', '20%', '-20%']` → `['-30%', '30%', '-30%']`, duration from 30 → 22.
+- Blob 1: increase to `w-[800px] h-[700px]`, opacity `0.07 * intensity`
+- Blob 2: increase to `w-[700px] h-[600px]`, opacity `0.05 * intensity`
+- Add blob 3 (warm white): `w-[600px] h-[500px]`, `hsl(40 30% 97% / 0.08)`, drift cycle 18s
+- Diagonal pattern: change `opacity-[0.008]` → `opacity-[0.02]`
 
----
-
-### Section 4: Scroll Progress Bar Gradient
-
-**File: `src/components/SiteHeader.tsx`**
-
-- **Line 96**: Change `className="... bg-gold/40 ..."` + remove `bg-gold/40`, add `style={{ scaleX: scrollYProgress, background: 'linear-gradient(90deg, hsl(38,48%,52%,0.2), hsl(38,48%,52%,0.5), hsl(38,48%,52%,0.2))' }}`
-
----
-
-### Section 5: Footer Entrance Animation
+### 8. Footer Always Dark Persian Blue
 
 **File: `src/components/SiteFooter.tsx`**
 
-- Wrap `<div className="max-w-[1080px]...">` content in a `<motion.div>` with `initial={{ opacity: 0 }}`, `whileInView={{ opacity: 1 }}`, `viewport={{ once: true, margin: '-50px' }}`, `transition={{ duration: 0.8 }}`.
+- Already has `bg-[hsl(228,58%,18%)]` and cream text — confirmed correct
+- Add `<WaveBackground variant="section" />` (from section 2)
+- No other changes needed
+
+### 9. Vertical Gap Audit
+
+**Files: `src/pages/InvestmentCriteria.tsx`**
+
+- Line 273: `py-10 md:py-14 lg:py-16` → `py-8 md:py-12 lg:py-14`
+- Line 226: already fine at implicit py from pt/pb
+
+**File: `src/components/ScrollRevealText.tsx`**
+
+- Currently `py-8 md:py-10 lg:py-12` — already at target, no change needed
+
+No `py-20` or `py-24` found anywhere — previous pass already handled this.
+
+### 10. Micro-Animations
+
+**File: `src/components/GlassCard.tsx`**
+
+- Add subtle 3D tilt on hover: `whileHover={{ y: -6, rotateX: 2, rotateY: -2 }}`
 
 ---
 
-### Section 6: Investment Profile Gold Glow Pulse
-
-**Files: `src/pages/OurFocus.tsx` + `src/pages/InvestmentCriteria.tsx`**
-
-- In `TypographicNumber`, change the value `<p>` to `<motion.p>` with `initial={{ textShadow: 'none' }}`, `whileInView={{ textShadow: ['none', '0 0 30px hsl(38,48%,52%,0.25)', 'none'] }}`, `viewport={{ once: true }}`, `transition={{ duration: 2, delay: 0.5 }}`.
-
----
-
-### Section 7: CSS Enhancements
-
-**File: `src/index.css`**
-
-- Add `.btn-premium::before` radial ripple effect (width 0→300% on hover, `radial-gradient(circle, hsl(38 48% 52% / 0.08), transparent 70%)`).
-- Ensure existing `::after` shimmer sweep is present.
-
----
-
-### Section 8: contentVisibility Global Removal
-
-Already only in `ScrollRevealText.tsx` (confirmed via search). Handled in Section 1.
-
----
-
-### Technical Summary
+### Files Modified (~12)
 
 | File | Changes |
 |---|---|
-| `ScrollRevealText.tsx` | Remove gold bands, gold wipe, contentVisibility; soften contrast bg; add gradient fades; stat hover |
-| `LogoMarquee.tsx` | Tighter gaps, compact padding |
-| `LightSectionEffects.tsx` | Aurora ribbon, ripple rings, stronger wash |
-| `SiteHeader.tsx` | Gradient scroll progress bar |
-| `SiteFooter.tsx` | Entrance animation wrapper |
-| `OurFocus.tsx` | TypographicNumber gold glow pulse |
-| `InvestmentCriteria.tsx` | TypographicNumber gold glow pulse |
-| `index.css` | btn-premium radial ripple |
+| `src/components/WaveBackground.tsx` | New component — animated SVG waves |
+| `src/components/LogoMarquee.tsx` | Double base sizes, responsive, slower duration |
+| `src/components/LightSectionEffects.tsx` | Larger blobs, third blob, visible pattern |
+| `src/components/ScrollRevealText.tsx` | Add WaveBackground for dark variant |
+| `src/components/SiteFooter.tsx` | Add WaveBackground |
+| `src/components/GlassCard.tsx` | 3D tilt hover |
+| `src/pages/Home.tsx` | Scale values 2.0, duration 55, WaveBackground in hero+CTA |
+| `src/pages/Team.tsx` | Scale values, duration 55, WaveBackground in hero+CTA+stats |
+| `src/pages/OurFocus.tsx` | Typographic stats, prose criteria, WaveBackground |
+| `src/pages/InvestmentCriteria.tsx` | Typographic stats, WaveBackground, gap reduction |
+| `src/pages/Contact.tsx` | Maps URL fix, WaveBackground |
+| `src/pages/GuidingPrinciples.tsx` | WaveBackground in hero+CTA |
+| `src/pages/About.tsx` | WaveBackground in hero+CTA |
+| `src/pages/OurPlaybook.tsx` | WaveBackground in hero+CTA |
 

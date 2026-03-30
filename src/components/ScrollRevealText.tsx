@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import LightSectionEffects from '@/components/LightSectionEffects';
-import DarkSectionEffects from '@/components/DarkSectionEffects';
+import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface ScrollRevealTextProps {
@@ -50,19 +50,34 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       className={`relative overflow-hidden ${
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
-          : 'bg-background text-foreground'
+          : isContrastLight
+            ? 'bg-[hsl(38,18%,93%)] text-foreground'
+            : 'bg-background text-foreground'
       } ${className}`}
+      style={{ contentVisibility: 'auto' }}
     >
-      {isActuallyDark && <DarkSectionEffects variant="default" />}
+      {isActuallyDark && <WaveBackground variant="section" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
 
-      {/* Soft top/bottom gradient fades for non-dark variants */}
-      {!isActuallyDark && (
+      {/* Gold gradient bands for contrast sections */}
+      {isContrastLight && (
         <>
-          <div className="absolute top-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-b from-background to-transparent pointer-events-none z-[1]" />
-          <div className="absolute bottom-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-[1]" />
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
         </>
+      )}
+
+      {/* Section entry gold wipe for contrast sections */}
+      {isContrastLight && (
+        <motion.div
+          className="absolute top-1/2 left-0 right-0 h-px z-10"
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.15), transparent)' }}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        />
       )}
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
@@ -156,44 +171,12 @@ const StatReveal = ({
   const end = Math.min(start + 0.2, 1);
   const opacity = useTransform(progress, [start, end], [0, 1]);
 
-  const counterRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(counterRef, { once: true });
-  const [displayValue, setDisplayValue] = useState(stat.value);
-
-  useEffect(() => {
-    if (!isInView) return;
-    const numMatch = stat.value.match(/[\d.]+/);
-    if (!numMatch) return;
-    const target = parseFloat(numMatch[0]);
-    const prefix = stat.value.slice(0, stat.value.indexOf(numMatch[0]));
-    const suffix = stat.value.slice(stat.value.indexOf(numMatch[0]) + numMatch[0].length);
-
-    let frame = 0;
-    const totalFrames = 40;
-    const interval = setInterval(() => {
-      frame++;
-      const p = frame / totalFrames;
-      const eased = 1 - Math.pow(1 - p, 3);
-      const current = Math.round(target * eased * 10) / 10;
-      setDisplayValue(`${prefix}${current % 1 === 0 ? current.toFixed(0) : current}${suffix}`);
-      if (frame >= totalFrames) {
-        setDisplayValue(stat.value);
-        clearInterval(interval);
-      }
-    }, 30);
-    return () => clearInterval(interval);
-  }, [isInView, stat.value]);
-
   return (
-    <motion.div ref={counterRef} style={{ opacity }} className="text-center">
-      <motion.p
-        whileHover={{ scale: 1.05, textShadow: '0 0 20px hsl(38,48%,52%,0.3)' }}
-        transition={{ duration: 0.2 }}
-        className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] cursor-default ${isDark ? 'text-gold' : 'text-gold'}`}
-      >
-        {displayValue}
-      </motion.p>
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/45' : 'text-[hsl(228,45%,45%)]/40'}`}>
+    <motion.div style={{ opacity }} className="text-center">
+      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-gold'}`}>
+        {stat.value}
+      </p>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-[hsl(228,45%,45%)]/40'}`}>
         {stat.label}
       </p>
     </motion.div>
