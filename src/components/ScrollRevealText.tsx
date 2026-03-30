@@ -55,6 +55,13 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
             : 'bg-background text-foreground'
       } ${className}`}
     >
+      {/* Soft gradient fades for section blending */}
+      {!isActuallyDark && (
+        <>
+          <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none z-[1]" style={{ background: 'linear-gradient(to bottom, hsl(var(--background)), transparent)' }} />
+          <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none z-[1]" style={{ background: 'linear-gradient(to top, hsl(var(--background)), transparent)' }} />
+        </>
+      )}
       {isActuallyDark && <WaveBackground variant="section" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}

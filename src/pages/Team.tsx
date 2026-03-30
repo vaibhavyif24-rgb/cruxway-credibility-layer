@@ -229,11 +229,15 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                     style={{ margin: -3 }}
                   />
                   <div className="w-full h-full rounded-full overflow-hidden bg-muted border-2 border-foreground/[0.04] shadow-[0_4px_24px_-4px_hsl(var(--prussian)/0.14)] transition-transform duration-500 group-hover/card:scale-[1.03]">
-                    <img
+                    <motion.img
                       src={member.photo}
                       alt={member.name}
                       loading="lazy"
-                      className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700"
+                      className="w-full h-full object-cover object-top"
+                      initial={{ filter: 'grayscale(100%)' }}
+                      whileInView={{ filter: 'grayscale(0%)' }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     />
                   </div>
                 </div>
@@ -432,7 +436,7 @@ const Team = () => {
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Advisors &amp; Operating Partners</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] text-foreground leading-[1.18]">
+              <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 Our Network
               </h2>
               <GoldRule className="mt-3 md:mt-4" />
@@ -463,9 +467,7 @@ const Team = () => {
             <GoldRule className="mt-1" />
           </FadeIn>
         </div>
-        <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
-        </FadeIn>
+        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
     </div>
   );

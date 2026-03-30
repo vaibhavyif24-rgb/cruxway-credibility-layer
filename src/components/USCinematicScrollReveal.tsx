@@ -26,17 +26,18 @@ const usSectors = {
   },
 };
 
-const OVERLAY_GRADIENT = 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%)';
+const DARK_OVERLAY = 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%)';
+const LIGHT_OVERLAY = 'linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(248,245,240,0.75) 25%, rgba(248,245,240,0.88) 50%, rgba(248,245,240,0.94) 75%, rgba(248,245,240,0.97) 100%)';
 
-const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; items: { name: string; desc: string }[]; side: 'left' | 'right'; isMobile: boolean }) => (
+const SectorColumn = ({ heading, items, side, isMobile, isDark }: { heading: string; items: { name: string; desc: string }[]; side: 'left' | 'right'; isMobile: boolean; isDark: boolean }) => (
   <div className={isMobile ? '' : side === 'left' ? 'pr-12' : 'pl-12'}>
     <h3
       className="font-serif leading-tight"
       style={{
-        color: '#F8F6F2',
+        color: isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
         fontSize: isMobile ? '1.5rem' : '2rem',
         marginBottom: isMobile ? '0.75rem' : '1rem',
-        textShadow: '0 2px 12px rgba(0,0,0,0.7)',
+        textShadow: isDark ? '0 2px 12px rgba(0,0,0,0.7)' : 'none',
       }}
     >
       {heading}
@@ -56,13 +57,21 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
           <div>
             <span
               className="font-serif leading-[1.3] block"
-              style={{ color: '#F8F6F2', fontSize: isMobile ? '1.2rem' : '1.7rem', textShadow: '0 2px 16px rgba(0,0,0,0.8)' }}
+              style={{
+                color: isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
+                fontSize: isMobile ? '1.2rem' : '1.7rem',
+                textShadow: isDark ? '0 2px 16px rgba(0,0,0,0.8)' : 'none',
+              }}
             >
               {item.name}
             </span>
             <span
               className="block font-sans leading-[1.4]"
-              style={{ color: 'rgba(248,246,242,0.65)', fontSize: isMobile ? '15px' : '18px', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}
+              style={{
+                color: isDark ? 'rgba(248,246,242,0.65)' : 'hsl(var(--muted-foreground))',
+                fontSize: isMobile ? '15px' : '18px',
+                textShadow: isDark ? '0 2px 10px rgba(0,0,0,0.6)' : 'none',
+              }}
             >
               {item.desc}
             </span>
@@ -73,7 +82,7 @@ const SectorColumn = ({ heading, items, side, isMobile }: { heading: string; ite
   </div>
 );
 
-const MobileWordReveal = ({ words, goldWords, containerRef }: { words: string[]; goldWords: string[]; containerRef: React.RefObject<HTMLDivElement> }) => {
+const MobileWordReveal = ({ words, goldWords, containerRef, isDark }: { words: string[]; goldWords: string[]; containerRef: React.RefObject<HTMLDivElement>; isDark: boolean }) => {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end end'] });
 
   return (
@@ -86,7 +95,7 @@ const MobileWordReveal = ({ words, goldWords, containerRef }: { words: string[];
           const start = i / words.length;
           const end = (i + 1) / words.length;
           return (
-            <MobileWord key={i} word={word} range={[start, end]} progress={scrollYProgress} isGold={goldWords.includes(word)} />
+            <MobileWord key={i} word={word} range={[start, end]} progress={scrollYProgress} isGold={goldWords.includes(word)} isDark={isDark} />
           );
         })}
       </h2>
@@ -94,16 +103,15 @@ const MobileWordReveal = ({ words, goldWords, containerRef }: { words: string[];
   );
 };
 
-const MobileWord = ({ word, range, progress, isGold }: { word: string; range: [number, number]; progress: any; isGold: boolean }) => {
+const MobileWord = ({ word, range, progress, isGold, isDark }: { word: string; range: [number, number]; progress: any; isGold: boolean; isDark: boolean }) => {
   const rawOpacity = useTransform(progress, range, [0.15, 1]);
-  // Clamp so words never fade back once revealed
   const opacity = useTransform(rawOpacity, (v) => Math.max(v, 0.15));
   return (
     <motion.span
       style={{
         opacity,
-        color: isGold ? 'hsl(38, 55%, 62%)' : '#F8F6F2',
-        textShadow: '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)',
+        color: isGold ? 'hsl(38, 55%, 62%)' : isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
+        textShadow: isDark ? '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)' : 'none',
         fontWeight: 500,
       }}
     >
@@ -135,14 +143,13 @@ const USCinematicScrollReveal = () => {
 
   const isDark = theme === 'dark';
 
-  // ── Mobile: full-bleed image with scroll-triggered word reveal ──
+  // ── Mobile ──
   if (isMobile) {
     const words = ['Where', "America's", 'essential', 'industries', 'find', 'their', 'permanent', 'partner.'];
     const goldWords = ['essential', 'permanent', 'partner.'];
 
     return (
       <>
-        {/* Hero with word-by-word scroll reveal */}
         <section ref={containerRef} className="relative" style={{ height: '180vh' }}>
           <div className="sticky top-0 h-screen w-full overflow-hidden">
             <img
@@ -156,20 +163,27 @@ const USCinematicScrollReveal = () => {
             />
             <div
               className="absolute inset-0"
-              style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.65) 100%)' }}
+              style={{
+                background: isDark
+                  ? 'linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.65) 100%)'
+                  : 'linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(248,245,240,0.5) 40%, rgba(248,245,240,0.75) 100%)',
+              }}
             />
-            <MobileWordReveal words={words} goldWords={goldWords} containerRef={containerRef} />
+            <MobileWordReveal words={words} goldWords={goldWords} containerRef={containerRef} isDark={isDark} />
           </div>
         </section>
 
-        {/* Sectors below */}
         <div
           className="relative overflow-hidden"
           style={{ padding: '2.5rem 1.25rem 3rem' }}
         >
           <div className="absolute inset-0" style={{ zIndex: 0 }}>
             <img src={US_IMG} alt="" aria-hidden="true" className="w-full h-full" style={{ objectFit: 'cover', filter: 'blur(8px)', transform: 'scale(1.1)' }} />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(11,19,30,0.92) 0%, rgba(11,19,30,0.96) 50%, rgba(11,19,30,0.98) 100%)' }} />
+            <div className="absolute inset-0" style={{
+              background: isDark
+                ? 'linear-gradient(to bottom, rgba(11,19,30,0.92) 0%, rgba(11,19,30,0.96) 50%, rgba(11,19,30,0.98) 100%)'
+                : 'linear-gradient(to bottom, rgba(248,245,240,0.92) 0%, rgba(248,245,240,0.96) 50%, rgba(248,245,240,0.98) 100%)',
+            }} />
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
             <div className="text-center mb-8">
@@ -177,8 +191,8 @@ const USCinematicScrollReveal = () => {
               <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
             </div>
             <div className="space-y-10">
-              <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={true} />
-              <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={true} />
+              <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={true} isDark={isDark} />
+              <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={true} isDark={isDark} />
             </div>
           </div>
         </div>
@@ -186,7 +200,7 @@ const USCinematicScrollReveal = () => {
     );
   }
 
-  // ── Desktop: full 250vh sticky circle-expand animation ──
+  // ── Desktop ──
   const circleSize = 300;
   const imageProgress = Math.min(progress / 0.55, 1);
   const sectorProgress = Math.max(0, Math.min((progress - 0.55) / 0.45, 1));
@@ -195,7 +209,7 @@ const USCinematicScrollReveal = () => {
   const targetScale = (maxDim * 1.5) / circleSize;
   const currentScale = 1 + (targetScale - 1) * imageProgress;
   const currentBorderRadius = 50 * (1 - imageProgress);
-  const textIsLight = imageProgress > 0.3;
+  const textIsLight = isDark && imageProgress > 0.3;
   const taglineTop = 26 - (sectorProgress * 20);
   const overlayOffset = 18;
   const circleTop = 62 + (50 - 62) * imageProgress;
@@ -228,7 +242,7 @@ const USCinematicScrollReveal = () => {
           />
           <div
             className="absolute inset-0"
-            style={{ background: OVERLAY_GRADIENT, opacity: imageProgress }}
+            style={{ background: isDark ? DARK_OVERLAY : LIGHT_OVERLAY, opacity: imageProgress }}
           />
         </div>
 
@@ -245,7 +259,7 @@ const USCinematicScrollReveal = () => {
             transform: 'translateX(-50%)',
             width: '90%',
             maxWidth: '800px',
-            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : 'none',
+            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : imageProgress > 0.3 ? '0 2px 12px rgba(255,255,255,0.3)' : 'none',
           }}
         >
           Where America's essential industries find their{' '}
@@ -275,13 +289,12 @@ const USCinematicScrollReveal = () => {
             <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
           </div>
           <div className="grid grid-cols-2 gap-8 relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: 'hsl(38, 55%, 62%, 0.2)' }} />
-            <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={false} />
-            <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={false} />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: isDark ? 'hsl(38,55%,62%,0.2)' : 'hsl(38,48%,52%,0.15)' }} />
+            <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={false} isDark={isDark} />
+            <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={false} isDark={isDark} />
           </div>
         </div>
       </div>
-      {/* Gold gradient transition line */}
       <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.15), transparent)' }} />
     </section>
   );
