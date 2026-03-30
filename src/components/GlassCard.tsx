@@ -35,6 +35,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
       >
         <motion.div
           whileHover={hover ? { y: -6, rotateX: 2, rotateY: -2 } : {}}
+          style={{ transformPerspective: 1200 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
           className={`
             relative overflow-hidden rounded-sm h-full

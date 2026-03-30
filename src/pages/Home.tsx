@@ -211,9 +211,7 @@ const Home = () => {
         variant="light"
       />
       <div className="bg-background">
-        <FadeIn delay={0.1}>
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
-        </FadeIn>
+        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 
       {/* CTA */}
