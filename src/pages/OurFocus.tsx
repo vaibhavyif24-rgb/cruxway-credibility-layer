@@ -157,7 +157,7 @@ const OurFocus = () => {
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8 h-auto overflow-visible">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 h-auto overflow-visible">
             {profile.map((stat, i) => (
               <StatBlock key={stat.label} label={stat.label} value={stat.value} delay={i * 0.06} />
             ))}

@@ -81,7 +81,7 @@ const GuidingPrinciples = () => {
           <GoldRule />
         </FadeIn>
       </div>
-      <PrinciplesDeck principles={principles} isDark={isDark} />
+      <PrinciplesGrid principles={principles} />
 
       {/* CTA */}
       {/* Shimmer divider */}

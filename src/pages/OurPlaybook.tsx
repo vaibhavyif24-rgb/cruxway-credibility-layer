@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
-import CriteriaCarousel from '@/components/CriteriaCarousel';
-import StickyCardStack from '@/components/StickyCardStack';
+import GlassCard from '@/components/GlassCard';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
