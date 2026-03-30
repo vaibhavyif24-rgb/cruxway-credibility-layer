@@ -3,6 +3,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
@@ -14,19 +15,18 @@ import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 
 const investmentProfile = {
   us: [
-    { label: 'Revenue Range', value: '$1M – $10M (₹10Cr – ₹100Cr)' },
-    { label: 'EBITDA Range', value: '$500K – $2.5M (₹5Cr – ₹25Cr)' },
+    { label: 'Revenue Range', value: '$1M – $10M', subtitle: '₹10Cr – ₹100Cr' },
+    { label: 'EBITDA Range', value: '$500K – $2.5M', subtitle: '₹5Cr – ₹25Cr' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place.' },
   ],
   india: [
-    { label: 'Revenue Range', value: '₹20Cr – ₹500Cr' },
-    { label: 'EBITDA Range', value: '₹5Cr – ₹75Cr' },
-    { label: 'Enterprise Value', value: '₹30Cr – ₹750Cr' },
-    { label: 'Structure', value: 'Majority stakes' },
-    { label: 'Hold Period', value: 'Long-term partnership' },
-    { label: 'Geography', value: 'Pan-India' },
+    { label: 'Revenue Range', value: '₹10Cr – ₹100Cr', subtitle: '$1M – $10M' },
+    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr', subtitle: '$500K – $2.5M' },
+    { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
+    { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
+    { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place.' },
   ],
 };
 
@@ -39,7 +39,10 @@ const whatWeLookFor = [
   { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
-const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; delay?: number }) => {
+/** Stat card for the investment profile band */
+const StatCard = ({ label, value, subtitle, delay = 0, isDark, isCompact = false }: {
+  label: string; value: string; subtitle?: string; delay?: number; isDark: boolean; isCompact?: boolean;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
 
@@ -49,19 +52,39 @@ const StatBlock = ({ label, value, delay = 0 }: { label: string; value: string; 
       initial={{ opacity: 0, y: 12 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className="group text-center"
+      whileHover={{ y: -3 }}
+      className={`group rounded-sm border p-5 md:p-6 transition-all duration-500 hover:border-gold/25 ${
+        isDark
+          ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-border/30'
+          : 'bg-white/70 backdrop-blur-sm border-[hsl(38,15%,90%)]/50 hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
+      }`}
     >
-      <div className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-gold leading-none tracking-[-0.02em] mb-1.5 group-hover:text-gold/90 transition-colors duration-300">
-        {value}
-      </div>
-      <div className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] text-primary-foreground/35 group-hover:text-primary-foreground/50 transition-colors duration-300">
+      <div className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mb-2 ${
+        isDark ? 'text-primary-foreground/35' : 'text-muted-foreground'
+      }`}>
         {label}
       </div>
+      {isCompact ? (
+        <>
+          <div className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-gold leading-none tracking-[-0.02em] group-hover:text-gold/90 transition-colors duration-300">
+            {value}
+          </div>
+          {subtitle && (
+            <div className={`font-sans text-[11px] md:text-[12px] mt-1.5 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/60'}`}>
+              {subtitle}
+            </div>
+          )}
+        </>
+      ) : (
+        <p className={`font-sans text-[14px] md:text-[15px] leading-[1.65] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/80'}`}>
+          {value}
+        </p>
+      )}
     </motion.div>
   );
 };
 
-const CriterionCard = ({ item, index }: { item: typeof whatWeLookFor[0]; index: number }) => {
+const CriterionCard = ({ item, index, isDark }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-40px' });
   const isEven = index % 2 === 0;
@@ -75,33 +98,38 @@ const CriterionCard = ({ item, index }: { item: typeof whatWeLookFor[0]; index: 
       whileHover={{ y: -4, scale: 1.01 }}
       className="group relative"
     >
-      <div className="relative h-full overflow-hidden rounded-sm border border-border/40 bg-card/50 backdrop-blur-sm transition-all duration-500 group-hover:border-gold/20 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--gold)/0.15)]">
+      <div className={`relative h-full overflow-hidden rounded-sm border backdrop-blur-sm transition-all duration-500 ${
+        isDark
+          ? 'border-border/40 bg-card/50 group-hover:border-gold/20 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--gold)/0.15)]'
+          : 'border-[hsl(38,15%,90%)]/60 bg-[hsl(40,20%,98%)]/80 group-hover:border-gold/25 group-hover:shadow-[0_12px_40px_-10px_hsl(38,45%,52%,0.1)]'
+      }`}>
         {/* Animated gold accent line — left edge */}
-        <div className="absolute left-0 top-0 w-[2px] h-0 bg-gold/60 transition-all duration-700 ease-out group-hover:h-full" />
+        <div className={`absolute left-0 top-0 w-[2px] h-0 transition-all duration-700 ease-out group-hover:h-full ${
+          isDark ? 'bg-gold/60' : 'bg-gold/20 group-hover:bg-gold/60'
+        }`} />
 
         {/* Subtle inner glow on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--gold)/0.04),transparent_70%)]" />
 
         {/* Watermark number */}
-        <span className="absolute -right-2 -bottom-4 font-serif text-[6rem] md:text-[7rem] leading-none text-gold/[0.04] italic select-none pointer-events-none transition-colors duration-500 group-hover:text-gold/[0.08]">
+        <span className={`absolute -right-2 -bottom-4 font-serif text-[6rem] md:text-[7rem] leading-none italic select-none pointer-events-none transition-colors duration-500 ${
+          isDark
+            ? 'text-gold/[0.04] group-hover:text-gold/[0.08]'
+            : 'text-gold/[0.05] group-hover:text-gold/[0.1]'
+        }`}>
           {item.num}
         </span>
 
         <div className="relative p-7 md:p-8 lg:p-10 flex flex-col h-full">
-          {/* Criterion label */}
           <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-5 md:mb-6 block">
             Criterion {item.num}
           </span>
-
-          {/* Title */}
           <h3 className="font-serif text-[clamp(1.2rem,2.2vw,1.5rem)] text-foreground leading-[1.2] tracking-[-0.02em] mb-4">
             {item.title}
           </h3>
-
-          {/* Gold divider */}
-          <div className="w-10 h-[1.5px] bg-gold/25 mb-5 transition-all duration-500 group-hover:w-16 group-hover:bg-gold/40" />
-
-          {/* Description */}
+          <div className={`w-10 h-[1.5px] mb-5 transition-all duration-500 group-hover:w-16 ${
+            isDark ? 'bg-gold/25 group-hover:bg-gold/40' : 'bg-gold/30 group-hover:bg-gold/50'
+          }`} />
           <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] flex-1">
             {item.desc}
           </p>
@@ -114,26 +142,31 @@ const CriterionCard = ({ item, index }: { item: typeof whatWeLookFor[0]; index: 
 const OurFocus = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const isIndia = region === 'india';
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
+
+  // Split profile into number cards (first 2) and text cards (rest)
+  const numberCards = profile.slice(0, 2);
+  const textCards = profile.slice(2);
 
   return (
     <div className="overflow-x-clip">
       {/* Hero */}
-      <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
-        <DarkSectionEffects variant="hero" />
+        {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
-            <SectionLabel light={theme === 'dark'}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
+            <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${theme === 'dark' ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia ? <><span className="text-gold">Disciplined</span> Capital for India's Best</> : <>Where <span className="text-gold">Conviction</span> Meets Capital</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${theme === 'dark' ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
                 : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}
@@ -146,20 +179,31 @@ const OurFocus = () => {
         <HeroDivider />
       </section>
 
-      {/* Investment Profile — dark stats band */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects variant="cta" />
+      {/* Investment Profile — theme-responsive stat band */}
+      <section className={`relative overflow-hidden ${
+        isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
+      }`}>
+        {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="section" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
-            <SectionLabel light>Investment Profile</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-primary-foreground leading-[1.15] mb-2">
+            <SectionLabel light={isDark}>Investment Profile</SectionLabel>
+            <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 h-auto overflow-visible">
-            {profile.map((stat, i) => (
-              <StatBlock key={stat.label} label={stat.label} value={stat.value} delay={i * 0.06} />
+
+          {/* Top row: number cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
+            {numberCards.map((stat, i) => (
+              <StatCard key={stat.label} label={stat.label} value={stat.value} subtitle={stat.subtitle} delay={i * 0.06} isDark={isDark} isCompact />
+            ))}
+          </div>
+
+          {/* Bottom row: text cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+            {textCards.map((stat, i) => (
+              <StatCard key={stat.label} label={stat.label} value={stat.value} delay={(i + 2) * 0.06} isDark={isDark} />
             ))}
           </div>
         </div>
@@ -181,7 +225,7 @@ const OurFocus = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
             {whatWeLookFor.map((item, i) => (
-              <CriterionCard key={item.num} item={item} index={i} />
+              <CriterionCard key={item.num} item={item} index={i} isDark={isDark} />
             ))}
           </div>
         </div>
@@ -191,16 +235,18 @@ const OurFocus = () => {
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* CTA */}
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${theme === 'dark' ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
-        <DarkSectionEffects variant="cta" />
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+      }`}>
+        {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
             <FadeIn>
-              <SectionLabel light={theme === 'dark'}>Connect</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <SectionLabel light={isDark}>Connect</SectionLabel>
+              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
               </h2>
-              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${theme === 'dark' ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
                 {isIndia
                   ? 'If you\'re building a business meant to last, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder considering your next chapter, we\'d welcome the conversation.'}
@@ -208,7 +254,7 @@ const OurFocus = () => {
               <Link
                 to={`/${region}/contact`}
                 className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
-                  theme === 'dark'
+                  isDark
                     ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
                     : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
                 }`}

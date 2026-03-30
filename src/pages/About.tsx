@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import ApproachTable from '@/components/ApproachTable';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesSlider from '@/components/PrinciplesSlider';
 import ScrollRevealText from '@/components/ScrollRevealText';
@@ -43,10 +44,10 @@ const About = () => {
 
   return (
     <div>
-      {/* Hero — distinct region-specific cinematic photo */}
+      {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
-        <DarkSectionEffects variant="hero" />
+        {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
             <SectionLabel light={isDark}>{isIndia ? 'About, India' : 'About'}</SectionLabel>
@@ -70,7 +71,7 @@ const About = () => {
         <HeroDivider />
       </section>
 
-      {/* Mission — scroll reveal */}
+      {/* Mission */}
       <ScrollRevealText
         label="Mission"
         heading={
@@ -87,22 +88,24 @@ const About = () => {
         variant="light"
       />
 
-      {/* Our Approach — dark */}
-      <section className="relative bg-primary text-primary-foreground overflow-hidden">
-        <DarkSectionEffects />
+      {/* Our Approach — dark/light responsive */}
+      <section className={`relative overflow-hidden ${
+        isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
+      }`}>
+        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <FadeIn>
-            <SectionLabel light>Our Approach</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] text-primary-foreground leading-[1.15] max-w-[480px] mb-2">
+            <SectionLabel light={isDark}>Our Approach</SectionLabel>
+            <h2 className={`font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               How We Partner With Founders
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
-          <ApproachTable items={approach} variant="dark" />
+          <ApproachTable items={approach} variant={isDark ? 'dark' : 'light'} />
         </div>
       </section>
 
-      {/* Principles — Scroll-triggered vertical slider */}
+      {/* Principles */}
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-12 md:pt-16">
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
@@ -115,8 +118,10 @@ const About = () => {
       <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
-        <DarkSectionEffects variant="cta" />
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 ${
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+      }`}>
+        {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
             <FadeIn>
