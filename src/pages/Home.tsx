@@ -32,25 +32,25 @@ import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.0 },
-  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
-  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
-  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
-  { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
-  { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
-  { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.2 },
+  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.3 },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.2 },
+  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.3 },
+  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.2 },
+  { src: evercoreLogo, alt: 'Evercore', scale: 1.3 },
+  { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.2 },
+  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.2 },
+  { src: depaulLogo, alt: 'DePaul University', scale: 1.2 },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
-  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.0 },
-  { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
-  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.2 },
-  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.2 },
-  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.0 },
+  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.2 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.2 },
+  { src: iicLogo, alt: 'Impact Investors Council', scale: 1.2 },
+  { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.3 },
+  { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.3 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.2 },
 ];
 
 const processStepsUS = [
