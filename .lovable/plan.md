@@ -1,121 +1,213 @@
 
 
-## Plan: Surgical Polish Pass — 12 Fixes
+## Plan: Persian Blue Brand Shift + Visual Overhaul (10 Sections)
 
-### Fix 1: Remove Berkeley Haas Logo
-**File: `src/pages/Home.tsx`**
-- Delete line 28: `import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';`
-- Delete line 48: `{ src: berkeleyHaasLogo, alt: 'UC Berkeley Haas' },` from `foundersLogos`
-- No other files reference it (search confirmed only Home.tsx)
+This is a major visual identity change touching ~20 files. The core brand hue shifts from 207 (Prussian navy) to 228 (Persian blue), with layout diversification, enhanced animations, and contact page updates.
 
-### Fix 2: LogoMarquee Uniform Sizing + Bolder Appearance
+---
+
+### Section 1: Persian Blue Color Shift in `index.css`
+
+**File: `src/index.css`**
+
+Update CSS custom properties:
+
+**:root (light mode):**
+- `--foreground: 228 58% 18%` (was 207 65% 12%)
+- `--card-foreground: 228 58% 18%`
+- `--popover-foreground: 228 58% 18%`
+- `--primary: 228 58% 18%`
+- `--secondary-foreground: 228 58% 18%`
+- `--ring: 228 58% 18%`
+- `--accent: 228 45% 24%` (was 207 50% 18%)
+- Brand tokens: `--prussian: 228 58% 18%`, `--prussian-mid: 228 45% 24%`, `--prussian-light: 228 35% 32%`, `--navy-deep: 228 55% 8%`
+- `--muted-foreground: 228 8% 46%` (was 210)
+
+**.dark:**
+- `--background: 228 45% 6%` (was 210 50% 5%)
+- `--card: 228 40% 8%`, `--popover: 228 45% 7%`
+- `--primary: 228 50% 12%`, `--secondary: 228 30% 12%`
+- `--muted: 228 28% 12%`, `--muted-foreground: 228 12% 55%`
+- `--accent: 228 38% 18%`
+- `--border: 228 22% 16%`, `--input: 228 22% 16%`
+- `--cream: 228 40% 7%`, `--rule: 228 18% 17%`, `--light-stone: 228 28% 10%`
+
+**hero-gradient-animated:** Update gradient stops from 207/210 hues to 228 hue. Change animation duration to 20s.
+
+Add new keyframes:
+```css
+@keyframes text-shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+```
+Add `.text-shimmer-gold` utility class for one-time gold sweep on hero headings.
+
+---
+
+### Section 2: Hardcoded HSL References — Full Sweep
+
+Update all hardcoded `hsl(207...`, `hsl(210...`, `hsl(215...` references across these files:
+
+| File | What changes |
+|---|---|
+| `SiteHeader.tsx` | `hsl(207,65%,12%)` → `hsl(228,58%,18%)`, `hsl(210,8%,46%)` → `hsl(228,8%,46%)`, `hsl(215,50%,8%)` → `hsl(228,48%,10%)`, `hsl(210_60%_4%/0.5)` → `hsl(228_55%_6%/0.5)` |
+| `StickyCardStack.tsx` | darkBgs array: all 207/210 → 228 equivalents. lightTextColors: `hsl(207 65% 12%)` → `hsl(228 58% 18%)`, `hsl(210 8% 44%)` → `hsl(228 8% 44%)` |
+| `HorizontalStickyDeck.tsx` | Same pattern: darkBgs + lightBgs + lightTextColors arrays — all 207/210 → 228 |
+| `TeamStickyDeck.tsx` | darkCardBgs: `hsl(207 50% 12%)` → `hsl(228 48% 14%)`, `hsl(210 12% 10%)` → `hsl(228 12% 10%)` |
+| `PrinciplesDeck.tsx` | titleColor, descColor, darkBg gradients — 207/210/215 → 228 |
+| `PrinciplesSlider.tsx` | Same as PrinciplesDeck |
+| `DarkSectionEffects.tsx` | orbBottomLeft: `hsl(207 50% 18%)` → `hsl(228 45% 20%)` |
+| `OurFocus.tsx` | StatCard dark bg: `hsl(210,45%,9%)` → `hsl(228,42%,11%)` |
+| `InvestmentCriteria.tsx` | Same StatCard dark bg update |
+| `InvestorLogin.tsx` | radial gradient: `hsl(207 65% 15%)` → `hsl(228 58% 18%)` |
+| `CinematicHero.tsx` | vignette: `hsl(214 45% 8%)` → `hsl(228 45% 8%)` |
+
+---
+
+### Section 3: LightSectionEffects Enhanced Rewrite
+
+**File: `src/components/LightSectionEffects.tsx`** — Full rewrite
+
+Add:
+- Two large animated drifting gradient blobs using Framer Motion (x/y drift over 20-25s infinite)
+- Increased particle count: hero=8, cta=6, section=4. Mix of filled (`bg-gold/10`) and hollow (`border border-gold/15 bg-transparent`) particles. Some with slow rotation.
+- Subtle diagonal line pattern overlay at `opacity-[0.008]`
+- Shimmer lines with increased gold opacity (0.18 bottom, 0.14 top)
+
+---
+
+### Section 4: Logo Carousel Per-Logo Sizing
+
 **File: `src/components/LogoMarquee.tsx`**
-- Replace all conditional sizing (lines 61-74) with uniform height: container `h-[48px] md:h-[72px] lg:h-[80px]`, img `h-[40px] md:h-[64px] lg:h-[72px] max-w-[140px] md:max-w-[240px] lg:max-w-[280px]`
-- Boost opacity: `isActuallyDark ? 'opacity-80 hover:opacity-100'`, `isContrastLight ? 'opacity-65 hover:opacity-90'`, inline `'opacity-65 hover:opacity-85'`
-- Add `transition-transform duration-500 hover:scale-110` on container div
-- Add `transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)'` to img style
+- Add `scale?: number` to LogoItem interface
+- Apply scale multiplier to img height via inline style: base heights 44/64/72px × (logo.scale || 1)
+- Update gap to `gap-10 md:gap-14 lg:gap-20`, slow duration by 20%
 
-**File: `src/pages/Team.tsx`** (DealLogoMarquee, ~line 164-203)
-- Uniform deal logo sizing: `h-[32px] md:h-[40px] lg:h-[48px]` container, img `h-[28px] md:h-[36px] lg:h-[44px]`
-- Remove `logo.scale` transform from img style
+**File: `src/pages/Home.tsx`**
+- Add scale values to foundersLogos and allLogos arrays (Warburg 1.6, NITI Aayog 1.5, Swishin 1.5, others 1.0-1.1)
+- Update LogoMarquee `duration` from 40 to 48
 
-### Fix 3: "What We Stand For" Single Line
-**File: `src/pages/GuidingPrinciples.tsx`** (lines 79-83)
-- Replace the two-line heading with single line: `<h2>What We <span className="text-gold">Stand For</span></h2>` — remove the `<br />` tag
+**File: `src/pages/Team.tsx`**
+- Add matching scale values to foundersLogos and allLogos
+- DealLogoMarquee: normalize all deal logo scales to 1.0, remove extraGap, increase base height to `h-[36px] md:h-[44px] lg:h-[52px]`
+- Update LogoMarquee `duration` from 40 to 48
 
-### Fix 4: Reduce Vertical Gaps Globally
+---
 
-**A. `src/components/ScrollRevealText.tsx`** (line 65)
-- Change `py-14 md:py-20 lg:py-24` → `py-10 md:py-14 lg:py-16`
+### Section 5: Layout Diversification — Principles Timeline
 
-**B. `src/pages/Home.tsx`** (line 195)
-- Change `pt-8 md:pt-10 lg:pt-12 pb-2` → `pt-6 md:pt-8 lg:pt-10 pb-0`
+**File: `src/components/PrinciplesGrid.tsx`** — Major refactor
 
-**C. `src/pages/GuidingPrinciples.tsx`** (line 76)
-- Change `pt-4 md:pt-6` → `pt-8 md:pt-10`
-- `PrinciplesGrid.tsx` line 81: change `pb-8 md:pb-12` → `pb-6 md:pb-8`
+Replace 3-column card grid with vertical staggered timeline:
+- Alternating left/right alignment on desktop (md+), all left on mobile
+- No boxes, no borders, no card backgrounds
+- Large gold number (`text-[3rem] font-serif text-gold/20`) with vertical connecting gold line (`w-px bg-gold/10`)
+- Principle title in serif + description in sans, no containers
+- Staggered `whileInView` entrance, sliding from left/right alternately
+- On hover: gold number intensifies to `text-gold/40`, gold underline appears under title
+- Connecting line pulses with shimmer animation between items
 
-**D. `src/pages/OurFocus.tsx`** (line 226)
-- Change `py-12 md:py-16 lg:py-20` → `py-8 md:py-12 lg:py-14`
+---
 
-**E. Scan all pages**: Cap maximum vertical padding at `py-10 md:py-14 lg:py-16`. Reduce any `py-20`, `py-24` values found in section-level elements across all pages.
+### Section 6: Layout Diversification — Investment Profile Typographic
 
-### Fix 5: Investment Profile Card Polish
 **Files: `src/pages/OurFocus.tsx`, `src/pages/InvestmentCriteria.tsx`**
 
-Number cards (isCompact):
-- Add animated gold underline beneath value: `motion.div` from `width: 0` → `width: 40px`, `h-[1.5px] bg-gold/30`, on viewport entry with 0.6s duration
-- Hover shadow upgrade: `hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)]` and `hover:border-t-gold/70`
+Replace StatCard bordered cards with borderless typographic layout:
+- Remove StatCard component entirely
+- Each item is a `motion.div` with:
+  - Label: `text-[10px] font-medium uppercase tracking-[0.22em] text-gold/50`
+  - Value: `font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] text-foreground mt-1` (Revenue/EBITDA values in `text-gold`)
+  - Animated gold underline: `width: 0 → 32px`, `h-[1.5px] bg-gold/25`
+- Layout: 2-col for Revenue+EBITDA, full-width for Structure, 2-col for Hold Period+Aligned Partnerships
+- Staggered entrance with increasing delays
+- No card containers — clean typographic presentation on the warm contrast band
 
-Text cards:
-- Value text: update to `text-[14.5px] md:text-[15px] leading-[1.7] text-foreground/85`
+---
 
-Add shimmer sweep on stat band container: a `div` overlay with `background: linear-gradient(105deg, transparent 40%, hsl(38,48%,52%,0.03) 50%, transparent 60%)`, `background-size: 300% 100%`, animated via `shimmer-sweep` keyframe at 8s.
+### Section 7: Layout Diversification — OurFocus Criteria Prose Blocks
 
-### Fix 6: Light-Mode Animation & Color Elevation
+**File: `src/pages/OurFocus.tsx`** (CriterionCard)
 
-**A. `src/components/ui/Section.tsx`** — GoldRule already has viewport-triggered width animation (confirmed in code). No change needed.
+Replace 3-column card grid with 2-column alternating prose layout:
+- Left column: large gold number (`text-[3.5rem] font-serif text-gold/15`) + title
+- Right column: description text
+- No borders, no card backgrounds
+- Thin gold divider with shimmer between each criterion
+- Odd rows slide from left, even from right on viewport entry
 
-**B. SectionLabel** (Section.tsx line 50-63): Add letter-spacing animation — wrap in `motion.p` with `initial={{ letterSpacing: '0.15em' }}` and `whileInView={{ letterSpacing: '0.28em' }}`, `viewport={{ once: true }}`, duration 0.5s.
+---
 
-**C. FadeIn** (Section.tsx line 11-24): Add blur focus-pull: `initial={{ opacity: 0, y, filter: 'blur(4px)' }}` and `whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}`.
+### Section 8: Contact Page Updates
 
-**D. ScrollRevealText contrast sections**: Change `bg-[hsl(40,16%,94%)]` → `bg-[hsl(38,18%,93%)]` for richer warm tone. Add decorative gold gradient bands at top and bottom when `isContrastLight`.
+**File: `src/pages/Contact.tsx`**
+- Update India location: `'GK II, Delhi, India'` → `'E-97, GK II, Delhi, India'`
+- Wrap location GlassCard in `<a>` linking to Google Maps with `target="_blank"`
+- Add ArrowUpRight icon to location card (matching email card pattern)
+- Google Maps URLs: India → `https://maps.google.com/?q=E-97+GK+II+Delhi+India`, US → `https://maps.google.com/?q=San+Diego+California`
 
-**E. StatReveal in ScrollRevealText**: When not dark, stat values use `text-gold` instead of `text-foreground`.
+---
 
-**F. CTA sections across all pages**: Change light-mode bg from `bg-[hsl(40,18%,96%)]` to `bg-[hsl(38,16%,92%)]` and add `border-t border-gold/10`. Affects: Home, GuidingPrinciples, OurFocus, InvestmentCriteria, OurPlaybook, About, Contact, Team.
+### Section 9: Advanced Animations
 
-**G. `src/index.css`**: Add `.btn-premium` shimmer sweep CSS with `::after` pseudo-element. Add `.gold-underline-hover` utility. Verify all keyframes exist (they do from prior rounds). Add `gold-border-pulse` keyframe + `.gold-shimmer-border` utility if missing.
+**A. Scroll progress bar** — `SiteHeader.tsx`
+- Add `useScroll` → `scrollYProgress` from Framer Motion
+- Render a `motion.div` at top of header: `h-[2px] bg-gold/40 origin-left`, `scaleX` bound to `scrollYProgress`
 
-### Fix 7: PrincipleCard Hover Enhancement
-**File: `src/components/PrinciplesGrid.tsx`**
-- Add `y: -4` to `whileHover` alongside `scale: 1.02`
-- Gold left-edge: start at `h-[30%] bg-gold/10` (visible by default), expand to `h-full bg-gold/50` on hover
-- Watermark: light mode default `text-gold/[0.06]`, hover `text-gold/[0.12]`
-- Add shimmer bottom border: `border-b-2 border-transparent group-hover:border-gold/20 transition-all duration-500`
+**B. Parallax on hero images** — `CinematicHero.tsx`
+- Add `useScroll` + `useTransform(scrollY, [0, 500], [0, -60])` for subtle upward parallax on hero image
 
-### Fix 8: LogoMarquee Light-Mode Background
-**File: `src/components/LogoMarquee.tsx`**
-- Change `bg-[hsl(40,16%,94%)]` → `bg-[hsl(38,16%,92%)]`
-- Add gold border accents (1px gold/10 top and bottom) when `isContrastLight`
-- Import and render `<LightSectionEffects variant="section" />` inside the band when `isContrastLight`
+**C. Text shimmer on hero headings** — All pages
+- Apply `text-shimmer-gold` class to hero `<h1>` elements across Home, GuidingPrinciples, OurFocus, InvestmentCriteria, OurPlaybook, Team, About, Contact
 
-### Fix 9: Team Stats Bar Visual Upgrade
-**File: `src/pages/Team.tsx`** (StatItem component, lines 303-318)
-- Light mode: value color `text-gold` instead of `text-foreground`
-- Add animated gold underline: `motion.div` from `width: 0` → `width: 24px`, `h-[1.5px] bg-gold/30 mx-auto mt-2`, staggered delays
-- Counting animation: parse numeric portion with `useMotionValue` + `animate` for count-up effect, fallback to static text
+**D. Section entry gold wipe** — `ScrollRevealText.tsx`
+- When `isContrastLight`, add a `motion.div` horizontal gold line that sweeps across on viewport entry
 
-### Fix 10: CSS Additions
-**File: `src/index.css`**
-- Add `.btn-premium` shimmer sweep (position: relative, overflow: hidden, ::after pseudo-element with gold gradient)
-- Add `.gold-underline-hover` utility
-- Add `gold-border-pulse` keyframe + `.gold-shimmer-border` if not already present
-- Verify all existing keyframes are intact
-- Add button active press effect: `button:not([disabled]):active { transform: scale(0.97) }`
+---
 
-### Fix 11: CinematicScrollReveal Bottom Transition
-**Files: `src/components/CinematicScrollReveal.tsx`, `src/components/USCinematicScrollReveal.tsx`**
-- Add a decorative gold gradient line at the bottom of each component's render output: `<div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.15), transparent)' }} />`
+### Section 10: Padding Reduction + Persian Blue Integration
 
-### Files Modified (Total: ~12)
+**Padding cap:**
+- `ScrollRevealText.tsx`: `py-10 md:py-14 lg:py-16` → `py-8 md:py-10 lg:py-12`
+- `SectorShowcase.tsx`: `py-16 md:py-20 lg:py-28` → `py-14 md:py-16 lg:py-16`
+- Home consecutive ScrollRevealText sections: add `-mt-2` between them
 
-| File | Key Changes |
+**Persian blue accent integration (light mode):**
+- `SectionLabel`: change `text-muted-foreground/50` → `text-[hsl(228,45%,45%)]/50`
+- SiteHeader active nav underline: light mode `bg-gold/30` → `bg-[hsl(228,45%,45%)]/30`
+- Stat labels in ScrollRevealText: `text-muted-foreground/50` → `text-[hsl(228,45%,45%)]/40`
+
+**Footer dark in both modes:**
+- `SiteFooter.tsx`: Change `isDark ? 'bg-primary' : 'bg-card'` → `isDark ? 'bg-primary' : 'bg-[hsl(228,58%,18%)]'`
+- All footer text uses cream/light colors regardless of mode (text-primary-foreground pattern)
+
+---
+
+### Files Modified (~20 total)
+
+| File | Changes |
 |---|---|
-| `src/pages/Home.tsx` | Remove Berkeley Haas, tighten Our Process padding, CTA bg update |
-| `src/components/LogoMarquee.tsx` | Uniform sizing, bolder opacity, hover scale, warmer bg, LightSectionEffects |
-| `src/pages/GuidingPrinciples.tsx` | Single-line heading, tighten padding, CTA bg |
-| `src/components/ScrollRevealText.tsx` | Tighter padding, warmer contrast bg, gold stat values, decorative borders |
-| `src/components/ui/Section.tsx` | FadeIn blur effect, SectionLabel letter-spacing animation |
-| `src/components/PrinciplesGrid.tsx` | Hover lift, visible default gold accent, bolder watermark, bottom border |
-| `src/pages/OurFocus.tsx` | StatCard gold underline, shimmer sweep, tighter gaps, CTA bg |
-| `src/pages/InvestmentCriteria.tsx` | Same StatCard upgrades, CTA bg |
-| `src/pages/Team.tsx` | Gold stat values, counting animation, gold underlines, DealLogoMarquee uniform sizing |
-| `src/index.css` | btn-premium shimmer, gold-underline-hover, gold-border-pulse, button press |
-| `src/components/CinematicScrollReveal.tsx` | Gold gradient bottom line |
-| `src/components/USCinematicScrollReveal.tsx` | Gold gradient bottom line |
-| `src/pages/About.tsx` | CTA bg update |
-| `src/pages/Contact.tsx` | CTA bg update |
-| `src/pages/OurPlaybook.tsx` | CTA bg update |
+| `src/index.css` | Persian blue vars, text-shimmer keyframe, utility class |
+| `src/components/SiteHeader.tsx` | Scroll progress bar, hardcoded HSL updates |
+| `src/components/SiteFooter.tsx` | Dark footer in both modes |
+| `src/components/LightSectionEffects.tsx` | Full rewrite with drifting blobs, more particles |
+| `src/components/LogoMarquee.tsx` | Per-logo scale prop, adjusted gaps/duration |
+| `src/components/PrinciplesGrid.tsx` | Timeline layout replacing card grid |
+| `src/components/ScrollRevealText.tsx` | Tighter padding, gold wipe, Persian blue stat labels |
+| `src/components/CinematicHero.tsx` | Parallax effect, vignette HSL update |
+| `src/components/DarkSectionEffects.tsx` | HSL update |
+| `src/components/StickyCardStack.tsx` | HSL updates for all palette arrays |
+| `src/components/HorizontalStickyDeck.tsx` | HSL updates |
+| `src/components/TeamStickyDeck.tsx` | HSL updates |
+| `src/components/PrinciplesDeck.tsx` | HSL updates |
+| `src/components/PrinciplesSlider.tsx` | HSL updates |
+| `src/components/ui/Section.tsx` | SectionLabel Persian blue color |
+| `src/pages/Home.tsx` | Logo scales, text-shimmer, spacing |
+| `src/pages/Team.tsx` | Logo scales, deal logo normalization, text-shimmer |
+| `src/pages/OurFocus.tsx` | Typographic stat layout, prose criteria, text-shimmer |
+| `src/pages/InvestmentCriteria.tsx` | Typographic stat layout, text-shimmer |
+| `src/pages/Contact.tsx` | Address update, clickable location card |
+| `src/pages/GuidingPrinciples.tsx` | text-shimmer on hero |
+| `src/pages/About.tsx` | text-shimmer, CTA bg |
+| `src/pages/OurPlaybook.tsx` | text-shimmer |
+| `src/pages/InvestorLogin.tsx` | HSL update |
+| `src/components/SectorShowcase.tsx` | Padding reduction |
 
