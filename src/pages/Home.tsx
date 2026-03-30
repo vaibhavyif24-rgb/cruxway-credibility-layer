@@ -107,7 +107,7 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
+            <SectionLabel light={theme === 'dark'}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[12px] md:text-[14px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-4">
@@ -115,14 +115,14 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.8rem)] text-white max-w-[680px] leading-[1.08] tracking-[-0.03em] drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]">
+            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${theme === 'dark' ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold">Essential</span> Companies</>
                 : <>Building the <span className="text-gold">Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className="font-sans text-[14px] md:text-[16px] text-white/65 leading-[1.75] mt-5 max-w-[520px] drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]">
+            <p className={`font-sans text-[14px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${theme === 'dark' ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
                 : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
@@ -135,7 +135,11 @@ const Home = () => {
             <div className="mt-6 md:mt-8 flex flex-wrap gap-3">
               <Link
                 to={`/${region}/focus`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80 transition-all duration-300"
+                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
+                  theme === 'dark'
+                    ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
+                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
+                }`}
               >
                 Our Focus
               </Link>
