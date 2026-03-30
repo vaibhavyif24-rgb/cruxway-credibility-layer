@@ -9,7 +9,6 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import GlassCard from '@/components/GlassCard';
 import ScrollRevealText from '@/components/ScrollRevealText';
-import WaveBackground from '@/components/WaveBackground';
 
 import heroIndiaContact from '@/assets/hero-india-contact.jpg';
 import heroUSContact from '@/assets/hero-us-contact.jpg';
