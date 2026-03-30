@@ -50,34 +50,19 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       className={`relative overflow-hidden ${
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
-          : isContrastLight
-            ? 'bg-[hsl(38,18%,93%)] text-foreground'
-            : 'bg-background text-foreground'
+          : 'bg-background text-foreground'
       } ${className}`}
-      style={{ contentVisibility: 'auto' }}
     >
       {isActuallyDark && <DarkSectionEffects variant="default" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
 
-      {/* Gold gradient bands for contrast sections */}
-      {(isContrastLight || isActuallyDark) && (
+      {/* Soft top/bottom gradient fades for non-dark variants */}
+      {!isActuallyDark && (
         <>
-          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
-          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
+          <div className="absolute top-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-b from-background to-transparent pointer-events-none z-[1]" />
+          <div className="absolute bottom-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-[1]" />
         </>
-      )}
-
-      {/* Section entry gold wipe for contrast sections */}
-      {isContrastLight && (
-        <motion.div
-          className="absolute top-1/2 left-0 right-0 h-px z-10"
-          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.15), transparent)' }}
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-        />
       )}
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
@@ -201,9 +186,13 @@ const StatReveal = ({
 
   return (
     <motion.div ref={counterRef} style={{ opacity }} className="text-center">
-      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-gold' : 'text-gold'}`}>
+      <motion.p
+        whileHover={{ scale: 1.05, textShadow: '0 0 20px hsl(38,48%,52%,0.3)' }}
+        transition={{ duration: 0.2 }}
+        className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] cursor-default ${isDark ? 'text-gold' : 'text-gold'}`}
+      >
         {displayValue}
-      </p>
+      </motion.p>
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/45' : 'text-[hsl(228,45%,45%)]/40'}`}>
         {stat.label}
       </p>

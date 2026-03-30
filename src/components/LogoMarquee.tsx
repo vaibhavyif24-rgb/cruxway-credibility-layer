@@ -34,10 +34,10 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
   const bgClass = isActuallyDark
-    ? 'bg-primary py-6 md:py-10 lg:py-14'
+    ? 'bg-primary py-4 md:py-6 lg:py-8'
     : isContrastLight
-      ? 'bg-[hsl(38,16%,92%)] py-6 md:py-10 lg:py-14'
-      : 'py-5 md:py-8 lg:py-10';
+      ? 'bg-[hsl(38,16%,92%)] py-4 md:py-6 lg:py-8'
+      : 'py-3 md:py-5 lg:py-6';
 
   const fadeFromClass = isActuallyDark
     ? 'from-primary'
@@ -67,7 +67,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
       <div className={`absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-l ${fadeFromClass} to-transparent`} />
 
       <motion.div
-        className="flex items-center gap-12 md:gap-16 lg:gap-24 w-max"
+        className="flex items-center gap-6 md:gap-10 lg:gap-14 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >

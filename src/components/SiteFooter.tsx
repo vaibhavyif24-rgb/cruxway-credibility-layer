@@ -39,7 +39,13 @@ const SiteFooter = () => {
 
       <div className={`h-px ${isDark ? 'bg-[hsl(40,28%,95%)]/[0.04]' : 'bg-border/40'}`} />
 
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 relative z-10">
+      <motion.div
+        className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 relative z-10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      >
         <FadeIn>
           <div className="flex flex-col md:flex-row justify-between items-start gap-5 md:gap-14 mb-8">
             <div className="relative">
@@ -102,7 +108,7 @@ const SiteFooter = () => {
             </div>
           </div>
         </FadeIn>
-      </div>
+      </motion.div>
     </footer>
   );
 };

@@ -72,14 +72,49 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
             background: `linear-gradient(90deg, transparent 0%, hsl(38 48% 52% / ${0.04 * intensity}) 30%, hsl(38 48% 52% / ${0.06 * intensity}) 50%, hsl(38 48% 52% / ${0.04 * intensity}) 70%, transparent 100%)`,
           }}
           animate={{
-            x: ['-20%', '20%', '-20%'],
+            x: ['-30%', '30%', '-30%'],
           }}
           transition={{
-            duration: 30,
+            duration: 22,
             repeat: Infinity,
             ease: 'easeInOut',
           }}
         />
+
+        {/* Aurora ribbon — slow horizontal sweep */}
+        <motion.div
+          className="absolute w-[120%] h-[40%] top-[30%] -left-[10%]"
+          style={{
+            background: `linear-gradient(
+              90deg,
+              transparent 0%,
+              hsl(38 48% 52% / ${0.03 * intensity}) 20%,
+              hsl(228 40% 60% / ${0.02 * intensity}) 40%,
+              hsl(38 48% 52% / ${0.04 * intensity}) 60%,
+              hsl(228 40% 60% / ${0.02 * intensity}) 80%,
+              transparent 100%
+            )`,
+            filter: 'blur(60px)',
+          }}
+          animate={{
+            x: ['-15%', '15%', '-15%'],
+            rotate: [-2, 2, -2],
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
+        {/* Ripple rings — top right (hero only) */}
+        {variant === 'hero' && (
+          <motion.div
+            className="absolute top-[15%] right-[10%] w-[300px] h-[300px]"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.03, 0.06, 0.03] }}
+            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <div className="w-full h-full rounded-full border border-gold/[0.06]" />
+            <div className="absolute inset-[20%] rounded-full border border-gold/[0.04]" />
+            <div className="absolute inset-[40%] rounded-full border border-gold/[0.03]" />
+          </motion.div>
+        )}
 
         {/* Subtle diagonal line pattern overlay */}
         <div

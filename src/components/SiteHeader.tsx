@@ -93,8 +93,8 @@ const SiteHeader = () => {
       >
         {/* Scroll progress bar */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-[2px] bg-gold/40 origin-left z-50"
-          style={{ scaleX: scrollYProgress }}
+          className="absolute top-0 left-0 right-0 h-[2px] origin-left z-50"
+          style={{ scaleX: scrollYProgress, background: 'linear-gradient(90deg, hsl(38,48%,52%,0.2), hsl(38,48%,52%,0.5), hsl(38,48%,52%,0.2))' }}
         />
 
         {/* Animated shimmer line */}
