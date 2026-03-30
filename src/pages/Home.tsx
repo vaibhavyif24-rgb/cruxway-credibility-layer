@@ -101,7 +101,7 @@ const Home = () => {
   return (
     <div style={{ overflowX: 'clip' }}>
       {/* Hero — region-specific cinematic photo with Ken Burns + gold geometric lines */}
-      <section className="relative text-primary-foreground overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end">
+      <section className={`relative overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
         <DarkSectionEffects variant="hero" />
 
