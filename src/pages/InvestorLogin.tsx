@@ -24,7 +24,7 @@ const InvestorLogin = () => {
     <div className="min-h-[100dvh] bg-prussian flex flex-col items-center justify-center px-6 relative overflow-hidden">
       <DarkSectionEffects variant="hero" />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-transparent to-navy-deep/40 pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(207_65%_15%/0.2)_0%,_transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_hsl(228_58%_18%/0.2)_0%,_transparent_60%)] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 14 }}

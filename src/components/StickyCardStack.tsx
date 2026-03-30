@@ -31,17 +31,17 @@ const lightBgs = [
 ];
 
 const darkBgs = [
-  'hsl(207 60% 10%)',
-  'hsl(210 50% 14%)',
-  'hsl(207 45% 18%)',
-  'hsl(210 55% 8%)',
+  'hsl(228 55% 12%)',
+  'hsl(228 45% 16%)',
+  'hsl(228 40% 20%)',
+  'hsl(228 50% 10%)',
 ];
 
 const lightTextColors = [
-  { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
-  { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
-  { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
-  { title: 'hsl(207 65% 12%)', desc: 'hsl(210 8% 44%)', step: 'hsl(38 48% 52%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(38 48% 52%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(38 48% 52%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(38 48% 52%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(38 48% 52%)' },
 ];
 
 const darkTextColors = {
