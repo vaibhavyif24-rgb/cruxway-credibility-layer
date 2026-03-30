@@ -9,7 +9,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import TeamStickyDeck from '@/components/TeamStickyDeck';
-import WaveBackground from '@/components/WaveBackground';
+
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';

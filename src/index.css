@@ -357,4 +357,11 @@
     animation: text-shimmer 3s ease-in-out 0.5s 1;
     animation-fill-mode: forwards;
   }
+
+  /* CTA button pulse glow */
+  @keyframes btn-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(38 48% 52% / 0); }
+    50% { box-shadow: 0 0 16px 0 hsl(38 48% 52% / 0.08); }
+  }
+  .btn-premium-glow { animation: btn-pulse 3s ease-in-out infinite; }
 }
