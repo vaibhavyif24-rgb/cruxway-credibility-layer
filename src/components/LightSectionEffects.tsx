@@ -14,11 +14,11 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
       <div ref={ref} className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Drifting gradient blob 1 — warm gold */}
         <motion.div
-          className="absolute w-[600px] h-[500px] rounded-full"
+          className="absolute w-[800px] h-[700px] rounded-full"
           style={{
             top: '-10%',
             right: '-15%',
-            background: `radial-gradient(ellipse at center, hsl(38 48% 52% / ${0.05 * intensity}), transparent 70%)`,
+            background: `radial-gradient(ellipse at center, hsl(38 48% 52% / ${0.07 * intensity}), transparent 70%)`,
           }}
           animate={{
             x: [0, 40, -20, 0],
@@ -33,11 +33,11 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
 
         {/* Drifting gradient blob 2 — Persian blue tint */}
         <motion.div
-          className="absolute w-[500px] h-[450px] rounded-full"
+          className="absolute w-[700px] h-[600px] rounded-full"
           style={{
             bottom: '-15%',
             left: '-10%',
-            background: `radial-gradient(ellipse at center, hsl(228 45% 55% / ${0.03 * intensity}), transparent 70%)`,
+            background: `radial-gradient(ellipse at center, hsl(228 45% 55% / ${0.05 * intensity}), transparent 70%)`,
           }}
           animate={{
             x: [0, -30, 25, 0],
@@ -51,8 +51,27 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
         />
 
         {/* Subtle diagonal line pattern overlay */}
+        {/* Warm white ambient blob */}
+        <motion.div
+          className="absolute w-[600px] h-[500px] rounded-full"
+          style={{
+            top: '30%',
+            left: '20%',
+            background: `radial-gradient(ellipse at center, hsl(40 30% 97% / ${0.08 * intensity}), transparent 70%)`,
+          }}
+          animate={{
+            x: [0, 35, -20, 0],
+            y: [0, -20, 30, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+        />
+
         <div
-          className="absolute inset-0 opacity-[0.008]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(38 45% 55%) 40px, hsl(38 45% 55%) 40.5px)',
           }}

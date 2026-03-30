@@ -7,6 +7,7 @@ import AnimatedAccent from '@/components/AnimatedAccent';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesGrid from '@/components/PrinciplesGrid';
 import ScrollRevealText from '@/components/ScrollRevealText';
+import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
@@ -33,8 +34,9 @@ const GuidingPrinciples = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
+        <WaveBackground variant="hero" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
             <SectionLabel light={isDark}>{isIndia ? 'About Us, India' : 'About Us'}</SectionLabel>
           </FadeIn>
@@ -101,6 +103,7 @@ const GuidingPrinciples = () => {
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-6 md:py-10 lg:py-12 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
+        <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">

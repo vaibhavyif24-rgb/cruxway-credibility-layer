@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import LightSectionEffects from '@/components/LightSectionEffects';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LogoItem {
   src: string;
@@ -17,9 +18,14 @@ interface LogoMarqueeProps {
   variant?: 'dark' | 'inline';
 }
 
-const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 28, variant = 'dark' }, ref) => {
+const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 55, variant = 'dark' }, ref) => {
   const doubled = [...logos, ...logos];
   const { theme } = useTheme();
+  const isMobile = useIsMobile();
+
+  const baseHeight = isMobile ? 48 : 80;
+  const baseMaxWidth = isMobile ? 160 : 280;
+  const containerHeight = isMobile ? 56 : 96;
 
   const isDarkVariant = variant === 'dark';
   const isActuallyDark = isDarkVariant && theme === 'dark';
@@ -61,7 +67,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
       <div className={`absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-l ${fadeFromClass} to-transparent`} />
 
       <motion.div
-        className="flex items-center gap-10 md:gap-14 lg:gap-20 w-max"
+        className="flex items-center gap-12 md:gap-16 lg:gap-24 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
@@ -72,7 +78,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
               key={`${logo.alt}-${i}`}
               className="flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110"
               style={{
-                height: `${Math.round(s * 48)}px`,
+                height: `${Math.round(s * containerHeight)}px`,
               }}
             >
               <img
@@ -80,8 +86,8 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
                 alt={logo.alt}
                 className={`w-auto object-contain ${logoOpacity}`}
                 style={{
-                  height: `${Math.round(s * 40)}px`,
-                  maxWidth: `${Math.round(s * 140)}px`,
+                  height: `${Math.round(s * baseHeight)}px`,
+                  maxWidth: `${Math.round(s * baseMaxWidth)}px`,
                   filter: goldFilter,
                   mixBlendMode: blendMode as any,
                   transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',

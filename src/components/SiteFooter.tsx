@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { FadeIn, GoldRule } from '@/components/ui/Section';
+import WaveBackground from '@/components/WaveBackground';
 
 const SiteFooter = () => {
   const year = new Date().getFullYear();
@@ -22,6 +23,7 @@ const SiteFooter = () => {
   // Footer is always dark (Persian blue) in both modes
   return (
     <footer className="relative overflow-hidden transition-colors duration-300 bg-[hsl(228,58%,18%)]">
+      <WaveBackground variant="section" />
       <div className="h-px bg-[hsl(40,28%,95%)]/[0.04]" />
 
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 relative z-10">
