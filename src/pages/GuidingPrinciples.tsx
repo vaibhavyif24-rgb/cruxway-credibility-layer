@@ -7,7 +7,6 @@ import AnimatedAccent from '@/components/AnimatedAccent';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesGrid from '@/components/PrinciplesGrid';
 import ScrollRevealText from '@/components/ScrollRevealText';
-import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
