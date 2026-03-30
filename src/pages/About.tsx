@@ -8,7 +8,6 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesSlider from '@/components/PrinciplesSlider';
 import ScrollRevealText from '@/components/ScrollRevealText';
-import WaveBackground from '@/components/WaveBackground';
 import { motion } from 'framer-motion';
 
 import heroIndiaAbout from '@/assets/hero-india-about.jpg';
