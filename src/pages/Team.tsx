@@ -367,22 +367,25 @@ const Team = () => {
   const { region } = useRegion();
   const isIndia = region === 'india';
 
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
     <div>
       {/* Hero */}
-      <section className="relative hero-gradient-animated text-primary-foreground overflow-hidden">
+      <section className={`relative overflow-hidden ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
         <DarkSectionEffects variant="hero" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-18 lg:pt-36 lg:pb-20">
           <FadeIn>
-            <SectionLabel light>Team</SectionLabel>
+            <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className="font-serif text-[clamp(1.6rem,4.5vw,3rem)] text-primary-foreground max-w-[460px] leading-[1.12] tracking-[-0.025em]">
+            <h1 className={`font-serif text-[clamp(1.6rem,4.5vw,3rem)] max-w-[460px] leading-[1.12] tracking-[-0.025em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className="font-sans text-[12px] md:text-[13px] text-primary-foreground/40 leading-[1.65] md:leading-[1.7] mt-3 md:mt-4 max-w-[420px]">
+            <p className={`font-sans text-[12px] md:text-[13px] leading-[1.65] md:leading-[1.7] mt-3 md:mt-4 max-w-[420px] ${isDark ? 'text-primary-foreground/40' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}
@@ -394,7 +397,7 @@ const Team = () => {
         </div>
 
         {/* Stats Bar */}
-        <div className="relative border-t border-primary-foreground/[0.06]">
+        <div className={`relative border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               <StatItem value="25+" label="Years Combined" delay={0.1} />
