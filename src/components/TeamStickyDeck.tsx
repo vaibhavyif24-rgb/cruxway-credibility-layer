@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 export interface TeamDeckMember {
   name: string;
@@ -16,11 +17,6 @@ export interface TeamDeckMember {
 interface TeamStickyDeckProps {
   members: TeamDeckMember[];
 }
-
-/* ─── Constants ─── */
-const STICKY_TOP_BASE = 72;
-const STICKY_OFFSET_STEP = 16;
-const CARD_MIN_H = 520;
 
 /* ─── Backgrounds ─── */
 const darkCardBgs = [
@@ -37,7 +33,7 @@ const lightCardBgs = [
 
 const goldFilter = 'brightness(0) invert(67%) sepia(65%) saturate(400%) hue-rotate(358deg) brightness(92%)';
 
-/* ─── Inline Logo Marquee (auto-scrolling, no duplicate logos visible) ─── */
+/* ─── Inline Logo Marquee ─── */
 const InlineMarquee: React.FC<{
   logos: TeamDeckMember['dealLogos'];
   isDark: boolean;
@@ -46,8 +42,6 @@ const InlineMarquee: React.FC<{
   const [hovered, setHovered] = useState(false);
   if (!logos || logos.length === 0) return null;
 
-  // Triple the set: the visible container only ever shows ~1 set width,
-  // the animation scrolls by exactly 1/3 (one set) then loops seamlessly
   const track = [...logos, ...logos, ...logos];
 
   return (
@@ -61,7 +55,7 @@ const InlineMarquee: React.FC<{
       <motion.div
         className="flex items-center gap-6 md:gap-8 lg:gap-10 w-max"
         animate={{ x: ['0%', '-33.333%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 28, ease: 'linear' } }}
+        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 16, ease: 'linear' } }}
         style={{ animationPlayState: hovered ? 'paused' : 'running' }}
       >
         {track.map((logo, i) => (
@@ -94,23 +88,46 @@ const TeamCard: React.FC<{
   index: number;
   totalMembers: number;
   isDark: boolean;
-}> = ({ member, index, totalMembers, isDark }) => {
+  stickyBase: number;
+  stickyStep: number;
+}> = ({ member, index, totalMembers, isDark, stickyBase, stickyStep }) => {
   const bgs = isDark ? darkCardBgs : lightCardBgs;
   const bg = bgs[index % bgs.length];
-  const stickyTop = STICKY_TOP_BASE + index * STICKY_OFFSET_STEP;
+  const stickyTop = stickyBase + index * stickyStep;
 
   return (
-    <div
-      className="rounded-2xl overflow-hidden will-change-transform"
+    <motion.div
+      initial={{ opacity: 0, y: 30, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      whileHover={{ y: -4, scale: 1.01 }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className="rounded-2xl overflow-hidden"
       style={{
         position: 'sticky',
         top: `${stickyTop}px`,
         zIndex: index + 1,
         backgroundColor: bg,
-        minHeight: undefined,
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -10px rgba(0,0,0,0.15)',
       }}
     >
+      {/* Gold accent line */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        className="h-[2px] bg-gradient-to-r from-gold/30 via-gold/15 to-transparent origin-left"
+      />
+
+      {/* Soft top fade for stacking blend */}
+      {index > 0 && (
+        <div
+          className="absolute top-0 left-0 right-0 h-3 z-[2] pointer-events-none rounded-t-2xl"
+          style={{ background: `linear-gradient(to bottom, ${bg}, transparent)` }}
+        />
+      )}
+
       <div className="flex flex-col md:flex-row h-full">
 
         {/* ─── Left: Photo column ─── */}
@@ -124,11 +141,15 @@ const TeamCard: React.FC<{
                   boxShadow: `0 8px 32px -8px ${isDark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
                 }}
               >
-                <img
+                <motion.img
                   src={member.photo}
                   alt={member.name}
                   loading="lazy"
-                  className="w-full h-full object-cover object-top grayscale"
+                  initial={{ filter: 'grayscale(100%)' }}
+                  whileInView={{ filter: 'grayscale(0%)' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </div>
@@ -161,7 +182,7 @@ const TeamCard: React.FC<{
           <div className="mb-3">
             <div className="flex items-center gap-2 flex-wrap">
               <h3
-                className="font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
+                className="text-shimmer-gold font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
                 style={{ color: isDark ? 'hsl(0 0% 100%)' : 'hsl(var(--foreground))' }}
               >
                 {member.name}
@@ -190,7 +211,7 @@ const TeamCard: React.FC<{
             </p>
           </div>
 
-          {/* Deal logos — directly below name */}
+          {/* Deal logos */}
           {member.dealLogos && member.dealLogos.length > 0 && (
             <div className="mb-4 md:mb-5 min-w-0 overflow-hidden">
               <p
@@ -203,7 +224,7 @@ const TeamCard: React.FC<{
             </div>
           )}
 
-          {/* Summary — proper wrapping */}
+          {/* Summary */}
           <p
             className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words"
             style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
@@ -211,7 +232,7 @@ const TeamCard: React.FC<{
             {member.summary}
           </p>
 
-          {/* Highlights — proper wrapping */}
+          {/* Highlights */}
           <ul className="space-y-2 flex-1 min-w-0">
             {member.highlights.map((line, i) => (
               <li
@@ -229,7 +250,7 @@ const TeamCard: React.FC<{
           </ul>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -237,6 +258,9 @@ const TeamCard: React.FC<{
 const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
+  const isMobile = useIsMobile();
+  const stickyStep = isMobile ? 10 : 16;
+  const stickyBase = isMobile ? 60 : 72;
 
   return (
     <div className="flex flex-col max-w-[1080px] mx-auto px-4 md:px-6 lg:px-10">
@@ -247,9 +271,10 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
           index={i}
           totalMembers={members.length}
           isDark={isDark}
+          stickyBase={stickyBase}
+          stickyStep={stickyStep}
         />
       ))}
-      {/* Scroll clearance for last card — smaller on desktop */}
       <div className="h-[120px] md:h-[80px]" />
     </div>
   );

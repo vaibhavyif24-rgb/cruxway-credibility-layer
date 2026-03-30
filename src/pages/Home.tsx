@@ -4,6 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
 import LogoMarquee from '@/components/LogoMarquee';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
@@ -149,6 +150,20 @@ const Home = () => {
               </Link>
             </div>
           </FadeIn>
+          {/* Scroll indicator */}
+          <motion.div
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+          >
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ChevronDown className="w-5 h-5 text-gold/60" />
+            </motion.div>
+          </motion.div>
         </div>
         <HeroDivider />
       </section>

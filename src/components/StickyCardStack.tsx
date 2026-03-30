@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import CriteriaIllustration from './CriteriaIllustrations';
+import { useIsMobile } from '@/hooks/use-mobile';
 export interface StickyCard {
   num: string;
   title: string;
@@ -278,10 +279,12 @@ const SlideCard: React.FC<{
   cardHeight: number;
   illustrationSet: 'process' | 'criteria';
   labelPrefix: string;
-}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix }) => {
+  isMobile?: boolean;
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix, isMobile }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
+  const dur = isMobile ? '0.3s' : '0.5s';
 
   return (
     <div
@@ -290,7 +293,7 @@ const SlideCard: React.FC<{
         backgroundColor: bg,
         opacity: isActive ? 1 : 0,
         transform: `translateY(${isActive ? 0 : 20}px)`,
-        transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
+        transition: `opacity ${dur} ease-out, transform ${dur} ease-out`,
         pointerEvents: isActive ? 'auto' : 'none',
       }}
     >
@@ -307,7 +310,7 @@ const SlideCard: React.FC<{
               color: colors.step,
               opacity: isActive ? 0.6 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s',
+              transition: `opacity ${dur} ease-out 0.1s, transform ${dur} ease-out 0.1s`,
             }}
           >
             {labelPrefix} {card.num}
@@ -318,7 +321,7 @@ const SlideCard: React.FC<{
               color: colors.title,
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.15s, transform 0.5s ease-out 0.15s',
+              transition: `opacity ${dur} ease-out 0.15s, transform ${dur} ease-out 0.15s`,
             }}
           >
 {card.title}.
@@ -329,7 +332,7 @@ const SlideCard: React.FC<{
               color: colors.desc,
               opacity: isActive ? 1 : 0,
               transform: `translateY(${isActive ? 0 : 12}px)`,
-              transition: 'opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s',
+              transition: `opacity ${dur} ease-out 0.2s, transform ${dur} ease-out 0.2s`,
             }}
           >
             {card.description}
@@ -419,6 +422,7 @@ const StickyCardItem: React.FC<{
 
 /* ─── Main Component ─── */
 const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'light', illustrationSet = 'process', labelPrefix = 'Step', mode = 'slides' }) => {
+  const isMobile = useIsMobile();
   const [cardHeight, setCardHeight] = useState(getCardHeight);
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -503,6 +507,7 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
                 key={card.num} card={card} index={i} variant={variant}
                 isActive={i === activeIndex} cardHeight={cardHeight}
                 illustrationSet={illustrationSet} labelPrefix={labelPrefix}
+                isMobile={isMobile}
               />
             ))}
             <div className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2.5">

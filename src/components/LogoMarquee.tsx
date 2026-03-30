@@ -79,6 +79,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
               className="flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110"
               style={{
                 height: `${Math.round(s * containerHeight)}px`,
+                transform: `translateY(${Math.sin(i * 0.6) * 3}px)`,
               }}
             >
               <img

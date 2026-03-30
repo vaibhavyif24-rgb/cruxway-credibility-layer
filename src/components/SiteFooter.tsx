@@ -45,19 +45,26 @@ const SiteFooter = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-2.5">
-              {links.map((item) => (
-                <Link
+              {links.map((item, i) => (
+                <motion.div
                   key={item.path}
-                  to={item.path}
-                  className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
-                    isDark
-                      ? 'text-primary-foreground/15 hover:text-primary-foreground/35'
-                      : 'text-muted-foreground/50 hover:text-foreground/60'
-                  }`}
+                  initial={{ opacity: 0, y: 6 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 hover:w-full transition-all duration-500" />
-                </Link>
+                  <Link
+                    to={item.path}
+                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
+                      isDark
+                        ? 'text-primary-foreground/15 hover:text-primary-foreground/35'
+                        : 'text-muted-foreground/50 hover:text-foreground/60'
+                    }`}
+                  >
+                    {item.label}
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 hover:w-full transition-all duration-500" />
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
