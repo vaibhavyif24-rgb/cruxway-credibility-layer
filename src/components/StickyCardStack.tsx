@@ -279,10 +279,12 @@ const SlideCard: React.FC<{
   cardHeight: number;
   illustrationSet: 'process' | 'criteria';
   labelPrefix: string;
-}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix }) => {
+  isMobile?: boolean;
+}> = ({ card, index, variant, isActive, cardHeight, illustrationSet, labelPrefix, isMobile }) => {
   const isDark = variant === 'dark';
   const bg = isDark ? darkBgs[index % darkBgs.length] : lightBgs[index % lightBgs.length];
   const colors = isDark ? darkTextColors : lightTextColors[index % lightTextColors.length];
+  const dur = isMobile ? '0.3s' : '0.5s';
 
   return (
     <div
@@ -291,7 +293,7 @@ const SlideCard: React.FC<{
         backgroundColor: bg,
         opacity: isActive ? 1 : 0,
         transform: `translateY(${isActive ? 0 : 20}px)`,
-        transition: `opacity 0.5s ease-out, transform 0.5s ease-out`,
+        transition: `opacity ${dur} ease-out, transform ${dur} ease-out`,
         pointerEvents: isActive ? 'auto' : 'none',
       }}
     >
