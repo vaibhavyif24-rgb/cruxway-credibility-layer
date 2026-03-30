@@ -33,11 +33,11 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
 
         {/* Drifting gradient blob 2 — Persian blue tint */}
         <motion.div
-          className="absolute w-[500px] h-[450px] rounded-full"
+          className="absolute w-[700px] h-[600px] rounded-full"
           style={{
             bottom: '-15%',
             left: '-10%',
-            background: `radial-gradient(ellipse at center, hsl(228 45% 55% / ${0.03 * intensity}), transparent 70%)`,
+            background: `radial-gradient(ellipse at center, hsl(228 45% 55% / ${0.05 * intensity}), transparent 70%)`,
           }}
           animate={{
             x: [0, -30, 25, 0],
