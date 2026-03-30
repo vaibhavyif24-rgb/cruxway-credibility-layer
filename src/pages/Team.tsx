@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import { ArrowUpRight } from 'lucide-react';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import LightSectionEffects from '@/components/LightSectionEffects';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import TeamStickyDeck from '@/components/TeamStickyDeck';
 
