@@ -1,99 +1,88 @@
 
 
-## Cruxway v15: Finalization Pass
+## Cruxway v16: Finalization Pass — Team Cards, Mobile Performance, Premium Polish
 
-6 sections, ~10 files modified. Sectors light-mode fix, evaluation timeline, scroll-linked criteria, dark mode polish, micro-animations, visual refinements.
-
----
-
-### Section 1: Sectors Light-Mode Background
-
-**Files: `CinematicScrollReveal.tsx`, `USCinematicScrollReveal.tsx`**
-
-Both files get identical changes:
-
-- Add `LIGHT_OVERLAY` constant alongside existing `DARK_OVERLAY` (rename current `OVERLAY_GRADIENT` → use conditionally)
-- Desktop overlay div: `background: isDark ? DARK_OVERLAY : LIGHT_OVERLAY`
-- `textIsLight` changes to: `const textIsLight = isDark && imageProgress > 0.3`
-- Theme-aware text shadow: `textIsLight ? dark shadow : imageProgress > 0.3 ? light white shadow : none`
-- `SectorColumn` gets `isDark` prop. Colors become conditional:
-  - Heading: `isDark ? '#F8F6F2' : 'hsl(var(--foreground))'`
-  - Item name: `isDark ? '#F8F6F2' : 'hsl(var(--foreground))'`
-  - Item desc: `isDark ? 'rgba(248,246,242,0.65)' : 'hsl(var(--muted-foreground))'`
-  - Text shadows: only in dark mode
-- "Sectors We Look At" label: gold in both modes (already correct)
-- Center divider: `isDark ? 'hsl(38,55%,62%,0.2)' : 'hsl(38,48%,52%,0.15)'`
-- Mobile sector list overlay: `isDark ? dark gradient : light warm gradient`
-- Mobile word reveal text: `isDark ? '#F8F6F2' : 'hsl(var(--foreground))'`, shadows only in dark
-- Pass `isDark` to all `SectorColumn` calls
+7 files modified, focused on sticky card animations, mobile performance, and micro-interactions.
 
 ---
 
-### Section 2: Evaluation Framework — Horizontal Timeline
+### Section 1: Team Sticky Card Transitions
+**File: `src/components/TeamStickyDeck.tsx`**
 
-**File: `InvestmentCriteria.tsx`**
+**A. Entrance animation**: Wrap the card container `div` (line 103) in a `motion.div` with `initial={{ opacity: 0, y: 30, scale: 0.97 }}`, `whileInView={{ opacity: 1, y: 0, scale: 1 }}`, `viewport={{ once: true, margin: '-80px' }}`. Move sticky positioning and styles onto this `motion.div`. Remove `will-change-transform` from className.
 
-Replace the Evaluation Framework `StickyCardStack` (lines 220-242) with a horizontal 4-column timeline:
-- Remove `StickyCardStack` import (check if still used for "What We Look For" — yes it is, keep import)
-- New `EvalStep` component with per-item scroll tracking:
-  - `useScroll` + `useTransform` for glowOpacity, dotScale, dotGlow
-  - Timeline dot with gold glow halo
-  - Step number, title, gold underline, description
-- Container has a horizontal connecting line (`absolute top-[14px] h-px bg-gold/10`)
-- 4-column grid on desktop, 2-col on tablet, 1-col mobile
-- Add `useScroll, useTransform` to imports, add `useRef` (already imported)
+**B. Photo grayscale→color**: Replace the `<img>` (line 127) with `<motion.img>` using `initial={{ filter: 'grayscale(100%)' }}`, `whileInView={{ filter: 'grayscale(0%)' }}`, `viewport={{ once: true }}`, `transition={{ duration: 1, delay: 0.3 }}`. Remove `grayscale` from className.
 
----
+**C. Mobile sticky offset**: Import `useIsMobile`, compute `stickyStep = isMobile ? 10 : 16` and `stickyBase = isMobile ? 60 : 72` in `TeamStickyDeck`. Pass to `TeamCard` as props instead of constants.
 
-### Section 3: OurFocus Criteria — Scroll-Linked Glow
+**D. Faster logo marquee**: Change `duration: 28` → `duration: 16` in `InlineMarquee` (line 64).
 
-**File: `OurFocus.tsx`**
+**E. Gold accent line**: Add `motion.div` at top of card (before flex container, line 114) with `initial={{ scaleX: 0 }}`, `whileInView={{ scaleX: 1 }}`, gold gradient, `origin-left`.
 
-Replace `CriterionRow` with scroll-linked version:
-- Add `useScroll, useTransform` to framer-motion imports
-- New `CriterionRow` uses `useScroll({ target: ref, offset: [...] })`
-- `glowOpacity`, `numberIntensity`, `underlineWidth`, `dividerOpacity` all scroll-linked
-- Replace `useInView`-based entrance with continuous scroll-linked opacity
-- Title gets scroll-linked underline (gold, `width` mapped to scroll)
-- Divider opacity linked to scroll position
+**F. Hover lift**: Add `whileHover={{ y: -4, scale: 1.01 }}` with deeper shadow transition to the card `motion.div`.
+
+**G. Name shimmer**: Add `text-shimmer-gold` class to the `<h3>` member name (line 164).
+
+**H. Stacking blend**: Add a soft top-fade gradient overlay `div` for `index > 0` cards (height 12px, gradient from card bg to transparent).
 
 ---
 
-### Section 4: Dark Mode Text Verification
+### Section 2: Mobile Performance — FadeIn
+**File: `src/components/ui/Section.tsx`**
 
-**File: `Team.tsx`** — Line 435: "Our Network" heading
-- Change `text-foreground` → `${isDark ? 'text-primary-foreground' : 'text-foreground'}`
-
-**File: `OurFocus.tsx`** — Line 142: "What We Look For" heading
-- Change `text-foreground` → `${isDark ? 'text-primary-foreground' : 'text-foreground'}`
-
-**File: `InvestmentCriteria.tsx`** — Line 193: "What We Look For" heading
-- Change `text-foreground` → `${isDark ? 'text-primary-foreground' : 'text-foreground'}`
-
-Section.tsx SectionLabel auto-detection — already done (line 54: `shouldUseGold`). No changes needed.
-
-Dark mode `--muted-foreground` — already at `228 10% 65%`. No changes needed.
+- Import `useIsMobile`
+- FadeIn changes: mobile → no blur filter (`'none'`), duration `0.4s`, delays halved, viewport margin `-30px`, y distance `10px`, add `scale: 0.98` to initial for all (2% scale-up on entry)
 
 ---
 
-### Section 5: Micro-Animations & Polish
+### Section 3: Mobile Performance — LightSectionEffects
+**File: `src/components/LightSectionEffects.tsx`**
 
-**A. Investment Profile number glow** — `OurFocus.tsx` and `InvestmentCriteria.tsx`
-- TypographicNumber: add `animate` with `textShadow` cycling `none → 0 0 30px gold/0.4 → none` over 2s, delay 0.5
-
-**B. CTA button glow** — `btn-pulse` keyframe and `.btn-premium-glow` already exist in `index.css` (lines 362-366). Add `btn-premium-glow` class to "Get in Touch" buttons on: Home, OurFocus, InvestmentCriteria, OurPlaybook, GuidingPrinciples, About, Contact.
-
-**C. Team photo grayscale-to-color** — `Team.tsx` ProfileCard: wrap photo in `motion.div` with `whileInView` filter transition from `grayscale(100%)` to `grayscale(0%)`
-
-**D. Remove FadeIn from LogoMarquee** — `Home.tsx` line 214: remove `<FadeIn>` wrapper if present (check — line 214 shows bare `<LogoMarquee>`, already done). Team.tsx line 466-468: remove `<FadeIn delay={0.1}>` wrapper.
+- Import `useIsMobile`
+- Mobile: `particleCount = 2`, wrap all 3 gradient blobs in `{!isMobile && (...)}`
+- Keep shimmer lines and 2 particles on mobile
 
 ---
 
-### Section 6: Visual Refinements
+### Section 4: Mobile Performance — PrinciplesGrid
+**File: `src/components/PrinciplesGrid.tsx`**
 
-**A. ScrollRevealText gradient fades** — Add soft top/bottom gradient fades for non-dark variants to blend section transitions
+- Mobile `PrincipleItem`: replace scroll-linked transforms with simple `whileInView` opacity animation (no `useScroll` tracking per item on mobile)
+- Keep the same visual layout, just use `motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}` instead of scroll-linked `glowOpacity`
 
-**B. TypographicNumber gold accent line** — Add thin animated vertical gold line to the left of number values in both OurFocus and InvestmentCriteria
+---
+
+### Section 5: Mobile Performance — StickyCardStack
+**File: `src/components/StickyCardStack.tsx`**
+
+- Import `useIsMobile`, compute `dur = isMobile ? '0.3s' : '0.5s'` and `durSlow = isMobile ? '0.5s' : '0.8s'`
+- Replace hardcoded `0.5s` and `0.8s` transition durations in `SlideCard` with these variables
+
+---
+
+### Section 6: Premium Animations
+**A. Scroll indicator arrow** — `src/pages/Home.tsx`: Add a bouncing ChevronDown at bottom of hero section with `animate={{ y: [0, 6, 0] }}` infinite
+
+**B. Logo parallax offset** — `src/components/LogoMarquee.tsx`: Add subtle `translateY` per logo: `transform: translateY(${Math.sin(i * 0.6) * 3}px)` for organic wave depth
+
+**C. Footer link stagger** — `src/components/SiteFooter.tsx`: Wrap each link in `motion` with `initial={{ opacity: 0, y: 6 }}`, `whileInView={{ opacity: 1, y: 0 }}`, staggered delay `i * 0.04`
+
+**D. Animated investment dividers** — `src/pages/OurFocus.tsx` and `src/pages/InvestmentCriteria.tsx`: Replace static `h-px` gold divider between number/text cards with `motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }}`
+
+---
+
+### Section 7: Error Cleanup Verification
+
+Already confirmed:
+- ✅ No `contentVisibility` in codebase
+- ✅ ScrollRevealText has no gold border artifacts
+- ✅ `btn-premium-glow` on all CTA buttons (7 files)
+- ✅ SectionLabel auto-detects dark mode via `useTheme()`
+- ✅ Team.tsx "Our Network" heading uses `isDark` ternary
+- ✅ Contact.tsx maps URL is correct
+- ✅ GlassCard has `transformPerspective: 1200` and tilt hover
+
+No changes needed for Section 7.
 
 ---
 
@@ -101,15 +90,14 @@ Dark mode `--muted-foreground` — already at `228 10% 65%`. No changes needed.
 
 | File | Changes |
 |---|---|
-| `CinematicScrollReveal.tsx` | Theme-aware overlays, text colors, SectorColumn isDark |
-| `USCinematicScrollReveal.tsx` | Same as above |
-| `InvestmentCriteria.tsx` | Horizontal eval timeline, dark text fix, number glow, CTA glow |
-| `OurFocus.tsx` | Scroll-linked criteria, dark text fix, number glow, CTA glow |
-| `Team.tsx` | Dark heading fix, photo grayscale, remove FadeIn on marquee |
-| `Home.tsx` | CTA button glow class |
-| `About.tsx` | CTA button glow class |
-| `GuidingPrinciples.tsx` | CTA button glow class |
-| `OurPlaybook.tsx` | CTA button glow class |
-| `Contact.tsx` | CTA button glow class |
-| `ScrollRevealText.tsx` | Gradient fade blends |
+| `src/components/TeamStickyDeck.tsx` | Entrance anim, grayscale→color, mobile offset, faster marquee, gold accent, hover lift, name shimmer, stacking blend |
+| `src/components/ui/Section.tsx` | FadeIn mobile optimizations + 2% scale entry |
+| `src/components/LightSectionEffects.tsx` | Disable blobs on mobile, reduce particles |
+| `src/components/PrinciplesGrid.tsx` | Mobile fallback to simple whileInView |
+| `src/components/StickyCardStack.tsx` | Faster mobile slide transitions |
+| `src/components/LogoMarquee.tsx` | Subtle vertical wave offset per logo |
+| `src/components/SiteFooter.tsx` | Staggered link entrance |
+| `src/pages/Home.tsx` | Bouncing scroll indicator arrow |
+| `src/pages/OurFocus.tsx` | Animated investment divider |
+| `src/pages/InvestmentCriteria.tsx` | Animated investment divider |
 
