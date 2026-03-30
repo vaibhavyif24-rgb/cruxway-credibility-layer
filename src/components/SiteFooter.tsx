@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { FadeIn, GoldRule } from '@/components/ui/Section';
+import WaveBackground from '@/components/WaveBackground';
 
 const SiteFooter = () => {
   const year = new Date().getFullYear();
