@@ -96,7 +96,24 @@ const OurPlaybook = () => {
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
-          <CriteriaCarousel items={valueCreationItems} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+            {valueCreationItems.map((item, i) => (
+              <GlassCard key={i} index={i} variant={theme === 'dark' ? 'dark' : 'light'}>
+                <div className="p-6 md:p-7">
+                  <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2 block">
+                    Phase {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="font-serif text-[1.25rem] text-foreground leading-[1.2] tracking-[-0.02em] mb-3">
+                    {item.title}
+                  </h3>
+                  <div className="w-8 h-[1.5px] bg-gold/25 mb-3" />
+                  <p className="font-sans text-[1rem] text-muted-foreground leading-[1.75]">
+                    {item.desc}
+                  </p>
+                </div>
+              </GlassCard>
+            ))}
+          </div>
         </div>
       </section>
 
