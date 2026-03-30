@@ -7,6 +7,7 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
+import WaveBackground from '@/components/WaveBackground';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
@@ -39,135 +40,12 @@ const whatWeLookFor = [
   { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
-/** Stat card for the investment profile band */
-const StatCard = ({ label, value, delay = 0, isDark, isCompact = false, currencySymbol }: {
-  label: string; value: string; delay?: number; isDark: boolean; isCompact?: boolean; currencySymbol?: string;
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-20px' });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 12 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4 }}
-      className={`group relative rounded-sm transition-all duration-500 overflow-hidden ${
-        isCompact
-          ? `border-t-2 border-gold/30 border-x border-b p-5 md:p-6 ${
-              isDark
-                ? 'bg-[hsl(228,42%,11%)]/80 backdrop-blur-sm border-x-border/30 border-b-border/30'
-                : 'bg-white border-x-[hsl(38,15%,90%)] border-b-[hsl(38,15%,90%)] hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)] hover:border-t-gold/70'
-            }`
-          : `border-l-2 border-gold/20 group-hover:border-gold/50 border-y border-r p-5 md:p-6 ${
-              isDark
-                ? 'bg-[hsl(228,42%,11%)]/80 backdrop-blur-sm border-y-border/30 border-r-border/30'
-                : 'bg-white border-y-[hsl(38,15%,90%)] border-r-[hsl(38,15%,90%)] hover:shadow-[0_12px_40px_-8px_hsl(38,45%,52%,0.12)]'
-            }`
-      }`}
-    >
-      {/* Hover inner glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_top_left,hsl(38,48%,52%,0.04),transparent_70%)]" />
-
-      {/* Currency watermark for compact cards */}
-      {isCompact && currencySymbol && (
-        <span className="absolute top-3 right-4 font-serif italic text-[3rem] text-gold/[0.05] select-none pointer-events-none leading-none">
-          {currencySymbol}
-        </span>
-      )}
-
-      <div className="relative">
-        <div className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mb-2 ${
-          isDark ? 'text-primary-foreground/35' : 'text-muted-foreground'
-        }`}>
-          {!isCompact && <span className="text-gold mr-1">•</span>}
-          {label}
-        </div>
-        {isCompact ? (
-          <>
-            <div
-              className="font-serif text-[clamp(1.5rem,3vw,2rem)] text-gold leading-none tracking-[-0.02em] group-hover:text-gold/90 transition-all duration-300"
-              style={{ textShadow: 'none' }}
-              onMouseEnter={(e) => { (e.target as HTMLElement).style.textShadow = '0 0 30px hsl(38,48%,52%,0.15)'; }}
-              onMouseLeave={(e) => { (e.target as HTMLElement).style.textShadow = 'none'; }}
-            >
-              {value}
-            </div>
-            {/* Animated gold underline */}
-            <motion.div
-              initial={{ width: 0 }}
-              animate={isInView ? { width: 40 } : {}}
-              transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="h-[1.5px] bg-gold/30 mt-2"
-            />
-          </>
-        ) : (
-          <p className={`font-sans text-[14.5px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
-            {value}
-          </p>
-        )}
-      </div>
-    </motion.div>
-  );
-};
-
-const CriterionCard = ({ item, index, isDark }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '-40px' });
-  const isEven = index % 2 === 0;
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: isEven ? -30 : 30, y: 20 }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4, scale: 1.01 }}
-      className="group relative"
-    >
-      <div className={`relative h-full overflow-hidden rounded-sm border backdrop-blur-sm transition-all duration-500 ${
-        isDark
-          ? 'border-border/40 bg-card/50 group-hover:border-gold/20 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--gold)/0.15)]'
-          : 'border-[hsl(38,15%,90%)]/60 bg-[hsl(40,20%,98%)]/80 group-hover:border-gold/25 group-hover:shadow-[0_12px_40px_-10px_hsl(38,45%,52%,0.1)]'
-      }`}>
-        <div className={`absolute left-0 top-0 w-[2px] h-0 transition-all duration-700 ease-out group-hover:h-full ${
-          isDark ? 'bg-gold/60' : 'bg-gold/20 group-hover:bg-gold/60'
-        }`} />
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--gold)/0.04),transparent_70%)]" />
-        <span className={`absolute -right-2 -bottom-4 font-serif text-[6rem] md:text-[7rem] leading-none italic select-none pointer-events-none transition-colors duration-500 ${
-          isDark
-            ? 'text-gold/[0.04] group-hover:text-gold/[0.08]'
-            : 'text-gold/[0.05] group-hover:text-gold/[0.1]'
-        }`}>
-          {item.num}
-        </span>
-        <div className="relative p-7 md:p-8 lg:p-10 flex flex-col h-full">
-          <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-5 md:mb-6 block">
-            Criterion {item.num}
-          </span>
-          <h3 className="font-serif text-[clamp(1.2rem,2.2vw,1.5rem)] text-foreground leading-[1.2] tracking-[-0.02em] mb-4">
-            {item.title}
-          </h3>
-          <div className={`w-10 h-[1.5px] mb-5 transition-all duration-500 group-hover:w-16 ${
-            isDark ? 'bg-gold/25 group-hover:bg-gold/40' : 'bg-gold/30 group-hover:bg-gold/50'
-          }`} />
-          <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] flex-1">
-            {item.desc}
-          </p>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 const OurFocus = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const isIndia = region === 'india';
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
-  const currencySymbol = isIndia ? '₹' : '$';
 
   const numberCards = profile.slice(0, 2);
   const textCards = profile.slice(2);
@@ -177,8 +55,9 @@ const OurFocus = () => {
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
+        <WaveBackground variant="hero" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
             <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
@@ -201,12 +80,11 @@ const OurFocus = () => {
         <HeroDivider />
       </section>
 
-      {/* Investment Profile — theme-responsive stat band */}
+      {/* Investment Profile — Typographic Term Sheet */}
       <section className={`relative overflow-hidden ${
         isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="section" />}
-        {/* Shimmer sweep overlay */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
             className="absolute inset-0"
@@ -217,32 +95,46 @@ const OurFocus = () => {
             }}
           />
         </div>
+
+        {/* Section entry gold wipe */}
+        <motion.div
+          className="absolute top-0 left-0 right-0 h-px z-10"
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.15), transparent)' }}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        />
+
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Investment Profile</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
-            <GoldRule className="mb-6 md:mb-8" />
+            <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
 
-          {/* Top row: number cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
+          {/* Top row: Revenue + EBITDA — headline numbers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-10">
             {numberCards.map((stat, i) => (
-              <StatCard key={stat.label} label={stat.label} value={stat.value} delay={i * 0.06} isDark={isDark} isCompact currencySymbol={currencySymbol} />
+              <TypographicNumber key={stat.label} label={stat.label} value={stat.value} delay={i * 0.08} isDark={isDark} />
             ))}
           </div>
 
-          {/* Bottom row: text cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {/* Thin gold divider */}
+          <div className="h-px bg-gold/15 mb-8 md:mb-10" />
+
+          {/* Bottom section: Structure, Hold Period, Aligned Partnerships */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {textCards.map((stat, i) => (
-              <StatCard key={stat.label} label={stat.label} value={stat.value} delay={(i + 2) * 0.06} isDark={isDark} />
+              <TypographicText key={stat.label} label={stat.label} value={stat.value} delay={(i + 2) * 0.08} isDark={isDark} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* What We Look For */}
+      {/* What We Look For — Numbered Prose */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
@@ -250,15 +142,12 @@ const OurFocus = () => {
             <h2 className="font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] text-foreground leading-[1.15] max-w-[480px] mb-2">
               What We Look For
             </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              We evaluate opportunities through a rigorous lens: target sectors, ownership transitions, cultural fit, and enduring competitive advantages.
-            </p>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          <div className="space-y-0">
             {whatWeLookFor.map((item, i) => (
-              <CriterionCard key={item.num} item={item} index={i} isDark={isDark} />
+              <CriterionRow key={item.num} item={item} index={i} isDark={isDark} isLast={i === whatWeLookFor.length - 1} />
             ))}
           </div>
         </div>
@@ -271,6 +160,7 @@ const OurFocus = () => {
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
       }`}>
+        <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
@@ -298,6 +188,107 @@ const OurFocus = () => {
           </div>
         </div>
       </section>
+    </div>
+  );
+};
+
+/* ─── Typographic Number Card (Revenue/EBITDA) ─── */
+const TypographicNumber = ({ label, value, delay, isDark }: { label: string; value: string; delay: number; isDark: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-20px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 16 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 ${isDark ? 'text-gold/50' : 'text-gold/50'}`}>
+        {label}
+      </p>
+      <p className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]">
+        {value}
+      </p>
+      <motion.div
+        initial={{ width: 0 }}
+        animate={isInView ? { width: 32 } : {}}
+        transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="h-[1.5px] bg-gold/25 mt-3"
+      />
+    </motion.div>
+  );
+};
+
+/* ─── Typographic Text Card (Structure/Hold/Partnerships) ─── */
+const TypographicText = ({ label, value, delay, isDark }: { label: string; value: string; delay: number; isDark: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-20px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 12 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-2 flex items-center gap-1.5 ${isDark ? 'text-gold/50' : 'text-gold/50'}`}>
+        <span className="w-1.5 h-1.5 rounded-full bg-gold/30" />
+        {label}
+      </p>
+      <p className={`font-sans text-[14.5px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
+        {value}
+      </p>
+    </motion.div>
+  );
+};
+
+/* ─── Criterion Row (Numbered Prose) ─── */
+const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean; isLast: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+  const isEven = index % 2 === 0;
+
+  return (
+    <div ref={ref}>
+      <motion.div
+        initial={{ opacity: 0, x: isEven ? -20 : 20 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+        className="grid grid-cols-12 gap-3 md:gap-6 py-6 md:py-8 group"
+      >
+        {/* Number */}
+        <div className="col-span-2 md:col-span-1">
+          <span className="font-serif text-[2.5rem] md:text-[3.5rem] leading-none text-gold/15 group-hover:text-gold/30 transition-colors duration-500">
+            {item.num}
+          </span>
+        </div>
+
+        {/* Title */}
+        <div className="col-span-10 md:col-span-3 flex items-start pt-2 md:pt-3">
+          <h3 className="font-serif text-[1.1rem] md:text-[1.25rem] text-foreground leading-[1.2] tracking-[-0.02em] group-hover:text-gold transition-colors duration-500">
+            {item.title}
+          </h3>
+        </div>
+
+        {/* Description */}
+        <div className="col-span-12 md:col-span-8 pt-0 md:pt-3">
+          <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75]">
+            {item.desc}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Animated gold divider */}
+      {!isLast && (
+        <motion.div
+          className="h-px origin-left"
+          style={{ background: 'linear-gradient(90deg, hsl(38 48% 52% / 0.2), hsl(38 48% 52% / 0.05), transparent)' }}
+          initial={{ scaleX: 0 }}
+          animate={isInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.8, delay: index * 0.08 + 0.3, ease: [0.22, 1, 0.36, 1] }}
+        />
+      )}
     </div>
   );
 };
