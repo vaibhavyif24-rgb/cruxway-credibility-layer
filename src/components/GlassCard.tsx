@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, forwardRef } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface GlassCardProps {
   children: React.ReactNode;
@@ -12,13 +13,17 @@ interface GlassCardProps {
 /**
  * Premium glassmorphism card with frosted glass effect,
  * gold border accents, and hover glow.
+ * Theme-aware: uses warm white in light mode, dark glass in dark mode.
  */
 const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
-  ({ children, className = '', index = 0, variant = 'light', hover = true }, _ref) => {
+  ({ children, className = '', index = 0, variant, hover = true }, _ref) => {
     const internalRef = useRef<HTMLDivElement>(null);
     const isInView = useInView(internalRef, { once: true, margin: '-30px' });
+    const { theme } = useTheme();
 
-    const isDark = variant === 'dark';
+    // If variant not explicitly provided, derive from theme
+    const isDark = variant ? variant === 'dark' : theme === 'dark';
+    const isLight = !isDark;
 
     return (
       <motion.div
@@ -35,7 +40,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
             relative overflow-hidden rounded-sm h-full
             ${isDark
               ? 'bg-primary-foreground/[0.04] border border-primary-foreground/[0.08] hover:border-gold/20'
-              : 'bg-background/60 dark:bg-card/40 border border-border/60 hover:border-gold/25 dark:border-primary-foreground/[0.06]'
+              : 'bg-[hsl(40,20%,98%)]/80 border border-[hsl(38,15%,90%)]/50 hover:border-gold/20 hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
             }
             backdrop-blur-sm transition-all duration-500
             ${className}
@@ -45,17 +50,17 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
             WebkitBackdropFilter: 'blur(8px)',
           }}
         >
-          {/* Gold corner accents */}
-          <span className={`absolute top-0 left-0 w-0 h-px ${isDark ? 'bg-gold/40' : 'bg-gold/30'} group-hover:w-8 transition-all duration-500`} />
-          <span className={`absolute top-0 left-0 h-0 w-px ${isDark ? 'bg-gold/40' : 'bg-gold/30'} group-hover:h-8 transition-all duration-500`} />
-          <span className={`absolute bottom-0 right-0 w-0 h-px ${isDark ? 'bg-gold/40' : 'bg-gold/30'} group-hover:w-8 transition-all duration-500`} />
-          <span className={`absolute bottom-0 right-0 h-0 w-px ${isDark ? 'bg-gold/40' : 'bg-gold/30'} group-hover:h-8 transition-all duration-500`} />
+          {/* Gold corner accents — boosted opacity in light mode */}
+          <span className={`absolute top-0 left-0 w-0 h-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:w-8 transition-all duration-500`} />
+          <span className={`absolute top-0 left-0 h-0 w-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:h-8 transition-all duration-500`} />
+          <span className={`absolute bottom-0 right-0 w-0 h-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:w-8 transition-all duration-500`} />
+          <span className={`absolute bottom-0 right-0 h-0 w-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:h-8 transition-all duration-500`} />
 
           {/* Hover glow */}
           <div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{
-              background: `radial-gradient(ellipse at center, hsl(38 45% 55% / ${isDark ? '0.04' : '0.03'}), transparent 70%)`,
+              background: `radial-gradient(ellipse at center, hsl(38 45% 55% / ${isLight ? '0.04' : '0.04'}), transparent 70%)`,
             }}
           />
 

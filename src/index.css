@@ -212,6 +212,33 @@
   50% { opacity: 0.3; }
 }
 
+/* Light-mode ambient animations */
+@keyframes shimmer-sweep {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes warm-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-12px) scale(1.1); opacity: 0.6; }
+}
+
+@keyframes header-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Grid shimmer sweep for card containers */
+@keyframes grid-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

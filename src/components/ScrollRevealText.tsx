@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import LightSectionEffects from '@/components/LightSectionEffects';
 
 interface ScrollRevealTextProps {
   label?: string;
@@ -16,6 +17,7 @@ interface ScrollRevealTextProps {
  * Each word transitions from ~15 % opacity to full as the viewport scrolls
  * through the container, creating a cinematic reading cadence.
  * Words matching the `highlights` array render in gold for emphasis.
+ * Light variant includes ambient gold glow effects and text-shadow on highlights.
  */
 const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>(({
   label,
@@ -54,7 +56,10 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       } ${className}`}
       style={{ contentVisibility: 'auto' }}
     >
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24 flex flex-col items-center text-center">
+      {/* Light variant ambient effects */}
+      {!isDark && <LightSectionEffects variant="section" />}
+
+      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-14 md:py-20 lg:py-24 flex flex-col items-center text-center">
         {/* Overline label */}
         {label && (
           <motion.p
@@ -125,7 +130,10 @@ const Word = ({
 
   return (
     <motion.span
-      style={{ opacity }}
+      style={{
+        opacity,
+        textShadow: isHighlighted && !isDark ? '0 0 40px hsl(38, 48%, 52%, 0.15)' : undefined,
+      }}
       className={`inline-block mr-[0.3em] ${
         isHighlighted
           ? 'text-gold'

@@ -6,6 +6,7 @@ import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Sec
 import { motion } from 'framer-motion';
 import LogoMarquee from '@/components/LogoMarquee';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
+import LightSectionEffects from '@/components/LightSectionEffects';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
@@ -96,18 +97,19 @@ StatBlock.displayName = 'StatBlock';
 const Home = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const isIndia = region === 'india';
 
   return (
     <div style={{ overflowX: 'clip' }}>
-      {/* Hero — region-specific cinematic photo with Ken Burns + gold geometric lines */}
-      <section className={`relative overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
+      {/* Hero */}
+      <section className={`relative overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
-        <DarkSectionEffects variant="hero" />
+        {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={theme === 'dark'}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
+            <SectionLabel light={isDark}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[12px] md:text-[14px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-4">
@@ -115,14 +117,14 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${theme === 'dark' ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold">Essential</span> Companies</>
                 : <>Building the <span className="text-gold">Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[14px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${theme === 'dark' ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[14px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
                 : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
@@ -136,7 +138,7 @@ const Home = () => {
               <Link
                 to={`/${region}/focus`}
                 className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
-                  theme === 'dark'
+                  isDark
                     ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
                     : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
                 }`}
@@ -155,7 +157,7 @@ const Home = () => {
         <HeroDivider />
       </section>
 
-      {/* What We Do — Scroll-triggered reveal */}
+      {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
         heading={
@@ -172,7 +174,7 @@ const Home = () => {
         variant="light"
       />
 
-      {/* Market Thesis — Scroll reveal on dark */}
+      {/* Market Thesis */}
       <ScrollRevealText
         label={isIndia ? 'The Opportunity' : 'Our Thesis'}
         heading={
@@ -189,7 +191,7 @@ const Home = () => {
         variant="dark"
       />
 
-      {/* Our Process — Sticky Card Stack */}
+      {/* Our Process */}
       <section className="bg-background pt-8 md:pt-10 lg:pt-12 pb-2">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
           <FadeIn>
@@ -200,10 +202,10 @@ const Home = () => {
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
         </div>
-        <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={theme === 'dark' ? 'dark' : 'light'} />
+        <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={isDark ? 'dark' : 'light'} />
       </section>
 
-      {/* Social Proof — Scroll-triggered reveal */}
+      {/* Social Proof */}
       <ScrollRevealText
         heading={isIndia
           ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
@@ -219,19 +221,20 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      {/* Shimmer divider */}
       <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.15), transparent)', animationDuration: '5s' }} />
 
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${theme === 'dark' ? 'hero-gradient-animated text-primary-foreground' : 'bg-card text-foreground'}`}>
-        <DarkSectionEffects variant="cta" />
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'
+      }`}>
+        {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
           <div className="max-w-[540px]">
             <FadeIn>
-              <SectionLabel light={theme === 'dark'}>Connect</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${theme === 'dark' ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <SectionLabel light={isDark}>Connect</SectionLabel>
+              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
               </h2>
-              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${theme === 'dark' ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
                 {isIndia
                   ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
                   : 'If you\'re a founder considering your next chapter, we\'d welcome an honest discussion about long-term partnership.'}
@@ -239,7 +242,7 @@ const Home = () => {
               <Link
                 to={`/${region}/contact`}
                 className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
-                  theme === 'dark'
+                  isDark
                     ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
                     : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
                 }`}
