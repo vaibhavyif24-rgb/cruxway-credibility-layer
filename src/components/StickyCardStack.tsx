@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import CriteriaIllustration from './CriteriaIllustrations';
 import { useIsMobile } from '@/hooks/use-mobile';
 export interface StickyCard {
