@@ -175,7 +175,7 @@ const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-t
       <div className={`absolute left-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-r ${bgClass}`} />
       <div className={`absolute right-0 top-0 bottom-0 w-8 md:w-12 z-10 pointer-events-none bg-gradient-to-l ${bgClass}`} />
       <motion.div
-        className="flex items-center gap-6 md:gap-7 lg:gap-10 w-max"
+        className="flex items-center gap-8 md:gap-10 lg:gap-12 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
       >
