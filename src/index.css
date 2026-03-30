@@ -305,4 +305,8 @@
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
+
+  .gold-shimmer-border {
+    animation: gold-border-pulse 3s ease-in-out infinite;
+  }
 }
