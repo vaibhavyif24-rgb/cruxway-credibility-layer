@@ -79,8 +79,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
     </div>
   );
 };
-
-
+const OurPlaybook = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
   const isIndia = region === 'india';
