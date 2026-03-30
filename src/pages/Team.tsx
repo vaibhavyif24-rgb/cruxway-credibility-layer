@@ -12,7 +12,6 @@ import TeamStickyDeck from '@/components/TeamStickyDeck';
 
 // Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
-import bensonPhoto from '@/assets/team/benson-zhang.jpg';
 import vaibhavPhoto from '@/assets/vaibhav-sharma.png';
 
 // Deal logos — Harin
@@ -25,28 +24,17 @@ import alliedUniversalLogo from '@/assets/deals/allied-universal.png';
 import energizerLogo from '@/assets/deals/energizer.png';
 import broadcomLogo from '@/assets/deals/broadcom.png';
 
-// Deal logos — Benson
-import abgLogo from '@/assets/deals/abg.png';
-import rpxLogo from '@/assets/deals/rpx.png';
-import ideraLogo from '@/assets/deals/idera.png';
-import westernDigitalLogo from '@/assets/deals/western-digital.png';
-import mindbodyLogo from '@/assets/deals/mindbody.png';
-import selligentLogo from '@/assets/deals/selligent.png';
-import micronLogo from '@/assets/deals/micron.png';
-
 // Logos — Institutional experience
-import blackrockLogo from '@/assets/logos/blackrock.png';
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
 import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
 import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
-import creditSuisseLogo from '@/assets/logos/credit-suisse.png';
 import lamResearchLogo from '@/assets/logos/lam-research.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
-import berkeleyHaasLogo from '@/assets/logos/berkeley-haas.png';
 import depaulLogo from '@/assets/logos/depaul.png';
+
 // Logos — Vaibhav
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
 import ashokaLogo from '@/assets/logos/ashoka.png';
@@ -95,35 +83,7 @@ const harinDealLogos: LogoItem[] = [
   { src: broadcomLogo, alt: 'Broadcom' },
 ];
 
-const bensonDealLogos: LogoItem[] = [
-  { src: abgLogo, alt: 'Authentic Brands Group', scale: 2.55 },
-  { src: rpxLogo, alt: 'RPX' },
-  { src: ideraLogo, alt: 'Idera', scale: 1.75 },
-  { src: westernDigitalLogo, alt: 'Western Digital', scale: 1.5 },
-  { src: mindbodyLogo, alt: 'Mindbody' },
-  { src: selligentLogo, alt: 'Selligent', scale: 1.15 },
-  { src: micronLogo, alt: 'Micron' },
-];
-
 const founders: TeamMember[] = [
-  {
-    name: 'Benson Zhang',
-    role: 'Managing Partner',
-    photo: bensonPhoto,
-    linkedIn: 'https://www.linkedin.com/in/benson8zhang/',
-    summary:
-      'Benson has over a decade of experience in finance and private equity investing across technology and business services sectors. He brings disciplined capital allocation and deep sector knowledge to every partnership.',
-    highlights: [
-      'Most recently invested through BlackRock\'s flagship direct private equity group, where he led the sale of BlackRock\'s stake in Authentic Brands Group',
-      'At HGGC, led the investments in IDERA and RPX where he served as a board observer',
-      'Began his career at Credit Suisse in the Technology Investment Banking Group where he closed 7 deals totaling $30 billion in deal value, primarily in the semiconductor and software spaces',
-    ],
-    logos: [
-      { src: blackrockLogo, alt: 'BlackRock' },
-      { src: creditSuisseLogo, alt: 'Credit Suisse' },
-    ],
-    dealLogos: bensonDealLogos,
-  },
   {
     name: 'Harin Gupta',
     role: 'Managing Partner',
@@ -179,17 +139,14 @@ const indiaPartner: TeamMember = {
 };
 
 const foundersLogos = [
-  { src: blackrockLogo, alt: 'BlackRock' },
   { src: warburgLogo, alt: 'Warburg Pincus' },
   { src: neosPartnersLogo, alt: 'Neos Partners' },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', small: true },
   { src: saltwaterLogo, alt: 'Saltwater Capital' },
-  { src: creditSuisseLogo, alt: 'Credit Suisse' },
   { src: lamResearchLogo, alt: 'Lam Research' },
   { src: evercoreLogo, alt: 'Evercore' },
   { src: dunesPointLogo, alt: 'Dunes Point Capital' },
   { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', small: true },
-  { src: berkeleyHaasLogo, alt: 'UC Berkeley Haas' },
   { src: depaulLogo, alt: 'DePaul University', small: true },
 ];
 
@@ -263,12 +220,10 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
     <FadeIn ref={ref} delay={index * 0.08}>
       <div className="py-6 md:py-10 border-b border-foreground/[0.06] last:border-b-0 -mx-3 px-3 rounded-sm overflow-hidden group/card">
         <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">
-          {/* Photo + Identity */}
           <div className="md:col-span-3 flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
             <LinkedWrapper className="group shrink-0">
               {member.photo ? (
                 <div className="relative w-[72px] h-[72px] md:w-[140px] md:h-[140px] md:mb-4">
-                  {/* Gold ring on hover — only around image */}
                   <motion.div
                     className="absolute inset-0 rounded-full border border-gold/0 group-hover:border-gold/25 transition-colors duration-700"
                     style={{ margin: -3 }}
@@ -308,7 +263,6 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
             </div>
           </div>
 
-          {/* Bio */}
           <div className="md:col-span-9 overflow-hidden">
             <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
               {member.summary}
@@ -329,7 +283,6 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
               ))}
             </ul>
 
-            {/* Deal logos */}
             {member.dealLogos && member.dealLogos.length > 0 && (
               <div className="mt-4 md:mt-6 pt-4 md:pt-5 border-t border-foreground/[0.05]">
                 <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
@@ -347,10 +300,10 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
 ProfileCard.displayName = 'ProfileCard';
 
 /* ─── Stats Bar ─── */
-const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; delay?: number }) => (
+const StatItem = ({ value, label, delay = 0, isDark }: { value: string; label: string; delay?: number; isDark: boolean }) => (
   <FadeIn delay={delay} className="text-center">
     <motion.p
-      className="font-serif text-[clamp(1.2rem,3vw,2rem)] text-primary-foreground tracking-[-0.03em] leading-none"
+      className={`font-serif text-[clamp(1.2rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -358,7 +311,7 @@ const StatItem = ({ value, label, delay = 0 }: { value: string; label: string; d
     >
       {value}
     </motion.p>
-    <p className="font-sans text-[7.5px] md:text-[9px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] text-primary-foreground/25 mt-1.5 md:mt-2">
+    <p className={`font-sans text-[7.5px] md:text-[9px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-1.5 md:mt-2 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
       {label}
     </p>
   </FadeIn>
@@ -401,9 +354,9 @@ const Team = () => {
         <div className={`relative border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-2 md:gap-4">
-              <StatItem value="25+" label="Years Combined" delay={0.1} />
-              <StatItem value="$30B+" label="Deal Experience" delay={0.18} />
-              <StatItem value={isIndia ? '3' : '50+'} label={isIndia ? 'Continents Covered' : 'Transactions'} delay={0.26} />
+              <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />
+              <StatItem value="$15B+" label="Deal Experience" delay={0.18} isDark={isDark} />
+              <StatItem value={isIndia ? '3' : '50+'} label={isIndia ? 'Continents Covered' : 'Transactions'} delay={0.26} isDark={isDark} />
             </div>
           </div>
         </div>
@@ -418,7 +371,7 @@ const Team = () => {
         variant="light"
       />
 
-      {/* Team Sticky Deck — Boundless-style stacking cards */}
+      {/* Team Sticky Deck */}
       <section className="bg-background pt-0 pb-10 md:pb-16">
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 lg:px-12 mb-8 md:mb-10">
           <FadeIn>
@@ -470,7 +423,7 @@ const Team = () => {
         </div>
       </Section>
 
-      {/* Institutional Experience Marquee — below network */}
+      {/* Institutional Experience Marquee */}
       <div className="bg-background">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10 pb-8 md:pb-10">
           <FadeIn>

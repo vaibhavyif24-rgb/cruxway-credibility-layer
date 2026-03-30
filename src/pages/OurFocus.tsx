@@ -15,18 +15,18 @@ import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 
 const investmentProfile = {
   us: [
-    { label: 'Revenue Range', value: '$1M – $10M', subtitle: '₹10Cr – ₹100Cr' },
-    { label: 'EBITDA Range', value: '$500K – $2.5M', subtitle: '₹5Cr – ₹25Cr' },
+    { label: 'Revenue Range', value: '$1M – $10M' },
+    { label: 'EBITDA Range', value: '$500K – $2.5M' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
-    { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place.' },
+    { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
   ],
   india: [
-    { label: 'Revenue Range', value: '₹10Cr – ₹100Cr', subtitle: '$1M – $10M' },
-    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr', subtitle: '$500K – $2.5M' },
+    { label: 'Revenue Range', value: '₹10Cr – ₹100Cr' },
+    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
-    { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place.' },
+    { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
   ],
 };
 
@@ -40,8 +40,8 @@ const whatWeLookFor = [
 ];
 
 /** Stat card for the investment profile band */
-const StatCard = ({ label, value, subtitle, delay = 0, isDark, isCompact = false }: {
-  label: string; value: string; subtitle?: string; delay?: number; isDark: boolean; isCompact?: boolean;
+const StatCard = ({ label, value, delay = 0, isDark, isCompact = false, currencySymbol }: {
+  label: string; value: string; delay?: number; isDark: boolean; isCompact?: boolean; currencySymbol?: string;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-20px' });
@@ -52,34 +52,53 @@ const StatCard = ({ label, value, subtitle, delay = 0, isDark, isCompact = false
       initial={{ opacity: 0, y: 12 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -3 }}
-      className={`group rounded-sm border p-5 md:p-6 transition-all duration-500 hover:border-gold/25 ${
-        isDark
-          ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-border/30'
-          : 'bg-white/70 backdrop-blur-sm border-[hsl(38,15%,90%)]/50 hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
+      whileHover={{ y: -4 }}
+      className={`group relative rounded-sm transition-all duration-500 overflow-hidden ${
+        isCompact
+          ? `border-t-2 border-gold/30 border-x border-b p-5 md:p-6 ${
+              isDark
+                ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-x-border/30 border-b-border/30'
+                : 'bg-white border-x-[hsl(38,15%,90%)] border-b-[hsl(38,15%,90%)] hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
+            }`
+          : `border-l-2 border-gold/20 group-hover:border-gold/50 border-y border-r p-5 md:p-6 ${
+              isDark
+                ? 'bg-[hsl(210,45%,9%)]/80 backdrop-blur-sm border-y-border/30 border-r-border/30'
+                : 'bg-white border-y-[hsl(38,15%,90%)] border-r-[hsl(38,15%,90%)] hover:shadow-[0_8px_32px_-8px_hsl(38,45%,52%,0.08)]'
+            }`
       }`}
     >
-      <div className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mb-2 ${
-        isDark ? 'text-primary-foreground/35' : 'text-muted-foreground'
-      }`}>
-        {label}
-      </div>
-      {isCompact ? (
-        <>
-          <div className="font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] text-gold leading-none tracking-[-0.02em] group-hover:text-gold/90 transition-colors duration-300">
+      {/* Hover inner glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(ellipse_at_top_left,hsl(38,48%,52%,0.04),transparent_70%)]" />
+
+      {/* Currency watermark for compact cards */}
+      {isCompact && currencySymbol && (
+        <span className="absolute top-3 right-4 font-serif italic text-[3rem] text-gold/[0.05] select-none pointer-events-none leading-none">
+          {currencySymbol}
+        </span>
+      )}
+
+      <div className="relative">
+        <div className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mb-2 ${
+          isDark ? 'text-primary-foreground/35' : 'text-muted-foreground'
+        }`}>
+          {!isCompact && <span className="text-gold mr-1">•</span>}
+          {label}
+        </div>
+        {isCompact ? (
+          <div
+            className="font-serif text-[clamp(1.5rem,3vw,2rem)] text-gold leading-none tracking-[-0.02em] group-hover:text-gold/90 transition-all duration-300"
+            style={{ textShadow: 'none' }}
+            onMouseEnter={(e) => { (e.target as HTMLElement).style.textShadow = '0 0 30px hsl(38,48%,52%,0.15)'; }}
+            onMouseLeave={(e) => { (e.target as HTMLElement).style.textShadow = 'none'; }}
+          >
             {value}
           </div>
-          {subtitle && (
-            <div className={`font-sans text-[11px] md:text-[12px] mt-1.5 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/60'}`}>
-              {subtitle}
-            </div>
-          )}
-        </>
-      ) : (
-        <p className={`font-sans text-[14px] md:text-[15px] leading-[1.65] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/80'}`}>
-          {value}
-        </p>
-      )}
+        ) : (
+          <p className={`font-sans text-[14px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
+            {value}
+          </p>
+        )}
+      </div>
     </motion.div>
   );
 };
@@ -103,15 +122,10 @@ const CriterionCard = ({ item, index, isDark }: { item: typeof whatWeLookFor[0];
           ? 'border-border/40 bg-card/50 group-hover:border-gold/20 group-hover:shadow-[0_8px_32px_-8px_hsl(var(--gold)/0.15)]'
           : 'border-[hsl(38,15%,90%)]/60 bg-[hsl(40,20%,98%)]/80 group-hover:border-gold/25 group-hover:shadow-[0_12px_40px_-10px_hsl(38,45%,52%,0.1)]'
       }`}>
-        {/* Animated gold accent line — left edge */}
         <div className={`absolute left-0 top-0 w-[2px] h-0 transition-all duration-700 ease-out group-hover:h-full ${
           isDark ? 'bg-gold/60' : 'bg-gold/20 group-hover:bg-gold/60'
         }`} />
-
-        {/* Subtle inner glow on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[radial-gradient(ellipse_at_top_left,hsl(var(--gold)/0.04),transparent_70%)]" />
-
-        {/* Watermark number */}
         <span className={`absolute -right-2 -bottom-4 font-serif text-[6rem] md:text-[7rem] leading-none italic select-none pointer-events-none transition-colors duration-500 ${
           isDark
             ? 'text-gold/[0.04] group-hover:text-gold/[0.08]'
@@ -119,7 +133,6 @@ const CriterionCard = ({ item, index, isDark }: { item: typeof whatWeLookFor[0];
         }`}>
           {item.num}
         </span>
-
         <div className="relative p-7 md:p-8 lg:p-10 flex flex-col h-full">
           <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-5 md:mb-6 block">
             Criterion {item.num}
@@ -145,8 +158,8 @@ const OurFocus = () => {
   const isDark = theme === 'dark';
   const isIndia = region === 'india';
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
+  const currencySymbol = isIndia ? '₹' : '$';
 
-  // Split profile into number cards (first 2) and text cards (rest)
   const numberCards = profile.slice(0, 2);
   const textCards = profile.slice(2);
 
@@ -196,7 +209,7 @@ const OurFocus = () => {
           {/* Top row: number cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 mb-4 md:mb-5">
             {numberCards.map((stat, i) => (
-              <StatCard key={stat.label} label={stat.label} value={stat.value} subtitle={stat.subtitle} delay={i * 0.06} isDark={isDark} isCompact />
+              <StatCard key={stat.label} label={stat.label} value={stat.value} delay={i * 0.06} isDark={isDark} isCompact currencySymbol={currencySymbol} />
             ))}
           </div>
 
@@ -209,7 +222,7 @@ const OurFocus = () => {
         </div>
       </section>
 
-      {/* What We Look For — 2×3 Criteria Grid */}
+      {/* What We Look For */}
       <section className="bg-background px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
@@ -231,7 +244,7 @@ const OurFocus = () => {
         </div>
       </section>
 
-      {/* Cinematic Scroll Reveal with Sectors */}
+      {/* Cinematic Scroll Reveal */}
       {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* CTA */}

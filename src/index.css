@@ -239,6 +239,11 @@
   100% { transform: translateX(200%); }
 }
 
+@keyframes gold-border-pulse {
+  0%, 100% { border-color: hsl(38 48% 52% / 0.15); }
+  50% { border-color: hsl(38 48% 52% / 0.35); }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -299,5 +304,9 @@
   .glass-card {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+  }
+
+  .gold-shimmer-border {
+    animation: gold-border-pulse 3s ease-in-out infinite;
   }
 }
