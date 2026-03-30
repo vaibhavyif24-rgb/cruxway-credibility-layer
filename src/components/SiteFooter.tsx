@@ -24,7 +24,7 @@ const SiteFooter = () => {
 
   return (
     <footer className={`relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-primary' : 'bg-card'}`}>
-      {isDark ? <DarkSectionEffects variant="section" /> : <LightSectionEffects variant="section" />}
+      {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
 
       {/* Top shimmer line */}
       <div className="absolute top-0 left-0 right-0 h-px z-10" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.12), transparent)' }} />
