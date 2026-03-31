@@ -182,7 +182,7 @@ const OurFocus = () => {
               </p>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 transition-all duration-300"
+                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
               >
                 Get in Touch
               </Link>
