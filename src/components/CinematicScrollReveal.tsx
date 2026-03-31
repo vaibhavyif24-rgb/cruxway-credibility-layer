@@ -111,7 +111,7 @@ const MobileWord = ({ word, range, progress, isGold, isDark }: { word: string; r
       style={{
         opacity,
         color: isGold ? 'hsl(43, 78%, 50%)' : isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
-        textShadow: isDark ? '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)' : 'none',
+        textShadow: isDark ? '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)' : '0 1px 6px hsl(43,78%,50%,0.2)',
         fontWeight: 500,
       }}
     >

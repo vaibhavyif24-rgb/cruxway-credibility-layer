@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import GlassCard from '@/components/GlassCard';
 
 interface CriteriaItem {
@@ -66,8 +67,10 @@ const CriteriaCarousel: React.FC<CriteriaCarouselProps> = ({ items }) => {
           .criteria-carousel::-webkit-scrollbar { display: none; }
         `}</style>
         {items.map((item, i) => (
-          <div
+          <motion.div
             key={item.title}
+            whileHover={{ y: -4, boxShadow: '0 12px 40px -8px hsl(43,78%,50%,0.1)' }}
+            transition={{ duration: 0.3 }}
             className="criteria-carousel shrink-0 w-[280px] md:w-[320px] lg:w-[340px]"
             style={{ scrollSnapAlign: 'start' }}
           >
@@ -85,7 +88,7 @@ const CriteriaCarousel: React.FC<CriteriaCarouselProps> = ({ items }) => {
                 </p>
               </div>
             </GlassCard>
-          </div>
+          </motion.div>
         ))}
         {/* Spacer for last card snap */}
         <div className="shrink-0 w-1" aria-hidden="true" />

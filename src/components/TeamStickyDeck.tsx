@@ -117,7 +117,7 @@ const TeamCard: React.FC<{
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="h-[2px] bg-gradient-to-r from-gold/30 via-gold/15 to-transparent origin-left"
+        className="h-[2px] bg-gradient-to-r from-gold/50 via-gold/25 to-transparent origin-left"
       />
 
       {/* Soft top fade for stacking blend */}
@@ -137,7 +137,7 @@ const TeamCard: React.FC<{
               <div
                 className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] rounded-full overflow-hidden border-2 shadow-lg"
                 style={{
-                  borderColor: isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.12)',
+                  borderColor: isDark ? 'hsl(43 70% 55% / 0.25)' : 'hsl(43 78% 50% / 0.2)',
                   boxShadow: `0 8px 32px -8px ${isDark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
                 }}
               >
@@ -173,7 +173,7 @@ const TeamCard: React.FC<{
           {/* Counter */}
           <p
             className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
-            style={{ color: 'hsl(43 78% 50% / 0.4)' }}
+            style={{ color: isDark ? 'hsl(43 70% 55% / 0.6)' : 'hsl(43 78% 50% / 0.65)' }}
           >
             {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
           </p>
@@ -182,7 +182,7 @@ const TeamCard: React.FC<{
           <div className="mb-3">
             <div className="flex items-center gap-2 flex-wrap">
               <h3
-                className="text-shimmer-gold font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
+                className="font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
                 style={{ color: isDark ? 'hsl(0 0% 100%)' : 'hsl(var(--foreground))' }}
               >
                 {member.name}
@@ -194,7 +194,7 @@ const TeamCard: React.FC<{
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="h-px w-full origin-left mt-1 mb-1"
-                style={{ background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.3), transparent)' }}
+                style={{ background: `linear-gradient(90deg, ${isDark ? 'hsl(43 70% 55% / 0.4)' : 'hsl(43 78% 50% / 0.45)'}, transparent)` }}
               />
               {member.linkedIn && (
                 <a
@@ -224,8 +224,8 @@ const TeamCard: React.FC<{
           {member.dealLogos && member.dealLogos.length > 0 && (
             <div className="mb-4 md:mb-5 min-w-0 overflow-hidden">
               <p
-                className="font-sans text-[7px] md:text-[8px] font-semibold uppercase tracking-[0.22em] mb-2"
-                style={{ color: 'hsl(43 78% 50% / 0.45)' }}
+                className="font-sans text-[8px] md:text-[9px] font-semibold uppercase tracking-[0.22em] mb-2"
+                style={{ color: isDark ? 'hsl(43 70% 55% / 0.7)' : 'hsl(43 78% 50% / 0.8)' }}
               >
                 Select Investments &amp; Deals
               </p>
@@ -234,27 +234,35 @@ const TeamCard: React.FC<{
           )}
 
           {/* Summary */}
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words"
             style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
           >
             {member.summary}
-          </p>
+          </motion.p>
 
           {/* Highlights */}
           <ul className="space-y-2 flex-1 min-w-0">
             {member.highlights.map((line, i) => (
-              <li
+              <motion.li
                 key={i}
+                initial={{ opacity: 0, x: -8 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.3 + i * 0.08 }}
                 className="font-sans text-[10.5px] md:text-[11.5px] leading-[1.6] flex gap-2.5 items-start min-w-0"
                 style={{ color: isDark ? 'hsl(0 0% 100% / 0.3)' : 'hsl(var(--foreground) / 0.4)' }}
               >
                 <span
                   className="shrink-0 mt-[6px] w-2 h-px"
-                  style={{ backgroundColor: 'hsl(43 78% 50% / 0.3)' }}
+                  style={{ backgroundColor: isDark ? 'hsl(43 70% 55% / 0.45)' : 'hsl(43 78% 50% / 0.5)' }}
                 />
                 <span className="break-words overflow-wrap-anywhere">{line}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>

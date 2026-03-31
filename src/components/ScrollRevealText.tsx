@@ -51,7 +51,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
           : isContrastLight
-            ? 'bg-[hsl(40,22%,92%)] text-foreground'
+            ? 'bg-[hsl(40,25%,90%)] text-foreground'
             : 'bg-background text-foreground'
       } ${className}`}
     >
@@ -61,19 +61,16 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
         {label && (
-          <motion.p
-            style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
-            className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] mb-5 md:mb-7 text-gold"
-          >
-            {label}
-          </motion.p>
-        )}
-
-        {label && (
           <motion.div
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
-            className="w-8 h-[1.5px] bg-gold/50 mb-6 md:mb-8"
-          />
+            className="flex items-center gap-3 mb-5 md:mb-6"
+          >
+            <div className="w-6 h-px bg-gold/50" />
+            <p className="font-sans text-[11px] md:text-[12px] font-bold uppercase tracking-[0.3em] text-gold">
+              {label}
+            </p>
+            <div className="w-6 h-px bg-gold/50" />
+          </motion.div>
         )}
 
         <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px]">
@@ -99,7 +96,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
         {stats && stats.length > 0 && (
           <div className={`mt-8 md:mt-12 pt-8 md:pt-10 w-full max-w-[680px] ${
-            isActuallyDark ? 'border-t border-gold/20' : 'border-t border-gold/25'
+            isActuallyDark ? 'border-t border-gold/35' : 'border-t border-gold/40'
           }`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
               {stats.map((stat, i) => (
@@ -129,8 +126,8 @@ const Word = ({
     <motion.span
       style={{
         opacity,
-        textShadow: isHighlighted ? '0 0 15px hsl(43,78%,50%,0.25)' : undefined,
-        fontWeight: isHighlighted ? 500 : undefined,
+        textShadow: isHighlighted ? '0 0 20px hsl(43,78%,50%,0.35), 0 0 40px hsl(43,78%,50%,0.15)' : undefined,
+        fontWeight: isHighlighted ? 600 : undefined,
       }}
       className={`inline-block mr-[0.3em] ${
         isHighlighted
@@ -157,11 +154,22 @@ const StatReveal = ({
   const opacity = useTransform(progress, [start, end], [0, 1]);
 
   return (
-    <motion.div style={{ opacity }} className="text-center">
-      <p className="font-serif text-[clamp(1.6rem,3.5vw,2.4rem)] tracking-[-0.02em] text-gold font-medium">
+    <motion.div
+      style={{ opacity }}
+      className="text-center"
+      initial={{ y: 15, scale: 0.95 }}
+      whileInView={{ y: 0, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <motion.p
+        whileHover={{ scale: 1.05, textShadow: '0 0 25px hsl(43,78%,50%,0.3)' }}
+        transition={{ duration: 0.2 }}
+        className="font-serif text-[clamp(1.8rem,4vw,2.8rem)] tracking-[-0.02em] text-gold font-semibold cursor-default"
+      >
         {stat.value}
-      </p>
-      <p className={`font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] mt-2 ${isDark ? 'text-primary-foreground/40' : 'text-foreground/50'}`}>
+      </motion.p>
+      <p className={`font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] mt-2 ${isDark ? 'text-primary-foreground/50' : 'text-foreground/60'}`}>
         {stat.label}
       </p>
     </motion.div>
