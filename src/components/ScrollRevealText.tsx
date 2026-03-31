@@ -56,7 +56,25 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       } ${className}`}
     >
       {isActuallyDark && <WaveBackground variant="section" />}
-      {isContrastLight && <LightSectionEffects variant="section" />}
+      {isContrastLight && (
+        <>
+          <LightSectionEffects variant="section" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent origin-center z-10"
+          />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent origin-center z-10"
+          />
+        </>
+      )}
       {isLight && <LightSectionEffects variant="section" />}
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
