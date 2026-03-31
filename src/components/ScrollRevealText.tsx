@@ -195,7 +195,7 @@ const StatReveal = ({
   return (
     <motion.div
       ref={statRef}
-      style={{ opacity }}
+      
       className="text-center"
       initial={{ y: 15, scale: 0.95 }}
       whileInView={{ y: 0, scale: 1 }}
