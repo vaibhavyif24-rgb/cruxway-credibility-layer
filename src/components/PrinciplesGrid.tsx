@@ -27,14 +27,13 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
     offset: ['start 0.75', 'center 0.45', 'end 0.25'],
   });
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.45, 0.6, 1], [0.15, 0.7, 1, 0.7, 0.15]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
   const numberColor = useTransform(scrollYProgress, [0, 0.45, 1], [0.1, 0.45, 0.1]);
   const underlineWidth = useTransform(scrollYProgress, [0, 0.45, 1], ['0%', '100%', '0%']);
   const dotScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.8, 1.4, 0.8]);
   const dotGlowOpacity = useTransform(scrollYProgress, [0, 0.45, 1], [0, 1, 0]);
   const itemScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.97, 1, 0.97]);
   const numberY = useTransform(scrollYProgress, [0, 1], [-8, 8]);
-  const itemBlur = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [2, 0.5, 0, 0.5, 2]);
 
   if (isMobile) {
     return (
@@ -49,7 +48,7 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
           <div className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background" />
         </div>
 
-        <span className="block font-serif text-[2rem] leading-none text-gold select-none opacity-25">
+        <span className="block font-serif text-[2.5rem] leading-none text-gold select-none opacity-25">
           {num}
         </span>
 
@@ -73,7 +72,7 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
   return (
     <motion.div
       ref={itemRef}
-      style={{ opacity: glowOpacity, scale: itemScale, filter: useTransform(itemBlur, v => `blur(${v}px)`) }}
+      style={{ opacity: glowOpacity, scale: itemScale }}
       initial={{ x: isLeft ? -30 : 30 }}
       whileInView={{ x: 0 }}
       viewport={{ once: true, margin: '-60px' }}
@@ -90,17 +89,11 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
           style={{ scale: dotScale }}
           className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background transition-colors duration-500"
         />
-        {/* Outer ring */}
-        <motion.div
-          style={{ opacity: dotGlowOpacity, scale: dotScale }}
-          className="absolute inset-[-8px] rounded-full border border-gold/20"
-        />
-        {/* Inner glow */}
         <motion.div
           style={{ opacity: dotGlowOpacity }}
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute inset-[-5px] rounded-full bg-gold/30 blur-md"
+          animate={{ scale: [1, 1.4, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-[-6px] rounded-full bg-gold/35 blur-md"
         />
       </div>
 
@@ -163,7 +156,7 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
           <div
             className="absolute inset-0 w-full"
             style={{
-              background: 'linear-gradient(180deg, transparent 0%, hsl(43,78%,50%,0.25) 50%, transparent 100%)',
+              background: 'linear-gradient(180deg, transparent 0%, hsl(40,65%,44%,0.25) 50%, transparent 100%)',
               backgroundSize: '100% 300%',
               animation: 'shimmer-line-pulse 5s ease-in-out infinite',
             }}

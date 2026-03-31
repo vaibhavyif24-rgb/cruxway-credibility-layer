@@ -40,11 +40,7 @@ const SiteFooter = () => {
                 className="absolute -inset-8 rounded-full pointer-events-none animate-pulse"
                 style={{ background: 'radial-gradient(ellipse at center, hsl(40, 60%, 48%, 0.06) 0%, transparent 70%)' }}
               />
-              <motion.p
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.3 }}
-                className={`font-serif text-xl tracking-[-0.02em] relative cursor-default ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
-              >Cruxway</motion.p>
+              <p className={`font-serif text-xl tracking-[-0.02em] relative ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>Cruxway</p>
               <GoldRule className="mt-3" />
             </div>
 
