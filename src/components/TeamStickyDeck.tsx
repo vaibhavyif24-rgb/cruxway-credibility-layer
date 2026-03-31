@@ -224,8 +224,8 @@ const TeamCard: React.FC<{
           {member.dealLogos && member.dealLogos.length > 0 && (
             <div className="mb-4 md:mb-5 min-w-0 overflow-hidden">
               <p
-                className="font-sans text-[7px] md:text-[8px] font-semibold uppercase tracking-[0.22em] mb-2"
-                style={{ color: 'hsl(43 78% 50% / 0.45)' }}
+                className="font-sans text-[8px] md:text-[9px] font-semibold uppercase tracking-[0.22em] mb-2"
+                style={{ color: isDark ? 'hsl(43 70% 55% / 0.7)' : 'hsl(43 78% 50% / 0.8)' }}
               >
                 Select Investments &amp; Deals
               </p>
