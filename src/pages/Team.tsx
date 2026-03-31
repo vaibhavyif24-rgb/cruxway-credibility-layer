@@ -139,7 +139,7 @@ const indiaPartner: TeamMember = {
 };
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.3 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.95 },
   { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
   { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
@@ -313,8 +313,8 @@ const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => 
     const target = parseInt(numMatch[1], 10);
     const suffix = value.slice(numMatch[1].length);
     const controls = animate(motionVal, target, {
-      duration: 1.5,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 2.8,
+      ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => setDisplay(`${Math.round(v)}${suffix}`),
     });
     return () => controls.stop();
@@ -369,12 +369,12 @@ const Team = () => {
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}

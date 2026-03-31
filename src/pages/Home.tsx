@@ -111,12 +111,12 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
   return (
     <div ref={sectionRef} className="w-full">
       {/* Step headings */}
-      <div className="flex border-b border-gold/10">
+      <div className="flex overflow-x-auto scrollbar-hide border-b border-gold/10 -mx-2 px-2 md:mx-0 md:px-0">
         {steps.map((step, i) => (
           <button
             key={i}
             onClick={() => { setActive(i); setAutoplay(false); }}
-            className={`group flex-1 text-left relative py-3 md:py-4 transition-all duration-500 min-h-[44px] ${
+            className={`group flex-1 min-w-[80px] text-left relative py-3 md:py-4 transition-all duration-500 min-h-[44px] whitespace-nowrap ${
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
@@ -143,7 +143,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
                 {step.num}
               </span>
               <motion.span
-                className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
                     : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
@@ -151,7 +151,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
                 animate={i === active ? { scale: [1, 1.01, 1] } : {}}
                 transition={{ duration: 0.3 }}
               >
-                {isMobile ? step.title.charAt(0) : step.title}
+                {isMobile ? step.title : step.title}
               </motion.span>
             </div>
           </button>
@@ -407,7 +407,7 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={isDark}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
+            <SectionLabel light={isDark}>Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
@@ -415,14 +415,14 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Companies</>
                 : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
                 : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}

@@ -32,8 +32,8 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
       ? 'bg-gradient-to-t from-navy-deep/95 via-prussian/80 to-navy-deep/70'
       : 'bg-gradient-to-t from-navy-deep/90 via-prussian/65 to-navy-deep/55'
     : overlay === 'strong'
-      ? 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.92] via-[hsl(40,25%,96%)]/[0.82] to-[hsl(40,20%,93%)]/[0.72]'
-      : 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.85] via-[hsl(40,25%,96%)]/[0.70] to-[hsl(40,20%,93%)]/[0.55]';
+      ? 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.96] via-[hsl(40,25%,96%)]/[0.88] to-[hsl(40,20%,93%)]/[0.78]'
+      : 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.92] via-[hsl(40,25%,96%)]/[0.80] to-[hsl(40,20%,93%)]/[0.65]';
 
   const vignetteColor = isDark
     ? 'radial-gradient(ellipse at center, transparent 40%, hsl(228 45% 8% / 0.5) 100%)'
@@ -44,12 +44,12 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
       {/* Photo with Ken Burns + parallax */}
       <motion.div
         className="absolute inset-[-5%]"
-        style={{ y: parallaxY }}
+        style={{ y: parallaxY, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
       >
         <motion.div
           className="w-full h-full"
           initial={{ scale: 1.02, x: 0 }}
-          animate={{ scale: 1.14, x: [0, 12, -8, 0] }}
+          animate={{ scale: 1.14, x: [0, 15, -10, 0] }}
           transition={{
             scale: { duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
             x: { duration: 35, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
@@ -61,6 +61,7 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
             className="w-full h-full object-cover"
             loading="eager"
             fetchPriority="high"
+            decoding="async"
             aria-hidden="true"
           />
         </motion.div>

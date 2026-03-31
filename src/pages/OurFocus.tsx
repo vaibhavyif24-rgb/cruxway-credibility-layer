@@ -18,14 +18,14 @@ import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 const investmentProfile = {
   us: [
     { label: 'Revenue Range', value: '$1M – $10M' },
-    { label: 'EBITDA Range', value: '$500K – $2.5M' },
+    { label: 'EBITDA Range', value: '$500K – $2.5M+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
   ],
   india: [
     { label: 'Revenue Range', value: '₹10Cr – ₹100Cr' },
-    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr' },
+    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
@@ -63,12 +63,12 @@ const OurFocus = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? <><span className="text-gold">Disciplined</span> Capital for India's Best</> : <>Where <span className="text-gold">Conviction</span> Meets Capital</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
                 : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}

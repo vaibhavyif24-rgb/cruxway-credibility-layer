@@ -1,5 +1,5 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Search, BarChart3, FileSearch, Layers } from 'lucide-react';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
@@ -13,7 +13,7 @@ import CinematicScrollReveal from '@/components/CinematicScrollReveal';
 import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import WaveBackground from '@/components/WaveBackground';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
 import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
 import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
@@ -21,14 +21,14 @@ import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 const investmentProfile = {
   us: [
     { label: 'Revenue Range', value: '$1M – $10M' },
-    { label: 'EBITDA Range', value: '$500K – $2.5M' },
+    { label: 'EBITDA Range', value: '$500K – $2.5M+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
   ],
   india: [
     { label: 'Revenue Range', value: '₹10Cr – ₹100Cr' },
-    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr' },
+    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
@@ -110,7 +110,9 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
 };
 
 /* ─── Eval Step (Horizontal Timeline) ─── */
-const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string; desc: string }; index: number; isDark: boolean }) => {
+const evalIcons = [Search, BarChart3, FileSearch, Layers];
+
+const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; title: string; desc: string }; index: number; isDark: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -119,24 +121,30 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
   const glowOpacity = useTransform(scrollYProgress, [0, 0.4, 0.5, 0.6, 1], [0.4, 0.9, 1, 0.9, 0.4]);
   const dotScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.5, 1]);
   const dotGlow = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.8, 0]);
+  const Icon = evalIcons[index] || Search;
 
   return (
     <motion.div ref={ref} style={{ opacity: glowOpacity }} className="relative pt-10">
-      {/* Timeline dot */}
+      {/* Timeline dot with ring */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center">
-        <motion.div
-          style={{
-            scale: dotScale,
-            boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
-          }}
-          className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
-        />
+        <div className="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center group hover:bg-gold/10 transition-colors duration-300">
+          <motion.div
+            style={{
+              scale: dotScale,
+              boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
+            }}
+            className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
+          />
+        </div>
+      </div>
+
+      {/* Icon */}
+      <div className="flex justify-center mt-3 mb-2">
+        <Icon className="w-5 h-5 text-gold/40" />
       </div>
 
       {/* Step number */}
-      <motion.p
-        className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mt-4 mb-2"
-      >
+      <motion.p className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2">
         Step {step.num}
       </motion.p>
 
@@ -146,7 +154,13 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
       </h3>
 
       {/* Gold underline */}
-      <div className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3" />
+      <motion.div
+        className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3 origin-left"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      />
 
       {/* Description */}
       <p className={`text-center font-sans text-[13px] md:text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
@@ -154,7 +168,7 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
       </p>
     </motion.div>
   );
-};
+});
 
 const InvestmentCriteria = () => {
   const { region } = useRegion();
@@ -178,12 +192,12 @@ const InvestmentCriteria = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Investment Criteria, India' : 'Investment Criteria'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? <><span className="text-gold">Disciplined</span> Capital for India's Best</> : <>Where <span className="text-gold">Conviction</span> Meets Capital</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
                 : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}
@@ -298,15 +312,21 @@ const InvestmentCriteria = () => {
 
           {/* Timeline container */}
           <div className="relative">
-            {/* Horizontal connecting line */}
-            <div className="absolute top-[6px] left-0 right-0 h-px bg-gold/20 hidden md:block" />
+            {/* Horizontal connecting line with draw animation */}
+            <motion.div
+              className="absolute top-[16px] left-0 right-0 h-px bg-gold/20 hidden md:block origin-left"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
               {[
-                { num: '01', title: 'Discovery', desc: 'Proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
-                { num: '02', title: 'Evaluation', desc: 'Strategic fit, market position, culture alignment, and growth vectors assessed with institutional rigour.' },
-                { num: '03', title: 'Diligence', desc: 'Deep financial, operational, legal, and commercial analysis. Conviction requires evidence.' },
-                { num: '04', title: 'Structuring', desc: 'Ownership, governance, and capital structures designed for decades, not exits.' },
+                { num: '01', title: 'Discovery', desc: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process.' },
+                { num: '02', title: 'Evaluation', desc: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment.' },
+                { num: '03', title: 'Diligence', desc: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios and build conviction through evidence.' },
+                { num: '04', title: 'Structuring', desc: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term reflects our commitment to permanence.' },
               ].map((step, i) => (
                 <EvalStep key={i} step={step} index={i} isDark={isDark} />
               ))}
@@ -359,16 +379,18 @@ const InvestmentCriteria = () => {
               </FadeIn>
             </div>
             <FadeIn delay={0.1}>
-              <Link
-                to={`/${region}/contact`}
-                className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
-              >
-                Get in Touch
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                <span className="absolute inset-0 pointer-events-none overflow-hidden">
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
-                </span>
-              </Link>
+              <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  to={`/${region}/contact`}
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden btn-premium-glow"
+                >
+                  Get in Touch
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <span className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
+                  </span>
+                </Link>
+              </motion.div>
             </FadeIn>
           </div>
         </div>

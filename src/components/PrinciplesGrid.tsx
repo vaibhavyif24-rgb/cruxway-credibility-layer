@@ -137,7 +137,7 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-6 md:pb-8">
+    <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-6 md:pb-8 overflow-hidden">
       <div className="relative">
         {/* Vertical connecting line */}
         <div

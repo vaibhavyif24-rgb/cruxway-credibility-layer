@@ -412,4 +412,25 @@
     border-radius: 50%;
     animation: spin-smooth 0.8s linear infinite;
   }
+
+  /* Pulse glow for footer wordmark */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+  }
+
+  /* Scrollbar hide utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Content visibility for below-fold sections */
+  .content-below-fold {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
 }

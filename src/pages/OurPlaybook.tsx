@@ -16,10 +16,10 @@ import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
-  { num: '01', title: 'Discovery', description: 'We go beyond deal brokers. Our proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
-  { num: '02', title: 'Evaluation', description: 'Strategic fit, market position, culture alignment, and growth vectors. Every dimension is assessed with institutional rigour before we proceed.' },
-  { num: '03', title: 'Diligence', description: 'Deep financial, operational, legal, and commercial analysis. We leave no stone unturned because conviction requires evidence.' },
-  { num: '04', title: 'Structuring', description: 'Ownership, governance, and capital structures designed for decades, not exits. Every term reflects our commitment to lasting partnership.' },
+  { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
+  { num: '02', title: 'Evaluation', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. We triangulate data with on-the-ground diligence and reference networks.' },
+  { num: '03', title: 'Diligence', description: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence, not intuition.' },
+  { num: '04', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
 ];
 
 const valueCreationItems = [
@@ -103,12 +103,12 @@ const OurPlaybook = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Playbook, India' : 'Our Playbook'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               From <span className="text-gold">Sourcing</span> to Value Creation
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               A disciplined, repeatable process for identifying exceptional businesses and building lasting value alongside management teams.
             </p>
           </FadeIn>

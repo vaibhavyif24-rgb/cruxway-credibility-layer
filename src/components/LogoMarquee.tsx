@@ -54,7 +54,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const blendMode = isActuallyDark ? 'screen' : undefined;
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${bgClass}`}>
+    <div ref={ref} className={`relative overflow-hidden ${bgClass}`} style={{ contain: 'layout style paint' }}>
       {isContrastLight && (
         <>
           <div className="absolute top-0 left-0 right-0 h-px bg-gold/20" />
@@ -73,7 +73,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
         style={{ willChange: 'transform', transform: 'translateZ(0)' }}
       >
         {doubled.map((logo, i) => {
-          const clampedScale = Math.max(0.7, Math.min(1.3, logo.scale || 1));
+          const clampedScale = Math.max(0.7, Math.min(2.0, logo.scale || 1));
           return (
             <div
               key={`${logo.alt}-${i}`}
