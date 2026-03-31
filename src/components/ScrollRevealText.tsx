@@ -51,12 +51,30 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
           : isContrastLight
-            ? 'bg-[hsl(40,25%,90%)] text-foreground'
+            ? 'bg-[hsl(40,22%,91%)] text-foreground'
             : 'bg-background text-foreground'
       } ${className}`}
     >
       {isActuallyDark && <WaveBackground variant="section" />}
-      {isContrastLight && <LightSectionEffects variant="section" />}
+      {isContrastLight && (
+        <>
+          <LightSectionEffects variant="section" />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent origin-center z-10"
+          />
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/15 to-transparent origin-center z-10"
+          />
+        </>
+      )}
       {isLight && <LightSectionEffects variant="section" />}
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
@@ -73,7 +91,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           </motion.div>
         )}
 
-        <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px]">
+        <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px] break-words">
           {words.map((word, i) => {
             const start = (i / words.length) * 0.8;
             const end = ((i + 1) / words.length) * 0.8;
@@ -169,6 +187,13 @@ const StatReveal = ({
       >
         {stat.value}
       </motion.p>
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: 24 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+        className="h-[1.5px] bg-gold/40 mx-auto mt-2"
+      />
       <p className={`font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] mt-2 ${isDark ? 'text-primary-foreground/50' : 'text-foreground/60'}`}>
         {stat.label}
       </p>

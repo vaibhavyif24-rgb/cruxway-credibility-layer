@@ -22,19 +22,19 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
   const isLeft = index % 2 === 0;
   const itemRef = useRef<HTMLDivElement>(null);
 
-  // Always call hooks unconditionally (React rules of hooks)
   const { scrollYProgress } = useScroll({
     target: itemRef,
-    offset: ['start 0.85', 'center center', 'end 0.15'],
+    offset: ['start 0.75', 'center 0.45', 'end 0.25'],
   });
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.5, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
-  const numberColor = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.45, 0.1]);
-  const underlineWidth = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '100%', '0%']);
-  const dotScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.4, 0.8]);
-  const dotGlowOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
+  const numberColor = useTransform(scrollYProgress, [0, 0.45, 1], [0.1, 0.45, 0.1]);
+  const underlineWidth = useTransform(scrollYProgress, [0, 0.45, 1], ['0%', '100%', '0%']);
+  const dotScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.8, 1.4, 0.8]);
+  const dotGlowOpacity = useTransform(scrollYProgress, [0, 0.45, 1], [0, 1, 0]);
+  const itemScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.97, 1, 0.97]);
+  const numberY = useTransform(scrollYProgress, [0, 1], [-8, 8]);
 
-  // Mobile: simple whileInView instead of scroll-linked tracking
   if (isMobile) {
     return (
       <motion.div
@@ -42,24 +42,24 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="relative pl-14"
+        className="relative pl-12"
       >
-        {/* Timeline dot */}
-        <div className="absolute top-1 left-[calc(1.5rem-5px)]">
-          <div className="w-3 h-3 rounded-full border-2 border-gold/30 bg-background" />
+        <div className="absolute top-1 left-[calc(1.25rem-5px)]">
+          <div className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background" />
         </div>
 
-        <span className="block font-serif text-[3rem] leading-none text-gold select-none opacity-20">
+        <span className="block font-serif text-[2.5rem] leading-none text-gold select-none opacity-25">
           {num}
         </span>
 
-        <h3 className={`font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mt-1 ${
+        <h3 className={`font-serif text-[1.15rem] leading-[1.25] tracking-[-0.02em] mt-1.5 ${
           isDark ? 'text-primary-foreground' : 'text-foreground'
         }`}>
           {principle.t}
         </h3>
+        <div className="w-8 h-[1.5px] bg-gold/40 mt-1.5" />
 
-        <p className={`font-sans text-[13.5px] md:text-[14px] leading-[1.75] mt-2 max-w-[400px] ${
+        <p className={`font-sans text-[13px] leading-[1.75] mt-2.5 ${
           isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
         }`}>
           {principle.d}
@@ -72,54 +72,61 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
   return (
     <motion.div
       ref={itemRef}
-      style={{ opacity: glowOpacity }}
+      style={{ opacity: glowOpacity, scale: itemScale }}
+      initial={{ x: isLeft ? -30 : 30 }}
+      whileInView={{ x: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       className={`relative ${
         isLeft
-          ? 'md:pr-[calc(50%+2.5rem)] md:text-right'
-          : 'md:pl-[calc(50%+2.5rem)] md:text-left'
+          ? 'md:pr-[calc(50%+2.5rem)]'
+          : 'md:pl-[calc(50%+2.5rem)]'
       }`}
     >
       {/* Timeline dot with glow */}
       <div className="absolute top-1 left-[calc(50%-6px)]">
         <motion.div
           style={{ scale: dotScale }}
-          className="w-3 h-3 rounded-full border-2 border-gold/30 bg-background transition-colors duration-500"
+          className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background transition-colors duration-500"
         />
         <motion.div
           style={{ opacity: dotGlowOpacity }}
-          animate={{ scale: [1, 1.3, 1] }}
+          animate={{ scale: [1, 1.4, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute inset-[-4px] rounded-full bg-gold/25 blur-sm"
+          className="absolute inset-[-6px] rounded-full bg-gold/35 blur-md"
         />
       </div>
 
-      {/* Number */}
-      <motion.span
-        style={{ opacity: numberColor }}
-        className={`block font-serif text-[3rem] md:text-[3.5rem] leading-none text-gold select-none ${
-          isLeft ? 'md:text-right' : 'md:text-left'
-        }`}
-      >
-        {num}
-      </motion.span>
-
-      {/* Title with scroll-linked underline */}
-      <h3 className={`font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mt-1 relative inline-block ${
-        isDark ? 'text-primary-foreground' : 'text-foreground'
-      }`}>
-        {principle.t}
+      {/* Content wrapper: forces all children into a vertical stack */}
+      <div className={`flex flex-col ${isLeft ? 'md:items-end md:text-right' : 'md:items-start md:text-left'}`}>
+        {/* Number */}
         <motion.span
-          style={{ width: underlineWidth }}
-          className="absolute bottom-0 left-0 h-[1.5px] bg-gold/40"
-        />
-      </h3>
+          style={{ opacity: numberColor, y: numberY }}
+          className="block font-serif text-[3.5rem] md:text-[4rem] leading-none text-gold select-none"
+        >
+          {num}
+        </motion.span>
 
-      {/* Description */}
-      <p className={`font-sans text-[13.5px] md:text-[14px] leading-[1.75] mt-2 max-w-[400px] inline-block ${
-        isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
-      }`}>
-        {principle.d}
-      </p>
+        {/* Title with scroll-linked underline */}
+        <div className="mt-1 relative">
+          <h3 className={`font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] ${
+            isDark ? 'text-primary-foreground' : 'text-foreground'
+          }`}>
+            {principle.t}
+          </h3>
+          <motion.div
+            style={{ width: underlineWidth }}
+            className={`h-[1.5px] bg-gold/50 mt-1 ${isLeft ? 'ml-auto' : ''}`}
+          />
+        </div>
+
+        {/* Description */}
+        <p className={`font-sans text-[13.5px] md:text-[14px] leading-[1.75] mt-3 max-w-[400px] ${
+          isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
+        }`}>
+          {principle.d}
+        </p>
+      </div>
     </motion.div>
   );
 };
@@ -135,11 +142,11 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
         {/* Vertical connecting line */}
         <div
           className={`absolute top-0 bottom-0 w-px ${
-            isMobile ? 'left-[1.5rem]' : 'left-1/2 -translate-x-px'
+            isMobile ? 'left-[1.25rem]' : 'left-1/2 -translate-x-px'
           }`}
         >
           <motion.div
-            className="w-full h-full bg-gold/20"
+            className="w-full h-full bg-gold/15"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
@@ -149,23 +156,29 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
           <div
             className="absolute inset-0 w-full"
             style={{
-              background: 'linear-gradient(180deg, transparent 0%, hsl(40,65%,44%,0.15) 50%, transparent 100%)',
-              backgroundSize: '100% 200%',
-              animation: 'shimmer-line-pulse 4s ease-in-out infinite',
+              background: 'linear-gradient(180deg, transparent 0%, hsl(40,65%,44%,0.25) 50%, transparent 100%)',
+              backgroundSize: '100% 300%',
+              animation: 'shimmer-line-pulse 5s ease-in-out infinite',
             }}
           />
         </div>
 
         {/* Principles */}
-        <div className="relative space-y-8 md:space-y-12">
+        <div className="relative space-y-0">
           {principles.map((principle, i) => (
-            <PrincipleItem
-              key={i}
-              principle={principle}
-              index={i}
-              isDark={isDark}
-              isMobile={isMobile}
-            />
+            <div key={i}>
+              <PrincipleItem
+                principle={principle}
+                index={i}
+                isDark={isDark}
+                isMobile={isMobile}
+              />
+              {i < principles.length - 1 && (
+                <div className={`py-4 md:py-6 ${isMobile ? 'pl-12' : ''}`}>
+                  <div className="h-px bg-gold/10" />
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
