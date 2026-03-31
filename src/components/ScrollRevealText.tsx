@@ -154,11 +154,22 @@ const StatReveal = ({
   const opacity = useTransform(progress, [start, end], [0, 1]);
 
   return (
-    <motion.div style={{ opacity }} className="text-center">
-      <p className="font-serif text-[clamp(1.6rem,3.5vw,2.4rem)] tracking-[-0.02em] text-gold font-medium">
+    <motion.div
+      style={{ opacity }}
+      className="text-center"
+      initial={{ y: 15, scale: 0.95 }}
+      whileInView={{ y: 0, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <motion.p
+        whileHover={{ scale: 1.05, textShadow: '0 0 25px hsl(43,78%,50%,0.3)' }}
+        transition={{ duration: 0.2 }}
+        className="font-serif text-[clamp(1.8rem,4vw,2.8rem)] tracking-[-0.02em] text-gold font-semibold cursor-default"
+      >
         {stat.value}
-      </p>
-      <p className={`font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] mt-2 ${isDark ? 'text-primary-foreground/40' : 'text-foreground/50'}`}>
+      </motion.p>
+      <p className={`font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] mt-2 ${isDark ? 'text-primary-foreground/50' : 'text-foreground/60'}`}>
         {stat.label}
       </p>
     </motion.div>

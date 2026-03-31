@@ -88,7 +88,7 @@ const CriteriaCarousel: React.FC<CriteriaCarouselProps> = ({ items }) => {
                 </p>
               </div>
             </GlassCard>
-          </div>
+          </motion.div>
         ))}
         {/* Spacer for last card snap */}
         <div className="shrink-0 w-1" aria-hidden="true" />

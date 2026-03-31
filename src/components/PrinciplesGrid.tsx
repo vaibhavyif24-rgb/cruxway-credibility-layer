@@ -87,7 +87,9 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
         />
         <motion.div
           style={{ opacity: dotGlowOpacity }}
-          className="absolute inset-[-4px] rounded-full bg-gold/20 blur-sm"
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-[-4px] rounded-full bg-gold/25 blur-sm"
         />
       </div>
 

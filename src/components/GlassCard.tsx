@@ -52,10 +52,10 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           }}
         >
           {/* Gold corner accents — boosted opacity in light mode */}
-          <span className={`absolute top-0 left-0 w-0 h-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:w-8 transition-all duration-500`} />
-          <span className={`absolute top-0 left-0 h-0 w-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:h-8 transition-all duration-500`} />
-          <span className={`absolute bottom-0 right-0 w-0 h-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:w-8 transition-all duration-500`} />
-          <span className={`absolute bottom-0 right-0 h-0 w-px ${isLight ? 'bg-gold/45' : 'bg-gold/40'} group-hover:h-8 transition-all duration-500`} />
+          <span className={`absolute top-0 left-0 w-0 h-px ${isLight ? 'bg-gold/60' : 'bg-gold/55'} group-hover:w-8 transition-all duration-500`} />
+          <span className={`absolute top-0 left-0 h-0 w-px ${isLight ? 'bg-gold/60' : 'bg-gold/55'} group-hover:h-8 transition-all duration-500`} />
+          <span className={`absolute bottom-0 right-0 w-0 h-px ${isLight ? 'bg-gold/60' : 'bg-gold/55'} group-hover:w-8 transition-all duration-500`} />
+          <span className={`absolute bottom-0 right-0 h-0 w-px ${isLight ? 'bg-gold/60' : 'bg-gold/55'} group-hover:h-8 transition-all duration-500`} />
 
           {/* Hover glow */}
           <div

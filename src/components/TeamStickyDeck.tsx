@@ -234,27 +234,35 @@ const TeamCard: React.FC<{
           )}
 
           {/* Summary */}
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 }}
             className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words"
             style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
           >
             {member.summary}
-          </p>
+          </motion.p>
 
           {/* Highlights */}
           <ul className="space-y-2 flex-1 min-w-0">
             {member.highlights.map((line, i) => (
-              <li
+              <motion.li
                 key={i}
+                initial={{ opacity: 0, x: -8 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: 0.3 + i * 0.08 }}
                 className="font-sans text-[10.5px] md:text-[11.5px] leading-[1.6] flex gap-2.5 items-start min-w-0"
                 style={{ color: isDark ? 'hsl(0 0% 100% / 0.3)' : 'hsl(var(--foreground) / 0.4)' }}
               >
                 <span
                   className="shrink-0 mt-[6px] w-2 h-px"
-                  style={{ backgroundColor: 'hsl(43 78% 50% / 0.3)' }}
+                  style={{ backgroundColor: isDark ? 'hsl(43 70% 55% / 0.45)' : 'hsl(43 78% 50% / 0.5)' }}
                 />
                 <span className="break-words overflow-wrap-anywhere">{line}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
