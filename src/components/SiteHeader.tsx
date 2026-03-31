@@ -127,21 +127,19 @@ const SiteHeader = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.08em] py-1.5 px-1.5 rounded-sm transition-all duration-200 active:scale-[0.93] active:bg-gold/[0.06] ${
+                    className={`relative font-sans text-[10px] uppercase tracking-[0.08em] py-1.5 px-2 rounded-sm transition-all duration-300 ${
                       isActive(item.path)
-                        ? isDark
-                          ? 'text-primary-foreground bg-primary-foreground/[0.04]'
-                          : 'text-[hsl(228,58%,18%)] bg-foreground/[0.03]'
+                        ? 'text-gold font-semibold'
                         : isDark
-                          ? 'text-primary-foreground/40 hover:text-primary-foreground/70 hover:bg-primary-foreground/[0.03]'
-                          : 'text-[hsl(228,8%,46%)] hover:text-foreground hover:bg-foreground/[0.02]'
+                          ? 'text-primary-foreground/40 hover:text-primary-foreground/70'
+                          : 'text-foreground/40 hover:text-foreground/70'
                     }`}
                   >
                     {item.label}
                     {isActive(item.path) && (
                       <motion.span
                         layoutId="nav-underline"
-                        className={`absolute -bottom-0.5 left-0 right-0 h-px ${isDark ? 'bg-gold/30' : 'bg-[hsl(228,45%,45%)]/30'}`}
+                        className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold rounded-full"
                         transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                       />
                     )}
