@@ -142,7 +142,7 @@ const OurFocus = () => {
       </section>
 
       {/* What We Look For — Sticky Scroll Zoom */}
-      <section className="bg-background overflow-hidden">
+      <section className="bg-background overflow-x-clip">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
