@@ -57,84 +57,30 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Naming Story — scroll reveal */}
-      <ScrollRevealText
-        label="Our Name"
-        heading="Crucible. The Way. Two words that define everything we do."
-        highlights={['Crucible', 'Way']}
-        subtext="A crucible is a vessel in which raw materials are subjected to extreme heat and pressure until something stronger emerges. 'The Way' is the path, the discipline, the philosophy. Cruxway: forging conviction through rigour."
-        variant="light"
-      />
-
-      {/* Etymology Reveal */}
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 ${isDark ? 'bg-primary' : 'bg-background'}`}>
-        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
-        <div className="relative max-w-[800px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 md:gap-0 items-stretch">
-            {/* Crucible card */}
-            <FadeIn delay={0}>
-              <motion.div
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className={`p-6 md:p-8 rounded-sm border border-gold/20 ${isDark ? 'bg-primary-foreground/[0.03]' : 'bg-[hsl(40,20%,98%)]'}`}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gold/50">
-                    <path d="M7 4h10l2 8-4 8H9L5 12l2-8z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                    <path d="M9 4v4M15 4v4" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                  </svg>
-                  <h3 className={`font-serif text-[1.3rem] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                    Crucible
-                  </h3>
-                </div>
-                <p className={`font-sans text-[13px] leading-[1.75] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
-                  A ceramic or metal container in which metals or other substances may be melted or subjected to very high temperatures.
-                </p>
-              </motion.div>
-            </FadeIn>
-
-            {/* Gold + connector */}
-            <div className="hidden md:flex items-center justify-center px-6">
-              <motion.span
-                animate={{ rotate: [0, 90, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="text-gold text-2xl font-serif select-none"
-              >
-                +
-              </motion.span>
+      {/* Naming Story — Cinematic Video */}
+      <section className={`relative overflow-hidden ${isDark ? 'bg-[hsl(228,55%,8%)]' : 'bg-[hsl(40,25%,96%)]'}`}>
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-12 md:py-16">
+          <FadeIn>
+            <SectionLabel light={isDark}>Our Name</SectionLabel>
+          </FadeIn>
+          <FadeIn delay={0.08}>
+            <div className="mt-6 rounded-sm overflow-hidden border border-gold/20" style={{ aspectRatio: '16/9' }}>
+              <video
+                src="/cruxway-naming.mp4"
+                autoPlay
+                muted
+                playsInline
+                loop
+                className="w-full h-full object-cover"
+                style={{ willChange: 'transform' }}
+              />
             </div>
-            <div className="flex md:hidden items-center justify-center">
-              <motion.span
-                animate={{ rotate: [0, 90, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="text-gold text-2xl font-serif select-none"
-              >
-                +
-              </motion.span>
-            </div>
-
-            {/* The Way card */}
-            <FadeIn delay={0.1}>
-              <motion.div
-                whileHover={{ y: -3 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className={`p-6 md:p-8 rounded-sm border border-gold/20 ${isDark ? 'bg-primary-foreground/[0.03]' : 'bg-[hsl(40,20%,98%)]'}`}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gold/50">
-                    <path d="M5 19l7-14 7 14" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-                    <path d="M12 5v14" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-                  </svg>
-                  <h3 className={`font-serif text-[1.3rem] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                    The Way
-                  </h3>
-                </div>
-                <p className={`font-sans text-[13px] leading-[1.75] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
-                  A method, style, or manner of doing something; a road, track, or path for travelling along.
-                </p>
-              </motion.div>
-            </FadeIn>
-          </div>
+          </FadeIn>
+          <FadeIn delay={0.16}>
+            <p className={`font-sans text-[13px] md:text-[14px] leading-[1.75] mt-5 max-w-[560px] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+              A crucible is a vessel in which raw materials are subjected to extreme heat and pressure until something stronger emerges. "The Way" is the path, the discipline, the philosophy. Cruxway: forging conviction through rigour.
+            </p>
+          </FadeIn>
         </div>
       </section>
 
