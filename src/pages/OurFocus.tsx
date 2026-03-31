@@ -10,6 +10,7 @@ import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import WaveBackground from '@/components/WaveBackground';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
 import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
@@ -140,23 +141,18 @@ const OurFocus = () => {
         </div>
       </section>
 
-      {/* What We Look For — Numbered Prose */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
-        <div className="max-w-[1080px] mx-auto">
+      {/* What We Look For — Sticky Scroll Zoom */}
+      <section className="bg-background overflow-hidden">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-12">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               What We Look For
             </h2>
-            <GoldRule className="mt-3 mb-8 md:mb-10" />
+            <GoldRule className="mt-3 mb-0" />
           </FadeIn>
-
-          <div className="space-y-0">
-            {whatWeLookFor.map((item, i) => (
-              <CriterionRow key={item.num} item={item} index={i} isDark={isDark} isLast={i === whatWeLookFor.length - 1} />
-            ))}
-          </div>
         </div>
+        <CriteriaScrollZoom items={whatWeLookFor} isDark={isDark} />
       </section>
 
       {/* Cinematic Scroll Reveal */}
@@ -259,68 +255,195 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
   );
 };
 
-/* ─── Criterion Row (Scroll-Linked Glow) ─── */
-const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean; isLast: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
+/* ─── CriteriaScrollZoom ─── */
+const CriteriaScrollZoom = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: boolean }) => {
+  const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start 0.75', 'center 0.45', 'end 0.25'],
+    target: containerRef,
+    offset: ['start start', 'end end'],
   });
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
-  const itemScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.98, 1, 0.98]);
-  const numberIntensity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.35, 0.1]);
-  const underlineWidth = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '60%', '0%']);
-  const dividerOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.05, 0.25, 0.05]);
+  const totalItems = items.length;
+
+  if (isMobile) {
+    return (
+      <div className="px-5 py-6">
+        <div className="space-y-6">
+          {items.map((item, i) => (
+            <MobileCriterionCard key={item.num} item={item} index={i} isDark={isDark} />
+          ))}
+        </div>
+        <div className="flex items-center justify-center gap-1.5 pt-4 pb-2">
+          {items.map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-gold/20" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const sectionHeight = totalItems * 100;
 
   return (
-    <div ref={ref}>
-      <motion.div
-        style={{ opacity: glowOpacity, scale: itemScale }}
-        className="grid grid-cols-12 gap-3 md:gap-6 py-6 md:py-8 group"
-      >
-        {/* Number */}
-        <div className="col-span-2 md:col-span-1">
+    <>
+      <div className="h-12 bg-gradient-to-b from-background to-transparent pointer-events-none relative z-10" />
+      <div ref={containerRef} className="relative" style={{ height: `${sectionHeight}vh` }}>
+        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
+          <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 w-full relative">
+            {items.map((item, i) => {
+              const itemStart = i / totalItems;
+              const itemEnd = (i + 1) / totalItems;
+              const itemCenter = (itemStart + itemEnd) / 2;
+
+              return (
+                <DesktopCriterionItem
+                  key={item.num}
+                  item={item}
+                  index={i}
+                  totalItems={totalItems}
+                  isDark={isDark}
+                  scrollProgress={scrollYProgress}
+                  itemStart={itemStart}
+                  itemEnd={itemEnd}
+                  itemCenter={itemCenter}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div className="h-12 bg-gradient-to-t from-background to-transparent pointer-events-none relative z-10" />
+    </>
+  );
+};
+
+const DesktopCriterionItem = ({ item, index, totalItems, isDark, scrollProgress, itemStart, itemEnd, itemCenter }: {
+  item: typeof whatWeLookFor[0];
+  index: number;
+  totalItems: number;
+  isDark: boolean;
+  scrollProgress: any;
+  itemStart: number;
+  itemEnd: number;
+  itemCenter: number;
+}) => {
+  const opacity = useTransform(scrollProgress,
+    [itemStart, itemCenter - 0.03, itemCenter, itemCenter + 0.03, itemEnd],
+    [0, 0.4, 1, 0.4, 0]
+  );
+  const scale = useTransform(scrollProgress,
+    [itemStart, itemCenter, itemEnd],
+    [0.92, 1, 0.92]
+  );
+  const y = useTransform(scrollProgress,
+    [itemStart, itemCenter, itemEnd],
+    [40, 0, -40]
+  );
+  const numberScale = useTransform(scrollProgress,
+    [itemStart, itemCenter, itemEnd],
+    [0.7, 1, 0.7]
+  );
+  const underlineWidth = useTransform(scrollProgress,
+    [itemStart, itemCenter - 0.02, itemCenter, itemCenter + 0.02, itemEnd],
+    ['0%', '30%', '100%', '30%', '0%']
+  );
+  const numberGlow = useTransform(scrollProgress,
+    [itemCenter - 0.02, itemCenter, itemCenter + 0.02],
+    ['0 0 0px hsl(43 78% 50% / 0)', '0 0 40px hsl(43 78% 50% / 0.3)', '0 0 0px hsl(43 78% 50% / 0)']
+  );
+  const progressWidth = useTransform(scrollProgress, [0, 1], ['0%', '100%']);
+
+  return (
+    <motion.div
+      style={{ opacity, scale, y }}
+      className="absolute inset-x-0 px-5 md:px-10 lg:px-16"
+    >
+      <div className="max-w-[1080px] mx-auto grid grid-cols-12 gap-8 items-center">
+        {/* Large number */}
+        <div className="col-span-2">
           <motion.span
-            className="font-serif text-[2.5rem] md:text-[3.5rem] leading-none"
-            style={{ opacity: numberIntensity, color: 'hsl(var(--gold))' }}
+            style={{ scale: numberScale, textShadow: numberGlow }}
+            className="block font-serif text-[5rem] md:text-[7rem] leading-none text-gold/30"
           >
             {item.num}
           </motion.span>
         </div>
 
-        {/* Title */}
-        <div className="col-span-10 md:col-span-3 flex items-start pt-2 md:pt-3">
-          <div>
-            <h3 className={`font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.2] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              {item.title}
-            </h3>
-            <motion.div
-              className="h-[1.5px] bg-gold/30 mt-1"
-              style={{ width: underlineWidth }}
-            />
-          </div>
+        {/* Content */}
+        <div className="col-span-10 md:col-span-4">
+          <h3 className={`font-serif text-[1.4rem] md:text-[1.8rem] leading-[1.15] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            {item.title}
+          </h3>
+          <motion.div
+            style={{ width: underlineWidth }}
+            className="h-[2px] bg-gold/60 mt-2"
+          />
         </div>
 
-        {/* Description */}
-        <div className="col-span-12 md:col-span-8 pt-0 md:pt-3">
-          <p className={`font-sans text-[14px] md:text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+        <div className="col-span-12 md:col-span-6">
+          <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
             {item.desc}
           </p>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Divider with scroll-linked opacity */}
-      {!isLast && (
-        <motion.div
-          className="h-px origin-left"
-          style={{
-            background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.2), hsl(43 78% 50% / 0.05), transparent)',
-            opacity: dividerOpacity,
-          }}
-        />
-      )}
+      {/* Progress indicator */}
+      <div className="max-w-[1080px] mx-auto mt-8 flex items-center gap-2">
+        {Array.from({ length: totalItems }, (_, i) => (
+          <div key={i} className={`h-[2px] flex-1 rounded-full transition-all duration-500 ${
+            i === index
+              ? 'bg-gold/60 shadow-[0_0_8px_hsl(43,78%,50%,0.2)]'
+              : isDark ? 'bg-primary-foreground/10' : 'bg-foreground/8'
+          }`} />
+        ))}
+      </div>
+
+      {/* Bottom counter */}
+      <div className="max-w-[1080px] mx-auto mt-4 flex items-center justify-center gap-3">
+        <span className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-gold/60">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div className="w-16 h-px bg-foreground/10 relative overflow-hidden">
+          <motion.div
+            className="absolute inset-y-0 left-0 bg-gold/60"
+            style={{ width: progressWidth }}
+          />
+        </div>
+        <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-foreground/25">
+          {String(totalItems).padStart(2, '0')}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
+const MobileCriterionCard = ({ item, index, isDark }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.8', 'center center', 'end 0.2'],
+  });
+  const cardScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const cardOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5, 0.7, 1], [0.4, 0.9, 1, 0.9, 0.4]);
+
+  return (
+    <div className="min-h-[140px]">
+      <motion.div
+        ref={ref}
+        style={{ scale: cardScale, opacity: cardOpacity }}
+        whileTap={{ scale: 0.98 }}
+        className={`relative p-5 rounded-lg ${isDark ? 'bg-card/40' : 'bg-[hsl(40,22%,96%)]/80'}`}
+      >
+        <span className="font-serif text-[2rem] leading-none text-gold/25 block mb-2">{item.num}</span>
+        <h3 className={`font-serif text-[1.1rem] leading-[1.25] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+          {item.title}
+        </h3>
+        <div className="w-8 h-[1.5px] bg-gold/50 mt-1.5 mb-2" />
+        <p className={`font-sans text-[13px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+          {item.desc}
+        </p>
+      </motion.div>
     </div>
   );
 };

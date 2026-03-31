@@ -310,13 +310,28 @@
     border: 1.5px solid hsl(var(--gold));
     color: hsl(var(--gold));
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+  }
+  .btn-gold::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: hsl(var(--gold));
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+  .btn-gold:hover::before {
+    opacity: 0.15;
   }
   .btn-gold:hover {
-    background: hsl(var(--gold) / 0.08);
+    background: hsl(var(--gold) / 0.06);
     border-color: hsl(var(--gold));
     color: hsl(var(--gold));
-    box-shadow: 0 0 20px hsl(var(--gold) / 0.15);
+    box-shadow: 0 0 24px hsl(var(--gold) / 0.12);
   }
   .dark .btn-gold {
     border-color: hsl(var(--gold) / 0.6);
