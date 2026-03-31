@@ -144,7 +144,7 @@ const Home = () => {
               </Link>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-gold/25 text-gold/65 hover:border-gold/45 hover:text-gold/90 transition-all duration-300"
+                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 transition-all duration-300"
               >
                 Get in Touch
               </Link>
