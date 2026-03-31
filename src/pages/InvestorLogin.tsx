@@ -49,7 +49,7 @@ const InvestorLogin = () => {
         style={{
           background: isDark
             ? 'radial-gradient(ellipse at center, hsl(228 58% 18% / 0.2), transparent 60%)'
-            : 'radial-gradient(ellipse at center, hsl(40 60% 48% / 0.04), transparent 60%)',
+            : 'radial-gradient(ellipse at center, hsl(43 70% 50% / 0.04), transparent 60%)',
         }}
       />
 

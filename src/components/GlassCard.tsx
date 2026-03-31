@@ -61,7 +61,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           <div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{
-              background: `radial-gradient(ellipse at center, hsl(40 60% 48% / ${isLight ? '0.04' : '0.04'}), transparent 70%)`,
+              background: `radial-gradient(ellipse at center, hsl(43 70% 50% / ${isLight ? '0.04' : '0.04'}), transparent 70%)`,
             }}
           />
 
@@ -69,7 +69,7 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
           <div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-sm"
             style={{
-              boxShadow: `inset 0 0 40px -12px hsl(40 60% 48% / ${isLight ? '0.06' : '0.05'})`,
+              boxShadow: `inset 0 0 40px -12px hsl(43 70% 50% / ${isLight ? '0.06' : '0.05'})`,
             }}
           />
 

@@ -110,7 +110,7 @@ const MobileWord = ({ word, range, progress, isGold, isDark }: { word: string; r
     <motion.span
       style={{
         opacity,
-        color: isGold ? 'hsl(40, 65%, 44%)' : isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
+        color: isGold ? 'hsl(43, 78%, 50%)' : isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
         textShadow: isDark ? '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)' : 'none',
         fontWeight: 500,
       }}
@@ -187,8 +187,8 @@ const CinematicScrollReveal = () => {
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
             <div className="text-center mb-8">
-              <span className="font-sans font-semibold uppercase" style={{ color: 'hsl(40, 65%, 44%)', fontSize: '12px', letterSpacing: '0.28em' }}>Sectors We Look At</span>
-              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(40, 65%, 44%)' }} />
+              <span className="font-sans font-semibold uppercase" style={{ color: 'hsl(43, 78%, 50%)', fontSize: '12px', letterSpacing: '0.28em' }}>Sectors We Look At</span>
+              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(43, 78%, 50%)' }} />
             </div>
             <div className="space-y-10">
               <SectorColumn heading={indiaSectors.left.heading} items={indiaSectors.left.items} side="left" isMobile={true} isDark={isDark} />
@@ -263,7 +263,7 @@ const CinematicScrollReveal = () => {
           }}
         >
           Building enduring platforms across India's{' '}
-          <span style={{ color: 'hsl(40, 65%, 44%)' }}>lower middle market.</span>
+          <span style={{ color: 'hsl(43, 78%, 50%)' }}>lower middle market.</span>
         </h2>
 
         <div
@@ -282,11 +282,11 @@ const CinematicScrollReveal = () => {
           <div className="text-center mb-10">
             <span
               className="font-sans font-semibold uppercase"
-              style={{ color: 'hsl(40, 65%, 44%)', fontSize: '14px', letterSpacing: '0.28em' }}
+              style={{ color: 'hsl(43, 78%, 50%)', fontSize: '14px', letterSpacing: '0.28em' }}
             >
               Sectors We Look At
             </span>
-            <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(40, 65%, 44%)' }} />
+            <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(43, 78%, 50%)' }} />
           </div>
           <div className="grid grid-cols-2 gap-8 relative">
             <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: isDark ? 'hsl(40,65%,44%,0.2)' : 'hsl(40,65%,44%,0.15)' }} />

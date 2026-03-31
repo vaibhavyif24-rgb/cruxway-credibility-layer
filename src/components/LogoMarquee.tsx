@@ -31,12 +31,12 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const isActuallyDark = isDarkVariant && theme === 'dark';
   const isContrastLight = isDarkVariant && theme === 'light';
 
-  const goldFilter = 'brightness(0) invert(60%) sepia(50%) saturate(350%) hue-rotate(5deg) brightness(95%)';
+  const goldFilter = 'brightness(0) invert(55%) sepia(60%) saturate(500%) hue-rotate(8deg) brightness(100%)';
 
   const bgClass = isActuallyDark
     ? 'bg-primary py-4 md:py-6 lg:py-8'
     : isContrastLight
-      ? 'bg-[hsl(38,16%,92%)] py-4 md:py-6 lg:py-8'
+      ? 'bg-[hsl(40,20%,91%)] py-4 md:py-6 lg:py-8'
       : 'py-3 md:py-5 lg:py-6';
 
   const fadeFromClass = isActuallyDark

@@ -69,7 +69,7 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
       <motion.p
         className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]"
         animate={isInView ? {
-          textShadow: ['0 0 0px hsl(40 65% 44% / 0)', '0 0 30px hsl(40 65% 44% / 0.4)', '0 0 0px hsl(40 65% 44% / 0)'],
+          textShadow: ['0 0 0px hsl(43 78% 50% / 0)', '0 0 30px hsl(43 78% 50% / 0.4)', '0 0 0px hsl(43 78% 50% / 0)'],
         } : {}}
         transition={{ duration: 2, delay: delay + 0.5, ease: 'easeInOut' }}
       >
@@ -126,7 +126,7 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
         <motion.div
           style={{
             scale: dotScale,
-            boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(40 65% 44% / ${v * 0.5})`),
+            boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
           }}
           className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
         />
@@ -213,7 +213,7 @@ const InvestmentCriteria = () => {
 
         <motion.div
           className="absolute top-0 left-0 right-0 h-px z-10"
-          style={{ background: 'linear-gradient(90deg, transparent, hsl(40 65% 44% / 0.15), transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.15), transparent)' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -338,7 +338,7 @@ const InvestmentCriteria = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/10'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
