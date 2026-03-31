@@ -1,4 +1,5 @@
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
+import { ArrowRight } from 'lucide-react';
 import { useRegion } from '@/contexts/RegionContext';
 import { Link } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
