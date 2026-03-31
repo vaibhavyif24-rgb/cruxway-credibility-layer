@@ -27,13 +27,14 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
     offset: ['start 0.75', 'center 0.45', 'end 0.25'],
   });
 
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.45, 0.6, 1], [0.15, 0.7, 1, 0.7, 0.15]);
   const numberColor = useTransform(scrollYProgress, [0, 0.45, 1], [0.1, 0.45, 0.1]);
   const underlineWidth = useTransform(scrollYProgress, [0, 0.45, 1], ['0%', '100%', '0%']);
   const dotScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.8, 1.4, 0.8]);
   const dotGlowOpacity = useTransform(scrollYProgress, [0, 0.45, 1], [0, 1, 0]);
   const itemScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.97, 1, 0.97]);
   const numberY = useTransform(scrollYProgress, [0, 1], [-8, 8]);
+  const itemBlur = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [2, 0.5, 0, 0.5, 2]);
 
   if (isMobile) {
     return (
