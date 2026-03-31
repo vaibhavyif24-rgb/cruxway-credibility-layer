@@ -18,7 +18,7 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
 
     const orbBottomLeft = isDark
       ? 'radial-gradient(circle, hsl(228 45% 20% / 0.3), transparent 70%)'
-      : 'radial-gradient(circle, hsl(38 30% 70% / 0.12), transparent 70%)';
+      : 'radial-gradient(circle, hsl(40 40% 60% / 0.12), transparent 70%)';
 
     return (
       <div ref={ref}>

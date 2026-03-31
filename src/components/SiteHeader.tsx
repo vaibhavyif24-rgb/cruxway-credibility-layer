@@ -101,7 +101,7 @@ const SiteHeader = () => {
         <div
           className="h-px w-full"
           style={{
-            background: 'linear-gradient(90deg, transparent 0%, hsl(38, 48%, 52%, 0.25) 50%, transparent 100%)',
+            background: 'linear-gradient(90deg, transparent 0%, hsl(40, 65%, 44%, 0.25) 50%, transparent 100%)',
             backgroundSize: '200% 100%',
             animation: 'header-shimmer 4s linear infinite',
           }}

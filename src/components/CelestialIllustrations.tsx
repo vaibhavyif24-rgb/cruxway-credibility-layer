@@ -1,8 +1,8 @@
 import React from 'react';
 
 /* ─── Palette ─── */
-const GOLD = 'hsl(38, 55%, 60%)';
-const GOLD_DIM = 'hsl(38, 40%, 45%)';
+const GOLD = 'hsl(40, 60%, 50%)';
+const GOLD_DIM = 'hsl(40, 45%, 40%)';
 const WARM_WHITE = 'hsl(40, 30%, 85%)';
 const NAVY_DEEP = 'hsl(225, 45%, 5%)';
 

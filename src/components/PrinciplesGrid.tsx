@@ -147,7 +147,7 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
           <div
             className="absolute inset-0 w-full"
             style={{
-              background: 'linear-gradient(180deg, transparent 0%, hsl(38,48%,52%,0.15) 50%, transparent 100%)',
+              background: 'linear-gradient(180deg, transparent 0%, hsl(40,65%,44%,0.15) 50%, transparent 100%)',
               backgroundSize: '100% 200%',
               animation: 'shimmer-line-pulse 4s ease-in-out infinite',
             }}
