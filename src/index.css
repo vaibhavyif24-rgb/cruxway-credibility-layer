@@ -398,6 +398,29 @@
     animation: shimmer-sweep-continuous 3s ease-in-out infinite;
   }
 
+  /* Scrollbar hide utility */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Diamond breathing animation */
+  @keyframes diamond-breathe {
+    0%, 100% { transform: rotate(45deg) scale(1); }
+    50% { transform: rotate(45deg) scale(1.15); }
+  }
+
+  /* Gold line sweep between sections */
+  @keyframes gold-line-sweep {
+    0% { transform: scaleX(0); opacity: 0; }
+    50% { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(0); opacity: 0; }
+  }
+  .section-gold-sweep {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.2), transparent);
+    transform-origin: center;
+    animation: gold-line-sweep 3s ease-in-out;
+  }
+
   /* Gold spinner for loading states */
   @keyframes spin-smooth {
     from { transform: rotate(0deg); }

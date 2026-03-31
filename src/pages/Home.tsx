@@ -104,15 +104,25 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
     return () => clearInterval(timer);
   }, [steps.length, autoplay]);
 
+  /* Keyboard navigation */
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') { setActive(prev => Math.min(prev + 1, steps.length - 1)); setAutoplay(false); }
+      if (e.key === 'ArrowLeft') { setActive(prev => Math.max(prev - 1, 0)); setAutoplay(false); }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [steps.length]);
+
   return (
     <div className="w-full">
       {/* Step headings — always visible, clickable */}
-      <div className="flex border-b border-gold/10">
+      <div className={`flex border-b border-gold/10 ${isMobile ? 'overflow-x-auto scrollbar-hide' : ''}`}>
         {steps.map((step, i) => (
           <button
             key={i}
             onClick={() => { setActive(i); setAutoplay(false); }}
-            className={`group flex-1 text-left relative py-3 md:py-4 transition-all duration-500 ${
+            className={`${isMobile ? 'flex-shrink-0 w-[130px]' : 'flex-1'} text-left relative py-3 md:py-4 transition-all duration-500 ${
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
@@ -238,6 +248,7 @@ const Home = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const isIndia = region === 'india';
+  const isMobile = useIsMobile();
 
   return (
     <div style={{ overflowX: 'clip' }}>
@@ -300,6 +311,15 @@ const Home = () => {
             animate={{ opacity: 0.4 }}
             transition={{ delay: 1.5, duration: 0.8 }}
           >
+            {isMobile && (
+              <motion.span
+                animate={{ opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="font-sans text-[9px] uppercase tracking-[0.3em] text-gold/60 mb-1"
+              >
+                Scroll
+              </motion.span>
+            )}
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
@@ -327,6 +347,18 @@ const Home = () => {
         }
         variant="light"
       />
+
+      {/* Animated transition dots */}
+      <div className={`flex justify-center gap-3 py-4 ${isDark ? 'bg-background' : 'bg-background'}`}>
+        {[0, 1, 2].map(i => (
+          <motion.div
+            key={i}
+            className="w-1 h-1 rounded-full bg-gold/30"
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.7, 0.3] }}
+            transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }}
+          />
+        ))}
+      </div>
 
       {/* Market Thesis */}
       <ScrollRevealText
@@ -360,15 +392,20 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Social Proof */}
-      <ScrollRevealText
-        heading={isIndia
-          ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
-          : "Decades of institutional experience dedicated to partnering with the owners who built America's essential industries."
-        }
-        highlights={isIndia ? ['institutional', 'shaping'] : ['institutional', 'essential']}
-        variant="light"
-      />
+      {/* Social Proof — Simple FadeIn */}
+      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-background'}`}>
+        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 text-center">
+          <FadeIn>
+            <p className={`font-serif text-[clamp(1.4rem,3.5vw,2.2rem)] leading-[1.25] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              {isIndia
+                ? <>Global <span className="text-gold">institutional</span> expertise applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
+                : <>Decades of <span className="text-gold">institutional</span> experience dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
+              }
+            </p>
+          </FadeIn>
+        </div>
+      </section>
       <div className="bg-background">
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
