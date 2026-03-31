@@ -40,7 +40,8 @@ const SiteHeader = () => {
   const prefix = `/${region}`;
   const isDark = theme === 'dark';
 
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress, scrollY } = useScroll();
+  const headerBgOpacity = useTransform(scrollY, [0, 60], [0, 0.95]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
