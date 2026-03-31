@@ -54,7 +54,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const blendMode = isActuallyDark ? 'screen' : undefined;
 
   return (
-    <div ref={ref} className={`relative overflow-hidden ${bgClass}`}>
+    <div ref={ref} className={`relative overflow-hidden ${bgClass}`} style={{ contain: 'layout style paint' }}>
       {isContrastLight && (
         <>
           <div className="absolute top-0 left-0 right-0 h-px bg-gold/20" />
