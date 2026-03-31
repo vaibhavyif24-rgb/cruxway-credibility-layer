@@ -465,18 +465,17 @@ const Home = () => {
         variant="light"
       />
 
-      {/* Cinematic breaker — visual separation */}
-      <CinematicBreaker isIndia={isIndia} isDark={isDark} />
+      {/* The Opportunity — Cinematic video header */}
+      <OpportunityCinematic isIndia={isIndia} isDark={isDark} />
 
-      {/* Market Thesis */}
+      {/* Market Thesis — Stats and supporting text */}
       <ScrollRevealText
-        label={isIndia ? 'The Opportunity' : 'Our Thesis'}
         heading={
           isIndia
-            ? 'India\'s lower middle market is one of the most under-served segments in global investing. Companies proven over decades are ready for a partner who can help them scale with discipline.'
-            : 'Tens of thousands of essential businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
+            ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
+            : 'Patient capital and operational expertise unlock their next chapter of growth.'
         }
-        highlights={isIndia ? ['under-served', 'discipline'] : ['essential', 'Patient']}
+        highlights={isIndia ? ['discipline'] : ['Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
