@@ -303,10 +303,10 @@ const InvestmentCriteria = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
               {[
-                { num: '01', title: 'Discovery', desc: 'Proprietary networks and deep sector relationships surface opportunities that never reach a market process.' },
-                { num: '02', title: 'Evaluation', desc: 'Strategic fit, market position, culture alignment, and growth vectors assessed with institutional rigour.' },
-                { num: '03', title: 'Diligence', desc: 'Deep financial, operational, legal, and commercial analysis. Conviction requires evidence.' },
-                { num: '04', title: 'Structuring', desc: 'Ownership, governance, and capital structures designed for decades, not exits.' },
+                { num: '01', title: 'Discovery', desc: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process.' },
+                { num: '02', title: 'Evaluation', desc: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment.' },
+                { num: '03', title: 'Diligence', desc: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios and build conviction through evidence.' },
+                { num: '04', title: 'Structuring', desc: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term reflects our commitment to permanence.' },
               ].map((step, i) => (
                 <EvalStep key={i} step={step} index={i} isDark={isDark} />
               ))}

@@ -143,7 +143,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
                 {step.num}
               </span>
               <motion.span
-                className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
                     : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
