@@ -117,7 +117,7 @@ const TeamCard: React.FC<{
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        className="h-[2px] bg-gradient-to-r from-gold/30 via-gold/15 to-transparent origin-left"
+        className="h-[2px] bg-gradient-to-r from-gold/50 via-gold/25 to-transparent origin-left"
       />
 
       {/* Soft top fade for stacking blend */}
