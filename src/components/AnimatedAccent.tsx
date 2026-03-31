@@ -25,8 +25,8 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
     transition: { duration: 0.6, delay } as const,
   });
 
-  const goldStroke = 'hsl(40 60% 48%)';
-  const goldFill = 'hsl(40 60% 48%)';
+  const goldStroke = 'hsl(43 70% 50%)';
+  const goldFill = 'hsl(43 70% 50%)';
 
   return (
     <div
@@ -218,7 +218,7 @@ const AnimatedAccent = ({ variant = 'default' }: { variant?: 'default' | 'partne
       {/* Ambient glow */}
       <motion.div
         className="absolute left-1/2 top-1/2 h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{ background: 'radial-gradient(circle, hsl(40 60% 48% / 0.06), transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, hsl(43 70% 50% / 0.06), transparent 70%)' }}
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         transition={{ duration: 1.5, delay: 0.5 }}
       />

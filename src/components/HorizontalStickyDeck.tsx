@@ -41,18 +41,18 @@ const darkBgs = [
 ];
 
 const lightTextColors = [
-  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(40 65% 44%)' },
+  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(40 30% 96%)', desc: 'hsl(40 20% 78%)', step: 'hsl(43 78% 50%)' },
 ];
 
 const darkTextColors = {
   title: 'hsl(40 30% 96%)',
   desc: 'hsl(40 20% 72%)',
-  step: 'hsl(40 65% 44%)',
+  step: 'hsl(43 78% 50%)',
 };
 
 /* ─── 6 Unique Thematic Illustrations ─── */
@@ -65,7 +65,7 @@ const HorizontalIllustration: React.FC<{ index: number; isDark: boolean; isActiv
     return () => clearInterval(timer);
   }, [isActive]);
 
-  const gold = 'hsl(40 60% 48%)';
+  const gold = 'hsl(43 70% 50%)';
   const goldDim = 'hsl(40 45% 40%)';
   const baseOpacity = isDark ? 0.15 : 0.25;
 
@@ -533,7 +533,7 @@ const HorizontalStickyDeck: React.FC<HorizontalStickyDeckProps> = ({ cards, vari
                 width: i === activeIndex ? '8px' : '5px',
                 height: i === activeIndex ? '8px' : '5px',
                 backgroundColor: i === activeIndex
-                  ? 'hsl(40 65% 44%)'
+                  ? 'hsl(43 78% 50%)'
                   : variant === 'dark'
                     ? 'hsla(40, 30%, 96%, 0.2)'
                     : 'hsla(210, 8%, 44%, 0.25)',

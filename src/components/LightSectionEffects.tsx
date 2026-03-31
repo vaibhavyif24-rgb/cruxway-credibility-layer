@@ -18,7 +18,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
               style={{
                 top: '-10%',
                 right: '-15%',
-                background: `radial-gradient(ellipse at center, hsl(40 65% 44% / ${0.07 * intensity}), transparent 70%)`,
+                background: `radial-gradient(ellipse at center, hsl(43 78% 50% / ${0.07 * intensity}), transparent 70%)`,
               }}
               animate={{ x: [0, 40, -20, 0], y: [0, -30, 20, 0] }}
               transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut' }}
@@ -49,7 +49,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
         <div
           className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(40 60% 48%) 40px, hsl(40 60% 48%) 40.5px)',
+            backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(43 70% 50%) 40px, hsl(43 70% 50%) 40.5px)',
           }}
         />
 
@@ -60,7 +60,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
           return (
             <motion.div
               key={i}
-              className={`absolute rounded-full ${isHollow ? 'border border-gold/15 bg-transparent' : 'bg-gold/10'}`}
+              className={`absolute rounded-full ${isHollow ? 'border border-gold/25 bg-transparent' : 'bg-gold/20'}`}
               style={{
                 width: `${size}px`,
                 height: `${size}px`,
@@ -91,7 +91,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
           <div
             className="w-full h-full"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, hsl(40 65% 44% / 0.18) 50%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.18) 50%, transparent 100%)',
               backgroundSize: '200% 100%',
               animation: 'shimmer-sweep 5s linear infinite',
             }}
@@ -104,7 +104,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
             <div
               className="w-full h-full"
               style={{
-                background: 'linear-gradient(90deg, transparent 0%, hsl(40 65% 44% / 0.14) 50%, transparent 100%)',
+                background: 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.14) 50%, transparent 100%)',
                 backgroundSize: '200% 100%',
                 animation: 'shimmer-sweep 6s linear infinite 1s',
               }}
@@ -122,9 +122,9 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
             transition={{ duration: 1.5, delay: 0.3 }}
           >
             <svg width="80" height="80" viewBox="0 0 80 80" fill="none" className="opacity-[0.06]">
-              <line x1="0" y1="40" x2="40" y2="40" stroke="hsl(40 60% 48%)" strokeWidth="0.5" />
-              <line x1="40" y1="0" x2="40" y2="40" stroke="hsl(40 60% 48%)" strokeWidth="0.5" />
-              <circle cx="40" cy="40" r="1.5" fill="hsl(40 60% 48%)" />
+              <line x1="0" y1="40" x2="40" y2="40" stroke="hsl(43 70% 50%)" strokeWidth="0.5" />
+              <line x1="40" y1="0" x2="40" y2="40" stroke="hsl(43 70% 50%)" strokeWidth="0.5" />
+              <circle cx="40" cy="40" r="1.5" fill="hsl(43 70% 50%)" />
             </svg>
           </motion.div>
         )}

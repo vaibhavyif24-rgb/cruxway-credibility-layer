@@ -40,16 +40,16 @@ const darkBgs = [
 ];
 
 const lightTextColors = [
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
-  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(40 65% 44%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
+  { title: 'hsl(228 58% 18%)', desc: 'hsl(228 8% 44%)', step: 'hsl(43 78% 50%)' },
 ];
 
 const darkTextColors = {
   title: 'hsl(40 30% 96%)',
   desc: 'hsl(40 20% 72%)',
-  step: 'hsl(40 65% 44%)',
+  step: 'hsl(43 78% 50%)',
 };
 
 /* ─── Thematic Illustrations (AnimatedAccent style) ─── */
@@ -62,7 +62,7 @@ const ThematicIllustration = React.forwardRef<HTMLDivElement, { index: number; i
     return () => clearInterval(timer);
   }, [isActive]);
 
-  const gold = 'hsl(40 60% 48%)';
+  const gold = 'hsl(43 70% 50%)';
   const goldDim = 'hsl(40 45% 40%)';
   const baseOpacity = isDark ? 0.15 : 0.25;
 
@@ -523,8 +523,8 @@ const StickyCardStack: React.FC<StickyCardStackProps> = ({ cards, variant = 'lig
                     style={{
                       width: i === activeIndex ? 8 : 5,
                       height: i === activeIndex ? 8 : 5,
-                      backgroundColor: i === activeIndex ? 'hsl(40 65% 44%)' : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
-                      boxShadow: i === activeIndex ? '0 0 8px hsl(40 65% 44% / 0.4)' : 'none',
+                      backgroundColor: i === activeIndex ? 'hsl(43 78% 50%)' : isDark ? 'hsl(0 0% 100% / 0.15)' : 'hsl(0 0% 100% / 0.25)',
+                      boxShadow: i === activeIndex ? '0 0 8px hsl(43 78% 50% / 0.4)' : 'none',
                     }}
                   />
                   {i === activeIndex && (

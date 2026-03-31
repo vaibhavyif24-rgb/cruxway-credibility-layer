@@ -101,7 +101,7 @@ const GuidingPrinciples = () => {
       <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.12), transparent)', animationDuration: '5s' }} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-6 md:py-10 lg:py-12 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
@@ -117,11 +117,7 @@ const GuidingPrinciples = () => {
               </p>
               <Link
                 to={`/${region}/contact`}
-                 className={`btn-premium btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
-                  isDark
-                    ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
-                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
-                }`}
+                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 transition-all duration-300"
               >
                 Get in Touch
               </Link>

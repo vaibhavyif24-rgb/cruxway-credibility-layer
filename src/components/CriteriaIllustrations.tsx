@@ -2,7 +2,7 @@ import React from 'react';
 
 /* 6 unique thematic illustrations for the "What We Look For" criteria deck */
 const CriteriaIllustration: React.FC<{ index: number; isDark: boolean; isActive: boolean }> = ({ index, isDark, isActive }) => {
-  const gold = 'hsl(40 60% 48%)';
+  const gold = 'hsl(43 70% 50%)';
   const goldDim = 'hsl(40 45% 40%)';
   const baseOpacity = isDark ? 0.15 : 0.25;
 

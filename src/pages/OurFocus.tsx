@@ -99,7 +99,7 @@ const OurFocus = () => {
         {/* Section entry gold wipe */}
         <motion.div
           className="absolute top-0 left-0 right-0 h-px z-10"
-          style={{ background: 'linear-gradient(90deg, transparent, hsl(40 65% 44% / 0.15), transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.15), transparent)' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -124,7 +124,7 @@ const OurFocus = () => {
 
           {/* Animated gold divider */}
           <motion.div
-            className="h-px bg-gold/15 mb-8 md:mb-10 origin-left"
+            className="h-px bg-gold/20 mb-8 md:mb-10 origin-left"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -164,7 +164,7 @@ const OurFocus = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
@@ -182,11 +182,7 @@ const OurFocus = () => {
               </p>
               <Link
                 to={`/${region}/contact`}
-                className={`btn-premium btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
-                  isDark
-                    ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
-                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
-                }`}
+                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 transition-all duration-300"
               >
                 Get in Touch
               </Link>
@@ -218,13 +214,13 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
         animate={isInView ? { height: '100%' } : {}}
         transition={{ duration: 0.6, delay: delay + 0.2, ease: [0.22, 1, 0.36, 1] }}
       />
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 ${isDark ? 'text-gold/50' : 'text-gold/50'}`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 ${isDark ? 'text-gold/75' : 'text-gold/75'}`}>
         {label}
       </p>
       <motion.p
         className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]"
         animate={isInView ? {
-          textShadow: ['0 0 0px hsl(40 65% 44% / 0)', '0 0 30px hsl(40 65% 44% / 0.4)', '0 0 0px hsl(40 65% 44% / 0)'],
+          textShadow: ['0 0 0px hsl(43 78% 50% / 0)', '0 0 30px hsl(43 78% 50% / 0.4)', '0 0 0px hsl(43 78% 50% / 0)'],
         } : {}}
         transition={{ duration: 2, delay: delay + 0.5, ease: 'easeInOut' }}
       >
@@ -252,7 +248,7 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-2 flex items-center gap-1.5 ${isDark ? 'text-gold/50' : 'text-gold/50'}`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-2 flex items-center gap-1.5 ${isDark ? 'text-gold/75' : 'text-gold/75'}`}>
         <span className="w-1.5 h-1.5 rounded-full bg-gold/30" />
         {label}
       </p>
@@ -319,7 +315,7 @@ const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLook
         <motion.div
           className="h-px origin-left"
           style={{
-            background: 'linear-gradient(90deg, hsl(40 65% 44% / 0.2), hsl(40 65% 44% / 0.05), transparent)',
+            background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.2), hsl(43 78% 50% / 0.05), transparent)',
             opacity: dividerOpacity,
           }}
         />

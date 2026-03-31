@@ -109,15 +109,15 @@ const Home = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[12px] md:text-[14px] font-medium uppercase tracking-[0.22em] text-gold/70 mb-4">
+            <p className="font-sans text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia
-                ? <>Investing in India's Next Generation of <span className="text-gold">Essential</span> Companies</>
-                : <>Building the <span className="text-gold">Next Generation</span> of Essential U.S. Companies</>}
+                ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 1px 8px hsl(43,78%,50%,0.3)' }}>Essential</span> Companies</>
+                : <>Building the <span className="text-gold" style={{ textShadow: '0 1px 8px hsl(43,78%,50%,0.3)' }}>Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
@@ -144,7 +144,7 @@ const Home = () => {
               </Link>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border border-gold/25 text-gold/65 hover:border-gold/45 hover:text-gold/90 transition-all duration-300"
+                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 transition-all duration-300"
               >
                 Get in Touch
               </Link>
@@ -161,7 +161,7 @@ const Home = () => {
               animate={{ y: [0, 6, 0] }}
               transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <ChevronDown className="w-5 h-5 text-gold/60" />
+              <ChevronDown className="w-5 h-5 text-gold/85" />
             </motion.div>
           </motion.div>
         </div>
@@ -233,7 +233,7 @@ const Home = () => {
       <div className="h-px w-full shimmer-effect mt-0" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.15), transparent)', animationDuration: '5s' }} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
@@ -251,11 +251,7 @@ const Home = () => {
               </p>
               <Link
                 to={`/${region}/contact`}
-                 className={`btn-premium btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
-                  isDark
-                    ? 'border-primary-foreground/[0.1] text-primary-foreground/50 hover:border-gold/30 hover:text-primary-foreground/75'
-                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
-                }`}
+                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 transition-all duration-300"
               >
                 Get in Touch
               </Link>

@@ -49,7 +49,7 @@ const InvestorLogin = () => {
         style={{
           background: isDark
             ? 'radial-gradient(ellipse at center, hsl(228 58% 18% / 0.2), transparent 60%)'
-            : 'radial-gradient(ellipse at center, hsl(40 60% 48% / 0.04), transparent 60%)',
+            : 'radial-gradient(ellipse at center, hsl(43 70% 50% / 0.04), transparent 60%)',
         }}
       />
 
@@ -125,7 +125,7 @@ const InvestorLogin = () => {
             <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
               isDark ? 'bg-primary-foreground/[0.04]' : 'bg-muted/60'
             }`}>
-              <Lock className="w-4 h-4 text-gold/50" />
+              <Lock className="w-4 h-4 text-gold/75" />
             </div>
           </motion.div>
 

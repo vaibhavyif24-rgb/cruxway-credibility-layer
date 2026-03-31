@@ -62,8 +62,8 @@ const DeckCard: React.FC<DeckCardProps> = ({
   const shimmerOpacity = isDark ? 0.15 * fxOpacity : 0.25 * fxOpacity;
   const titleColor = isDark ? '#F8F6F2' : 'hsl(228, 58%, 18%)';
   const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(228, 8%, 38%)';
-  const indexColor = isDark ? 'hsl(40, 60%, 48%, 0.5)' : 'hsl(40, 65%, 38%, 0.6)';
-  const borderColor = isDark ? 'hsl(40, 60%, 48%, 0.06)' : 'hsl(40, 40%, 50%, 0.12)';
+  const indexColor = isDark ? 'hsl(40, 60%, 48%, 0.5)' : 'hsl(43, 70%, 42%, 0.6)';
+  const borderColor = isDark ? 'hsl(40, 60%, 48%, 0.06)' : 'hsl(43, 50%, 50%, 0.12)';
 
   const shadowActive = isDark
     ? '0 -6px 30px -4px rgba(0,0,0,0.25), 0 20px 50px -10px rgba(0,0,0,0.22)'
@@ -115,7 +115,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
             style={{
               top: p.top, left: p.left,
               width: p.size, height: p.size,
-              background: 'hsl(40, 60%, 48%)',
+              background: 'hsl(43, 70%, 50%)',
               animationDelay: p.delay,
               opacity: 0.5 * fxOpacity,
             }}
@@ -282,7 +282,7 @@ const PrinciplesDeck: React.FC<PrinciplesDeckProps> = ({ principles, isDark = tr
                 width: i === activeIndex ? '8px' : '5px',
                 height: i === activeIndex ? '8px' : '5px',
                 backgroundColor: i === activeIndex
-                  ? 'hsl(40, 65%, 44%)'
+                  ? 'hsl(43, 78%, 50%)'
                   : isDark
                     ? 'hsla(40, 30%, 96%, 0.2)'
                     : 'hsla(210, 8%, 44%, 0.25)',

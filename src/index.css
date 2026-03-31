@@ -44,8 +44,8 @@
     --warm-gray: 30 8% 52%;
     --light-stone: 40 16% 92%;
     --cream: 40 20% 93%;
-    --gold: 40 65% 44%;
-    --gold-dim: 40 45% 36%;
+    --gold: 43 78% 50%;
+    --gold-dim: 43 55% 40%;
     --rule: 38 10% 84%;
 
     /* Cinematic card tokens */
@@ -57,7 +57,7 @@
     --cin-card-descriptor: rgba(11, 33, 50, 0.45);
     --cin-card-bullet: rgba(154, 115, 48, 0.6);
     --cin-card-divider: rgba(154, 115, 48, 0.15);
-    --cin-card-label: hsl(40, 45%, 36%);
+    --cin-card-label: hsl(43, 55%, 40%);
 
     --font-serif: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
     --font-sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
@@ -105,8 +105,8 @@
     --cream: 228 40% 7%;
     --rule: 228 18% 17%;
     --light-stone: 228 28% 10%;
-    --gold: 40 58% 56%;
-    --gold-dim: 40 38% 46%;
+    --gold: 43 70% 55%;
+    --gold-dim: 43 45% 45%;
 
     /* Cinematic card tokens — dark */
     --cin-card-bg: rgba(10, 17, 28, 0.90);
@@ -117,7 +117,7 @@
     --cin-card-descriptor: rgba(248, 246, 242, 0.38);
     --cin-card-bullet: rgba(192, 154, 89, 0.65);
     --cin-card-divider: rgba(192, 154, 89, 0.12);
-    --cin-card-label: hsl(40, 55%, 58%);
+    --cin-card-label: hsl(43, 65%, 55%);
   }
 }
 
@@ -245,8 +245,8 @@
 }
 
 @keyframes gold-border-pulse {
-  0%, 100% { border-color: hsl(40 65% 44% / 0.15); }
-  50% { border-color: hsl(40 65% 44% / 0.35); }
+  0%, 100% { border-color: hsl(43 78% 50% / 0.15); }
+  50% { border-color: hsl(43 78% 50% / 0.35); }
 }
 
 /* Text shimmer for hero headings */
@@ -290,7 +290,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, hsl(40 65% 44% / 0.08), transparent);
+    background: linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.08), transparent);
     transition: left 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     pointer-events: none;
   }
@@ -303,6 +303,30 @@
     transform: scale(0.96);
     box-shadow: 0 0 12px 2px hsl(var(--gold) / 0.15);
     transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  }
+
+  /* Unified gold CTA button */
+  .btn-gold {
+    border: 1.5px solid hsl(var(--gold));
+    color: hsl(var(--gold));
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-gold:hover {
+    background: hsl(var(--gold) / 0.08);
+    border-color: hsl(var(--gold));
+    color: hsl(var(--gold));
+    box-shadow: 0 0 20px hsl(var(--gold) / 0.15);
+  }
+  .dark .btn-gold {
+    border-color: hsl(var(--gold) / 0.6);
+    color: hsl(var(--gold) / 0.8);
+  }
+  .dark .btn-gold:hover {
+    border-color: hsl(var(--gold));
+    color: hsl(var(--gold));
+    background: hsl(var(--gold) / 0.06);
+    box-shadow: 0 0 24px hsl(var(--gold) / 0.12);
   }
 
   /* Universal button press effect */
@@ -330,7 +354,7 @@
 
   /* Gold link underline animation */
   .gold-underline-hover {
-    background-image: linear-gradient(hsl(40 65% 44% / 0.3), hsl(40 65% 44% / 0.3));
+    background-image: linear-gradient(hsl(43 78% 50% / 0.3), hsl(43 78% 50% / 0.3));
     background-size: 0% 1px;
     background-position: left bottom;
     background-repeat: no-repeat;
@@ -346,7 +370,7 @@
       90deg,
       currentColor 0%,
       currentColor 40%,
-      hsl(40 60% 55%) 50%,
+      hsl(43 70% 55%) 50%,
       currentColor 60%,
       currentColor 100%
     );
@@ -360,8 +384,8 @@
 
   /* CTA button pulse glow */
   @keyframes btn-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 hsl(40 65% 44% / 0); }
-    50% { box-shadow: 0 0 16px 0 hsl(40 65% 44% / 0.08); }
+    0%, 100% { box-shadow: 0 0 0 0 hsl(43 78% 50% / 0); }
+    50% { box-shadow: 0 0 16px 0 hsl(43 78% 50% / 0.08); }
   }
   .btn-premium-glow { animation: btn-pulse 3s ease-in-out infinite; }
 
@@ -374,8 +398,8 @@
     display: inline-block;
     width: 14px;
     height: 14px;
-    border: 1.5px solid hsl(40 65% 44% / 0.2);
-    border-top-color: hsl(40 65% 44% / 0.6);
+    border: 1.5px solid hsl(43 78% 50% / 0.2);
+    border-top-color: hsl(43 78% 50% / 0.6);
     border-radius: 50%;
     animation: spin-smooth 0.8s linear infinite;
   }

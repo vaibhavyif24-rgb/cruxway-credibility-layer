@@ -31,7 +31,7 @@ const lightCardBgs = [
   'hsl(40 25% 95.5%)',
 ];
 
-const goldFilter = 'brightness(0) invert(60%) sepia(50%) saturate(350%) hue-rotate(5deg) brightness(95%)';
+const goldFilter = 'brightness(0) invert(55%) sepia(60%) saturate(500%) hue-rotate(8deg) brightness(100%)';
 
 /* ─── Inline Logo Marquee ─── */
 const InlineMarquee: React.FC<{
@@ -137,7 +137,7 @@ const TeamCard: React.FC<{
               <div
                 className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] rounded-full overflow-hidden border-2 shadow-lg"
                 style={{
-                  borderColor: isDark ? 'hsl(40 65% 44% / 0.15)' : 'hsl(40 65% 44% / 0.12)',
+                  borderColor: isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.12)',
                   boxShadow: `0 8px 32px -8px ${isDark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
                 }}
               >
@@ -173,7 +173,7 @@ const TeamCard: React.FC<{
           {/* Counter */}
           <p
             className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
-            style={{ color: 'hsl(40 65% 44% / 0.4)' }}
+            style={{ color: 'hsl(43 78% 50% / 0.4)' }}
           >
             {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
           </p>
@@ -194,7 +194,7 @@ const TeamCard: React.FC<{
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="h-px w-full origin-left mt-1 mb-1"
-                style={{ background: 'linear-gradient(90deg, hsl(40 65% 44% / 0.3), transparent)' }}
+                style={{ background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.3), transparent)' }}
               />
               {member.linkedIn && (
                 <a
@@ -214,7 +214,7 @@ const TeamCard: React.FC<{
             </div>
             <p
               className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mt-1.5"
-              style={{ color: 'hsl(40 65% 44%)' }}
+              style={{ color: 'hsl(43 78% 50%)' }}
             >
               {member.role}
             </p>
@@ -225,7 +225,7 @@ const TeamCard: React.FC<{
             <div className="mb-4 md:mb-5 min-w-0 overflow-hidden">
               <p
                 className="font-sans text-[7px] md:text-[8px] font-semibold uppercase tracking-[0.22em] mb-2"
-                style={{ color: 'hsl(40 65% 44% / 0.45)' }}
+                style={{ color: 'hsl(43 78% 50% / 0.45)' }}
               >
                 Select Investments &amp; Deals
               </p>
@@ -251,7 +251,7 @@ const TeamCard: React.FC<{
               >
                 <span
                   className="shrink-0 mt-[6px] w-2 h-px"
-                  style={{ backgroundColor: 'hsl(40 65% 44% / 0.3)' }}
+                  style={{ backgroundColor: 'hsl(43 78% 50% / 0.3)' }}
                 />
                 <span className="break-words overflow-wrap-anywhere">{line}</span>
               </li>

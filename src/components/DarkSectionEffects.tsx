@@ -13,8 +13,8 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
       : 'bg-gradient-to-b from-[hsl(38,20%,85%)]/20 via-transparent to-[hsl(38,20%,85%)]/10';
 
     const orbTopRight = isDark
-      ? 'radial-gradient(circle, hsl(40 60% 48% / 0.03), transparent 70%)'
-      : 'radial-gradient(circle, hsl(40 60% 48% / 0.06), transparent 70%)';
+      ? 'radial-gradient(circle, hsl(43 70% 50% / 0.03), transparent 70%)'
+      : 'radial-gradient(circle, hsl(43 70% 50% / 0.06), transparent 70%)';
 
     const orbBottomLeft = isDark
       ? 'radial-gradient(circle, hsl(228 45% 20% / 0.3), transparent 70%)'
@@ -25,38 +25,38 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
         <div className={`absolute inset-0 ${baseGradient} pointer-events-none`} />
         <div className="absolute top-[10%] right-[5%] w-[200px] h-[200px] md:w-[350px] md:h-[250px] rounded-full pointer-events-none float-orb-slow" style={{ background: orbTopRight }} />
         <div className="absolute bottom-[5%] left-[2%] w-[250px] h-[180px] md:w-[400px] md:h-[280px] rounded-full pointer-events-none float-orb-medium" style={{ background: orbBottomLeft }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full pointer-events-none pulse-glow-effect" style={{ background: `radial-gradient(circle, hsl(40 60% 48% / ${fx}), transparent 60%)` }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[400px] rounded-full pointer-events-none pulse-glow-effect" style={{ background: `radial-gradient(circle, hsl(43 70% 50% / ${fx}), transparent 60%)` }} />
         <div className="absolute top-[30%] left-0 right-0 h-px pointer-events-none overflow-hidden">
-          <div className="w-[200px] h-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(40 60% 48% / 0.1), transparent)' }} />
+          <div className="w-[200px] h-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(43 70% 50% / 0.1), transparent)' }} />
         </div>
         {[...Array(variant === 'hero' ? 5 : 3)].map((_, i) => (
-          <motion.div key={i} className="absolute w-[2px] h-[2px] rounded-full pointer-events-none" style={{ background: 'hsl(40 60% 48%)', left: `${15 + i * 18}%`, top: `${20 + (i * 15) % 60}%` }}
+          <motion.div key={i} className="absolute w-[2px] h-[2px] rounded-full pointer-events-none" style={{ background: 'hsl(43 70% 50%)', left: `${15 + i * 18}%`, top: `${20 + (i * 15) % 60}%` }}
             animate={{ y: [0, -30, -10, -40, 0], x: [0, 10, -5, 15, 0], opacity: [0, 0.25 * fx, 0.15 * fx, 0.3 * fx, 0], scale: [0, 1, 0.8, 1.2, 0] }}
             transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: 'easeInOut' }}
           />
         ))}
         <motion.div className="absolute top-0 left-0 pointer-events-none" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.5, delay: 0.3 }}>
           <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.04]">
-            <motion.line x1="0" y1="60" x2="60" y2="60" stroke="hsl(40 60% 48%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.5 }} />
-            <motion.line x1="60" y1="0" x2="60" y2="60" stroke="hsl(40 60% 48%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.8 }} />
-            <motion.circle cx="60" cy="60" r="2" fill="hsl(40 60% 48%)" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.2 }} />
+            <motion.line x1="0" y1="60" x2="60" y2="60" stroke="hsl(43 70% 50%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.5 }} />
+            <motion.line x1="60" y1="0" x2="60" y2="60" stroke="hsl(43 70% 50%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.8 }} />
+            <motion.circle cx="60" cy="60" r="2" fill="hsl(43 70% 50%)" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.2 }} />
           </svg>
         </motion.div>
         {(variant === 'hero' || variant === 'cta') && (
           <motion.div className="absolute bottom-0 right-0 pointer-events-none rotate-180" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.5, delay: 0.5 }}>
             <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.04]">
-              <motion.line x1="0" y1="60" x2="60" y2="60" stroke="hsl(40 60% 48%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.7 }} />
-              <motion.line x1="60" y1="0" x2="60" y2="60" stroke="hsl(40 60% 48%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 1 }} />
-              <motion.circle cx="60" cy="60" r="2" fill="hsl(40 60% 48%)" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.4 }} />
+              <motion.line x1="0" y1="60" x2="60" y2="60" stroke="hsl(43 70% 50%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.7 }} />
+              <motion.line x1="60" y1="0" x2="60" y2="60" stroke="hsl(43 70% 50%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 1 }} />
+              <motion.circle cx="60" cy="60" r="2" fill="hsl(43 70% 50%)" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 1.4 }} />
             </svg>
           </motion.div>
         )}
         {variant !== 'cta' && (
           <div className="absolute top-0 right-[20%] bottom-0 w-px pointer-events-none overflow-hidden">
-            <motion.div className="w-full h-[100px]" style={{ background: 'linear-gradient(180deg, transparent, hsl(40 60% 48% / 0.06), transparent)' }} animate={{ y: ['-100px', '500px'] }} transition={{ duration: 6, repeat: Infinity, ease: 'linear', delay: 1 }} />
+            <motion.div className="w-full h-[100px]" style={{ background: 'linear-gradient(180deg, transparent, hsl(43 70% 50% / 0.06), transparent)' }} animate={{ y: ['-100px', '500px'] }} transition={{ duration: 6, repeat: Infinity, ease: 'linear', delay: 1 }} />
           </div>
         )}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.01]" style={{ backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(40 60% 48%) 40px, hsl(40 60% 48%) 40.5px)' }} />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.01]" style={{ backgroundImage: 'repeating-linear-gradient(135deg, transparent, transparent 40px, hsl(43 70% 50%) 40px, hsl(43 70% 50%) 40.5px)' }} />
       </div>
     );
   }

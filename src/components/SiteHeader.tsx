@@ -229,7 +229,7 @@ const SiteHeader = () => {
                 to="/investor-login"
                 className={`btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-5 py-2.5 border transition-all duration-300 ${
                   isDark
-                    ? 'border-gold/12 text-gold/55 hover:border-gold/30 hover:text-gold/85'
+                    ? 'border-gold/12 text-gold/80 hover:border-gold/30 hover:text-gold/85'
                     : 'border-gold/20 text-gold hover:border-gold/40 hover:text-foreground'
                 }`}
               >
@@ -295,7 +295,7 @@ const SiteHeader = () => {
                   >
                     <Link
                       to={item.path}
-                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-all duration-200 active:scale-95 active:text-gold/60 ${
+                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-all duration-200 active:scale-95 active:text-gold/85 ${
                         isActive(item.path)
                           ? isDark ? 'text-primary-foreground' : 'text-foreground'
                           : isDark ? 'text-primary-foreground/25' : 'text-muted-foreground'
@@ -331,7 +331,7 @@ const SiteHeader = () => {
                   to="/investor-login"
                   className={`btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-7 py-2.5 border ${
                     isDark
-                      ? 'border-gold/12 text-gold/45 active:text-gold/70'
+                      ? 'border-gold/12 text-gold/70 active:text-gold/70'
                       : 'border-gold/20 text-gold active:text-foreground'
                   }`}
                 >

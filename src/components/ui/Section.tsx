@@ -67,7 +67,7 @@ export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.R
         className={`
           font-sans text-[9.5px] md:text-[10px] font-medium uppercase
           mb-2.5 md:mb-3
-          ${shouldUseGold ? 'text-gold/55' : 'text-[hsl(228,45%,45%)]/50'}
+          ${shouldUseGold ? 'text-gold' : 'text-[hsl(228,45%,45%)]/60'}
         `}
       >
         {children}
@@ -85,7 +85,7 @@ export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
         whileInView={{ width: 32 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="h-px bg-gold/30"
+        className="h-px bg-gold/40"
       />
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
@@ -93,7 +93,7 @@ export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: 0.3 }}
         whileHover={{ rotate: 180, scale: 1.4 }}
-        className="w-1 h-1 rotate-45 border border-gold/25"
+        className="w-1.5 h-1.5 rotate-45 border border-gold/35"
       />
     </div>
   )
