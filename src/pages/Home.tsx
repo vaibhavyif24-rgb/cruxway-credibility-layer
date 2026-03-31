@@ -263,16 +263,18 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
           loop
           playsInline
           preload="metadata"
+          // @ts-ignore — fetchpriority is valid HTML but not in React's type defs yet
+          fetchpriority="low"
           className="w-full h-full object-cover"
           poster={isIndia
-            ? 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=1200&q=80'
-            : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80'
+            ? 'https://images.pexels.com/videos/4193140/pexels-photo-4193140.jpeg?auto=compress&w=1200'
+            : 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200'
           }
         >
           <source
             src={isIndia
-              ? 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4'
-              : 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4'
+              ? 'https://videos.pexels.com/video-files/4193140/4193140-uhd_2562_1440_24fps.mp4'
+              : 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4'
             }
             type="video/mp4"
           />
@@ -283,7 +285,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
       <div className="absolute inset-0 z-[2]" style={{
         background: isDark
           ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
-          : 'linear-gradient(to bottom, hsl(228 45% 14% / 0.65) 0%, hsl(228 45% 14% / 0.82) 40%, hsl(228 45% 14% / 0.92) 100%)'
+          : 'linear-gradient(to bottom, hsl(228 45% 12% / 0.75) 0%, hsl(228 45% 12% / 0.88) 40%, hsl(228 45% 12% / 0.95) 100%)'
       }} />
 
       {/* Subtle grain texture */}
