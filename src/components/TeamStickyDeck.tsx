@@ -173,7 +173,7 @@ const TeamCard: React.FC<{
           {/* Counter */}
           <p
             className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
-            style={{ color: 'hsl(43 78% 50% / 0.4)' }}
+            style={{ color: isDark ? 'hsl(43 70% 55% / 0.6)' : 'hsl(43 78% 50% / 0.65)' }}
           >
             {String(index + 1).padStart(2, '0')} / {String(totalMembers).padStart(2, '0')}
           </p>
@@ -182,7 +182,7 @@ const TeamCard: React.FC<{
           <div className="mb-3">
             <div className="flex items-center gap-2 flex-wrap">
               <h3
-                className="text-shimmer-gold font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
+                className="font-serif text-[1.35rem] md:text-[1.6rem] lg:text-[1.85rem] tracking-[-0.025em] leading-[1.1]"
                 style={{ color: isDark ? 'hsl(0 0% 100%)' : 'hsl(var(--foreground))' }}
               >
                 {member.name}
