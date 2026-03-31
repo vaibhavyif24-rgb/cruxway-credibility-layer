@@ -167,9 +167,7 @@ const StatReveal = ({
   progress: ReturnType<typeof useScroll>['scrollYProgress'];
   isDark: boolean;
 }) => {
-  const start = 0.65 + (index / total) * 0.15;
-  const end = Math.min(start + 0.2, 1);
-  const opacity = useTransform(progress, [start, end], [0, 1]);
+
 
   const statRef = useRef<HTMLDivElement>(null);
   const isInViewStat = useInView(statRef, { once: true });
