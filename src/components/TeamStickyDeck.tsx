@@ -194,7 +194,7 @@ const TeamCard: React.FC<{
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className="h-px w-full origin-left mt-1 mb-1"
-                style={{ background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.3), transparent)' }}
+                style={{ background: `linear-gradient(90deg, ${isDark ? 'hsl(43 70% 55% / 0.4)' : 'hsl(43 78% 50% / 0.45)'}, transparent)` }}
               />
               {member.linkedIn && (
                 <a
