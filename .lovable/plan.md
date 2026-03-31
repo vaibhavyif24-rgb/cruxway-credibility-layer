@@ -1,55 +1,59 @@
 
 
-## CriteriaScrollZoom + Principles Enhancement — Implementation Plan
+## Implementation Plan: Scroll-Zoom Fix, Nav Active State, Refinements & Animations
 
-### Section 1: Create CriteriaScrollZoom for OurFocus.tsx
-**File**: `src/pages/OurFocus.tsx`
+### Section 1: Fix overflow-hidden Breaking Sticky (30 seconds)
+**Files**: `src/pages/InvestmentCriteria.tsx` (line 413), `src/pages/OurFocus.tsx` (line 145)
 
-- Delete `CriterionRow` component (lines 262-326)
-- Replace "What We Look For" section (lines 143-160) with new sticky scroll-zoom section
-- Add three new components above the default export:
-  - `CriteriaScrollZoom` — container with tall scroll area (desktop) or stacked cards (mobile)
-  - `DesktopCriterionItem` — absolute-positioned card with scroll-linked opacity/scale/y/numberScale/underlineWidth + progress bar + numberGlow textShadow
-  - `MobileCriterionCard` — simple card with scroll-linked scale/opacity and `whileTap`
-- Add `useIsMobile` import
-- Desktop: `height: ${totalItems * 100}vh`, sticky viewport, items fade/zoom one at a time
-- Progress bar with 6 segments, active one gets gold glow shadow
-- Bottom counter with scroll-linked fill bar
-- Gradient transitions (h-12) at top/bottom of scroll zone
+- Change `overflow-hidden` → `overflow-x-clip` on both scroll-zoom section wrappers
 
-### Section 2: Apply Same to InvestmentCriteria.tsx
-**File**: `src/pages/InvestmentCriteria.tsx`
+### Section 2: Navigation Active State — Gold Indicator (3 minutes)
+**File**: `src/components/SiteHeader.tsx`
 
-- Replace lines 254-281 (StickyCardStack usage) with same CriteriaScrollZoom pattern
-- Copy the three components into this file (CriteriaScrollZoom, DesktopCriterionItem, MobileCriterionCard)
-- Note: `whatWeLookFor` in this file lacks `num` field — need to generate it: `String(i+1).padStart(2,'0')`
-- Remove `StickyCardStack` import if no longer used elsewhere in this file
+**Desktop nav (lines 126-149)**:
+- Active link: `text-gold font-semibold` (both modes), remove `bg-foreground/[0.03]`
+- Inactive links: `text-foreground/40` light / `text-primary-foreground/40` dark
+- Underline: `h-[2px] bg-gold rounded-full` at `-bottom-1` (was `h-px bg-[hsl(228,45%,45%)]/30`)
+- Add `useTransform` import (already have `useScroll`)
 
-### Section 3: Enhance PrinciplesGrid Scroll Effect
-**File**: `src/components/PrinciplesGrid.tsx`
+**Mobile nav (lines 296-305)**:
+- Active: `text-gold font-medium` (both modes)
+- Inactive: `text-foreground/25` light / `text-primary-foreground/25` dark
 
-- Line 30: Change glowOpacity from `[0.3, 0.85, 1, 0.85, 0.3]` → `[0.15, 0.7, 1, 0.7, 0.15]` for more dramatic contrast
-- Add desktop-only blur: `const itemBlur = useTransform(...)` with values `[2, 0.5, 0, 0.5, 2]`
-- Apply blur via `filter: useTransform(itemBlur, v => \`blur(\${v}px)\`)` on the desktop `motion.div` style prop
-- Skip blur transform entirely on mobile (already handled by early return)
-- Line 92-97: Replace single glow div with double-ring (outer ring `border border-gold/20 inset-[-8px]` + inner glow `bg-gold/30 blur-md inset-[-5px]` with scale `[1, 1.3, 1]` at 2.5s)
-- Line 51: Mobile number size `text-[2.5rem]` → `text-[2rem]`
-- Line 159: Fix hardcoded gold `hsl(40,65%,44%,0.25)` → `hsl(43,78%,50%,0.25)`
+**Investor Login button (lines 228-237)**:
+- Light: `border-gold/30 text-gold hover:border-gold/50`
+- Dark: `border-gold/20 text-gold/80 hover:border-gold/40 hover:text-gold`
 
-### Section 4: btn-gold Hover Glow Enhancement
+### Section 3: Scroll-Zoom Transition Refinement (5 minutes)
+**Files**: `src/pages/OurFocus.tsx`, `src/pages/InvestmentCriteria.tsx`
+
+In both `DesktopCriterionItem` / `ICDesktopCriterionItem`:
+- Widen opacity transition window: `0.03` → `0.06`, intermediate `0.4` → `0.6`
+- First item (`index === 0`): starts at 0.8 opacity so section isn't blank on entry
+
+### Section 4: Header Scroll Fade + Progress Pulse (5 minutes)
+**File**: `src/components/SiteHeader.tsx`
+
+- Add `scrollY` from `useScroll()` (currently only `scrollYProgress`)
+- Add `headerBgOpacity = useTransform(scrollY, [0, 60], [0, 0.95])`
+- Light mode: change `bg-white/90` to transparent base + `motion.div` overlay with opacity linked to scroll
+- Progress bar: wrap in container, add initial gold pulse `motion.div` that fades out after 1.5s
+
+### Section 5: Footer Wordmark Hover (1 minute)
+**File**: `src/components/SiteFooter.tsx`
+
+- Line 43: Change `<p>` to `<motion.p>` with `whileHover={{ scale: 1.03 }}` on the "Cruxway" wordmark
+
+### Section 6: Card Hover Glow Utility (1 minute)
 **File**: `src/index.css`
 
-- Update `.btn-gold` (lines 309-330) to add `position: relative` and a `::before` pseudo-element for the glow halo effect
-- Add `transition: all 0.4s` (was 0.3s)
-
-### Section 5: Mobile Dot Indicator
-- Add simple dot indicator below mobile cards in CriteriaScrollZoom
-- Ensure `min-h-[140px]` wrapper on mobile cards to prevent layout shift
+- Add `.card-hover-glow` class with `box-shadow` and `translateY(-2px)` on hover
 
 ### Technical Details
-**Files modified (4)**:
-1. `src/pages/OurFocus.tsx` — new CriteriaScrollZoom replacing CriterionRow
-2. `src/pages/InvestmentCriteria.tsx` — same CriteriaScrollZoom replacing StickyCardStack
-3. `src/components/PrinciplesGrid.tsx` — dramatic glow contrast, blur, double-ring dot, mobile number size fix
-4. `src/index.css` — btn-gold glow halo pseudo-element
+**Files modified (5)**:
+1. `src/pages/OurFocus.tsx` — overflow-x-clip, smoother opacity transitions, first-item visibility
+2. `src/pages/InvestmentCriteria.tsx` — same overflow + opacity fixes
+3. `src/components/SiteHeader.tsx` — gold active nav, scroll fade, progress pulse, investor login styling
+4. `src/components/SiteFooter.tsx` — wordmark hover
+5. `src/index.css` — card-hover-glow utility
 
