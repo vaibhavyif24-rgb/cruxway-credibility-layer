@@ -1,49 +1,48 @@
 
 
-## Replace CinematicBreaker + Market Thesis with OpportunityCinematic
+## Video Upgrade + Overlay Fix + Performance Attributes
 
-### What changes
-Delete `CinematicBreaker` component (lines 236-299). Create `OpportunityCinematic` in its place — a video-backed section header with the "The Opportunity" / "Our Thesis" heading overlaid on cinematic video. Then update the JSX to replace the breaker + full ScrollRevealText with the new component + a stats-only ScrollRevealText.
+**File**: `src/pages/Home.tsx` — `OpportunityCinematic` component (lines 260-279, 283-287)
 
-### File: `src/pages/Home.tsx`
+### 1. Replace video sources (lines 272-278)
 
-**1. Delete `CinematicBreaker` (lines 236-299), replace with `OpportunityCinematic`:**
-- `useScroll` + `useTransform` for parallax video (scale 1.08→1.15→1.08, y 0%→6%)
-- Text parallax: y 40→0, opacity 0→1 based on scroll
-- `<video autoPlay muted loop playsInline>` with poster fallback images
-- Deep navy overlay (not black): `hsl(228,55%,8%)` gradients at 70-92% opacity
-- SVG noise grain at 3% opacity for cinematic texture
-- Centered content: gold label with animated flanking lines, white heading with gold keyword highlights, gold ornament (lines + diamond)
-- Top/bottom gradient fades matching adjacent sections
-- Height: `clamp(50vh, 60vh, 70vh)`
-- India video: `3571264-uhd_2560_1440_30fps.mp4`, US: `3129671-uhd_2560_1440_30fps.mp4`
-- Poster images: existing Unsplash URLs for instant visual while video loads
-
-**2. Update JSX (lines 396-414):**
-
-Replace:
+**US region**: Manhattan evening skyline — cinematic, horizontal 2560x1440, slow pan across Midtown at dusk
 ```
-<CinematicBreaker ... />
-<ScrollRevealText label="The Opportunity" heading="India's lower middle market..." stats={...} variant="dark" />
+https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4
 ```
 
-With:
+**India region**: Drone aerial of modern high-rise cityscape — aspirational, horizontal 2562x1440, smooth aerial dolly
 ```
-<OpportunityCinematic isIndia={isIndia} isDark={isDark} />
-<ScrollRevealText
-  heading="Companies proven over decades..."  (secondary statement only)
-  highlights={['discipline'] / ['Patient']}
-  stats={...same stats...}
-  variant="dark"
-/>
+https://videos.pexels.com/video-files/4193140/4193140-uhd_2562_1440_24fps.mp4
 ```
 
-The primary hook heading moves into the video section. ScrollRevealText keeps only the secondary statement and stats, with no `label` prop.
+### 2. Update poster images (lines 267-270)
 
-### Design rationale
-- Video provides ambient motion and texture without distraction
-- Deep navy overlay (not black) maintains brand identity
-- Heading split: dramatic hook in video, evidence/stats in scroll section = narrative arc
-- Film grain adds analog warmth at imperceptible 3% opacity
-- Gold ornament is minimal (lines + tiny diamond) — institutional, not decorative
+Match poster images to the video content:
+- India: `https://images.pexels.com/videos/4193140/pexels-photo-4193140.jpeg?auto=compress&w=1200`
+- US: `https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200`
+
+### 3. Fix light-mode overlay (line 286)
+
+Change from:
+```
+hsl(228 45% 14% / 0.65) ... 0.82 ... 0.92
+```
+To:
+```
+hsl(228 45% 12% / 0.75) ... 0.88 ... 0.95
+```
+
+### 4. Add performance attributes to `<video>` (line 260-265)
+
+Add `fetchPriority="low"` and `loading="lazy"` to the `<video>` element (note: `loading="lazy"` is non-standard on video but harmless; the key optimization is `preload="metadata"` which is already there, plus `fetchPriority="low"`).
+
+### 5. Fix hooks error
+
+The "fewer hooks" error needs investigation — will also check if there's a conditional hook call anywhere in the render path. The `ScrollRevealText` component uses `useScroll` unconditionally so it should be fine. This error may have been transient from a hot-reload. Will ensure no conditional returns exist before hooks in the component.
+
+### Technical details
+- Single file edit: `src/pages/Home.tsx`, lines 260-287
+- All changes are within the `OpportunityCinematic` component
+- Video URLs are confirmed horizontal (landscape) format from Pexels with high engagement
 
