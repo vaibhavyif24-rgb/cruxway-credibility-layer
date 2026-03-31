@@ -233,66 +233,124 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
   );
 };
 
-/* ─── Cinematic Breaker ─── */
-const CinematicBreaker = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
+/* ─── Cinematic Thesis — Brand gradient with "The Opportunity" ─── */
+const CinematicThesis = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const vidY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-  const vidScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.12, 1.05]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.65, 0.35, 0.65]);
+  const isMobile = useIsMobile();
 
-  const videoSrc = isIndia
-    ? 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4'
-    : 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4';
+  const label = isIndia ? 'The Opportunity' : 'Our Thesis';
+  const heading = isIndia
+    ? 'India\u2019s lower middle market is one of the most under-served segments in global investing.'
+    : 'Tens of thousands of essential businesses keep America running.';
+  const subtext = isIndia
+    ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
+    : 'Patient capital and operational expertise unlock their next chapter of growth.';
+  const highlights = isIndia ? ['under-served'] : ['essential'];
+  const stats = isIndia
+    ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
+    : [{ value: '10M+', label: 'Small Businesses' }, { value: '$10T+', label: 'Transition Value' }, { value: '70%+', label: 'Lack Succession Plans' }];
+
+  const renderHeading = () => {
+    const words = heading.split(' ');
+    return words.map((word, i) => {
+      const isHighlight = highlights.some(h => word.toLowerCase().includes(h.toLowerCase()));
+      return (
+        <span key={i} className={isHighlight ? 'text-gold' : ''}>
+          {word}{i < words.length - 1 ? ' ' : ''}
+        </span>
+      );
+    });
+  };
 
   return (
-    <section ref={ref} className="relative h-[30vh] md:h-[40vh] overflow-hidden">
-      <motion.div
-        className="absolute inset-0"
-        style={{ y: vidY, scale: vidScale }}
-      >
-        <video
-          src={videoSrc}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
+    <section
+      ref={ref}
+      className="relative overflow-hidden min-h-[60vh] md:min-h-[70vh] flex items-center justify-center hero-gradient-animated"
+    >
+      {/* Subtle ambient effects */}
+      <DarkSectionEffects variant="hero" />
 
-      {/* Top gradient fade */}
-      <div className={`absolute top-0 left-0 right-0 h-1/3 z-10 ${
+      {/* Top gradient fade from previous section */}
+      <div className={`absolute top-0 left-0 right-0 h-24 md:h-32 z-10 ${
         isDark
           ? 'bg-gradient-to-b from-primary to-transparent'
           : 'bg-gradient-to-b from-background to-transparent'
       }`} />
 
-      {/* Bottom gradient fade */}
-      <div className={`absolute bottom-0 left-0 right-0 h-1/3 z-10 ${
+      {/* Bottom gradient fade to next section */}
+      <div className={`absolute bottom-0 left-0 right-0 h-24 md:h-32 z-10 ${
         isDark
           ? 'bg-gradient-to-t from-primary to-transparent'
-          : 'bg-gradient-to-t from-[hsl(40,22%,91%)] to-transparent'
+          : 'bg-gradient-to-t from-background to-transparent'
       }`} />
 
-      {/* Dark overlay — scroll-linked */}
-      <motion.div
-        className="absolute inset-0 bg-black z-[5]"
-        style={{ opacity: overlayOpacity }}
-      />
+      {/* Content */}
+      <div className="relative z-20 max-w-[680px] mx-auto px-6 md:px-10 text-center">
+        {/* Label with flanking lines */}
+        <FadeIn delay={0}>
+          <div className="flex items-center justify-center gap-3 mb-6 md:mb-8">
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: isMobile ? 20 : 32 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="h-px bg-gold/40"
+            />
+            <span className="font-sans text-[9.5px] md:text-[10px] font-medium uppercase tracking-[0.3em] text-gold whitespace-nowrap">
+              {label}
+            </span>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: isMobile ? 20 : 32 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="h-px bg-gold/40"
+            />
+          </div>
+        </FadeIn>
 
-      {/* Minimal separator — thin gold rule */}
-      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <motion.div
-          initial={{ width: 0, opacity: 0 }}
-          whileInView={{ width: 60, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="h-px bg-gold/30"
-        />
+        {/* Heading */}
+        <FadeIn delay={0.08}>
+          <h2 className="font-serif text-primary-foreground text-[clamp(1.4rem,3.8vw,2.4rem)] leading-[1.2] mb-4 md:mb-5">
+            {renderHeading()}
+          </h2>
+        </FadeIn>
+
+        {/* Subtext */}
+        <FadeIn delay={0.14}>
+          <p className="font-sans text-primary-foreground/60 text-[13px] md:text-[14.5px] leading-relaxed max-w-[520px] mx-auto mb-8 md:mb-10">
+            {subtext}
+          </p>
+        </FadeIn>
+
+        {/* Gold rule */}
+        <FadeIn delay={0.18}>
+          <div className="flex justify-center mb-8 md:mb-10">
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: 48 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="h-px bg-gold/30"
+            />
+          </div>
+        </FadeIn>
+
+        {/* Stats */}
+        <FadeIn delay={0.24}>
+          <div className="grid grid-cols-3 gap-4 md:gap-8">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <p className="font-serif text-gold text-[clamp(1.3rem,3vw,2rem)] leading-none mb-1.5">
+                  {stat.value}
+                </p>
+                <p className="font-sans text-primary-foreground/50 text-[9px] md:text-[10px] uppercase tracking-[0.18em]">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
