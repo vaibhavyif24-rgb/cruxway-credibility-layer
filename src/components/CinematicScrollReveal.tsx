@@ -259,7 +259,7 @@ const CinematicScrollReveal = () => {
             transform: 'translateX(-50%)',
             width: '90%',
             maxWidth: '820px',
-            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : imageProgress > 0.3 ? '0 2px 12px rgba(255,255,255,0.3)' : 'none',
+            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : imageProgress > 0.3 ? '0 1px 10px rgba(40,30,10,0.12)' : 'none',
           }}
         >
           Building enduring platforms across India's{' '}
