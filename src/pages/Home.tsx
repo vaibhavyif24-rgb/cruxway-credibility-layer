@@ -111,7 +111,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
   return (
     <div ref={sectionRef} className="w-full">
       {/* Step headings */}
-      <div className="flex border-b border-gold/10">
+      <div className="flex overflow-x-auto scrollbar-hide border-b border-gold/10 -mx-2 px-2 md:mx-0 md:px-0">
         {steps.map((step, i) => (
           <button
             key={i}
