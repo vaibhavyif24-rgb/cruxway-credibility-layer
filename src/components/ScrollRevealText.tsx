@@ -96,7 +96,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
         {stats && stats.length > 0 && (
           <div className={`mt-8 md:mt-12 pt-8 md:pt-10 w-full max-w-[680px] ${
-            isActuallyDark ? 'border-t border-gold/20' : 'border-t border-gold/25'
+            isActuallyDark ? 'border-t border-gold/35' : 'border-t border-gold/40'
           }`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
               {stats.map((stat, i) => (
