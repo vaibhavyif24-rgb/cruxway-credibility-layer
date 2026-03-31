@@ -219,10 +219,13 @@ const ICDesktopCriterionItem = ({ item, index, totalItems, isDark, scrollProgres
   itemEnd: number;
   itemCenter: number;
 }) => {
-  const opacity = useTransform(scrollProgress,
-    [itemStart, itemCenter - 0.03, itemCenter, itemCenter + 0.03, itemEnd],
-    [0, 0.4, 1, 0.4, 0]
+  const rawOpacity = useTransform(scrollProgress,
+    [itemStart, itemCenter - 0.06, itemCenter, itemCenter + 0.06, itemEnd],
+    [0, 0.6, 1, 0.6, 0]
   );
+  const opacity = index === 0
+    ? useTransform(scrollProgress, [0, 0.02, itemCenter, itemCenter + 0.06, itemEnd], [0.8, 1, 1, 0.6, 0])
+    : rawOpacity;
   const scale = useTransform(scrollProgress, [itemStart, itemCenter, itemEnd], [0.92, 1, 0.92]);
   const y = useTransform(scrollProgress, [itemStart, itemCenter, itemEnd], [40, 0, -40]);
   const numberScale = useTransform(scrollProgress, [itemStart, itemCenter, itemEnd], [0.7, 1, 0.7]);

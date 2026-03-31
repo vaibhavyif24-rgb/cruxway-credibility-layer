@@ -310,10 +310,10 @@ const SiteHeader = () => {
                   >
                     <Link
                       to={item.path}
-                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-all duration-200 active:scale-95 active:text-gold/85 ${
+                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-all duration-200 active:scale-95 ${
                         isActive(item.path)
-                          ? isDark ? 'text-primary-foreground' : 'text-foreground'
-                          : isDark ? 'text-primary-foreground/25' : 'text-muted-foreground'
+                          ? 'text-gold font-medium'
+                          : isDark ? 'text-primary-foreground/25' : 'text-foreground/25'
                       }`}
                     >
                       {item.label}
