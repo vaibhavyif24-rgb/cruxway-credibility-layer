@@ -1,59 +1,55 @@
 
 
-## Surgical Visual Polish — PrinciplesGrid, ScrollRevealText, OurFocus, Animations
+## CriteriaScrollZoom + Principles Enhancement — Implementation Plan
 
-### Section 1: Fix PrinciplesGrid Desktop Alignment (Critical Bug)
-**File**: `src/components/PrinciplesGrid.tsx`
-
-**Root cause**: Lines 107 and 118 use `inline-block` on both `<h3>` and `<p>`, causing them to flow horizontally instead of stacking vertically.
-
-**Fix**: Replace the desktop return block (lines 72-124) with a `flex flex-col` wrapper that forces vertical stacking. The underline becomes a separate `<div>` below `<h3>` instead of an absolute `<span>` inside it. Add `ml-auto` for right-aligned underlines.
-
-**Mobile fix** (lines 38-68): Reduce `pl-14` → `pl-12`, number `3rem` → `2.5rem`, add gold underline `w-8 h-[1.5px] bg-gold/40` below title, timeline dot position `1.5rem` → `1.25rem`.
-
-### Section 2: Enhance Principles Scroll Effect
-**File**: `src/components/PrinciplesGrid.tsx`
-
-- Tighten scroll offset: `['start 0.85', 'center center', 'end 0.15']` → `['start 0.75', 'center 0.45', 'end 0.25']`
-- Add `itemScale` transform: `[0, 0.45, 1] → [0.97, 1, 0.97]`
-- Add `numberY` parallax: `[0, 1] → [-8, 8]`
-- Dot glow: `inset-[-4px] bg-gold/25 blur-sm` → `inset-[-6px] bg-gold/35 blur-md`, scale `[1, 1.4, 1]`
-- Add one-time slide-in: `initial={{ x: isLeft ? -30 : 30 }}` + `whileInView={{ x: 0 }}`
-- Timeline line: `bg-gold/20` → `bg-gold/15`, shimmer uses `hsl(var(--gold) / 0.25)`, backgroundSize `300%`, duration `5s`
-
-### Section 3: PrinciplesGrid Items Layout
-Replace `space-y-8 md:space-y-12` with `space-y-0` and add faint gold separators (`h-px bg-gold/10`) between items with `py-4 md:py-6` spacing.
-
-### Section 4: OurFocus CriterionRow Scroll Effect
+### Section 1: Create CriteriaScrollZoom for OurFocus.tsx
 **File**: `src/pages/OurFocus.tsx`
 
-- Line 268: Tighten offset → `['start 0.75', 'center 0.45', 'end 0.25']`
-- Add `itemScale` transform `[0, 0.45, 1] → [0.98, 1, 0.98]`
-- Apply `scale: itemScale` to outer `motion.div` (line 278-279)
+- Delete `CriterionRow` component (lines 262-326)
+- Replace "What We Look For" section (lines 143-160) with new sticky scroll-zoom section
+- Add three new components above the default export:
+  - `CriteriaScrollZoom` — container with tall scroll area (desktop) or stacked cards (mobile)
+  - `DesktopCriterionItem` — absolute-positioned card with scroll-linked opacity/scale/y/numberScale/underlineWidth + progress bar + numberGlow textShadow
+  - `MobileCriterionCard` — simple card with scroll-linked scale/opacity and `whileTap`
+- Add `useIsMobile` import
+- Desktop: `height: ${totalItems * 100}vh`, sticky viewport, items fade/zoom one at a time
+- Progress bar with 6 segments, active one gets gold glow shadow
+- Bottom counter with scroll-linked fill bar
+- Gradient transitions (h-12) at top/bottom of scroll zone
 
-### Section 5: ScrollRevealText Enhancements
-**File**: `src/components/ScrollRevealText.tsx`
+### Section 2: Apply Same to InvestmentCriteria.tsx
+**File**: `src/pages/InvestmentCriteria.tsx`
 
-- Line 54: Contrast-light bg → `bg-[hsl(40,22%,91%)]`
-- Add animated gold border lines for `isContrastLight` variant (top + bottom `h-px` gradient lines with `scaleX` entrance)
-- Line 98-99: Stats border `border-gold/35` / `border-gold/40`
-- Line 168: Stat value → `text-[clamp(1.8rem,4vw,2.8rem)]` + `font-semibold` (already done — verify)
-- Add gold underline below stat values: `<motion.div>` with `initial={{ width: 0 }}` → `whileInView={{ width: 24 }}`
+- Replace lines 254-281 (StickyCardStack usage) with same CriteriaScrollZoom pattern
+- Copy the three components into this file (CriteriaScrollZoom, DesktopCriterionItem, MobileCriterionCard)
+- Note: `whatWeLookFor` in this file lacks `num` field — need to generate it: `String(i+1).padStart(2,'0')`
+- Remove `StickyCardStack` import if no longer used elsewhere in this file
 
-### Section 6: Mobile Responsiveness
-- **PrinciplesGrid**: `pl-14` → `pl-12`, timeline `left-[1.25rem]`
-- **CTA buttons**: All `px-8` → `px-6 md:px-8` across Home, OurFocus, InvestmentCriteria, OurPlaybook, GuidingPrinciples, About
-- **ScrollRevealText heading**: Add `break-words` class
+### Section 3: Enhance PrinciplesGrid Scroll Effect
+**File**: `src/components/PrinciplesGrid.tsx`
 
-### Section 7: Number Size Increase
-Desktop principle numbers: `text-[3rem] md:text-[3.5rem]` → `text-[3.5rem] md:text-[4rem]`
+- Line 30: Change glowOpacity from `[0.3, 0.85, 1, 0.85, 0.3]` → `[0.15, 0.7, 1, 0.7, 0.15]` for more dramatic contrast
+- Add desktop-only blur: `const itemBlur = useTransform(...)` with values `[2, 0.5, 0, 0.5, 2]`
+- Apply blur via `filter: useTransform(itemBlur, v => \`blur(\${v}px)\`)` on the desktop `motion.div` style prop
+- Skip blur transform entirely on mobile (already handled by early return)
+- Line 92-97: Replace single glow div with double-ring (outer ring `border border-gold/20 inset-[-8px]` + inner glow `bg-gold/30 blur-md inset-[-5px]` with scale `[1, 1.3, 1]` at 2.5s)
+- Line 51: Mobile number size `text-[2.5rem]` → `text-[2rem]`
+- Line 159: Fix hardcoded gold `hsl(40,65%,44%,0.25)` → `hsl(43,78%,50%,0.25)`
+
+### Section 4: btn-gold Hover Glow Enhancement
+**File**: `src/index.css`
+
+- Update `.btn-gold` (lines 309-330) to add `position: relative` and a `::before` pseudo-element for the glow halo effect
+- Add `transition: all 0.4s` (was 0.3s)
+
+### Section 5: Mobile Dot Indicator
+- Add simple dot indicator below mobile cards in CriteriaScrollZoom
+- Ensure `min-h-[140px]` wrapper on mobile cards to prevent layout shift
 
 ### Technical Details
 **Files modified (4)**:
-1. `src/components/PrinciplesGrid.tsx` — alignment fix, scroll enhancements, animations, separators, mobile fixes
-2. `src/components/ScrollRevealText.tsx` — contrast-light borders, stat underlines, break-words
-3. `src/pages/OurFocus.tsx` — CriterionRow scroll tightening + scale
-4. `src/pages/Home.tsx`, `src/pages/About.tsx`, `src/pages/OurPlaybook.tsx`, `src/pages/InvestmentCriteria.tsx`, `src/pages/GuidingPrinciples.tsx`, `src/pages/OurFocus.tsx` — CTA button responsive padding
-
-All changes are visual: layout fixes, animations, opacities. No structural changes.
+1. `src/pages/OurFocus.tsx` — new CriteriaScrollZoom replacing CriterionRow
+2. `src/pages/InvestmentCriteria.tsx` — same CriteriaScrollZoom replacing StickyCardStack
+3. `src/components/PrinciplesGrid.tsx` — dramatic glow contrast, blur, double-ring dot, mobile number size fix
+4. `src/index.css` — btn-gold glow halo pseudo-element
 
