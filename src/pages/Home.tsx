@@ -240,22 +240,26 @@ const CinematicBreaker = ({ isIndia, isDark }: { isIndia: boolean; isDark: boole
     target: ref,
     offset: ['start end', 'end start'],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.12, 1.05]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 0.4, 0.9]);
+  const vidY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+  const vidScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.12, 1.05]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.65, 0.35, 0.65]);
+
+  const videoSrc = isIndia
+    ? 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4'
+    : 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4';
 
   return (
     <section ref={ref} className="relative h-[30vh] md:h-[40vh] overflow-hidden">
       <motion.div
         className="absolute inset-0"
-        style={{ y: imgY, scale: imgScale }}
+        style={{ y: vidY, scale: vidScale }}
       >
-        <img
-          src={isIndia
-            ? 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=1920&q=80'
-            : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80'
-          }
-          alt={isIndia ? 'Indian industrial infrastructure' : 'American corporate skyline'}
+        <video
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
           className="w-full h-full object-cover"
         />
       </motion.div>
@@ -279,39 +283,16 @@ const CinematicBreaker = ({ isIndia, isDark }: { isIndia: boolean; isDark: boole
         className="absolute inset-0 bg-black z-[5]"
         style={{ opacity: overlayOpacity }}
       />
-      {!isDark && (
-        <div className="absolute inset-0 bg-white/10 backdrop-blur-[0.5px] z-[6]" />
-      )}
 
-      {/* Centered gold ornament */}
+      {/* Minimal separator — thin gold rule */}
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ width: 0, opacity: 0 }}
+          whileInView={{ width: 60, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex items-center gap-3"
-        >
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: 40 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-px bg-gold/40"
-          />
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-            className="w-3 h-3 border border-gold/50 rotate-45"
-          />
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: 40 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="h-px bg-gold/40"
-          />
-        </motion.div>
+          className="h-px bg-gold/30"
+        />
       </div>
     </section>
   );
