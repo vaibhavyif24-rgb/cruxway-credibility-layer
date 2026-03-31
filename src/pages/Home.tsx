@@ -263,7 +263,8 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
           loop
           playsInline
           preload="metadata"
-          fetchPriority="low"
+          // @ts-ignore — fetchpriority is valid HTML but not in React's type defs yet
+          fetchpriority="low"
           className="w-full h-full object-cover"
           poster={isIndia
             ? 'https://images.pexels.com/videos/4193140/pexels-photo-4193140.jpeg?auto=compress&w=1200'
