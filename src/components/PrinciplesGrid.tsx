@@ -90,11 +90,17 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
           style={{ scale: dotScale }}
           className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background transition-colors duration-500"
         />
+        {/* Outer ring */}
+        <motion.div
+          style={{ opacity: dotGlowOpacity, scale: dotScale }}
+          className="absolute inset-[-8px] rounded-full border border-gold/20"
+        />
+        {/* Inner glow */}
         <motion.div
           style={{ opacity: dotGlowOpacity }}
-          animate={{ scale: [1, 1.4, 1] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute inset-[-6px] rounded-full bg-gold/35 blur-md"
+          animate={{ scale: [1, 1.3, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="absolute inset-[-5px] rounded-full bg-gold/30 blur-md"
         />
       </div>
 
