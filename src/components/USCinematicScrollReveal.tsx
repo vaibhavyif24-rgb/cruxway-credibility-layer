@@ -27,7 +27,7 @@ const usSectors = {
 };
 
 const DARK_OVERLAY = 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%)';
-const LIGHT_OVERLAY = 'linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(248,245,240,0.75) 25%, rgba(248,245,240,0.88) 50%, rgba(248,245,240,0.94) 75%, rgba(248,245,240,0.97) 100%)';
+const LIGHT_OVERLAY = 'linear-gradient(to bottom, rgba(248,245,240,0.75) 0%, rgba(248,245,240,0.85) 20%, rgba(248,245,240,0.94) 50%, rgba(248,245,240,0.97) 75%, rgba(248,245,240,0.99) 100%)';
 
 const SectorColumn = ({ heading, items, side, isMobile, isDark }: { heading: string; items: { name: string; desc: string }[]; side: 'left' | 'right'; isMobile: boolean; isDark: boolean }) => (
   <div className={isMobile ? '' : side === 'left' ? 'pr-12' : 'pl-12'}>
@@ -37,7 +37,7 @@ const SectorColumn = ({ heading, items, side, isMobile, isDark }: { heading: str
         color: isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
         fontSize: isMobile ? '1.5rem' : '2rem',
         marginBottom: isMobile ? '0.75rem' : '1rem',
-        textShadow: isDark ? '0 2px 12px rgba(0,0,0,0.7)' : 'none',
+        textShadow: isDark ? '0 2px 12px rgba(0,0,0,0.7)' : '0 1px 4px rgba(0,0,0,0.06)',
       }}
     >
       {heading}
@@ -48,7 +48,7 @@ const SectorColumn = ({ heading, items, side, isMobile, isDark }: { heading: str
           <span
             className="flex-shrink-0 rotate-45"
             style={{
-              background: 'hsl(38, 55%, 62%, 0.7)',
+              background: 'hsl(40, 65%, 44%, 0.7)',
               width: isMobile ? '7px' : '9px',
               height: isMobile ? '7px' : '9px',
               marginTop: isMobile ? '5px' : '8px',
@@ -110,7 +110,7 @@ const MobileWord = ({ word, range, progress, isGold, isDark }: { word: string; r
     <motion.span
       style={{
         opacity,
-        color: isGold ? 'hsl(38, 55%, 62%)' : isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
+        color: isGold ? 'hsl(40, 65%, 44%)' : isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
         textShadow: isDark ? '0 4px 32px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.7)' : 'none',
         fontWeight: 500,
       }}
@@ -187,8 +187,8 @@ const USCinematicScrollReveal = () => {
           </div>
           <div className="relative" style={{ zIndex: 1 }}>
             <div className="text-center mb-8">
-              <span className="font-sans font-semibold uppercase" style={{ color: 'hsl(38, 55%, 62%)', fontSize: '12px', letterSpacing: '0.28em' }}>Sectors We Look At</span>
-              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+              <span className="font-sans font-semibold uppercase" style={{ color: 'hsl(40, 65%, 44%)', fontSize: '12px', letterSpacing: '0.28em' }}>Sectors We Look At</span>
+              <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(40, 65%, 44%)' }} />
             </div>
             <div className="space-y-10">
               <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={true} isDark={isDark} />
@@ -259,11 +259,11 @@ const USCinematicScrollReveal = () => {
             transform: 'translateX(-50%)',
             width: '90%',
             maxWidth: '800px',
-            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : imageProgress > 0.3 ? '0 2px 12px rgba(255,255,255,0.3)' : 'none',
+            textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : imageProgress > 0.3 ? '0 1px 10px rgba(40,30,10,0.12)' : 'none',
           }}
         >
           Where America's essential industries find their{' '}
-          <span style={{ color: 'hsl(38, 55%, 62%)' }}>permanent partner.</span>
+          <span style={{ color: 'hsl(40, 65%, 44%)' }}>permanent partner.</span>
         </h2>
 
         <div
@@ -282,20 +282,20 @@ const USCinematicScrollReveal = () => {
           <div className="text-center mb-10">
             <span
               className="font-sans font-semibold uppercase"
-              style={{ color: 'hsl(38, 55%, 62%)', fontSize: '14px', letterSpacing: '0.28em' }}
+              style={{ color: 'hsl(40, 65%, 44%)', fontSize: '14px', letterSpacing: '0.28em' }}
             >
               Sectors We Look At
             </span>
-            <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(38, 55%, 62%)' }} />
+            <div className="mx-auto mt-2.5 w-12 h-[1.5px]" style={{ background: 'hsl(40, 65%, 44%)' }} />
           </div>
           <div className="grid grid-cols-2 gap-8 relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: isDark ? 'hsl(38,55%,62%,0.2)' : 'hsl(38,48%,52%,0.15)' }} />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px" style={{ background: isDark ? 'hsl(40,65%,44%,0.2)' : 'hsl(40,65%,44%,0.15)' }} />
             <SectorColumn heading={usSectors.left.heading} items={usSectors.left.items} side="left" isMobile={false} isDark={isDark} />
             <SectorColumn heading={usSectors.right.heading} items={usSectors.right.items} side="right" isMobile={false} isDark={isDark} />
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(38,48%,52%,0.15), transparent)' }} />
+      <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(40,65%,44%,0.15), transparent)' }} />
     </section>
   );
 };

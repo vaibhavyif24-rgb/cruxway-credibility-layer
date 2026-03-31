@@ -14,7 +14,7 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
   const parallaxY = useTransform(scrollY, [0, 500], [0, -60]);
 
   const lineStyle = {
-    stroke: 'hsl(38 45% 55%)',
+    stroke: 'hsl(40 60% 48%)',
     strokeWidth: 0.3,
     fill: 'none',
     opacity: 0.25,
@@ -94,14 +94,14 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
           {...draw(1.2, 0.6)}
           style={{ ...lineStyle, strokeWidth: 0.25, opacity: 0.18 }}
         />
-        <motion.circle cx="250" cy="480" r="1.5" fill="hsl(38 45% 55%)" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.8 }} />
-        <motion.circle cx="950" cy="480" r="1.5" fill="hsl(38 45% 55%)" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.9 }} />
+        <motion.circle cx="250" cy="480" r="1.5" fill="hsl(40 60% 48%)" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.8 }} />
+        <motion.circle cx="950" cy="480" r="1.5" fill="hsl(40 60% 48%)" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.9 }} />
       </svg>
 
       {/* Ambient gold glow */}
       <motion.div
         className="absolute bottom-[15%] left-1/2 -translate-x-1/2 w-[400px] h-[250px] rounded-full z-[2]"
-        style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.04), transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, hsl(40 60% 48% / 0.04), transparent 70%)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.7, 0.4] }}
         transition={{ duration: 3, delay: 1.5, ease: 'easeOut' }}
@@ -122,7 +122,7 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
       {/* Soft horizontal shimmer */}
       <motion.div
         className="absolute top-[40%] left-0 right-0 h-px z-[2]"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(38 45% 55% / 0.06), transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, hsl(40 60% 48% / 0.06), transparent)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.5, 0] }}
         transition={{ duration: 6, delay: 3, repeat: Infinity, ease: 'easeInOut' }}

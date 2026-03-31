@@ -84,8 +84,8 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
 
     const titleColor = isDark ? '#F8F6F2' : 'hsl(228, 58%, 18%)';
     const descColor = isDark ? 'rgba(248,246,242,0.7)' : 'hsl(228, 8%, 38%)';
-    const indexColor = isDark ? 'hsl(38, 45%, 55%, 0.5)' : 'hsl(38, 48%, 42%, 0.6)';
-    const borderColor = isDark ? 'hsl(38, 45%, 55%, 0.06)' : 'hsl(38, 30%, 60%, 0.12)';
+    const indexColor = isDark ? 'hsl(40, 60%, 48%, 0.5)' : 'hsl(40, 65%, 38%, 0.6)';
+    const borderColor = isDark ? 'hsl(40, 60%, 48%, 0.06)' : 'hsl(40, 40%, 50%, 0.12)';
 
     const shadowActive = isDark
       ? '0 -6px 30px -4px rgba(0,0,0,0.25), 0 20px 50px -10px rgba(0,0,0,0.22)'
@@ -124,14 +124,14 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
               className="absolute w-[140%] h-[140%] top-1/2 left-1/2"
               style={{
                 transform: 'translate(-50%, -50%)',
-                background: `radial-gradient(ellipse at center, hsl(38, 45%, 55%, ${0.08 * fxOpacity}) 0%, transparent 60%)`,
+                background: `radial-gradient(ellipse at center, hsl(40, 60%, 48%, ${0.08 * fxOpacity}) 0%, transparent 60%)`,
                 animation: 'celestial-rotate 20s linear infinite',
               }}
             />
             <div
               className="absolute inset-0"
               style={{
-                background: `radial-gradient(circle at 40% 45%, hsl(207, 50%, 30%, ${0.15 * fxOpacity}) 0%, transparent 50%), radial-gradient(circle at 65% 60%, hsl(38, 48%, 52%, ${0.1 * fxOpacity}) 0%, transparent 45%)`,
+                background: `radial-gradient(circle at 40% 45%, hsl(207, 50%, 30%, ${0.15 * fxOpacity}) 0%, transparent 50%), radial-gradient(circle at 65% 60%, hsl(40, 65%, 44%, ${0.1 * fxOpacity}) 0%, transparent 45%)`,
                 animation: 'nebula-pulse 6s ease-in-out infinite',
               }}
             />
@@ -148,7 +148,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
                   left: p.left,
                   width: p.size,
                   height: p.size,
-                  background: 'hsl(38, 45%, 55%)',
+                  background: 'hsl(40, 60%, 48%)',
                   animationDelay: p.delay,
                   opacity: 0.5 * fxOpacity,
                 }}
@@ -157,7 +157,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
             <div
               className="absolute top-1/2 left-0 w-full h-px shimmer-effect"
               style={{
-                background: `linear-gradient(90deg, transparent, hsl(38, 45%, 55%, ${0.15 * fxOpacity}), transparent)`,
+                background: `linear-gradient(90deg, transparent, hsl(40, 60%, 48%, ${0.15 * fxOpacity}), transparent)`,
                 animationDuration: '6s',
               }}
             />
@@ -180,8 +180,8 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
             style={{
               opacity: isActive ? 1 : 0,
               boxShadow: isDark
-                ? 'inset 0 0 60px -20px hsl(38, 45%, 55%, 0.06)'
-                : 'inset 0 0 40px -15px hsl(38, 45%, 55%, 0.04)',
+                ? 'inset 0 0 60px -20px hsl(40, 60%, 48%, 0.06)'
+                : 'inset 0 0 40px -15px hsl(40, 60%, 48%, 0.04)',
             }}
           />
 

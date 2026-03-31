@@ -7,7 +7,7 @@ import heroImage from '@/assets/hero-crossroads-road.webp';
  */
 const GeometricHero = () => {
   const lineStyle = {
-    stroke: 'hsl(38 45% 55%)',
+    stroke: 'hsl(40 60% 48%)',
     strokeWidth: 0.5,
     fill: 'none',
   };
@@ -83,16 +83,16 @@ const GeometricHero = () => {
         <motion.line x1="1160" y1="760" x2="1080" y2="760" {...draw(0.5, 0.8)} style={{ ...lineStyle, strokeWidth: 0.3, opacity: 0.2 }} />
         <motion.line x1="1160" y1="760" x2="1160" y2="680" {...draw(0.6, 0.8)} style={{ ...lineStyle, strokeWidth: 0.3, opacity: 0.2 }} />
 
-        <motion.circle cx="300" cy="450" r="2" fill="hsl(38 45% 55%)" {...pulse(2.0)} />
-        <motion.circle cx="900" cy="450" r="2" fill="hsl(38 45% 55%)" {...pulse(2.1)} />
-        <motion.circle cx="250" cy="350" r="1.5" fill="hsl(38 45% 55%)" {...pulse(2.2)} />
-        <motion.circle cx="950" cy="350" r="1.5" fill="hsl(38 45% 55%)" {...pulse(2.3)} />
+        <motion.circle cx="300" cy="450" r="2" fill="hsl(40 60% 48%)" {...pulse(2.0)} />
+        <motion.circle cx="900" cy="450" r="2" fill="hsl(40 60% 48%)" {...pulse(2.1)} />
+        <motion.circle cx="250" cy="350" r="1.5" fill="hsl(40 60% 48%)" {...pulse(2.2)} />
+        <motion.circle cx="950" cy="350" r="1.5" fill="hsl(40 60% 48%)" {...pulse(2.3)} />
       </svg>
 
       {/* Ambient glow */}
       <motion.div
         className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full z-[2]"
-        style={{ background: 'radial-gradient(circle, hsl(38 45% 55% / 0.05), transparent 70%)' }}
+        style={{ background: 'radial-gradient(circle, hsl(40 60% 48% / 0.05), transparent 70%)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 0.8, 0.5] }}
         transition={{ duration: 3, delay: 1.5, ease: 'easeOut' }}

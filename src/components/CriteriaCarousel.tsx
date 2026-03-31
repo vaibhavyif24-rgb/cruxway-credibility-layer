@@ -108,7 +108,7 @@ const CriteriaCarousel: React.FC<CriteriaCarouselProps> = ({ items }) => {
                 width: i === activeIndex ? '20px' : '6px',
                 height: '6px',
                 backgroundColor: i === activeIndex
-                  ? 'hsl(38 48% 52%)'
+                  ? 'hsl(40 65% 44%)'
                   : 'hsl(var(--muted-foreground) / 0.2)',
                 borderRadius: '3px',
               }}

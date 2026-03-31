@@ -71,7 +71,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
             className={`font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] mb-5 md:mb-7 ${
-              isActuallyDark ? 'text-gold/50' : 'text-gold/50'
+              isActuallyDark ? 'text-gold/60' : 'text-gold/60'
             }`}
           >
             {label}
@@ -131,7 +131,7 @@ const Word = ({
     <motion.span
       style={{
         opacity,
-        textShadow: isHighlighted && !isDark ? '0 0 40px hsl(38, 48%, 52%, 0.15)' : undefined,
+        textShadow: isHighlighted && !isDark ? '0 0 40px hsl(40, 65%, 44%, 0.2)' : undefined,
       }}
       className={`inline-block mr-[0.3em] ${
         isHighlighted
