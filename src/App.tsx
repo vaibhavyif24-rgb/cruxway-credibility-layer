@@ -18,11 +18,7 @@ const RegionLayout = lazy(() => import("./components/RegionLayout"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const PageLoader = () => (
-  <div className="min-h-[100dvh] flex items-center justify-center bg-background">
-    <p className="font-serif text-xl tracking-[-0.02em] text-gold/40 animate-pulse">
-      Cruxway
-    </p>
-  </div>
+  <div className="min-h-[100dvh] bg-background" />
 );
 
 const AppRoutes = () => {
