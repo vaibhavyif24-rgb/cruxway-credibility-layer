@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'; // v1
+import { motion } from 'framer-motion';
 import React, { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -91,8 +91,7 @@ export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
         initial={{ opacity: 0, scale: 0 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        animate={{ scale: [1, 1.15, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 0.4, delay: 0.3 }}
         whileHover={{ rotate: 180, scale: 1.4 }}
         className="w-1.5 h-1.5 rotate-45 border border-gold/35"
       />

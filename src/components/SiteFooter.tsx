@@ -23,13 +23,13 @@ const SiteFooter = () => {
   ];
 
   return (
-    <footer className={`relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-primary' : 'bg-[hsl(40,12%,91%)]'}`}>
+    <footer className={`relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-primary' : 'bg-[hsl(40,15%,94%)]'}`}>
       {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
 
       {/* Top shimmer line */}
       <div className="absolute top-0 left-0 right-0 h-px z-10" style={{ background: 'linear-gradient(90deg, transparent, hsl(40,65%,44%,0.12), transparent)' }} />
 
-      <div className={`h-px ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/15'}`} />
+      <div className={`h-px ${isDark ? 'bg-primary-foreground/[0.04]' : 'bg-border/30'}`} />
 
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-12 relative z-10">
         <FadeIn>
@@ -57,8 +57,8 @@ const SiteFooter = () => {
                     to={item.path}
                     className={`group relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
                       isDark
-                        ? 'text-primary-foreground/30 hover:text-primary-foreground/60'
-                        : 'text-foreground/55 hover:text-foreground/80'
+                        ? 'text-primary-foreground/25 hover:text-primary-foreground/50'
+                        : 'text-foreground/45 hover:text-foreground/70'
                     }`}
                   >
                     {item.label}
@@ -70,11 +70,11 @@ const SiteFooter = () => {
           </div>
         </FadeIn>
 
-        <div className={`h-px mb-4 ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/15'}`} />
+        <div className={`h-px mb-4 ${isDark ? 'bg-primary-foreground/[0.04]' : 'bg-border/30'}`} />
 
         <FadeIn delay={0.08}>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1.5">
-            <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/20' : 'text-foreground/45'}`}>
+            <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/15' : 'text-foreground/35'}`}>
               &copy; {year} Cruxway LLC. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
@@ -83,14 +83,14 @@ const SiteFooter = () => {
                 onClick={() => setRegion(otherRegion)}
                 className={`font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
                   isDark
-                    ? 'text-primary-foreground/30 hover:text-primary-foreground/60'
-                    : 'text-foreground/55 hover:text-foreground/80'
+                    ? 'text-primary-foreground/25 hover:text-primary-foreground/50'
+                    : 'text-foreground/45 hover:text-foreground/70'
                 }`}
               >
                 Switch to {otherRegion === 'india' ? 'India' : 'United States'}
               </Link>
-              <span className={`w-px h-2.5 ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/15'}`} />
-              <p className={`font-sans text-[8px] tracking-[0.12em] uppercase ${isDark ? 'text-primary-foreground/10' : 'text-foreground/35'}`}>
+              <span className={`w-px h-2.5 ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-border/30'}`} />
+              <p className={`font-sans text-[8px] tracking-[0.12em] uppercase ${isDark ? 'text-primary-foreground/[0.08]' : 'text-foreground/25'}`}>
                 Privileged &amp; Confidential
               </p>
             </div>
