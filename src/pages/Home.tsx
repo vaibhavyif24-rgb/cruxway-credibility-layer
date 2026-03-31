@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import LogoMarquee from '@/components/LogoMarquee';
@@ -233,6 +233,90 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
   );
 };
 
+/* ─── Cinematic Breaker ─── */
+const CinematicBreaker = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  const imgY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+  const imgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.12, 1.05]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 0.4, 0.9]);
+
+  return (
+    <section ref={ref} className="relative h-[30vh] md:h-[40vh] overflow-hidden">
+      <motion.div
+        className="absolute inset-0"
+        style={{ y: imgY, scale: imgScale }}
+      >
+        <img
+          src={isIndia
+            ? 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?auto=format&fit=crop&w=1920&q=80'
+            : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80'
+          }
+          alt={isIndia ? 'Indian industrial infrastructure' : 'American corporate skyline'}
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+
+      {/* Top gradient fade */}
+      <div className={`absolute top-0 left-0 right-0 h-1/3 z-10 ${
+        isDark
+          ? 'bg-gradient-to-b from-primary to-transparent'
+          : 'bg-gradient-to-b from-background to-transparent'
+      }`} />
+
+      {/* Bottom gradient fade */}
+      <div className={`absolute bottom-0 left-0 right-0 h-1/3 z-10 ${
+        isDark
+          ? 'bg-gradient-to-t from-primary to-transparent'
+          : 'bg-gradient-to-t from-[hsl(40,22%,91%)] to-transparent'
+      }`} />
+
+      {/* Dark overlay — scroll-linked */}
+      <motion.div
+        className="absolute inset-0 bg-black z-[5]"
+        style={{ opacity: overlayOpacity }}
+      />
+      {!isDark && (
+        <div className="absolute inset-0 bg-white/10 backdrop-blur-[0.5px] z-[6]" />
+      )}
+
+      {/* Centered gold ornament */}
+      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="flex items-center gap-3"
+        >
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 40 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="h-px bg-gold/40"
+          />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className="w-3 h-3 border border-gold/50 rotate-45"
+          />
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 40 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="h-px bg-gold/40"
+          />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const Home = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
@@ -328,6 +412,9 @@ const Home = () => {
         variant="light"
       />
 
+      {/* Cinematic breaker — visual separation */}
+      <CinematicBreaker isIndia={isIndia} isDark={isDark} />
+
       {/* Market Thesis */}
       <ScrollRevealText
         label={isIndia ? 'The Opportunity' : 'Our Thesis'}
@@ -360,15 +447,20 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Social Proof */}
-      <ScrollRevealText
-        heading={isIndia
-          ? "Global institutional expertise applied locally, partnering with the founders shaping India's industrial future."
-          : "Decades of institutional experience dedicated to partnering with the owners who built America's essential industries."
-        }
-        highlights={isIndia ? ['institutional', 'shaping'] : ['institutional', 'essential']}
-        variant="light"
-      />
+      {/* Social Proof — Simple fade, no scroll-linked words */}
+      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-background'}`}>
+        <LightSectionEffects variant="section" />
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 text-center">
+          <FadeIn>
+            <p className={`font-serif text-[clamp(1.6rem,4vw,2.6rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              {isIndia
+                ? <>Global <span className="text-gold">institutional expertise</span> applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
+                : <>Decades of <span className="text-gold">institutional experience</span> dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
+              }
+            </p>
+          </FadeIn>
+        </div>
+      </section>
       <div className="bg-background">
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>

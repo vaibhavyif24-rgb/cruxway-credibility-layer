@@ -28,7 +28,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.95', 'end 0.35'],
+    offset: ['start 0.85', 'end 0.5'],
   });
 
   const words = heading.split(' ');
@@ -83,11 +83,11 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
             className="flex items-center gap-3 mb-5 md:mb-6"
           >
-            <div className="w-6 h-px bg-gold/50" />
+            <motion.div initial={{ width: 0 }} whileInView={{ width: 24 }} viewport={{ once: true }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="h-px bg-gold/50" />
             <p className="font-sans text-[12px] md:text-[13px] font-bold uppercase tracking-[0.3em] text-gold">
               {label}
             </p>
-            <div className="w-6 h-px bg-gold/50" />
+            <motion.div initial={{ width: 0 }} whileInView={{ width: 24 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} className="h-px bg-gold/50" />
           </motion.div>
         )}
 
@@ -139,7 +139,7 @@ const Word = ({
   isDark: boolean;
   isHighlighted?: boolean;
 }) => {
-  const opacity = useTransform(progress, range, [0.15, 1]);
+  const opacity = useTransform(progress, range, [0.3, 1]);
   return (
     <motion.span
       style={{
@@ -167,9 +167,7 @@ const StatReveal = ({
   progress: ReturnType<typeof useScroll>['scrollYProgress'];
   isDark: boolean;
 }) => {
-  const start = 0.65 + (index / total) * 0.15;
-  const end = Math.min(start + 0.2, 1);
-  const opacity = useTransform(progress, [start, end], [0, 1]);
+
 
   const statRef = useRef<HTMLDivElement>(null);
   const isInViewStat = useInView(statRef, { once: true });
@@ -197,7 +195,7 @@ const StatReveal = ({
   return (
     <motion.div
       ref={statRef}
-      style={{ opacity }}
+      
       className="text-center"
       initial={{ y: 15, scale: 0.95 }}
       whileInView={{ y: 0, scale: 1 }}
