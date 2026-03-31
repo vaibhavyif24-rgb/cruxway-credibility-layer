@@ -412,6 +412,9 @@ const Home = () => {
         variant="light"
       />
 
+      {/* Cinematic breaker — visual separation */}
+      <CinematicBreaker isIndia={isIndia} isDark={isDark} />
+
       {/* Market Thesis */}
       <ScrollRevealText
         label={isIndia ? 'The Opportunity' : 'Our Thesis'}
