@@ -49,7 +49,7 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         <motion.div
           className="w-full h-full"
           initial={{ scale: 1.02, x: 0 }}
-          animate={{ scale: 1.14, x: [0, 12, -8, 0] }}
+          animate={{ scale: 1.14, x: [0, 15, -10, 0] }}
           transition={{
             scale: { duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
             x: { duration: 35, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
