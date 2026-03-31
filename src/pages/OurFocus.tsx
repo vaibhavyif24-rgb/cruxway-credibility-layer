@@ -277,7 +277,7 @@ const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLook
   return (
     <div ref={ref}>
       <motion.div
-        style={{ opacity: glowOpacity }}
+        style={{ opacity: glowOpacity, scale: itemScale }}
         className="grid grid-cols-12 gap-3 md:gap-6 py-6 md:py-8 group"
       >
         {/* Number */}
