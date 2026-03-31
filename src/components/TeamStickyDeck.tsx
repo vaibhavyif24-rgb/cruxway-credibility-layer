@@ -137,7 +137,7 @@ const TeamCard: React.FC<{
               <div
                 className="w-[100px] h-[100px] md:w-[130px] md:h-[130px] lg:w-[150px] lg:h-[150px] rounded-full overflow-hidden border-2 shadow-lg"
                 style={{
-                  borderColor: isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.12)',
+                  borderColor: isDark ? 'hsl(43 70% 55% / 0.25)' : 'hsl(43 78% 50% / 0.2)',
                   boxShadow: `0 8px 32px -8px ${isDark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.1)'}`,
                 }}
               >
