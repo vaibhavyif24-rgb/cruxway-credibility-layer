@@ -28,7 +28,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 0.95', 'end 0.35'],
+    offset: ['start 0.85', 'end 0.5'],
   });
 
   const words = heading.split(' ');
