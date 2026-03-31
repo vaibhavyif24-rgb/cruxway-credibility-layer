@@ -109,7 +109,7 @@ const Home = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[12px] md:text-[14px] font-medium uppercase tracking-[0.22em] text-gold/55 mb-4">
+            <p className="font-sans text-[12px] md:text-[14px] font-medium uppercase tracking-[0.22em] text-gold/70 mb-4">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>

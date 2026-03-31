@@ -71,7 +71,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
             className={`font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] mb-5 md:mb-7 ${
-              isActuallyDark ? 'text-gold/50' : 'text-gold/50'
+              isActuallyDark ? 'text-gold/60' : 'text-gold/60'
             }`}
           >
             {label}
