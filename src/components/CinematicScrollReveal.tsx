@@ -37,7 +37,7 @@ const SectorColumn = ({ heading, items, side, isMobile, isDark }: { heading: str
         color: isDark ? '#F8F6F2' : 'hsl(var(--foreground))',
         fontSize: isMobile ? '1.5rem' : '2rem',
         marginBottom: isMobile ? '0.75rem' : '1rem',
-        textShadow: isDark ? '0 2px 12px rgba(0,0,0,0.7)' : 'none',
+        textShadow: isDark ? '0 2px 12px rgba(0,0,0,0.7)' : '0 1px 4px rgba(0,0,0,0.06)',
       }}
     >
       {heading}
