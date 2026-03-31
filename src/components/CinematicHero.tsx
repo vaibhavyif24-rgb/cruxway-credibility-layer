@@ -32,8 +32,8 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
       ? 'bg-gradient-to-t from-navy-deep/95 via-prussian/80 to-navy-deep/70'
       : 'bg-gradient-to-t from-navy-deep/90 via-prussian/65 to-navy-deep/55'
     : overlay === 'strong'
-      ? 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.92] via-[hsl(40,25%,96%)]/[0.82] to-[hsl(40,20%,93%)]/[0.72]'
-      : 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.85] via-[hsl(40,25%,96%)]/[0.70] to-[hsl(40,20%,93%)]/[0.55]';
+      ? 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.96] via-[hsl(40,25%,96%)]/[0.88] to-[hsl(40,20%,93%)]/[0.78]'
+      : 'bg-gradient-to-t from-[hsl(40,20%,93%)]/[0.92] via-[hsl(40,25%,96%)]/[0.80] to-[hsl(40,20%,93%)]/[0.65]';
 
   const vignetteColor = isDark
     ? 'radial-gradient(ellipse at center, transparent 40%, hsl(228 45% 8% / 0.5) 100%)'
