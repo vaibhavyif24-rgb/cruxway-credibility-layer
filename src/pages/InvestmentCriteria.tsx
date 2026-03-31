@@ -312,8 +312,14 @@ const InvestmentCriteria = () => {
 
           {/* Timeline container */}
           <div className="relative">
-            {/* Horizontal connecting line */}
-            <div className="absolute top-[6px] left-0 right-0 h-px bg-gold/20 hidden md:block" />
+            {/* Horizontal connecting line with draw animation */}
+            <motion.div
+              className="absolute top-[16px] left-0 right-0 h-px bg-gold/20 hidden md:block origin-left"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
               {[
