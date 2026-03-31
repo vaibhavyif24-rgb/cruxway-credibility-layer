@@ -389,6 +389,15 @@
   }
   .btn-premium-glow { animation: btn-pulse 3s ease-in-out infinite; }
 
+  /* Continuous shimmer sweep for CTA buttons */
+  @keyframes shimmer-sweep-continuous {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer-sweep {
+    animation: shimmer-sweep-continuous 3s ease-in-out infinite;
+  }
+
   /* Gold spinner for loading states */
   @keyframes spin-smooth {
     from { transform: rotate(0deg); }

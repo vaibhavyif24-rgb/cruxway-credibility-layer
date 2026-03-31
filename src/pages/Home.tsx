@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronDown, ArrowRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import LogoMarquee from '@/components/LogoMarquee';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import GlassCard from '@/components/GlassCard';
 import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
-import StickyCardStack from '@/components/StickyCardStack';
 import WaveBackground from '@/components/WaveBackground';
 
 import heroIndiaHome from '@/assets/hero-india-home.jpg';
@@ -89,6 +89,149 @@ const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; d
   )
 );
 StatBlock.displayName = 'StatBlock';
+
+/* ─── Process Carousel ─── */
+const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDark: boolean }) => {
+  const [active, setActive] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (!autoplay) return;
+    const timer = setInterval(() => {
+      setActive(prev => (prev + 1) % steps.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [steps.length, autoplay]);
+
+  return (
+    <div className="w-full">
+      {/* Step headings — always visible, clickable */}
+      <div className="flex border-b border-gold/10">
+        {steps.map((step, i) => (
+          <button
+            key={i}
+            onClick={() => { setActive(i); setAutoplay(false); }}
+            className={`group flex-1 text-left relative py-3 md:py-4 transition-all duration-500 ${
+              i > 0 ? 'border-l border-gold/10' : ''
+            }`}
+          >
+            {/* Gold progress line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
+              {i === active && autoplay && (
+                <motion.div
+                  key={`progress-${active}`}
+                  className="h-full bg-gold"
+                  initial={{ width: '0%' }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 5, ease: 'linear' }}
+                />
+              )}
+              {i === active && !autoplay && (
+                <div className="h-full w-full bg-gold" />
+              )}
+            </div>
+
+            <div className="px-2 md:px-4">
+              <span className={`font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                i === active ? 'text-gold' : isDark ? 'text-primary-foreground/20' : 'text-foreground/20'
+              }`}>
+                {step.num}
+              </span>
+              <span className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                i === active
+                  ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
+                  : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+              }`}>
+                {step.title}
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      {/* Active content panel */}
+      <div className="mt-6 md:mt-8">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className={`rounded-sm border p-6 md:p-10 ${
+              isDark
+                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
+                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
+            }`}
+            whileHover={{ rotateX: 0.5, rotateY: -0.5 }}
+            style={{ transformPerspective: 800 }}
+          >
+            {/* Large step number */}
+            <motion.span
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="font-serif text-[3rem] md:text-[4rem] leading-none text-gold/15 block mb-2"
+            >
+              {steps[active].num}
+            </motion.span>
+
+            <div>
+              <motion.h3
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.15 }}
+                className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+              >
+                {steps[active].title}
+              </motion.h3>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: 40 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="h-[1.5px] bg-gold/30 mb-4"
+              />
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.25 }}
+                className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
+              >
+                {steps[active].description}
+              </motion.p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Bottom navigation arrows */}
+        <div className="flex items-center justify-between mt-5">
+          <button
+            onClick={() => { setActive(Math.max(0, active - 1)); setAutoplay(false); }}
+            disabled={active === 0}
+            className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-20 ${
+              isDark ? 'text-primary-foreground/40 hover:text-gold' : 'text-foreground/40 hover:text-gold'
+            }`}
+          >
+            ← Previous
+          </button>
+          <span className={`font-sans text-[10px] font-medium tracking-[0.15em] ${isDark ? 'text-primary-foreground/25' : 'text-foreground/25'}`}>
+            {String(active + 1).padStart(2, '0')} / {String(steps.length).padStart(2, '0')}
+          </span>
+          <button
+            onClick={() => { setActive(Math.min(steps.length - 1, active + 1)); setAutoplay(false); }}
+            disabled={active === steps.length - 1}
+            className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-20 ${
+              isDark ? 'text-primary-foreground/40 hover:text-gold' : 'text-foreground/40 hover:text-gold'
+            }`}
+          >
+            Next →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Home = () => {
   const { region } = useRegion();
@@ -202,18 +345,19 @@ const Home = () => {
         variant="dark"
       />
 
-      {/* Our Process */}
-      <section className="bg-background pt-6 md:pt-8 lg:pt-10 pb-0">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
+      {/* Our Process — Horizontal Carousel */}
+      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-background'}`}>
+        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <FadeIn>
-            <SectionLabel>Our Process</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] max-w-[480px] mb-3">
+            <SectionLabel light={isDark}>Our Process</SectionLabel>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               From Discovery to Partnership
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
+          <ProcessCarousel steps={isIndia ? processStepsIndia : processStepsUS} isDark={isDark} />
         </div>
-        <StickyCardStack cards={isIndia ? processStepsIndia : processStepsUS} variant={isDark ? 'dark' : 'light'} />
       </section>
 
       {/* Social Proof */}
@@ -229,31 +373,43 @@ const Home = () => {
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 
-      {/* CTA */}
+      {/* CTA — Full-Width Gold Band */}
       <div className="h-px w-full shimmer-effect mt-0" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.15), transparent)', animationDuration: '5s' }} />
 
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
+
         <div className="relative max-w-[1080px] mx-auto">
-          <div className="max-w-[540px]">
-            <FadeIn>
-              <SectionLabel light={isDark}>Connect</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
-              </h2>
-              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
-                {isIndia
-                  ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                  : 'If you\'re a founder considering your next chapter, we\'d welcome an honest discussion about long-term partnership.'}
-              </p>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            {/* Left: Text */}
+            <div className="flex-1 max-w-[560px]">
+              <FadeIn>
+                <SectionLabel light={isDark}>Connect</SectionLabel>
+                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                </h2>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                  {isIndia
+                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
+                    : "If you're a founder considering your next chapter, we'd welcome an honest discussion about long-term partnership."}
+                </p>
+              </FadeIn>
+            </div>
+
+            {/* Right: Large CTA Button */}
+            <FadeIn delay={0.1}>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
               >
                 Get in Touch
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="absolute inset-0 pointer-events-none overflow-hidden">
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
+                </span>
               </Link>
             </FadeIn>
           </div>

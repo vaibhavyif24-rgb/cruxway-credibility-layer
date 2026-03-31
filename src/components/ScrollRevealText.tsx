@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -77,21 +77,21 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
       )}
       {isLight && <LightSectionEffects variant="section" />}
 
-      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-8 md:py-10 lg:py-12 flex flex-col items-center text-center">
+      <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-12 lg:py-14 flex flex-col items-center text-center">
         {label && (
           <motion.div
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
             className="flex items-center gap-3 mb-5 md:mb-6"
           >
             <div className="w-6 h-px bg-gold/50" />
-            <p className="font-sans text-[11px] md:text-[12px] font-bold uppercase tracking-[0.3em] text-gold">
+            <p className="font-sans text-[12px] md:text-[13px] font-bold uppercase tracking-[0.3em] text-gold">
               {label}
             </p>
             <div className="w-6 h-px bg-gold/50" />
           </motion.div>
         )}
 
-        <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px] break-words">
+        <p className="font-serif text-[clamp(1.9rem,5.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px] break-words">
           {words.map((word, i) => {
             const start = (i / words.length) * 0.8;
             const end = ((i + 1) / words.length) * 0.8;
@@ -104,7 +104,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         {subtext && !stats && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
-            className={`font-sans text-[13px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
+            className={`font-sans text-[14px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
               isActuallyDark ? 'text-primary-foreground/45' : 'text-muted-foreground'
             }`}
           >
@@ -171,8 +171,32 @@ const StatReveal = ({
   const end = Math.min(start + 0.2, 1);
   const opacity = useTransform(progress, [start, end], [0, 1]);
 
+  const statRef = useRef<HTMLDivElement>(null);
+  const isInViewStat = useInView(statRef, { once: true });
+  const [displayVal, setDisplayVal] = useState(stat.value);
+
+  useEffect(() => {
+    if (!isInViewStat) return;
+    const numMatch = stat.value.match(/[\d.]+/);
+    if (!numMatch) return;
+    const target = parseFloat(numMatch[0]);
+    const prefix = stat.value.slice(0, stat.value.indexOf(numMatch[0]));
+    const suffix = stat.value.slice(stat.value.indexOf(numMatch[0]) + numMatch[0].length);
+    let frame = 0;
+    const totalFrames = 30;
+    const timer = setInterval(() => {
+      frame++;
+      const eased = 1 - Math.pow(1 - frame / totalFrames, 3);
+      const current = target % 1 === 0 ? Math.round(target * eased) : (target * eased).toFixed(1);
+      setDisplayVal(`${prefix}${current}${suffix}`);
+      if (frame >= totalFrames) { setDisplayVal(stat.value); clearInterval(timer); }
+    }, 30);
+    return () => clearInterval(timer);
+  }, [isInViewStat, stat.value]);
+
   return (
     <motion.div
+      ref={statRef}
       style={{ opacity }}
       className="text-center"
       initial={{ y: 15, scale: 0.95 }}
@@ -183,9 +207,9 @@ const StatReveal = ({
       <motion.p
         whileHover={{ scale: 1.05, textShadow: '0 0 25px hsl(43,78%,50%,0.3)' }}
         transition={{ duration: 0.2 }}
-        className="font-serif text-[clamp(1.8rem,4vw,2.8rem)] tracking-[-0.02em] text-gold font-semibold cursor-default"
+        className="font-serif text-[clamp(2rem,5vw,2.8rem)] tracking-[-0.02em] text-gold font-semibold cursor-default"
       >
-        {stat.value}
+        {displayVal}
       </motion.p>
       <motion.div
         initial={{ width: 0 }}
