@@ -267,13 +267,13 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
           fetchpriority="low"
           className="w-full h-full object-cover"
           poster={isIndia
-            ? 'https://images.pexels.com/videos/35213738/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213738.jpeg?auto=compress&w=1200'
+            ? 'https://images.pexels.com/videos/35213732/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213732.jpeg?auto=compress&w=1200'
             : 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200'
           }
         >
           <source
             src={isIndia
-              ? 'https://videos.pexels.com/video-files/35213738/14917588_2560_1440_60fps.mp4'
+              ? 'https://videos.pexels.com/video-files/35213732/14917606_2560_1440_60fps.mp4'
               : 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4'
             }
             type="video/mp4"
@@ -287,6 +287,18 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
           ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
           : 'linear-gradient(to bottom, hsl(228 45% 12% / 0.75) 0%, hsl(228 45% 12% / 0.88) 40%, hsl(228 45% 12% / 0.95) 100%)'
       }} />
+
+      {/* Radial vignette — cinematic depth-of-field feel */}
+      <div className="absolute inset-0 z-[2] pointer-events-none" style={{
+        background: 'radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)'
+      }} />
+
+      {/* Light-mode warm center glow — lets video warmth breathe */}
+      {!isDark && (
+        <div className="absolute inset-0 z-[2] pointer-events-none" style={{
+          background: 'radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.04) 0%, transparent 60%)'
+        }} />
+      )}
 
       {/* Subtle grain texture */}
       <div className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
