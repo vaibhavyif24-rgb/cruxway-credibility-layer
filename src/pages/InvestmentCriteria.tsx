@@ -110,7 +110,9 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
 };
 
 /* ─── Eval Step (Horizontal Timeline) ─── */
-const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string; desc: string }; index: number; isDark: boolean }) => {
+const evalIcons = [Search, BarChart3, FileSearch, Layers];
+
+const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; title: string; desc: string }; index: number; isDark: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -119,24 +121,30 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
   const glowOpacity = useTransform(scrollYProgress, [0, 0.4, 0.5, 0.6, 1], [0.4, 0.9, 1, 0.9, 0.4]);
   const dotScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.5, 1]);
   const dotGlow = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.8, 0]);
+  const Icon = evalIcons[index] || Search;
 
   return (
     <motion.div ref={ref} style={{ opacity: glowOpacity }} className="relative pt-10">
-      {/* Timeline dot */}
+      {/* Timeline dot with ring */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center">
-        <motion.div
-          style={{
-            scale: dotScale,
-            boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
-          }}
-          className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
-        />
+        <div className="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center group hover:bg-gold/10 transition-colors duration-300">
+          <motion.div
+            style={{
+              scale: dotScale,
+              boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
+            }}
+            className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
+          />
+        </div>
+      </div>
+
+      {/* Icon */}
+      <div className="flex justify-center mt-3 mb-2">
+        <Icon className="w-5 h-5 text-gold/40" />
       </div>
 
       {/* Step number */}
-      <motion.p
-        className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mt-4 mb-2"
-      >
+      <motion.p className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2">
         Step {step.num}
       </motion.p>
 
@@ -146,7 +154,13 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
       </h3>
 
       {/* Gold underline */}
-      <div className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3" />
+      <motion.div
+        className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3 origin-left"
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      />
 
       {/* Description */}
       <p className={`text-center font-sans text-[13px] md:text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
@@ -154,7 +168,7 @@ const EvalStep = ({ step, index, isDark }: { step: { num: string; title: string;
       </p>
     </motion.div>
   );
-};
+});
 
 const InvestmentCriteria = () => {
   const { region } = useRegion();
