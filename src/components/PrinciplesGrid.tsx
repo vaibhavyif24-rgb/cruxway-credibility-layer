@@ -24,7 +24,9 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
 
   const { scrollYProgress } = useScroll({
     target: itemRef,
-    offset: ['start 0.75', 'center 0.45', 'end 0.25'],
+    offset: isMobile
+      ? ['start 0.85', 'end 0.35']
+      : ['start 0.75', 'center 0.45', 'end 0.25'],
   });
 
   const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
@@ -35,17 +37,26 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
   const itemScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.97, 1, 0.97]);
   const numberY = useTransform(scrollYProgress, [0, 1], [-8, 8]);
 
+  // Mobile: scroll-linked with lighter transforms
+  const mobileScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.98, 1, 0.98]);
+  const mobileGlow = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.4, 1, 1, 0.4]);
+
   if (isMobile) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="relative pl-12"
+        ref={itemRef}
+        style={{ opacity: mobileGlow, scale: mobileScale }}
+        className="relative pl-[3.25rem]"
       >
-        <div className="absolute top-1 left-[calc(1.25rem-5px)]">
-          <div className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background" />
+        <div className="absolute top-1 left-[calc(1.5rem-5px)]">
+          <motion.div
+            style={{ scale: dotScale }}
+            className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background"
+          />
+          <motion.div
+            style={{ opacity: dotGlowOpacity }}
+            className="absolute inset-[-4px] rounded-full bg-gold/25 blur-sm"
+          />
         </div>
 
         <span className="block font-serif text-[2.5rem] leading-none text-gold select-none opacity-25">
@@ -57,7 +68,10 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
         }`}>
           {principle.t}
         </h3>
-        <div className="w-8 h-[1.5px] bg-gold/40 mt-1.5" />
+        <motion.div
+          style={{ width: underlineWidth }}
+          className="h-[1.5px] bg-gold/40 mt-1.5 max-w-[120px]"
+        />
 
         <p className={`font-sans text-[13px] leading-[1.75] mt-2.5 ${
           isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
@@ -97,9 +111,8 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
         />
       </div>
 
-      {/* Content wrapper: forces all children into a vertical stack */}
+      {/* Content wrapper */}
       <div className={`flex flex-col ${isLeft ? 'md:items-end md:text-right' : 'md:items-start md:text-left'}`}>
-        {/* Number */}
         <motion.span
           style={{ opacity: numberColor, y: numberY }}
           className="block font-serif text-[3.5rem] md:text-[4rem] leading-none text-gold select-none"
@@ -107,7 +120,6 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
           {num}
         </motion.span>
 
-        {/* Title with scroll-linked underline */}
         <div className="mt-1 relative">
           <h3 className={`font-serif text-[clamp(1.15rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] ${
             isDark ? 'text-primary-foreground' : 'text-foreground'
@@ -120,7 +132,6 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
           />
         </div>
 
-        {/* Description */}
         <p className={`font-sans text-[13.5px] md:text-[14px] leading-[1.75] mt-3 max-w-[400px] ${
           isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
         }`}>
@@ -142,11 +153,11 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
         {/* Vertical connecting line */}
         <div
           className={`absolute top-0 bottom-0 w-px ${
-            isMobile ? 'left-[1.25rem]' : 'left-1/2 -translate-x-px'
+            isMobile ? 'left-[1.5rem]' : 'left-1/2 -translate-x-px'
           }`}
         >
           <motion.div
-            className="w-full h-full bg-gold/15"
+            className="w-full h-full bg-gold/25"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
@@ -174,7 +185,7 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
                 isMobile={isMobile}
               />
               {i < principles.length - 1 && (
-                <div className={`py-4 md:py-6 ${isMobile ? 'pl-12' : ''}`}>
+                <div className={`py-4 md:py-6 ${isMobile ? 'pl-[3.25rem]' : ''}`}>
                   <div className="h-px bg-gold/10" />
                 </div>
               )}

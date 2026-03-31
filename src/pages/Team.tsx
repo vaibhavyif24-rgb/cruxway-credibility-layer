@@ -201,7 +201,7 @@ const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-t
 };
 
 /* ─── Profile Card ─── */
-const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index: number; creamBg?: boolean }>(({ member, index, creamBg = false }, ref) => {
+const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMember; index: number; creamBg?: boolean }>(({ member, index, creamBg = false }, ref) => {
   const LinkedWrapper = ({ children, className = '' }: { children: React.ReactNode; className?: string }) =>
     member.linkedIn ? (
       <a href={member.linkedIn} target="_blank" rel="noopener noreferrer" className={`cursor-pointer ${className}`}>
@@ -299,7 +299,7 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
       </div>
     </FadeIn>
   );
-});
+}));
 ProfileCard.displayName = 'ProfileCard';
 
 /* ─── Counting Stat ─── */
@@ -313,8 +313,8 @@ const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => 
     const target = parseInt(numMatch[1], 10);
     const suffix = value.slice(numMatch[1].length);
     const controls = animate(motionVal, target, {
-      duration: 2.8,
-      ease: [0.16, 1, 0.3, 1],
+      duration: 3.8,
+      ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => setDisplay(`${Math.round(v)}${suffix}`),
     });
     return () => controls.stop();
@@ -335,16 +335,16 @@ const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => 
 
 /* ─── Stats Bar ─── */
 const StatItem = ({ value, label, delay = 0, isDark }: { value: string; label: string; delay?: number; isDark: boolean }) => (
-  <FadeIn delay={delay} className="text-center">
+  <FadeIn delay={delay} className="text-center pb-2 md:pb-3">
     <CountingStat value={value} isDark={isDark} />
     <motion.div
       initial={{ width: 0 }}
       whileInView={{ width: 24 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="h-[1.5px] bg-gold/30 mx-auto mt-2"
+      className="h-[1.5px] bg-gold/30 mx-auto mt-3"
     />
-    <p className={`font-sans text-[7.5px] md:text-[9px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-1.5 md:mt-2 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
+    <p className={`font-sans text-[8.5px] md:text-[10px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-2.5 md:mt-3 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
       {label}
     </p>
   </FadeIn>
@@ -388,7 +388,7 @@ const Team = () => {
         {/* Stats Bar */}
         <div className={`absolute bottom-0 left-0 right-0 z-10 border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
-            <div className="grid grid-cols-3 gap-2 md:gap-4">
+            <div className="grid grid-cols-3 gap-3 md:gap-4">
               <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />
               <StatItem value="$15B+" label="Deal Experience" delay={0.18} isDark={isDark} />
               <StatItem value={isIndia ? '3' : '50+'} label={isIndia ? 'Continents Covered' : 'Transactions'} delay={0.26} isDark={isDark} />

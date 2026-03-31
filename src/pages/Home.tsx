@@ -4,7 +4,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import LogoMarquee from '@/components/LogoMarquee';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
@@ -85,7 +85,7 @@ const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; d
 StatBlock.displayName = 'StatBlock';
 
 /* ─── Process Carousel with Intersection Observer ─── */
-const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDark: boolean }) => {
+const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processStepsUS; isDark: boolean }) => {
   const [active, setActive] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const isMobile = useIsMobile();
@@ -93,7 +93,6 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
   const isInViewport = useInView(sectionRef, { once: false, amount: 0.3 });
   const [hasEnteredView, setHasEnteredView] = useState(false);
 
-  // Only start once it enters viewport
   useEffect(() => {
     if (isInViewport && !hasEnteredView) {
       setHasEnteredView(true);
@@ -120,7 +119,6 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
-            {/* Gold progress line */}
             <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
               {i === active && autoplay && hasEnteredView && (
                 <motion.div
@@ -151,7 +149,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
                 animate={i === active ? { scale: [1, 1.01, 1] } : {}}
                 transition={{ duration: 0.3 }}
               >
-                {isMobile ? step.title : step.title}
+                {step.title}
               </motion.span>
             </div>
           </button>
@@ -238,11 +236,14 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
       </div>
     </div>
   );
-};
+});
+ProcessCarousel.displayName = 'ProcessCarousel';
 
 /* ─── Opportunity Cinematic Section Header ─── */
 const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const isVideoInView = useInView(sectionRef, { once: false, margin: '500px' });
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ['start end', 'end start'],
@@ -256,19 +257,29 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
   const pexelsUSVid = 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4';
   const pexelsUSImg = 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200';
 
+  // Play/pause video based on viewport
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (isVideoInView) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+  }, [isVideoInView]);
+
   return (
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
       style={{ height: 'clamp(50vh, 60vh, 70vh)' }}
     >
-      {/* Video background with parallax */}
       <motion.div
         className="absolute inset-[-10%]"
         style={{ scale: videoScale, y: videoY, willChange: 'transform' }}
       >
         <video
-          autoPlay
+          ref={videoRef}
           muted
           loop
           playsInline
@@ -291,31 +302,23 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
         </video>
       </motion.div>
 
-      {/* Deep cinematic overlay */}
       <div className="absolute inset-0 z-[2]" style={{
         background: isDark
           ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
           : 'linear-gradient(to bottom, hsl(228 45% 12% / 0.75) 0%, hsl(228 45% 12% / 0.88) 40%, hsl(228 45% 12% / 0.95) 100%)'
       }} />
-
-      {/* Radial vignette */}
       <div className="absolute inset-0 z-[2] pointer-events-none" style={{
         background: 'radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)'
       }} />
-
-      {/* Light-mode warm center glow */}
       {!isDark && (
         <div className="absolute inset-0 z-[2] pointer-events-none" style={{
           background: 'radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.04) 0%, transparent 60%)'
         }} />
       )}
-
-      {/* Subtle grain texture */}
       <div className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
         style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }}
       />
 
-      {/* Content */}
       <div className="absolute inset-0 z-[4] flex items-center justify-center">
         <motion.div
           style={{ y: textY, opacity: textOpacity }}
@@ -374,14 +377,11 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
         </motion.div>
       </div>
 
-      {/* Top gradient fade */}
       <div className={`absolute top-0 left-0 right-0 h-20 z-[5] pointer-events-none ${
         isDark
           ? 'bg-gradient-to-b from-primary to-transparent'
           : 'bg-gradient-to-b from-background to-transparent'
       }`} />
-
-      {/* Bottom gradient fade */}
       <div className={`absolute bottom-0 left-0 right-0 h-20 z-[5] pointer-events-none ${
         isDark
           ? 'bg-gradient-to-t from-primary to-transparent'
@@ -455,20 +455,6 @@ const Home = () => {
               </motion.div>
             </div>
           </FadeIn>
-          {/* Scroll indicator */}
-          <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.4 }}
-            transition={{ delay: 1.5, duration: 0.8 }}
-          >
-            <motion.div
-              animate={{ y: [0, 6, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <ChevronDown className="w-5 h-5 text-gold/85" />
-            </motion.div>
-          </motion.div>
         </div>
         <HeroDivider />
       </section>
@@ -478,14 +464,14 @@ const Home = () => {
         label="What We Do"
         heading={
           isIndia
-            ? 'Investing in and building the next generation of essential companies across India.'
-            : 'Investing in and building essential U.S. companies across regulated, compliance-driven sectors.'
+            ? 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
+            : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
         }
-        highlights={isIndia ? ['essential', 'building'] : ['essential', 'regulated']}
+        highlights={isIndia ? ['founders', 'long'] : ['founders', 'long']}
         subtext={
           isIndia
-            ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
-            : 'We focus on owner-operated and family-held businesses where reliability, deep client relationships, and high barriers to entry define long-term value.'
+            ? 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
+            : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
         }
         variant="light"
       />
