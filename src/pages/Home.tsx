@@ -451,25 +451,8 @@ const Home = () => {
         variant="light"
       />
 
-      {/* Cinematic breaker — visual separation */}
-      <CinematicBreaker isIndia={isIndia} isDark={isDark} />
-
-      {/* Market Thesis */}
-      <ScrollRevealText
-        label={isIndia ? 'The Opportunity' : 'Our Thesis'}
-        heading={
-          isIndia
-            ? 'India\'s lower middle market is one of the most under-served segments in global investing. Companies proven over decades are ready for a partner who can help them scale with discipline.'
-            : 'Tens of thousands of essential businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
-        }
-        highlights={isIndia ? ['under-served', 'discipline'] : ['essential', 'Patient']}
-        stats={
-          isIndia
-            ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
-            : [{ value: '10M+', label: 'Small Businesses' }, { value: '$10T+', label: 'Transition Value' }, { value: '70%+', label: 'Lack Succession Plans' }]
-        }
-        variant="dark"
-      />
+      {/* The Opportunity — cinematic thesis section */}
+      <CinematicThesis isIndia={isIndia} isDark={isDark} />
 
       {/* Our Process — Horizontal Carousel */}
       <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-background'}`}>
