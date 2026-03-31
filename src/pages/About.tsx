@@ -121,28 +121,36 @@ const About = () => {
       <PrinciplesSlider principles={principles} />
 
       {/* CTA */}
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}
         <div className="relative max-w-[1080px] mx-auto">
-          <div className="max-w-[540px]">
-            <FadeIn>
-              <SectionLabel light={isDark}>Connect</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                Built for Owners Thinking Long-Term
-              </h2>
-              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] mb-6 ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
-                {isIndia
-                  ? 'If you\'re building a business meant to last in India, we\'d welcome a conversation about partnership.'
-                  : 'If you\'re a founder considering your next chapter, we\'d welcome the conversation.'}
-              </p>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+            <div className="flex-1 max-w-[560px]">
+              <FadeIn>
+                <SectionLabel light={isDark}>Connect</SectionLabel>
+                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  Built for Owners Thinking Long-Term
+                </h2>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                  {isIndia
+                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
+                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
+                </p>
+              </FadeIn>
+            </div>
+            <FadeIn delay={0.1}>
               <Link
                 to={`/${region}/contact`}
-                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
               >
                 Start a Conversation
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <span className="absolute inset-0 pointer-events-none overflow-hidden">
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
+                </span>
               </Link>
             </FadeIn>
           </div>
