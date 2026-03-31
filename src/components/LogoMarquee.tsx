@@ -73,7 +73,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
         style={{ willChange: 'transform', transform: 'translateZ(0)' }}
       >
         {doubled.map((logo, i) => {
-          const clampedScale = Math.max(0.7, Math.min(1.3, logo.scale || 1));
+          const clampedScale = Math.max(0.7, Math.min(2.0, logo.scale || 1));
           return (
             <div
               key={`${logo.alt}-${i}`}

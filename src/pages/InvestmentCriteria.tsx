@@ -28,7 +28,7 @@ const investmentProfile = {
   ],
   india: [
     { label: 'Revenue Range', value: '₹10Cr – ₹100Cr' },
-    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr' },
+    { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },

@@ -44,7 +44,7 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
       {/* Photo with Ken Burns + parallax */}
       <motion.div
         className="absolute inset-[-5%]"
-        style={{ y: parallaxY }}
+        style={{ y: parallaxY, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
       >
         <motion.div
           className="w-full h-full"
