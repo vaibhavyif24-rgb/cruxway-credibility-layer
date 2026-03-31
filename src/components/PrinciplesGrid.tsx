@@ -73,7 +73,7 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
   return (
     <motion.div
       ref={itemRef}
-      style={{ opacity: glowOpacity, scale: itemScale }}
+      style={{ opacity: glowOpacity, scale: itemScale, filter: useTransform(itemBlur, v => `blur(${v}px)`) }}
       initial={{ x: isLeft ? -30 : 30 }}
       whileInView={{ x: 0 }}
       viewport={{ once: true, margin: '-60px' }}
