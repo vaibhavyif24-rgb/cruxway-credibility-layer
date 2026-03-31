@@ -27,7 +27,7 @@ const usSectors = {
 };
 
 const DARK_OVERLAY = 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.55) 25%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.82) 75%, rgba(0,0,0,0.88) 100%)';
-const LIGHT_OVERLAY = 'linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(248,245,240,0.75) 25%, rgba(248,245,240,0.88) 50%, rgba(248,245,240,0.94) 75%, rgba(248,245,240,0.97) 100%)';
+const LIGHT_OVERLAY = 'linear-gradient(to bottom, rgba(248,245,240,0.75) 0%, rgba(248,245,240,0.85) 20%, rgba(248,245,240,0.94) 50%, rgba(248,245,240,0.97) 75%, rgba(248,245,240,0.99) 100%)';
 
 const SectorColumn = ({ heading, items, side, isMobile, isDark }: { heading: string; items: { name: string; desc: string }[]; side: 'left' | 'right'; isMobile: boolean; isDark: boolean }) => (
   <div className={isMobile ? '' : side === 'left' ? 'pr-12' : 'pl-12'}>
