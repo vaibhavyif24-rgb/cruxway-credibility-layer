@@ -51,17 +51,10 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
           : isContrastLight
-            ? 'bg-[hsl(38,18%,93%)] text-foreground'
+            ? 'bg-[hsl(40,22%,92%)] text-foreground'
             : 'bg-background text-foreground'
       } ${className}`}
     >
-      {/* Soft gradient fades for section blending */}
-      {!isActuallyDark && (
-        <>
-          <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none z-[1]" style={{ background: 'linear-gradient(to bottom, hsl(var(--background)), transparent)' }} />
-          <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none z-[1]" style={{ background: 'linear-gradient(to top, hsl(var(--background)), transparent)' }} />
-        </>
-      )}
       {isActuallyDark && <WaveBackground variant="section" />}
       {isContrastLight && <LightSectionEffects variant="section" />}
       {isLight && <LightSectionEffects variant="section" />}
@@ -70,12 +63,17 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         {label && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
-            className={`font-sans text-[9px] md:text-[10px] font-medium uppercase tracking-[0.28em] mb-5 md:mb-7 ${
-              isActuallyDark ? 'text-gold/60' : 'text-gold/60'
-            }`}
+            className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.28em] mb-5 md:mb-7 text-gold"
           >
             {label}
           </motion.p>
+        )}
+
+        {label && (
+          <motion.div
+            style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
+            className="w-8 h-[1.5px] bg-gold/50 mb-6 md:mb-8"
+          />
         )}
 
         <p className="font-serif text-[clamp(1.6rem,4.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px]">
@@ -101,7 +99,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
         {stats && stats.length > 0 && (
           <div className={`mt-8 md:mt-12 pt-8 md:pt-10 w-full max-w-[680px] ${
-            isActuallyDark ? 'border-t border-gold/10' : 'border-t border-gold/15'
+            isActuallyDark ? 'border-t border-gold/20' : 'border-t border-gold/25'
           }`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
               {stats.map((stat, i) => (
@@ -131,11 +129,12 @@ const Word = ({
     <motion.span
       style={{
         opacity,
-        textShadow: isHighlighted && !isDark ? '0 0 40px hsl(40, 65%, 44%, 0.2)' : undefined,
+        textShadow: isHighlighted ? '0 0 15px hsl(43,78%,50%,0.25)' : undefined,
+        fontWeight: isHighlighted ? 500 : undefined,
       }}
       className={`inline-block mr-[0.3em] ${
         isHighlighted
-          ? 'text-gold'
+          ? 'text-gold font-medium'
           : isDark ? 'text-primary-foreground' : 'text-foreground'
       }`}
     >
@@ -159,10 +158,10 @@ const StatReveal = ({
 
   return (
     <motion.div style={{ opacity }} className="text-center">
-      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-gold'}`}>
+      <p className="font-serif text-[clamp(1.6rem,3.5vw,2.4rem)] tracking-[-0.02em] text-gold font-medium">
         {stat.value}
       </p>
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${isDark ? 'text-primary-foreground/35' : 'text-[hsl(228,45%,45%)]/40'}`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] mt-2 ${isDark ? 'text-primary-foreground/40' : 'text-foreground/50'}`}>
         {stat.label}
       </p>
     </motion.div>
