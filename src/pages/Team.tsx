@@ -313,8 +313,8 @@ const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => 
     const target = parseInt(numMatch[1], 10);
     const suffix = value.slice(numMatch[1].length);
     const controls = animate(motionVal, target, {
-      duration: 1.5,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 2.8,
+      ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => setDisplay(`${Math.round(v)}${suffix}`),
     });
     return () => controls.stop();
