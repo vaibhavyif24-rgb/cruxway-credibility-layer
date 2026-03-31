@@ -32,7 +32,7 @@ const NotFound = () => {
         </p>
         <Link
           to="/"
-          className="inline-block mt-8 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold/60 hover:text-gold transition-colors duration-300 border-b border-gold/20 hover:border-gold/40 pb-1"
+          className="inline-block mt-8 font-sans text-[10px] font-medium uppercase tracking-[0.2em] text-gold/85 hover:text-gold transition-colors duration-300 border-b border-gold/20 hover:border-gold/40 pb-1"
         >
           Return Home
         </Link>

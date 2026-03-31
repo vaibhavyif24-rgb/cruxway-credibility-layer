@@ -57,8 +57,8 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
     <div ref={ref} className={`relative overflow-hidden ${bgClass}`}>
       {isContrastLight && (
         <>
-          <div className="absolute top-0 left-0 right-0 h-px bg-gold/10" />
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gold/10" />
+          <div className="absolute top-0 left-0 right-0 h-px bg-gold/20" />
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gold/20" />
         </>
       )}
       {isContrastLight && <LightSectionEffects variant="section" />}

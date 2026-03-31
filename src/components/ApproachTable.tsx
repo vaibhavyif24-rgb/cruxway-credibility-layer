@@ -29,7 +29,7 @@ const ApproachRow = ({ item, index, variant }: { item: ApproachItem; index: numb
         transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
         className={`relative grid grid-cols-[36px_1fr] md:grid-cols-[44px_1fr] lg:grid-cols-[48px_160px_1fr] items-baseline gap-x-2 md:gap-x-3 lg:gap-x-6 py-5 md:py-6 transition-all duration-300 ${
           isDark
-            ? 'border-b border-primary-foreground/[0.05] group-hover:border-gold/15'
+            ? 'border-b border-primary-foreground/[0.05] group-hover:border-gold/25'
             : 'border-b border-foreground/[0.06] group-hover:border-gold/20'
         }`}
       >
@@ -51,7 +51,7 @@ const ApproachRow = ({ item, index, variant }: { item: ApproachItem; index: numb
           transition={{ duration: 0.4, delay: index * 0.09 + 0.15 }}
           className={`font-serif text-[1.15rem] md:text-[1.3rem] tabular-nums leading-none tracking-[-0.03em] transition-colors duration-500 ${
             isDark
-              ? 'text-gold/20 group-hover:text-gold/45'
+              ? 'text-gold/20 group-hover:text-gold/70'
               : 'text-gold/18 group-hover:text-gold/40'
           }`}
         >

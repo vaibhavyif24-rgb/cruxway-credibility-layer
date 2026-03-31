@@ -40,14 +40,14 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
             onClick={() => setActive(i)}
             className={`min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border
               ${active === i
-                ? 'bg-gold/15 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
+                ? 'bg-gold/20 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
                 : isDark
                   ? 'border-primary-foreground/10 text-primary-foreground/40 hover:border-gold/20 hover:text-primary-foreground/60'
                   : 'border-border/40 text-muted-foreground hover:border-gold/20 hover:text-foreground/70'
               }
             `}
           >
-            <span className="text-gold/60 mr-1.5">{step.num}</span>
+            <span className="text-gold/85 mr-1.5">{step.num}</span>
             <span className="hidden sm:inline">{step.title}</span>
           </button>
         ))}
@@ -179,7 +179,7 @@ const OurPlaybook = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/10'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}

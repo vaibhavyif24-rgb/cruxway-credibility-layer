@@ -78,7 +78,7 @@ const CriteriaPipeline = () => {
                     w-12 h-12 rounded-sm flex items-center justify-center
                     border transition-all duration-400
                     ${activeStage === i
-                      ? 'border-gold/40 bg-gold/10 text-gold'
+                      ? 'border-gold/40 bg-gold/20 text-gold'
                       : 'border-primary-foreground/[0.1] bg-primary-foreground/[0.04] text-primary-foreground/40'
                     }
                   `}
@@ -93,7 +93,7 @@ const CriteriaPipeline = () => {
                     initial={{ scaleY: 0 }}
                     animate={isInView ? { scaleY: 1 } : {}}
                     transition={{ duration: 0.6, delay: 0.5 + i * 0.15 }}
-                    className="w-px h-4 bg-gold/15 origin-top mt-0"
+                    className="w-px h-4 bg-gold/20 origin-top mt-0"
                   />
                 )}
               </div>

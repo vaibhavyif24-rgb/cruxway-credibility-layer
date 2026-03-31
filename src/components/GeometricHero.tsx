@@ -102,7 +102,7 @@ const GeometricHero = () => {
       {[...Array(4)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-0.5 h-0.5 rounded-full bg-gold/15 z-[2]"
+          className="absolute w-0.5 h-0.5 rounded-full bg-gold/20 z-[2]"
           style={{ left: `${20 + i * 20}%`, top: `${25 + (i % 2) * 30}%` }}
           initial={{ opacity: 0, y: 0 }}
           animate={{ opacity: [0, 0.35, 0], y: [-5, -25] }}

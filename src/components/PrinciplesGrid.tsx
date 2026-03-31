@@ -137,7 +137,7 @@ const PrinciplesGrid = ({ principles }: PrinciplesGridProps) => {
           }`}
         >
           <motion.div
-            className="w-full h-full bg-gold/10"
+            className="w-full h-full bg-gold/20"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}

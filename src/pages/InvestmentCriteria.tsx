@@ -63,7 +63,7 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
         animate={isInView ? { height: '100%' } : {}}
         transition={{ duration: 0.6, delay: delay + 0.2, ease: [0.22, 1, 0.36, 1] }}
       />
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 text-gold/50`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 text-gold/75`}>
         {label}
       </p>
       <motion.p
@@ -97,7 +97,7 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
     >
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-2 flex items-center gap-1.5 text-gold/50`}>
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-2 flex items-center gap-1.5 text-gold/75`}>
         <span className="w-1.5 h-1.5 rounded-full bg-gold/30" />
         {label}
       </p>
@@ -236,7 +236,7 @@ const InvestmentCriteria = () => {
           </div>
 
           <motion.div
-            className="h-px bg-gold/15 mb-8 md:mb-10 origin-left"
+            className="h-px bg-gold/20 mb-8 md:mb-10 origin-left"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -298,7 +298,7 @@ const InvestmentCriteria = () => {
           {/* Timeline container */}
           <div className="relative">
             {/* Horizontal connecting line */}
-            <div className="absolute top-[6px] left-0 right-0 h-px bg-gold/10 hidden md:block" />
+            <div className="absolute top-[6px] left-0 right-0 h-px bg-gold/20 hidden md:block" />
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
               {[
@@ -338,7 +338,7 @@ const InvestmentCriteria = () => {
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${
-        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/10'
+        isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
         <WaveBackground variant="section" />
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="cta" />}

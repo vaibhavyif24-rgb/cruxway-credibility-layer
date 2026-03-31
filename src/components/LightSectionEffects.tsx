@@ -60,7 +60,7 @@ const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'sec
           return (
             <motion.div
               key={i}
-              className={`absolute rounded-full ${isHollow ? 'border border-gold/15 bg-transparent' : 'bg-gold/10'}`}
+              className={`absolute rounded-full ${isHollow ? 'border border-gold/25 bg-transparent' : 'bg-gold/20'}`}
               style={{
                 width: `${size}px`,
                 height: `${size}px`,
