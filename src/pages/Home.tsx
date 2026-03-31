@@ -267,7 +267,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
           fetchpriority="low"
           className="w-full h-full object-cover"
           poster={isIndia
-            ? 'https://images.pexels.com/videos/4193140/pexels-photo-4193140.jpeg?auto=compress&w=1200'
+            ? 'https://images.pexels.com/videos/35213738/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213738.jpeg?auto=compress&w=1200'
             : 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200'
           }
         >
