@@ -29,12 +29,26 @@ const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'h
         <div className="absolute top-[30%] left-0 right-0 h-px pointer-events-none overflow-hidden">
           <div className="w-[200px] h-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(43 70% 50% / 0.1), transparent)' }} />
         </div>
-        {[...Array(variant === 'hero' ? 5 : 3)].map((_, i) => (
-          <motion.div key={i} className="absolute w-[2px] h-[2px] rounded-full pointer-events-none" style={{ background: 'hsl(43 70% 50%)', left: `${15 + i * 18}%`, top: `${20 + (i * 15) % 60}%` }}
-            animate={{ y: [0, -30, -10, -40, 0], x: [0, 10, -5, 15, 0], opacity: [0, 0.25 * fx, 0.15 * fx, 0.3 * fx, 0], scale: [0, 1, 0.8, 1.2, 0] }}
-            transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 1.5, ease: 'easeInOut' }}
-          />
-        ))}
+      {[...Array(variant === 'hero' ? 8 : 5)].map((_, i) => {
+          const isHollow = i % 3 === 2;
+          const size = isHollow ? 3 : 2;
+          return (
+            <motion.div
+              key={i}
+              className={`absolute rounded-full pointer-events-none ${isHollow ? 'border border-gold/25 bg-transparent' : ''}`}
+              style={{
+                width: size,
+                height: size,
+                background: isHollow ? 'transparent' : 'hsl(43 70% 50%)',
+                left: `${10 + i * (80 / (variant === 'hero' ? 8 : 5))}%`,
+                top: `${20 + (i * 15) % 60}%`,
+                willChange: 'transform, opacity',
+              }}
+              animate={{ y: [0, -30, -10, -40, 0], x: [0, 10, -5, 15, 0], opacity: [0, 0.25 * fx, 0.15 * fx, 0.3 * fx, 0], scale: [0, 1, 0.8, 1.2, 0] }}
+              transition={{ duration: 6 + i * 1.5, repeat: Infinity, delay: i * 1.2, ease: 'easeInOut' }}
+            />
+          );
+        })}
         <motion.div className="absolute top-0 left-0 pointer-events-none" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.5, delay: 0.3 }}>
           <svg width="120" height="120" viewBox="0 0 120 120" fill="none" className="opacity-[0.04]">
             <motion.line x1="0" y1="60" x2="60" y2="60" stroke="hsl(43 70% 50%)" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.5 }} />

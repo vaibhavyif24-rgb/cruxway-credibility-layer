@@ -34,8 +34,8 @@ const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
         className="group h-full"
       >
         <motion.div
-          whileHover={hover ? { y: -6, rotateX: 2, rotateY: -2 } : {}}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
+          whileHover={hover ? { y: -3, rotateX: 2, rotateY: -2 } : {}}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
           className={`
             relative overflow-hidden rounded-sm h-full
             ${isDark
