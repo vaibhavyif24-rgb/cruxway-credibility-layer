@@ -410,7 +410,7 @@ const InvestmentCriteria = () => {
       </section>
 
       {/* What We Look For — Scroll Zoom */}
-      <section className="bg-background overflow-hidden">
+      <section className="bg-background overflow-x-clip">
         <div className="px-5 md:px-10 lg:px-16 pt-4 md:pt-6 lg:pt-8">
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
