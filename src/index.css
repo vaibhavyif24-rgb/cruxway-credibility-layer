@@ -418,4 +418,13 @@
     border-radius: 50%;
     animation: spin-smooth 0.8s linear infinite;
   }
+
+  /* Card hover glow utility */
+  .card-hover-glow {
+    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-hover-glow:hover {
+    box-shadow: 0 8px 32px -8px hsl(43 78% 50% / 0.1);
+    transform: translateY(-2px);
+  }
 }

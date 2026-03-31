@@ -3,7 +3,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
 /* ─── Minimal SVG flag icons ─── */
 const IndiaFlag = ({ size = 16 }: { size?: number }) => (
@@ -40,7 +40,8 @@ const SiteHeader = () => {
   const prefix = `/${region}`;
   const isDark = theme === 'dark';
 
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress, scrollY } = useScroll();
+  const headerBgOpacity = useTransform(scrollY, [0, 60], [0, 0.95]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -88,14 +89,30 @@ const SiteHeader = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isDark
             ? `hero-gradient-animated ${scrolled ? 'shadow-[0_2px_16px_-2px_hsl(228_55%_6%/0.5)]' : ''}`
-            : `bg-white/90 backdrop-blur-xl ${scrolled ? 'shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'border-b border-transparent'}`
+            : `backdrop-blur-xl ${scrolled ? 'shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'border-b border-transparent'}`
         }`}
       >
+        {/* Light mode smooth background fade */}
+        {!isDark && (
+          <motion.div
+            className="absolute inset-0 bg-white"
+            style={{ opacity: headerBgOpacity }}
+          />
+        )}
+
         {/* Scroll progress bar */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-[2px] bg-gold/40 origin-left z-50"
+          className="absolute top-0 left-0 right-0 h-[2px] origin-left z-50"
           style={{ scaleX: scrollYProgress }}
-        />
+        >
+          <div className="w-full h-full bg-gold/40" />
+          <motion.div
+            initial={{ opacity: 0.8, scaleX: 0.3 }}
+            animate={{ opacity: 0, scaleX: 1 }}
+            transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
+            className="absolute inset-0 bg-gold/30 origin-left"
+          />
+        </motion.div>
 
         {/* Animated shimmer line */}
         <div
@@ -127,21 +144,19 @@ const SiteHeader = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.08em] py-1.5 px-1.5 rounded-sm transition-all duration-200 active:scale-[0.93] active:bg-gold/[0.06] ${
+                    className={`relative font-sans text-[10px] font-medium uppercase tracking-[0.08em] py-1.5 px-2 rounded-sm transition-all duration-300 ${
                       isActive(item.path)
-                        ? isDark
-                          ? 'text-primary-foreground bg-primary-foreground/[0.04]'
-                          : 'text-[hsl(228,58%,18%)] bg-foreground/[0.03]'
+                        ? 'text-gold font-semibold'
                         : isDark
-                          ? 'text-primary-foreground/40 hover:text-primary-foreground/70 hover:bg-primary-foreground/[0.03]'
-                          : 'text-[hsl(228,8%,46%)] hover:text-foreground hover:bg-foreground/[0.02]'
+                          ? 'text-primary-foreground/40 hover:text-primary-foreground/70'
+                          : 'text-foreground/40 hover:text-foreground/70'
                     }`}
                   >
                     {item.label}
                     {isActive(item.path) && (
                       <motion.span
                         layoutId="nav-underline"
-                        className={`absolute -bottom-0.5 left-0 right-0 h-px ${isDark ? 'bg-gold/30' : 'bg-[hsl(228,45%,45%)]/30'}`}
+                        className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold rounded-full"
                         transition={{ type: 'spring', stiffness: 400, damping: 35 }}
                       />
                     )}
@@ -227,10 +242,10 @@ const SiteHeader = () => {
 
               <Link
                 to="/investor-login"
-                className={`btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-5 py-2.5 border transition-all duration-300 ${
+                className={`btn-premium font-sans text-[10px] font-medium uppercase tracking-[0.16em] px-5 py-2.5 border transition-all duration-300 relative overflow-hidden ${
                   isDark
-                    ? 'border-gold/12 text-gold/80 hover:border-gold/30 hover:text-gold/85'
-                    : 'border-gold/20 text-gold hover:border-gold/40 hover:text-foreground'
+                    ? 'border-gold/20 text-gold/80 hover:border-gold/40 hover:text-gold'
+                    : 'border-gold/30 text-gold hover:border-gold/50 hover:text-gold'
                 }`}
               >
                 Investor Login
@@ -295,10 +310,10 @@ const SiteHeader = () => {
                   >
                     <Link
                       to={item.path}
-                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-all duration-200 active:scale-95 active:text-gold/85 ${
+                      className={`font-serif text-[1.5rem] tracking-[-0.02em] transition-all duration-200 active:scale-95 ${
                         isActive(item.path)
-                          ? isDark ? 'text-primary-foreground' : 'text-foreground'
-                          : isDark ? 'text-primary-foreground/25' : 'text-muted-foreground'
+                          ? 'text-gold font-medium'
+                          : isDark ? 'text-primary-foreground/25' : 'text-foreground/25'
                       }`}
                     >
                       {item.label}
