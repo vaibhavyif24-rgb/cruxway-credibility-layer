@@ -98,7 +98,7 @@ const GuidingPrinciples = () => {
       <PrinciplesGrid principles={principles} />
 
       {/* CTA */}
-      <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(38, 45%, 55%, 0.12), transparent)', animationDuration: '5s' }} />
+      <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.12), transparent)', animationDuration: '5s' }} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-6 md:py-10 lg:py-12 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(38,16%,92%)] text-foreground border-t border-gold/10'

@@ -89,7 +89,7 @@ const OurFocus = () => {
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(105deg, transparent 40%, hsl(38,48%,52%,0.03) 50%, transparent 60%)',
+              background: 'linear-gradient(105deg, transparent 40%, hsl(40,65%,44%,0.03) 50%, transparent 60%)',
               backgroundSize: '300% 100%',
               animation: 'shimmer-sweep 8s linear infinite',
             }}
@@ -99,7 +99,7 @@ const OurFocus = () => {
         {/* Section entry gold wipe */}
         <motion.div
           className="absolute top-0 left-0 right-0 h-px z-10"
-          style={{ background: 'linear-gradient(90deg, transparent, hsl(38 48% 52% / 0.15), transparent)' }}
+          style={{ background: 'linear-gradient(90deg, transparent, hsl(40 65% 44% / 0.15), transparent)' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -224,7 +224,7 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
       <motion.p
         className="font-serif text-[clamp(1.8rem,3.5vw,2.8rem)] text-gold leading-none tracking-[-0.02em]"
         animate={isInView ? {
-          textShadow: ['0 0 0px hsl(38 48% 52% / 0)', '0 0 30px hsl(38 48% 52% / 0.4)', '0 0 0px hsl(38 48% 52% / 0)'],
+          textShadow: ['0 0 0px hsl(40 65% 44% / 0)', '0 0 30px hsl(40 65% 44% / 0.4)', '0 0 0px hsl(40 65% 44% / 0)'],
         } : {}}
         transition={{ duration: 2, delay: delay + 0.5, ease: 'easeInOut' }}
       >
@@ -319,7 +319,7 @@ const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLook
         <motion.div
           className="h-px origin-left"
           style={{
-            background: 'linear-gradient(90deg, hsl(38 48% 52% / 0.2), hsl(38 48% 52% / 0.05), transparent)',
+            background: 'linear-gradient(90deg, hsl(40 65% 44% / 0.2), hsl(40 65% 44% / 0.05), transparent)',
             opacity: dividerOpacity,
           }}
         />
