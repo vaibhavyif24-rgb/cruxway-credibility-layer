@@ -139,7 +139,7 @@ const Word = ({
   isDark: boolean;
   isHighlighted?: boolean;
 }) => {
-  const opacity = useTransform(progress, range, [0.15, 1]);
+  const opacity = useTransform(progress, range, [0.3, 1]);
   return (
     <motion.span
       style={{
