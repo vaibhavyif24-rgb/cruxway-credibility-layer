@@ -116,7 +116,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
           <button
             key={i}
             onClick={() => { setActive(i); setAutoplay(false); }}
-            className={`group flex-1 text-left relative py-3 md:py-4 transition-all duration-500 min-h-[44px] ${
+            className={`group flex-1 min-w-[80px] text-left relative py-3 md:py-4 transition-all duration-500 min-h-[44px] whitespace-nowrap ${
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
