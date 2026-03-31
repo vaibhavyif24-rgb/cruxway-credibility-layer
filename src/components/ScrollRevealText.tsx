@@ -51,7 +51,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
           : isContrastLight
-            ? 'bg-[hsl(40,22%,92%)] text-foreground'
+            ? 'bg-[hsl(40,25%,90%)] text-foreground'
             : 'bg-background text-foreground'
       } ${className}`}
     >
