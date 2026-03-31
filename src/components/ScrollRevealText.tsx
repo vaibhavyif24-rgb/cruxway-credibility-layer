@@ -126,8 +126,8 @@ const Word = ({
     <motion.span
       style={{
         opacity,
-        textShadow: isHighlighted ? '0 0 15px hsl(43,78%,50%,0.25)' : undefined,
-        fontWeight: isHighlighted ? 500 : undefined,
+        textShadow: isHighlighted ? '0 0 20px hsl(43,78%,50%,0.35), 0 0 40px hsl(43,78%,50%,0.15)' : undefined,
+        fontWeight: isHighlighted ? 600 : undefined,
       }}
       className={`inline-block mr-[0.3em] ${
         isHighlighted
