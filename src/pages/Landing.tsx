@@ -141,7 +141,7 @@ const Landing = () => {
                       animate={{ opacity: [0, 0.6, 0.3] }}
                       transition={{ duration: 0.8, ease: 'easeOut' }}
                       className="absolute inset-0 pointer-events-none"
-                      style={{ background: 'radial-gradient(ellipse at center, hsl(38 48% 52% / 0.15) 0%, transparent 70%)' }}
+                      style={{ background: 'radial-gradient(ellipse at center, hsl(40 65% 44% / 0.15) 0%, transparent 70%)' }}
                     />
                   )}
                 </AnimatePresence>
