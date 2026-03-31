@@ -21,7 +21,7 @@ import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
 const investmentProfile = {
   us: [
     { label: 'Revenue Range', value: '$1M – $10M' },
-    { label: 'EBITDA Range', value: '$500K – $2.5M' },
+    { label: 'EBITDA Range', value: '$500K – $2.5M+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
     { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
