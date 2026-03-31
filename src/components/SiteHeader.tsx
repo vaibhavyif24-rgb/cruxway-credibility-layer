@@ -89,14 +89,30 @@ const SiteHeader = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isDark
             ? `hero-gradient-animated ${scrolled ? 'shadow-[0_2px_16px_-2px_hsl(228_55%_6%/0.5)]' : ''}`
-            : `bg-white/90 backdrop-blur-xl ${scrolled ? 'shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'border-b border-transparent'}`
+            : `backdrop-blur-xl ${scrolled ? 'shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'border-b border-transparent'}`
         }`}
       >
+        {/* Light mode smooth background fade */}
+        {!isDark && (
+          <motion.div
+            className="absolute inset-0 bg-white"
+            style={{ opacity: headerBgOpacity }}
+          />
+        )}
+
         {/* Scroll progress bar */}
         <motion.div
-          className="absolute top-0 left-0 right-0 h-[2px] bg-gold/40 origin-left z-50"
+          className="absolute top-0 left-0 right-0 h-[2px] origin-left z-50"
           style={{ scaleX: scrollYProgress }}
-        />
+        >
+          <div className="w-full h-full bg-gold/40" />
+          <motion.div
+            initial={{ opacity: 0.8, scaleX: 0.3 }}
+            animate={{ opacity: 0, scaleX: 1 }}
+            transition={{ duration: 1.5, delay: 0.3, ease: 'easeOut' }}
+            className="absolute inset-0 bg-gold/30 origin-left"
+          />
+        </motion.div>
 
         {/* Animated shimmer line */}
         <div
