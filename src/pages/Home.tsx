@@ -233,67 +233,139 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
   );
 };
 
-/* ─── Cinematic Breaker ─── */
-const CinematicBreaker = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
+/* ─── Opportunity Cinematic Section Header ─── */
+const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: sectionRef,
     offset: ['start end', 'end start'],
   });
-  const vidY = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
-  const vidScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.05, 1.12, 1.05]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.65, 0.35, 0.65]);
 
-  const videoSrc = isIndia
-    ? 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4'
-    : 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4';
+  const videoScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.08, 1.15, 1.08]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '6%']);
+  const textY = useTransform(scrollYProgress, [0.15, 0.5], [40, 0]);
+  const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
 
   return (
-    <section ref={ref} className="relative h-[30vh] md:h-[40vh] overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden"
+      style={{ height: 'clamp(50vh, 60vh, 70vh)' }}
+    >
+      {/* Video background with parallax */}
       <motion.div
-        className="absolute inset-0"
-        style={{ y: vidY, scale: vidScale }}
+        className="absolute inset-[-10%]"
+        style={{ scale: videoScale, y: videoY }}
       >
         <video
-          src={videoSrc}
           autoPlay
           muted
           loop
           playsInline
+          preload="metadata"
           className="w-full h-full object-cover"
-        />
+          poster={isIndia
+            ? 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?w=1200&q=80'
+            : 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80'
+          }
+        >
+          <source
+            src={isIndia
+              ? 'https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4'
+              : 'https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_30fps.mp4'
+            }
+            type="video/mp4"
+          />
+        </video>
       </motion.div>
 
+      {/* Deep cinematic overlay — navy, not black */}
+      <div className="absolute inset-0 z-[2]" style={{
+        background: isDark
+          ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
+          : 'linear-gradient(to bottom, hsl(228 45% 14% / 0.65) 0%, hsl(228 45% 14% / 0.82) 40%, hsl(228 45% 14% / 0.92) 100%)'
+      }} />
+
+      {/* Subtle grain texture */}
+      <div className="absolute inset-0 z-[3] opacity-[0.03] pointer-events-none"
+        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }}
+      />
+
+      {/* Content — label, heading, gold ornament */}
+      <div className="absolute inset-0 z-[4] flex items-center justify-center">
+        <motion.div
+          style={{ y: textY, opacity: textOpacity }}
+          className="text-center px-5 md:px-10 max-w-[680px]"
+        >
+          {/* Label with flanking lines */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center justify-center gap-3 mb-5"
+          >
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: 24 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="h-px bg-gold/50"
+            />
+            <p className="font-sans text-[11px] md:text-[12px] font-bold uppercase tracking-[0.3em] text-gold">
+              {isIndia ? 'The Opportunity' : 'Our Thesis'}
+            </p>
+            <motion.div
+              initial={{ width: 0 }}
+              whileInView={{ width: 24 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="h-px bg-gold/50"
+            />
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] text-white"
+          >
+            {isIndia
+              ? <>India's lower middle market is one of the most <span className="text-gold font-semibold">under-served</span> segments in global investing.</>
+              : <>Tens of thousands of <span className="text-gold font-semibold">essential</span> businesses keep America running.</>
+            }
+          </motion.h2>
+
+          {/* Gold ornament */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex items-center justify-center gap-2.5 mt-6"
+          >
+            <div className="w-6 h-px bg-gold/30" />
+            <div className="w-1.5 h-1.5 rotate-45 border border-gold/40" />
+            <div className="w-6 h-px bg-gold/30" />
+          </motion.div>
+        </motion.div>
+      </div>
+
       {/* Top gradient fade */}
-      <div className={`absolute top-0 left-0 right-0 h-1/3 z-10 ${
+      <div className={`absolute top-0 left-0 right-0 h-20 z-[5] pointer-events-none ${
         isDark
           ? 'bg-gradient-to-b from-primary to-transparent'
           : 'bg-gradient-to-b from-background to-transparent'
       }`} />
 
       {/* Bottom gradient fade */}
-      <div className={`absolute bottom-0 left-0 right-0 h-1/3 z-10 ${
+      <div className={`absolute bottom-0 left-0 right-0 h-20 z-[5] pointer-events-none ${
         isDark
           ? 'bg-gradient-to-t from-primary to-transparent'
           : 'bg-gradient-to-t from-[hsl(40,22%,91%)] to-transparent'
       }`} />
-
-      {/* Dark overlay — scroll-linked */}
-      <motion.div
-        className="absolute inset-0 bg-black z-[5]"
-        style={{ opacity: overlayOpacity }}
-      />
-
-      {/* Minimal separator — thin gold rule */}
-      <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <motion.div
-          initial={{ width: 0, opacity: 0 }}
-          whileInView={{ width: 60, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="h-px bg-gold/30"
-        />
-      </div>
     </section>
   );
 };
@@ -393,18 +465,17 @@ const Home = () => {
         variant="light"
       />
 
-      {/* Cinematic breaker — visual separation */}
-      <CinematicBreaker isIndia={isIndia} isDark={isDark} />
+      {/* The Opportunity — Cinematic video header */}
+      <OpportunityCinematic isIndia={isIndia} isDark={isDark} />
 
-      {/* Market Thesis */}
+      {/* Market Thesis — Stats and supporting text */}
       <ScrollRevealText
-        label={isIndia ? 'The Opportunity' : 'Our Thesis'}
         heading={
           isIndia
-            ? 'India\'s lower middle market is one of the most under-served segments in global investing. Companies proven over decades are ready for a partner who can help them scale with discipline.'
-            : 'Tens of thousands of essential businesses keep America running. Patient capital and operational expertise unlock their next chapter of growth.'
+            ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
+            : 'Patient capital and operational expertise unlock their next chapter of growth.'
         }
-        highlights={isIndia ? ['under-served', 'discipline'] : ['essential', 'Patient']}
+        highlights={isIndia ? ['discipline'] : ['Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
