@@ -273,7 +273,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
         >
           <source
             src={isIndia
-              ? 'https://videos.pexels.com/video-files/4193140/4193140-uhd_2562_1440_24fps.mp4'
+              ? 'https://videos.pexels.com/video-files/35213738/14917588_2560_1440_60fps.mp4'
               : 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4'
             }
             type="video/mp4"
