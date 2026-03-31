@@ -9,11 +9,13 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import TeamStickyDeck from '@/components/TeamStickyDeck';
+import CinematicHero from '@/components/CinematicHero';
 
-
-// Photos
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import vaibhavPhoto from '@/assets/vaibhav-sharma.png';
+
+import heroIndiaHome from '@/assets/hero-india-home.jpg';
+import heroUSHome from '@/assets/hero-us-home.jpg';
 
 // Deal logos — Harin
 import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
@@ -33,12 +35,9 @@ import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
 import lamResearchLogo from '@/assets/logos/lam-research.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
-import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
-import depaulLogo from '@/assets/logos/depaul.png';
 
 // Logos — Vaibhav
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
-import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
@@ -140,25 +139,22 @@ const indiaPartner: TeamMember = {
 };
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.0 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.3 },
   { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
   { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
-  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
+  { src: lamResearchLogo, alt: 'Lam Research', scale: 0.7 },
   { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
   { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
-  { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
-  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.0 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 1.3 },
   { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
   { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.2 },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.2 },
-  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.0 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 1.3 },
 ];
 
 /* ─── Deal Logo Marquee ─── */
@@ -179,6 +175,7 @@ const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-t
         className="flex items-center gap-8 md:gap-10 lg:gap-12 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
+        style={{ willChange: 'transform', transform: 'translateZ(0)' }}
       >
         {doubled.map((logo, i) => (
           <div
@@ -233,6 +230,8 @@ const ProfileCard = React.forwardRef<HTMLDivElement, { member: TeamMember; index
                       src={member.photo}
                       alt={member.name}
                       loading="lazy"
+                      width={140}
+                      height={140}
                       className="w-full h-full object-cover object-top"
                       initial={{ filter: 'grayscale(100%)' }}
                       whileInView={{ filter: 'grayscale(0%)' }}
@@ -359,35 +358,35 @@ const Team = () => {
   const isDark = theme === 'dark';
 
   return (
-    <div>
-      {/* Hero */}
-      <section className={`relative overflow-hidden ${isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground'}`}>
+    <div style={{ overflowX: 'clip' }}>
+      {/* Hero — with CinematicHero background */}
+      <section className={`relative overflow-hidden min-h-[60vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+        <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-20 pb-10 md:pt-34 md:pb-14 lg:pt-36 lg:pb-14">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(1.6rem,4.5vw,3rem)] max-w-[460px] leading-[1.12] tracking-[-0.025em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
-          <FadeIn delay={0.12}>
-            <p className={`font-sans text-[12px] md:text-[13px] leading-[1.65] md:leading-[1.7] mt-3 md:mt-4 max-w-[420px] ${isDark ? 'text-primary-foreground/40' : 'text-muted-foreground'}`}>
+          <FadeIn delay={0.14}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}
             </p>
           </FadeIn>
-          <FadeIn delay={0.16}>
-            <GoldRule className="mt-4 md:mt-6" />
+          <FadeIn delay={0.2}>
+            <GoldRule className="mt-4 md:mt-5" />
           </FadeIn>
         </div>
 
         {/* Stats Bar */}
-        <div className={`relative border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
-          
+        <div className={`absolute bottom-0 left-0 right-0 z-10 border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />

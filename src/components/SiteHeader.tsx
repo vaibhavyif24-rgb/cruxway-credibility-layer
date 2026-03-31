@@ -88,8 +88,8 @@ const SiteHeader = () => {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isDark
             ? `hero-gradient-animated ${scrolled ? 'shadow-[0_2px_16px_-2px_hsl(228_55%_6%/0.5)]' : ''}`
-            : `bg-white/90 backdrop-blur-xl ${scrolled ? 'shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'border-b border-transparent'}`
-        }`}
+            : `${scrolled ? 'bg-white shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'bg-white/90 border-b border-transparent'}`
+        } ${scrolled ? 'md:backdrop-blur-xl' : 'md:backdrop-blur-xl'}`}
       >
         {/* Scroll progress bar */}
         <motion.div
@@ -140,7 +140,7 @@ const SiteHeader = () => {
                       <motion.span
                         layoutId="nav-underline"
                         className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold rounded-full"
-                        transition={{ type: 'spring', stiffness: 400, damping: 35 }}
+                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
                     )}
                   </Link>

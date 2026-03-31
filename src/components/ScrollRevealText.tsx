@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import WaveBackground from '@/components/WaveBackground';
+import DarkSectionEffects from '@/components/DarkSectionEffects';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface ScrollRevealTextProps {
@@ -38,6 +39,9 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
   const isLight = variant === 'light';
   const isDarkText = isActuallyDark;
 
+  // variant=light + dark theme → use bg-primary instead of bg-background
+  const isLightVariantDarkTheme = isLight && theme === 'dark';
+
   const normHighlights = highlights.map(h => h.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, ''));
 
   return (
@@ -52,10 +56,18 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           ? 'bg-primary text-primary-foreground'
           : isContrastLight
             ? 'bg-[hsl(40,22%,91%)] text-foreground'
-            : 'bg-background text-foreground'
+            : isLightVariantDarkTheme
+              ? 'bg-primary text-primary-foreground'
+              : 'bg-background text-foreground'
       } ${className}`}
     >
       {isActuallyDark && <WaveBackground variant="section" />}
+      {isLightVariantDarkTheme && (
+        <>
+          <WaveBackground variant="section" />
+          <DarkSectionEffects />
+        </>
+      )}
       {isContrastLight && (
         <>
           <LightSectionEffects variant="section" />
@@ -75,7 +87,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           />
         </>
       )}
-      {isLight && <LightSectionEffects variant="section" />}
+      {isLight && !isLightVariantDarkTheme && <LightSectionEffects variant="section" />}
 
       <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-12 lg:py-14 flex flex-col items-center text-center">
         {label && (
@@ -97,7 +109,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
             const end = ((i + 1) / words.length) * 0.8;
             const cleanWord = word.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, '');
             const isHighlighted = normHighlights.includes(cleanWord);
-            return <Word key={i} word={word} range={[start, end]} progress={scrollYProgress} isDark={isDarkText} isHighlighted={isHighlighted} />;
+            return <Word key={i} word={word} range={[start, end]} progress={scrollYProgress} isDark={isDarkText || isLightVariantDarkTheme} isHighlighted={isHighlighted} />;
           })}
         </p>
 
@@ -105,7 +117,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
             className={`font-sans text-[14px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
-              isActuallyDark ? 'text-primary-foreground/45' : 'text-muted-foreground'
+              (isActuallyDark || isLightVariantDarkTheme) ? 'text-primary-foreground/45' : 'text-muted-foreground'
             }`}
           >
             {subtext}
@@ -114,11 +126,11 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
         {stats && stats.length > 0 && (
           <div className={`mt-8 md:mt-12 pt-8 md:pt-10 w-full max-w-[680px] ${
-            isActuallyDark ? 'border-t border-gold/35' : 'border-t border-gold/40'
+            (isActuallyDark || isLightVariantDarkTheme) ? 'border-t border-gold/35' : 'border-t border-gold/40'
           }`}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6">
               {stats.map((stat, i) => (
-                <StatReveal key={i} stat={stat} index={i} total={stats.length} progress={scrollYProgress} isDark={isDarkText} />
+                <StatReveal key={i} stat={stat} index={i} total={stats.length} progress={scrollYProgress} isDark={isDarkText || isLightVariantDarkTheme} />
               ))}
             </div>
           </div>
@@ -167,8 +179,6 @@ const StatReveal = ({
   progress: ReturnType<typeof useScroll>['scrollYProgress'];
   isDark: boolean;
 }) => {
-
-
   const statRef = useRef<HTMLDivElement>(null);
   const isInViewStat = useInView(statRef, { once: true });
   const [displayVal, setDisplayVal] = useState(stat.value);
@@ -195,7 +205,6 @@ const StatReveal = ({
   return (
     <motion.div
       ref={statRef}
-      
       className="text-center"
       initial={{ y: 15, scale: 0.95 }}
       whileInView={{ y: 0, scale: 1 }}

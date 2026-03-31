@@ -23,9 +23,9 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const { theme } = useTheme();
   const isMobile = useIsMobile();
 
-  const baseHeight = isMobile ? 48 : 80;
-  const baseMaxWidth = isMobile ? 160 : 280;
-  const containerHeight = isMobile ? 56 : 96;
+  const baseHeight = isMobile ? 34 : 80;
+  const baseMaxWidth = isMobile ? 120 : 280;
+  const containerHeight = isMobile ? 40 : 96;
 
   const isDarkVariant = variant === 'dark';
   const isActuallyDark = isDarkVariant && theme === 'dark';
@@ -70,15 +70,16 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
         className="flex items-center gap-6 md:gap-10 lg:gap-14 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
+        style={{ willChange: 'transform', transform: 'translateZ(0)' }}
       >
         {doubled.map((logo, i) => {
-          const s = logo.scale || 1;
+          const clampedScale = Math.max(0.7, Math.min(1.3, logo.scale || 1));
           return (
             <div
               key={`${logo.alt}-${i}`}
               className="flex items-center justify-center shrink-0 transition-transform duration-500 hover:scale-110"
               style={{
-                height: `${Math.round(s * containerHeight)}px`,
+                height: `${Math.round(clampedScale * containerHeight)}px`,
                 transform: `translateY(${Math.sin(i * 0.6) * 3}px)`,
               }}
             >
@@ -87,8 +88,8 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
                 alt={logo.alt}
                 className={`w-auto object-contain ${logoOpacity}`}
                 style={{
-                  height: `${Math.round(s * baseHeight)}px`,
-                  maxWidth: `${Math.round(s * baseMaxWidth)}px`,
+                  height: `${Math.round(clampedScale * baseHeight)}px`,
+                  maxWidth: `${Math.round(clampedScale * baseMaxWidth)}px`,
                   filter: goldFilter,
                   mixBlendMode: blendMode as any,
                   transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',

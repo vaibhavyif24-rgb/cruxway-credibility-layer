@@ -3,7 +3,7 @@ import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
 import { ChevronDown, ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import LogoMarquee from '@/components/LogoMarquee';
@@ -24,35 +24,29 @@ import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
 import lamResearchLogo from '@/assets/logos/lam-research.png';
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
-import culinaryInstituteLogo from '@/assets/logos/culinary-institute.png';
-import depaulLogo from '@/assets/logos/depaul.png';
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
-import ashokaLogo from '@/assets/logos/ashoka.png';
 import iicLogo from '@/assets/logos/iic.png';
 import treeforestLogo from '@/assets/logos/treeforest.png';
 import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.0 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.3 },
   { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
-  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 1.0 },
+  { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
   { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
-  { src: lamResearchLogo, alt: 'Lam Research', scale: 1.0 },
+  { src: lamResearchLogo, alt: 'Lam Research', scale: 0.7 },
   { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
   { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
-  { src: culinaryInstituteLogo, alt: 'Culinary Institute of America', scale: 1.0 },
-  { src: depaulLogo, alt: 'DePaul University', scale: 1.0 },
 ];
 
 const allLogos = [
   ...foundersLogos,
-  { src: ashokaLogo, alt: 'Ashoka University', scale: 1.0 },
-  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 2.0 },
+  { src: nitiAayogLogo, alt: 'NITI Aayog', scale: 1.3 },
   { src: iicLogo, alt: 'Impact Investors Council', scale: 1.0 },
   { src: treeforestLogo, alt: 'TreeForest Capital', scale: 1.2 },
   { src: lodhaGeniusLogo, alt: 'Lodha Genius', scale: 1.2 },
-  { src: swishinLogo, alt: 'Swishin Ventures', scale: 2.0 },
+  { src: swishinLogo, alt: 'Swishin Ventures', scale: 1.3 },
 ];
 
 const processStepsUS = [
@@ -90,37 +84,47 @@ const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; d
 );
 StatBlock.displayName = 'StatBlock';
 
-/* ─── Process Carousel ─── */
+/* ─── Process Carousel with Intersection Observer ─── */
 const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDark: boolean }) => {
   const [active, setActive] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const isMobile = useIsMobile();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInViewport = useInView(sectionRef, { once: false, amount: 0.3 });
+  const [hasEnteredView, setHasEnteredView] = useState(false);
+
+  // Only start once it enters viewport
+  useEffect(() => {
+    if (isInViewport && !hasEnteredView) {
+      setHasEnteredView(true);
+    }
+  }, [isInViewport, hasEnteredView]);
 
   useEffect(() => {
-    if (!autoplay) return;
+    if (!autoplay || !hasEnteredView) return;
     const timer = setInterval(() => {
       setActive(prev => (prev + 1) % steps.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [steps.length, autoplay]);
+  }, [steps.length, autoplay, hasEnteredView]);
 
   return (
-    <div className="w-full">
-      {/* Step headings — always visible, clickable */}
+    <div ref={sectionRef} className="w-full">
+      {/* Step headings */}
       <div className="flex border-b border-gold/10">
         {steps.map((step, i) => (
           <button
             key={i}
             onClick={() => { setActive(i); setAutoplay(false); }}
-            className={`group flex-1 text-left relative py-3 md:py-4 transition-all duration-500 ${
+            className={`group flex-1 text-left relative py-3 md:py-4 transition-all duration-500 min-h-[44px] ${
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
             {/* Gold progress line */}
             <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
-              {i === active && autoplay && (
+              {i === active && autoplay && hasEnteredView && (
                 <motion.div
-                  key={`progress-${active}`}
+                  key={`progress-${active}-${hasEnteredView}`}
                   className="h-full bg-gold"
                   initial={{ width: '0%' }}
                   animate={{ width: '100%' }}
@@ -138,13 +142,17 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
               }`}>
                 {step.num}
               </span>
-              <span className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
-                i === active
-                  ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
-                  : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
-              }`}>
-                {step.title}
-              </span>
+              <motion.span
+                className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                  i === active
+                    ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
+                    : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+                }`}
+                animate={i === active ? { scale: [1, 1.01, 1] } : {}}
+                transition={{ duration: 0.3 }}
+              >
+                {isMobile ? step.title.charAt(0) : step.title}
+              </motion.span>
             </div>
           </button>
         ))}
@@ -167,7 +175,6 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
             whileHover={{ rotateX: 0.5, rotateY: -0.5 }}
             style={{ transformPerspective: 800 }}
           >
-            {/* Large step number */}
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -209,7 +216,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
           <button
             onClick={() => { setActive(Math.max(0, active - 1)); setAutoplay(false); }}
             disabled={active === 0}
-            className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-20 ${
+            className={`min-h-[44px] font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-20 ${
               isDark ? 'text-primary-foreground/40 hover:text-gold' : 'text-foreground/40 hover:text-gold'
             }`}
           >
@@ -221,7 +228,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
           <button
             onClick={() => { setActive(Math.min(steps.length - 1, active + 1)); setAutoplay(false); }}
             disabled={active === steps.length - 1}
-            className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-20 ${
+            className={`min-h-[44px] font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-all duration-300 disabled:opacity-20 ${
               isDark ? 'text-primary-foreground/40 hover:text-gold' : 'text-foreground/40 hover:text-gold'
             }`}
           >
@@ -246,6 +253,9 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
   const textY = useTransform(scrollYProgress, [0.15, 0.5], [40, 0]);
   const textOpacity = useTransform(scrollYProgress, [0.15, 0.35], [0, 1]);
 
+  const pexelsUSVid = 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4';
+  const pexelsUSImg = 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200';
+
   return (
     <section
       ref={sectionRef}
@@ -255,45 +265,45 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
       {/* Video background with parallax */}
       <motion.div
         className="absolute inset-[-10%]"
-        style={{ scale: videoScale, y: videoY }}
+        style={{ scale: videoScale, y: videoY, willChange: 'transform' }}
       >
         <video
           autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
-          // @ts-ignore — fetchpriority is valid HTML but not in React's type defs yet
+          preload="none"
+          // @ts-ignore
           fetchpriority="low"
           className="w-full h-full object-cover"
           poster={isIndia
             ? 'https://images.pexels.com/videos/35213732/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213732.jpeg?auto=compress&w=1200'
-            : 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200'
+            : pexelsUSImg
           }
         >
           <source
             src={isIndia
               ? 'https://videos.pexels.com/video-files/35213732/14917606_2560_1440_60fps.mp4'
-              : 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4'
+              : pexelsUSVid
             }
             type="video/mp4"
           />
         </video>
       </motion.div>
 
-      {/* Deep cinematic overlay — navy, not black */}
+      {/* Deep cinematic overlay */}
       <div className="absolute inset-0 z-[2]" style={{
         background: isDark
           ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
           : 'linear-gradient(to bottom, hsl(228 45% 12% / 0.75) 0%, hsl(228 45% 12% / 0.88) 40%, hsl(228 45% 12% / 0.95) 100%)'
       }} />
 
-      {/* Radial vignette — cinematic depth-of-field feel */}
+      {/* Radial vignette */}
       <div className="absolute inset-0 z-[2] pointer-events-none" style={{
         background: 'radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)'
       }} />
 
-      {/* Light-mode warm center glow — lets video warmth breathe */}
+      {/* Light-mode warm center glow */}
       {!isDark && (
         <div className="absolute inset-0 z-[2] pointer-events-none" style={{
           background: 'radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.04) 0%, transparent 60%)'
@@ -305,13 +315,12 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
         style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }}
       />
 
-      {/* Content — label, heading, gold ornament */}
+      {/* Content */}
       <div className="absolute inset-0 z-[4] flex items-center justify-center">
         <motion.div
           style={{ y: textY, opacity: textOpacity }}
           className="text-center px-5 md:px-10 max-w-[680px]"
         >
-          {/* Label with flanking lines */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -338,13 +347,12 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             />
           </motion.div>
 
-          {/* Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] text-white"
+            className="font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]"
           >
             {isIndia
               ? <>India's lower middle market is one of the most <span className="text-gold font-semibold">under-served</span> segments in global investing.</>
@@ -352,7 +360,6 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             }
           </motion.h2>
 
-          {/* Gold ornament */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -393,7 +400,7 @@ const Home = () => {
   return (
     <div style={{ overflowX: 'clip' }}>
       {/* Hero */}
-      <section className={`relative overflow-hidden min-h-[80vh] md:min-h-[85vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <section className={`relative overflow-hidden min-h-[60vh] md:min-h-[85vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
@@ -403,19 +410,19 @@ const Home = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Cruxway India' : 'Investment Firm'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
+            <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.8rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Companies</>
                 : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[14px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground'}`}>
               {isIndia
                 ? 'Long-term capital and operational expertise for founder-led companies shaping India\'s economic future.'
                 : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
@@ -426,27 +433,31 @@ const Home = () => {
           </FadeIn>
           <FadeIn delay={0.28}>
             <div className="mt-6 md:mt-8 flex flex-wrap gap-3">
-              <Link
-                to={`/${region}/focus`}
-                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
-                  isDark
-                    ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
-                    : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
-                }`}
-              >
-                Our Focus
-              </Link>
-              <Link
-                to={`/${region}/contact`}
-                className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
-              >
-                Get in Touch
-              </Link>
+              <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  to={`/${region}/focus`}
+                  className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
+                    isDark
+                      ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
+                      : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
+                  }`}
+                >
+                  Our Focus
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  to={`/${region}/contact`}
+                  className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                >
+                  Get in Touch
+                </Link>
+              </motion.div>
             </div>
           </FadeIn>
           {/* Scroll indicator */}
           <motion.div
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
             transition={{ delay: 1.5, duration: 0.8 }}
@@ -492,7 +503,7 @@ const Home = () => {
         highlights={isIndia ? ['discipline'] : ['Patient']}
         stats={
           isIndia
-            ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$5T', label: 'Economy by 2028' }]
+            ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
             : [{ value: '10M+', label: 'Small Businesses' }, { value: '$10T+', label: 'Transition Value' }, { value: '70%+', label: 'Lack Succession Plans' }]
         }
         variant="dark"
@@ -513,7 +524,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Social Proof — Simple fade, no scroll-linked words */}
+      {/* Social Proof */}
       <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-background'}`}>
         <LightSectionEffects variant="section" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 text-center">
@@ -531,7 +542,7 @@ const Home = () => {
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 
-      {/* CTA — Full-Width Gold Band */}
+      {/* CTA */}
       <div className="h-px w-full shimmer-effect mt-0" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.15), transparent)', animationDuration: '5s' }} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 ${
@@ -542,7 +553,6 @@ const Home = () => {
 
         <div className="relative max-w-[1080px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            {/* Left: Text */}
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
@@ -557,18 +567,19 @@ const Home = () => {
               </FadeIn>
             </div>
 
-            {/* Right: Large CTA Button */}
             <FadeIn delay={0.1}>
-              <Link
-                to={`/${region}/contact`}
-                className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
-              >
-                Get in Touch
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                <span className="absolute inset-0 pointer-events-none overflow-hidden">
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
-                </span>
-              </Link>
+              <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  to={`/${region}/contact`}
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden btn-premium-glow"
+                >
+                  Get in Touch
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  <span className="absolute inset-0 pointer-events-none overflow-hidden">
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
+                  </span>
+                </Link>
+              </motion.div>
             </FadeIn>
           </div>
         </div>
