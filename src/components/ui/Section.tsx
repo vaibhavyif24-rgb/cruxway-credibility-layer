@@ -85,7 +85,7 @@ export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
         whileInView={{ width: 32 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className="h-px bg-gold/20"
+        className="h-px bg-gold/30"
       />
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
