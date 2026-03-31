@@ -142,7 +142,6 @@ const SiteHeader = () => {
                         className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold rounded-full"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       />
-                      />
                     )}
                   </Link>
                 ))}
