@@ -1,48 +1,32 @@
 
 
-## Video Upgrade + Overlay Fix + Performance Attributes
+## Replace India Video with Mumbai Skyline Aerial
 
-**File**: `src/pages/Home.tsx` — `OpportunityCinematic` component (lines 260-279, 283-287)
+### What changes
+Replace the India region video and poster in the `OpportunityCinematic` component with a premium aerial shot of Mumbai's skyline. No other changes.
 
-### 1. Replace video sources (lines 272-278)
+### File: `src/pages/Home.tsx` (lines 269-276)
 
-**US region**: Manhattan evening skyline — cinematic, horizontal 2560x1440, slow pan across Midtown at dusk
+**India video source** (line 276):
 ```
-https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4
-```
-
-**India region**: Drone aerial of modern high-rise cityscape — aspirational, horizontal 2562x1440, smooth aerial dolly
-```
-https://videos.pexels.com/video-files/4193140/4193140-uhd_2562_1440_24fps.mp4
+FROM: https://videos.pexels.com/video-files/4193140/4193140-uhd_2562_1440_24fps.mp4
+TO:   https://videos.pexels.com/video-files/35213738/14917588_2560_1440_60fps.mp4
 ```
 
-### 2. Update poster images (lines 267-270)
-
-Match poster images to the video content:
-- India: `https://images.pexels.com/videos/4193140/pexels-photo-4193140.jpeg?auto=compress&w=1200`
-- US: `https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200`
-
-### 3. Fix light-mode overlay (line 286)
-
-Change from:
+**India poster image** (line 270):
 ```
-hsl(228 45% 14% / 0.65) ... 0.82 ... 0.92
-```
-To:
-```
-hsl(228 45% 12% / 0.75) ... 0.88 ... 0.95
+FROM: https://images.pexels.com/videos/4193140/pexels-photo-4193140.jpeg?auto=compress&w=1200
+TO:   https://images.pexels.com/videos/35213738/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213738.jpeg?auto=compress&w=1200
 ```
 
-### 4. Add performance attributes to `<video>` (line 260-265)
+### Why this video
+- **"Aerial View of Mumbai City's Expansive Skyline"** — explicitly Mumbai, recognizably Indian
+- 2560x1440 at 60fps — smooth, cinematic drone footage
+- Expansive city skyline perspective — aspirational, modern India that global investors see
+- Works under both the dark navy overlay (deep cinematic mood) and the heavier light-mode overlay (subtle texture)
+- By the same creator (Rajkumarrr comics) who has a series of Mumbai aerials — professional, consistent quality
 
-Add `fetchPriority="low"` and `loading="lazy"` to the `<video>` element (note: `loading="lazy"` is non-standard on video but harmless; the key optimization is `preload="metadata"` which is already there, plus `fetchPriority="low"`).
-
-### 5. Fix hooks error
-
-The "fewer hooks" error needs investigation — will also check if there's a conditional hook call anywhere in the render path. The `ScrollRevealText` component uses `useScroll` unconditionally so it should be fine. This error may have been transient from a hot-reload. Will ensure no conditional returns exist before hooks in the component.
-
-### Technical details
-- Single file edit: `src/pages/Home.tsx`, lines 260-287
-- All changes are within the `OpportunityCinematic` component
-- Video URLs are confirmed horizontal (landscape) format from Pexels with high engagement
+### Scope
+- US video, overlays, grain, text, ornament, parallax — all unchanged
+- Only two URL strings are swapped
 
