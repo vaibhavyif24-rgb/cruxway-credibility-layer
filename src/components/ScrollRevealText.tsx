@@ -83,11 +83,11 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
             style={{ opacity: useTransform(scrollYProgress, [0, 0.15], [0, 1]) }}
             className="flex items-center gap-3 mb-5 md:mb-6"
           >
-            <div className="w-6 h-px bg-gold/50" />
+            <motion.div initial={{ width: 0 }} whileInView={{ width: 24 }} viewport={{ once: true }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="h-px bg-gold/50" />
             <p className="font-sans text-[12px] md:text-[13px] font-bold uppercase tracking-[0.3em] text-gold">
               {label}
             </p>
-            <div className="w-6 h-px bg-gold/50" />
+            <motion.div initial={{ width: 0 }} whileInView={{ width: 24 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} className="h-px bg-gold/50" />
           </motion.div>
         )}
 
