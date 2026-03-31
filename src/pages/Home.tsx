@@ -151,7 +151,7 @@ const ProcessCarousel = ({ steps, isDark }: { steps: typeof processStepsUS; isDa
                 animate={i === active ? { scale: [1, 1.01, 1] } : {}}
                 transition={{ duration: 0.3 }}
               >
-                {isMobile ? step.title.charAt(0) : step.title}
+                {isMobile ? step.title : step.title}
               </motion.span>
             </div>
           </button>
