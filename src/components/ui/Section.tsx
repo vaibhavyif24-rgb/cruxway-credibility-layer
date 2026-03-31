@@ -92,6 +92,8 @@ export const GoldRule = forwardRef<HTMLDivElement, { className?: string }>(
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4, delay: 0.3 }}
+        animate={{ scale: [1, 1.15, 1] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         whileHover={{ rotate: 180, scale: 1.4 }}
         className="w-1.5 h-1.5 rotate-45 border border-gold/35"
       />
