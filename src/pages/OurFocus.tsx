@@ -1,16 +1,16 @@
+import React, { useState } from 'react';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
-import CinematicScrollReveal from '@/components/CinematicScrollReveal';
-import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import WaveBackground from '@/components/WaveBackground';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
 import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
@@ -41,22 +41,69 @@ const whatWeLookFor = [
   { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
+const indiaSectors = {
+  left: {
+    heading: 'Industrials',
+    items: [
+      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
+      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
+      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
+      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
+    ],
+  },
+  right: {
+    heading: 'Business & Industrial Services',
+    items: [
+      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
+      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
+      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
+      { name: 'Industrial Technology', desc: 'Automation & process software' },
+    ],
+  },
+};
+
+const usSectors = {
+  left: {
+    heading: 'Industrials',
+    items: [
+      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
+      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
+      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
+      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
+    ],
+  },
+  right: {
+    heading: 'Business & Industrial Services',
+    items: [
+      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
+      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
+      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
+      { name: 'Industrial Technology', desc: 'Automation & process software' },
+    ],
+  },
+};
+
 const OurFocus = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const isIndia = region === 'india';
+  const isMobile = useIsMobile();
   const profile = isIndia ? investmentProfile.india : investmentProfile.us;
+  const sectors = isIndia ? indiaSectors : usSectors;
 
   const numberCards = profile.slice(0, 2);
   const textCards = profile.slice(2);
+
+  const scrollTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="overflow-x-clip">
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
-        
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
@@ -81,23 +128,41 @@ const OurFocus = () => {
         <HeroDivider />
       </section>
 
-      {/* Investment Profile — Typographic Term Sheet */}
-      <section className={`relative overflow-hidden ${
+      {/* Anchor Navigation */}
+      <div className={`relative overflow-hidden border-b ${isDark ? 'bg-primary border-primary-foreground/[0.06]' : 'bg-background border-border/30'}`}>
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-3">
+          <div className="flex gap-2 md:gap-3 overflow-x-auto scrollbar-hide">
+            {[
+              { label: 'Investment Profile', id: 'investment-profile' },
+              { label: 'Sectors', id: 'sectors' },
+              { label: 'Investment Criteria', id: 'investment-criteria' },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollTo(item.id)}
+                className={`whitespace-nowrap font-sans text-[11px] uppercase tracking-[0.18em] px-4 py-2 rounded-full border border-gold/30 transition-colors duration-300 min-h-[44px] hover:bg-gold/10 ${
+                  isDark ? 'text-gold/80 hover:text-gold' : 'text-gold hover:text-gold'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Investment Profile */}
+      <section id="investment-profile" className={`relative overflow-hidden ${
         isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
       }`}>
         {isDark ? <DarkSectionEffects variant="cta" /> : <LightSectionEffects variant="section" />}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(105deg, transparent 40%, hsl(40,65%,44%,0.03) 50%, transparent 60%)',
-              backgroundSize: '300% 100%',
-              animation: 'shimmer-sweep 8s linear infinite',
-            }}
-          />
+          <div className="absolute inset-0" style={{
+            background: 'linear-gradient(105deg, transparent 40%, hsl(40,65%,44%,0.03) 50%, transparent 60%)',
+            backgroundSize: '300% 100%',
+            animation: 'shimmer-sweep 8s linear infinite',
+          }} />
         </div>
-
-        {/* Section entry gold wipe */}
         <motion.div
           className="absolute top-0 left-0 right-0 h-px z-10"
           style={{ background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.15), transparent)' }}
@@ -106,7 +171,6 @@ const OurFocus = () => {
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         />
-
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Investment Profile</SectionLabel>
@@ -115,15 +179,11 @@ const OurFocus = () => {
             </h2>
             <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
-
-          {/* Top row: Revenue + EBITDA — headline numbers */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-10">
             {numberCards.map((stat, i) => (
               <TypographicNumber key={stat.label} label={stat.label} value={stat.value} delay={i * 0.08} isDark={isDark} />
             ))}
           </div>
-
-          {/* Animated gold divider */}
           <motion.div
             className="h-px bg-gold/20 mb-8 md:mb-10 origin-left"
             initial={{ scaleX: 0 }}
@@ -131,8 +191,6 @@ const OurFocus = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           />
-
-          {/* Bottom section: Structure, Hold Period, Aligned Partnerships */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {textCards.map((stat, i) => (
               <TypographicText key={stat.label} label={stat.label} value={stat.value} delay={(i + 2) * 0.08} isDark={isDark} />
@@ -141,8 +199,79 @@ const OurFocus = () => {
         </div>
       </section>
 
-      {/* What We Look For — Numbered Prose */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14">
+      {/* Sectors We Cover */}
+      <section id="sectors" className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 ${isDark ? 'bg-primary' : 'bg-background'}`}>
+        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
+        <div className="relative max-w-[1080px] mx-auto">
+          <FadeIn>
+            <SectionLabel light={isDark}>Sectors We Cover</SectionLabel>
+            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              Where We Invest
+            </h2>
+            <GoldRule className="mt-3 mb-8 md:mb-10" />
+          </FadeIn>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative">
+            {/* Vertical divider on desktop */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gold/15" />
+
+            {/* Left column */}
+            <FadeIn delay={0}>
+              <div>
+                <h3 className={`font-serif text-[1.2rem] md:text-[1.4rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  {sectors.left.heading}
+                </h3>
+                <ul className="space-y-3">
+                  {sectors.left.items.map((item, i) => (
+                    <FadeIn key={i} delay={i * 0.06}>
+                      <li className="flex items-start gap-2.5">
+                        <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
+                        <div>
+                          <span className={`font-serif text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                            {item.name}
+                          </span>
+                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                            {item.desc}
+                          </span>
+                        </div>
+                      </li>
+                    </FadeIn>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+
+            {/* Right column */}
+            <FadeIn delay={0.08}>
+              <div>
+                <h3 className={`font-serif text-[1.2rem] md:text-[1.4rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  {sectors.right.heading}
+                </h3>
+                <ul className="space-y-3">
+                  {sectors.right.items.map((item, i) => (
+                    <FadeIn key={i} delay={0.08 + i * 0.06}>
+                      <li className="flex items-start gap-2.5">
+                        <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
+                        <div>
+                          <span className={`font-serif text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                            {item.name}
+                          </span>
+                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                            {item.desc}
+                          </span>
+                        </div>
+                      </li>
+                    </FadeIn>
+                  ))}
+                </ul>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* What We Look For — Tabbed Desktop / Accordion Mobile */}
+      <section id="investment-criteria" className={`overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${isDark ? 'bg-background' : 'bg-background'}`}>
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
@@ -152,16 +281,13 @@ const OurFocus = () => {
             <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
-          <div className="space-y-0">
-            {whatWeLookFor.map((item, i) => (
-              <CriterionRow key={item.num} item={item} index={i} isDark={isDark} isLast={i === whatWeLookFor.length - 1} />
-            ))}
-          </div>
+          {isMobile ? (
+            <CriteriaAccordion items={whatWeLookFor} isDark={isDark} />
+          ) : (
+            <CriteriaTabs items={whatWeLookFor} isDark={isDark} />
+          )}
         </div>
       </section>
-
-      {/* Cinematic Scroll Reveal */}
-      {isIndia ? <CinematicScrollReveal /> : <USCinematicScrollReveal />}
 
       {/* CTA */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 ${
@@ -205,6 +331,158 @@ const OurFocus = () => {
   );
 };
 
+/* ─── Criteria Tabs (Desktop) ─── */
+const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: boolean }) => {
+  const [active, setActive] = useState(0);
+
+  return (
+    <div>
+      {/* Tab row */}
+      <div className="flex border-b border-gold/10">
+        {items.map((item, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`flex-1 text-left relative py-3 px-3 transition-all duration-300 ${
+              i > 0 ? 'border-l border-gold/10' : ''
+            }`}
+          >
+            <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
+              {i === active && <div className="h-full w-full bg-gold" />}
+            </div>
+            <span className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
+              i === active ? 'text-gold' : isDark ? 'text-primary-foreground/20' : 'text-foreground/20'
+            }`}>
+              {item.num}
+            </span>
+            <span className={`block font-serif text-[0.8rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+              i === active
+                ? isDark ? 'text-primary-foreground' : 'text-foreground'
+                : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+            }`}>
+              {item.title}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Step dots */}
+      <div className="flex justify-center gap-1.5 mt-4">
+        {items.map((_, i) => (
+          <div key={i} className={`h-[3px] rounded-full transition-all duration-300 ${
+            i === active ? 'w-5 bg-gold' : `w-2 ${isDark ? 'bg-primary-foreground/10' : 'bg-foreground/10'}`
+          }`} />
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="mt-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className={`rounded-sm border p-8 md:p-10 relative overflow-hidden ${
+              isDark
+                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
+                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
+            }`}
+          >
+            {/* Watermark number */}
+            <span className={`absolute top-4 right-6 font-serif text-[6rem] leading-none select-none pointer-events-none ${
+              isDark ? 'text-primary-foreground/[0.04]' : 'text-foreground/[0.04]'
+            }`}>
+              {items[active].num}
+            </span>
+
+            <div className="relative">
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/60 block mb-2"
+              >
+                {items[active].num}
+              </motion.span>
+              <h3 className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                {items[active].title}
+              </h3>
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: 40 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+                className="h-[1.5px] bg-gold/30 mb-4"
+              />
+              <p className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                {items[active].desc}
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+
+/* ─── Criteria Accordion (Mobile) ─── */
+const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: boolean }) => {
+  const [open, setOpen] = useState(0);
+
+  return (
+    <div className="space-y-0">
+      {items.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <div key={i} className={`border-b ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/30'}`}>
+            <button
+              onClick={() => setOpen(isOpen ? -1 : i)}
+              className={`w-full flex items-center justify-between py-4 min-h-[44px] text-left`}
+            >
+              <div className="flex items-center gap-3">
+                <span className={`font-serif text-[1.5rem] leading-none ${isOpen ? 'text-gold/40' : isDark ? 'text-primary-foreground/10' : 'text-foreground/10'}`}>
+                  {item.num}
+                </span>
+                <span className={`font-serif text-[1rem] tracking-[-0.02em] ${
+                  isOpen
+                    ? isDark ? 'text-primary-foreground' : 'text-foreground'
+                    : isDark ? 'text-primary-foreground/50' : 'text-foreground/50'
+                }`}>
+                  {item.title}
+                </span>
+              </div>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <ChevronDown className={`w-4 h-4 ${isDark ? 'text-gold/40' : 'text-gold/50'}`} />
+              </motion.div>
+            </button>
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="pb-5 pl-[calc(1.5rem+12px)]">
+                    <div className="w-8 h-[1.5px] bg-gold/30 mb-3" />
+                    <p className={`font-sans text-[13px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                      {item.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
 /* ─── Typographic Number Card (Revenue/EBITDA) ─── */
 const TypographicNumber = ({ label, value, delay, isDark }: { label: string; value: string; delay: number; isDark: boolean }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -218,7 +496,6 @@ const TypographicNumber = ({ label, value, delay, isDark }: { label: string; val
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       className="relative pl-4"
     >
-      {/* Gold accent line */}
       <motion.div
         className="absolute left-0 top-0 w-[2px] bg-gold/30"
         initial={{ height: 0 }}
@@ -267,72 +544,6 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
         {value}
       </p>
     </motion.div>
-  );
-};
-
-/* ─── Criterion Row (Scroll-Linked Glow) ─── */
-const CriterionRow = ({ item, index, isDark, isLast }: { item: typeof whatWeLookFor[0]; index: number; isDark: boolean; isLast: boolean }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start 0.75', 'center 0.45', 'end 0.25'],
-  });
-
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.35, 0.45, 0.65, 1], [0.3, 0.85, 1, 0.85, 0.3]);
-  const itemScale = useTransform(scrollYProgress, [0, 0.45, 1], [0.98, 1, 0.98]);
-  const numberIntensity = useTransform(scrollYProgress, [0, 0.5, 1], [0.1, 0.35, 0.1]);
-  const underlineWidth = useTransform(scrollYProgress, [0, 0.5, 1], ['0%', '60%', '0%']);
-  const dividerOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [0.05, 0.25, 0.05]);
-
-  return (
-    <div ref={ref}>
-      <motion.div
-        style={{ opacity: glowOpacity, scale: itemScale }}
-        className="grid grid-cols-12 gap-3 md:gap-6 py-6 md:py-8 group"
-      >
-        {/* Number */}
-        <div className="col-span-2 md:col-span-1">
-          <motion.span
-            className="font-serif text-[2.5rem] md:text-[3.5rem] leading-none"
-            style={{ opacity: numberIntensity, color: 'hsl(var(--gold))' }}
-          >
-            {item.num}
-          </motion.span>
-        </div>
-
-        {/* Title */}
-        <div className="col-span-10 md:col-span-3 flex items-start pt-2 md:pt-3">
-          <div>
-            <h3 className={`font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.2] tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              {item.title}
-            </h3>
-            <motion.div
-              className="h-[1.5px] bg-gold/30 mt-1"
-              style={{ width: underlineWidth }}
-            />
-          </div>
-        </div>
-
-        {/* Description */}
-        <div className="col-span-12 md:col-span-8 pt-0 md:pt-3">
-          <p className={`font-sans text-[14px] md:text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
-            {item.desc}
-          </p>
-        </div>
-      </motion.div>
-
-      {/* Divider with scroll-linked opacity */}
-      {!isLast && (
-        <motion.div
-          className="h-px origin-left"
-          style={{
-            background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.2), hsl(43 78% 50% / 0.05), transparent)',
-            opacity: dividerOpacity,
-          }}
-        />
-      )}
-    </div>
   );
 };
 
