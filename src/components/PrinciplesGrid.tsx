@@ -49,7 +49,7 @@ const PrincipleItem = ({ principle, index, isDark, isMobile }: {
           <div className="w-3 h-3 rounded-full border-2 border-gold/40 bg-background" />
         </div>
 
-        <span className="block font-serif text-[2.5rem] leading-none text-gold select-none opacity-25">
+        <span className="block font-serif text-[2rem] leading-none text-gold select-none opacity-25">
           {num}
         </span>
 
