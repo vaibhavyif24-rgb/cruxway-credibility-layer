@@ -134,9 +134,9 @@ const Home = () => {
             <div className="mt-6 md:mt-8 flex flex-wrap gap-3">
               <Link
                 to={`/${region}/focus`}
-                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-8 py-3.5 border transition-all duration-300 ${
+                className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
                   isDark
-                    ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80 px-6 md:px-8'
+                    ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
                     : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
                 }`}
               >
