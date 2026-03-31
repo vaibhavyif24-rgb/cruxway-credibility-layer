@@ -23,7 +23,7 @@ const SiteFooter = () => {
   ];
 
   return (
-    <footer className={`relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-primary' : 'bg-card'}`}>
+    <footer className={`relative overflow-hidden transition-colors duration-300 ${isDark ? 'bg-primary' : 'bg-[hsl(40,15%,94%)]'}`}>
       {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
 
       {/* Top shimmer line */}
@@ -57,12 +57,12 @@ const SiteFooter = () => {
                     to={item.path}
                     className={`group relative font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
                       isDark
-                        ? 'text-primary-foreground/15 hover:text-primary-foreground/35'
-                        : 'text-muted-foreground/50 hover:text-foreground/60'
+                        ? 'text-primary-foreground/25 hover:text-primary-foreground/50'
+                        : 'text-foreground/45 hover:text-foreground/70'
                     }`}
                   >
                     {item.label}
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/30 group-hover:w-full transition-all duration-500" />
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-gold/40 group-hover:w-full transition-all duration-500" />
                   </Link>
                 </motion.div>
               ))}
@@ -74,7 +74,7 @@ const SiteFooter = () => {
 
         <FadeIn delay={0.08}>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-1.5">
-            <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/10' : 'text-muted-foreground/35'}`}>
+            <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/15' : 'text-foreground/35'}`}>
               &copy; {year} Cruxway LLC. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
@@ -83,14 +83,14 @@ const SiteFooter = () => {
                 onClick={() => setRegion(otherRegion)}
                 className={`font-sans text-[10px] font-medium uppercase tracking-[0.16em] transition-colors duration-300 ${
                   isDark
-                    ? 'text-primary-foreground/15 hover:text-primary-foreground/35'
-                    : 'text-muted-foreground/50 hover:text-foreground/60'
+                    ? 'text-primary-foreground/25 hover:text-primary-foreground/50'
+                    : 'text-foreground/45 hover:text-foreground/70'
                 }`}
               >
                 Switch to {otherRegion === 'india' ? 'India' : 'United States'}
               </Link>
               <span className={`w-px h-2.5 ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-border/30'}`} />
-              <p className={`font-sans text-[8px] tracking-[0.12em] uppercase ${isDark ? 'text-primary-foreground/[0.06]' : 'text-muted-foreground/20'}`}>
+              <p className={`font-sans text-[8px] tracking-[0.12em] uppercase ${isDark ? 'text-primary-foreground/[0.08]' : 'text-foreground/25'}`}>
                 Privileged &amp; Confidential
               </p>
             </div>
