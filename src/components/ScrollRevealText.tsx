@@ -187,6 +187,13 @@ const StatReveal = ({
       >
         {stat.value}
       </motion.p>
+      <motion.div
+        initial={{ width: 0 }}
+        whileInView={{ width: 24 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+        className="h-[1.5px] bg-gold/40 mx-auto mt-2"
+      />
       <p className={`font-sans text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] mt-2 ${isDark ? 'text-primary-foreground/50' : 'text-foreground/60'}`}>
         {stat.label}
       </p>
