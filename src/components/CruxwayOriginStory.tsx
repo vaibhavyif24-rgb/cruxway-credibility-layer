@@ -2,8 +2,10 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
-import crucibleImg from '@/assets/cruxway-crucible.jpg';
+import { useRegion } from '@/contexts/RegionContext';
+import crucibleImg from '@/assets/cruxway-crucible-v2.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
+import mergeImg from '@/assets/cruxway-merge-v2.jpg';
 import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
 import WayEffects from '@/components/origin-effects/WayEffects';
 import MergeEffects from '@/components/origin-effects/MergeEffects';
@@ -101,10 +103,43 @@ const ShimmerLine = () => (
   />
 );
 
+/* ─── Frosted scrim for text readability ─── */
+const FrostedScrim = ({ isDark, isMobile, variant = 'default' }: { isDark: boolean; isMobile: boolean; variant?: 'default' | 'wide' }) => {
+  if (isDark) {
+    return (
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: '600px',
+          height: '500px',
+          background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          zIndex: -1,
+        }}
+      />
+    );
+  }
+  return (
+    <div
+      className="absolute rounded-2xl pointer-events-none"
+      style={{
+        width: isMobile ? '94%' : variant === 'wide' ? '620px' : '560px',
+        height: isMobile ? '75%' : '400px',
+        background: 'radial-gradient(ellipse, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.40) 55%, transparent 100%)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        zIndex: -1,
+      }}
+    />
+  );
+};
+
 const CruxwayOriginStory = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const isMobile = useIsMobile();
+  const { region } = useRegion();
+  const isIndia = region === 'india';
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -115,16 +150,15 @@ const CruxwayOriginStory = () => {
   const scrollH = isMobile ? '350vh' : '400vh';
 
   /* ─── Overlays: theme-aware ─── */
-  /* Dark: deep navy cinematic overlays · Light: warm cream/amber — bright editorial feel */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.35) 0%, hsl(35 25% 88% / 0.50) 50%, hsl(35 25% 88% / 0.58) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.38) 0%, hsl(35 25% 88% / 0.55) 50%, hsl(35 25% 88% / 0.62) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.40) 0%, hsl(40 20% 85% / 0.55) 50%, hsl(40 20% 85% / 0.62) 100%)';
+    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.45) 0%, hsl(40 20% 85% / 0.60) 50%, hsl(40 20% 85% / 0.65) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.60) 0%, hsl(35 18% 85% / 0.70) 50%, hsl(35 18% 85% / 0.75) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.62) 0%, hsl(35 18% 85% / 0.72) 50%, hsl(35 18% 85% / 0.78) 100%)';
 
   /* Solid bg between transitions */
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 94%)';
@@ -134,10 +168,10 @@ const CruxwayOriginStory = () => {
   const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'hsl(228, 30%, 35%)';
   const videoTextShadow = isDark
     ? '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)'
-    : '0 1px 12px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.4)';
+    : '0 1px 4px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 255, 255, 0.6)';
   const videoSubShadow = isDark
     ? '0 1px 12px rgba(0, 0, 0, 0.6)'
-    : '0 1px 8px rgba(255, 255, 255, 0.7)';
+    : '0 1px 3px rgba(0, 0, 0, 0.06), 0 0 12px rgba(255, 255, 255, 0.5)';
   const wordmarkShadow = isDark
     ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
     : '0 0 60px hsl(43 78% 50% / 0.20), 0 2px 16px rgba(255,255,255,0.3)';
@@ -211,9 +245,9 @@ const CruxwayOriginStory = () => {
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Background: Crucible Return (Acts 3-4) ─── */}
+        {/* ─── Background: Merge (Acts 3-4) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
-          <ImageBackground src={crucibleImg} />
+          <ImageBackground src={mergeImg} />
           <MergeEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
           <Grain />
@@ -227,20 +261,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act1LabelOp }}
         >
-          {/* Frosted scrim for light mode readability */}
-          {!isDark && (
-            <div
-              className="absolute rounded-2xl pointer-events-none"
-              style={{
-                width: isMobile ? '92%' : '560px',
-                height: isMobile ? '70%' : '380px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                zIndex: -1,
-              }}
-            />
-          )}
+          <FrostedScrim isDark={isDark} isMobile={isMobile} />
           {/* Heading glow */}
           <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
 
@@ -282,6 +303,7 @@ const CruxwayOriginStory = () => {
             }}
           >
             /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>
+            {isIndia && <span className="font-sans not-italic"> · Hindi: कुठाली (kuṭhālī)</span>}
           </motion.p>
 
           <motion.p
@@ -303,33 +325,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
-          {/* Frosted scrim for light mode readability */}
-          {!isDark && (
-            <div
-              className="absolute rounded-2xl pointer-events-none"
-              style={{
-                width: isMobile ? '92%' : '560px',
-                height: isMobile ? '70%' : '380px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                zIndex: -1,
-              }}
-            />
-          )}
-          {/* Dark mode scrim */}
-          {isDark && (
-            <div
-              className="absolute rounded-full pointer-events-none"
-              style={{
-                width: '600px',
-                height: '500px',
-                background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
-                filter: 'blur(60px)',
-                zIndex: -1,
-              }}
-            />
-          )}
+          <FrostedScrim isDark={isDark} isMobile={isMobile} />
 
           <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
 
@@ -370,7 +366,8 @@ const CruxwayOriginStory = () => {
               fontSize: isMobile ? '12px' : '14px',
             }}
           >
-            /weɪ/ · <span className="font-sans italic">noun</span> · Hindi: मार्ग (mārg)
+            /weɪ/ · <span className="font-sans italic">noun</span>
+            {isIndia && <span className="font-sans not-italic"> · Hindi: मार्ग (mārg)</span>}
           </motion.p>
 
           <motion.p
@@ -392,20 +389,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act3Op }}
         >
-          {/* Frosted scrim for light mode readability */}
-          {!isDark && (
-            <div
-              className="absolute rounded-2xl pointer-events-none"
-              style={{
-                width: isMobile ? '92%' : '600px',
-                height: isMobile ? '65%' : '360px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                zIndex: -1,
-              }}
-            />
-          )}
+          <FrostedScrim isDark={isDark} isMobile={isMobile} variant="wide" />
           <div className="flex items-baseline gap-3 md:gap-5">
             <motion.span
               className="font-serif text-gold uppercase"
@@ -475,20 +459,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform' }}
         >
-          {/* Frosted scrim for light mode readability */}
-          {!isDark && (
-            <div
-              className="absolute rounded-2xl pointer-events-none"
-              style={{
-                width: isMobile ? '92%' : '560px',
-                height: isMobile ? '65%' : '360px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                zIndex: -1,
-              }}
-            />
-          )}
+          <FrostedScrim isDark={isDark} isMobile={isMobile} />
           <p
             className="font-serif text-gold tracking-[-0.02em]"
             style={{
