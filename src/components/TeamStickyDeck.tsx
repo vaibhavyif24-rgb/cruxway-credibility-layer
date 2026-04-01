@@ -295,7 +295,7 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
           isMobile={isMobile}
         />
       ))}
-      <div className="h-[120px] md:h-[80px]" />
+      <div className="h-[24px] md:h-[80px]" />
     </div>
   );
 };
