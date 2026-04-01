@@ -288,7 +288,7 @@ const CruxwayOriginStory = () => {
               color: videoMutedColor,
               textShadow: videoSubShadow,
               fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
-              fontSize: isMobile ? '12px' : '14px',
+              fontSize: isMobile ? '13px' : '15px',
             }}
           >
             /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>
