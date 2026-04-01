@@ -7,8 +7,8 @@ interface Props {
 
 const MergeEffects = ({ isMobile, isDark }: Props) => {
   const sparkCount = isMobile ? 4 : 8;
-  const sparkColor = isDark ? 'hsl(43 78% 50%)' : 'hsl(43 70% 40%)';
-  const sparkGlow = isDark ? 'hsl(43 78% 50% / 0.3)' : 'hsl(43 70% 40% / 0.2)';
+  const sparkColor = isDark ? 'hsl(43 78% 50%)' : 'hsl(40 80% 58%)';
+  const sparkGlow = isDark ? 'hsl(43 78% 50% / 0.3)' : 'hsl(40 80% 58% / 0.35)';
 
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 4 }}>

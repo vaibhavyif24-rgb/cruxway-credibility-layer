@@ -7,7 +7,7 @@ interface Props {
 
 const WayEffects = ({ isMobile, isDark }: Props) => {
   const dustCount = isMobile ? 4 : 8;
-  const dustColor = isDark ? 'hsl(43 60% 70%)' : 'hsl(43 55% 45%)';
+  const dustColor = isDark ? 'hsl(43 60% 70%)' : 'hsl(40 70% 75%)';
 
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
