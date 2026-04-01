@@ -114,7 +114,10 @@ const ShimmerLine = () => (
   />
 );
 
-/* ─── Pexels video sources ─── */
+/* ─── Local image assets (primary) + Pexels video sources (optional enhancement) ─── */
+import crucibleImg from '@/assets/cruxway-crucible.jpg';
+import wayImg from '@/assets/cruxway-way.jpg';
+
 const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/3170469/3170469-hd_1920_1080_25fps.mp4';
 const WAY_VIDEO = 'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4';
 
