@@ -142,6 +142,11 @@ const CruxwayOriginStory = () => {
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
 
+  /* ─── Returning Crucible overlay (heavier for text readability) ─── */
+  const crucibleReturnOverlay = isDark
+    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.78) 0%, hsl(228 55% 8% / 0.84) 50%, hsl(228 55% 8% / 0.90) 100%)'
+    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.70) 0%, hsl(220 30% 10% / 0.78) 50%, hsl(220 30% 10% / 0.86) 100%)';
+
   /* ─── Colors for text over video (always light, both themes) ─── */
   const videoBodyColor = 'rgba(255, 255, 255, 0.82)';
   const videoMutedColor = 'rgba(255, 255, 255, 0.55)';
