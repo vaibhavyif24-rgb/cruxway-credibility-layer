@@ -3,9 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useRegion } from '@/contexts/RegionContext';
-import crucibleImg from '@/assets/cruxway-crucible-v3.jpg';
+import crucibleImg from '@/assets/cruxway-crucible-v2.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
-import mergeImg from '@/assets/cruxway-merge-v3.jpg';
+import mergeImg from '@/assets/cruxway-merge-v2.jpg';
 import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
 import WayEffects from '@/components/origin-effects/WayEffects';
 import MergeEffects from '@/components/origin-effects/MergeEffects';
@@ -103,18 +103,36 @@ const ShimmerLine = () => (
   />
 );
 
-/* ─── Radial vignette for natural text contrast (no visible box) ─── */
-const RadialVignette = ({ isDark }: { isDark: boolean }) => (
-  <div
-    className="absolute inset-0 pointer-events-none"
-    style={{
-      zIndex: 7,
-      background: isDark
-        ? 'radial-gradient(ellipse at center, hsl(228 50% 6% / 0.70) 0%, hsl(228 50% 6% / 0.30) 45%, transparent 70%)'
-        : 'radial-gradient(ellipse at center, hsl(40 30% 96% / 0.82) 0%, hsl(40 25% 94% / 0.50) 40%, transparent 72%)',
-    }}
-  />
-);
+/* ─── Frosted scrim for text readability ─── */
+const FrostedScrim = ({ isDark, isMobile, variant = 'default' }: { isDark: boolean; isMobile: boolean; variant?: 'default' | 'wide' }) => {
+  if (isDark) {
+    return (
+      <div
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: '600px',
+          height: '500px',
+          background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+          zIndex: -1,
+        }}
+      />
+    );
+  }
+  return (
+    <div
+      className="absolute rounded-2xl pointer-events-none"
+      style={{
+        width: isMobile ? '94%' : variant === 'wide' ? '620px' : '560px',
+        height: isMobile ? '75%' : '400px',
+        background: 'radial-gradient(ellipse, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.40) 55%, transparent 100%)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        zIndex: -1,
+      }}
+    />
+  );
+};
 
 const CruxwayOriginStory = () => {
   const { theme } = useTheme();
@@ -131,16 +149,16 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Overlays: theme-aware — stronger in light mode ─── */
+  /* ─── Overlays: theme-aware ─── */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 25% 88% / 0.50) 0%, hsl(35 25% 88% / 0.65) 50%, hsl(35 25% 88% / 0.72) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.38) 0%, hsl(35 25% 88% / 0.55) 50%, hsl(35 25% 88% / 0.62) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 20% 85% / 0.55) 0%, hsl(40 20% 85% / 0.68) 50%, hsl(40 20% 85% / 0.75) 100%)';
+    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.45) 0%, hsl(40 20% 85% / 0.60) 50%, hsl(40 20% 85% / 0.65) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 18% 85% / 0.70) 0%, hsl(35 18% 85% / 0.80) 50%, hsl(35 18% 85% / 0.85) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.62) 0%, hsl(35 18% 85% / 0.72) 50%, hsl(35 18% 85% / 0.78) 100%)';
 
   /* Solid bg between transitions */
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 94%)';
@@ -148,17 +166,15 @@ const CruxwayOriginStory = () => {
   /* ─── Text: dark navy in light mode, white in dark mode ─── */
   const videoBodyColor = isDark ? 'rgba(255, 255, 255, 0.88)' : 'hsl(228, 45%, 15%)';
   const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'hsl(228, 30%, 35%)';
-
-  /* Text shadows: gold glow + dark anchor for headings */
   const videoTextShadow = isDark
-    ? '0 0 40px hsl(43 78% 50% / 0.3), 0 2px 8px rgba(0, 0, 0, 0.6)'
-    : '0 0 30px hsl(43 78% 50% / 0.25), 0 1px 4px rgba(0, 0, 0, 0.2)';
+    ? '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)'
+    : '0 1px 4px rgba(0, 0, 0, 0.08), 0 0 20px rgba(255, 255, 255, 0.6)';
   const videoSubShadow = isDark
     ? '0 1px 12px rgba(0, 0, 0, 0.6)'
-    : '0 1px 3px rgba(0, 0, 0, 0.10)';
+    : '0 1px 3px rgba(0, 0, 0, 0.06), 0 0 12px rgba(255, 255, 255, 0.5)';
   const wordmarkShadow = isDark
     ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
-    : '0 0 50px hsl(43 78% 50% / 0.25), 0 2px 12px rgba(0,0,0,0.15)';
+    : '0 0 60px hsl(43 78% 50% / 0.20), 0 2px 16px rgba(255,255,255,0.3)';
 
   /* heading glow – warmer in light mode */
   const headingGlowBg = isDark
@@ -214,7 +230,6 @@ const CruxwayOriginStory = () => {
           <ImageBackground src={crucibleImg} />
           <CrucibleEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleOverlay }} />
-          <RadialVignette isDark={isDark} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
@@ -225,7 +240,6 @@ const CruxwayOriginStory = () => {
           <ImageBackground src={wayImg} variant="drift" />
           <WayEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: wayOverlay }} />
-          <RadialVignette isDark={isDark} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
@@ -236,7 +250,6 @@ const CruxwayOriginStory = () => {
           <ImageBackground src={mergeImg} />
           <MergeEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
-          <RadialVignette isDark={isDark} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
@@ -248,6 +261,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act1LabelOp }}
         >
+          <FrostedScrim isDark={isDark} isMobile={isMobile} />
           {/* Heading glow */}
           <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
 
@@ -311,6 +325,8 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
+          <FrostedScrim isDark={isDark} isMobile={isMobile} />
+
           <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
 
           <motion.p
@@ -373,6 +389,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act3Op }}
         >
+          <FrostedScrim isDark={isDark} isMobile={isMobile} variant="wide" />
           <div className="flex items-baseline gap-3 md:gap-5">
             <motion.span
               className="font-serif text-gold uppercase"
@@ -380,7 +397,6 @@ const CruxwayOriginStory = () => {
                 x: cruX,
                 fontSize: isMobile ? 'clamp(2rem, 9vw, 3rem)' : 'clamp(2.4rem, 5vw, 4rem)',
                 letterSpacing: cruLetterSpacing,
-                textShadow: videoTextShadow,
               }}
             >
               CRU
@@ -402,7 +418,6 @@ const CruxwayOriginStory = () => {
                 x: wayX,
                 fontSize: isMobile ? 'clamp(2rem, 9vw, 3rem)' : 'clamp(2.4rem, 5vw, 4rem)',
                 letterSpacing: cruLetterSpacing,
-                textShadow: videoTextShadow,
               }}
             >
               WAY
@@ -444,6 +459,7 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform' }}
         >
+          <FrostedScrim isDark={isDark} isMobile={isMobile} />
           <p
             className="font-serif text-gold tracking-[-0.02em]"
             style={{

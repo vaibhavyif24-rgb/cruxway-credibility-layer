@@ -76,7 +76,7 @@ const GuidingPrinciples = () => {
           </div>
 
           {/* Subtitle */}
-          <p className={`font-sans text-[13px] md:text-[14px] leading-[1.7] mt-3 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/50' : 'text-foreground/60'}`}>
+          <p className={`font-sans text-[13px] md:text-[14px] leading-[1.7] mt-3 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
             Every name carries weight. Ours was forged with intent.
           </p>
         </motion.div>
