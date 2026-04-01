@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -6,7 +6,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 /* ─── Grain overlay ─── */
 const Grain = () => (
   <div
-    className="absolute inset-0 pointer-events-none opacity-[0.03]"
+    className="absolute inset-0 pointer-events-none opacity-[0.04]"
     style={{
       zIndex: 5,
       backgroundImage:
@@ -20,12 +20,10 @@ const Grain = () => (
 /* ─── Video layer with IntersectionObserver ─── */
 const VideoLayer = ({
   src,
-  poster,
   style,
   className = '',
 }: {
   src: string;
-  poster?: string;
   style?: React.CSSProperties;
   className?: string;
 }) => {
@@ -50,7 +48,6 @@ const VideoLayer = ({
       ref={ref}
       className={`absolute inset-0 h-full w-full object-cover ${className}`}
       src={src}
-      poster={poster}
       muted
       loop
       playsInline
@@ -60,11 +57,66 @@ const VideoLayer = ({
   );
 };
 
+/* ─── Corner geometric SVG for Acts 3-4 ─── */
+const CornerBrackets = () => {
+  const lineStyle = { stroke: 'hsl(43 70% 50%)', strokeWidth: 0.4, fill: 'none' };
+  return (
+    <svg viewBox="0 0 1200 800" className="absolute inset-0 w-full h-full opacity-[0.04]" preserveAspectRatio="xMidYMid slice">
+      <motion.line x1="30" y1="30" x2="100" y2="30" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} style={lineStyle} />
+      <motion.line x1="30" y1="30" x2="30" y2="100" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.3 }} style={lineStyle} />
+      <motion.line x1="1170" y1="30" x2="1100" y2="30" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.2 }} style={lineStyle} />
+      <motion.line x1="1170" y1="30" x2="1170" y2="100" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.3 }} style={lineStyle} />
+      <motion.line x1="30" y1="770" x2="100" y2="770" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.4 }} style={lineStyle} />
+      <motion.line x1="30" y1="770" x2="30" y2="700" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.5 }} style={lineStyle} />
+      <motion.line x1="1170" y1="770" x2="1100" y2="770" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.4 }} style={lineStyle} />
+      <motion.line x1="1170" y1="770" x2="1170" y2="700" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.5 }} style={lineStyle} />
+    </svg>
+  );
+};
+
+/* ─── Floating gold particles for video acts ─── */
+const GoldParticles = () => (
+  <>
+    {[...Array(6)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute rounded-full bg-gold/30"
+        style={{
+          width: 2,
+          height: 2,
+          left: `${12 + i * 15}%`,
+          top: `${55 + (i % 3) * 12}%`,
+          zIndex: 6,
+        }}
+        animate={{ y: [0, -30], opacity: [0, 0.3, 0] }}
+        transition={{
+          duration: 4 + i * 0.6,
+          delay: i * 1.2,
+          repeat: Infinity,
+          ease: 'easeOut',
+        }}
+      />
+    ))}
+  </>
+);
+
+/* ─── Horizontal shimmer line ─── */
+const ShimmerLine = () => (
+  <motion.div
+    className="absolute left-0 right-0 h-px"
+    style={{
+      top: '40%',
+      zIndex: 6,
+      background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.06), transparent)',
+    }}
+    animate={{ opacity: [0, 0.4, 0] }}
+    transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+  />
+);
+
 /* ─── Pexels video sources ─── */
 const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/5547729/5547729-hd_1920_1080_25fps.mp4';
 const WAY_VIDEO = 'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4';
-
-const ease = [0.22, 1, 0.36, 1] as const;
 
 const CruxwayOriginStory = () => {
   const { theme } = useTheme();
@@ -79,81 +131,99 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Overlay colors ─── */
-  const darkOverlay = 'linear-gradient(to bottom, hsl(228 55% 8% / 0.55) 0%, hsl(228 55% 8% / 0.72) 50%, hsl(228 55% 8% / 0.85) 100%)';
-  const lightOverlay = 'linear-gradient(to bottom, hsl(40 25% 96% / 0.35) 0%, hsl(40 25% 96% / 0.52) 50%, hsl(40 25% 96% / 0.7) 100%)';
+  /* ─── Overlay colors (lighter to let video show through) ─── */
+  const darkOverlay = 'linear-gradient(to bottom, hsl(228 55% 8% / 0.35) 0%, hsl(228 55% 8% / 0.50) 50%, hsl(228 55% 8% / 0.70) 100%)';
+  const lightOverlay = 'linear-gradient(to bottom, hsl(40 25% 96% / 0.25) 0%, hsl(40 25% 96% / 0.42) 50%, hsl(40 25% 96% / 0.62) 100%)';
   const overlay = isDark ? darkOverlay : lightOverlay;
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
-  const bodyColor = isDark ? 'rgba(255,255,255,0.72)' : 'rgba(11,33,50,0.6)';
-  const mutedColor = isDark ? 'rgba(255,255,255,0.45)' : 'rgba(11,33,50,0.4)';
-  const symbolColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(11,33,50,0.2)';
-  const textShadow = '0 2px 20px rgba(0,0,0,0.6), 0 0 40px rgba(0,0,0,0.25)';
-  const subShadow = '0 1px 10px rgba(0,0,0,0.35)';
+  const bodyColor = isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.55)';
+  const mutedColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.4)';
+  const symbolColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)';
+  const textShadow = isDark
+    ? '0 2px 24px rgba(0,0,0,0.7)'
+    : '0 1px 12px rgba(255,255,255,0.8)';
+  const subShadow = isDark
+    ? '0 1px 12px rgba(0,0,0,0.5)'
+    : '0 1px 8px rgba(255,255,255,0.6)';
   const wordmarkShadow = isDark
     ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
     : '0 4px 24px rgba(0,0,0,0.12)';
 
-  /* ─── ACT 1: Crucible (0 → 0.22) ─── */
-  const act1VideoOpacity = useTransform(scrollYProgress, [0, 0.18, 0.25], [1, 1, 0]);
-  const act1LabelOp = useTransform(scrollYProgress, [0, 0.01, 0.04, 0.18], [0, 1, 1, 0]);
-  const act1HeadingOp = useTransform(scrollYProgress, [0.01, 0.04, 0.05, 0.18], [0, 0, 1, 0]);
-  const act1HeadingScale = useTransform(scrollYProgress, [0.01, 0.05], [0.92, 1]);
-  const act1PhoneticOp = useTransform(scrollYProgress, [0.03, 0.06, 0.18], [0, 1, 0]);
-  const act1Def1Op = useTransform(scrollYProgress, [0.05, 0.08, 0.18], [0, 1, 0]);
-  const act1Def2Op = useTransform(scrollYProgress, [0.08, 0.12, 0.18], [0, 1, 0]);
+  /* heading glow */
+  const headingGlowBg = isDark
+    ? 'radial-gradient(circle, hsl(43 78% 50% / 0.04), transparent 70%)'
+    : 'radial-gradient(circle, hsl(43 78% 50% / 0.06), transparent 70%)';
 
-  /* ─── ACT 2: The Way (0.22 → 0.45) ─── */
-  const act2VideoOpacity = useTransform(scrollYProgress, [0.18, 0.25, 0.40, 0.47], [0, 1, 1, 0]);
-  const act2LabelOp = useTransform(scrollYProgress, [0.25, 0.28, 0.40], [0, 1, 0]);
-  const act2HeadingOp = useTransform(scrollYProgress, [0.26, 0.30, 0.40], [0, 1, 0]);
-  const act2HeadingScale = useTransform(scrollYProgress, [0.26, 0.30], [0.92, 1]);
-  const act2PhoneticOp = useTransform(scrollYProgress, [0.28, 0.31, 0.40], [0, 1, 0]);
-  const act2Def1Op = useTransform(scrollYProgress, [0.30, 0.33, 0.40], [0, 1, 0]);
-  const act2Def2Op = useTransform(scrollYProgress, [0.33, 0.37, 0.40], [0, 1, 0]);
+  /* ─── ACT 1: Crucible (0.00 → 0.28) ─── */
+  const act1VideoOp = useTransform(scrollYProgress, [0, 0.22, 0.28], [1, 1, 0]);
+  const act1LabelOp = useTransform(scrollYProgress, [0.02, 0.05, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1HeadingOp = useTransform(scrollYProgress, [0.03, 0.08, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1HeadingScale = useTransform(scrollYProgress, [0.03, 0.08], [0.92, 1]);
+  const act1PhoneticOp = useTransform(scrollYProgress, [0.05, 0.09, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1DefOp = useTransform(scrollYProgress, [0.07, 0.12, 0.22, 0.28], [0, 1, 1, 0]);
 
-  /* ─── ACT 3: The Equation (0.45 → 0.65) ─── */
-  const solidBgOp = useTransform(scrollYProgress, [0.42, 0.48, 0.92, 1], [0, 1, 1, 1]);
-  const act3Op = useTransform(scrollYProgress, [0.47, 0.52, 0.62, 0.67], [0, 1, 1, 0]);
-  const cruX = useTransform(scrollYProgress, isMobile ? [0.47, 0.52] : [0.47, 0.52], isMobile ? [0, 0] : [-60, 0]);
-  const wayX = useTransform(scrollYProgress, isMobile ? [0.47, 0.52] : [0.47, 0.52], isMobile ? [0, 0] : [60, 0]);
-  const symbolOp = useTransform(scrollYProgress, [0.51, 0.54], [0, 1]);
-  const ruleWidth = useTransform(scrollYProgress, [0.53, 0.58], [0, 120]);
-  const taglineOp = useTransform(scrollYProgress, [0.56, 0.60], [0, 1]);
+  /* ─── ACT 2: The Way (0.25 → 0.52) ─── */
+  const act2VideoOp = useTransform(scrollYProgress, [0.25, 0.30, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2LabelOp = useTransform(scrollYProgress, [0.32, 0.36, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2HeadingOp = useTransform(scrollYProgress, [0.33, 0.38, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2HeadingScale = useTransform(scrollYProgress, [0.33, 0.38], [0.92, 1]);
+  const act2PhoneticOp = useTransform(scrollYProgress, [0.35, 0.39, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2DefOp = useTransform(scrollYProgress, [0.37, 0.42, 0.46, 0.52], [0, 1, 1, 0]);
 
-  /* ─── ACT 4: The Name (0.67 → 0.92) ─── */
-  const act4Op = useTransform(scrollYProgress, [0.67, 0.73, 0.92, 1], [0, 1, 1, 1]);
-  const act4Scale = useTransform(scrollYProgress, [0.67, 0.73], [0.92, 1]);
-  const act4DividerOp = useTransform(scrollYProgress, [0.73, 0.76], [0, 1]);
-  const act4StatementOp = useTransform(scrollYProgress, [0.75, 0.80], [0, 1]);
-  const act4ClosingOp = useTransform(scrollYProgress, [0.80, 0.85], [0, 1]);
+  /* ─── ACT 3: The Equation (0.50 → 0.72) ─── */
+  const solidBgOp = useTransform(scrollYProgress, [0.48, 0.52, 0.92, 1], [0, 1, 1, 1]);
+  const act3Op = useTransform(scrollYProgress, [0.52, 0.56, 0.68, 0.72], [0, 1, 1, 0]);
+  const cruX = useTransform(scrollYProgress, isMobile ? [0.52, 0.56] : [0.52, 0.58], isMobile ? [0, 0] : [-80, 0]);
+  const wayX = useTransform(scrollYProgress, isMobile ? [0.52, 0.56] : [0.52, 0.58], isMobile ? [0, 0] : [80, 0]);
+  const symbolOp = useTransform(scrollYProgress, [0.57, 0.59], [0, 1]);
+  const ruleWidth = useTransform(scrollYProgress, [0.60, 0.64], [0, 120]);
+  const taglineOp = useTransform(scrollYProgress, [0.64, 0.67], [0, 1]);
+
+  /* ─── ACT 4: The Name (0.70 → 1.00) ─── */
+  const act4Op = useTransform(scrollYProgress, [0.70, 0.76, 0.95, 1], [0, 1, 1, 1]);
+  const act4Scale = useTransform(scrollYProgress, [0.70, 0.78], [0.92, 1]);
+  const act4DividerOp = useTransform(scrollYProgress, [0.78, 0.80], [0, 1]);
+  const act4StatementOp = useTransform(scrollYProgress, [0.80, 0.84], [0, 1]);
+  const act4ClosingOp = useTransform(scrollYProgress, [0.84, 0.88], [0, 1]);
+
+  const headingSize = isMobile ? 'clamp(3rem, 13vw, 4.5rem)' : 'clamp(3.5rem, 8vw, 6rem)';
 
   return (
     <div ref={containerRef} className="relative" style={{ height: scrollH }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: solidBg }}>
 
         {/* ─── Video: Crucible ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: act1VideoOpacity, zIndex: 1 }}>
+        <motion.div className="absolute inset-0" style={{ opacity: act1VideoOp, zIndex: 1 }}>
           <VideoLayer src={CRUCIBLE_VIDEO} />
           <div className="absolute inset-0" style={{ background: overlay }} />
           <Grain />
+          <GoldParticles />
+          <ShimmerLine />
         </motion.div>
 
         {/* ─── Video: The Way ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: act2VideoOpacity, zIndex: 2 }}>
+        <motion.div className="absolute inset-0" style={{ opacity: act2VideoOp, zIndex: 2 }}>
           <VideoLayer src={WAY_VIDEO} />
           <div className="absolute inset-0" style={{ background: overlay }} />
           <Grain />
+          <GoldParticles />
+          <ShimmerLine />
         </motion.div>
 
-        {/* ─── Solid background for Acts 3–4 ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: solidBgOp, zIndex: 3, background: solidBg }} />
+        {/* ─── Solid background for Acts 3-4 ─── */}
+        <motion.div className="absolute inset-0" style={{ opacity: solidBgOp, zIndex: 3, background: solidBg }}>
+          <CornerBrackets />
+        </motion.div>
 
         {/* ─── ACT 1 Content ─── */}
         <motion.div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act1LabelOp }}
         >
+          {/* Heading glow */}
+          <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
+
           <motion.p
             className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
             style={{ opacity: act1LabelOp, textShadow: subShadow }}
@@ -166,7 +236,8 @@ const CruxwayOriginStory = () => {
             style={{
               opacity: act1HeadingOp,
               scale: act1HeadingScale,
-              fontSize: isMobile ? 'clamp(2.8rem, 12vw, 4rem)' : 'clamp(3.2rem, 7vw, 5.5rem)',
+              fontSize: headingSize,
+              letterSpacing: '0.04em',
               textShadow,
               willChange: 'transform',
             }}
@@ -175,24 +246,29 @@ const CruxwayOriginStory = () => {
           </motion.h2>
 
           <motion.p
-            className="font-sans italic text-[13px] md:text-[14px] mt-3"
-            style={{ opacity: act1PhoneticOp, color: mutedColor, textShadow: subShadow }}
+            className="mt-3"
+            style={{
+              opacity: act1PhoneticOp,
+              color: mutedColor,
+              textShadow: subShadow,
+              fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
+              fontSize: isMobile ? '12px' : '14px',
+            }}
           >
-            /ˈkruː.sɪ.bəl/ · <em>noun</em>
+            /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>
           </motion.p>
 
           <motion.p
-            className="font-sans text-[13px] md:text-[15px] leading-[1.75] mt-4 max-w-[520px]"
-            style={{ opacity: act1Def1Op, color: bodyColor, textShadow: subShadow }}
+            className="font-sans leading-[1.8] mt-5 max-w-[480px]"
+            style={{
+              opacity: act1DefOp,
+              color: bodyColor,
+              textShadow: subShadow,
+              fontSize: isMobile ? '14px' : '15px',
+              letterSpacing: '0.01em',
+            }}
           >
-            "A vessel in which raw material is subjected to intense heat, pressure, and transformation. What emerges is fundamentally changed: refined, stronger, and purified of what does not serve."
-          </motion.p>
-
-          <motion.p
-            className="font-sans text-[13px] md:text-[15px] leading-[1.75] mt-4 max-w-[520px]"
-            style={{ opacity: act1Def2Op, color: bodyColor, textShadow: subShadow }}
-          >
-            "In private equity, every investment is a crucible. Capital alone changes nothing. Conviction under pressure: that is what transforms a company."
+            A vessel where raw material is transformed under intense heat and pressure into something fundamentally stronger.
           </motion.p>
         </motion.div>
 
@@ -201,6 +277,8 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
+          <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
+
           <motion.p
             className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
             style={{ opacity: act2LabelOp, textShadow: subShadow }}
@@ -213,7 +291,8 @@ const CruxwayOriginStory = () => {
             style={{
               opacity: act2HeadingOp,
               scale: act2HeadingScale,
-              fontSize: isMobile ? 'clamp(2.8rem, 12vw, 4rem)' : 'clamp(3.2rem, 7vw, 5.5rem)',
+              fontSize: headingSize,
+              letterSpacing: '0.04em',
               textShadow,
               willChange: 'transform',
             }}
@@ -222,24 +301,29 @@ const CruxwayOriginStory = () => {
           </motion.h2>
 
           <motion.p
-            className="font-sans italic text-[13px] md:text-[14px] mt-3"
-            style={{ opacity: act2PhoneticOp, color: mutedColor, textShadow: subShadow }}
+            className="mt-3"
+            style={{
+              opacity: act2PhoneticOp,
+              color: mutedColor,
+              textShadow: subShadow,
+              fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
+              fontSize: isMobile ? '12px' : '14px',
+            }}
           >
-            /weɪ/ · <em>noun</em>
+            /weɪ/ · <span className="font-sans italic">noun</span> · Hindi: मार्ग (mārg)
           </motion.p>
 
           <motion.p
-            className="font-sans text-[13px] md:text-[15px] leading-[1.75] mt-4 max-w-[520px]"
-            style={{ opacity: act2Def1Op, color: bodyColor, textShadow: subShadow }}
+            className="font-sans leading-[1.8] mt-5 max-w-[480px]"
+            style={{
+              opacity: act2DefOp,
+              color: bodyColor,
+              textShadow: subShadow,
+              fontSize: isMobile ? '14px' : '15px',
+              letterSpacing: '0.01em',
+            }}
           >
-            "A path, a method, a discipline. In Hindi: मार्ग (mārg), the road one commits to walking."
-          </motion.p>
-
-          <motion.p
-            className="font-sans text-[13px] md:text-[15px] leading-[1.75] mt-4 max-w-[520px]"
-            style={{ opacity: act2Def2Op, color: bodyColor, textShadow: subShadow }}
-          >
-            "Not just a direction. A deliberate practice. The way you do one thing is the way you do everything."
+            A path. A method. A discipline. The road one commits to walking.
           </motion.p>
         </motion.div>
 
@@ -313,18 +397,20 @@ const CruxwayOriginStory = () => {
             Cruxway
           </p>
 
-          <motion.div
-            className="mt-5"
-            style={{ opacity: act4DividerOp }}
-          >
+          <motion.div className="mt-5" style={{ opacity: act4DividerOp }}>
             <div className="h-[1.5px] w-[80px] mx-auto bg-gold/40" />
           </motion.div>
 
           <motion.p
-            className="font-sans text-[13px] md:text-[15px] leading-[1.8] mt-5 max-w-[480px]"
-            style={{ opacity: act4StatementOp, color: bodyColor }}
+            className="font-sans leading-[1.8] mt-5 max-w-[480px]"
+            style={{
+              opacity: act4StatementOp,
+              color: bodyColor,
+              fontSize: isMobile ? '14px' : '15px',
+              letterSpacing: '0.01em',
+            }}
           >
-            We named ourselves after what we believe: that the path to building something enduring runs through the crucible. There are no shortcuts. Only the discipline of showing up, day after day, with conviction.
+            The path to building something enduring runs through the crucible. There are no shortcuts.
           </motion.p>
 
           <motion.p
