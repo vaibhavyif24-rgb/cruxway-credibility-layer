@@ -288,7 +288,7 @@ const CruxwayOriginStory = () => {
               color: videoMutedColor,
               textShadow: videoSubShadow,
               fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
-              fontSize: isMobile ? '12px' : '14px',
+              fontSize: isMobile ? '13px' : '15px',
             }}
           >
             /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>
@@ -301,7 +301,7 @@ const CruxwayOriginStory = () => {
               opacity: act1DefOp,
               color: videoBodyColor,
               textShadow: videoSubShadow,
-              fontSize: isMobile ? '14px' : '15px',
+              fontSize: isMobile ? '15px' : '16px',
               letterSpacing: '0.01em',
             }}
           >
@@ -352,7 +352,7 @@ const CruxwayOriginStory = () => {
               color: videoMutedColor,
               textShadow: videoSubShadow,
               fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
-              fontSize: isMobile ? '12px' : '14px',
+              fontSize: isMobile ? '13px' : '15px',
             }}
           >
             /weɪ/ · <span className="font-sans italic">noun</span>
@@ -365,7 +365,7 @@ const CruxwayOriginStory = () => {
               opacity: act2DefOp,
               color: videoBodyColor,
               textShadow: videoSubShadow,
-              fontSize: isMobile ? '14px' : '15px',
+              fontSize: isMobile ? '15px' : '16px',
               letterSpacing: '0.01em',
             }}
           >
@@ -423,7 +423,7 @@ const CruxwayOriginStory = () => {
           </motion.div>
 
           <motion.p
-            className="font-sans text-[10px] md:text-[12px] uppercase tracking-[0.22em] mt-5"
+            className="font-sans text-[11px] md:text-[13px] uppercase tracking-[0.22em] mt-5"
             style={{ opacity: taglineOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             The crucible of conviction · The discipline of the path
@@ -435,7 +435,7 @@ const CruxwayOriginStory = () => {
               opacity: act3ExplainOp,
               color: videoBodyColor,
               textShadow: videoSubShadow,
-              fontSize: isMobile ? '13px' : '14px',
+              fontSize: isMobile ? '14px' : '15px',
               letterSpacing: '0.01em',
             }}
           >
@@ -469,7 +469,7 @@ const CruxwayOriginStory = () => {
               opacity: act4StatementOp,
               color: videoBodyColor,
               textShadow: videoSubShadow,
-              fontSize: isMobile ? '14px' : '15px',
+              fontSize: isMobile ? '15px' : '16px',
               letterSpacing: '0.01em',
             }}
           >
@@ -477,7 +477,7 @@ const CruxwayOriginStory = () => {
           </motion.p>
 
           <motion.p
-            className="font-sans text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.22em] mt-8"
+            className="font-sans text-[11px] md:text-[13px] font-semibold uppercase tracking-[0.22em] mt-8"
             style={{ opacity: act4ClosingOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             Forging conviction through rigour

@@ -128,28 +128,6 @@ const OurFocus = () => {
         <HeroDivider />
       </section>
 
-      {/* Anchor Navigation */}
-      <div className={`relative overflow-hidden border-b ${isDark ? 'bg-primary border-primary-foreground/[0.06]' : 'bg-background border-border/30'}`}>
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-3">
-          <div className="flex gap-2 md:gap-3 overflow-x-auto scrollbar-hide">
-            {[
-              { label: 'Investment Profile', id: 'investment-profile' },
-              { label: 'Sectors', id: 'sectors' },
-              { label: 'Investment Criteria', id: 'investment-criteria' },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollTo(item.id)}
-                className={`whitespace-nowrap font-sans text-[11px] uppercase tracking-[0.18em] px-4 py-2 rounded-full border border-gold/30 transition-colors duration-300 min-h-[44px] hover:bg-gold/10 ${
-                  isDark ? 'text-gold/80 hover:text-gold' : 'text-gold hover:text-gold'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Investment Profile */}
       <section id="investment-profile" className={`relative overflow-hidden ${

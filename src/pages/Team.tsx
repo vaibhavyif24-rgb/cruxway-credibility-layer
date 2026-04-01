@@ -364,7 +364,7 @@ const Team = () => {
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-28 md:pt-36 md:pb-24 lg:pt-40 lg:pb-24">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
@@ -374,7 +374,7 @@ const Team = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}
