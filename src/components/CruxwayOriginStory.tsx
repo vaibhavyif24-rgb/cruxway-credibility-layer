@@ -147,26 +147,47 @@ const CruxwayOriginStory = () => {
             </p>
           </motion.div>
 
-          {/* Phase 3: Equation */}
+          {/* Phase 3: CRU × WAY Equation */}
           <motion.div
             className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
             style={{ opacity: mPhase3Opacity }}
           >
-            <div className="flex items-center gap-3">
-              <span className="font-serif text-gold uppercase tracking-[0.08em]"
-                style={{ fontSize: 'clamp(1.2rem, 5vw, 2rem)', textShadow }}>
-                Crux
+            {/* Letter assembly */}
+            <div className="flex items-baseline gap-0">
+              <span className="font-serif text-gold uppercase tracking-[0.18em] font-light"
+                style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', textShadow }}>
+                CRU
               </span>
-              <span className="font-serif text-gold text-[1.3rem]" style={{ textShadow }}>+</span>
-              <span className="font-serif uppercase tracking-[0.08em]"
-                style={{ fontSize: 'clamp(1.2rem, 5vw, 2rem)', color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)', textShadow }}>
-                Way
+              <span className="font-serif mx-2 md:mx-3"
+                style={{
+                  fontSize: 'clamp(1rem, 4vw, 1.6rem)',
+                  color: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)',
+                  textShadow,
+                }}>
+                ×
+              </span>
+              <span className="font-serif text-gold uppercase tracking-[0.18em] font-light"
+                style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', textShadow }}>
+                WAY
               </span>
             </div>
-            <motion.div className="h-[2px] bg-gold/40 mt-4 mx-auto" style={{ width: mPhase3RuleW }} />
-            <p className="font-serif text-gold mt-4 text-center"
-              style={{ fontSize: 'clamp(1.8rem, 7vw, 3rem)', textShadow: cruxwayShadow }}>
-              Cruxway
+
+            {/* Animated gold rule */}
+            <motion.div
+              className="mt-5 mx-auto overflow-hidden"
+              style={{ width: mPhase3RuleW }}
+            >
+              <div className="h-[1px] w-full" style={{
+                background: isDark
+                  ? 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.6) 30%, hsl(43 78% 50%) 50%, hsl(43 78% 50% / 0.6) 70%, transparent 100%)'
+                  : 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.4) 30%, hsl(43 78% 50% / 0.8) 50%, hsl(43 78% 50% / 0.4) 70%, transparent 100%)',
+              }} />
+            </motion.div>
+
+            {/* Meaning */}
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] mt-4 text-center"
+              style={{ color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)', textShadow: subShadow }}>
+              The crucible of conviction · The way forward
             </p>
           </motion.div>
 
@@ -299,32 +320,47 @@ const CruxwayOriginStory = () => {
           </p>
         </motion.div>
 
-        {/* ---- Phase 3: Equation ---- */}
+        {/* ---- Phase 3: CRU × WAY Equation ---- */}
         <motion.div
           className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
           style={{ opacity: phase3TextOpacity }}
         >
-          <div className="flex items-center gap-3 md:gap-5">
-            <span className="font-serif text-gold uppercase tracking-[0.08em]"
-              style={{ fontSize: 'clamp(1.4rem, 3vw, 2.4rem)', textShadow }}>
-              Crux
+          {/* Letter assembly — CRU × WAY */}
+          <div className="flex items-baseline gap-0">
+            <span className="font-serif text-gold uppercase tracking-[0.2em] font-light"
+              style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', textShadow }}>
+              CRU
             </span>
-            <span className="font-serif text-gold text-[1.5rem] md:text-[2rem]" style={{ textShadow }}>
-              +
-            </span>
-            <span className="font-serif uppercase tracking-[0.08em]"
+            <span className="font-serif mx-3 md:mx-4"
               style={{
-                fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
-                color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)',
+                fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
+                color: isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)',
                 textShadow,
               }}>
-              Way
+              ×
+            </span>
+            <span className="font-serif text-gold uppercase tracking-[0.2em] font-light"
+              style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', textShadow }}>
+              WAY
             </span>
           </div>
-          <motion.div className="h-[2px] bg-gold/40 mt-4 mx-auto" style={{ width: phase3RuleWidth }} />
-          <p className="font-serif text-gold mt-4"
-            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', textShadow: cruxwayShadow }}>
-            Cruxway
+
+          {/* Animated gradient gold rule */}
+          <motion.div
+            className="mt-6 mx-auto overflow-hidden"
+            style={{ width: phase3RuleWidth }}
+          >
+            <div className="h-[1px] w-full" style={{
+              background: isDark
+                ? 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.5) 20%, hsl(43 78% 50%) 50%, hsl(43 78% 50% / 0.5) 80%, transparent 100%)'
+                : 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.35) 20%, hsl(43 78% 50% / 0.8) 50%, hsl(43 78% 50% / 0.35) 80%, transparent 100%)',
+            }} />
+          </motion.div>
+
+          {/* Meaning tagline */}
+          <p className="font-sans text-[11px] md:text-[13px] uppercase tracking-[0.25em] mt-5 text-center"
+            style={{ color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)', textShadow: subShadow }}>
+            The crucible of conviction · The way forward
           </p>
         </motion.div>
 
