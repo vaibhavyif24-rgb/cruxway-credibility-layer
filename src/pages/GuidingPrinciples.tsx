@@ -52,24 +52,22 @@ const GuidingPrinciples = () => {
       {/* Transition bridge with intro heading into origin story */}
       <div
         className="relative -mt-1 pointer-events-none"
-        style={{
-          zIndex: 5,
-        }}
+        style={{ zIndex: 5 }}
       >
-        {/* Gradient from hero into dark origin section */}
+        {/* Gradient from hero into origin section — theme-aware */}
         <div
           className="h-16 md:h-20"
           style={{
             background: isDark
               ? 'linear-gradient(to bottom, hsl(228 55% 8%), hsl(228 55% 6%))'
-              : 'linear-gradient(to bottom, hsl(40 25% 96%), hsl(228 40% 10%))',
+              : 'linear-gradient(to bottom, hsl(40 25% 96%), hsl(40 25% 94%))',
           }}
         />
         {/* Intro label area */}
         <div
           className="flex flex-col items-center justify-center py-8 md:py-12 pointer-events-auto"
           style={{
-            background: isDark ? 'hsl(228 55% 6%)' : 'hsl(228 40% 10%)',
+            background: isDark ? 'hsl(228 55% 6%)' : 'hsl(40 25% 94%)',
           }}
         >
           <motion.p
@@ -90,7 +88,7 @@ const GuidingPrinciples = () => {
             style={{ transformOrigin: 'center' }}
           />
           <motion.p
-            className="font-sans text-[12px] md:text-[13px] leading-[1.7] text-white/40 mt-3 text-center max-w-[340px] px-6"
+            className={`font-sans text-[12px] md:text-[13px] leading-[1.7] mt-3 text-center max-w-[340px] px-6 ${isDark ? 'text-white/40' : 'text-foreground/50'}`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

@@ -380,7 +380,7 @@ const CruxwayOriginStory = () => {
               style={{
                 opacity: symbolOp,
                 fontSize: isMobile ? 'clamp(1rem, 4vw, 1.5rem)' : 'clamp(1.2rem, 2.5vw, 2rem)',
-                color: 'rgba(255,255,255,0.3)',
+                color: isDark ? 'rgba(255,255,255,0.3)' : 'hsl(228, 45%, 15%, 0.35)',
                 textShadow: videoSubShadow,
               }}
             >
