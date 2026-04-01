@@ -90,7 +90,8 @@ const TeamCard: React.FC<{
   isDark: boolean;
   stickyBase: number;
   stickyStep: number;
-}> = ({ member, index, totalMembers, isDark, stickyBase, stickyStep }) => {
+  isMobile: boolean;
+}> = ({ member, index, totalMembers, isDark, stickyBase, stickyStep, isMobile }) => {
   const bgs = isDark ? darkCardBgs : lightCardBgs;
   const bg = bgs[index % bgs.length];
   const stickyTop = stickyBase + index * stickyStep;
@@ -104,11 +105,12 @@ const TeamCard: React.FC<{
       transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       className="rounded-2xl overflow-hidden w-full"
       style={{
-        position: 'sticky',
-        top: `${stickyTop}px`,
+        position: isMobile ? 'relative' as const : 'sticky' as const,
+        top: isMobile ? undefined : `${stickyTop}px`,
         zIndex: index + 1,
         backgroundColor: bg,
         boxShadow: '0 -6px 24px -4px rgba(0,0,0,0.2), 0 16px 40px -10px rgba(0,0,0,0.15)',
+        marginBottom: isMobile ? '16px' : undefined,
       }}
     >
       {/* Gold accent line */}
