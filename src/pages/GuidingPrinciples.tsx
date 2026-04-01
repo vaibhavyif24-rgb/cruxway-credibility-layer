@@ -6,7 +6,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesGrid from '@/components/PrinciplesGrid';
-
+import CruxwayOriginStory from '@/components/CruxwayOriginStory';
 import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
