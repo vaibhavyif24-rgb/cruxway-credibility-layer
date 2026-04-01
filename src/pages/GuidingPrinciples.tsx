@@ -6,7 +6,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import PrinciplesGrid from '@/components/PrinciplesGrid';
-
+import CruxwayOriginStory from '@/components/CruxwayOriginStory';
 import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
@@ -57,32 +57,8 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Naming Story — Cinematic Video */}
-      <section className={`relative overflow-hidden ${isDark ? 'bg-[hsl(228,55%,8%)]' : 'bg-[hsl(40,25%,96%)]'}`}>
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-12 md:py-16">
-          <FadeIn>
-            <SectionLabel light={isDark}>Our Name</SectionLabel>
-          </FadeIn>
-          <FadeIn delay={0.08}>
-            <div className="mt-6 rounded-sm overflow-hidden border border-gold/20" style={{ aspectRatio: '16/9' }}>
-              <video
-                src="/cruxway-naming.mp4"
-                autoPlay
-                muted
-                playsInline
-                loop
-                className="w-full h-full object-cover"
-                style={{ willChange: 'transform' }}
-              />
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.16}>
-            <p className={`font-sans text-[13px] md:text-[14px] leading-[1.75] mt-5 max-w-[560px] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
-              A crucible is a vessel in which raw materials are subjected to extreme heat and pressure until something stronger emerges. "The Way" is the path, the discipline, the philosophy. Cruxway: forging conviction through rigour.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+      {/* Naming Story — Two-Act Origin */}
+      <CruxwayOriginStory />
 
       {/* Principles — refined heading + grid */}
       <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10">
