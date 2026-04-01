@@ -1,62 +1,44 @@
 
 
-## Plan: Fix Crucible Text Visibility, Remove Initial Scroll Effect, Revamp Footer
+## Plan: Fix Team Hero Collision, Origin Story Font Size, Focus Page Cleanup
 
-### Part 1: Crucible "The First Word" Visibility + Transition Fix
+### 1. Fix Team Hero Text Collision — `src/pages/Team.tsx`
 
-**Problem**: "The First Word" label in Act 1 is hard to read. On desktop, there's an unnecessary upward-scrolling effect at the start that delays content visibility.
+**Problem**: The subtitle paragraph overlaps with the stats bar because the hero uses `flex items-end` with the content div having only `pb-10`, while the stats bar is `absolute bottom-0` with its own height (~80px on mobile). The subtitle text bleeds into the stats numbers.
 
-**Changes in `src/components/CruxwayOriginStory.tsx`:**
+**Fix**:
+- Increase bottom padding on the hero content div: `pb-10` → `pb-28 md:pb-24` to clear the stats bar
+- On mobile, the stats bar takes ~100px, so `pb-28` (112px) provides clearance
+- Constrain the subtitle `max-w-[420px]` to `max-w-[360px]` on mobile to prevent wide text from creating more collision risk
 
-1. **Make Act 1 text appear immediately** — remove the delayed entry. Change scroll ranges so content is visible from the start:
-   - `act1LabelOp`: `[0.02, 0.05, ...]` → `[0, 0.01, ...]` (instant)
-   - `act1HeadingOp`: `[0.03, 0.08, ...]` → `[0, 0.02, ...]`
-   - `act1HeadingScale`: start at `1` instead of `0.92` (remove scale-up)
-   - `act1HeadingY`: start at `0` instead of `20` (remove Y translation)
-   - `act1PhoneticOp`, `act1DefOp`: tighten to appear within first 1-3% of scroll
+### 2. Increase Origin Story Font Sizes — `src/components/CruxwayOriginStory.tsx`
 
-2. **Boost "The First Word" label visibility** — increase font size from `11px/12px` to `12px/13px`, increase gold opacity, and add a stronger text shadow with a warm glow behind it.
+**Problem**: Body text in the origin story is 13-15px, making it hard to read. Font should use the site's sans font consistently.
 
-3. **Strengthen TextAura for Act 1** — increase the aura opacity in both modes to ensure the label text pops against the crucible image.
+**Fix**:
+- Act 1 & 2 definition text: `14px/15px` → `15px/16px`
+- Act 1 & 2 phonetic text: `12px/14px` → `13px/15px`
+- Act 3 explanation text: `13px/14px` → `14px/15px`
+- Act 3 tagline: `10px/12px` → `11px/13px`
+- Act 4 body text: `14px/15px` → `15px/16px`
+- Act 4 closing text: `10px/12px` → `11px/13px`
+- Ensure all body text uses `font-sans` class (already present) — no changes needed for font family consistency
 
-### Part 2: Revamp Footer — Compact, Professional, Structured
+### 3. Remove Anchor Navigation Bar in Focus Page — `src/pages/OurFocus.tsx`
 
-**Problem**: Current 4-column footer is too large, unstructured, and visually heavy with unnecessary effects and redundant elements.
+**Problem**: The sticky anchor nav bar (Investment Profile / Sectors / Investment Criteria buttons) adds clutter and blank space.
 
-**Redesign in `src/components/SiteFooter.tsx`:**
+**Fix**:
+- Remove the entire anchor navigation `<div>` block (lines 131-152)
+- Tighten section padding: reduce `py-10 md:py-14` to `py-8 md:py-10` on Investment Profile section
+- Remove any excess top margin that creates blank space between sections
 
-Replace the current sprawling 4-column layout with a **compact 2-row footer**:
+### 4. Ensure Section Labels Are Correct
 
-**Row 1** (main content — single horizontal line):
-- Left: "Cruxway" wordmark + "Lower Middle Market Private Equity" tagline (inline)
-- Center: Inline navigation links (Home · Principles · Focus · Playbook · Team · Contact) separated by `·` dots — all on one line
-- Right: Region switcher pill + email link
-
-**Row 2** (bottom bar — slim):
-- Left: © 2026 Cruxway LLC
-- Right: Privacy · Terms
-
-**What gets removed:**
-- Remove `DarkSectionEffects` / `LightSectionEffects` (too heavy for footer)
-- Remove the grain texture overlay
-- Remove the animated shimmer divider (replace with simple `border-t`)
-- Remove the `MapPin` address line
-- Remove "Patient capital for essential businesses" subtitle
-- Remove "Privileged & Confidential" text
-- Remove the `GoldRule` component
-- Remove the radial glow behind the brand name
-- Remove individual `FadeIn` and staggered `motion.div` animations on each link
-
-**What stays:**
-- Clean gold top border line
-- Theme-aware background (dark navy / light cream)
-- Region switcher with flag icons
-- Email link
-- Copyright + legal links
-
-**Visual style:** Clean, minimal, ~80px total height on desktop. No visual effects — just clean typography and spacing. Professional institutional aesthetic.
+**Verification**: Navigation already shows "Our Identity" (not "Principles") in `SiteHeader.tsx`. The GuidingPrinciples page hero says "Our Identity". No stale "Principles" references found in active navigation. No changes needed.
 
 ### Files Modified
-- `src/components/CruxwayOriginStory.tsx` — fix Act 1 timing and label visibility
-- `src/components/SiteFooter.tsx` — complete revamp to compact 2-row layout
+- `src/pages/Team.tsx` — fix hero bottom padding to prevent stats collision
+- `src/components/CruxwayOriginStory.tsx` — increase all body/phonetic/tagline font sizes
+- `src/pages/OurFocus.tsx` — remove anchor nav bar, tighten spacing
 
