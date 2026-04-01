@@ -142,6 +142,11 @@ const CruxwayOriginStory = () => {
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
 
+  /* ─── Returning Crucible overlay (heavier for text readability) ─── */
+  const crucibleReturnOverlay = isDark
+    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.78) 0%, hsl(228 55% 8% / 0.84) 50%, hsl(228 55% 8% / 0.90) 100%)'
+    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.70) 0%, hsl(220 30% 10% / 0.78) 50%, hsl(220 30% 10% / 0.86) 100%)';
+
   /* ─── Colors for text over video (always light, both themes) ─── */
   const videoBodyColor = 'rgba(255, 255, 255, 0.82)';
   const videoMutedColor = 'rgba(255, 255, 255, 0.55)';
@@ -182,7 +187,7 @@ const CruxwayOriginStory = () => {
   const act2DefOp = useTransform(scrollYProgress, [0.37, 0.42, 0.46, 0.52], [0, 1, 1, 0]);
 
   /* ─── ACT 3: The Equation (0.50 → 0.72) ─── */
-  const solidBgOp = useTransform(scrollYProgress, [0.48, 0.52, 0.92, 1], [0, 1, 1, 1]);
+  const crucibleReturnOp = useTransform(scrollYProgress, [0.46, 0.54, 0.95, 1.0], [0, 1, 1, 1]);
   const act3Op = useTransform(scrollYProgress, [0.50, 0.54, 0.68, 0.72], [0, 1, 1, 0]);
   const cruX = useTransform(scrollYProgress, isMobile ? [0.50, 0.54] : [0.50, 0.56], isMobile ? [0, 0] : [-80, 0]);
   const wayX = useTransform(scrollYProgress, isMobile ? [0.50, 0.54] : [0.50, 0.56], isMobile ? [0, 0] : [80, 0]);
@@ -223,8 +228,13 @@ const CruxwayOriginStory = () => {
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Solid background for Acts 3-4 ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: solidBgOp, zIndex: 3, background: solidBg }}>
+        {/* ─── Video: Crucible Return (Acts 3-4) ─── */}
+        <motion.div className="absolute inset-0" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
+          <VideoLayer src={CRUCIBLE_VIDEO} />
+          <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
+          <Grain />
+          <GoldParticles />
+          <ShimmerLine />
           <CornerBrackets />
         </motion.div>
 
@@ -384,7 +394,8 @@ const CruxwayOriginStory = () => {
               style={{
                 opacity: symbolOp,
                 fontSize: isMobile ? 'clamp(1rem, 4vw, 1.5rem)' : 'clamp(1.2rem, 2.5vw, 2rem)',
-                color: symbolColor,
+                color: 'rgba(255,255,255,0.3)',
+                textShadow: videoSubShadow,
               }}
             >
               ×
@@ -412,7 +423,7 @@ const CruxwayOriginStory = () => {
 
           <motion.p
             className="font-sans text-[10px] md:text-[12px] uppercase tracking-[0.22em] mt-5"
-            style={{ opacity: taglineOp, color: mutedColor }}
+            style={{ opacity: taglineOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             The crucible of conviction · The discipline of the path
           </motion.p>
@@ -421,7 +432,8 @@ const CruxwayOriginStory = () => {
             className="font-sans leading-[1.75] mt-4 max-w-[520px]"
             style={{
               opacity: act3ExplainOp,
-              color: bodyColor,
+              color: videoBodyColor,
+              textShadow: videoSubShadow,
               fontSize: isMobile ? '13px' : '14px',
               letterSpacing: '0.01em',
             }}
@@ -453,7 +465,8 @@ const CruxwayOriginStory = () => {
             className="font-sans leading-[1.8] mt-5 max-w-[480px]"
             style={{
               opacity: act4StatementOp,
-              color: bodyColor,
+              color: videoBodyColor,
+              textShadow: videoSubShadow,
               fontSize: isMobile ? '14px' : '15px',
               letterSpacing: '0.01em',
             }}
@@ -463,7 +476,7 @@ const CruxwayOriginStory = () => {
 
           <motion.p
             className="font-sans text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.22em] mt-8"
-            style={{ opacity: act4ClosingOp, color: mutedColor }}
+            style={{ opacity: act4ClosingOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             Forging conviction through rigour
           </motion.p>
