@@ -1,40 +1,62 @@
 
 
-## Plan: Make "The Opportunity" Video Section Theme-Aware
+## Plan: Fix Crucible Text Visibility, Remove Initial Scroll Effect, Revamp Footer
 
-### Problem
-The overlay on the video section uses dark navy gradients (`hsl(228 55% 8%)`) in **both** light and dark mode, making it always look like a dark-themed section. In light mode, this clashes with the surrounding warm cream aesthetic.
+### Part 1: Crucible "The First Word" Visibility + Transition Fix
 
-### Solution
-Make the overlay adapt to the theme — warm cream/gold tones in light mode, deep navy in dark mode. Text colors also need to flip accordingly.
+**Problem**: "The First Word" label in Act 1 is hard to read. On desktop, there's an unnecessary upward-scrolling effect at the start that delays content visibility.
 
-### Changes — `src/pages/Home.tsx` (lines 305-389)
+**Changes in `src/components/CruxwayOriginStory.tsx`:**
 
-**1. Light-mode overlay** — replace the dark navy gradient with warm cream:
-```
-light: linear-gradient(to bottom,
-  hsl(40 25% 94% / 0.75) 0%,
-  hsl(40 22% 91% / 0.88) 40%,
-  hsl(40 22% 91% / 0.95) 100%)
-```
-Keep dark mode as-is.
+1. **Make Act 1 text appear immediately** — remove the delayed entry. Change scroll ranges so content is visible from the start:
+   - `act1LabelOp`: `[0.02, 0.05, ...]` → `[0, 0.01, ...]` (instant)
+   - `act1HeadingOp`: `[0.03, 0.08, ...]` → `[0, 0.02, ...]`
+   - `act1HeadingScale`: start at `1` instead of `0.92` (remove scale-up)
+   - `act1HeadingY`: start at `0` instead of `20` (remove Y translation)
+   - `act1PhoneticOp`, `act1DefOp`: tighten to appear within first 1-3% of scroll
 
-**2. Radial vignette** — theme-aware:
-- Dark: `hsl(228 55% 8% / 0.25)` (current)
-- Light: `hsl(40 20% 85% / 0.3)`
+2. **Boost "The First Word" label visibility** — increase font size from `11px/12px` to `12px/13px`, increase gold opacity, and add a stronger text shadow with a warm glow behind it.
 
-**3. Warm ambient glow in light mode** — increase the existing subtle gold radial from `0.04` to `0.08` opacity for a warmer feel.
+3. **Strengthen TextAura for Act 1** — increase the aura opacity in both modes to ensure the label text pops against the crucible image.
 
-**4. Text color** — currently hardcoded `text-white`:
-- Dark: keep `text-white`
-- Light: switch to `text-prussian` (dark navy text on cream overlay)
-- Gold accent spans stay gold in both modes
-- Drop shadow: remove in light mode (unnecessary on cream), keep in dark
+### Part 2: Revamp Footer — Compact, Professional, Structured
 
-**5. Top/bottom edge blends** — the bottom gradient already adapts (line 388 uses `from-[hsl(40,22%,91%)]`), but make sure it matches the new overlay exactly.
+**Problem**: Current 4-column footer is too large, unstructured, and visually heavy with unnecessary effects and redundant elements.
 
-**6. Grain overlay** — reduce from `0.03` to `0.015` in light mode so it doesn't add noise to the cream surface.
+**Redesign in `src/components/SiteFooter.tsx`:**
+
+Replace the current sprawling 4-column layout with a **compact 2-row footer**:
+
+**Row 1** (main content — single horizontal line):
+- Left: "Cruxway" wordmark + "Lower Middle Market Private Equity" tagline (inline)
+- Center: Inline navigation links (Home · Principles · Focus · Playbook · Team · Contact) separated by `·` dots — all on one line
+- Right: Region switcher pill + email link
+
+**Row 2** (bottom bar — slim):
+- Left: © 2026 Cruxway LLC
+- Right: Privacy · Terms
+
+**What gets removed:**
+- Remove `DarkSectionEffects` / `LightSectionEffects` (too heavy for footer)
+- Remove the grain texture overlay
+- Remove the animated shimmer divider (replace with simple `border-t`)
+- Remove the `MapPin` address line
+- Remove "Patient capital for essential businesses" subtitle
+- Remove "Privileged & Confidential" text
+- Remove the `GoldRule` component
+- Remove the radial glow behind the brand name
+- Remove individual `FadeIn` and staggered `motion.div` animations on each link
+
+**What stays:**
+- Clean gold top border line
+- Theme-aware background (dark navy / light cream)
+- Region switcher with flag icons
+- Email link
+- Copyright + legal links
+
+**Visual style:** Clean, minimal, ~80px total height on desktop. No visual effects — just clean typography and spacing. Professional institutional aesthetic.
 
 ### Files Modified
-- `src/pages/Home.tsx` — lines 305-389 in `OpportunityCinematic`
+- `src/components/CruxwayOriginStory.tsx` — fix Act 1 timing and label visibility
+- `src/components/SiteFooter.tsx` — complete revamp to compact 2-row layout
 
