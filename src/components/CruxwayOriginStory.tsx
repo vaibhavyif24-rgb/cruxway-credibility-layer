@@ -100,21 +100,21 @@ const CruxwayOriginStory = () => {
   const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.80, 0.95, 1.0], [0, 1, 1, 1]);
   const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.80], [0.92, 1]);
 
-  // Desktop transforms — panels split between 0.15 → 0.35
-  const leftWidth = useTransform(scrollYProgress, [0, 0.12, 0.30], ['100%', '100%', '50%']);
-  const rightWidth = useTransform(scrollYProgress, [0, 0.12, 0.30], ['0%', '0%', '50%']);
-  const seamOpacity = useTransform(scrollYProgress, [0.18, 0.30], [0, 1]);
-  const seamHeight = useTransform(scrollYProgress, [0.20, 0.35], ['0%', '100%']);
-  // Phase 1: visible immediately, fades out as split begins
-  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.01, 0.08, 0.14], [1, 1, 1, 0]);
-  // Phase 2: per-panel labels appear AFTER phase 1 is gone and split is mostly done
-  const phase2TextOpacity = useTransform(scrollYProgress, [0.30, 0.38, 0.50, 0.56], [0, 1, 1, 0]);
+  // Desktop transforms — panels split between 0.10 → 0.28
+  const leftWidth = useTransform(scrollYProgress, [0, 0.10, 0.28], ['100%', '100%', '50%']);
+  const rightWidth = useTransform(scrollYProgress, [0, 0.10, 0.28], ['0%', '0%', '50%']);
+  const seamOpacity = useTransform(scrollYProgress, [0.16, 0.28], [0, 1]);
+  const seamHeight = useTransform(scrollYProgress, [0.18, 0.32], ['0%', '100%']);
+  // Phase 1: visible immediately, GONE before split starts
+  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.005, 0.06, 0.10], [1, 1, 1, 0]);
+  // Phase 2: per-panel labels appear AFTER split is complete
+  const phase2TextOpacity = useTransform(scrollYProgress, [0.30, 0.36, 0.48, 0.54], [0, 1, 1, 0]);
   // Phase 3: equation
-  const phase3TextOpacity = useTransform(scrollYProgress, [0.56, 0.62, 0.72, 0.78], [0, 1, 1, 0]);
-  const phase3RuleWidth = useTransform(scrollYProgress, [0.60, 0.68], [0, 120]);
+  const phase3TextOpacity = useTransform(scrollYProgress, [0.54, 0.60, 0.70, 0.76], [0, 1, 1, 0]);
+  const phase3RuleWidth = useTransform(scrollYProgress, [0.58, 0.66], [0, 120]);
   // Phase 4: final CRUXWAY
-  const phase4TextOpacity = useTransform(scrollYProgress, [0.78, 0.86, 0.95, 1.0], [0, 1, 1, 1]);
-  const phase4Scale = useTransform(scrollYProgress, [0.78, 0.86], [0.92, 1]);
+  const phase4TextOpacity = useTransform(scrollYProgress, [0.76, 0.84, 0.95, 1.0], [0, 1, 1, 1]);
+  const phase4Scale = useTransform(scrollYProgress, [0.76, 0.84], [0.92, 1]);
 
   /* ================================================================ */
   /*  MOBILE RENDER                                                    */
