@@ -17,7 +17,7 @@ const Grain = () => (
   />
 );
 
-/* ─── Video layer with IntersectionObserver ─── */
+/* ─── Video layer with IntersectionObserver, fades in on canplay ─── */
 const VideoLayer = ({
   src,
   style,
@@ -32,6 +32,12 @@ const VideoLayer = ({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const handleCanPlay = () => {
+      el.style.opacity = '0.6';
+    };
+    el.addEventListener('canplay', handleCanPlay);
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) el.play().catch(() => {});
@@ -40,7 +46,11 @@ const VideoLayer = ({
       { rootMargin: '500px' }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+
+    return () => {
+      el.removeEventListener('canplay', handleCanPlay);
+      obs.disconnect();
+    };
   }, []);
 
   return (
@@ -52,7 +62,7 @@ const VideoLayer = ({
       loop
       playsInline
       preload="none"
-      style={{ willChange: 'transform', ...style }}
+      style={{ willChange: 'transform', opacity: 0, transition: 'opacity 1s ease', ...style }}
     />
   );
 };
