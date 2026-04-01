@@ -134,10 +134,10 @@ const CruxwayOriginStory = () => {
   const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'hsl(228, 30%, 35%)';
   const videoTextShadow = isDark
     ? '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)'
-    : '0 1px 8px rgba(255, 255, 255, 0.6), 0 0 2px rgba(255, 255, 255, 0.3)';
+    : '0 1px 12px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.4)';
   const videoSubShadow = isDark
     ? '0 1px 12px rgba(0, 0, 0, 0.6)'
-    : '0 1px 6px rgba(255, 255, 255, 0.5)';
+    : '0 1px 8px rgba(255, 255, 255, 0.7)';
   const wordmarkShadow = isDark
     ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
     : '0 0 60px hsl(43 78% 50% / 0.20), 0 2px 16px rgba(255,255,255,0.3)';
