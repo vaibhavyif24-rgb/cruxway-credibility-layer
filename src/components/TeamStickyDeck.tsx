@@ -102,7 +102,7 @@ const TeamCard: React.FC<{
       whileHover={{ y: -4, scale: 1.01 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl overflow-hidden"
+      className="rounded-2xl overflow-hidden w-full"
       style={{
         position: 'sticky',
         top: `${stickyTop}px`,
