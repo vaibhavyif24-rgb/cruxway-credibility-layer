@@ -6,8 +6,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 /* ------------------------------------------------------------------ */
 /*  Pexels media                                                       */
 /* ------------------------------------------------------------------ */
-const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/5121751/5121751-uhd_2560_1440_25fps.mp4';
-const CRUCIBLE_POSTER = 'https://images.pexels.com/videos/5121751/pexels-photo-5121751.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/33938968/14402040_2560_1440_32fps.mp4';
+const CRUCIBLE_POSTER = 'https://images.pexels.com/videos/33938968/pexels-photo-33938968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 const WAY_VIDEO = 'https://videos.pexels.com/video-files/7895948/7895948-uhd_2560_1440_25fps.mp4';
 const WAY_POSTER = 'https://images.pexels.com/videos/7895948/pexels-photo-7895948.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
@@ -72,136 +72,118 @@ const CruxwayOriginStory = () => {
     offset: ['start start', 'end end'],
   });
 
-  /* ------ Overlay colours (LIGHTER than typical hero) ------ */
-  const darkOverlay = 'linear-gradient(to bottom, hsl(228 55% 8% / 0.25) 0%, hsl(228 55% 8% / 0.45) 60%, hsl(228 55% 8% / 0.7) 100%)';
-  const lightOverlay = 'linear-gradient(to bottom, hsl(40 25% 96% / 0.3) 0%, hsl(40 25% 96% / 0.5) 60%, hsl(40 25% 96% / 0.75) 100%)';
+  /* ------ Overlay colours (LIGHT — video must be visible) ------ */
+  const darkOverlay = 'linear-gradient(to bottom, hsl(228 55% 8% / 0.2) 0%, hsl(228 55% 8% / 0.4) 50%, hsl(228 55% 8% / 0.6) 100%)';
+  const lightOverlay = 'linear-gradient(to bottom, hsl(40 25% 96% / 0.25) 0%, hsl(40 25% 96% / 0.4) 50%, hsl(40 25% 96% / 0.65) 100%)';
   const overlay = isDark ? darkOverlay : lightOverlay;
-
-  /* ================================================================ */
-  /*  DESKTOP transforms                                               */
-  /* ================================================================ */
-
-  // Phase 1: Full-viewport CRUCIBLE text (z-30, centered on viewport)
-  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.28, 0.38], [1, 1, 0]);
-  const defOpacity = useTransform(scrollYProgress, [0.05, 0.15, 0.25, 0.30], [0, 1, 1, 0]);
-
-  // Phase 2: Panel split
-  const leftPanelWidth = useTransform(scrollYProgress, [0.30, 0.55], ['100%', '50%']);
-  const rightPanelWidth = useTransform(scrollYProgress, [0.30, 0.55], ['0%', '50%']);
-
-  // Gold center seam
-  const goldLineHeight = useTransform(scrollYProgress, [0.40, 0.58], ['0%', '100%']);
-  const goldLineOpacity = useTransform(scrollYProgress, [0.39, 0.44], [0, 1]);
-
-  // Per-panel diptych labels (contained WITHIN each panel)
-  const diptychOpacity = useTransform(scrollYProgress, [0.48, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
-  const diptychRightOpacity = useTransform(scrollYProgress, [0.50, 0.60, 0.65, 0.72], [0, 1, 1, 0]);
-
-  // Phase 3: CRUXWAY resolution
-  const cruxwayOpacity = useTransform(scrollYProgress, [0.72, 0.84], [0, 1]);
-  const cruxwayScale = useTransform(scrollYProgress, [0.72, 0.84], [0.92, 1]);
-  const ruleWidth = useTransform(scrollYProgress, [0.84, 0.92], [0, 80]);
-  const taglineOpacity = useTransform(scrollYProgress, [0.88, 0.96], [0, 1]);
-
-  /* ================================================================ */
-  /*  MOBILE transforms (crossfade instead of split)                   */
-  /* ================================================================ */
-  const mCrucibleVideoOpacity = useTransform(scrollYProgress, [0.28, 0.45], [1, 0]);
-  const mWayVideoOpacity = useTransform(scrollYProgress, [0.28, 0.45], [0, 1]);
-  const mPhase1TextOpacity = useTransform(scrollYProgress, [0, 0.25, 0.35], [1, 1, 0]);
-  const mDefOpacity = useTransform(scrollYProgress, [0.05, 0.13, 0.22, 0.28], [0, 1, 1, 0]);
-  const mWayTextOpacity = useTransform(scrollYProgress, [0.38, 0.50, 0.55, 0.62], [0, 1, 1, 0]);
-  const mWayDefOpacity = useTransform(scrollYProgress, [0.42, 0.52, 0.55, 0.60], [0, 1, 1, 0]);
-  const mCruxwayOpacity = useTransform(scrollYProgress, [0.65, 0.78], [0, 1]);
-  const mCruxwayScale = useTransform(scrollYProgress, [0.65, 0.78], [0.92, 1]);
-  const mRuleWidth = useTransform(scrollYProgress, [0.78, 0.88], [0, 64]);
-  const mTaglineOpacity = useTransform(scrollYProgress, [0.85, 0.94], [0, 1]);
 
   /* ------ Text shadows for legibility over bright video ------ */
   const textShadow = '0 2px 20px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.3)';
   const cruxwayShadow = isDark
-    ? '0 0 50px hsl(43 78% 50% / 0.25), 0 4px 24px rgba(0,0,0,0.5)'
-    : '0 0 30px hsl(43 78% 50% / 0.15), 0 4px 16px rgba(0,0,0,0.15)';
+    ? '0 0 60px hsl(43 78% 50% / 0.2), 0 4px 30px rgba(0,0,0,0.6)'
+    : '0 4px 30px rgba(0,0,0,0.2)';
 
-  const subColor = isDark ? 'text-white/70' : 'text-foreground/60';
+  const subColor = isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.55)';
+  const subShadow = '0 1px 10px rgba(0,0,0,0.4)';
 
   /* ================================================================ */
-  /*  MOBILE RENDER                                                    */
+  /*  MOBILE transforms (crossfade, no split)                          */
   /* ================================================================ */
   if (isMobile) {
+    const mCrucibleOpacity = useTransform(scrollYProgress, [0.12, 0.30], [1, 0]);
+    const mWayOpacity = useTransform(scrollYProgress, [0.12, 0.30], [0, 1]);
+
+    const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.02, 0.10, 0.16], [0, 1, 1, 0]);
+    const mPhase2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.42, 0.48], [0, 1, 1, 0]);
+    const mPhase3Opacity = useTransform(scrollYProgress, [0.50, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
+    const mPhase3RuleW = useTransform(scrollYProgress, [0.54, 0.62], [0, 100]);
+    const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
+    const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+
     return (
-      <div ref={containerRef} className="relative" style={{ height: '180vh' }}>
-        <div className="sticky top-0 h-[100vh] w-full overflow-hidden">
-          {/* Crucible video */}
-          <motion.div className="absolute inset-0" style={{ opacity: mCrucibleVideoOpacity, willChange: 'transform' }}>
-            <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
+      <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          {/* Way video (behind) */}
+          <motion.div className="absolute inset-0" style={{ opacity: mWayOpacity, willChange: 'transform' }}>
+            <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
             <div className="absolute inset-0" style={{ background: overlay }} />
             <Grain />
           </motion.div>
 
-          {/* Way video (behind crucible, revealed by crossfade) */}
-          <motion.div className="absolute inset-0" style={{ opacity: mWayVideoOpacity, willChange: 'transform' }}>
-            <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
+          {/* Crucible video (on top, fades out) */}
+          <motion.div className="absolute inset-0" style={{ opacity: mCrucibleOpacity, zIndex: 2, willChange: 'transform' }}>
+            <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
             <div className="absolute inset-0" style={{ background: overlay }} />
             <Grain />
           </motion.div>
 
           {/* Phase 1: CRUCIBLE */}
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center px-6"
-            style={{ opacity: mPhase1TextOpacity, zIndex: 10 }}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase1Opacity }}
           >
-            <h2
-              className="font-serif text-[clamp(2.8rem,12vw,5rem)] uppercase tracking-[0.12em] text-gold text-center"
-              style={{ textShadow }}
-            >
+            <h2 className="font-serif text-gold uppercase tracking-[0.12em] text-center"
+              style={{ fontSize: 'clamp(2.4rem, 10vw, 4rem)', textShadow }}>
               Crucible
             </h2>
-            <motion.p
-              className={`font-sans text-[13px] text-center max-w-[320px] mt-4 ${subColor}`}
-              style={{ opacity: mDefOpacity, textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
-            >
-              A vessel where raw material becomes something stronger.
-            </motion.p>
+            <p className="font-sans text-[13px] text-center max-w-[320px] mt-4"
+              style={{ color: subColor, textShadow: subShadow }}>
+              A vessel where raw material is transformed under pressure.
+            </p>
           </motion.div>
 
           {/* Phase 2: THE WAY */}
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center px-6"
-            style={{ opacity: mWayTextOpacity, zIndex: 10 }}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase2Opacity }}
           >
-            <h2
-              className="font-serif text-[clamp(2.5rem,10vw,4.5rem)] uppercase tracking-[0.12em] text-gold text-center"
-              style={{ textShadow }}
-            >
+            <h2 className="font-serif text-gold uppercase tracking-[0.12em] text-center"
+              style={{ fontSize: 'clamp(2.2rem, 9vw, 3.5rem)', textShadow }}>
               The Way
             </h2>
-            <motion.p
-              className={`font-sans text-[13px] text-center max-w-[320px] mt-4 ${subColor}`}
-              style={{ opacity: mWayDefOpacity, textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
-            >
+            <p className="font-sans text-[13px] text-center max-w-[320px] mt-4"
+              style={{ color: subColor, textShadow: subShadow }}>
               The discipline that guides the transformation.
-            </motion.p>
+            </p>
           </motion.div>
 
-          {/* Phase 3: CRUXWAY */}
+          {/* Phase 3: Equation */}
           <motion.div
-            className="absolute inset-0 flex flex-col items-center justify-center px-6"
-            style={{ opacity: mCruxwayOpacity, scale: mCruxwayScale, zIndex: 10 }}
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase3Opacity }}
           >
-            <h2
-              className="font-serif text-[clamp(3rem,14vw,5.5rem)] text-gold tracking-[-0.02em] text-center"
-              style={{ textShadow: cruxwayShadow }}
-            >
+            <div className="flex items-center gap-3">
+              <span className="font-serif text-gold uppercase tracking-[0.08em]"
+                style={{ fontSize: 'clamp(1.2rem, 5vw, 2rem)', textShadow }}>
+                Crux
+              </span>
+              <span className="font-serif text-gold text-[1.3rem]" style={{ textShadow }}>+</span>
+              <span className="font-serif uppercase tracking-[0.08em]"
+                style={{ fontSize: 'clamp(1.2rem, 5vw, 2rem)', color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)', textShadow }}>
+                Way
+              </span>
+            </div>
+            <motion.div className="h-[2px] bg-gold/40 mt-4 mx-auto" style={{ width: mPhase3RuleW }} />
+            <p className="font-serif text-gold mt-4 text-center"
+              style={{ fontSize: 'clamp(1.8rem, 7vw, 3rem)', textShadow: cruxwayShadow }}>
               Cruxway
-            </h2>
-            <motion.div className="mt-4 h-[2px] bg-gold/60 mx-auto" style={{ width: mRuleWidth }} />
-            <motion.p
-              className="font-sans text-[12px] uppercase tracking-[0.18em] text-center mt-4 text-gold/70"
-              style={{ opacity: mTaglineOpacity }}
-            >
+            </p>
+          </motion.div>
+
+          {/* Phase 4: Final */}
+          <motion.div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase4Opacity, scale: mPhase4Scale }}
+          >
+            <p className="font-serif text-gold tracking-[-0.02em] text-center"
+              style={{ fontSize: 'clamp(2.8rem, 12vw, 5rem)', textShadow: cruxwayShadow }}>
+              Cruxway
+            </p>
+            <div className="h-[1.5px] bg-gold/40 w-[64px] mt-4" />
+            <p className="font-sans text-[11px] uppercase tracking-[0.18em] mt-3 text-center"
+              style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)' }}>
               Forging conviction through rigour.
-            </motion.p>
+            </p>
           </motion.div>
         </div>
       </div>
@@ -209,35 +191,57 @@ const CruxwayOriginStory = () => {
   }
 
   /* ================================================================ */
+  /*  DESKTOP transforms                                               */
+  /* ================================================================ */
+
+  // Panel widths
+  const leftWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['100%', '100%', '50%']);
+  const rightWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['0%', '0%', '50%']);
+
+  // Gold center seam
+  const seamOpacity = useTransform(scrollYProgress, [0.20, 0.35], [0, 1]);
+  const seamHeight = useTransform(scrollYProgress, [0.25, 0.40], ['0%', '100%']);
+
+  // Phase 1: full-screen CRUCIBLE
+  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12, 0.18], [0, 1, 1, 0]);
+
+  // Phase 2: per-panel labels
+  const phase2TextOpacity = useTransform(scrollYProgress, [0.32, 0.40, 0.48, 0.55], [0, 1, 1, 0]);
+
+  // Phase 3: equation
+  const phase3TextOpacity = useTransform(scrollYProgress, [0.53, 0.60, 0.68, 0.75], [0, 1, 1, 0]);
+  const phase3RuleWidth = useTransform(scrollYProgress, [0.56, 0.65], [0, 120]);
+
+  // Phase 4: final CRUXWAY
+  const phase4TextOpacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
+  const phase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+
+  /* ================================================================ */
   /*  DESKTOP RENDER                                                   */
   /* ================================================================ */
   return (
-    <div ref={containerRef} className="relative" style={{ height: '180vh' }}>
-      <div className="sticky top-0 h-[100vh] w-full overflow-hidden">
+    <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* ---- Left panel (Crucible) ---- */}
         <motion.div
           className="absolute top-0 left-0 h-full overflow-hidden"
-          style={{ width: leftPanelWidth, willChange: 'transform' }}
+          style={{ width: leftWidth, zIndex: 2, willChange: 'transform' }}
         >
           <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
           <div className="absolute inset-0" style={{ background: overlay }} />
           <Grain />
 
-          {/* Diptych label: CRUCIBLE (inside left panel only) */}
+          {/* Phase 2: CRUCIBLE label (inside left panel) */}
           <motion.div
             className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ opacity: diptychOpacity, zIndex: 10 }}
+            style={{ opacity: phase2TextOpacity, zIndex: 10 }}
           >
-            <h3
-              className="font-serif text-[clamp(1.8rem,4vw,3rem)] uppercase tracking-[0.1em] text-gold"
-              style={{ textShadow }}
-            >
+            <h3 className="font-serif text-gold uppercase tracking-[0.1em]"
+              style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)', textShadow }}>
               Crucible
             </h3>
-            <p
-              className={`font-sans text-[13px] md:text-[15px] mt-3 ${subColor}`}
-              style={{ textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
-            >
+            <p className="font-sans text-[13px] md:text-[15px] mt-2 text-center max-w-[240px]"
+              style={{ color: subColor, textShadow: subShadow }}>
               Where conviction is forged.
             </p>
           </motion.div>
@@ -246,27 +250,23 @@ const CruxwayOriginStory = () => {
         {/* ---- Right panel (The Way) ---- */}
         <motion.div
           className="absolute top-0 right-0 h-full overflow-hidden"
-          style={{ width: rightPanelWidth, willChange: 'transform' }}
+          style={{ width: rightWidth, zIndex: 1, willChange: 'transform' }}
         >
           <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
           <div className="absolute inset-0" style={{ background: overlay }} />
           <Grain />
 
-          {/* Diptych label: THE WAY (inside right panel only) */}
+          {/* Phase 2: THE WAY label (inside right panel) */}
           <motion.div
             className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ opacity: diptychRightOpacity, zIndex: 10 }}
+            style={{ opacity: phase2TextOpacity, zIndex: 10 }}
           >
-            <h3
-              className="font-serif text-[clamp(1.8rem,4vw,3rem)] uppercase tracking-[0.1em] text-gold"
-              style={{ textShadow }}
-            >
+            <h3 className="font-serif text-gold uppercase tracking-[0.1em]"
+              style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.8rem)', textShadow }}>
               The Way
             </h3>
-            <p
-              className={`font-sans text-[13px] md:text-[15px] mt-3 ${subColor}`}
-              style={{ textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
-            >
+            <p className="font-sans text-[13px] md:text-[15px] mt-2 text-center max-w-[240px]"
+              style={{ color: subColor, textShadow: subShadow }}>
               The discipline that guides the transformation.
             </p>
           </motion.div>
@@ -274,52 +274,74 @@ const CruxwayOriginStory = () => {
 
         {/* ---- Gold center seam ---- */}
         <motion.div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] bg-gold/50"
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px]"
           style={{
-            height: goldLineHeight,
-            opacity: goldLineOpacity,
-            zIndex: 20,
-            boxShadow: '0 0 12px hsl(43 78% 50% / 0.3)',
+            height: seamHeight,
+            opacity: seamOpacity,
+            zIndex: 10,
+            background: 'hsl(43 78% 50%)',
+            boxShadow: '0 0 15px hsl(43 78% 50% / 0.3)',
           }}
         />
 
-        {/* ---- Phase 1: CRUCIBLE (full viewport overlay, z-30) ---- */}
+        {/* ---- Phase 1: CRUCIBLE full-screen ---- */}
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-          style={{ opacity: phase1TextOpacity, zIndex: 30 }}
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
+          style={{ opacity: phase1TextOpacity }}
         >
-          <h2
-            className="font-serif text-[clamp(2.8rem,7vw,5.5rem)] uppercase tracking-[0.12em] text-gold"
-            style={{ textShadow }}
-          >
+          <h2 className="font-serif text-gold uppercase tracking-[0.12em]"
+            style={{ fontSize: 'clamp(2.8rem, 7vw, 5.5rem)', textShadow }}>
             Crucible
           </h2>
-          <motion.p
-            className={`font-sans text-[13px] md:text-[15px] text-center max-w-[380px] mt-5 ${subColor}`}
-            style={{ opacity: defOpacity, textShadow: '0 1px 8px rgba(0,0,0,0.5)' }}
-          >
-            A vessel where raw material becomes something stronger.
-          </motion.p>
+          <p className="font-sans text-[13px] md:text-[15px] mt-4 max-w-[380px] text-center"
+            style={{ color: subColor, textShadow: subShadow }}>
+            A vessel where raw material is transformed under pressure.
+          </p>
         </motion.div>
 
-        {/* ---- Phase 3: CRUXWAY (full viewport overlay, z-30) ---- */}
+        {/* ---- Phase 3: Equation ---- */}
         <motion.div
-          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
-          style={{ opacity: cruxwayOpacity, scale: cruxwayScale, zIndex: 30 }}
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
+          style={{ opacity: phase3TextOpacity }}
         >
-          <h2
-            className="font-serif text-[clamp(3rem,9vw,7rem)] text-gold tracking-[-0.02em]"
-            style={{ textShadow: cruxwayShadow }}
-          >
+          <div className="flex items-center gap-3 md:gap-5">
+            <span className="font-serif text-gold uppercase tracking-[0.08em]"
+              style={{ fontSize: 'clamp(1.4rem, 3vw, 2.4rem)', textShadow }}>
+              Crux
+            </span>
+            <span className="font-serif text-gold text-[1.5rem] md:text-[2rem]" style={{ textShadow }}>
+              +
+            </span>
+            <span className="font-serif uppercase tracking-[0.08em]"
+              style={{
+                fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
+                color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.8)',
+                textShadow,
+              }}>
+              Way
+            </span>
+          </div>
+          <motion.div className="h-[2px] bg-gold/40 mt-4 mx-auto" style={{ width: phase3RuleWidth }} />
+          <p className="font-serif text-gold mt-4"
+            style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', textShadow: cruxwayShadow }}>
             Cruxway
-          </h2>
-          <motion.div className="mt-5 h-[2px] bg-gold/60 mx-auto" style={{ width: ruleWidth }} />
-          <motion.p
-            className="font-sans text-[12px] md:text-[14px] uppercase tracking-[0.18em] mt-5 text-gold/70"
-            style={{ opacity: taglineOpacity }}
-          >
+          </p>
+        </motion.div>
+
+        {/* ---- Phase 4: Final CRUXWAY ---- */}
+        <motion.div
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
+          style={{ opacity: phase4TextOpacity, scale: phase4Scale }}
+        >
+          <p className="font-serif text-gold tracking-[-0.02em]"
+            style={{ fontSize: 'clamp(3rem, 9vw, 6.5rem)', textShadow: cruxwayShadow }}>
+            Cruxway
+          </p>
+          <div className="h-[1.5px] bg-gold/40 w-[80px] mt-5" />
+          <p className="font-sans text-[12px] md:text-[14px] uppercase tracking-[0.18em] mt-4"
+            style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)' }}>
             Forging conviction through rigour.
-          </motion.p>
+          </p>
         </motion.div>
       </div>
     </div>
