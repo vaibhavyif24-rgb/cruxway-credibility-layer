@@ -118,7 +118,7 @@ const CruxwayOriginStory = () => {
   if (isMobile) {
     return (
       <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: isDark ? 'hsl(228 55% 8%)' : 'hsl(40 25% 20%)' }}>
           {/* Way video (behind) */}
           <motion.div className="absolute inset-0" style={{ opacity: mWayOpacity, willChange: 'transform' }}>
             <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
