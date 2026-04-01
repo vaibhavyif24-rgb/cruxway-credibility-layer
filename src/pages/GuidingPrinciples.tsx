@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
-import PrinciplesGrid from '@/components/PrinciplesGrid';
+import ConvictionsDeck from '@/components/ConvictionsDeck';
 import CruxwayOriginStory from '@/components/CruxwayOriginStory';
 import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -13,15 +13,6 @@ import { motion } from 'framer-motion';
 
 import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
 import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
-
-const principles = [
-  { t: 'Integrity', d: 'We say what we mean and follow through. Transparency and intellectual honesty in every interaction, even when the truth is uncomfortable.' },
-  { t: 'Steward Leadership', d: 'Leadership is earned through stewardship, not authority. We succeed when the people and businesses around us succeed.' },
-  { t: 'Humility', d: 'The best investors never stop learning. We approach every situation with curiosity and an open mind.' },
-  { t: 'Grit', d: 'Building lasting businesses requires perseverance. We do hard things, especially when things get hard.' },
-  { t: 'Bias to Action', d: 'Analysis has its place, but progress demands execution. We move decisively and learn in motion.' },
-  { t: 'The Golden Rule', d: 'Treat every person, from founder to frontline employee, with respect, fairness, and genuine compassion.' },
-];
 
 const GuidingPrinciples = () => {
   const { region } = useRegion();
@@ -38,16 +29,16 @@ const GuidingPrinciples = () => {
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
-            <SectionLabel light={isDark}>{isIndia ? 'About Us, India' : 'About Us'}</SectionLabel>
+            <SectionLabel light={isDark}>{isIndia ? 'Our Identity, India' : 'Our Identity'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[540px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : <>Guiding <span className="text-gold">Principles</span></>}
+              The Name. The <span className="text-gold">Conviction</span>. The Way.
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[460px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              The values and convictions that shape every partnership and every decision we make.
+              How we named ourselves, what we believe, and why it matters in every decision we make.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -57,32 +48,11 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Naming Story — Two-Act Origin */}
+      {/* Naming Story */}
       <CruxwayOriginStory />
 
-      {/* Principles — refined heading + grid */}
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10">
-        <FadeIn>
-          <SectionLabel>Core Values</SectionLabel>
-          <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] mb-1">
-            <span className="text-foreground">What We </span>
-            <span className="text-gold">Stand For</span>
-          </h2>
-          <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-2">
-            The principles that govern every partnership, every decision, and every relationship we build.
-          </p>
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: 48 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-6 md:mb-0"
-          >
-            <GoldRule />
-          </motion.div>
-        </FadeIn>
-      </div>
-      <PrinciplesGrid principles={principles} />
+      {/* Convictions Deck */}
+      <ConvictionsDeck />
 
       {/* CTA */}
       <div className="h-px w-full shimmer-effect" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.12), transparent)', animationDuration: '5s' }} />
