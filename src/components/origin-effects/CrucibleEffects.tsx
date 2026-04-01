@@ -7,8 +7,8 @@ interface Props {
 
 const CrucibleEffects = ({ isMobile, isDark }: Props) => {
   const particleCount = isMobile ? 6 : 12;
-  const emberColor = isDark ? 'hsl(43 78% 50%)' : 'hsl(43 70% 42%)';
-  const glowColor = isDark ? 'hsl(30 90% 50% / 0.25)' : 'hsl(30 80% 45% / 0.18)';
+  const emberColor = isDark ? 'hsl(43 78% 50%)' : 'hsl(35 85% 55%)';
+  const glowColor = isDark ? 'hsl(30 90% 50% / 0.25)' : 'hsl(30 80% 55% / 0.30)';
 
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
