@@ -477,7 +477,7 @@ const CruxwayOriginStory = () => {
           </motion.p>
 
           <motion.p
-            className="font-sans text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.22em] mt-8"
+            className="font-sans text-[11px] md:text-[13px] font-semibold uppercase tracking-[0.22em] mt-8"
             style={{ opacity: act4ClosingOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             Forging conviction through rigour
