@@ -219,7 +219,7 @@ const CruxwayOriginStory = () => {
   /* ================================================================ */
   return (
     <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: isDark ? 'hsl(228 55% 8%)' : 'hsl(40 25% 20%)' }}>
         {/* ---- Left panel (Crucible) ---- */}
         <motion.div
           className="absolute top-0 left-0 h-full overflow-hidden"
