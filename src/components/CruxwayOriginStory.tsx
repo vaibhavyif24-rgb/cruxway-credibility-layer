@@ -464,7 +464,8 @@ const CruxwayOriginStory = () => {
             className="font-sans leading-[1.8] mt-5 max-w-[480px]"
             style={{
               opacity: act4StatementOp,
-              color: bodyColor,
+              color: videoBodyColor,
+              textShadow: videoSubShadow,
               fontSize: isMobile ? '14px' : '15px',
               letterSpacing: '0.01em',
             }}
@@ -474,7 +475,7 @@ const CruxwayOriginStory = () => {
 
           <motion.p
             className="font-sans text-[10px] md:text-[12px] font-semibold uppercase tracking-[0.22em] mt-8"
-            style={{ opacity: act4ClosingOp, color: mutedColor }}
+            style={{ opacity: act4ClosingOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             Forging conviction through rigour
           </motion.p>
