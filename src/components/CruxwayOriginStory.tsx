@@ -228,8 +228,13 @@ const CruxwayOriginStory = () => {
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Solid background for Acts 3-4 ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: solidBgOp, zIndex: 3, background: solidBg }}>
+        {/* ─── Video: Crucible Return (Acts 3-4) ─── */}
+        <motion.div className="absolute inset-0" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
+          <VideoLayer src={CRUCIBLE_VIDEO} />
+          <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
+          <Grain />
+          <GoldParticles />
+          <ShimmerLine />
           <CornerBrackets />
         </motion.div>
 
