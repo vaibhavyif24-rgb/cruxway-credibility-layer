@@ -49,30 +49,36 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Compact transition bridge into origin story */}
+      {/* ═══ Origin Story Bridge ═══ */}
       <div
         className="relative -mt-1"
         style={{
           zIndex: 5,
           background: isDark
-            ? 'linear-gradient(to bottom, hsl(228 55% 8%), hsl(228 55% 6%))'
-            : 'linear-gradient(to bottom, hsl(40 25% 96%), hsl(40 25% 94%))',
+            ? 'hsl(228, 55%, 8%)'
+            : 'hsl(40, 25%, 94%)',
         }}
       >
         <motion.div
-          className="flex items-center justify-center gap-3 md:gap-4 py-5 md:py-6 px-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="flex flex-col items-center justify-center py-8 md:py-10 px-6"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <span className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.32em] text-gold/70 whitespace-nowrap">
-            The Origin Story
-          </span>
-          <span className="hidden md:block h-[1px] w-[40px] bg-gold/25 flex-shrink-0" />
-          <span className={`font-sans text-[11px] md:text-[12px] leading-[1.6] ${isDark ? 'text-white/40' : 'text-foreground/50'}`}>
+          {/* Flanked label */}
+          <div className="flex items-center gap-4 md:gap-6">
+            <span className="h-[1px] w-8 md:w-12 bg-gold/40" />
+            <span className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.34em] text-gold whitespace-nowrap">
+              The Origin Story
+            </span>
+            <span className="h-[1px] w-8 md:w-12 bg-gold/40" />
+          </div>
+
+          {/* Subtitle */}
+          <p className={`font-sans text-[13px] md:text-[14px] leading-[1.7] mt-3 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
             Every name carries weight. Ours was forged with intent.
-          </span>
+          </p>
         </motion.div>
       </div>
 
