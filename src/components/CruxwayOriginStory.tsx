@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useRegion } from '@/contexts/RegionContext';
 import crucibleImg from '@/assets/cruxway-crucible.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
 import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
