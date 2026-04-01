@@ -60,23 +60,29 @@ const GuidingPrinciples = () => {
         }}
       >
         <motion.div
-          className="flex flex-col items-center justify-center py-8 md:py-10 px-6"
+          className="flex flex-col items-center justify-center py-6 md:py-8 px-6"
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          {/* Flanked label */}
+          {/* Flanked gold rules + serif heading */}
           <div className="flex items-center gap-4 md:gap-6">
-            <span className="h-[1px] w-8 md:w-12 bg-gold/40" />
-            <span className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.34em] text-gold whitespace-nowrap">
+            <span className="h-[1px] w-10 md:w-16 bg-gold/40" />
+            <h2 className={`font-serif text-[18px] md:text-[22px] tracking-[-0.01em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               The Origin Story
-            </span>
-            <span className="h-[1px] w-8 md:w-12 bg-gold/40" />
+            </h2>
+            <span className="h-[1px] w-10 md:w-16 bg-gold/40" />
           </div>
 
+          {/* Gold gradient underline */}
+          <div
+            className="h-[1px] w-16 md:w-20 mt-3"
+            style={{ background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.5), transparent)' }}
+          />
+
           {/* Subtitle */}
-          <p className={`font-sans text-[13px] md:text-[14px] leading-[1.7] mt-3 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+          <p className={`font-sans text-[11px] md:text-[12px] leading-[1.7] mt-2 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/40' : 'text-muted-foreground'}`}>
             Every name carries weight. Ours was forged with intent.
           </p>
         </motion.div>
