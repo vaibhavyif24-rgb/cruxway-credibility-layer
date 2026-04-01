@@ -1,63 +1,71 @@
 
 
-## Plan: Fix Light Mode Text Readability + Compact Origin Story Bridge
+## Plan: Fix Origin Story — Images, Hindi Text, Heading, Text Visibility
 
-### Problem
-1. **Light mode text invisible on images** — the warm cream overlays are too transparent, and dark navy text lacks contrast against bright, busy backgrounds. Need a localized frosted-glass scrim behind each text block.
-2. **"The Origin Story" bridge section wastes vertical space** — currently ~120px of padding with a tiny label, a divider, and a subtitle stacked vertically. Needs to be collapsed into a tight, elegant transition.
+### Problems to Fix
+1. **Text invisible in light mode** — frosted scrims not providing enough contrast; overlays too weak
+2. **Hindi meaning of "Crucible" missing** — "Way" already has Hindi (`मार्ग`) but it shows on both India and US pages
+3. **Images don't suit light mode** — current crucible image is too dark/busy for light overlays
+4. **Origin Story bridge heading** looks unprofessional and poorly formatted
 
 ---
 
 ### Changes
 
-#### 1. Add frosted text scrims to all 4 Acts (light mode only) — `CruxwayOriginStory.tsx`
+#### 1. Generate two new images via AI — script to `/tmp`
 
-Each Act's content div already has a centered layout. Add a **backdrop blur scrim** behind the text area that only appears in light mode:
+Generate two cinematic images optimized for both themes (lighter base tones, golden warmth):
+- **Crucible image**: Molten gold being poured into a dark stone crucible against a gradient background (dark at edges, golden warmth in center) — works with both dark navy and cream overlays
+- **Merge/CRU×WAY image**: Two golden light streams converging into a single beam against a dark-to-warm gradient — replaces reusing the crucible image for Acts 3-4
 
-```tsx
-// Inserted inside each Act's content wrapper, behind text
-{!isDark && (
-  <div
-    className="absolute rounded-2xl pointer-events-none"
-    style={{
-      width: isMobile ? '92%' : '560px',
-      height: isMobile ? '70%' : '380px',
-      background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
-      backdropFilter: 'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)',
-      zIndex: -1,
-    }}
-  />
-)}
+Save to `src/assets/cruxway-crucible-v2.jpg` and `src/assets/cruxway-merge-v2.jpg`.
+
+#### 2. Fix text visibility — `CruxwayOriginStory.tsx`
+
+**Light mode**: Replace the current weak frosted scrims with stronger ones:
+- Increase backdrop blur from `12px` → `20px`
+- Strengthen radial gradient center from `rgba(255,255,255,0.55)` → `rgba(255,255,255,0.72)`
+- Add a subtle dark text shadow in light mode: `0 1px 3px rgba(0,0,0,0.12)` instead of the white halo (which does nothing against white scrims)
+- Increase light-mode overlay opacity further (crucible `0.62`, way `0.65`, merge `0.78`)
+
+**Dark mode**: Add dark scrim behind Act 1 (currently only Act 2 has one) for consistency.
+
+#### 3. Add region-awareness for Hindi text — `CruxwayOriginStory.tsx`
+
+- Import `useRegion` from `@/contexts/RegionContext`
+- Add `const { region } = useRegion(); const isIndia = region === 'india';`
+- **Act 1 (Crucible)**: Add Hindi meaning only for India: `Hindi: कुठाली (kuṭhālī)` after the phonetic line
+- **Act 2 (Way)**: Wrap the existing `· Hindi: मार्ग (mārg)` in a conditional: only show when `isIndia`
+
+#### 4. Redesign Origin Story bridge heading — `GuidingPrinciples.tsx`
+
+Replace the current minimal strip with a more polished, centered heading block:
+
+```
+┌─────────────────────────────────────────────┐
+│          ── THE ORIGIN STORY ──             │
+│  Every name carries weight.                 │
+│  Ours was forged with intent.               │
+└─────────────────────────────────────────────┘
 ```
 
-This creates a soft frosted-glass halo that makes dark text pop without looking like an ugly box. The radial gradient fades to transparent at the edges for a natural, editorial look.
+- Centered layout with gold horizontal rules flanking the label
+- Subtitle on its own line below, slightly larger font (`13px` → `14px`)
+- Proper theme-aware text colors (not `white/40` which disappears in light mode)
+- Compact padding: `py-6 md:py-8` (professional spacing without waste)
+- Background matches the `solidBg` of the origin story for seamless transition
 
-Also strengthen the light-mode text shadows to use a subtle dark halo instead of the current white halo (white-on-white doesn't help):
+#### 5. Update image imports — `CruxwayOriginStory.tsx`
 
-- `videoTextShadow` light: `'0 1px 12px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.4)'`
-- `videoSubShadow` light: `'0 1px 8px rgba(255,255,255,0.7)'`
+- Replace `crucibleImg` import with new `cruxway-crucible-v2.jpg`
+- Add new `mergeImg` import for `cruxway-merge-v2.jpg`
+- Use `mergeImg` for the Acts 3-4 background instead of reusing `crucibleImg`
 
-#### 2. Strengthen light-mode overlays slightly — `CruxwayOriginStory.tsx`
-
-Increase the light-mode overlay opacity by ~10-15% so the images are more washed out (closer to the reference screenshot):
-
-- Crucible light: end at `0.58` instead of `0.50`
-- Way light: end at `0.62` instead of `0.55`
-- Crucible return light: end at `0.75` instead of `0.70`
-
-#### 3. Compact the Origin Story bridge — `GuidingPrinciples.tsx`
-
-Replace the current large padded block (gradient div + padded content area = ~140px total) with a single compact strip:
-
-- Remove the separate `h-16` gradient div
-- Collapse into one `py-5 md:py-6` container with the label and subtitle on a single line or tightly stacked
-- Reduce to: small gold "THE ORIGIN STORY" label inline with the subtitle text, separated by a `·` dot or thin gold divider — all in one line on desktop, two tight lines on mobile
-- Total height drops from ~140px to ~60-70px
-
-Layout: `THE ORIGIN STORY  ——  Every name carries weight. Ours was forged with intent.` (single horizontal line on desktop)
+---
 
 ### Files Modified
-- `src/components/CruxwayOriginStory.tsx` — frosted scrims + overlay opacity tweaks
-- `src/pages/GuidingPrinciples.tsx` — compact bridge section
+- `src/assets/cruxway-crucible-v2.jpg` — new AI-generated image (create)
+- `src/assets/cruxway-merge-v2.jpg` — new AI-generated image (create)
+- `src/components/CruxwayOriginStory.tsx` — new images, stronger scrims, region-aware Hindi, dark scrims
+- `src/pages/GuidingPrinciples.tsx` — redesigned bridge heading
 
