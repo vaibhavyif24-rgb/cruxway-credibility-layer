@@ -4,6 +4,9 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
 import crucibleImg from '@/assets/cruxway-crucible.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
+import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
+import WayEffects from '@/components/origin-effects/WayEffects';
+import MergeEffects from '@/components/origin-effects/MergeEffects';
 
 /* ─── Grain overlay ─── */
 const Grain = () => (
