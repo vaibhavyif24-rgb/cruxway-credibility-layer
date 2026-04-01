@@ -91,8 +91,8 @@ const CruxwayOriginStory = () => {
   /* ================================================================ */
 
   // Mobile transforms
-  const mCrucibleOpacity = useTransform(scrollYProgress, [0.12, 0.30], [1, 0]);
-  const mWayOpacity = useTransform(scrollYProgress, [0.12, 0.30], [0, 1]);
+  const mCrucibleOpacity = useTransform(scrollYProgress, [0.15, 0.30], [1, 0]);
+  const mWayOpacity = useTransform(scrollYProgress, [0.15, 0.30], [0, 1]);
   const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.01, 0.10, 0.16], [1, 1, 1, 0]);
   const mPhase2Opacity = useTransform(scrollYProgress, [0.20, 0.28, 0.42, 0.48], [0, 1, 1, 0]);
   const mPhase3Opacity = useTransform(scrollYProgress, [0.50, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
