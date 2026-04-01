@@ -49,7 +49,7 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Minimal cinematic seam into origin story */}
+      {/* Compact transition bridge into origin story */}
       <div
         className="relative -mt-1"
         style={{
@@ -60,17 +60,19 @@ const GuidingPrinciples = () => {
         }}
       >
         <motion.div
-          className="flex items-center justify-center py-5"
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
+          className="flex items-center justify-center gap-3 md:gap-4 py-5 md:py-6 px-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-3">
-            <div className="h-px w-8 bg-gold/30" />
-            <div className="w-1.5 h-1.5 rotate-45 bg-gold/50" />
-            <div className="h-px w-8 bg-gold/30" />
-          </div>
+          <span className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.32em] text-gold/70 whitespace-nowrap">
+            The Origin Story
+          </span>
+          <span className="hidden md:block h-[1px] w-[40px] bg-gold/25 flex-shrink-0" />
+          <span className={`font-sans text-[11px] md:text-[12px] leading-[1.6] ${isDark ? 'text-white/40' : 'text-foreground/50'}`}>
+            Every name carries weight. Ours was forged with intent.
+          </span>
         </motion.div>
       </div>
 

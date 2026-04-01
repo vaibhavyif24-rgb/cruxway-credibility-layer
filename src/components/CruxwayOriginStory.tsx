@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { useRegion } from '@/contexts/RegionContext';
 import crucibleImg from '@/assets/cruxway-crucible.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
 import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
@@ -106,8 +105,6 @@ const CruxwayOriginStory = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const isMobile = useIsMobile();
-  const { region } = useRegion();
-  const isIndia = region === 'india';
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -121,13 +118,13 @@ const CruxwayOriginStory = () => {
   /* Dark: deep navy cinematic overlays · Light: warm cream/amber — bright editorial feel */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.40) 0%, hsl(35 25% 88% / 0.55) 50%, hsl(35 25% 88% / 0.65) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.35) 0%, hsl(35 25% 88% / 0.50) 50%, hsl(35 25% 88% / 0.58) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.45) 0%, hsl(40 20% 85% / 0.60) 50%, hsl(40 20% 85% / 0.68) 100%)';
+    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.40) 0%, hsl(40 20% 85% / 0.55) 50%, hsl(40 20% 85% / 0.62) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.65) 0%, hsl(35 18% 85% / 0.75) 50%, hsl(35 18% 85% / 0.80) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.60) 0%, hsl(35 18% 85% / 0.70) 50%, hsl(35 18% 85% / 0.75) 100%)';
 
   /* Solid bg between transitions */
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 94%)';
@@ -230,18 +227,17 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act1LabelOp }}
         >
-          {/* Tight radial frost behind gold heading for light mode */}
+          {/* Frosted scrim for light mode readability */}
           {!isDark && (
             <div
-              className="absolute rounded-full pointer-events-none"
+              className="absolute rounded-2xl pointer-events-none"
               style={{
-                width: isMobile ? '240px' : '320px',
-                height: isMobile ? '100px' : '120px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.35) 50%, transparent 80%)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                width: isMobile ? '92%' : '560px',
+                height: isMobile ? '70%' : '380px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 zIndex: -1,
-                transform: 'translateY(-8px)',
               }}
             />
           )}
@@ -285,7 +281,7 @@ const CruxwayOriginStory = () => {
               fontSize: isMobile ? '12px' : '14px',
             }}
           >
-            /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>{isIndia && <> · <span className="font-sans">Hindi: कसौटी (kasauṭī)</span></>}
+            /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>
           </motion.p>
 
           <motion.p
@@ -307,18 +303,17 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
-          {/* Tight radial frost behind gold heading for light mode */}
+          {/* Frosted scrim for light mode readability */}
           {!isDark && (
             <div
-              className="absolute rounded-full pointer-events-none"
+              className="absolute rounded-2xl pointer-events-none"
               style={{
-                width: isMobile ? '200px' : '280px',
-                height: isMobile ? '90px' : '110px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.35) 50%, transparent 80%)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                width: isMobile ? '92%' : '560px',
+                height: isMobile ? '70%' : '380px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 zIndex: -1,
-                transform: 'translateY(-8px)',
               }}
             />
           )}
@@ -375,7 +370,7 @@ const CruxwayOriginStory = () => {
               fontSize: isMobile ? '12px' : '14px',
             }}
           >
-            /weɪ/ · <span className="font-sans italic">noun</span>{isIndia && <> · <span className="font-sans">Hindi: मार्ग (mārg)</span></>}
+            /weɪ/ · <span className="font-sans italic">noun</span> · Hindi: मार्ग (mārg)
           </motion.p>
 
           <motion.p
@@ -397,18 +392,17 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act3Op }}
         >
-          {/* Tight radial frost for light mode */}
+          {/* Frosted scrim for light mode readability */}
           {!isDark && (
             <div
-              className="absolute rounded-full pointer-events-none"
+              className="absolute rounded-2xl pointer-events-none"
               style={{
-                width: isMobile ? '260px' : '360px',
-                height: isMobile ? '90px' : '110px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.35) 50%, transparent 80%)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                width: isMobile ? '92%' : '600px',
+                height: isMobile ? '65%' : '360px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 zIndex: -1,
-                transform: 'translateY(-20px)',
               }}
             />
           )}
@@ -481,18 +475,17 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform' }}
         >
-          {/* Tight radial frost for light mode */}
+          {/* Frosted scrim for light mode readability */}
           {!isDark && (
             <div
-              className="absolute rounded-full pointer-events-none"
+              className="absolute rounded-2xl pointer-events-none"
               style={{
-                width: isMobile ? '260px' : '360px',
-                height: isMobile ? '100px' : '120px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.35) 50%, transparent 80%)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                width: isMobile ? '92%' : '560px',
+                height: isMobile ? '65%' : '360px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
                 zIndex: -1,
-                transform: 'translateY(-15px)',
               }}
             />
           )}
