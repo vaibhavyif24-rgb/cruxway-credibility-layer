@@ -49,54 +49,31 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* Transition bridge with intro heading into origin story */}
+      {/* Compact transition bridge into origin story */}
       <div
-        className="relative -mt-1 pointer-events-none"
-        style={{ zIndex: 5 }}
+        className="relative -mt-1"
+        style={{
+          zIndex: 5,
+          background: isDark
+            ? 'linear-gradient(to bottom, hsl(228 55% 8%), hsl(228 55% 6%))'
+            : 'linear-gradient(to bottom, hsl(40 25% 96%), hsl(40 25% 94%))',
+        }}
       >
-        {/* Gradient from hero into origin section — theme-aware */}
-        <div
-          className="h-16 md:h-20"
-          style={{
-            background: isDark
-              ? 'linear-gradient(to bottom, hsl(228 55% 8%), hsl(228 55% 6%))'
-              : 'linear-gradient(to bottom, hsl(40 25% 96%), hsl(40 25% 94%))',
-          }}
-        />
-        {/* Intro label area */}
-        <div
-          className="flex flex-col items-center justify-center py-8 md:py-12 pointer-events-auto"
-          style={{
-            background: isDark ? 'hsl(228 55% 6%)' : 'hsl(40 25% 94%)',
-          }}
+        <motion.div
+          className="flex items-center justify-center gap-3 md:gap-4 py-5 md:py-6 px-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
         >
-          <motion.p
-            className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.32em] text-gold/70 mb-3"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <span className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.32em] text-gold/70 whitespace-nowrap">
             The Origin Story
-          </motion.p>
-          <motion.div
-            className="h-[1px] w-[40px] md:w-[56px] bg-gold/25"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ transformOrigin: 'center' }}
-          />
-          <motion.p
-            className={`font-sans text-[12px] md:text-[13px] leading-[1.7] mt-3 text-center max-w-[340px] px-6 ${isDark ? 'text-white/40' : 'text-foreground/50'}`}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          </span>
+          <span className="hidden md:block h-[1px] w-[40px] bg-gold/25 flex-shrink-0" />
+          <span className={`font-sans text-[11px] md:text-[12px] leading-[1.6] ${isDark ? 'text-white/40' : 'text-foreground/50'}`}>
             Every name carries weight. Ours was forged with intent.
-          </motion.p>
-        </div>
+          </span>
+        </motion.div>
       </div>
 
       {/* Naming Story */}
