@@ -12,7 +12,7 @@ import TeamStickyDeck from '@/components/TeamStickyDeck';
 import CinematicHero from '@/components/CinematicHero';
 
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
-import vaibhavPhoto from '@/assets/vaibhav-sharma.png';
+import vaibhavPhoto from '@/assets/team/vaibhav-sharma.jpg';
 
 import heroIndiaHome from '@/assets/hero-india-home.jpg';
 import heroUSHome from '@/assets/hero-us-home.jpg';
