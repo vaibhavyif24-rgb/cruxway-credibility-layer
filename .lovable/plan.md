@@ -1,37 +1,52 @@
+## Plan: Fix Identity Heading, Playbook Auto-Rotation, CTA Button, Nav Consistency
 
-1. Fix Harin’s last line being clipped on mobile in `src/components/TeamStickyDeck.tsx`.
-- The current cards stay `position: sticky` on mobile (`390px` viewport), which is likely causing the next card to overlap before the first card’s full highlight list is readable.
-- Follow the existing responsive pattern already used in `src/components/PrinciplesSlider.tsx`: disable sticky behavior on mobile.
-- Update the card wrapper so it uses:
-  - `position: 'relative'` on mobile
-  - `position: 'sticky'` only on tablet/desktop
-  - `top` only when sticky is active
-- Keep desktop stacking intact, but let mobile cards flow naturally one after another so Harin’s final bullet is fully visible.
+### 1. Fix India Principles Page Heading — `src/pages/GuidingPrinciples.tsx`
 
-2. Add a little more breathing room at the bottom of each team card on mobile.
-- Increase the content column’s bottom padding slightly for small screens so the last highlight line does not sit against the card edge.
-- If needed, slightly reduce the mobile sticky spacing logic or bypass it entirely when `isMobile` is true.
+**Problem**: The SectionLabel shows "Our Identity, India" for the India region.
 
-3. Enlarge Cohoma and Lohum logos in Vaibhav’s deal carousel in `src/pages/Team.tsx`.
-- Update `vaibhavDealLogos` so:
-  - `Lohum` scale goes from `1.0` to `2.0`
-  - `Cohoma Coffee` scale goes from `1.0` to `2.0`
-- Add a small `extraGap` for one or both if needed, since doubling their size may make the marquee feel cramped.
+**Fix**: Change line 33 from `{isIndia ? 'Our Identity, India' : 'Our Identity'}` to just `'Our Identity'` for both regions.
 
-4. Keep the carousel visually balanced in `src/components/TeamStickyDeck.tsx`.
-- The inline marquee already respects `logo.scale` via `transform: scale(...)`.
-- If the larger logos feel vertically cramped on mobile, slightly raise the marquee row height / image max-width for the inline team carousel only, without affecting other marquees site-wide.
+### 2. Add Auto-Rotation to Playbook Step Navigator — `src/pages/OurPlaybook.tsx`
 
-5. QA to verify after implementation.
-- Check `/india/team` at mobile width (`390px`) to confirm:
-  - Harin’s final highlight line is fully visible
-  - no text is clipped at the bottom of the first card
-  - Vaibhav’s Cohoma and Lohum logos are visibly ~2x larger and still scroll cleanly
-  - desktop sticky deck behavior remains unchanged
+**Problem**: On mobile, only step numbers (01, 02, etc.) are shown without titles (titles are `hidden sm:inline`). The steps should auto-advance every 10 seconds.
 
-Technical notes:
-- Files to update:
-  - `src/components/TeamStickyDeck.tsx`
-  - `src/pages/Team.tsx`
-- Root cause is likely layout behavior, not text wrapping: mobile sticky stacking is compressing readable space for taller cards.
-- Best fix is responsive behavior separation: stacked-flow on mobile, sticky deck on larger screens.
+**Fix**:
+- Add a `useEffect` with a 10-second `setInterval` that increments `active` and wraps around
+- Always show the step title text (remove `hidden sm:inline` so titles are visible on mobile too)
+- Reset the timer when user manually clicks a step
+- Use `useInView` or similar to only auto-advance when the section is visible (optional, keep simple with just interval)
+
+### 3. Remove Inner Shimmer Effect from CTA Buttons — All pages
+
+**Problem**: The "Get in Touch" button has an inner `animate-shimmer-sweep` white gradient that creates a distracting effect on hover. The user's screenshot shows this as undesirable.
+
+**Fix**: Remove the inner `<span>` shimmer overlay from the CTA button in:
+- `src/pages/OurPlaybook.tsx` (lines 210-212)
+- `src/pages/GuidingPrinciples.tsx` (lines 126-128)
+- `src/pages/Home.tsx` (lines 566-568)
+- `src/pages/OurFocus.tsx` (lines 299-301)
+- `src/pages/InvestmentCriteria.tsx` (lines 389-391)
+
+The button retains `btn-premium-glow`, `hover:bg-gold hover:text-white`, and the motion hover/tap effects — just the inner white shimmer sweep is removed.
+
+### 4. Fix Footer Nav Labels — `src/components/SiteFooter.tsx`
+
+**Problem**: Footer still says "Principles" instead of "Our Identity", and "Focus"/"Playbook" don't match header labels.
+
+**Fix**: Update footer `navLinks` labels to match header:
+- `'Principles'` → `'Our Identity'`
+- `'Focus'` → `'Our Focus'`
+- `'Playbook'` → `'Our Playbook'`
+
+### 5. Verify All Route Links
+
+Routes in `App.tsx` are correctly defined. Header and footer links all point to `/:region/principles`, `/:region/focus`, etc. All CTA "Get in Touch" buttons link to `/${region}/contact`. No broken links identified.
+
+### Files Modified
+- `src/pages/GuidingPrinciples.tsx` — remove "India" from heading
+- `src/pages/OurPlaybook.tsx` — add 10s auto-rotation to StepNavigator, show titles on mobile, remove shimmer
+- `src/pages/GuidingPrinciples.tsx` — remove shimmer
+- `src/pages/Home.tsx` — remove shimmer
+- `src/pages/OurFocus.tsx` — remove shimmer
+- `src/pages/InvestmentCriteria.tsx` — remove shimmer
+- `src/components/SiteFooter.tsx` — update nav labels
