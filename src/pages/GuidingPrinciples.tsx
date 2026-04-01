@@ -23,7 +23,7 @@ const GuidingPrinciples = () => {
     <div style={{ overflowX: 'clip' }}>
       {/* ═══ Hero with CinematicHero ═══ */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-        <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
+        <CinematicHero imageSrc={heroCrucible} overlay="strong" />
 
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
 

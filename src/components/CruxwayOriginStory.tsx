@@ -213,18 +213,43 @@ const CruxwayOriginStory = () => {
     <div ref={containerRef} className="relative" style={{ height: scrollH }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: solidBg }}>
 
-        {/* ─── Video: Crucible ─── */}
+        {/* ─── Background: Crucible (image-first, video enhancement) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: act1VideoOp, zIndex: 1 }}>
+          {/* Base image with Ken Burns */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: [1, 1.12] }}
+            transition={{ duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
+            style={{ willChange: 'transform' }}
+          >
+            <img src={crucibleImg} alt="" className="absolute inset-0 w-full h-full object-cover" loading="eager" aria-hidden="true" />
+          </motion.div>
+          {/* Optional video enhancement (fades in at 60% when loaded) */}
           <VideoLayer src={CRUCIBLE_VIDEO} />
+          {/* Dark overlay */}
           <div className="absolute inset-0" style={{ background: crucibleOverlay }} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Video: The Way ─── */}
+        {/* ─── Background: The Way (image-first, video enhancement) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: act2VideoOp, zIndex: 2 }}>
+          {/* Base image with Ken Burns + slow pan */}
+          <motion.div
+            className="absolute inset-[-5%]"
+            animate={{ scale: [1, 1.1], x: [0, -15, 0] }}
+            transition={{
+              scale: { duration: 30, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+              x: { duration: 35, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+            }}
+            style={{ willChange: 'transform' }}
+          >
+            <img src={wayImg} alt="" className="absolute inset-0 w-full h-full object-cover" loading="eager" aria-hidden="true" />
+          </motion.div>
+          {/* Optional video enhancement */}
           <VideoLayer src={WAY_VIDEO} />
+          {/* Dark overlay */}
           <div className="absolute inset-0" style={{ background: wayOverlay }} />
           <Grain />
           <GoldParticles />
