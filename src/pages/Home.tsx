@@ -447,10 +447,10 @@ const Home = () => {
                   Our Focus
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="btn-premium btn-gold btn-premium-glow inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                  className="btn-premium btn-gold inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
                 >
                   Get in Touch
                 </Link>
