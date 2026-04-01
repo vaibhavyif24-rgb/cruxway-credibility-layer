@@ -303,19 +303,33 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
-          {/* Scrim backdrop for readability */}
-          <div
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: '600px',
-              height: '500px',
-              background: isDark
-                ? 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)'
-                : 'radial-gradient(ellipse, hsl(40 25% 96% / 0.70) 0%, transparent 70%)',
-              filter: 'blur(60px)',
-              zIndex: -1,
-            }}
-          />
+          {/* Frosted scrim for light mode readability */}
+          {!isDark && (
+            <div
+              className="absolute rounded-2xl pointer-events-none"
+              style={{
+                width: isMobile ? '92%' : '560px',
+                height: isMobile ? '70%' : '380px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                zIndex: -1,
+              }}
+            />
+          )}
+          {/* Dark mode scrim */}
+          {isDark && (
+            <div
+              className="absolute rounded-full pointer-events-none"
+              style={{
+                width: '600px',
+                height: '500px',
+                background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
+                filter: 'blur(60px)',
+                zIndex: -1,
+              }}
+            />
+          )}
 
           <div className="absolute w-[400px] h-[300px] rounded-full pointer-events-none" style={{ background: headingGlowBg }} />
 
