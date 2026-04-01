@@ -1,44 +1,20 @@
 
 
-## Plan: Fix Team Hero Collision, Origin Story Font Size, Focus Page Cleanup
+## Plan: Fix Team Card Text Overflow on Mobile
 
-### 1. Fix Team Hero Text Collision — `src/pages/Team.tsx`
+### Problem
+On mobile (390px viewport), the team card text content overflows the screen edge. The card's content area doesn't properly constrain text within the available width.
 
-**Problem**: The subtitle paragraph overlaps with the stats bar because the hero uses `flex items-end` with the content div having only `pb-10`, while the stats bar is `absolute bottom-0` with its own height (~80px on mobile). The subtitle text bleeds into the stats numbers.
+### Root Cause
+The outer deck container uses `px-4` (16px each side), leaving 358px for cards. Inside, the content div uses `p-6` (24px each side). The `flex-1 min-w-0` on the content column should handle overflow, but the summary text at `11.5px` with `break-words` and highlights with `overflow-wrap-anywhere` may still overflow due to the `flex` layout not constraining width properly on mobile when the card has no explicit `max-width` or `overflow-hidden` on the outer wrapper.
 
-**Fix**:
-- Increase bottom padding on the hero content div: `pb-10` → `pb-28 md:pb-24` to clear the stats bar
-- On mobile, the stats bar takes ~100px, so `pb-28` (112px) provides clearance
-- Constrain the subtitle `max-w-[420px]` to `max-w-[360px]` on mobile to prevent wide text from creating more collision risk
+### Fix — `src/components/TeamStickyDeck.tsx`
 
-### 2. Increase Origin Story Font Sizes — `src/components/CruxwayOriginStory.tsx`
-
-**Problem**: Body text in the origin story is 13-15px, making it hard to read. Font should use the site's sans font consistently.
-
-**Fix**:
-- Act 1 & 2 definition text: `14px/15px` → `15px/16px`
-- Act 1 & 2 phonetic text: `12px/14px` → `13px/15px`
-- Act 3 explanation text: `13px/14px` → `14px/15px`
-- Act 3 tagline: `10px/12px` → `11px/13px`
-- Act 4 body text: `14px/15px` → `15px/16px`
-- Act 4 closing text: `10px/12px` → `11px/13px`
-- Ensure all body text uses `font-sans` class (already present) — no changes needed for font family consistency
-
-### 3. Remove Anchor Navigation Bar in Focus Page — `src/pages/OurFocus.tsx`
-
-**Problem**: The sticky anchor nav bar (Investment Profile / Sectors / Investment Criteria buttons) adds clutter and blank space.
-
-**Fix**:
-- Remove the entire anchor navigation `<div>` block (lines 131-152)
-- Tighten section padding: reduce `py-10 md:py-14` to `py-8 md:py-10` on Investment Profile section
-- Remove any excess top margin that creates blank space between sections
-
-### 4. Ensure Section Labels Are Correct
-
-**Verification**: Navigation already shows "Our Identity" (not "Principles") in `SiteHeader.tsx`. The GuidingPrinciples page hero says "Our Identity". No stale "Principles" references found in active navigation. No changes needed.
+1. **Add `overflow-hidden` and `w-full` to the outer card wrapper** (line 105) to ensure the card never exceeds its container width
+2. **Add `overflow-hidden` to the flex row** (line 131) so the content column is properly constrained
+3. **Add `word-break: break-word`** via Tailwind `break-words` to the summary and highlight text spans to ensure long words wrap
+4. **Reduce mobile padding** from `p-6` to `p-5` on mobile for the content area to give text more room
 
 ### Files Modified
-- `src/pages/Team.tsx` — fix hero bottom padding to prevent stats collision
-- `src/components/CruxwayOriginStory.tsx` — increase all body/phonetic/tagline font sizes
-- `src/pages/OurFocus.tsx` — remove anchor nav bar, tighten spacing
+- `src/components/TeamStickyDeck.tsx` — add overflow constraints and adjust mobile padding
 
