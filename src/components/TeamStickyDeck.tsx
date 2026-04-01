@@ -102,7 +102,7 @@ const TeamCard: React.FC<{
       whileHover={{ y: -4, scale: 1.01 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl overflow-hidden"
+      className="rounded-2xl overflow-hidden w-full"
       style={{
         position: 'sticky',
         top: `${stickyTop}px`,
@@ -128,7 +128,7 @@ const TeamCard: React.FC<{
         />
       )}
 
-      <div className="flex flex-col md:flex-row h-full">
+      <div className="flex flex-col md:flex-row h-full overflow-hidden">
 
         {/* ─── Left: Photo column ─── */}
         <div className="w-full md:w-[200px] lg:w-[240px] shrink-0 flex items-start justify-center pt-8 md:pt-10 px-6 md:px-0 md:pl-8 lg:pl-10">
@@ -169,7 +169,7 @@ const TeamCard: React.FC<{
         </div>
 
         {/* ─── Right: Content ─── */}
-        <div className="flex-1 min-w-0 flex flex-col justify-between p-6 md:p-8 lg:py-10 lg:pr-10 lg:pl-6 overflow-hidden">
+        <div className="flex-1 min-w-0 flex flex-col justify-between p-5 md:p-8 lg:py-10 lg:pr-10 lg:pl-6 overflow-hidden">
           {/* Counter */}
           <p
             className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
@@ -239,7 +239,7 @@ const TeamCard: React.FC<{
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words"
+            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words [word-break:break-word]"
             style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
           >
             {member.summary}
@@ -261,7 +261,7 @@ const TeamCard: React.FC<{
                   className="shrink-0 mt-[6px] w-2 h-px"
                   style={{ backgroundColor: isDark ? 'hsl(43 70% 55% / 0.45)' : 'hsl(43 78% 50% / 0.5)' }}
                 />
-                <span className="break-words overflow-wrap-anywhere">{line}</span>
+                <span className="break-words [word-break:break-word] [overflow-wrap:anywhere]">{line}</span>
               </motion.li>
             ))}
           </ul>
