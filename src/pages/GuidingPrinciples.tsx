@@ -11,8 +11,7 @@ import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
-import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
-import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
+import heroCrucible from '@/assets/cruxway-crucible.jpg';
 
 const GuidingPrinciples = () => {
   const { region } = useRegion();
