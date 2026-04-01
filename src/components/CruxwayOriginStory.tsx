@@ -118,13 +118,13 @@ const CruxwayOriginStory = () => {
   /* Dark: deep navy cinematic overlays · Light: warm cream/amber — bright editorial feel */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.30) 0%, hsl(35 25% 88% / 0.42) 50%, hsl(35 25% 88% / 0.50) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.35) 0%, hsl(35 25% 88% / 0.50) 50%, hsl(35 25% 88% / 0.58) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.35) 0%, hsl(40 20% 85% / 0.48) 50%, hsl(40 20% 85% / 0.55) 100%)';
+    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.40) 0%, hsl(40 20% 85% / 0.55) 50%, hsl(40 20% 85% / 0.62) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.55) 0%, hsl(35 18% 85% / 0.65) 50%, hsl(35 18% 85% / 0.70) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.60) 0%, hsl(35 18% 85% / 0.70) 50%, hsl(35 18% 85% / 0.75) 100%)';
 
   /* Solid bg between transitions */
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 94%)';
