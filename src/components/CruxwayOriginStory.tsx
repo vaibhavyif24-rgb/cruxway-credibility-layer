@@ -5,7 +5,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useRegion } from '@/contexts/RegionContext';
 import crucibleImg from '@/assets/cruxway-crucible-v2.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
-import mergeImg from '@/assets/cruxway-merge-v3.jpg';
+import mergeImg from '@/assets/cruxway-merge-v4.jpg';
 import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
 import WayEffects from '@/components/origin-effects/WayEffects';
 import MergeEffects from '@/components/origin-effects/MergeEffects';
