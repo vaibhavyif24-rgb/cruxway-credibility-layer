@@ -192,6 +192,7 @@ const CruxwayOriginStory = () => {
         {/* ─── Background: Crucible ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: act1BgOp, zIndex: 1 }}>
           <ImageBackground src={crucibleImg} />
+          <CrucibleEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleOverlay }} />
           <Grain />
           <GoldParticles />
