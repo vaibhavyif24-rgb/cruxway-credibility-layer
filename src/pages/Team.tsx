@@ -111,7 +111,7 @@ const vaibhavDealLogos: LogoItem[] = [
   { src: lohumLogo, alt: 'Lohum', scale: 2.0, extraGap: 8 },
   { src: wareeLogo, alt: 'Waaree', scale: 1.0 },
   { src: otplessLogo, alt: 'OTPless', scale: 1.0 },
-  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 1.0 },
+  { src: cohomaLogo, alt: 'Cohoma Coffee', scale: 2.0, extraGap: 8 },
   { src: bytepeLogo, alt: 'BytePe', scale: 1.0 },
   { src: tractorfactoryLogo, alt: 'TractorFactory', scale: 1.0 },
   { src: sonicLambLogo, alt: 'Sonic Lamb', scale: 1.0 },

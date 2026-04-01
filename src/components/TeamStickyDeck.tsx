@@ -292,6 +292,7 @@ const TeamStickyDeck: React.FC<TeamStickyDeckProps> = ({ members }) => {
           isDark={isDark}
           stickyBase={stickyBase}
           stickyStep={stickyStep}
+          isMobile={isMobile}
         />
       ))}
       <div className="h-[120px] md:h-[80px]" />
