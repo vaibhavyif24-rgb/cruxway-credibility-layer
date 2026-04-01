@@ -105,7 +105,7 @@ const CruxwayOriginStory = () => {
   const rightWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['0%', '0%', '50%']);
   const seamOpacity = useTransform(scrollYProgress, [0.20, 0.35], [0, 1]);
   const seamHeight = useTransform(scrollYProgress, [0.25, 0.40], ['0%', '100%']);
-  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12, 0.18], [0, 1, 1, 0]);
+  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.01, 0.12, 0.18], [1, 1, 1, 0]);
   const phase2TextOpacity = useTransform(scrollYProgress, [0.32, 0.40, 0.48, 0.55], [0, 1, 1, 0]);
   const phase3TextOpacity = useTransform(scrollYProgress, [0.53, 0.60, 0.68, 0.75], [0, 1, 1, 0]);
   const phase3RuleWidth = useTransform(scrollYProgress, [0.56, 0.65], [0, 120]);
