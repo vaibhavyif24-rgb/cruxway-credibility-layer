@@ -17,7 +17,7 @@ const Grain = () => (
   />
 );
 
-/* ─── Video layer with IntersectionObserver ─── */
+/* ─── Video layer with IntersectionObserver, fades in on canplay ─── */
 const VideoLayer = ({
   src,
   style,
@@ -32,6 +32,12 @@ const VideoLayer = ({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    const handleCanPlay = () => {
+      el.style.opacity = '0.6';
+    };
+    el.addEventListener('canplay', handleCanPlay);
+
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) el.play().catch(() => {});
@@ -40,7 +46,11 @@ const VideoLayer = ({
       { rootMargin: '500px' }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+
+    return () => {
+      el.removeEventListener('canplay', handleCanPlay);
+      obs.disconnect();
+    };
   }, []);
 
   return (
@@ -52,7 +62,7 @@ const VideoLayer = ({
       loop
       playsInline
       preload="none"
-      style={{ willChange: 'transform', ...style }}
+      style={{ willChange: 'transform', opacity: 0, transition: 'opacity 1s ease', ...style }}
     />
   );
 };
@@ -114,7 +124,10 @@ const ShimmerLine = () => (
   />
 );
 
-/* ─── Pexels video sources ─── */
+/* ─── Local image assets (primary) + Pexels video sources (optional enhancement) ─── */
+import crucibleImg from '@/assets/cruxway-crucible.jpg';
+import wayImg from '@/assets/cruxway-way.jpg';
+
 const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/3170469/3170469-hd_1920_1080_25fps.mp4';
 const WAY_VIDEO = 'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4';
 
@@ -131,14 +144,9 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Separate overlays: Crucible (lighter) vs Way (heavier, dark in both themes) ─── */
-  const crucibleOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.35) 0%, hsl(228 55% 8% / 0.50) 50%, hsl(228 55% 8% / 0.70) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 96% / 0.25) 0%, hsl(40 25% 96% / 0.42) 50%, hsl(40 25% 96% / 0.62) 100%)';
-
-  const wayOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.65) 0%, hsl(228 55% 6% / 0.75) 50%, hsl(228 55% 6% / 0.85) 100%)'
-    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.55) 0%, hsl(220 30% 8% / 0.68) 50%, hsl(220 30% 6% / 0.78) 100%)';
+  /* ─── Overlays: always dark in both themes (text is always white over images/video) ─── */
+  const crucibleOverlay = 'linear-gradient(to bottom, hsl(228 55% 6% / 0.30) 0%, hsl(228 55% 6% / 0.50) 50%, hsl(228 55% 6% / 0.72) 100%)';
+  const wayOverlay = 'linear-gradient(to bottom, hsl(220 20% 8% / 0.58) 0%, hsl(220 20% 6% / 0.70) 50%, hsl(220 20% 4% / 0.82) 100%)';
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
 
@@ -205,18 +213,43 @@ const CruxwayOriginStory = () => {
     <div ref={containerRef} className="relative" style={{ height: scrollH }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: solidBg }}>
 
-        {/* ─── Video: Crucible ─── */}
+        {/* ─── Background: Crucible (image-first, video enhancement) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: act1VideoOp, zIndex: 1 }}>
+          {/* Base image with Ken Burns */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{ scale: [1, 1.12] }}
+            transition={{ duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' }}
+            style={{ willChange: 'transform' }}
+          >
+            <img src={crucibleImg} alt="" className="absolute inset-0 w-full h-full object-cover" loading="eager" aria-hidden="true" />
+          </motion.div>
+          {/* Optional video enhancement (fades in at 60% when loaded) */}
           <VideoLayer src={CRUCIBLE_VIDEO} />
+          {/* Dark overlay */}
           <div className="absolute inset-0" style={{ background: crucibleOverlay }} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Video: The Way ─── */}
+        {/* ─── Background: The Way (image-first, video enhancement) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: act2VideoOp, zIndex: 2 }}>
+          {/* Base image with Ken Burns + slow pan */}
+          <motion.div
+            className="absolute inset-[-5%]"
+            animate={{ scale: [1, 1.1], x: [0, -15, 0] }}
+            transition={{
+              scale: { duration: 30, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+              x: { duration: 35, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+            }}
+            style={{ willChange: 'transform' }}
+          >
+            <img src={wayImg} alt="" className="absolute inset-0 w-full h-full object-cover" loading="eager" aria-hidden="true" />
+          </motion.div>
+          {/* Optional video enhancement */}
           <VideoLayer src={WAY_VIDEO} />
+          {/* Dark overlay */}
           <div className="absolute inset-0" style={{ background: wayOverlay }} />
           <Grain />
           <GoldParticles />

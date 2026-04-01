@@ -11,8 +11,7 @@ import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
-import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
-import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
+import heroCrucible from '@/assets/cruxway-crucible.jpg';
 
 const GuidingPrinciples = () => {
   const { region } = useRegion();
@@ -24,7 +23,7 @@ const GuidingPrinciples = () => {
     <div style={{ overflowX: 'clip' }}>
       {/* ═══ Hero with CinematicHero ═══ */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-        <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
+        <CinematicHero imageSrc={heroCrucible} overlay="strong" />
 
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
 
