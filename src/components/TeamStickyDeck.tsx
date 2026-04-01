@@ -261,7 +261,7 @@ const TeamCard: React.FC<{
                   className="shrink-0 mt-[6px] w-2 h-px"
                   style={{ backgroundColor: isDark ? 'hsl(43 70% 55% / 0.45)' : 'hsl(43 78% 50% / 0.5)' }}
                 />
-                <span className="break-words overflow-wrap-anywhere">{line}</span>
+                <span className="break-words [word-break:break-word] [overflow-wrap:anywhere]">{line}</span>
               </motion.li>
             ))}
           </ul>
