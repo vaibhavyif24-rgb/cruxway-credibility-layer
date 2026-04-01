@@ -1,37 +1,20 @@
 import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useRegion } from '@/contexts/RegionContext';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { SectionLabel, FadeIn, GoldRule } from '@/components/ui/Section';
 
 /* ------------------------------------------------------------------ */
-/*  Pexels media (free-to-use)                                        */
+/*  Pexels media                                                       */
 /* ------------------------------------------------------------------ */
 const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/7518826/7518826-uhd_2732_1440_25fps.mp4';
 const CRUCIBLE_POSTER = 'https://images.pexels.com/videos/7518826/pexels-photo-7518826.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
-
 const WAY_VIDEO = 'https://videos.pexels.com/video-files/34373737/14561661_2560_1440_60fps.mp4';
 const WAY_POSTER = 'https://images.pexels.com/videos/34373737/18th-century-architecture-4k-4k-background-4k-footage-34373737.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
 
 /* ------------------------------------------------------------------ */
-/*  Noise overlay (matches CinematicHero grain)                       */
+/*  Intersection-observed video                                        */
 /* ------------------------------------------------------------------ */
-const Grain = () => (
-  <div
-    className="absolute inset-0 z-[3] pointer-events-none opacity-[0.03]"
-    style={{
-      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
-      backgroundRepeat: 'repeat',
-      backgroundSize: '128px 128px',
-    }}
-  />
-);
-
-/* ------------------------------------------------------------------ */
-/*  Intersection-observed video                                       */
-/* ------------------------------------------------------------------ */
-const LazyVideo = ({ src, poster }: { src: string; poster: string }) => {
+const LazyVideo = ({ src, poster, className = '' }: { src: string; poster: string; className?: string }) => {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -39,7 +22,7 @@ const LazyVideo = ({ src, poster }: { src: string; poster: string }) => {
     if (!el) return;
     const obs = new IntersectionObserver(
       ([e]) => { e.isIntersecting ? el.play().catch(() => {}) : el.pause(); },
-      { threshold: 0.15 },
+      { threshold: 0.1 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -54,315 +37,277 @@ const LazyVideo = ({ src, poster }: { src: string; poster: string }) => {
       loop
       playsInline
       preload="none"
-      className="absolute inset-0 w-full h-full object-cover"
+      className={`absolute inset-0 w-full h-full object-cover ${className}`}
       style={{ willChange: 'transform' }}
     />
   );
 };
 
 /* ------------------------------------------------------------------ */
-/*  Media panel with parallax, overlay & grain                        */
+/*  Grain overlay                                                      */
 /* ------------------------------------------------------------------ */
-interface MediaPanelProps {
-  videoSrc: string;
-  poster: string;
-  gradientDir: string; // 'to right' | 'to left' | 'to bottom'
-  isDark: boolean;
-}
-
-const MediaPanel = ({ videoSrc, poster, gradientDir, isDark }: MediaPanelProps) => {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: panelRef, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '4%']);
-
-  const overlayBg = isDark
-    ? `linear-gradient(${gradientDir}, transparent 0%, hsl(228 55% 8% / 0.75) 85%, hsl(228 55% 8% / 0.95) 100%)`
-    : `linear-gradient(${gradientDir}, transparent 0%, hsl(40 25% 96% / 0.7) 80%, hsl(40 25% 96% / 0.95) 100%)`;
-
-  const vignette = 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.15) 100%)';
-
-  return (
-    <div ref={panelRef} className="relative w-full h-full overflow-hidden">
-      <motion.div className="absolute inset-[-4%]" style={{ y, willChange: 'transform' }}>
-        <LazyVideo src={videoSrc} poster={poster} />
-      </motion.div>
-      <div className="absolute inset-0 z-[1]" style={{ background: overlayBg }} />
-      <div className="absolute inset-0 z-[2]" style={{ background: vignette }} />
-      <Grain />
-    </div>
-  );
-};
-
-/* ------------------------------------------------------------------ */
-/*  Act text block                                                    */
-/* ------------------------------------------------------------------ */
-interface ActTextProps {
-  number: string;
-  label: string;
-  heading: string;
-  body: string[];
-  isDark: boolean;
-}
-
-const ActText = ({ number, label, heading, body, isDark }: ActTextProps) => (
-  <div className="flex flex-col justify-center h-full px-6 py-10 md:px-12 lg:px-16">
-    <FadeIn>
-      <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.25em] text-gold mb-4">
-        {number} — {label}
-      </p>
-    </FadeIn>
-    <FadeIn delay={0.08}>
-      <h3
-        className={`font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.15] tracking-[-0.02em] mb-3 ${
-          isDark ? 'text-primary-foreground' : 'text-foreground'
-        }`}
-      >
-        {heading}
-      </h3>
-    </FadeIn>
-    <FadeIn delay={0.14}>
-      <GoldRule className="mb-5" />
-    </FadeIn>
-    {body.map((p, i) => (
-      <FadeIn key={i} delay={0.2 + i * 0.06}>
-        <p
-          className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[480px] ${
-            i > 0 ? 'mt-4' : ''
-          } ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}
-        >
-          {p}
-        </p>
-      </FadeIn>
-    ))}
-  </div>
+const Grain = () => (
+  <div
+    className="absolute inset-0 pointer-events-none opacity-[0.03]"
+    style={{
+      zIndex: 5,
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+      backgroundRepeat: 'repeat',
+      backgroundSize: '128px 128px',
+    }}
+  />
 );
 
 /* ------------------------------------------------------------------ */
-/*  Diamond ornament divider                                          */
-/* ------------------------------------------------------------------ */
-const DiamondDivider = () => (
-  <div className="relative w-full py-4 flex items-center justify-center">
-    <div
-      className="absolute inset-x-0 top-1/2 h-px"
-      style={{
-        background: 'linear-gradient(90deg, transparent, hsl(40 60% 48% / 0.12), transparent)',
-      }}
-    />
-    <motion.div
-      initial={{ scale: 0, opacity: 0 }}
-      whileInView={{ scale: 1, opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="relative z-[1] w-[6px] h-[6px] rotate-45 border border-gold/40 bg-background"
-    />
-  </div>
-);
-
-/* ------------------------------------------------------------------ */
-/*  Main component                                                    */
+/*  Main component                                                     */
 /* ------------------------------------------------------------------ */
 const CruxwayOriginStory = () => {
   const { theme } = useTheme();
-  const { region } = useRegion();
   const isDark = theme === 'dark';
-  const isIndia = region === 'india';
   const isMobile = useIsMobile();
 
-  const crucibleBody = isIndia
-    ? [
-        'A crucible is a vessel where raw materials are subjected to extreme heat and pressure until something fundamentally stronger emerges. It demands resilience. It demands patience. It does not forgive shortcuts.',
-        'This is how we think about building businesses across India. Every company we partner with enters a process of rigorous transformation — not to become something different, but to become the strongest version of what it already is.',
-      ]
-    : [
-        'A crucible is a vessel where raw materials are subjected to extreme heat and pressure until something fundamentally stronger emerges. It demands resilience. It demands patience. It does not forgive shortcuts.',
-        'This is how we think about building businesses. Every company we partner with enters a process of rigorous transformation — not to become something different, but to become the strongest version of what it already is.',
-      ];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
 
-  const wayBody = isIndia
-    ? [
-        'The Way is not a destination. It is a practice — a commitment to process, to intellectual honesty, and to the belief that how you invest matters as much as what you invest in.',
-        'Every partnership, every decision, every relationship at Cruxway follows this principle: steward what exists, build what endures, and never compromise the path for a shortcut.',
-      ]
-    : [
-        'The Way is not a destination. It is a practice — a commitment to process, to intellectual honesty, and to the belief that how you invest matters as much as what you invest in.',
-        'Every partnership, every decision, every relationship at Cruxway follows this principle: steward what exists, build what endures, and never compromise the path for a shortcut.',
-      ];
+  /* ------ Overlay colours ------ */
+  const darkOverlay = 'linear-gradient(to bottom, hsl(228 55% 8% / 0.4) 0%, hsl(228 55% 8% / 0.6) 50%, hsl(228 55% 8% / 0.8) 100%)';
+  const lightOverlay = 'linear-gradient(to bottom, hsl(40 25% 96% / 0.5) 0%, hsl(40 25% 96% / 0.65) 50%, hsl(40 25% 96% / 0.85) 100%)';
+  const overlay = isDark ? darkOverlay : lightOverlay;
 
-  const gradientDirMobile = 'to bottom';
+  /* ================================================================ */
+  /*  DESKTOP transforms                                               */
+  /* ================================================================ */
 
-  return (
-    <>
-      {/* ---- Entry: "Why Cruxway?" ---- */}
-      <section
-        className={`relative py-16 md:py-24 ${isDark ? 'bg-primary' : 'bg-background'}`}
-      >
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 text-center">
-          <FadeIn>
-            <SectionLabel light={isDark}>Our Name</SectionLabel>
-          </FadeIn>
-          <FadeIn delay={0.1}>
+  // Phase 1: CRUCIBLE text
+  const crucibleOpacity = useTransform(scrollYProgress, [0, 0.30, 0.42], [1, 1, 0]);
+  const crucibleDefOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.30, 0.38], [0, 1, 1, 0]);
+
+  // Phase 2: Split
+  const leftPanelWidth = useTransform(scrollYProgress, [0.35, 0.60], ['100%', '50%']);
+  const rightPanelWidth = useTransform(scrollYProgress, [0.35, 0.60], ['0%', '50%']);
+  const goldLineHeight = useTransform(scrollYProgress, [0.45, 0.60], ['0%', '100%']);
+  const goldLineOpacity = useTransform(scrollYProgress, [0.44, 0.48], [0, 1]);
+
+  // Phase 2: Per-panel text (diptych labels)
+  const diptychOpacity = useTransform(scrollYProgress, [0.52, 0.62, 0.68, 0.74], [0, 1, 1, 0]);
+
+  // Phase 3: Resolution
+  const cruxwayOpacity = useTransform(scrollYProgress, [0.70, 0.82], [0, 1]);
+  const cruxwayScale = useTransform(scrollYProgress, [0.72, 0.85], [0.9, 1]);
+  const ruleWidth = useTransform(scrollYProgress, [0.82, 0.92], [0, 80]);
+  const taglineOpacity = useTransform(scrollYProgress, [0.88, 0.96], [0, 1]);
+
+  /* ================================================================ */
+  /*  MOBILE transforms (crossfade instead of split)                   */
+  /* ================================================================ */
+  const mCrucibleVideoOpacity = useTransform(scrollYProgress, [0.32, 0.50], [1, 0]);
+  const mWayVideoOpacity = useTransform(scrollYProgress, [0.32, 0.50], [0, 1]);
+  const mCrucibleTextOpacity = useTransform(scrollYProgress, [0, 0.30, 0.40], [1, 1, 0]);
+  const mCrucibleDefOpacity = useTransform(scrollYProgress, [0.08, 0.20, 0.28, 0.36], [0, 1, 1, 0]);
+  const mWayTextOpacity = useTransform(scrollYProgress, [0.42, 0.55, 0.62, 0.70], [0, 1, 1, 0]);
+  const mWayDefOpacity = useTransform(scrollYProgress, [0.48, 0.58, 0.62, 0.68], [0, 1, 1, 0]);
+  const mCruxwayOpacity = useTransform(scrollYProgress, [0.72, 0.84], [0, 1]);
+  const mCruxwayScale = useTransform(scrollYProgress, [0.74, 0.87], [0.9, 1]);
+  const mRuleWidth = useTransform(scrollYProgress, [0.84, 0.93], [0, 64]);
+  const mTaglineOpacity = useTransform(scrollYProgress, [0.90, 0.97], [0, 1]);
+
+  const textShadow = isDark ? '0 4px 30px hsl(43 78% 50% / 0.3)' : '0 4px 30px hsl(43 78% 50% / 0.15)';
+  const cruxwayShadow = isDark
+    ? '0 0 60px hsl(43 78% 50% / 0.25), 0 4px 20px rgba(0,0,0,0.5)'
+    : '0 0 40px hsl(43 78% 50% / 0.15), 0 4px 20px rgba(0,0,0,0.1)';
+
+  const defColor = isDark ? 'text-primary-foreground/60' : 'text-muted-foreground';
+
+  /* ================================================================ */
+  /*  MOBILE RENDER                                                    */
+  /* ================================================================ */
+  if (isMobile) {
+    return (
+      <div ref={containerRef} className="relative" style={{ height: '180vh' }}>
+        <div className="sticky top-0 h-[100vh] w-full overflow-hidden">
+          {/* Crucible video */}
+          <motion.div className="absolute inset-0" style={{ opacity: mCrucibleVideoOpacity, willChange: 'transform' }}>
+            <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
+            <div className="absolute inset-0" style={{ background: overlay }} />
+            <Grain />
+          </motion.div>
+
+          {/* Way video */}
+          <motion.div className="absolute inset-0" style={{ opacity: mWayVideoOpacity, willChange: 'transform' }}>
+            <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
+            <div className="absolute inset-0" style={{ background: overlay }} />
+            <Grain />
+          </motion.div>
+
+          {/* Phase 1: CRUCIBLE */}
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center px-6"
+            style={{ opacity: mCrucibleTextOpacity, zIndex: 10 }}
+          >
             <h2
-              className={`font-serif text-[clamp(2rem,5vw,3.4rem)] leading-[1.1] tracking-[-0.03em] ${
-                isDark ? 'text-primary-foreground' : 'text-foreground'
-              }`}
+              className="font-serif text-[clamp(3rem,12vw,5rem)] uppercase tracking-[0.15em] text-gold text-center"
+              style={{ textShadow }}
             >
-              Why{' '}
-              <span className="text-gold">Cruxway</span>?
+              Crucible
             </h2>
-          </FadeIn>
-        </div>
-      </section>
-
-      {/* ---- Act 1: Crucible ---- */}
-      <section
-        className={`relative overflow-hidden ${isDark ? 'bg-[hsl(228,55%,8%)]' : 'bg-[hsl(40,25%,96%)]'}`}
-      >
-        {isMobile ? (
-          <>
-            <div className="relative h-[45vh]">
-              <MediaPanel
-                videoSrc={CRUCIBLE_VIDEO}
-                poster={CRUCIBLE_POSTER}
-                gradientDir={gradientDirMobile}
-                isDark={isDark}
-              />
-            </div>
-            <ActText
-              number="01"
-              label="THE CRUCIBLE"
-              heading="Where Conviction Is Forged"
-              body={crucibleBody}
-              isDark={isDark}
-            />
-          </>
-        ) : (
-          <div className="flex min-h-[70vh]">
-            <div className="relative w-[55%]">
-              <MediaPanel
-                videoSrc={CRUCIBLE_VIDEO}
-                poster={CRUCIBLE_POSTER}
-                gradientDir="to right"
-                isDark={isDark}
-              />
-            </div>
-            <div className="w-[45%]">
-              <ActText
-                number="01"
-                label="THE CRUCIBLE"
-                heading="Where Conviction Is Forged"
-                body={crucibleBody}
-                isDark={isDark}
-              />
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* ---- Diamond divider ---- */}
-      <DiamondDivider />
-
-      {/* ---- Act 2: The Way ---- */}
-      <section
-        className={`relative overflow-hidden ${isDark ? 'bg-[hsl(228,55%,8%)]' : 'bg-[hsl(40,25%,96%)]'}`}
-      >
-        {isMobile ? (
-          <>
-            <div className="relative h-[45vh]">
-              <MediaPanel
-                videoSrc={WAY_VIDEO}
-                poster={WAY_POSTER}
-                gradientDir={gradientDirMobile}
-                isDark={isDark}
-              />
-            </div>
-            <ActText
-              number="02"
-              label="THE WAY"
-              heading="A Path Built on Discipline"
-              body={wayBody}
-              isDark={isDark}
-            />
-          </>
-        ) : (
-          <div className="flex min-h-[70vh]">
-            <div className="w-[45%]">
-              <ActText
-                number="02"
-                label="THE WAY"
-                heading="A Path Built on Discipline"
-                body={wayBody}
-                isDark={isDark}
-              />
-            </div>
-            <div className="relative w-[55%]">
-              <MediaPanel
-                videoSrc={WAY_VIDEO}
-                poster={WAY_POSTER}
-                gradientDir="to left"
-                isDark={isDark}
-              />
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* ---- Resolution: The Merge ---- */}
-      <section className={`relative py-20 md:py-28 ${isDark ? 'bg-primary' : 'bg-background'}`}>
-        <div className="max-w-[680px] mx-auto px-5 text-center">
-          <FadeIn>
-            <motion.span
-              className="inline-block font-serif text-gold text-[2rem] md:text-[3rem] select-none"
-              animate={{ rotate: [0, 90, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            <motion.p
+              className={`font-sans text-[14px] text-center max-w-[320px] mt-4 ${defColor}`}
+              style={{ opacity: mCrucibleDefOpacity }}
             >
-              +
-            </motion.span>
-          </FadeIn>
+              A vessel where raw material becomes something stronger.
+            </motion.p>
+          </motion.div>
 
-          <FadeIn delay={0.1}>
+          {/* Phase 2: THE WAY */}
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center px-6"
+            style={{ opacity: mWayTextOpacity, zIndex: 10 }}
+          >
             <h2
-              className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.2] mt-4 ${
-                isDark ? 'text-primary-foreground' : 'text-foreground'
-              }`}
+              className="font-serif text-[clamp(2.5rem,10vw,4.5rem)] uppercase tracking-[0.15em] text-gold text-center"
+              style={{ textShadow }}
             >
-              Crucible <span className="text-gold">+</span> The Way
+              The Way
             </h2>
-          </FadeIn>
+            <motion.p
+              className={`font-sans text-[14px] text-center max-w-[320px] mt-4 ${defColor}`}
+              style={{ opacity: mWayDefOpacity }}
+            >
+              The discipline that guides the transformation.
+            </motion.p>
+          </motion.div>
 
-          <FadeIn delay={0.2}>
-            <p
-              className="font-serif text-gold text-[clamp(2.5rem,6vw,4rem)] leading-[1.1] mt-3 tracking-[-0.03em]"
-              style={isDark ? { textShadow: '0 0 40px hsl(43 78% 50% / 0.3)' } : undefined}
+          {/* Phase 3: CRUXWAY */}
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center px-6"
+            style={{ opacity: mCruxwayOpacity, scale: mCruxwayScale, zIndex: 10 }}
+          >
+            <h2
+              className="font-serif text-[clamp(3rem,14vw,5.5rem)] text-gold tracking-[-0.02em] text-center"
+              style={{ textShadow: cruxwayShadow }}
             >
               Cruxway
-            </p>
-          </FadeIn>
-
-          <FadeIn delay={0.3}>
-            <div className="flex justify-center mt-5">
-              <motion.div
-                initial={{ width: 0 }}
-                whileInView={{ width: 64 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <GoldRule />
-              </motion.div>
-            </div>
-          </FadeIn>
-
-          <FadeIn delay={0.4}>
-            <p
-              className={`font-sans text-[14px] md:text-[16px] tracking-[0.04em] leading-[1.7] mt-5 ${
-                isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'
-              }`}
+            </h2>
+            <motion.div className="mt-4 h-[2px] bg-gold/60 mx-auto" style={{ width: mRuleWidth }} />
+            <motion.p
+              className={`font-sans text-[12px] uppercase tracking-[0.2em] text-center mt-4 ${defColor}`}
+              style={{ opacity: mTaglineOpacity }}
             >
               Forging conviction through rigour.
-            </p>
-          </FadeIn>
+            </motion.p>
+          </motion.div>
         </div>
-      </section>
-    </>
+      </div>
+    );
+  }
+
+  /* ================================================================ */
+  /*  DESKTOP RENDER                                                   */
+  /* ================================================================ */
+  return (
+    <div ref={containerRef} className="relative" style={{ height: '180vh' }}>
+      <div className="sticky top-0 h-[100vh] w-full overflow-hidden">
+        {/* Left panel (Crucible) */}
+        <motion.div
+          className="absolute top-0 left-0 h-full overflow-hidden"
+          style={{ width: leftPanelWidth, willChange: 'transform' }}
+        >
+          <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
+          <div className="absolute inset-0" style={{ background: overlay }} />
+          <Grain />
+
+          {/* Diptych label: left */}
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center"
+            style={{ opacity: diptychOpacity, zIndex: 10 }}
+          >
+            <h3
+              className="font-serif text-[clamp(2rem,5vw,4rem)] uppercase tracking-[0.15em] text-gold"
+              style={{ textShadow }}
+            >
+              Crucible
+            </h3>
+            <p className={`font-sans text-[13px] md:text-[15px] mt-3 ${defColor}`}>
+              Where conviction is forged.
+            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Right panel (The Way) */}
+        <motion.div
+          className="absolute top-0 right-0 h-full overflow-hidden"
+          style={{ width: rightPanelWidth, willChange: 'transform' }}
+        >
+          <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
+          <div className="absolute inset-0" style={{ background: overlay }} />
+          <Grain />
+
+          {/* Diptych label: right */}
+          <motion.div
+            className="absolute inset-0 flex flex-col items-center justify-center"
+            style={{ opacity: diptychOpacity, zIndex: 10 }}
+          >
+            <h3
+              className="font-serif text-[clamp(2rem,5vw,4rem)] uppercase tracking-[0.15em] text-gold"
+              style={{ textShadow }}
+            >
+              The Way
+            </h3>
+            <p className={`font-sans text-[13px] md:text-[15px] mt-3 ${defColor}`}>
+              The discipline that guides the transformation.
+            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Gold center line */}
+        <motion.div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] bg-gold/60"
+          style={{ height: goldLineHeight, opacity: goldLineOpacity, zIndex: 15 }}
+        />
+
+        {/* Phase 1: CRUCIBLE (full-frame) */}
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+          style={{ opacity: crucibleOpacity, zIndex: 20 }}
+        >
+          <h2
+            className="font-serif text-[clamp(3rem,8vw,6rem)] uppercase tracking-[0.15em] text-gold"
+            style={{ textShadow }}
+          >
+            Crucible
+          </h2>
+          <motion.p
+            className={`font-sans text-[14px] md:text-[16px] text-center max-w-[400px] mt-5 ${defColor}`}
+            style={{ opacity: crucibleDefOpacity }}
+          >
+            A vessel where raw material becomes something stronger.
+          </motion.p>
+        </motion.div>
+
+        {/* Phase 3: CRUXWAY */}
+        <motion.div
+          className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+          style={{ opacity: cruxwayOpacity, scale: cruxwayScale, zIndex: 20 }}
+        >
+          <h2
+            className="font-serif text-[clamp(3rem,9vw,7rem)] text-gold tracking-[-0.02em]"
+            style={{ textShadow: cruxwayShadow }}
+          >
+            Cruxway
+          </h2>
+          <motion.div className="mt-5 h-[2px] bg-gold/60 mx-auto" style={{ width: ruleWidth }} />
+          <motion.p
+            className={`font-sans text-[13px] md:text-[15px] uppercase tracking-[0.2em] mt-5 ${defColor}`}
+            style={{ opacity: taglineOpacity }}
+          >
+            Forging conviction through rigour.
+          </motion.p>
+        </motion.div>
+      </div>
+    </div>
   );
 };
 
