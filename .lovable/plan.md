@@ -1,41 +1,61 @@
 
 
-## Upgrade India Video + Refine Light-Mode Polish
+# Rebuild CruxwayOriginStory: Scroll-Driven Diptych
 
-### File: `src/pages/Home.tsx` — `OpportunityCinematic` component
+## Problem
+The current component has the right code structure (useScroll/useTransform, 300vh sticky) but is broken in practice:
+- **Videos aren't loading** -- the crucible video (33938968) shows nothing/black, the "Way" video (7895948) is static desert aerial, not forward-moving
+- **4 phases is too many** -- Phase 3 (equation) and Phase 4 (final CRUXWAY) are redundant. User wants 3 clean phases
+- **Text bleeds across panels** during the split (the Phase 1 full-viewport text lingers into Phase 2 timing)
 
-### 1. Replace India video with Mumbai dusk aerial (35213732)
+## What Changes
 
-The current video (35213738) shows a daytime cityscape that reads as generic. Swap to Pexels **35213732** — "Aerial View of Mumbai Cityscape at Dusk" — same creator (Rajkumarrr comics), same series, but shot at golden hour/dusk with warm amber tones in the sky. This is the version that works beautifully under both overlays: the warm dusk tones bleed through the navy overlay creating a subtle amber-navy interplay that feels premium.
+### 1. Replace both video sources
+- **Crucible**: Replace with Pexels **4927566** (close-up of metalworker grinding with bright orange sparks flying) or **3191572** (molten iron being poured in foundry). Both are bright, warm, unmistakably "forge/transformation." Include a fallback to a Pexels still image with Ken Burns if video fails to load.
+- **The Way**: Replace with Pexels **1572342** ("Car Driving Along The Desert Highway") -- a forward-driving POV video on a long desert road with strong vanishing-point perspective and actual movement. This is the "moving" video the user wants.
 
-- **Video**: `https://videos.pexels.com/video-files/35213732/14917606_2560_1440_60fps.mp4`
-- **Poster**: `https://images.pexels.com/videos/35213732/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213732.jpeg?auto=compress&w=1200`
+### 2. Simplify to exactly 3 phases (not 4)
 
-2560x1440 at 60fps. Smooth drone pan across Mumbai's modern skyline with warm dusk lighting — aspirational, recognizably Indian (Worli/Bandra high-rises visible), the exact aesthetic a global PE firm would use.
+**Phase 1: CRUCIBLE (progress 0.00 -- 0.25)**
+Full-screen crucible video. "CRUCIBLE" centered in gold serif + one-line definition. Right panel width: 0%.
 
-### 2. Enhance light-mode overlay for sophistication
+**Phase 2: THE SPLIT (progress 0.25 -- 0.55)**
+Left panel compresses 100% -> 50%, right panel grows 0% -> 50%. Gold seam draws. Per-panel text appears: "CRUCIBLE" (left, contained), "THE WAY" (right, contained) with one-line definitions each.
 
-Current light-mode overlay is a single linear gradient. Upgrade to a **layered overlay** that adds depth:
+**Phase 3: CRUXWAY resolves (progress 0.55 -- 1.00)**  
+Per-panel text fades. Centered across both panels: "CRUX + WAY" equation that resolves into "CRUXWAY" with gold rule + "Forging conviction through rigour." This is ONE phase, not two. The equation and the final word happen together in a continuous reveal.
 
-- **Base gradient** stays: `hsl(228 45% 12% / 0.75)` to `0.95` (bottom-heavy for text legibility)
-- **Add a secondary radial vignette**: dark edges fading to slightly more transparent center, creating a cinematic depth-of-field feel rather than a flat color wash
-- **Add a subtle warm undertone layer**: `hsl(228 40% 18% / 0.08)` radial at center — this lets a whisper of the video's warmth through in light mode, preventing the section from feeling like a dead flat navy block
+### 3. Delete all existing code, write from scratch
 
-Implementation: two additional absolute `div` layers in the overlay stack (z-[2]):
+The component keeps the same interface (`<CruxwayOriginStory />`, no props, reads useTheme/useIsMobile internally). Same 300vh container, same sticky top-0 h-screen architecture. But rewritten cleanly with exactly 3 text layers, proper phase timing, and working videos.
+
+### 4. Mobile: crossfade (unchanged approach)
+Same as current: crossfade between crucible and way videos instead of horizontal split. 3 phases mapped to crossfade timing.
+
+## Technical Details
+
+**File changed**: `src/components/CruxwayOriginStory.tsx` (full rewrite)
+
+**Video URLs to use**:
 ```
-// Radial vignette (both themes)
-radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)
-
-// Light-mode warm center glow (light only)  
-radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.04) 0%, transparent 60%)
+CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/4927566/4927566-hd_1920_1080_24fps.mp4'
+CRUCIBLE_POSTER = 'https://images.pexels.com/videos/4927566/free-video-4927566.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+WAY_VIDEO = 'https://videos.pexels.com/video-files/1572342/1572342-hd_1920_1080_30fps.mp4'
+WAY_POSTER = 'https://images.pexels.com/videos/1572342/free-video-1572342.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
 ```
 
-### 3. No changes to
-- US video (Manhattan evening — already great)
-- Dark-mode overlay (already works well)
-- Text content, animations, grain, ornament, parallax logic
-- Performance attributes (`fetchpriority`, `preload`)
+**Scroll mapping (3 phases)**:
+```
+leftWidth:   [0, 0.20, 0.45] -> ['100%', '100%', '50%']
+rightWidth:  [0, 0.20, 0.45] -> ['0%', '0%', '50%']
+seamHeight:  [0.30, 0.48] -> ['0%', '100%']
+phase1Text:  [0, 0.02, 0.18, 0.25] -> [0, 1, 1, 0]
+phase2Text:  [0.40, 0.50, 0.55, 0.62] -> [0, 1, 1, 0]
+phase3Text:  [0.60, 0.72, 0.95, 1.0] -> [0, 1, 1, 1]
+phase3Scale: [0.60, 0.72] -> [0.92, 1]
+```
 
-### Why this matters
-The dusk video has warm amber tones that interact with the navy overlay to create the kind of color-temperature interplay seen in premium film color grading. In light mode, the heavier overlay keeps text crisp while the warm radial lets just enough video warmth through to feel alive rather than flat.
+**Overlays**: Keep lighter (20-45% opacity max) with heavy textShadow for legibility.
+
+**LazyVideo**: Same IntersectionObserver play/pause pattern. Add `onError` fallback to show poster as static image with Ken Burns if video fails.
 
