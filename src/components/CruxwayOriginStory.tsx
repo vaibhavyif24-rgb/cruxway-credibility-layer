@@ -87,155 +87,36 @@ const CruxwayOriginStory = () => {
   const subShadow = '0 1px 10px rgba(0,0,0,0.4)';
 
   /* ================================================================ */
-  /*  MOBILE transforms (crossfade, no split)                          */
-  /* ================================================================ */
-  if (isMobile) {
-    const mCrucibleOpacity = useTransform(scrollYProgress, [0.12, 0.30], [1, 0]);
-    const mWayOpacity = useTransform(scrollYProgress, [0.12, 0.30], [0, 1]);
-
-    const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.02, 0.10, 0.16], [0, 1, 1, 0]);
-    const mPhase2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.42, 0.48], [0, 1, 1, 0]);
-    const mPhase3Opacity = useTransform(scrollYProgress, [0.50, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
-    const mPhase3RuleW = useTransform(scrollYProgress, [0.54, 0.62], [0, 100]);
-    const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
-    const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
-
-    return (
-      <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
-          {/* Way video (behind) */}
-          <motion.div className="absolute inset-0" style={{ opacity: mWayOpacity, willChange: 'transform' }}>
-            <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
-            <div className="absolute inset-0" style={{ background: overlay }} />
-            <Grain />
-          </motion.div>
-
-          {/* Crucible video (on top, fades out) */}
-          <motion.div className="absolute inset-0" style={{ opacity: mCrucibleOpacity, zIndex: 2, willChange: 'transform' }}>
-            <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
-            <div className="absolute inset-0" style={{ background: overlay }} />
-            <Grain />
-          </motion.div>
-
-          {/* Phase 1: CRUCIBLE */}
-          <motion.div
-            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
-            style={{ opacity: mPhase1Opacity }}
-          >
-            <h2 className="font-serif text-gold uppercase tracking-[0.12em] text-center"
-              style={{ fontSize: 'clamp(2.4rem, 10vw, 4rem)', textShadow }}>
-              Crucible
-            </h2>
-            <p className="font-sans text-[13px] text-center max-w-[320px] mt-4"
-              style={{ color: subColor, textShadow: subShadow }}>
-              A vessel where raw material is transformed under pressure.
-            </p>
-          </motion.div>
-
-          {/* Phase 2: THE WAY */}
-          <motion.div
-            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
-            style={{ opacity: mPhase2Opacity }}
-          >
-            <h2 className="font-serif text-gold uppercase tracking-[0.12em] text-center"
-              style={{ fontSize: 'clamp(2.2rem, 9vw, 3.5rem)', textShadow }}>
-              The Way
-            </h2>
-            <p className="font-sans text-[13px] text-center max-w-[320px] mt-4"
-              style={{ color: subColor, textShadow: subShadow }}>
-              The discipline that guides the transformation.
-            </p>
-          </motion.div>
-
-          {/* Phase 3: CRU × WAY Equation */}
-          <motion.div
-            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
-            style={{ opacity: mPhase3Opacity }}
-          >
-            {/* Letter assembly */}
-            <div className="flex items-baseline gap-0">
-              <span className="font-serif text-gold uppercase tracking-[0.18em] font-light"
-                style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', textShadow }}>
-                CRU
-              </span>
-              <span className="font-serif mx-2 md:mx-3"
-                style={{
-                  fontSize: 'clamp(1rem, 4vw, 1.6rem)',
-                  color: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)',
-                  textShadow,
-                }}>
-                ×
-              </span>
-              <span className="font-serif text-gold uppercase tracking-[0.18em] font-light"
-                style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', textShadow }}>
-                WAY
-              </span>
-            </div>
-
-            {/* Animated gold rule */}
-            <motion.div
-              className="mt-5 mx-auto overflow-hidden"
-              style={{ width: mPhase3RuleW }}
-            >
-              <div className="h-[1px] w-full" style={{
-                background: isDark
-                  ? 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.6) 30%, hsl(43 78% 50%) 50%, hsl(43 78% 50% / 0.6) 70%, transparent 100%)'
-                  : 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.4) 30%, hsl(43 78% 50% / 0.8) 50%, hsl(43 78% 50% / 0.4) 70%, transparent 100%)',
-              }} />
-            </motion.div>
-
-            {/* Meaning */}
-            <p className="font-sans text-[10px] uppercase tracking-[0.25em] mt-4 text-center"
-              style={{ color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)', textShadow: subShadow }}>
-              The crucible of conviction · The way forward
-            </p>
-          </motion.div>
-
-          {/* Phase 4: Final */}
-          <motion.div
-            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
-            style={{ opacity: mPhase4Opacity, scale: mPhase4Scale }}
-          >
-            <p className="font-serif text-gold tracking-[-0.02em] text-center"
-              style={{ fontSize: 'clamp(2.8rem, 12vw, 5rem)', textShadow: cruxwayShadow }}>
-              Cruxway
-            </p>
-            <div className="h-[1.5px] bg-gold/40 w-[64px] mt-4" />
-            <p className="font-sans text-[11px] uppercase tracking-[0.18em] mt-3 text-center"
-              style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)' }}>
-              Forging conviction through rigour.
-            </p>
-          </motion.div>
-        </div>
-      </div>
-    );
-  }
-
-  /* ================================================================ */
-  /*  DESKTOP transforms                                               */
+  /*  ALL hooks declared unconditionally (Rules of Hooks)              */
   /* ================================================================ */
 
-  // Panel widths
+  // Mobile transforms
+  const mCrucibleOpacity = useTransform(scrollYProgress, [0.12, 0.30], [1, 0]);
+  const mWayOpacity = useTransform(scrollYProgress, [0.12, 0.30], [0, 1]);
+  const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.02, 0.10, 0.16], [0, 1, 1, 0]);
+  const mPhase2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.42, 0.48], [0, 1, 1, 0]);
+  const mPhase3Opacity = useTransform(scrollYProgress, [0.50, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
+  const mPhase3RuleW = useTransform(scrollYProgress, [0.54, 0.62], [0, 100]);
+  const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
+  const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+
+  // Desktop transforms
   const leftWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['100%', '100%', '50%']);
   const rightWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['0%', '0%', '50%']);
-
-  // Gold center seam
   const seamOpacity = useTransform(scrollYProgress, [0.20, 0.35], [0, 1]);
   const seamHeight = useTransform(scrollYProgress, [0.25, 0.40], ['0%', '100%']);
-
-  // Phase 1: full-screen CRUCIBLE
   const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12, 0.18], [0, 1, 1, 0]);
-
-  // Phase 2: per-panel labels
   const phase2TextOpacity = useTransform(scrollYProgress, [0.32, 0.40, 0.48, 0.55], [0, 1, 1, 0]);
-
-  // Phase 3: equation
   const phase3TextOpacity = useTransform(scrollYProgress, [0.53, 0.60, 0.68, 0.75], [0, 1, 1, 0]);
   const phase3RuleWidth = useTransform(scrollYProgress, [0.56, 0.65], [0, 120]);
-
-  // Phase 4: final CRUXWAY
   const phase4TextOpacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
   const phase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+
+  /* ================================================================ */
+  /*  MOBILE RENDER                                                    */
+  /* ================================================================ */
+  if (isMobile) {
+    return (
 
   /* ================================================================ */
   /*  DESKTOP RENDER                                                   */
