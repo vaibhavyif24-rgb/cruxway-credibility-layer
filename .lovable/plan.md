@@ -1,41 +1,48 @@
 
 
-## Upgrade India Video + Refine Light-Mode Polish
+## Plan: Bring Crucible Video Back for Acts 3-4 with Smooth Cross-Dissolve
 
-### File: `src/pages/Home.tsx` — `OpportunityCinematic` component
+**File:** `src/components/CruxwayOriginStory.tsx` only.
 
-### 1. Replace India video with Mumbai dusk aerial (35213732)
+### What changes
 
-The current video (35213738) shows a daytime cityscape that reads as generic. Swap to Pexels **35213732** — "Aerial View of Mumbai Cityscape at Dusk" — same creator (Rajkumarrr comics), same series, but shot at golden hour/dusk with warm amber tones in the sky. This is the version that works beautifully under both overlays: the warm dusk tones bleed through the navy overlay creating a subtle amber-navy interplay that feels premium.
+**1. Replace the flat solid background (line 227) with a returning Crucible video layer**
 
-- **Video**: `https://videos.pexels.com/video-files/35213732/14917606_2560_1440_60fps.mp4`
-- **Poster**: `https://images.pexels.com/videos/35213732/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213732.jpeg?auto=compress&w=1200`
+The current Acts 3-4 backdrop is a plain `solidBg` div. Replace it with a third video layer using `CRUCIBLE_VIDEO`, creating a full-circle narrative: Crucible → Way → Crucible.
 
-2560x1440 at 60fps. Smooth drone pan across Mumbai's modern skyline with warm dusk lighting — aspirational, recognizably Indian (Worli/Bandra high-rises visible), the exact aesthetic a global PE firm would use.
+**2. Smooth cross-dissolve from Way → returning Crucible**
 
-### 2. Enhance light-mode overlay for sophistication
+New opacity keyframe for the returning Crucible layer:
+- `crucibleReturnOp`: `[0.46, 0.54, 0.95, 1.0]` → `[0, 1, 1, 1]`
 
-Current light-mode overlay is a single linear gradient. Upgrade to a **layered overlay** that adds depth:
+This overlaps with the Way video fading out at `[0.46, 0.52]`, creating a professional dissolve where both videos are briefly visible together.
 
-- **Base gradient** stays: `hsl(228 45% 12% / 0.75)` to `0.95` (bottom-heavy for text legibility)
-- **Add a secondary radial vignette**: dark edges fading to slightly more transparent center, creating a cinematic depth-of-field feel rather than a flat color wash
-- **Add a subtle warm undertone layer**: `hsl(228 40% 18% / 0.08)` radial at center — this lets a whisper of the video's warmth through in light mode, preventing the section from feeling like a dead flat navy block
+**3. Heavy overlay on the returning Crucible for text readability**
 
-Implementation: two additional absolute `div` layers in the overlay stack (z-[2]):
+Acts 3-4 have detailed text (the equation, wordmark, statements). The overlay must be much heavier than Act 1's crucible:
+- Dark: `hsl(228 55% 8% / 0.78)` → `0.84` → `0.90`
+- Light: `hsl(220 30% 10% / 0.70)` → `0.78` → `0.86`
+
+This lets the warm crucible glow bleed through subtly while keeping all text perfectly legible.
+
+**4. Keep CornerBrackets, add Grain and subtle GoldParticles**
+
+The returning layer includes `CornerBrackets` (already there), plus `Grain` and `GoldParticles` for visual consistency with Acts 1-2.
+
+**5. Update Acts 3-4 text to use `videoBodyColor`/`videoMutedColor`**
+
+Since the background is now video (dark in both themes), Acts 3-4 text switches from theme-aware `bodyColor`/`mutedColor` to the always-light `videoBodyColor`/`videoMutedColor` with `videoTextShadow`, matching Acts 1-2. The gold heading colors stay unchanged.
+
+### Technical summary
+
+```text
+Layer stack (z-index):
+  1: Crucible video (Act 1, fades 0.20→0.28)
+  2: Way video (Act 2, fades in 0.22→0.28, out 0.46→0.52)  
+  3: Crucible return (Acts 3-4, fades in 0.46→0.54, holds to end)
+     └─ heavy overlay + Grain + GoldParticles + CornerBrackets
+ 10: Text content (all acts)
 ```
-// Radial vignette (both themes)
-radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)
 
-// Light-mode warm center glow (light only)  
-radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.04) 0%, transparent 60%)
-```
-
-### 3. No changes to
-- US video (Manhattan evening — already great)
-- Dark-mode overlay (already works well)
-- Text content, animations, grain, ornament, parallax logic
-- Performance attributes (`fetchpriority`, `preload`)
-
-### Why this matters
-The dusk video has warm amber tones that interact with the navy overlay to create the kind of color-temperature interplay seen in premium film color grading. In light mode, the heavier overlay keeps text crisp while the warm radial lets just enough video warmth through to feel alive rather than flat.
+The `solidBgOp` transform and `solidBg` div are removed entirely.
 
