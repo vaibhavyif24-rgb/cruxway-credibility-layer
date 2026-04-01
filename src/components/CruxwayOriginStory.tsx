@@ -93,12 +93,12 @@ const CruxwayOriginStory = () => {
   // Mobile transforms
   const mCrucibleOpacity = useTransform(scrollYProgress, [0.12, 0.30], [1, 0]);
   const mWayOpacity = useTransform(scrollYProgress, [0.12, 0.30], [0, 1]);
-  const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.02, 0.10, 0.16], [0, 1, 1, 0]);
-  const mPhase2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.42, 0.48], [0, 1, 1, 0]);
+  const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.01, 0.10, 0.16], [1, 1, 1, 0]);
+  const mPhase2Opacity = useTransform(scrollYProgress, [0.20, 0.28, 0.42, 0.48], [0, 1, 1, 0]);
   const mPhase3Opacity = useTransform(scrollYProgress, [0.50, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
   const mPhase3RuleW = useTransform(scrollYProgress, [0.54, 0.62], [0, 100]);
-  const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
-  const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+  const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.80, 0.95, 1.0], [0, 1, 1, 1]);
+  const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.80], [0.92, 1]);
 
   // Desktop transforms
   const leftWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['100%', '100%', '50%']);
