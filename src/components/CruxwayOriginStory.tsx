@@ -117,7 +117,103 @@ const CruxwayOriginStory = () => {
   /* ================================================================ */
   if (isMobile) {
     return (
+      <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          {/* Way video (behind) */}
+          <motion.div className="absolute inset-0" style={{ opacity: mWayOpacity, willChange: 'transform' }}>
+            <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
+            <div className="absolute inset-0" style={{ background: overlay }} />
+            <Grain />
+          </motion.div>
 
+          {/* Crucible video (on top, fades out) */}
+          <motion.div className="absolute inset-0" style={{ opacity: mCrucibleOpacity, zIndex: 2, willChange: 'transform' }}>
+            <LazyVideo src={CRUCIBLE_VIDEO} poster={CRUCIBLE_POSTER} />
+            <div className="absolute inset-0" style={{ background: overlay }} />
+            <Grain />
+          </motion.div>
+
+          {/* Phase 1: CRUCIBLE */}
+          <motion.div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase1Opacity }}
+          >
+            <h2 className="font-serif text-gold uppercase tracking-[0.12em] text-center"
+              style={{ fontSize: 'clamp(2.4rem, 10vw, 4rem)', textShadow }}>
+              Crucible
+            </h2>
+            <p className="font-sans text-[13px] text-center max-w-[320px] mt-4"
+              style={{ color: subColor, textShadow: subShadow }}>
+              A vessel where raw material is transformed under pressure.
+            </p>
+          </motion.div>
+
+          {/* Phase 2: THE WAY */}
+          <motion.div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase2Opacity }}
+          >
+            <h2 className="font-serif text-gold uppercase tracking-[0.12em] text-center"
+              style={{ fontSize: 'clamp(2.2rem, 9vw, 3.5rem)', textShadow }}>
+              The Way
+            </h2>
+            <p className="font-sans text-[13px] text-center max-w-[320px] mt-4"
+              style={{ color: subColor, textShadow: subShadow }}>
+              The discipline that guides the transformation.
+            </p>
+          </motion.div>
+
+          {/* Phase 3: CRU × WAY Equation */}
+          <motion.div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase3Opacity }}
+          >
+            <div className="flex items-baseline gap-0">
+              <span className="font-serif text-gold uppercase tracking-[0.18em] font-light"
+                style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', textShadow }}>
+                CRU
+              </span>
+              <span className="font-serif mx-2 md:mx-3"
+                style={{ fontSize: 'clamp(1rem, 4vw, 1.6rem)', color: isDark ? 'rgba(255,255,255,0.35)' : 'rgba(0,0,0,0.25)', textShadow }}>
+                ×
+              </span>
+              <span className="font-serif text-gold uppercase tracking-[0.18em] font-light"
+                style={{ fontSize: 'clamp(2rem, 8vw, 3.2rem)', textShadow }}>
+                WAY
+              </span>
+            </div>
+            <motion.div className="mt-5 mx-auto overflow-hidden" style={{ width: mPhase3RuleW }}>
+              <div className="h-[1px] w-full" style={{
+                background: isDark
+                  ? 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.6) 30%, hsl(43 78% 50%) 50%, hsl(43 78% 50% / 0.6) 70%, transparent 100%)'
+                  : 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.4) 30%, hsl(43 78% 50% / 0.8) 50%, hsl(43 78% 50% / 0.4) 70%, transparent 100%)',
+              }} />
+            </motion.div>
+            <p className="font-sans text-[10px] uppercase tracking-[0.25em] mt-4 text-center"
+              style={{ color: isDark ? 'rgba(255,255,255,0.45)' : 'rgba(0,0,0,0.4)', textShadow: subShadow }}>
+              The crucible of conviction · The way forward
+            </p>
+          </motion.div>
+
+          {/* Phase 4: Final */}
+          <motion.div
+            className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-6"
+            style={{ opacity: mPhase4Opacity, scale: mPhase4Scale }}
+          >
+            <p className="font-serif text-gold tracking-[-0.02em] text-center"
+              style={{ fontSize: 'clamp(2.8rem, 12vw, 5rem)', textShadow: cruxwayShadow }}>
+              Cruxway
+            </p>
+            <div className="h-[1.5px] bg-gold/40 w-[64px] mt-4" />
+            <p className="font-sans text-[11px] uppercase tracking-[0.18em] mt-3 text-center"
+              style={{ color: isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.45)' }}>
+              Forging conviction through rigour.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
   /* ================================================================ */
   /*  DESKTOP RENDER                                                   */
   /* ================================================================ */
