@@ -285,7 +285,7 @@ const CruxwayOriginStory = () => {
               fontSize: isMobile ? '12px' : '14px',
             }}
           >
-            /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>
+            /ˈkruː.sɪ.bəl/ · <span className="font-sans italic">noun</span>{isIndia && <> · <span className="font-sans">Hindi: कसौटी (kasauṭī)</span></>}
           </motion.p>
 
           <motion.p
