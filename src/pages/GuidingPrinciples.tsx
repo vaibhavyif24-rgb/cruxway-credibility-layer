@@ -30,7 +30,7 @@ const GuidingPrinciples = () => {
   const isDark = theme === 'dark';
 
   return (
-    <div>
+    <div style={{ overflowX: 'clip' }}>
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaPrinciples : heroUSPrinciples} overlay="strong" />
