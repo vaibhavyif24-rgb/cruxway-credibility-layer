@@ -1,48 +1,57 @@
 
 
-## Plan: Bring Crucible Video Back for Acts 3-4 with Smooth Cross-Dissolve
+## Plan: Add Cinematic Animated Effects + Theme-Aware Styling to All Three Origin Story Backgrounds
 
-**File:** `src/components/CruxwayOriginStory.tsx` only.
+**File:** `src/components/CruxwayOriginStory.tsx`
 
-### What changes
+### Approach
 
-**1. Replace the flat solid background (line 227) with a returning Crucible video layer**
+Keep the reliable local images as the base layer. Add dramatic, highly visible animated effects on top that create a genuine "living video" feel. Make the overlays and effects theme-aware so light mode and dark mode each have a distinct cinematic character.
 
-The current Acts 3-4 backdrop is a plain `solidBg` div. Replace it with a third video layer using `CRUCIBLE_VIDEO`, creating a full-circle narrative: Crucible → Way → Crucible.
+---
 
-**2. Smooth cross-dissolve from Way → returning Crucible**
+### 1. Crucible Section: Forge Fire Effects
 
-New opacity keyframe for the returning Crucible layer:
-- `crucibleReturnOp`: `[0.46, 0.54, 0.95, 1.0]` → `[0, 1, 1, 1]`
+Three animated layers that together simulate a living forge:
 
-This overlaps with the Way video fading out at `[0.46, 0.52]`, creating a professional dissolve where both videos are briefly visible together.
+- **Rising Embers** (12 particles on desktop, 6 on mobile): Gold/orange glowing dots (3-6px) that rise from the bottom with horizontal sway. Each has `box-shadow` for a soft glow halo. Staggered durations (5-10s) and delays create organic randomness.
+- **Heat Pulse**: A large radial gradient (amber/orange, centered at bottom) that pulses in scale and opacity on a 6s cycle, simulating the forge breathing with molten heat.
+- **Smoke Drift**: Two wide, blurred gradient bands that slowly translate horizontally across the scene (25-35s), creating a haze/smoke effect over the image.
 
-**3. Heavy overlay on the returning Crucible for text readability**
+### 2. Way Section: Desert Journey Effects
 
-Acts 3-4 have detailed text (the equation, wordmark, statements). The overlay must be much heavier than Act 1's crucible:
-- Dark: `hsl(228 55% 8% / 0.78)` → `0.84` → `0.90`
-- Light: `hsl(220 30% 10% / 0.70)` → `0.78` → `0.86`
+Three layers simulating moving light through a landscape:
 
-This lets the warm crucible glow bleed through subtly while keeping all text perfectly legible.
+- **Sweeping Light Rays**: 3 diagonal gradient streaks (gold/white at 0.04-0.08 opacity) that slowly pan across the scene (18-28s), simulating sunlight shifting through atmospheric haze.
+- **Dust Motes**: 8 tiny warm particles (1-3px) with gentle randomized float paths (both x and y drift), very slow cycles (10-18s). Creates depth and atmosphere.
+- **Horizon Pulse**: A horizontal warm gradient band near the center that shifts in intensity on a 10s cycle, simulating distant heat shimmer on the road.
 
-**4. Keep CornerBrackets, add Grain and subtle GoldParticles**
+### 3. CRU x WAY Section: Convergence Energy
 
-The returning layer includes `CornerBrackets` (already there), plus `Grain` and `GoldParticles` for visual consistency with Acts 1-2.
+Three layers creating a sense of two forces merging:
 
-**5. Update Acts 3-4 text to use `videoBodyColor`/`videoMutedColor`**
+- **Convergence Sparks**: 8 gold particles that drift inward from the edges toward center on long arcing paths (12-18s cycles). Creates the visual metaphor of crucible + way merging.
+- **Central Radial Pulse**: A large radial gradient that expands and contracts from center (12s cycle), creating a breathing energy behind the equation text.
+- **Energy Lines**: Two horizontal gradient lines that slowly sweep inward from opposite edges and fade at center (20s cycle), reinforcing the convergence motif.
 
-Since the background is now video (dark in both themes), Acts 3-4 text switches from theme-aware `bodyColor`/`mutedColor` to the always-light `videoBodyColor`/`videoMutedColor` with `videoTextShadow`, matching Acts 1-2. The gold heading colors stay unchanged.
+### 4. Theme-Aware Overlays (Light vs Dark)
 
-### Technical summary
+Currently, overlays are identical in both themes. Update to be theme-responsive:
 
-```text
-Layer stack (z-index):
-  1: Crucible video (Act 1, fades 0.20→0.28)
-  2: Way video (Act 2, fades in 0.22→0.28, out 0.46→0.52)  
-  3: Crucible return (Acts 3-4, fades in 0.46→0.54, holds to end)
-     └─ heavy overlay + Grain + GoldParticles + CornerBrackets
- 10: Text content (all acts)
-```
+**Dark mode**: Current deep navy overlays stay. Effects use warm gold/amber tones for particles and glows, creating a rich, cinematic darkness.
 
-The `solidBgOp` transform and `solidBg` div are removed entirely.
+**Light mode**: 
+- Crucible overlay uses a warm sepia-tinted gradient (lighter opacity ~0.35-0.55) so more of the forge image shows through
+- Way overlay uses a soft cream/warm white gradient (lighter opacity ~0.40-0.60) for an ethereal, sun-washed feel  
+- CRU x WAY overlay uses a medium warm gradient for balanced readability
+- Effect particles shift to deeper gold/bronze tones for visibility against lighter backgrounds
+- Text colors adjust: use dark navy text (`hsl(228 55% 12%)`) with light text-shadow in light mode vs white text in dark mode
+
+### 5. Implementation
+
+Create three new internal components: `CrucibleEffects`, `WayEffects`, `MergeEffects`. Each accepts `isMobile` to reduce particle count. Insert them into the respective background layers between the image and the overlay div.
+
+Update overlay gradients and text colors to use `isDark` conditionals throughout all four acts.
+
+**Estimated additions**: ~180 lines of new effect components + ~30 lines of theme-conditional updates to existing overlays and text colors.
 
