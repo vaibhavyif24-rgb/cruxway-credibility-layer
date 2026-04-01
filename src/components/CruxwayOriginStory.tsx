@@ -5,7 +5,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useRegion } from '@/contexts/RegionContext';
 import crucibleImg from '@/assets/cruxway-crucible-v2.jpg';
 import wayImg from '@/assets/cruxway-way.jpg';
-import mergeImg from '@/assets/cruxway-merge-v3.jpg';
+import mergeImg from '@/assets/cruxway-merge-v4.jpg';
 import CrucibleEffects from '@/components/origin-effects/CrucibleEffects';
 import WayEffects from '@/components/origin-effects/WayEffects';
 import MergeEffects from '@/components/origin-effects/MergeEffects';
@@ -394,8 +394,8 @@ const CruxwayOriginStory = () => {
               className="font-serif"
               style={{
                 opacity: symbolOp,
-                fontSize: isMobile ? 'clamp(1rem, 4vw, 1.5rem)' : 'clamp(1.2rem, 2.5vw, 2rem)',
-                color: isDark ? 'rgba(255,255,255,0.3)' : 'hsl(228, 45%, 15%, 0.35)',
+                fontSize: isMobile ? 'clamp(1.6rem, 7vw, 2.4rem)' : 'clamp(1.8rem, 4vw, 3rem)',
+                color: isDark ? 'rgba(255,255,255,0.6)' : 'hsl(228, 45%, 15%, 0.5)',
                 textShadow: videoSubShadow,
               }}
             >
