@@ -66,7 +66,7 @@ const SiteHeader = () => {
 
   const navItems = [
     { label: 'Home', path: prefix },
-    { label: 'Our Principles', path: `${prefix}/principles` },
+    { label: 'Our Identity', path: `${prefix}/principles` },
     { label: 'Our Focus', path: `${prefix}/focus` },
     { label: 'Our Playbook', path: `${prefix}/playbook` },
     { label: 'Team', path: `${prefix}/team` },
