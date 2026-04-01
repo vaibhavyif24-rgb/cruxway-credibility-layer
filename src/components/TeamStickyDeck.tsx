@@ -128,7 +128,7 @@ const TeamCard: React.FC<{
         />
       )}
 
-      <div className="flex flex-col md:flex-row h-full">
+      <div className="flex flex-col md:flex-row h-full overflow-hidden">
 
         {/* ─── Left: Photo column ─── */}
         <div className="w-full md:w-[200px] lg:w-[240px] shrink-0 flex items-start justify-center pt-8 md:pt-10 px-6 md:px-0 md:pl-8 lg:pl-10">
