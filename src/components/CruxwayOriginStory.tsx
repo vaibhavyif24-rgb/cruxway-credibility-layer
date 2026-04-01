@@ -91,26 +91,30 @@ const CruxwayOriginStory = () => {
   /* ================================================================ */
 
   // Mobile transforms
-  const mCrucibleOpacity = useTransform(scrollYProgress, [0.12, 0.30], [1, 0]);
-  const mWayOpacity = useTransform(scrollYProgress, [0.12, 0.30], [0, 1]);
-  const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.02, 0.10, 0.16], [0, 1, 1, 0]);
-  const mPhase2Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.42, 0.48], [0, 1, 1, 0]);
+  const mCrucibleOpacity = useTransform(scrollYProgress, [0.15, 0.30], [1, 0]);
+  const mWayOpacity = useTransform(scrollYProgress, [0.15, 0.30], [0, 1]);
+  const mPhase1Opacity = useTransform(scrollYProgress, [0, 0.01, 0.10, 0.16], [1, 1, 1, 0]);
+  const mPhase2Opacity = useTransform(scrollYProgress, [0.20, 0.28, 0.42, 0.48], [0, 1, 1, 0]);
   const mPhase3Opacity = useTransform(scrollYProgress, [0.50, 0.58, 0.65, 0.72], [0, 1, 1, 0]);
   const mPhase3RuleW = useTransform(scrollYProgress, [0.54, 0.62], [0, 100]);
-  const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
-  const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+  const mPhase4Opacity = useTransform(scrollYProgress, [0.73, 0.80, 0.95, 1.0], [0, 1, 1, 1]);
+  const mPhase4Scale = useTransform(scrollYProgress, [0.73, 0.80], [0.92, 1]);
 
-  // Desktop transforms
-  const leftWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['100%', '100%', '50%']);
-  const rightWidth = useTransform(scrollYProgress, [0, 0.15, 0.35], ['0%', '0%', '50%']);
-  const seamOpacity = useTransform(scrollYProgress, [0.20, 0.35], [0, 1]);
-  const seamHeight = useTransform(scrollYProgress, [0.25, 0.40], ['0%', '100%']);
-  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.02, 0.12, 0.18], [0, 1, 1, 0]);
-  const phase2TextOpacity = useTransform(scrollYProgress, [0.32, 0.40, 0.48, 0.55], [0, 1, 1, 0]);
-  const phase3TextOpacity = useTransform(scrollYProgress, [0.53, 0.60, 0.68, 0.75], [0, 1, 1, 0]);
-  const phase3RuleWidth = useTransform(scrollYProgress, [0.56, 0.65], [0, 120]);
-  const phase4TextOpacity = useTransform(scrollYProgress, [0.73, 0.82, 0.95, 1.0], [0, 1, 1, 1]);
-  const phase4Scale = useTransform(scrollYProgress, [0.73, 0.82], [0.92, 1]);
+  // Desktop transforms — panels split between 0.10 → 0.28
+  const leftWidth = useTransform(scrollYProgress, [0, 0.10, 0.28], ['100%', '100%', '50%']);
+  const rightWidth = useTransform(scrollYProgress, [0, 0.10, 0.28], ['0%', '0%', '50%']);
+  const seamOpacity = useTransform(scrollYProgress, [0.16, 0.28], [0, 1]);
+  const seamHeight = useTransform(scrollYProgress, [0.18, 0.32], ['0%', '100%']);
+  // Phase 1: visible immediately, GONE before split starts
+  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.005, 0.08, 0.12], [1, 1, 1, 0]);
+  // Phase 2: per-panel labels appear AFTER split is complete
+  const phase2TextOpacity = useTransform(scrollYProgress, [0.30, 0.36, 0.48, 0.54], [0, 1, 1, 0]);
+  // Phase 3: equation
+  const phase3TextOpacity = useTransform(scrollYProgress, [0.54, 0.60, 0.70, 0.76], [0, 1, 1, 0]);
+  const phase3RuleWidth = useTransform(scrollYProgress, [0.58, 0.66], [0, 120]);
+  // Phase 4: final CRUXWAY
+  const phase4TextOpacity = useTransform(scrollYProgress, [0.76, 0.84, 0.95, 1.0], [0, 1, 1, 1]);
+  const phase4Scale = useTransform(scrollYProgress, [0.76, 0.84], [0.92, 1]);
 
   /* ================================================================ */
   /*  MOBILE RENDER                                                    */
@@ -118,7 +122,7 @@ const CruxwayOriginStory = () => {
   if (isMobile) {
     return (
       <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: isDark ? 'hsl(228 55% 8%)' : 'hsl(40 25% 20%)' }}>
           {/* Way video (behind) */}
           <motion.div className="absolute inset-0" style={{ opacity: mWayOpacity, willChange: 'transform' }}>
             <LazyVideo src={WAY_VIDEO} poster={WAY_POSTER} />
@@ -219,7 +223,7 @@ const CruxwayOriginStory = () => {
   /* ================================================================ */
   return (
     <div ref={containerRef} className="relative" style={{ height: '300vh' }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: isDark ? 'hsl(228 55% 8%)' : 'hsl(40 25% 20%)' }}>
         {/* ---- Left panel (Crucible) ---- */}
         <motion.div
           className="absolute top-0 left-0 h-full overflow-hidden"
