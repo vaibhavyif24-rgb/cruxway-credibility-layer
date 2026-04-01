@@ -375,7 +375,7 @@ const CruxwayOriginStory = () => {
               fontSize: isMobile ? '12px' : '14px',
             }}
           >
-            /weɪ/ · <span className="font-sans italic">noun</span> · Hindi: मार्ग (mārg)
+            /weɪ/ · <span className="font-sans italic">noun</span>{isIndia && <> · <span className="font-sans">Hindi: मार्ग (mārg)</span></>}
           </motion.p>
 
           <motion.p
