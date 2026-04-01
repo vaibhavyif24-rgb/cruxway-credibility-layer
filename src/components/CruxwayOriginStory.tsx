@@ -106,7 +106,7 @@ const CruxwayOriginStory = () => {
   const seamOpacity = useTransform(scrollYProgress, [0.16, 0.28], [0, 1]);
   const seamHeight = useTransform(scrollYProgress, [0.18, 0.32], ['0%', '100%']);
   // Phase 1: visible immediately, GONE before split starts
-  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.005, 0.06, 0.10], [1, 1, 1, 0]);
+  const phase1TextOpacity = useTransform(scrollYProgress, [0, 0.005, 0.08, 0.12], [1, 1, 1, 0]);
   // Phase 2: per-panel labels appear AFTER split is complete
   const phase2TextOpacity = useTransform(scrollYProgress, [0.30, 0.36, 0.48, 0.54], [0, 1, 1, 0]);
   // Phase 3: equation
