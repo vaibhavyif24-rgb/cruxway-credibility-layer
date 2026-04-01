@@ -187,7 +187,7 @@ const CruxwayOriginStory = () => {
   const act2DefOp = useTransform(scrollYProgress, [0.37, 0.42, 0.46, 0.52], [0, 1, 1, 0]);
 
   /* ─── ACT 3: The Equation (0.50 → 0.72) ─── */
-  const solidBgOp = useTransform(scrollYProgress, [0.48, 0.52, 0.92, 1], [0, 1, 1, 1]);
+  const crucibleReturnOp = useTransform(scrollYProgress, [0.46, 0.54, 0.95, 1.0], [0, 1, 1, 1]);
   const act3Op = useTransform(scrollYProgress, [0.50, 0.54, 0.68, 0.72], [0, 1, 1, 0]);
   const cruX = useTransform(scrollYProgress, isMobile ? [0.50, 0.54] : [0.50, 0.56], isMobile ? [0, 0] : [-80, 0]);
   const wayX = useTransform(scrollYProgress, isMobile ? [0.50, 0.54] : [0.50, 0.56], isMobile ? [0, 0] : [80, 0]);
