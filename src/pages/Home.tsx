@@ -357,7 +357,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]"
+            className={`font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
           >
             {isIndia
               ? <>India's lower middle market is one of the most <span className="text-gold font-semibold">under-served</span> segments in global investing.</>
