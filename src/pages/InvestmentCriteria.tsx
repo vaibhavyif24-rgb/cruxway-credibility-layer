@@ -386,9 +386,6 @@ const InvestmentCriteria = () => {
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  <span className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
-                  </span>
                 </Link>
               </motion.div>
             </FadeIn>
