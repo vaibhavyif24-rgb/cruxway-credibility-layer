@@ -9,7 +9,7 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import GlassCard from '@/components/GlassCard';
 import WaveBackground from '@/components/WaveBackground';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
@@ -32,13 +32,24 @@ const valueCreationItems = [
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
   const [active, setActive] = useState(0);
 
+  const handleClick = useCallback((i: number) => {
+    setActive(i);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActive(prev => (prev + 1) % steps.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [active, steps.length]);
+
   return (
     <div>
       <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
-            onClick={() => setActive(i)}
+            onClick={() => handleClick(i)}
             className={`min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border
               ${active === i
                 ? 'bg-gold/20 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
@@ -49,7 +60,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
             `}
           >
             <span className="text-gold/85 mr-1.5">{step.num}</span>
-            <span className="hidden sm:inline">{step.title}</span>
+            <span>{step.title}</span>
           </button>
         ))}
       </div>
@@ -207,9 +218,6 @@ const OurPlaybook = () => {
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  <span className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
-                  </span>
                 </Link>
               </motion.div>
             </FadeIn>

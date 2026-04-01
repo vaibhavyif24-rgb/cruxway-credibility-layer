@@ -30,7 +30,7 @@ const GuidingPrinciples = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>
-            <SectionLabel light={isDark}>{isIndia ? 'Our Identity, India' : 'Our Identity'}</SectionLabel>
+            <SectionLabel light={isDark}>Our Identity</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[540px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
@@ -123,9 +123,6 @@ const GuidingPrinciples = () => {
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  <span className="absolute inset-0 pointer-events-none overflow-hidden">
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer-sweep" />
-                  </span>
                 </Link>
               </motion.div>
             </FadeIn>

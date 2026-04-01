@@ -33,9 +33,9 @@ const SiteFooter = () => {
 
   const navLinks = [
     { label: 'Home', path: prefix },
-    { label: 'Principles', path: `${prefix}/principles` },
-    { label: 'Focus', path: `${prefix}/focus` },
-    { label: 'Playbook', path: `${prefix}/playbook` },
+    { label: 'Our Identity', path: `${prefix}/principles` },
+    { label: 'Our Focus', path: `${prefix}/focus` },
+    { label: 'Our Playbook', path: `${prefix}/playbook` },
     { label: 'Team', path: `${prefix}/team` },
     { label: 'Contact', path: `${prefix}/contact` },
   ];
