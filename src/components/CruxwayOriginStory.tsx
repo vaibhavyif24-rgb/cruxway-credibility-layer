@@ -131,25 +131,27 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Separate overlays: Crucible (lighter) vs Way (heavier) ─── */
+  /* ─── Separate overlays: Crucible (lighter) vs Way (heavier, dark in both themes) ─── */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.35) 0%, hsl(228 55% 8% / 0.50) 50%, hsl(228 55% 8% / 0.70) 100%)'
     : 'linear-gradient(to bottom, hsl(40 25% 96% / 0.25) 0%, hsl(40 25% 96% / 0.42) 50%, hsl(40 25% 96% / 0.62) 100%)';
 
   const wayOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.60) 0%, hsl(228 55% 8% / 0.72) 50%, hsl(228 55% 8% / 0.82) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 20% / 0.50) 0%, hsl(40 25% 15% / 0.62) 50%, hsl(40 25% 10% / 0.72) 100%)';
+    ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.65) 0%, hsl(228 55% 6% / 0.75) 50%, hsl(228 55% 6% / 0.85) 100%)'
+    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.55) 0%, hsl(220 30% 8% / 0.68) 50%, hsl(220 30% 6% / 0.78) 100%)';
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
+
+  /* ─── Colors for text over video (always light, both themes) ─── */
+  const videoBodyColor = 'rgba(255, 255, 255, 0.82)';
+  const videoMutedColor = 'rgba(255, 255, 255, 0.55)';
+  const videoTextShadow = '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)';
+  const videoSubShadow = '0 1px 12px rgba(0, 0, 0, 0.6)';
+
+  /* ─── Theme-aware colors for solid-background acts (3 & 4) ─── */
   const bodyColor = isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.55)';
   const mutedColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.4)';
   const symbolColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)';
-  const textShadow = isDark
-    ? '0 2px 24px rgba(0,0,0,0.7)'
-    : '0 1px 12px rgba(255,255,255,0.8)';
-  const subShadow = isDark
-    ? '0 1px 12px rgba(0,0,0,0.5)'
-    : '0 1px 8px rgba(255,255,255,0.6)';
   const wordmarkShadow = isDark
     ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
     : '0 4px 24px rgba(0,0,0,0.12)';
@@ -236,7 +238,7 @@ const CruxwayOriginStory = () => {
 
           <motion.p
             className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
-            style={{ opacity: act1LabelOp, textShadow: subShadow }}
+            style={{ opacity: act1LabelOp, textShadow: videoSubShadow }}
           >
             What's in a name
           </motion.p>
@@ -249,7 +251,7 @@ const CruxwayOriginStory = () => {
               y: act1HeadingY,
               fontSize: headingSize,
               letterSpacing: '0.04em',
-              textShadow,
+              textShadow: videoTextShadow,
               willChange: 'transform',
             }}
           >
@@ -265,8 +267,8 @@ const CruxwayOriginStory = () => {
             className="mt-1"
             style={{
               opacity: act1PhoneticOp,
-              color: mutedColor,
-              textShadow: subShadow,
+              color: videoMutedColor,
+              textShadow: videoSubShadow,
               fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
               fontSize: isMobile ? '12px' : '14px',
             }}
@@ -278,8 +280,8 @@ const CruxwayOriginStory = () => {
             className="font-sans leading-[1.8] mt-5 max-w-[480px]"
             style={{
               opacity: act1DefOp,
-              color: bodyColor,
-              textShadow: subShadow,
+              color: videoBodyColor,
+              textShadow: videoSubShadow,
               fontSize: isMobile ? '14px' : '15px',
               letterSpacing: '0.01em',
             }}
@@ -293,16 +295,14 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
-          {/* Dark scrim backdrop for readability over bright road video */}
+          {/* Dark scrim backdrop for readability over bright video */}
           <div
             className="absolute rounded-full pointer-events-none"
             style={{
-              width: '500px',
-              height: '400px',
-              background: isDark
-                ? 'radial-gradient(ellipse, hsl(228 55% 6% / 0.6) 0%, transparent 70%)'
-                : 'radial-gradient(ellipse, hsl(40 20% 15% / 0.4) 0%, transparent 70%)',
-              filter: 'blur(40px)',
+              width: '600px',
+              height: '500px',
+              background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
+              filter: 'blur(60px)',
               zIndex: -1,
             }}
           />
@@ -311,7 +311,7 @@ const CruxwayOriginStory = () => {
 
           <motion.p
             className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
-            style={{ opacity: act2LabelOp, textShadow: subShadow }}
+            style={{ opacity: act2LabelOp, textShadow: videoSubShadow }}
           >
             The second word
           </motion.p>
@@ -324,7 +324,7 @@ const CruxwayOriginStory = () => {
               y: act2HeadingY,
               fontSize: headingSize,
               letterSpacing: '0.04em',
-              textShadow,
+              textShadow: videoTextShadow,
               willChange: 'transform',
             }}
           >
@@ -340,8 +340,8 @@ const CruxwayOriginStory = () => {
             className="mt-1"
             style={{
               opacity: act2PhoneticOp,
-              color: mutedColor,
-              textShadow: subShadow,
+              color: videoMutedColor,
+              textShadow: videoSubShadow,
               fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
               fontSize: isMobile ? '12px' : '14px',
             }}
@@ -353,8 +353,8 @@ const CruxwayOriginStory = () => {
             className="font-sans leading-[1.8] mt-5 max-w-[480px]"
             style={{
               opacity: act2DefOp,
-              color: bodyColor,
-              textShadow: subShadow,
+              color: videoBodyColor,
+              textShadow: videoSubShadow,
               fontSize: isMobile ? '14px' : '15px',
               letterSpacing: '0.01em',
             }}
