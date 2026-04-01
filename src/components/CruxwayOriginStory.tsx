@@ -397,17 +397,18 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act3Op }}
         >
-          {/* Frosted scrim for light mode readability */}
+          {/* Tight radial frost for light mode */}
           {!isDark && (
             <div
-              className="absolute rounded-2xl pointer-events-none"
+              className="absolute rounded-full pointer-events-none"
               style={{
-                width: isMobile ? '92%' : '600px',
-                height: isMobile ? '65%' : '360px',
-                background: 'radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 60%, transparent 100%)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
+                width: isMobile ? '260px' : '360px',
+                height: isMobile ? '90px' : '110px',
+                background: 'radial-gradient(ellipse, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.35) 50%, transparent 80%)',
+                backdropFilter: 'blur(16px)',
+                WebkitBackdropFilter: 'blur(16px)',
                 zIndex: -1,
+                transform: 'translateY(-20px)',
               }}
             />
           )}
