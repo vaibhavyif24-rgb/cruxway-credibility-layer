@@ -169,7 +169,7 @@ const TeamCard: React.FC<{
         </div>
 
         {/* ─── Right: Content ─── */}
-        <div className="flex-1 min-w-0 flex flex-col justify-between p-6 md:p-8 lg:py-10 lg:pr-10 lg:pl-6 overflow-hidden">
+        <div className="flex-1 min-w-0 flex flex-col justify-between p-5 md:p-8 lg:py-10 lg:pr-10 lg:pl-6 overflow-hidden">
           {/* Counter */}
           <p
             className="font-sans text-[9px] md:text-[10px] font-semibold uppercase tracking-[0.25em] mb-5"
