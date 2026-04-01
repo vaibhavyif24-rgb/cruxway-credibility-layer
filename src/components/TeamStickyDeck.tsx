@@ -239,7 +239,7 @@ const TeamCard: React.FC<{
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words"
+            className="font-sans text-[11.5px] md:text-[12.5px] leading-[1.7] mb-4 break-words [word-break:break-word]"
             style={{ color: isDark ? 'hsl(0 0% 100% / 0.45)' : 'hsl(var(--foreground) / 0.55)' }}
           >
             {member.summary}
