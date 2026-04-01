@@ -115,25 +115,32 @@ const CruxwayOriginStory = () => {
   const scrollH = isMobile ? '350vh' : '400vh';
 
   /* ─── Overlays: theme-aware ─── */
-  /* Light mode: warm sepia tint so images look distinctly different; dark enough for white text */
+  /* Dark: deep navy cinematic overlays · Light: warm cream/amber — bright editorial feel */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(30 40% 18% / 0.40) 0%, hsl(30 35% 14% / 0.55) 50%, hsl(28 30% 10% / 0.68) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 30% 92% / 0.30) 0%, hsl(35 25% 88% / 0.42) 50%, hsl(35 25% 88% / 0.50) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 30% 16% / 0.52) 0%, hsl(35 28% 12% / 0.64) 50%, hsl(35 25% 8% / 0.78) 100%)';
+    : 'linear-gradient(to bottom, hsl(40 25% 90% / 0.35) 0%, hsl(40 20% 85% / 0.48) 50%, hsl(40 20% 85% / 0.55) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(30 30% 14% / 0.70) 0%, hsl(30 28% 10% / 0.78) 50%, hsl(28 25% 8% / 0.86) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 20% 90% / 0.55) 0%, hsl(35 18% 85% / 0.65) 50%, hsl(35 18% 85% / 0.70) 100%)';
 
-  const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(228, 40%, 10%)';
+  /* Solid bg between transitions */
+  const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 94%)';
 
-  /* ─── Colors for text over images (always light text — overlays are dark in both themes) ─── */
-  const videoBodyColor = 'rgba(255, 255, 255, 0.88)';
-  const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'rgba(255, 255, 255, 0.60)';
-  const videoTextShadow = '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)';
-  const videoSubShadow = '0 1px 12px rgba(0, 0, 0, 0.6)';
-  const wordmarkShadow = '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)';
+  /* ─── Text: dark navy in light mode, white in dark mode ─── */
+  const videoBodyColor = isDark ? 'rgba(255, 255, 255, 0.88)' : 'hsl(228, 45%, 15%)';
+  const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'hsl(228, 30%, 35%)';
+  const videoTextShadow = isDark
+    ? '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)'
+    : '0 1px 8px rgba(255, 255, 255, 0.6), 0 0 2px rgba(255, 255, 255, 0.3)';
+  const videoSubShadow = isDark
+    ? '0 1px 12px rgba(0, 0, 0, 0.6)'
+    : '0 1px 6px rgba(255, 255, 255, 0.5)';
+  const wordmarkShadow = isDark
+    ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
+    : '0 0 60px hsl(43 78% 50% / 0.20), 0 2px 16px rgba(255,255,255,0.3)';
 
   /* heading glow – warmer in light mode */
   const headingGlowBg = isDark
@@ -282,13 +289,15 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
-          {/* Dark scrim backdrop for readability over bright video */}
+          {/* Scrim backdrop for readability */}
           <div
             className="absolute rounded-full pointer-events-none"
             style={{
               width: '600px',
               height: '500px',
-              background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
+              background: isDark
+                ? 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)'
+                : 'radial-gradient(ellipse, hsl(40 25% 96% / 0.70) 0%, transparent 70%)',
               filter: 'blur(60px)',
               zIndex: -1,
             }}
@@ -371,7 +380,7 @@ const CruxwayOriginStory = () => {
               style={{
                 opacity: symbolOp,
                 fontSize: isMobile ? 'clamp(1rem, 4vw, 1.5rem)' : 'clamp(1.2rem, 2.5vw, 2rem)',
-                color: 'rgba(255,255,255,0.3)',
+                color: isDark ? 'rgba(255,255,255,0.3)' : 'hsl(228, 45%, 15%, 0.35)',
                 textShadow: videoSubShadow,
               }}
             >
