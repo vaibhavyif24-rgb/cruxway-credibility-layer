@@ -1,20 +1,37 @@
 
+1. Fix Harin’s last line being clipped on mobile in `src/components/TeamStickyDeck.tsx`.
+- The current cards stay `position: sticky` on mobile (`390px` viewport), which is likely causing the next card to overlap before the first card’s full highlight list is readable.
+- Follow the existing responsive pattern already used in `src/components/PrinciplesSlider.tsx`: disable sticky behavior on mobile.
+- Update the card wrapper so it uses:
+  - `position: 'relative'` on mobile
+  - `position: 'sticky'` only on tablet/desktop
+  - `top` only when sticky is active
+- Keep desktop stacking intact, but let mobile cards flow naturally one after another so Harin’s final bullet is fully visible.
 
-## Plan: Fix Team Card Text Overflow on Mobile
+2. Add a little more breathing room at the bottom of each team card on mobile.
+- Increase the content column’s bottom padding slightly for small screens so the last highlight line does not sit against the card edge.
+- If needed, slightly reduce the mobile sticky spacing logic or bypass it entirely when `isMobile` is true.
 
-### Problem
-On mobile (390px viewport), the team card text content overflows the screen edge. The card's content area doesn't properly constrain text within the available width.
+3. Enlarge Cohoma and Lohum logos in Vaibhav’s deal carousel in `src/pages/Team.tsx`.
+- Update `vaibhavDealLogos` so:
+  - `Lohum` scale goes from `1.0` to `2.0`
+  - `Cohoma Coffee` scale goes from `1.0` to `2.0`
+- Add a small `extraGap` for one or both if needed, since doubling their size may make the marquee feel cramped.
 
-### Root Cause
-The outer deck container uses `px-4` (16px each side), leaving 358px for cards. Inside, the content div uses `p-6` (24px each side). The `flex-1 min-w-0` on the content column should handle overflow, but the summary text at `11.5px` with `break-words` and highlights with `overflow-wrap-anywhere` may still overflow due to the `flex` layout not constraining width properly on mobile when the card has no explicit `max-width` or `overflow-hidden` on the outer wrapper.
+4. Keep the carousel visually balanced in `src/components/TeamStickyDeck.tsx`.
+- The inline marquee already respects `logo.scale` via `transform: scale(...)`.
+- If the larger logos feel vertically cramped on mobile, slightly raise the marquee row height / image max-width for the inline team carousel only, without affecting other marquees site-wide.
 
-### Fix — `src/components/TeamStickyDeck.tsx`
+5. QA to verify after implementation.
+- Check `/india/team` at mobile width (`390px`) to confirm:
+  - Harin’s final highlight line is fully visible
+  - no text is clipped at the bottom of the first card
+  - Vaibhav’s Cohoma and Lohum logos are visibly ~2x larger and still scroll cleanly
+  - desktop sticky deck behavior remains unchanged
 
-1. **Add `overflow-hidden` and `w-full` to the outer card wrapper** (line 105) to ensure the card never exceeds its container width
-2. **Add `overflow-hidden` to the flex row** (line 131) so the content column is properly constrained
-3. **Add `word-break: break-word`** via Tailwind `break-words` to the summary and highlight text spans to ensure long words wrap
-4. **Reduce mobile padding** from `p-6` to `p-5` on mobile for the content area to give text more room
-
-### Files Modified
-- `src/components/TeamStickyDeck.tsx` — add overflow constraints and adjust mobile padding
-
+Technical notes:
+- Files to update:
+  - `src/components/TeamStickyDeck.tsx`
+  - `src/pages/Team.tsx`
+- Root cause is likely layout behavior, not text wrapping: mobile sticky stacking is compressing readable space for taller cards.
+- Best fix is responsive behavior separation: stacked-flow on mobile, sticky deck on larger screens.
