@@ -1,7 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useIsMobile } from '@/hooks/use-mobile';
+import crucibleImg from '@/assets/cruxway-crucible.jpg';
+import wayImg from '@/assets/cruxway-way.jpg';
 
 /* ─── Grain overlay ─── */
 const Grain = () => (
@@ -17,45 +19,27 @@ const Grain = () => (
   />
 );
 
-/* ─── Video layer with IntersectionObserver ─── */
-const VideoLayer = ({
-  src,
-  style,
-  className = '',
-}: {
-  src: string;
-  style?: React.CSSProperties;
-  className?: string;
-}) => {
-  const ref = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) el.play().catch(() => {});
-        else el.pause();
-      },
-      { rootMargin: '500px' }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  return (
-    <video
-      ref={ref}
-      className={`absolute inset-0 h-full w-full object-cover ${className}`}
+/* ─── Image background with Ken Burns zoom + optional drift ─── */
+const ImageBackground = ({ src, variant = 'default' }: { src: string; variant?: 'default' | 'drift' }) => (
+  <motion.div
+    className="absolute inset-0"
+    animate={
+      variant === 'drift'
+        ? { scale: [1, 1.12, 1], x: [0, -15, 0] }
+        : { scale: [1, 1.12, 1] }
+    }
+    transition={{ duration: 30, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
+    style={{ willChange: 'transform' }}
+  >
+    <img
       src={src}
-      muted
-      loop
-      playsInline
-      preload="none"
-      style={{ willChange: 'transform', ...style }}
+      alt=""
+      loading="eager"
+      className="absolute inset-0 h-full w-full object-cover"
+      style={{ willChange: 'transform' }}
     />
-  );
-};
+  </motion.div>
+);
 
 /* ─── Corner geometric SVG for Acts 3-4 ─── */
 const CornerBrackets = () => {
@@ -114,10 +98,6 @@ const ShimmerLine = () => (
   />
 );
 
-/* ─── Pexels video sources ─── */
-const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/3170469/3170469-hd_1920_1080_25fps.mp4';
-const WAY_VIDEO = 'https://videos.pexels.com/video-files/3571264/3571264-hd_1920_1080_30fps.mp4';
-
 const CruxwayOriginStory = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -131,35 +111,19 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Separate overlays: Crucible (lighter) vs Way (heavier, dark in both themes) ─── */
-  const crucibleOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.35) 0%, hsl(228 55% 8% / 0.50) 50%, hsl(228 55% 8% / 0.70) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 96% / 0.25) 0%, hsl(40 25% 96% / 0.42) 50%, hsl(40 25% 96% / 0.62) 100%)';
+  /* ─── Overlays: always dark since images are the background ─── */
+  const crucibleOverlay = 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)';
+  const wayOverlay = 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)';
+  const crucibleReturnOverlay = 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)';
 
-  const wayOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.65) 0%, hsl(228 55% 6% / 0.75) 50%, hsl(228 55% 6% / 0.85) 100%)'
-    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.55) 0%, hsl(220 30% 8% / 0.68) 50%, hsl(220 30% 6% / 0.78) 100%)';
+  const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(220, 20%, 8%)';
 
-  const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
-
-  /* ─── Returning Crucible overlay (heavier for text readability) ─── */
-  const crucibleReturnOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.78) 0%, hsl(228 55% 8% / 0.84) 50%, hsl(228 55% 8% / 0.90) 100%)'
-    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.70) 0%, hsl(220 30% 10% / 0.78) 50%, hsl(220 30% 10% / 0.86) 100%)';
-
-  /* ─── Colors for text over video (always light, both themes) ─── */
+  /* ─── Colors for text over images (always light, both themes) ─── */
   const videoBodyColor = 'rgba(255, 255, 255, 0.82)';
   const videoMutedColor = 'rgba(255, 255, 255, 0.55)';
   const videoTextShadow = '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)';
   const videoSubShadow = '0 1px 12px rgba(0, 0, 0, 0.6)';
-
-  /* ─── Theme-aware colors for solid-background acts (3 & 4) ─── */
-  const bodyColor = isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.55)';
-  const mutedColor = isDark ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.4)';
-  const symbolColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.2)';
-  const wordmarkShadow = isDark
-    ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
-    : '0 4px 24px rgba(0,0,0,0.12)';
+  const wordmarkShadow = '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)';
 
   /* heading glow */
   const headingGlowBg = isDark
@@ -167,7 +131,7 @@ const CruxwayOriginStory = () => {
     : 'radial-gradient(circle, hsl(43 78% 50% / 0.06), transparent 70%)';
 
   /* ─── ACT 1: Crucible (0.00 → 0.28) ─── */
-  const act1VideoOp = useTransform(scrollYProgress, [0, 0.20, 0.28], [1, 1, 0]);
+  const act1BgOp = useTransform(scrollYProgress, [0, 0.20, 0.28], [1, 1, 0]);
   const act1LabelOp = useTransform(scrollYProgress, [0.02, 0.05, 0.22, 0.28], [0, 1, 1, 0]);
   const act1HeadingOp = useTransform(scrollYProgress, [0.03, 0.08, 0.22, 0.28], [0, 1, 1, 0]);
   const act1HeadingScale = useTransform(scrollYProgress, [0.03, 0.08], [0.92, 1]);
@@ -177,7 +141,7 @@ const CruxwayOriginStory = () => {
   const act1DefOp = useTransform(scrollYProgress, [0.07, 0.12, 0.22, 0.28], [0, 1, 1, 0]);
 
   /* ─── ACT 2: The Way (0.22 → 0.52) ─── */
-  const act2VideoOp = useTransform(scrollYProgress, [0.22, 0.28, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2BgOp = useTransform(scrollYProgress, [0.22, 0.28, 0.46, 0.52], [0, 1, 1, 0]);
   const act2LabelOp = useTransform(scrollYProgress, [0.32, 0.36, 0.46, 0.52], [0, 1, 1, 0]);
   const act2HeadingOp = useTransform(scrollYProgress, [0.33, 0.38, 0.46, 0.52], [0, 1, 1, 0]);
   const act2HeadingScale = useTransform(scrollYProgress, [0.33, 0.38], [0.92, 1]);
@@ -210,27 +174,27 @@ const CruxwayOriginStory = () => {
     <div ref={containerRef} className="relative" style={{ height: scrollH }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: solidBg }}>
 
-        {/* ─── Video: Crucible ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: act1VideoOp, zIndex: 1 }}>
-          <VideoLayer src={CRUCIBLE_VIDEO} />
+        {/* ─── Background: Crucible ─── */}
+        <motion.div className="absolute inset-0" style={{ opacity: act1BgOp, zIndex: 1 }}>
+          <ImageBackground src={crucibleImg} />
           <div className="absolute inset-0" style={{ background: crucibleOverlay }} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Video: The Way ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: act2VideoOp, zIndex: 2 }}>
-          <VideoLayer src={WAY_VIDEO} />
+        {/* ─── Background: The Way ─── */}
+        <motion.div className="absolute inset-0" style={{ opacity: act2BgOp, zIndex: 2 }}>
+          <ImageBackground src={wayImg} variant="drift" />
           <div className="absolute inset-0" style={{ background: wayOverlay }} />
           <Grain />
           <GoldParticles />
           <ShimmerLine />
         </motion.div>
 
-        {/* ─── Video: Crucible Return (Acts 3-4) ─── */}
+        {/* ─── Background: Crucible Return (Acts 3-4) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
-          <VideoLayer src={CRUCIBLE_VIDEO} />
+          <ImageBackground src={crucibleImg} />
           <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
           <Grain />
           <GoldParticles />
@@ -250,7 +214,7 @@ const CruxwayOriginStory = () => {
             className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
             style={{ opacity: act1LabelOp, textShadow: videoSubShadow }}
           >
-            What's in a name
+            The First Word
           </motion.p>
 
           <motion.h2
