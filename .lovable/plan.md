@@ -1,71 +1,69 @@
 
 
-## Plan: Fix Origin Story — Images, Hindi Text, Heading, Text Visibility
+## Plan: Remove Frosted Boxes, Add Text Glow Effects, Fix Transitions
 
-### Problems to Fix
-1. **Text invisible in light mode** — frosted scrims not providing enough contrast; overlays too weak
-2. **Hindi meaning of "Crucible" missing** — "Way" already has Hindi (`मार्ग`) but it shows on both India and US pages
-3. **Images don't suit light mode** — current crucible image is too dark/busy for light overlays
-4. **Origin Story bridge heading** looks unprofessional and poorly formatted
+### Problems
+1. **Visible frosted white rectangles** over photos look amateurish — need invisible text enhancement instead
+2. **Text still getting lost** in light mode against busy backgrounds
+3. **Transitions between acts not smooth** — some text disappears too early or appears too late
+4. **Merge section (Acts 3-4)** needs more professional imagery — converging roads/waves instead of static image
 
----
+### Approach
 
-### Changes
-
-#### 1. Generate two new images via AI — script to `/tmp`
-
-Generate two cinematic images optimized for both themes (lighter base tones, golden warmth):
-- **Crucible image**: Molten gold being poured into a dark stone crucible against a gradient background (dark at edges, golden warmth in center) — works with both dark navy and cream overlays
-- **Merge/CRU×WAY image**: Two golden light streams converging into a single beam against a dark-to-warm gradient — replaces reusing the crucible image for Acts 3-4
-
-Save to `src/assets/cruxway-crucible-v2.jpg` and `src/assets/cruxway-merge-v2.jpg`.
-
-#### 2. Fix text visibility — `CruxwayOriginStory.tsx`
-
-**Light mode**: Replace the current weak frosted scrims with stronger ones:
-- Increase backdrop blur from `12px` → `20px`
-- Strengthen radial gradient center from `rgba(255,255,255,0.55)` → `rgba(255,255,255,0.72)`
-- Add a subtle dark text shadow in light mode: `0 1px 3px rgba(0,0,0,0.12)` instead of the white halo (which does nothing against white scrims)
-- Increase light-mode overlay opacity further (crucible `0.62`, way `0.65`, merge `0.78`)
-
-**Dark mode**: Add dark scrim behind Act 1 (currently only Act 2 has one) for consistency.
-
-#### 3. Add region-awareness for Hindi text — `CruxwayOriginStory.tsx`
-
-- Import `useRegion` from `@/contexts/RegionContext`
-- Add `const { region } = useRegion(); const isIndia = region === 'india';`
-- **Act 1 (Crucible)**: Add Hindi meaning only for India: `Hindi: कुठाली (kuṭhālī)` after the phonetic line
-- **Act 2 (Way)**: Wrap the existing `· Hindi: मार्ग (mārg)` in a conditional: only show when `isIndia`
-
-#### 4. Redesign Origin Story bridge heading — `GuidingPrinciples.tsx`
-
-Replace the current minimal strip with a more polished, centered heading block:
-
-```
-┌─────────────────────────────────────────────┐
-│          ── THE ORIGIN STORY ──             │
-│  Every name carries weight.                 │
-│  Ours was forged with intent.               │
-└─────────────────────────────────────────────┘
-```
-
-- Centered layout with gold horizontal rules flanking the label
-- Subtitle on its own line below, slightly larger font (`13px` → `14px`)
-- Proper theme-aware text colors (not `white/40` which disappears in light mode)
-- Compact padding: `py-6 md:py-8` (professional spacing without waste)
-- Background matches the `solidBg` of the origin story for seamless transition
-
-#### 5. Update image imports — `CruxwayOriginStory.tsx`
-
-- Replace `crucibleImg` import with new `cruxway-crucible-v2.jpg`
-- Add new `mergeImg` import for `cruxway-merge-v2.jpg`
-- Use `mergeImg` for the Acts 3-4 background instead of reusing `crucibleImg`
+Replace the `FrostedScrim` component entirely with an invisible **text glow aura** — a large, soft radial glow centered behind the text that blends seamlessly with the image overlay. No visible edges, no rectangles.
 
 ---
+
+### Changes to `CruxwayOriginStory.tsx`
+
+**1. Remove FrostedScrim component entirely** — delete lines 106-135 and all 4 usages (lines 264, 328, 392, 462)
+
+**2. Replace with TextAura component** — invisible radial glow behind text:
+```tsx
+const TextAura = ({ isDark }: { isDark: boolean }) => (
+  <div
+    className="absolute pointer-events-none"
+    style={{
+      width: '700px',
+      height: '500px',
+      background: isDark
+        ? 'radial-gradient(ellipse, hsl(220 30% 6% / 0.7) 0%, hsl(220 30% 6% / 0.3) 40%, transparent 70%)'
+        : 'radial-gradient(ellipse, hsl(40 30% 94% / 0.85) 0%, hsl(40 25% 92% / 0.5) 35%, transparent 65%)',
+      filter: isDark ? 'blur(40px)' : 'blur(50px)',
+      zIndex: -1,
+    }}
+  />
+);
+```
+This creates an invisible fog/haze behind text — no edges, no box, just atmospheric contrast. The heavy blur makes it blend into the image naturally.
+
+**3. Strengthen light-mode overlays further** to reduce image busyness:
+- Crucible light: bottom opacity → `0.68` (was `0.62`)
+- Way light: bottom → `0.72` (was `0.65`)
+- Merge light: bottom → `0.82` (was `0.78`)
+
+**4. Fix light-mode text shadows** — use subtle dark shadows instead of white halos:
+- `videoTextShadow` light: `'0 1px 3px rgba(0,0,0,0.15), 0 0 30px hsl(40 30% 94% / 0.8)'`
+- `videoSubShadow` light: `'0 1px 2px rgba(0,0,0,0.10), 0 0 20px hsl(40 30% 94% / 0.6)'`
+
+**5. Generate new merge image** — use AI image generation to create a cinematic image of converging golden roads/paths merging into one, with a dark-to-warm gradient. This replaces the current `cruxway-merge-v2.jpg` and works for both themes.
+
+**6. Fix transition timing gaps** — currently Act 1 fades out at `0.28` and Act 2 background fades in at `0.22-0.28`, but Act 2 *text* doesn't appear until `0.32-0.36`. This creates a 4-8% dead zone where the user sees an image with no text. Fix:
+- Act 2 label: `[0.28, 0.32]` → start right as Act 1 text fades
+- Act 2 heading: `[0.29, 0.34]` → stagger after label
+- Act 2 phonetic: `[0.31, 0.35]`
+- Act 2 definition: `[0.33, 0.38]`
+- Similarly tighten Act 3 and Act 4 entry points
+
+**7. Redesign Origin Story bridge heading** in `GuidingPrinciples.tsx`:
+- Increase the visual weight: use serif font for "The Origin Story" at `text-[18px] md:text-[22px]`
+- Add a subtle gold gradient underline below the heading
+- Keep subtitle but make it `text-[12px]` muted
+- Reduce padding to `py-6 md:py-8`
+- Ensure colors work in both themes (dark navy text in light, white in dark)
 
 ### Files Modified
-- `src/assets/cruxway-crucible-v2.jpg` — new AI-generated image (create)
-- `src/assets/cruxway-merge-v2.jpg` — new AI-generated image (create)
-- `src/components/CruxwayOriginStory.tsx` — new images, stronger scrims, region-aware Hindi, dark scrims
-- `src/pages/GuidingPrinciples.tsx` — redesigned bridge heading
+- `src/components/CruxwayOriginStory.tsx` — remove FrostedScrim, add TextAura, fix overlays/shadows/timing
+- `src/pages/GuidingPrinciples.tsx` — redesign bridge heading
+- `src/assets/cruxway-merge-v3.jpg` — new AI-generated converging paths image
 
