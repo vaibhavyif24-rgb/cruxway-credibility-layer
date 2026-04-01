@@ -9,7 +9,7 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import GlassCard from '@/components/GlassCard';
 import WaveBackground from '@/components/WaveBackground';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
