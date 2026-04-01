@@ -134,14 +134,9 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Separate overlays: Crucible (lighter) vs Way (heavier, dark in both themes) ─── */
-  const crucibleOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.35) 0%, hsl(228 55% 8% / 0.50) 50%, hsl(228 55% 8% / 0.70) 100%)'
-    : 'linear-gradient(to bottom, hsl(40 25% 96% / 0.25) 0%, hsl(40 25% 96% / 0.42) 50%, hsl(40 25% 96% / 0.62) 100%)';
-
-  const wayOverlay = isDark
-    ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.65) 0%, hsl(228 55% 6% / 0.75) 50%, hsl(228 55% 6% / 0.85) 100%)'
-    : 'linear-gradient(to bottom, hsl(220 30% 10% / 0.55) 0%, hsl(220 30% 8% / 0.68) 50%, hsl(220 30% 6% / 0.78) 100%)';
+  /* ─── Overlays: always dark in both themes (text is always white over images/video) ─── */
+  const crucibleOverlay = 'linear-gradient(to bottom, hsl(228 55% 6% / 0.30) 0%, hsl(228 55% 6% / 0.50) 50%, hsl(228 55% 6% / 0.72) 100%)';
+  const wayOverlay = 'linear-gradient(to bottom, hsl(220 20% 8% / 0.58) 0%, hsl(220 20% 6% / 0.70) 50%, hsl(220 20% 4% / 0.82) 100%)';
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(40, 25%, 96%)';
 
