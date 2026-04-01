@@ -422,7 +422,7 @@ const CruxwayOriginStory = () => {
 
           <motion.p
             className="font-sans text-[10px] md:text-[12px] uppercase tracking-[0.22em] mt-5"
-            style={{ opacity: taglineOp, color: mutedColor }}
+            style={{ opacity: taglineOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
             The crucible of conviction · The discipline of the path
           </motion.p>
@@ -431,7 +431,8 @@ const CruxwayOriginStory = () => {
             className="font-sans leading-[1.75] mt-4 max-w-[520px]"
             style={{
               opacity: act3ExplainOp,
-              color: bodyColor,
+              color: videoBodyColor,
+              textShadow: videoSubShadow,
               fontSize: isMobile ? '13px' : '14px',
               letterSpacing: '0.01em',
             }}
