@@ -289,13 +289,15 @@ const CruxwayOriginStory = () => {
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
           style={{ opacity: act2LabelOp }}
         >
-          {/* Dark scrim backdrop for readability over bright video */}
+          {/* Scrim backdrop for readability */}
           <div
             className="absolute rounded-full pointer-events-none"
             style={{
               width: '600px',
               height: '500px',
-              background: 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)',
+              background: isDark
+                ? 'radial-gradient(ellipse, hsl(220 30% 6% / 0.65) 0%, transparent 70%)'
+                : 'radial-gradient(ellipse, hsl(40 25% 96% / 0.70) 0%, transparent 70%)',
               filter: 'blur(60px)',
               zIndex: -1,
             }}
