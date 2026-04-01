@@ -172,13 +172,13 @@ const CruxwayOriginStory = () => {
 
   /* ─── ACT 1: Crucible (0.00 → 0.28) ─── */
   const act1BgOp = useTransform(scrollYProgress, [0, 0.20, 0.28], [1, 1, 0]);
-  const act1LabelOp = useTransform(scrollYProgress, [0.02, 0.05, 0.22, 0.28], [0, 1, 1, 0]);
-  const act1HeadingOp = useTransform(scrollYProgress, [0.03, 0.08, 0.22, 0.28], [0, 1, 1, 0]);
-  const act1HeadingScale = useTransform(scrollYProgress, [0.03, 0.08], [0.92, 1]);
-  const act1HeadingY = useTransform(scrollYProgress, [0.03, 0.08], [20, 0]);
-  const act1RuleW = useTransform(scrollYProgress, [0.05, 0.10], [0, 48]);
-  const act1PhoneticOp = useTransform(scrollYProgress, [0.05, 0.09, 0.22, 0.28], [0, 1, 1, 0]);
-  const act1DefOp = useTransform(scrollYProgress, [0.07, 0.12, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1LabelOp = useTransform(scrollYProgress, [0, 0.01, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1HeadingOp = useTransform(scrollYProgress, [0, 0.02, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1HeadingScale = useTransform(scrollYProgress, [0, 0.01], [1, 1]);
+  const act1HeadingY = useTransform(scrollYProgress, [0, 0.01], [0, 0]);
+  const act1RuleW = useTransform(scrollYProgress, [0.01, 0.05], [0, 48]);
+  const act1PhoneticOp = useTransform(scrollYProgress, [0.01, 0.03, 0.22, 0.28], [0, 1, 1, 0]);
+  const act1DefOp = useTransform(scrollYProgress, [0.02, 0.05, 0.22, 0.28], [0, 1, 1, 0]);
 
   /* ─── ACT 2: The Way (0.22 → 0.52) — tightened entry to eliminate dead zone ─── */
   const act2BgOp = useTransform(scrollYProgress, [0.22, 0.28, 0.46, 0.52], [0, 1, 1, 0]);
