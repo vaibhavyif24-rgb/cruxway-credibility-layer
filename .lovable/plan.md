@@ -1,46 +1,24 @@
 
 
-## Plan: Fix Identity Heading, Playbook Auto-Rotation, CTA Button, Nav Consistency
+## Plan: Intersection-Triggered Auto-Rotation with Progress Bar
 
-### 1. Fix India Principles Page Heading — `src/pages/GuidingPrinciples.tsx`
+### What changes
 
-**Problem**: The SectionLabel shows "Our Identity, India" for the India region.
+**File: `src/pages/OurPlaybook.tsx` — `StepNavigator` component**
 
-**Fix**: Change to just `'Our Identity'` for both regions.
+1. **Add `useInView` from framer-motion** to detect when the step navigator enters the viewport. The 10-second auto-rotation timer only starts when the section is visible, and pauses when it scrolls out of view.
 
-### 2. Add Auto-Rotation to Playbook Step Navigator — `src/pages/OurPlaybook.tsx`
+2. **Add an animated progress bar** beneath each active step button that fills over 10 seconds, giving a polished visual indicator of time remaining before the next step. When the user clicks a step manually, the progress resets.
 
-**Problem**: On mobile, only step numbers (01, 02, etc.) are shown without titles. The steps should auto-advance every 10 seconds.
+3. **Refined transitions**: Keep the existing crossfade but add a subtle scale effect (0.98 → 1) on enter for a more cinematic feel, and use a smoother easing curve.
 
-**Fix**:
-- Add a `useEffect` with a 10-second `setInterval` that increments `active` and wraps around
-- Always show the step title text on mobile (remove `hidden sm:inline`)
-- Reset the timer when user manually clicks a step
+### Technical details
 
-### 3. Remove Inner Shimmer Effect from CTA Buttons — All pages
+- Use `useInView` with `{ amount: 0.3 }` on the container `ref` — timer runs only when `isInView` is true.
+- `useEffect` depends on `[isInView, active]` — clears interval when out of view, restarts on re-entry.
+- Progress bar: a `motion.div` inside each active button with `animate={{ scaleX: 1 }}` over 10s linear, reset via `key={active}`. Thin gold line (2px) at the bottom of the active button.
+- Content panel transition updated: `initial={{ opacity: 0, y: 12, scale: 0.98 }}`, `animate={{ opacity: 1, y: 0, scale: 1 }}`, with spring-like ease `[0.16, 1, 0.3, 1]` at 0.45s duration.
 
-**Problem**: The "Get in Touch" button has an inner white gradient shimmer sweep that creates a distracting visual artifact on hover.
-
-**Fix**: Remove the inner `<span>` shimmer overlay from the CTA button across all 5 pages:
-- `OurPlaybook.tsx`, `GuidingPrinciples.tsx`, `Home.tsx`, `OurFocus.tsx`, `InvestmentCriteria.tsx`
-
-The button keeps `btn-premium-glow`, `hover:bg-gold hover:text-white`, and motion hover/tap effects.
-
-### 4. Fix Footer Nav Labels — `src/components/SiteFooter.tsx`
-
-**Problem**: Footer says "Principles", "Focus", "Playbook" instead of matching header labels.
-
-**Fix**: Update to `'Our Identity'`, `'Our Focus'`, `'Our Playbook'`.
-
-### 5. Verify All Route Links
-
-All routes verified as correct. Header, footer, and CTA links all resolve properly. No broken links.
-
-### Files Modified
-- `src/pages/GuidingPrinciples.tsx`
+### Files modified
 - `src/pages/OurPlaybook.tsx`
-- `src/pages/Home.tsx`
-- `src/pages/OurFocus.tsx`
-- `src/pages/InvestmentCriteria.tsx`
-- `src/components/SiteFooter.tsx`
 
