@@ -212,6 +212,7 @@ const CruxwayOriginStory = () => {
         {/* ─── Background: Crucible Return (Acts 3-4) ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
           <ImageBackground src={crucibleImg} />
+          <MergeEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
           <Grain />
           <GoldParticles />
