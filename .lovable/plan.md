@@ -1,57 +1,46 @@
 
 
-## Plan: Add Cinematic Animated Effects + Theme-Aware Styling to All Three Origin Story Backgrounds
+## Plan: Theme-Aware Origin Story — Distinct Light Mode Treatment
 
-**File:** `src/components/CruxwayOriginStory.tsx`
+### Problem
+Currently, the Origin Story section looks nearly identical in both themes. The `solidBg` is dark navy in both modes (`hsl(228, 40%, 10%)`), overlays are heavy dark gradients in both, and text is always white. Light mode needs a fundamentally different visual character.
 
 ### Approach
-
-Keep the reliable local images as the base layer. Add dramatic, highly visible animated effects on top that create a genuine "living video" feel. Make the overlays and effects theme-aware so light mode and dark mode each have a distinct cinematic character.
+Make light mode feel warm, bright, and editorial — like a luxury print magazine — while dark mode stays cinematic and deep.
 
 ---
 
-### 1. Crucible Section: Forge Fire Effects
+### Changes to `CruxwayOriginStory.tsx`
 
-Three animated layers that together simulate a living forge:
+**1. Solid background (between image transitions)**
+- Dark: `hsl(228, 55%, 8%)` (current deep navy)
+- Light: `hsl(40, 25%, 94%)` (warm cream) — immediately visible difference
 
-- **Rising Embers** (12 particles on desktop, 6 on mobile): Gold/orange glowing dots (3-6px) that rise from the bottom with horizontal sway. Each has `box-shadow` for a soft glow halo. Staggered durations (5-10s) and delays create organic randomness.
-- **Heat Pulse**: A large radial gradient (amber/orange, centered at bottom) that pulses in scale and opacity on a 6s cycle, simulating the forge breathing with molten heat.
-- **Smoke Drift**: Two wide, blurred gradient bands that slowly translate horizontally across the scene (25-35s), creating a haze/smoke effect over the image.
+**2. Image overlays — lighter in light mode**
+- Dark mode: keep current deep navy overlays (0.25–0.88 opacity)
+- Light mode: use warm cream/amber overlays at lower opacity so images show through brighter:
+  - Crucible: `hsl(35 30% 92% / 0.30)` → `hsl(35 25% 88% / 0.50)` (warm wash)
+  - Way: `hsl(40 25% 90% / 0.35)` → `hsl(40 20% 85% / 0.55)` (soft golden haze)
+  - CRU×WAY: `hsl(35 20% 90% / 0.55)` → `hsl(35 18% 85% / 0.70)` (heavier for text contrast)
 
-### 2. Way Section: Desert Journey Effects
+**3. Text colors — dark text in light mode**
+- Light mode: `videoBodyColor` = `hsl(228 45% 15%)` (dark navy), `videoMutedColor` = `hsl(228 30% 35%)`
+- Light mode text shadows switch to light halos: `0 1px 8px rgba(255,255,255,0.6)` for readability against bright images
+- Gold headings stay gold in both modes (already high contrast)
+- The `×` symbol: dark navy in light mode instead of white
 
-Three layers simulating moving light through a landscape:
+**4. Scrim backdrop (Act 2)**
+- Light mode: use a soft white radial blur behind text instead of dark scrim
 
-- **Sweeping Light Rays**: 3 diagonal gradient streaks (gold/white at 0.04-0.08 opacity) that slowly pan across the scene (18-28s), simulating sunlight shifting through atmospheric haze.
-- **Dust Motes**: 8 tiny warm particles (1-3px) with gentle randomized float paths (both x and y drift), very slow cycles (10-18s). Creates depth and atmosphere.
-- **Horizon Pulse**: A horizontal warm gradient band near the center that shifts in intensity on a 10s cycle, simulating distant heat shimmer on the road.
+**5. Effect components** — already theme-aware from prior work, no changes needed
 
-### 3. CRU x WAY Section: Convergence Energy
+**6. Bridge section in `GuidingPrinciples.tsx`**
+- Light mode gradient transitions from hero cream to warm cream (matching new `solidBg`) instead of dark navy
 
-Three layers creating a sense of two forces merging:
+### Files Modified
+- `src/components/CruxwayOriginStory.tsx` — overlay colors, solidBg, text colors, scrim
+- `src/pages/GuidingPrinciples.tsx` — bridge gradient for light mode
 
-- **Convergence Sparks**: 8 gold particles that drift inward from the edges toward center on long arcing paths (12-18s cycles). Creates the visual metaphor of crucible + way merging.
-- **Central Radial Pulse**: A large radial gradient that expands and contracts from center (12s cycle), creating a breathing energy behind the equation text.
-- **Energy Lines**: Two horizontal gradient lines that slowly sweep inward from opposite edges and fade at center (20s cycle), reinforcing the convergence motif.
-
-### 4. Theme-Aware Overlays (Light vs Dark)
-
-Currently, overlays are identical in both themes. Update to be theme-responsive:
-
-**Dark mode**: Current deep navy overlays stay. Effects use warm gold/amber tones for particles and glows, creating a rich, cinematic darkness.
-
-**Light mode**: 
-- Crucible overlay uses a warm sepia-tinted gradient (lighter opacity ~0.35-0.55) so more of the forge image shows through
-- Way overlay uses a soft cream/warm white gradient (lighter opacity ~0.40-0.60) for an ethereal, sun-washed feel  
-- CRU x WAY overlay uses a medium warm gradient for balanced readability
-- Effect particles shift to deeper gold/bronze tones for visibility against lighter backgrounds
-- Text colors adjust: use dark navy text (`hsl(228 55% 12%)`) with light text-shadow in light mode vs white text in dark mode
-
-### 5. Implementation
-
-Create three new internal components: `CrucibleEffects`, `WayEffects`, `MergeEffects`. Each accepts `isMobile` to reduce particle count. Insert them into the respective background layers between the image and the overlay div.
-
-Update overlay gradients and text colors to use `isDark` conditionals throughout all four acts.
-
-**Estimated additions**: ~180 lines of new effect components + ~30 lines of theme-conditional updates to existing overlays and text colors.
+### Result
+Light mode: bright, warm images with dark legible text. Dark mode: unchanged cinematic feel. Clear visual distinction when toggling themes.
 
