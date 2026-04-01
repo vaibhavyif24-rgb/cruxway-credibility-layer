@@ -106,6 +106,8 @@ const CruxwayOriginStory = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   const isMobile = useIsMobile();
+  const { region } = useRegion();
+  const isIndia = region === 'india';
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
