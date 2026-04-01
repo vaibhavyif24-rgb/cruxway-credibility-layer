@@ -11,7 +11,7 @@ import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/5547729/5547729-hd_1920_1080_25fps.mp4';
+const CRUCIBLE_VIDEO = 'https://videos.pexels.com/video-files/3170469/3170469-uhd_2560_1440_25fps.mp4';
 
 const lineStyle = {
   stroke: 'hsl(43 70% 50%)',
