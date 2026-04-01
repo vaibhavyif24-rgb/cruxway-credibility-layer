@@ -435,7 +435,7 @@ const CruxwayOriginStory = () => {
               opacity: act3ExplainOp,
               color: videoBodyColor,
               textShadow: videoSubShadow,
-              fontSize: isMobile ? '13px' : '14px',
+              fontSize: isMobile ? '14px' : '15px',
               letterSpacing: '0.01em',
             }}
           >
