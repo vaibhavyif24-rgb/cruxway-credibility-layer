@@ -202,6 +202,7 @@ const CruxwayOriginStory = () => {
         {/* ─── Background: The Way ─── */}
         <motion.div className="absolute inset-0" style={{ opacity: act2BgOp, zIndex: 2 }}>
           <ImageBackground src={wayImg} variant="drift" />
+          <WayEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: wayOverlay }} />
           <Grain />
           <GoldParticles />
