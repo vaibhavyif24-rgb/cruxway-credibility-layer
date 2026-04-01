@@ -114,8 +114,8 @@ const TextAura = ({ isDark, size = 'default' }: { isDark: boolean; size?: 'defau
         width: w,
         height: h,
         background: isDark
-          ? 'radial-gradient(ellipse, hsl(220 30% 6% / 0.75) 0%, hsl(220 30% 6% / 0.35) 40%, transparent 70%)'
-          : 'radial-gradient(ellipse, hsl(40 30% 94% / 0.88) 0%, hsl(40 25% 92% / 0.55) 35%, transparent 65%)',
+          ? 'radial-gradient(ellipse, hsl(220 30% 6% / 0.85) 0%, hsl(220 30% 6% / 0.45) 40%, transparent 70%)'
+          : 'radial-gradient(ellipse, hsl(40 30% 94% / 0.95) 0%, hsl(40 25% 92% / 0.70) 35%, transparent 65%)',
         filter: isDark ? 'blur(40px)' : 'blur(50px)',
         zIndex: -1,
       }}
