@@ -29,28 +29,33 @@ const valueCreationItems = [
   { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
 ];
 
+const STEP_DURATION = 10000;
+
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
   const [active, setActive] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { amount: 0.3 });
 
   const handleClick = useCallback((i: number) => {
     setActive(i);
   }, []);
 
   useEffect(() => {
+    if (!isInView) return;
     const interval = setInterval(() => {
       setActive(prev => (prev + 1) % steps.length);
-    }, 10000);
+    }, STEP_DURATION);
     return () => clearInterval(interval);
-  }, [active, steps.length]);
+  }, [isInView, active, steps.length]);
 
   return (
-    <div>
+    <div ref={containerRef}>
       <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
             onClick={() => handleClick(i)}
-            className={`min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border
+            className={`relative min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden
               ${active === i
                 ? 'bg-gold/20 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
                 : isDark
@@ -59,8 +64,20 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
               }
             `}
           >
-            <span className="text-gold/85 mr-1.5">{step.num}</span>
-            <span>{step.title}</span>
+            <span className="relative z-10">
+              <span className="text-gold/85 mr-1.5">{step.num}</span>
+              <span>{step.title}</span>
+            </span>
+            {active === i && isInView && (
+              <motion.div
+                key={`progress-${active}`}
+                className="absolute bottom-0 left-0 h-[2px] bg-gold/50 origin-left"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: STEP_DURATION / 1000, ease: 'linear' }}
+                style={{ width: '100%' }}
+              />
+            )}
           </button>
         ))}
       </div>
@@ -69,10 +86,10 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -8, scale: 0.98 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             className={`rounded-sm border p-7 md:p-10 ${
               isDark
                 ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
