@@ -114,30 +114,31 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Overlays: theme-aware (dark tint in both modes for readability over images) ─── */
+  /* ─── Overlays: theme-aware ─── */
+  /* Light mode: warm sepia tint so images look distinctly different; dark enough for white text */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(228 40% 12% / 0.35) 0%, hsl(228 40% 10% / 0.50) 50%, hsl(228 40% 8% / 0.65) 100%)';
+    : 'linear-gradient(to bottom, hsl(30 40% 18% / 0.40) 0%, hsl(30 35% 14% / 0.55) 50%, hsl(28 30% 10% / 0.68) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(220 25% 12% / 0.50) 0%, hsl(220 25% 10% / 0.62) 50%, hsl(220 25% 8% / 0.75) 100%)';
+    : 'linear-gradient(to bottom, hsl(35 30% 16% / 0.52) 0%, hsl(35 28% 12% / 0.64) 50%, hsl(35 25% 8% / 0.78) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(228 40% 10% / 0.68) 0%, hsl(228 40% 8% / 0.76) 50%, hsl(228 40% 6% / 0.84) 100%)';
+    : 'linear-gradient(to bottom, hsl(30 30% 14% / 0.70) 0%, hsl(30 28% 10% / 0.78) 50%, hsl(28 25% 8% / 0.86) 100%)';
 
   const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(228, 40%, 10%)';
 
-  /* ─── Colors for text over images (always light text — images stay dark in both themes) ─── */
-  const videoBodyColor = 'rgba(255, 255, 255, 0.85)';
-  const videoMutedColor = 'rgba(255, 255, 255, 0.55)';
+  /* ─── Colors for text over images (always light text — overlays are dark in both themes) ─── */
+  const videoBodyColor = 'rgba(255, 255, 255, 0.88)';
+  const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'rgba(255, 255, 255, 0.60)';
   const videoTextShadow = '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)';
   const videoSubShadow = '0 1px 12px rgba(0, 0, 0, 0.6)';
   const wordmarkShadow = '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)';
 
-  /* heading glow */
+  /* heading glow – warmer in light mode */
   const headingGlowBg = isDark
     ? 'radial-gradient(circle, hsl(43 78% 50% / 0.04), transparent 70%)'
-    : 'radial-gradient(circle, hsl(43 78% 50% / 0.06), transparent 70%)';
+    : 'radial-gradient(circle, hsl(35 60% 50% / 0.08), transparent 70%)';
 
   /* ─── ACT 1: Crucible (0.00 → 0.28) ─── */
   const act1BgOp = useTransform(scrollYProgress, [0, 0.20, 0.28], [1, 1, 0]);
