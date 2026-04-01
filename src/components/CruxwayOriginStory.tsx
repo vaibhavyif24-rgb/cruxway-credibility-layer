@@ -114,31 +114,25 @@ const CruxwayOriginStory = () => {
 
   const scrollH = isMobile ? '350vh' : '400vh';
 
-  /* ─── Overlays: theme-aware ─── */
+  /* ─── Overlays: theme-aware (dark tint in both modes for readability over images) ─── */
   const crucibleOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.25) 0%, hsl(228 55% 6% / 0.42) 50%, hsl(228 55% 6% / 0.62) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 30% 90% / 0.30) 0%, hsl(35 30% 85% / 0.45) 50%, hsl(35 25% 80% / 0.55) 100%)';
+    : 'linear-gradient(to bottom, hsl(228 40% 12% / 0.35) 0%, hsl(228 40% 10% / 0.50) 50%, hsl(228 40% 8% / 0.65) 100%)';
   const wayOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(220 20% 8% / 0.55) 0%, hsl(220 20% 6% / 0.68) 50%, hsl(220 20% 4% / 0.80) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 20% 92% / 0.40) 0%, hsl(35 20% 88% / 0.55) 50%, hsl(35 15% 85% / 0.65) 100%)';
+    : 'linear-gradient(to bottom, hsl(220 25% 12% / 0.50) 0%, hsl(220 25% 10% / 0.62) 50%, hsl(220 25% 8% / 0.75) 100%)';
   const crucibleReturnOverlay = isDark
     ? 'linear-gradient(to bottom, hsl(228 55% 6% / 0.72) 0%, hsl(228 55% 6% / 0.80) 50%, hsl(228 55% 6% / 0.88) 100%)'
-    : 'linear-gradient(to bottom, hsl(35 25% 85% / 0.60) 0%, hsl(35 25% 82% / 0.70) 50%, hsl(35 20% 78% / 0.78) 100%)';
+    : 'linear-gradient(to bottom, hsl(228 40% 10% / 0.68) 0%, hsl(228 40% 8% / 0.76) 50%, hsl(228 40% 6% / 0.84) 100%)';
 
-  const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(35, 20%, 92%)';
+  const solidBg = isDark ? 'hsl(228, 55%, 8%)' : 'hsl(228, 40%, 10%)';
 
-  /* ─── Colors for text over images (theme-aware) ─── */
-  const videoBodyColor = isDark ? 'rgba(255, 255, 255, 0.82)' : 'hsl(228 55% 12%)';
-  const videoMutedColor = isDark ? 'rgba(255, 255, 255, 0.55)' : 'hsl(228 55% 25%)';
-  const videoTextShadow = isDark
-    ? '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)'
-    : '0 2px 16px rgba(255, 255, 255, 0.6), 0 1px 4px rgba(255, 255, 255, 0.3)';
-  const videoSubShadow = isDark
-    ? '0 1px 12px rgba(0, 0, 0, 0.6)'
-    : '0 1px 8px rgba(255, 255, 255, 0.4)';
-  const wordmarkShadow = isDark
-    ? '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)'
-    : '0 0 60px hsl(43 78% 50% / 0.20), 0 4px 20px rgba(255,255,255,0.3)';
+  /* ─── Colors for text over images (always light text — images stay dark in both themes) ─── */
+  const videoBodyColor = 'rgba(255, 255, 255, 0.85)';
+  const videoMutedColor = 'rgba(255, 255, 255, 0.55)';
+  const videoTextShadow = '0 2px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.5)';
+  const videoSubShadow = '0 1px 12px rgba(0, 0, 0, 0.6)';
+  const wordmarkShadow = '0 0 60px hsl(43 78% 50% / 0.15), 0 4px 30px rgba(0,0,0,0.5)';
 
   /* heading glow */
   const headingGlowBg = isDark
