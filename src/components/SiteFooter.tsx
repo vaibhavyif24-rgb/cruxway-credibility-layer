@@ -51,9 +51,9 @@ const SiteFooter = () => {
       {/* Gold top border */}
       <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(40,65%,44%,0.15), transparent)' }} />
 
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
+      <div className="max-w-[1140px] mx-auto px-5 md:px-10 lg:px-16">
         {/* Row 1: Brand + Nav + Region/Email */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-5 md:py-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-3">
           {/* Left: Brand */}
           <div className="flex items-center gap-3 shrink-0">
             <span className={`font-serif text-lg tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
@@ -66,7 +66,7 @@ const SiteFooter = () => {
           </div>
 
           {/* Center: Navigation */}
-          <nav className="flex items-center gap-3 md:gap-4 flex-wrap">
+          <nav className="flex items-center gap-3 md:gap-5 flex-wrap">
             {navLinks.map((item, i) => (
               <span key={item.path} className="flex items-center gap-3 md:gap-4">
                 <Link to={item.path} className={linkClass}>
@@ -107,7 +107,7 @@ const SiteFooter = () => {
         <div className={`h-px ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.08]'}`} />
 
         {/* Row 2: Copyright + Legal */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 py-3">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 py-2">
           <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/18' : 'text-foreground/30'}`}>
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>
