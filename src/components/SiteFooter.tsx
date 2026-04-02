@@ -112,14 +112,14 @@ const SiteFooter = () => {
           <Link
             to={`/${otherRegion}`}
             onClick={() => setRegion(otherRegion)}
-            className={`inline-flex items-center gap-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.14em] transition-colors duration-200 ${
+            className={`inline-flex items-center gap-2 font-sans text-[10px] font-medium uppercase tracking-[0.14em] transition-colors duration-200 ${
               isDark
                 ? 'text-primary-foreground/30 hover:text-primary-foreground/55'
                 : 'text-foreground/40 hover:text-foreground/65'
             }`}
           >
             {otherRegion === 'india' ? <IndiaFlag size={12} /> : <USFlag size={12} />}
-            {otherRegion === 'india' ? 'India' : 'US'}
+            {otherRegion === 'india' ? 'Switch to India' : 'Switch to United States'}
           </Link>
         </div>
 
