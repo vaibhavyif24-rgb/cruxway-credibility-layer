@@ -29,7 +29,7 @@ const SiteFooter = () => {
   const prefix = `/${region}`;
   const otherRegion = region === 'india' ? 'us' : 'india';
   const isIndia = region === 'india';
-  const email = isIndia ? 'india@cruxway.com' : 'info@cruxway.com';
+  const email = isIndia ? 'india@cruxway.com' : 'us@cruxway.com';
 
   const navLinks = [
     { label: 'Home', path: prefix },
