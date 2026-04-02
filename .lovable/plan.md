@@ -1,61 +1,39 @@
 
-Goal
 
-- Keep the cinematic loader with effects as the only intentional loading/transition experience.
-- Remove the extra static “Cruxway” screen shown in your screenshot.
+## Improve Largest Contentful Paint (LCP) — from 3.7s to target < 2.5s
 
-What I found
+### Root Cause
 
-- `src/App.tsx` already has the intended animated loader: `PageLoader`.
-- `index.html` contains a second, full-screen hard-coded fallback with a dark background and static `Cruxway` wordmark.
-- That static HTML is the duplicate screen, so the first-load sequence currently becomes:
+The `index.html` preloads the **wrong image file**:
+- Preloaded: `/src/assets/hero-crossroads.webp`
+- Actually used by LCP element (`GeometricHero`): `/src/assets/hero-crossroads-road.webp`
 
-```text
-static HTML wordmark
-→ animated loader
-→ actual page
-```
+This means the browser wastes bandwidth fetching an unused image while the real LCP image waits in the request queue until JavaScript discovers it.
 
-Implementation plan
+Additionally, the LCP element (the "Cruxway" h1 heading) starts with `opacity: 0` and `y: 10` via Framer Motion, which delays LCP measurement until the animation completes.
 
-1. Remove the branded static fallback from `index.html`
-- Replace the current full-screen `Cruxway` wordmark block inside `#root` with a neutral full-screen shell only.
-- No text, no logo, no second “page”.
+### Plan
 
-2. Make the initial shell theme-aware before React mounts
-- Add a tiny inline bootstrap in `index.html` that applies the correct dark/light background immediately using the same route/manual theme logic already used in `ThemeContext`.
-- This avoids a dark flash on light pages and makes first paint blend into the animated loader.
+**1. Fix the preload URL mismatch** (index.html)
+- Change the preload `href` from `/src/assets/hero-crossroads.webp` to `/src/assets/hero-crossroads-road.webp` so the browser fetches the correct image immediately.
 
-3. Keep `PageLoader` in `src/App.tsx` as the only branded loading state
-- Preserve the effects-based loader for lazy-load and transition moments.
-- If needed, slightly soften its entrance so it feels like a continuation from the neutral shell rather than a second screen.
+**2. Remove initial opacity animation from the LCP text element** (Landing.tsx)
+- The `<h1>Cruxway</h1>` is likely the LCP element. It's wrapped in a `motion.div` with `initial={{ y: 10 }}` which Framer Motion translates to `opacity: 0` by default on first render.
+- Change the wrapper to render the h1 visible immediately (no initial opacity of 0). Keep the subtle `y` slide if desired, but ensure `opacity` starts at 1.
+- The sub-elements (divider line, "Investment & Partnership") can keep their delayed animations — only the h1 matters for LCP.
 
-4. Do not change the overall transition concept
-- This fix targets the duplicate static page only.
-- The cinematic transition loader remains the visible experience, exactly as requested.
+**3. Remove the stale preload for the unused image**
+- Delete or update the preload so we're not wasting a network connection on `hero-crossroads.webp` (only used nowhere in the codebase).
 
-Files to update
+### Technical Details
 
-- `index.html`
-- `src/App.tsx` (only for minor loader polish if needed)
+- The LCP metric measures when the largest visible element finishes painting. If `opacity: 0` is set initially, Chrome waits until the element becomes visible.
+- Fixing the preload mismatch alone should shave ~500-800ms. Removing the opacity animation gate on the h1 should further improve LCP by ~200-400ms.
+- No visual change to the user — the hero text will simply appear ~300ms earlier, which is imperceptible given the page transition animation.
 
-Technical details
+### Files Changed
+| File | Change |
+|------|--------|
+| `index.html` | Fix preload href to `hero-crossroads-road.webp` |
+| `src/pages/Landing.tsx` | Ensure h1's parent motion.div starts with `opacity: 1` explicitly |
 
-- Root cause: the hard-coded static H1 fallback in `index.html`.
-- I would not keep that static wordmark fallback, because it directly causes the double-loading experience.
-- I would avoid broad router/Suspense restructuring in this pass since your requirement is specifically to remove the duplicate static screen, not replace the transition system.
-
-Expected result
-
-```text
-neutral theme-matched shell
-→ cinematic loader with effects
-→ page
-```
-
-Verification
-
-- Hard refresh on `/india/playbook`
-- First visit to `/`
-- Navigate between `Home`, `Our Playbook`, and `Team`
-- Confirm the static wordmark screen never appears, and only the animated loader is shown during real loading states
