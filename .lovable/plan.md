@@ -1,40 +1,29 @@
 
-Fix the remaining Team hero line artifact and polish the hero so it feels cinematic in both India and US modes.
 
-What I found
-- The line behind “founders.” is the Team page stats-strip separator, not the image itself.
-- In `src/pages/Team.tsx`, the absolute bottom stats bar uses a full-width `border-t`, and at the current tablet/desktop spacing that line lands directly behind the last line of the paragraph.
-- This affects both `/india/team` and `/us/team` because they share the same hero layout.
+## Plan: Tighten Team Carousel Spacing and Polish Footer
 
-Plan
-1. Remove the hard separator from the Team stats bar
-   - Delete the full-width `border-t` on the Team hero stats strip so the random line disappears completely.
+### 1. Reduce gaps and padding in LogoMarquee (keep logo sizes unchanged)
 
-2. Redesign the stats strip so it still feels premium
-   - Replace the hard line with a softer treatment: a subtle translucent/blurred band or top fade.
-   - Keep the existing gold stat accents so the section still has structure without a distracting rule.
+**File: `src/components/LogoMarquee.tsx`**
 
-3. Rebalance the Team hero layout
-   - Increase the bottom clearance between the intro copy and the stats strip, especially around the current ~947px viewport where the overlap is most visible.
-   - Tune spacing so both the India and US text variants sit comfortably above the stats row.
+- Add optional `compact` prop (boolean, default false)
+- When `compact`: reduce padding to `py-2 md:py-3 lg:py-4` and gaps to `gap-5 md:gap-8 lg:gap-10`
+- Default remains unchanged so Home and other pages are unaffected
 
-4. Make the moving hero image read better
-   - Keep the shared `CinematicHero` motion system (Ken Burns + parallax), but lighten the Team hero’s overlay using the existing softer overlay option so the background movement is more visible in both themes.
-   - Do not add new decorative lines or extra separators.
+### 2. Tighten Team page marquee wrapper
 
-Technical details
-- Main file: `src/pages/Team.tsx`
-- Intended edits:
-  - remove the stats bar `border-t`
-  - add a soft gradient/backdrop treatment to the stats strip
-  - adjust hero content padding/alignment
-  - switch Team’s `CinematicHero` usage to the lighter existing overlay mode
-- Scope stays Team-only so other hero sections are not unintentionally changed.
+**File: `src/pages/Team.tsx`** (lines 458-467)
 
-Validation
-- Check `/india/team` and `/us/team`
-- Check light and dark themes
-- Confirm:
-  - no line appears behind the hero paragraph
-  - hero copy and stats never collide
-  - the image still feels subtly alive behind the content
+- Reduce wrapper padding from `pt-8 md:pt-10 pb-8 md:pb-10` to `pt-4 md:pt-5 pb-2 md:pb-3`
+- Pass `compact` to `<LogoMarquee>`
+
+### 3. Polish footer for desktop
+
+**File: `src/components/SiteFooter.tsx`**
+
+- Widen container from `1080px` to `1140px`
+- Tighten Row 1 padding: `py-5 md:py-4` to `py-3`
+- Tighten Row 2 padding: `py-3` to `py-2`
+- Increase nav link desktop gap: `md:gap-5`
+- Single-line layout on desktop: ensure all three groups (brand, nav, region/email) sit on one row with proper `justify-between` and no wrapping
+
