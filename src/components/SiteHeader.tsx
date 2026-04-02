@@ -30,7 +30,7 @@ const FlagForRegion = ({ region, size }: { region: string; size?: number }) =>
 
 const SiteHeader = () => {
   const { region, setRegion } = useRegion();
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, setRegionTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
