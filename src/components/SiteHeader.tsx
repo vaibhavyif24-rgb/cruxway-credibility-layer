@@ -1,3 +1,4 @@
+import { startTransition } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
