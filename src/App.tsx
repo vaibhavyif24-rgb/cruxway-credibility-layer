@@ -103,32 +103,43 @@ const PageLoader = () => {
 
 const AppRoutes = () => {
   const location = useLocation();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Suspense fallback={<PageLoader />}>
-          <Routes location={location}>
-            <Route path="/" element={<Landing />} />
-            <Route path="/investor-login" element={<InvestorLogin />} />
-            <Route path="/:region" element={<RegionLayout />}>
-              <Route index element={<Home />} />
-              <Route path="principles" element={<GuidingPrinciples />} />
-              <Route path="focus" element={<OurFocus />} />
-              <Route path="playbook" element={<OurPlaybook />} />
-              <Route path="team" element={<Team />} />
-              <Route path="contact" element={<Contact />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </motion.div>
-    </AnimatePresence>
+    <div
+      className="min-h-[100dvh]"
+      style={{
+        background: isDark ? 'hsl(228 55% 8%)' : 'hsl(40 25% 96%)',
+        transition: 'background-color 0.4s ease',
+      }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0, scale: 0.995 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.995 }}
+          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Suspense fallback={<PageLoader />}>
+            <Routes location={location}>
+              <Route path="/" element={<Landing />} />
+              <Route path="/investor-login" element={<InvestorLogin />} />
+              <Route path="/:region" element={<RegionLayout />}>
+                <Route index element={<Home />} />
+                <Route path="principles" element={<GuidingPrinciples />} />
+                <Route path="focus" element={<OurFocus />} />
+                <Route path="playbook" element={<OurPlaybook />} />
+                <Route path="team" element={<Team />} />
+                <Route path="contact" element={<Contact />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
 
