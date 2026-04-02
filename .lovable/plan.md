@@ -1,35 +1,53 @@
 
 
-## Plan: Professional Mobile Footer Redesign
+## Plan: Region Switcher Labels + Performance Optimization
 
-### Problem
-On mobile (375px), the 6 navigation links in the footer try to display inline with gaps, causing them to wrap unpredictably across 2+ lines. "OUR IDENTITY" gets cut, and "OUR FOCUS" / "OUR PLAYBOOK" stack awkwardly. The overall mobile layout lacks structure.
+### Part 1: Region Switcher — Add "Switch to" Label
 
-### Solution: Vertically stacked, center-aligned mobile footer
+Update region switcher text across **two files** to read "Switch to India 🇮🇳" or "Switch to US 🇺🇸" instead of just showing a flag and country name.
 
-**File: `src/components/SiteFooter.tsx`** — mobile-only changes (below `md:` breakpoint):
+**`src/components/SiteFooter.tsx`** (line 112-123):
+- Change the region link text from `{otherRegion === 'india' ? 'India' : 'US'}` to `Switch to {otherRegion === 'india' ? 'India' : 'United States'}`
+- Keep the flag icon inline before the text
 
-**Row 1 — Brand (centered)**
-- Center-align "Cruxway" wordmark on mobile
-- Show tagline below it in smaller text (currently hidden on mobile)
-- `text-center` on mobile, keep `md:flex-row md:justify-between` for desktop
+**`src/components/SiteHeader.tsx`**:
+- **Desktop dropdown** (lines 189-208): Already shows "India" / "United States" — prefix with "Switch to" for the non-active region item
+- **Mobile menu** (line 331): Already says "Switch to India/United States" — no change needed
 
-**Row 2 — Navigation as 2-column grid**
-- Replace the single `flex` row with a `grid grid-cols-2 md:hidden` layout on mobile
-- 6 links in a clean 2×3 grid, center-aligned within each cell
-- Desktop keeps the existing inline layout unchanged
-- `gap-y-3 gap-x-4 py-4`
+### Part 2: Performance — Eliminate Loading Jank
 
-**Row 3 — Email + Region (centered)**
-- Center on mobile: email on one line, region switcher on the next
-- `flex-col items-center md:flex-row` 
+The current architecture causes unnecessary loading screens and sluggish transitions because:
+1. `AnimatePresence mode="wait"` with `key={location.pathname}` unmounts + remounts on every navigation, re-triggering Suspense fallback
+2. Every page is lazy-loaded, so navigating between pages shows the full "Cruxway" loader each time
+3. The `scale: 0.995` animation on every route change adds perceived lag
 
-**Row 4 — Legal (centered)**
-- Center copyright and Privacy/Terms on mobile
-- `text-center` on mobile, keep `sm:flex-row justify-between` for desktop
+**`src/App.tsx`** changes:
+- **Remove `AnimatePresence` wrapper around routes** — it forces unmount/remount causing Suspense to re-trigger the loader on every navigation
+- **Remove `motion.div` with scale/opacity animation** wrapping routes — the 250ms fade + scale on every click adds perceived sluggishness
+- **Keep `Suspense` with a minimal fallback** — use a simple themed empty div (matching page background) instead of the cinematic loader with shimmer/particles. The cinematic loader should only show on initial app load, not between pages
+- **Prefetch adjacent routes**: Add `import()` calls on hover/mousedown for nav links so chunks load before click
 
-### Technical Details
-- All changes scoped with responsive prefixes (`md:`) so desktop is untouched
-- Navigation: hidden `flex` on mobile, replaced with `grid grid-cols-2` for clean alignment
-- Touch targets maintained at 44px+ height via `py-2` on each grid link
+**Simplified AppRoutes structure:**
+```tsx
+const AppRoutes = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  return (
+    <div className="min-h-[100dvh]" style={{ background: isDark ? '...' : '...' }}>
+      <Suspense fallback={<MinimalLoader />}>
+        <Routes>
+          {/* same routes */}
+        </Routes>
+      </Suspense>
+    </div>
+  );
+};
+```
+
+Where `MinimalLoader` is just a themed empty div (no animations, no shimmer) that matches the page background so the transition feels instant.
+
+### Files Modified
+1. `src/components/SiteFooter.tsx` — "Switch to" label on region link
+2. `src/components/SiteHeader.tsx` — "Switch to" label in desktop dropdown  
+3. `src/App.tsx` — Remove AnimatePresence/motion wrapper, simplify Suspense fallback
 
