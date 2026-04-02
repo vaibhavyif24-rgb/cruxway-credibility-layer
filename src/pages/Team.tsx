@@ -383,7 +383,7 @@ const Team = () => {
         </div>
 
         {/* Stats Bar */}
-        <div className={`absolute bottom-0 left-0 right-0 z-10 border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
+        <div className={`absolute bottom-0 left-0 right-0 z-10 ${isDark ? 'bg-navy-deep/40' : 'bg-background/30'} backdrop-blur-sm`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-3 md:gap-4">
               <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />
