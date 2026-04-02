@@ -37,12 +37,28 @@
   </head>
 
   <body>
-    <div id="root">
-      <!-- Static LCP fallback — painted immediately, replaced by React -->
-      <div style="min-height:100dvh;display:flex;align-items:center;justify-content:center;background:#0d1926">
-        <h1 style="font-family:'EB Garamond',serif;font-size:clamp(3.5rem,9vw,6rem);font-weight:400;color:#fff;letter-spacing:-0.035em;line-height:1;text-align:center">Cruxway</h1>
-      </div>
-    </div>
+    <div id="root"></div>
+    <script>
+      // Theme-aware initial background before React mounts
+      (function(){
+        var m = localStorage.getItem('cruxway-theme-manual');
+        var dark = false;
+        if (m === 'dark') dark = true;
+        else if (m === 'light') dark = false;
+        else {
+          var p = location.pathname;
+          if (p.indexOf('/india') === 0 || p.indexOf('/us') === 0) {
+            try {
+              var h = parseInt(new Date().toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:false}),10);
+              var day = h >= 7 && h < 19;
+              dark = p.indexOf('/india') === 0 ? day : !day;
+            } catch(e){}
+          }
+        }
+        if (dark) document.documentElement.classList.add('dark');
+        document.getElementById('root').style.cssText = 'min-height:100dvh;background:' + (dark ? 'hsl(228,55%,8%)' : 'hsl(40,25%,96%)');
+      })();
+    </script>
     <script>
       // Auto-reload on stale chunk errors (dynamic import failures after deploy)
       window.addEventListener('error', function(e) {
