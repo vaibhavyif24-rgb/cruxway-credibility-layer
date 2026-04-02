@@ -2,10 +2,9 @@ import { startTransition } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { prefetchRoute } from '@/App';
 
 /* ─── Minimal SVG flag icons ─── */
 const IndiaFlag = ({ size = 16 }: { size?: number }) => (
@@ -66,15 +65,6 @@ const SiteHeader = () => {
     return () => document.removeEventListener('mousedown', handler);
   }, [flagOpen]);
 
-  const routePrefetchMap: Record<string, () => void> = {
-    [prefix]: prefetchRoute.home,
-    [`${prefix}/principles`]: prefetchRoute.principles,
-    [`${prefix}/focus`]: prefetchRoute.focus,
-    [`${prefix}/playbook`]: prefetchRoute.playbook,
-    [`${prefix}/team`]: prefetchRoute.team,
-    [`${prefix}/contact`]: prefetchRoute.contact,
-  };
-
   const navItems = [
     { label: 'Home', path: prefix },
     { label: 'Our Identity', path: `${prefix}/principles` },
@@ -83,10 +73,6 @@ const SiteHeader = () => {
     { label: 'Team', path: `${prefix}/team` },
     { label: 'Contact', path: `${prefix}/contact` },
   ];
-
-  const handlePrefetch = useCallback((path: string) => {
-    routePrefetchMap[path]?.();
-  }, [prefix]);
 
   const isActive = (path: string) => location.pathname === path;
   const otherRegion = region === 'india' ? 'us' : 'india';
@@ -147,7 +133,6 @@ const SiteHeader = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    onMouseEnter={() => handlePrefetch(item.path)}
                     className={`relative font-sans text-[10px] uppercase tracking-[0.08em] py-1.5 px-2 rounded-sm transition-all duration-300 ${
                       isActive(item.path)
                         ? 'text-gold font-semibold'
@@ -217,7 +202,7 @@ const SiteHeader = () => {
                           >
                             <FlagForRegion region={r} size={14} />
                             <span className="font-sans text-[10px] font-medium uppercase tracking-[0.12em]">
-                              {region === r ? (r === 'india' ? 'India' : 'United States') : `Switch to ${r === 'india' ? 'India' : 'United States'}`}
+                              {r === 'india' ? 'India' : 'United States'}
                             </span>
                           </button>
                         ))}
