@@ -1,4 +1,5 @@
 import { useRegion } from '@/contexts/RegionContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -11,12 +12,14 @@ const regions = [
 
 const Landing = () => {
   const { setRegion } = useRegion();
+  const { setRegionTheme } = useTheme();
   const navigate = useNavigate();
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
     setRegion(null);
-  }, [setRegion]);
+    setRegionTheme(null);
+  }, [setRegion, setRegionTheme]);
 
   const selectRegion = (region: 'india' | 'us') => {
     setSelected(region);

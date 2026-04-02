@@ -1,31 +1,36 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 type Theme = 'light' | 'dark';
+type Region = 'india' | 'us' | null;
 
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
+  setRegionTheme: (region: Region) => void;
 }
 
-const ThemeContext = createContext<ThemeContextType>({ theme: 'light', toggleTheme: () => {} });
+const ThemeContext = createContext<ThemeContextType>({
+  theme: 'light',
+  toggleTheme: () => {},
+  setRegionTheme: () => {},
+});
 
-function getTimezoneDefault(): Theme {
+function getThemeForRegion(region: Region): Theme {
+  if (!region) return 'light';
+
   try {
     const etHour = parseInt(
-      new Date().toLocaleString('en-US', { timeZone: 'America/New_York', hour: 'numeric', hour12: false }),
+      new Date().toLocaleString('en-US', {
+        timeZone: 'America/New_York',
+        hour: 'numeric',
+        hour12: false,
+      }),
       10
     );
-    // Check URL for region hint
-    const path = typeof window !== 'undefined' ? window.location.pathname : '';
-    const isIndia = path.startsWith('/india');
-    const isUS = path.startsWith('/us');
-
-    if (!isIndia && !isUS) return 'light'; // Landing page default
 
     const isDaytimeET = etHour >= 7 && etHour < 19;
 
-    if (isUS) return isDaytimeET ? 'light' : 'dark';
-    // India: opposite of US daytime
+    if (region === 'us') return isDaytimeET ? 'light' : 'dark';
     return isDaytimeET ? 'dark' : 'light';
   } catch {
     return 'light';
@@ -35,9 +40,13 @@ function getTimezoneDefault(): Theme {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const manual = localStorage.getItem('cruxway-theme-manual') as Theme | null;
-      if (manual === 'light' || manual === 'dark') return manual;
-      return getTimezoneDefault();
+      const path = window.location.pathname;
+      const region: Region = path.startsWith('/india')
+        ? 'india'
+        : path.startsWith('/us')
+          ? 'us'
+          : null;
+      return getThemeForRegion(region);
     }
     return 'light';
   });
@@ -49,20 +58,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } else {
       root.classList.remove('dark');
     }
-    // Only write to non-manual key for session awareness
-    localStorage.setItem('cruxway-theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => {
-      const next = prev === 'light' ? 'dark' : 'light';
-      localStorage.setItem('cruxway-theme-manual', next);
-      return next;
-    });
-  };
+  const toggleTheme = useCallback(() => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  }, []);
+
+  const setRegionTheme = useCallback((region: Region) => {
+    setTheme(getThemeForRegion(region));
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setRegionTheme }}>
       {children}
     </ThemeContext.Provider>
   );
