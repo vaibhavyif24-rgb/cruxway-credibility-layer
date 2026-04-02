@@ -1,18 +1,22 @@
 
 
-## Plan: Improve Footer Region Switcher Label
+## Fix: Mobile Accordion Should Start Collapsed
+
+### Problem
+The `CriteriaAccordion` component (mobile-only) in `src/pages/OurFocus.tsx` initializes with `useState(0)`, which auto-expands the first item ("Ownership Succession") on page load. It should start fully collapsed.
 
 ### Change
-In `src/components/SiteFooter.tsx`, line 122, change the region switcher text from just the country name to a descriptive "Switch to" label:
 
-**Current:** `India` or `US`
-**New:** `Switch to India` or `Switch to United States`
+**File: `src/components/../pages/OurFocus.tsx`** — Line 405
 
-### Technical Details
+Change:
+```ts
+const [open, setOpen] = useState(0);
+```
+To:
+```ts
+const [open, setOpen] = useState(-1);
+```
 
-**File: `src/components/SiteFooter.tsx`**
-
-- Line 122: Change `{otherRegion === 'india' ? 'India' : 'US'}` → `{otherRegion === 'india' ? 'Switch to India' : 'Switch to United States'}`
-- Increase gap from `gap-1.5` to `gap-2` for better spacing with longer text
-- Single-line change, desktop and mobile both benefit from clearer affordance
+This single-character change ensures no accordion item is expanded on load. Users must tap to expand. Desktop tabs (`CriteriaTabs`) remain unaffected.
 
