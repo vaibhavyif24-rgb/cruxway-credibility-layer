@@ -1,24 +1,61 @@
 
+Goal
 
-## Plan: Intersection-Triggered Auto-Rotation with Progress Bar
+- Keep the cinematic loader with effects as the only intentional loading/transition experience.
+- Remove the extra static “Cruxway” screen shown in your screenshot.
 
-### What changes
+What I found
 
-**File: `src/pages/OurPlaybook.tsx` — `StepNavigator` component**
+- `src/App.tsx` already has the intended animated loader: `PageLoader`.
+- `index.html` contains a second, full-screen hard-coded fallback with a dark background and static `Cruxway` wordmark.
+- That static HTML is the duplicate screen, so the first-load sequence currently becomes:
 
-1. **Add `useInView` from framer-motion** to detect when the step navigator enters the viewport. The 10-second auto-rotation timer only starts when the section is visible, and pauses when it scrolls out of view.
+```text
+static HTML wordmark
+→ animated loader
+→ actual page
+```
 
-2. **Add an animated progress bar** beneath each active step button that fills over 10 seconds, giving a polished visual indicator of time remaining before the next step. When the user clicks a step manually, the progress resets.
+Implementation plan
 
-3. **Refined transitions**: Keep the existing crossfade but add a subtle scale effect (0.98 → 1) on enter for a more cinematic feel, and use a smoother easing curve.
+1. Remove the branded static fallback from `index.html`
+- Replace the current full-screen `Cruxway` wordmark block inside `#root` with a neutral full-screen shell only.
+- No text, no logo, no second “page”.
 
-### Technical details
+2. Make the initial shell theme-aware before React mounts
+- Add a tiny inline bootstrap in `index.html` that applies the correct dark/light background immediately using the same route/manual theme logic already used in `ThemeContext`.
+- This avoids a dark flash on light pages and makes first paint blend into the animated loader.
 
-- Use `useInView` with `{ amount: 0.3 }` on the container `ref` — timer runs only when `isInView` is true.
-- `useEffect` depends on `[isInView, active]` — clears interval when out of view, restarts on re-entry.
-- Progress bar: a `motion.div` inside each active button with `animate={{ scaleX: 1 }}` over 10s linear, reset via `key={active}`. Thin gold line (2px) at the bottom of the active button.
-- Content panel transition updated: `initial={{ opacity: 0, y: 12, scale: 0.98 }}`, `animate={{ opacity: 1, y: 0, scale: 1 }}`, with spring-like ease `[0.16, 1, 0.3, 1]` at 0.45s duration.
+3. Keep `PageLoader` in `src/App.tsx` as the only branded loading state
+- Preserve the effects-based loader for lazy-load and transition moments.
+- If needed, slightly soften its entrance so it feels like a continuation from the neutral shell rather than a second screen.
 
-### Files modified
-- `src/pages/OurPlaybook.tsx`
+4. Do not change the overall transition concept
+- This fix targets the duplicate static page only.
+- The cinematic transition loader remains the visible experience, exactly as requested.
 
+Files to update
+
+- `index.html`
+- `src/App.tsx` (only for minor loader polish if needed)
+
+Technical details
+
+- Root cause: the hard-coded static H1 fallback in `index.html`.
+- I would not keep that static wordmark fallback, because it directly causes the double-loading experience.
+- I would avoid broad router/Suspense restructuring in this pass since your requirement is specifically to remove the duplicate static screen, not replace the transition system.
+
+Expected result
+
+```text
+neutral theme-matched shell
+→ cinematic loader with effects
+→ page
+```
+
+Verification
+
+- Hard refresh on `/india/playbook`
+- First visit to `/`
+- Navigate between `Home`, `Our Playbook`, and `Team`
+- Confirm the static wordmark screen never appears, and only the animated loader is shown during real loading states
