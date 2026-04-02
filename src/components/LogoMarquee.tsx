@@ -23,9 +23,9 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const { theme } = useTheme();
   const isMobile = useIsMobile();
 
-  const baseHeight = isMobile ? 34 : 80;
-  const baseMaxWidth = isMobile ? 120 : 280;
-  const containerHeight = isMobile ? 40 : 96;
+  const baseHeight = isMobile ? 40 : 96;
+  const baseMaxWidth = isMobile ? 140 : 320;
+  const containerHeight = isMobile ? 48 : 112;
 
   const isDarkVariant = variant === 'dark';
   const isActuallyDark = isDarkVariant && theme === 'dark';
