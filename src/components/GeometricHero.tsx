@@ -34,12 +34,12 @@ const GeometricHero = () => {
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Crossroads photo with Ken Burns + slow horizontal drift */}
       <motion.div
-        className="absolute inset-[-5%] z-[0]"
-        initial={{ scale: 1.02, x: 0 }}
-        animate={{ scale: 1.14, x: [0, 15, -10, 0] }}
+        className="absolute inset-[-10%] z-[0]"
+        initial={{ scale: 1.0, x: 0 }}
+        animate={{ scale: 1.22, x: [0, 25, -18, 8, 0] }}
         transition={{
-          scale: { duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-          x: { duration: 40, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+          scale: { duration: 22, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+          x: { duration: 30, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
         }}
       >
         <img

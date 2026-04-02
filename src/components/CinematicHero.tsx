@@ -43,16 +43,16 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Photo with Ken Burns + parallax */}
       <motion.div
-        className="absolute inset-[-5%]"
+        className="absolute inset-[-10%]"
         style={{ y: parallaxY, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
       >
         <motion.div
           className="w-full h-full"
-          initial={{ scale: 1.02, x: 0 }}
-          animate={{ scale: 1.14, x: [0, 15, -10, 0] }}
+          initial={{ scale: 1.0, x: 0 }}
+          animate={{ scale: 1.22, x: [0, 20, -15, 5, 0] }}
           transition={{
-            scale: { duration: 28, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-            x: { duration: 35, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+            scale: { duration: 24, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+            x: { duration: 32, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
           }}
         >
           <img
