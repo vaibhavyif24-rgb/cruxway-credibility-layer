@@ -180,15 +180,15 @@ const DealLogoMarquee = ({ logos, duration = 20, bgClass = 'from-background to-t
         {doubled.map((logo, i) => (
           <div
             key={`${logo.alt}-${i}`}
-            className="flex items-center justify-center shrink-0 h-[36px] md:h-[44px] lg:h-[52px]"
+            className="flex items-center justify-center shrink-0 h-[40px] md:h-[48px] lg:h-[56px]"
           >
             <img
               src={logo.src}
               alt={logo.alt}
               loading="lazy"
-              className="w-auto max-w-[100px] md:max-w-[130px] lg:max-w-[150px] object-contain transition-all duration-500"
+              className="w-auto max-w-[110px] md:max-w-[140px] lg:max-w-[160px] object-contain transition-all duration-500"
               style={{
-                height: `${(logo.scale || 1) * 36}px`,
+                height: `${(logo.scale || 1) * 40}px`,
                 filter: hovered ? 'none' : goldFilter,
                 opacity: hovered ? 1 : 0.8,
               }}

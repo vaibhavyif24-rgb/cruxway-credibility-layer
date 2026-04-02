@@ -51,18 +51,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return 'light';
   });
 
+  // Clear stale localStorage from older versions
+  useEffect(() => {
+    try {
+      localStorage.removeItem('cruxway-theme-manual');
+      localStorage.removeItem('cruxway-theme');
+    } catch {}
+  }, []);
+
   useEffect(() => {
     const root = document.documentElement;
-    root.style.transition = 'background-color 0.5s ease, color 0.3s ease';
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
-    const timer = setTimeout(() => {
-      root.style.transition = '';
-    }, 600);
-    return () => clearTimeout(timer);
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
