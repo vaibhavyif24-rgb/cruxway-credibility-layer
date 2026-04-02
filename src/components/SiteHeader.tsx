@@ -202,7 +202,7 @@ const SiteHeader = () => {
                           >
                             <FlagForRegion region={r} size={14} />
                             <span className="font-sans text-[10px] font-medium uppercase tracking-[0.12em]">
-                              {r === 'india' ? 'India' : 'United States'}
+                              {region === r ? (r === 'india' ? 'India' : 'United States') : `Switch to ${r === 'india' ? 'India' : 'United States'}`}
                             </span>
                           </button>
                         ))}
