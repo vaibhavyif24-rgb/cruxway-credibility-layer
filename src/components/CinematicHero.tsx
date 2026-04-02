@@ -112,14 +112,6 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         />
       ))}
 
-      {/* Soft horizontal shimmer */}
-      <motion.div
-        className="absolute top-[40%] left-0 right-0 h-px z-[2]"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(43 70% 50% / 0.06), transparent)' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.5, 0] }}
-        transition={{ duration: 6, delay: 3, repeat: Infinity, ease: 'easeInOut' }}
-      />
     </div>
   );
 };
