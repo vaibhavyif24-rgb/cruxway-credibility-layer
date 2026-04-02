@@ -95,6 +95,7 @@ const SiteHeader = () => {
             ? `hero-gradient-animated ${scrolled ? 'shadow-[0_2px_16px_-2px_hsl(228_55%_6%/0.5)]' : ''}`
             : `${scrolled ? 'bg-white shadow-[0_2px_20px_-4px_rgba(0,0,0,0.06)] border-b border-[hsl(38,20%,88%)]' : 'bg-white/90 border-b border-transparent'}`
         } ${scrolled ? 'md:backdrop-blur-xl' : 'md:backdrop-blur-xl'}`}
+        style={{ transition: 'background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease' }}
       >
         {/* Scroll progress bar */}
         <motion.div

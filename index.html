@@ -41,19 +41,15 @@
     <script>
       // Theme-aware initial background before React mounts
       (function(){
-        var m = localStorage.getItem('cruxway-theme-manual');
+        try { localStorage.removeItem('cruxway-theme-manual'); localStorage.removeItem('cruxway-theme'); } catch(e){}
         var dark = false;
-        if (m === 'dark') dark = true;
-        else if (m === 'light') dark = false;
-        else {
-          var p = location.pathname;
-          if (p.indexOf('/india') === 0 || p.indexOf('/us') === 0) {
-            try {
-              var h = parseInt(new Date().toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:false}),10);
-              var day = h >= 7 && h < 19;
-              dark = p.indexOf('/india') === 0 ? day : !day;
-            } catch(e){}
-          }
+        var p = location.pathname;
+        if (p.indexOf('/india') === 0 || p.indexOf('/us') === 0) {
+          try {
+            var h = parseInt(new Date().toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',hour12:false}),10);
+            var day = h >= 7 && h < 19;
+            dark = p.indexOf('/india') === 0 ? day : !day;
+          } catch(e){}
         }
         if (dark) document.documentElement.classList.add('dark');
         document.getElementById('root').style.cssText = 'min-height:100dvh;background:' + (dark ? 'hsl(228,55%,8%)' : 'hsl(40,25%,96%)');

@@ -23,9 +23,9 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const { theme } = useTheme();
   const isMobile = useIsMobile();
 
-  const baseHeight = isMobile ? 34 : 80;
-  const baseMaxWidth = isMobile ? 120 : 280;
-  const containerHeight = isMobile ? 40 : 96;
+  const baseHeight = isMobile ? 40 : 96;
+  const baseMaxWidth = isMobile ? 140 : 320;
+  const containerHeight = isMobile ? 48 : 112;
 
   const isDarkVariant = variant === 'dark';
   const isActuallyDark = isDarkVariant && theme === 'dark';
@@ -34,10 +34,10 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
   const goldFilter = 'brightness(0) invert(55%) sepia(60%) saturate(500%) hue-rotate(8deg) brightness(100%)';
 
   const bgClass = isActuallyDark
-    ? 'bg-primary py-4 md:py-6 lg:py-8'
+    ? 'bg-primary py-5 md:py-8 lg:py-10'
     : isContrastLight
-      ? 'bg-[hsl(40,20%,91%)] py-4 md:py-6 lg:py-8'
-      : 'py-3 md:py-5 lg:py-6';
+      ? 'bg-[hsl(40,20%,91%)] py-5 md:py-8 lg:py-10'
+      : 'py-4 md:py-6 lg:py-8';
 
   const fadeFromClass = isActuallyDark
     ? 'from-primary'
@@ -67,7 +67,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
       <div className={`absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-l ${fadeFromClass} to-transparent`} />
 
       <motion.div
-        className="flex items-center gap-6 md:gap-10 lg:gap-14 w-max"
+        className="flex items-center gap-8 md:gap-12 lg:gap-16 w-max"
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
         style={{ willChange: 'transform', transform: 'translateZ(0)' }}
