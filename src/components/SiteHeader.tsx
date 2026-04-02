@@ -66,6 +66,15 @@ const SiteHeader = () => {
     return () => document.removeEventListener('mousedown', handler);
   }, [flagOpen]);
 
+  const routePrefetchMap: Record<string, () => void> = {
+    [prefix]: prefetchRoute.home,
+    [`${prefix}/principles`]: prefetchRoute.principles,
+    [`${prefix}/focus`]: prefetchRoute.focus,
+    [`${prefix}/playbook`]: prefetchRoute.playbook,
+    [`${prefix}/team`]: prefetchRoute.team,
+    [`${prefix}/contact`]: prefetchRoute.contact,
+  };
+
   const navItems = [
     { label: 'Home', path: prefix },
     { label: 'Our Identity', path: `${prefix}/principles` },
@@ -74,6 +83,10 @@ const SiteHeader = () => {
     { label: 'Team', path: `${prefix}/team` },
     { label: 'Contact', path: `${prefix}/contact` },
   ];
+
+  const handlePrefetch = useCallback((path: string) => {
+    routePrefetchMap[path]?.();
+  }, [prefix]);
 
   const isActive = (path: string) => location.pathname === path;
   const otherRegion = region === 'india' ? 'us' : 'india';
