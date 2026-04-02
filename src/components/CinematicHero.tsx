@@ -11,7 +11,7 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
   const isDark = theme === 'dark';
 
   const { scrollY } = useScroll();
-  const parallaxY = useTransform(scrollY, [0, 500], [0, -60]);
+  const parallaxY = useTransform(scrollY, [0, 600], [0, -100]);
 
   const lineStyle = {
     stroke: 'hsl(43 70% 50%)',
