@@ -89,14 +89,6 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         <motion.line x1="1170" y1="770" x2="1170" y2="700" {...draw(0.6, 0.8)} style={lineStyle} />
         <motion.line x1="0" y1="600" x2="250" y2="480" {...draw(0.8)} style={{ ...lineStyle, strokeWidth: 0.2, opacity: 0.15 }} />
         <motion.line x1="1200" y1="600" x2="950" y2="480" {...draw(0.9)} style={{ ...lineStyle, strokeWidth: 0.2, opacity: 0.15 }} />
-        <motion.line x1="400" y1="720" x2="800" y2="720" {...draw(1.0, 1.2)} style={{ ...lineStyle, strokeWidth: 0.15, opacity: 0.1 }} />
-        <motion.path
-          d="M600 700 L605 710 L600 720 L595 710 Z"
-          {...draw(1.2, 0.6)}
-          style={{ ...lineStyle, strokeWidth: 0.25, opacity: 0.18 }}
-        />
-        <motion.circle cx="250" cy="480" r="1.5" fill="hsl(43 70% 50%)" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.8 }} />
-        <motion.circle cx="950" cy="480" r="1.5" fill="hsl(43 70% 50%)" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 0.2 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 1.9 }} />
       </svg>
 
       {/* Ambient gold glow */}
@@ -120,14 +112,6 @@ const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => 
         />
       ))}
 
-      {/* Soft horizontal shimmer */}
-      <motion.div
-        className="absolute top-[40%] left-0 right-0 h-px z-[2]"
-        style={{ background: 'linear-gradient(90deg, transparent, hsl(43 70% 50% / 0.06), transparent)' }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.5, 0] }}
-        transition={{ duration: 6, delay: 3, repeat: Infinity, ease: 'easeInOut' }}
-      />
     </div>
   );
 };

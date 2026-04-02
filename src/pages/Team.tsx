@@ -364,7 +364,7 @@ const Team = () => {
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-28 md:pt-36 md:pb-24 lg:pt-40 lg:pb-24">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-36 md:pt-36 md:pb-32 lg:pt-40 lg:pb-32">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
@@ -379,9 +379,6 @@ const Team = () => {
                 ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
                 : 'Operators and investors building alongside founders.'}
             </p>
-          </FadeIn>
-          <FadeIn delay={0.2}>
-            <GoldRule className="mt-4 md:mt-5" />
           </FadeIn>
         </div>
 
