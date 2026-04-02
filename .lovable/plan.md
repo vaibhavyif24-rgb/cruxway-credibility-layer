@@ -1,20 +1,40 @@
 
+Fix the remaining Team hero line artifact and polish the hero so it feels cinematic in both India and US modes.
 
-## Fix: Remove residual line & enhance Team hero consistency
+What I found
+- The line behind “founders.” is the Team page stats-strip separator, not the image itself.
+- In `src/pages/Team.tsx`, the absolute bottom stats bar uses a full-width `border-t`, and at the current tablet/desktop spacing that line lands directly behind the last line of the paragraph.
+- This affects both `/india/team` and `/us/team` because they share the same hero layout.
 
-### Problem
-The `HeroDivider` at line 396 of Team.tsx renders a 1px gradient line at the very bottom of the hero section, sitting behind/below the stats bar's own `border-t`. It adds no value and looks like an artifact.
+Plan
+1. Remove the hard separator from the Team stats bar
+   - Delete the full-width `border-t` on the Team hero stats strip so the random line disappears completely.
 
-### Changes
+2. Redesign the stats strip so it still feels premium
+   - Replace the hard line with a softer treatment: a subtle translucent/blurred band or top fade.
+   - Keep the existing gold stat accents so the section still has structure without a distracting rule.
 
-**1. Remove `HeroDivider` from Team hero** (`src/pages/Team.tsx`, line 396)
-- Delete `<HeroDivider />` — the stats bar already has its own `border-t` separator, making this redundant.
+3. Rebalance the Team hero layout
+   - Increase the bottom clearance between the intro copy and the stats strip, especially around the current ~947px viewport where the overlap is most visible.
+   - Tune spacing so both the India and US text variants sit comfortably above the stats row.
 
-**2. Confirm CinematicHero Ken Burns motion is active**
-- The hero image already has Ken Burns zoom (scale 1.02→1.14 over 28s) and horizontal drift (x: 0→15→-10→0 over 35s) plus scroll parallax. This matches every other page using `CinematicHero`. No change needed to the motion system — it's already consistent.
+4. Make the moving hero image read better
+   - Keep the shared `CinematicHero` motion system (Ken Burns + parallax), but lighten the Team hero’s overlay using the existing softer overlay option so the background movement is more visible in both themes.
+   - Do not add new decorative lines or extra separators.
 
-### Files Changed
-| File | Change |
-|------|--------|
-| `src/pages/Team.tsx` | Remove `<HeroDivider />` (line 396) |
+Technical details
+- Main file: `src/pages/Team.tsx`
+- Intended edits:
+  - remove the stats bar `border-t`
+  - add a soft gradient/backdrop treatment to the stats strip
+  - adjust hero content padding/alignment
+  - switch Team’s `CinematicHero` usage to the lighter existing overlay mode
+- Scope stays Team-only so other hero sections are not unintentionally changed.
 
+Validation
+- Check `/india/team` and `/us/team`
+- Check light and dark themes
+- Confirm:
+  - no line appears behind the hero paragraph
+  - hero copy and stats never collide
+  - the image still feels subtly alive behind the content
