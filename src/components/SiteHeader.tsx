@@ -2,9 +2,10 @@ import { startTransition } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { prefetchRoute } from '@/App';
 
 /* ─── Minimal SVG flag icons ─── */
 const IndiaFlag = ({ size = 16 }: { size?: number }) => (
