@@ -51,9 +51,9 @@ const SiteFooter = () => {
       {/* Gold top border */}
       <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(40,65%,44%,0.15), transparent)' }} />
 
-      <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16">
+      <div className="max-w-[1140px] mx-auto px-5 md:px-10 lg:px-16">
         {/* Row 1: Brand + Nav + Region/Email */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-5 md:py-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-3">
           {/* Left: Brand */}
           <div className="flex items-center gap-3 shrink-0">
             <span className={`font-serif text-lg tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
