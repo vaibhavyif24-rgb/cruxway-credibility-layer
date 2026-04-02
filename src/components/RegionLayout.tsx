@@ -13,14 +13,12 @@ const RegionLayout = () => {
 
   useEffect(() => {
     if (urlRegion === 'india' || urlRegion === 'us') {
-      if (region !== urlRegion) {
-        setRegion(urlRegion);
-        setRegionTheme(urlRegion);
-      }
+      setRegion(urlRegion);
+      setRegionTheme(urlRegion);
     } else {
       navigate('/', { replace: true });
     }
-  }, [urlRegion, region, setRegion, setRegionTheme, navigate]);
+  }, [urlRegion, setRegion, setRegionTheme, navigate]);
 
   if (urlRegion !== 'india' && urlRegion !== 'us') return null;
 
