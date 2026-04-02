@@ -364,7 +364,7 @@ const Team = () => {
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="medium" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-36 md:pt-36 md:pb-32 lg:pt-40 lg:pb-32">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-44 md:pt-36 md:pb-40 lg:pt-40 lg:pb-40">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
