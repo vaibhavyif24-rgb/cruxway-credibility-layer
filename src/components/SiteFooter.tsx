@@ -107,7 +107,7 @@ const SiteFooter = () => {
         <div className={`h-px ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.08]'}`} />
 
         {/* Row 2: Copyright + Legal */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 py-3">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 py-2">
           <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/18' : 'text-foreground/30'}`}>
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>

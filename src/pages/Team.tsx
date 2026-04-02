@@ -457,13 +457,13 @@ const Team = () => {
 
       {/* Institutional Experience Marquee */}
       <div className="bg-background">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10 pb-8 md:pb-10">
+        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-4 md:pt-5 pb-2 md:pb-3">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
             <GoldRule className="mt-1" />
           </FadeIn>
         </div>
-        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
+        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" compact />
       </div>
     </div>
   );

@@ -72,7 +72,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
       <div className={`absolute right-0 top-0 bottom-0 w-20 md:w-32 z-10 pointer-events-none bg-gradient-to-l ${fadeFromClass} to-transparent`} />
 
       <motion.div
-        className="flex items-center gap-8 md:gap-12 lg:gap-16 w-max"
+        className={`flex items-center w-max ${compact ? 'gap-5 md:gap-8 lg:gap-10' : 'gap-8 md:gap-12 lg:gap-16'}`}
         animate={{ x: ['0%', '-50%'] }}
         transition={{ x: { repeat: Infinity, repeatType: 'loop', duration, ease: 'linear' } }}
         style={{ willChange: 'transform', transform: 'translateZ(0)' }}
