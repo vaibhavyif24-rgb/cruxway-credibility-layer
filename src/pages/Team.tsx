@@ -361,10 +361,10 @@ const Team = () => {
     <div style={{ overflowX: 'clip' }}>
       {/* Hero — with CinematicHero background */}
       <section className={`relative overflow-hidden min-h-[60vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-        <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="medium" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-36 md:pt-36 md:pb-32 lg:pt-40 lg:pb-32">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-44 md:pt-36 md:pb-40 lg:pt-40 lg:pb-40">
           <FadeIn>
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
@@ -383,7 +383,7 @@ const Team = () => {
         </div>
 
         {/* Stats Bar */}
-        <div className={`absolute bottom-0 left-0 right-0 z-10 border-t ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/40'}`}>
+        <div className={`absolute bottom-0 left-0 right-0 z-10 ${isDark ? 'bg-navy-deep/40' : 'bg-background/30'} backdrop-blur-sm`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-3 md:gap-4">
               <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />
