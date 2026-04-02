@@ -119,7 +119,7 @@ const SiteFooter = () => {
             }`}
           >
             {otherRegion === 'india' ? <IndiaFlag size={12} /> : <USFlag size={12} />}
-            {otherRegion === 'india' ? 'India' : 'US'}
+            {otherRegion === 'india' ? 'Switch to India' : 'Switch to United States'}
           </Link>
         </div>
 
