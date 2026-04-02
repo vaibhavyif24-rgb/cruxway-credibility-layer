@@ -34,11 +34,15 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
 
   const goldFilter = 'brightness(0) invert(55%) sepia(60%) saturate(500%) hue-rotate(8deg) brightness(100%)';
 
+  const paddingClass = compact
+    ? 'py-2 md:py-3 lg:py-4'
+    : isDarkVariant ? 'py-5 md:py-8 lg:py-10' : 'py-4 md:py-6 lg:py-8';
+
   const bgClass = isActuallyDark
-    ? 'bg-primary py-5 md:py-8 lg:py-10'
+    ? `bg-primary ${paddingClass}`
     : isContrastLight
-      ? 'bg-[hsl(40,20%,91%)] py-5 md:py-8 lg:py-10'
-      : 'py-4 md:py-6 lg:py-8';
+      ? `bg-[hsl(40,20%,91%)] ${paddingClass}`
+      : paddingClass;
 
   const fadeFromClass = isActuallyDark
     ? 'from-primary'
