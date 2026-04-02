@@ -1,29 +1,34 @@
 
 
-## Plan: Tighten Team Carousel Spacing and Polish Footer
+## Plan: Redesign Footer for Professional Desktop Layout
 
-### 1. Reduce gaps and padding in LogoMarquee (keep logo sizes unchanged)
+### Problem
+The current footer crams brand, 6 navigation links, and email/region into a single row, causing nav links to wrap onto two lines at typical desktop widths (~947px). This looks unprofessional.
 
-**File: `src/components/LogoMarquee.tsx`**
+### Solution: Clean 3-row institutional footer
 
-- Add optional `compact` prop (boolean, default false)
-- When `compact`: reduce padding to `py-2 md:py-3 lg:py-4` and gaps to `gap-5 md:gap-8 lg:gap-10`
-- Default remains unchanged so Home and other pages are unaffected
+Restructure to a vertically stacked layout that never wraps:
 
-### 2. Tighten Team page marquee wrapper
+```text
+Row 1:  Cruxway | LOWER MIDDLE MARKET PE          info@cruxway.com  |  India
+        ──────────────────────────────────────────────────────────────────
+Row 2:  HOME · OUR IDENTITY · OUR FOCUS · OUR PLAYBOOK · TEAM · CONTACT
+        ──────────────────────────────────────────────────────────────────
+Row 3:  (c) 2026 Cruxway LLC...                    Privacy Policy  Terms
+```
 
-**File: `src/pages/Team.tsx`** (lines 458-467)
+### File: `src/components/SiteFooter.tsx`
 
-- Reduce wrapper padding from `pt-8 md:pt-10 pb-8 md:pb-10` to `pt-4 md:pt-5 pb-2 md:pb-3`
-- Pass `compact` to `<LogoMarquee>`
+- **Row 1** (brand + contact): `flex justify-between items-center py-4`
+  - Left: Cruxway wordmark + tagline (as-is)
+  - Right: email + divider + region switcher (as-is)
+- **Divider** between Row 1 and Row 2
+- **Row 2** (navigation): `flex justify-center items-center py-3` - all 6 links in a single centered row with `gap-6 md:gap-8` so they never wrap
+- **Divider** between Row 2 and Row 3
+- **Row 3** (legal): copyright left, Privacy/Terms right, `py-2.5`
+- Increase font sizes slightly: nav links to `text-[12px]`, email to `text-[12px]`, copyright/legal to `text-[11px]`
+- Widen container to `max-w-[1200px]` for more breathing room
+- Keep mobile stacking behavior with `flex-col` breakpoints
 
-### 3. Polish footer for desktop
-
-**File: `src/components/SiteFooter.tsx`**
-
-- Widen container from `1080px` to `1140px`
-- Tighten Row 1 padding: `py-5 md:py-4` to `py-3`
-- Tighten Row 2 padding: `py-3` to `py-2`
-- Increase nav link desktop gap: `md:gap-5`
-- Single-line layout on desktop: ensure all three groups (brand, nav, region/email) sit on one row with proper `justify-between` and no wrapping
+No other files modified.
 
