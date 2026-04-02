@@ -16,9 +16,10 @@ interface LogoMarqueeProps {
   logos: LogoItem[];
   duration?: number;
   variant?: 'dark' | 'inline';
+  compact?: boolean;
 }
 
-const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 55, variant = 'dark' }, ref) => {
+const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, duration = 55, variant = 'dark', compact = false }, ref) => {
   const doubled = [...logos, ...logos];
   const { theme } = useTheme();
   const isMobile = useIsMobile();
