@@ -78,9 +78,12 @@ const SiteHeader = () => {
   const otherRegion = region === 'india' ? 'us' : 'india';
 
   const handleRegionSwitch = (target: 'india' | 'us') => {
-    setRegion(target);
-    setRegionTheme(target);
-    navigate(`/${target}`);
+    const subPath = location.pathname.replace(/^\/(india|us)/, '');
+    startTransition(() => {
+      setRegion(target);
+      setRegionTheme(target);
+    });
+    navigate(`/${target}${subPath || ''}`);
     setFlagOpen(false);
   };
 

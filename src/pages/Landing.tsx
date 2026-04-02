@@ -25,6 +25,7 @@ const Landing = () => {
     setSelected(region);
     setTimeout(() => {
       setRegion(region);
+      setRegionTheme(region);
       navigate(`/${region}`);
     }, 600);
   };
