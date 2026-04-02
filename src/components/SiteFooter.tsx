@@ -66,7 +66,7 @@ const SiteFooter = () => {
           </div>
 
           {/* Center: Navigation */}
-          <nav className="flex items-center gap-3 md:gap-4 flex-wrap">
+          <nav className="flex items-center gap-3 md:gap-5 flex-wrap">
             {navLinks.map((item, i) => (
               <span key={item.path} className="flex items-center gap-3 md:gap-4">
                 <Link to={item.path} className={linkClass}>
