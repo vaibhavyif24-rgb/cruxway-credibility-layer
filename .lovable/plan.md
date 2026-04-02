@@ -1,39 +1,36 @@
 
 
-## Improve Largest Contentful Paint (LCP) — from 3.7s to target < 2.5s
+## Fix Team Page Hero — Remove Random Line & Polish Layout
 
-### Root Cause
+### Problem
+The Team page hero has a **GoldRule** element (a short gold line with a rotating diamond shape) floating awkwardly between the description text and the stats bar at the bottom. This looks like a random, misplaced line. Additionally, the hero content spacing and stats bar positioning need refinement for a polished, senior-designer feel.
 
-The `index.html` preloads the **wrong image file**:
-- Preloaded: `/src/assets/hero-crossroads.webp`
-- Actually used by LCP element (`GeometricHero`): `/src/assets/hero-crossroads-road.webp`
+### Changes
 
-This means the browser wastes bandwidth fetching an unused image while the real LCP image waits in the request queue until JavaScript discovers it.
+**1. Remove the GoldRule from the Team hero** (`src/pages/Team.tsx`, lines 383-385)
+- The GoldRule works well on pages without a stats bar (About, etc.), but on the Team page it sits between the text and the absolute-positioned stats bar, looking random and unintentional.
+- Delete the `<FadeIn delay={0.2}><GoldRule .../></FadeIn>` block.
 
-Additionally, the LCP element (the "Cruxway" h1 heading) starts with `opacity: 0` and `y: 10` via Framer Motion, which delays LCP measurement until the animation completes.
+**2. Fix hero content padding to properly clear the stats bar** (`src/pages/Team.tsx`, line 367)
+- Currently `pb-28` on mobile pushes content too close to the stats bar or leaves uneven spacing.
+- Change to `pb-36 md:pb-32 lg:pb-32` so the text content has consistent clearance above the stats bar across breakpoints.
 
-### Plan
+**3. Clean up CinematicHero SVG — remove the low-opacity horizontal line and diamond** (`src/components/CinematicHero.tsx`, lines 90-99)
+- Remove the horizontal line at `y=720` (line 92) and the diamond path (lines 93-97) — these draw a faint line and shape near the bottom of every hero using CinematicHero, contributing to the "random line" appearance.
+- Keep the corner brackets (lines 82-89) and the subtle diagonal convergence lines (lines 90-91) as they provide the geometric framing effect.
+- Also remove the two small circles at (250,480) and (950,480) (lines 98-99) which are endpoints of the diagonal lines — they're barely visible and add visual noise.
 
-**1. Fix the preload URL mismatch** (index.html)
-- Change the preload `href` from `/src/assets/hero-crossroads.webp` to `/src/assets/hero-crossroads-road.webp` so the browser fetches the correct image immediately.
-
-**2. Remove initial opacity animation from the LCP text element** (Landing.tsx)
-- The `<h1>Cruxway</h1>` is likely the LCP element. It's wrapped in a `motion.div` with `initial={{ y: 10 }}` which Framer Motion translates to `opacity: 0` by default on first render.
-- Change the wrapper to render the h1 visible immediately (no initial opacity of 0). Keep the subtle `y` slide if desired, but ensure `opacity` starts at 1.
-- The sub-elements (divider line, "Investment & Partnership") can keep their delayed animations — only the h1 matters for LCP.
-
-**3. Remove the stale preload for the unused image**
-- Delete or update the preload so we're not wasting a network connection on `hero-crossroads.webp` (only used nowhere in the codebase).
-
-### Technical Details
-
-- The LCP metric measures when the largest visible element finishes painting. If `opacity: 0` is set initially, Chrome waits until the element becomes visible.
-- Fixing the preload mismatch alone should shave ~500-800ms. Removing the opacity animation gate on the h1 should further improve LCP by ~200-400ms.
-- No visual change to the user — the hero text will simply appear ~300ms earlier, which is imperceptible given the page transition animation.
+**4. Remove the horizontal shimmer line** (`src/components/CinematicHero.tsx`, lines 123-130)
+- The full-width animated shimmer line at 40% height appears as a random horizontal line flashing across heroes.
+- Remove it entirely.
 
 ### Files Changed
 | File | Change |
 |------|--------|
-| `index.html` | Fix preload href to `hero-crossroads-road.webp` |
-| `src/pages/Landing.tsx` | Ensure h1's parent motion.div starts with `opacity: 1` explicitly |
+| `src/pages/Team.tsx` | Remove GoldRule, adjust hero content padding |
+| `src/components/CinematicHero.tsx` | Remove bottom horizontal line, diamond path, endpoint circles, and shimmer line |
+
+### Risk Assessment
+- GoldRule removal is Team-page-only — no other pages affected.
+- CinematicHero changes affect all pages using it (About, Team, OurPlaybook, InvestmentCriteria, Contact, GuidingPrinciples). The removed elements are very low opacity (0.1–0.18) decorative lines that read as visual noise. The corner brackets and diagonal convergence lines — the primary geometric framing — are preserved.
 
