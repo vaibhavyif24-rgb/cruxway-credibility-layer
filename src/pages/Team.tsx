@@ -393,7 +393,7 @@ const Team = () => {
           </div>
         </div>
 
-        <HeroDivider />
+        
       </section>
 
       {/* ScrollRevealText — after hero */}
