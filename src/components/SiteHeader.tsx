@@ -78,6 +78,7 @@ const SiteHeader = () => {
 
   const handleRegionSwitch = (target: 'india' | 'us') => {
     setRegion(target);
+    setRegionTheme(target);
     navigate(`/${target}`);
     setFlagOpen(false);
   };
