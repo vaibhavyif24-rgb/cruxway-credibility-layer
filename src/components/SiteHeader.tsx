@@ -147,6 +147,7 @@ const SiteHeader = () => {
                   <Link
                     key={item.path}
                     to={item.path}
+                    onMouseEnter={() => handlePrefetch(item.path)}
                     className={`relative font-sans text-[10px] uppercase tracking-[0.08em] py-1.5 px-2 rounded-sm transition-all duration-300 ${
                       isActive(item.path)
                         ? 'text-gold font-semibold'
