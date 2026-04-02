@@ -37,8 +37,8 @@ const Landing = () => {
 
       {/* Main content — high z-index, fully readable */}
       <motion.div
-        initial={{ y: 10 }}
-        animate={{ y: 0 }}
+        initial={{ opacity: 1, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         className="relative z-10 text-center"
       >
