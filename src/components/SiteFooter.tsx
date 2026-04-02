@@ -40,50 +40,38 @@ const SiteFooter = () => {
     { label: 'Contact', path: `${prefix}/contact` },
   ];
 
-  const linkClass = `font-sans text-[11px] font-medium uppercase tracking-[0.12em] transition-colors duration-200 ${
+  const navLinkClass = `font-sans text-[12px] font-medium uppercase tracking-[0.12em] transition-colors duration-200 ${
     isDark
       ? 'text-primary-foreground/40 hover:text-primary-foreground/70'
       : 'text-foreground/50 hover:text-foreground/75'
   }`;
+
+  const dividerClass = `h-px ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.08]'}`;
 
   return (
     <footer className={`relative transition-colors duration-300 ${isDark ? 'bg-primary' : 'bg-[hsl(40,15%,94%)]'}`}>
       {/* Gold top border */}
       <div className="h-px" style={{ background: 'linear-gradient(90deg, transparent, hsl(40,65%,44%,0.15), transparent)' }} />
 
-      <div className="max-w-[1140px] mx-auto px-5 md:px-10 lg:px-16">
-        {/* Row 1: Brand + Nav + Region/Email */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-3">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-10 lg:px-16">
+        {/* Row 1: Brand + Contact */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 py-4">
           {/* Left: Brand */}
           <div className="flex items-center gap-3 shrink-0">
             <span className={`font-serif text-lg tracking-[-0.02em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               Cruxway
             </span>
-            <span className={`hidden lg:inline h-3 w-px ${isDark ? 'bg-primary-foreground/10' : 'bg-foreground/15'}`} />
-            <span className={`hidden lg:inline font-sans text-[10px] uppercase tracking-[0.16em] ${isDark ? 'text-primary-foreground/20' : 'text-foreground/35'}`}>
+            <span className={`hidden md:inline h-3 w-px ${isDark ? 'bg-primary-foreground/10' : 'bg-foreground/15'}`} />
+            <span className={`hidden md:inline font-sans text-[10px] uppercase tracking-[0.16em] ${isDark ? 'text-primary-foreground/20' : 'text-foreground/35'}`}>
               Lower Middle Market Private Equity
             </span>
           </div>
 
-          {/* Center: Navigation */}
-          <nav className="flex items-center gap-3 md:gap-5 flex-wrap">
-            {navLinks.map((item, i) => (
-              <span key={item.path} className="flex items-center gap-3 md:gap-4">
-                <Link to={item.path} className={linkClass}>
-                  {item.label}
-                </Link>
-                {i < navLinks.length - 1 && (
-                  <span className={`text-[8px] ${isDark ? 'text-primary-foreground/10' : 'text-foreground/20'}`}>·</span>
-                )}
-              </span>
-            ))}
-          </nav>
-
-          {/* Right: Region + Email */}
+          {/* Right: Email + Region */}
           <div className="flex items-center gap-3 shrink-0">
             <a
               href={`mailto:${email}`}
-              className={`font-sans text-[11px] tracking-[0.04em] transition-colors duration-200 ${isDark ? 'text-primary-foreground/35 hover:text-gold' : 'text-foreground/45 hover:text-gold'}`}
+              className={`font-sans text-[12px] tracking-[0.04em] transition-colors duration-200 ${isDark ? 'text-primary-foreground/35 hover:text-gold' : 'text-foreground/45 hover:text-gold'}`}
             >
               {email}
             </a>
@@ -104,18 +92,37 @@ const SiteFooter = () => {
         </div>
 
         {/* Divider */}
-        <div className={`h-px ${isDark ? 'bg-primary-foreground/[0.06]' : 'bg-foreground/[0.08]'}`} />
+        <div className={dividerClass} />
 
-        {/* Row 2: Copyright + Legal */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 py-2">
-          <p className={`font-sans text-[10px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/18' : 'text-foreground/30'}`}>
+        {/* Row 2: Navigation (centered) */}
+        <div className="flex justify-center items-center py-3">
+          <nav className="flex items-center gap-6 md:gap-8">
+            {navLinks.map((item, i) => (
+              <span key={item.path} className="flex items-center gap-6 md:gap-8">
+                <Link to={item.path} className={navLinkClass}>
+                  {item.label}
+                </Link>
+                {i < navLinks.length - 1 && (
+                  <span className={`text-[8px] ${isDark ? 'text-primary-foreground/10' : 'text-foreground/20'}`}>·</span>
+                )}
+              </span>
+            ))}
+          </nav>
+        </div>
+
+        {/* Divider */}
+        <div className={dividerClass} />
+
+        {/* Row 3: Copyright + Legal */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 py-2.5">
+          <p className={`font-sans text-[11px] tracking-[0.06em] ${isDark ? 'text-primary-foreground/18' : 'text-foreground/30'}`}>
             &copy; {year} Cruxway LLC. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
-            <span className={`font-sans text-[10px] tracking-[0.06em] cursor-pointer transition-colors duration-200 ${isDark ? 'text-primary-foreground/15 hover:text-primary-foreground/30' : 'text-foreground/25 hover:text-foreground/45'}`}>
+            <span className={`font-sans text-[11px] tracking-[0.06em] cursor-pointer transition-colors duration-200 ${isDark ? 'text-primary-foreground/15 hover:text-primary-foreground/30' : 'text-foreground/25 hover:text-foreground/45'}`}>
               Privacy Policy
             </span>
-            <span className={`font-sans text-[10px] tracking-[0.06em] cursor-pointer transition-colors duration-200 ${isDark ? 'text-primary-foreground/15 hover:text-primary-foreground/30' : 'text-foreground/25 hover:text-foreground/45'}`}>
+            <span className={`font-sans text-[11px] tracking-[0.06em] cursor-pointer transition-colors duration-200 ${isDark ? 'text-primary-foreground/15 hover:text-primary-foreground/30' : 'text-foreground/25 hover:text-foreground/45'}`}>
               Terms
             </span>
           </div>
