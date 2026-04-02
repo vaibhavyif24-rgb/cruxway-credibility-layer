@@ -402,7 +402,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
 
 /* ─── Criteria Accordion (Mobile) ─── */
 const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: boolean }) => {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState(-1);
 
   return (
     <div className="space-y-0">
