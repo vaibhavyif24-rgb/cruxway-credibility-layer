@@ -520,7 +520,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            The path to building anything enduring has no shortcuts.
+            There are no shortcuts to building something worth keeping.
           </motion.p>
 
           <motion.p
