@@ -75,7 +75,7 @@ const Contact = () => {
                   <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground group-hover:text-gold-dim transition-colors duration-500 tracking-[-0.01em]">
                     {email}
                   </p>
-                  <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] mt-3">
+                  <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
                     {isIndia
                       ? 'For inquiries related to partnerships and opportunities in India.'
                       : 'For general inquiries, partnership discussions, and deal flow.'}
@@ -99,7 +99,7 @@ const Contact = () => {
                 <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground tracking-[-0.01em]">
                   {location}
                 </p>
-                <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] mt-3">
+                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
                   {isIndia
                     ? 'India operations based in Delhi, with a network spanning key industrial regions.'
                     : 'Headquartered in San Diego, with a nationwide investment focus.'}

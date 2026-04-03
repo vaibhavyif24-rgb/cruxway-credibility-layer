@@ -103,7 +103,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
           </motion.div>
         )}
 
-        <p className="font-serif text-[clamp(1.9rem,5.5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px] break-words">
+        <p className="font-serif text-[clamp(1.6rem,5vw,3.2rem)] leading-[1.18] tracking-[-0.025em] max-w-[780px] break-words">
           {words.map((word, i) => {
             const start = (i / words.length) * 0.8;
             const end = ((i + 1) / words.length) * 0.8;

@@ -377,7 +377,7 @@ const Team = () => {
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'Global experience, local conviction. Building alongside the founders who are building India.'
-                : 'Operators and investors building alongside founders.'}
+                : 'Operators and investors who understand what it takes to build.'}
             </p>
           </FadeIn>
         </div>
@@ -422,7 +422,7 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="Relationships built over years of working together, not a Rolodex."
+        heading="Relationships built over years of working together, not a contact list."
         variant="dark"
       />
 
@@ -441,7 +441,7 @@ const Team = () => {
           <div className="lg:col-span-8 flex items-center">
             <FadeIn delay={0.08}>
               <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
-                <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
+                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
                     ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
                     : 'Operators and leaders who have built businesses like the ones we invest in.'}
@@ -456,7 +456,7 @@ const Team = () => {
       </Section>
 
       {/* Institutional Experience Marquee */}
-      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-[hsl(40,18%,96%)] border-y border-[hsl(38,12%,90%)]'}`}>
+      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-[hsl(40,20%,91%)] border-y border-[hsl(38,12%,90%)]'}`}>
         {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10 pb-2 md:pb-3">
           <FadeIn>
@@ -465,7 +465,7 @@ const Team = () => {
           </FadeIn>
         </div>
         <div className="relative pb-6 md:pb-8">
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="inline" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
         </div>
       </section>
     </div>
