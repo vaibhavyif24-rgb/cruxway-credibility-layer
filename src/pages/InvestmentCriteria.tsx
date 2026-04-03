@@ -380,12 +380,12 @@ const InvestmentCriteria = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                  {isIndia ? "See Yourself Here?" : "Think This Describes Your Business?"}
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
-                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
+                    ? "If the criteria above describe your business, we'd welcome the opportunity to learn more about what you've built."
+                    : "If what you've read here sounds like your situation, reach out. We're direct, we're respectful, and we respond to every serious inquiry."}
                 </p>
               </FadeIn>
             </div>
