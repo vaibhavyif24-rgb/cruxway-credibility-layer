@@ -190,6 +190,7 @@ const CruxwayOriginStory = () => {
   const act2Line1Op = useTransform(scrollYProgress, [0.35, 0.38, 0.46, 0.52], [0, 1, 1, 0]);
   const act2Line2Op = useTransform(scrollYProgress, [0.36, 0.39, 0.46, 0.52], [0, 1, 1, 0]);
   const act2Line3Op = useTransform(scrollYProgress, [0.37, 0.40, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2Line4Op = useTransform(scrollYProgress, [0.38, 0.41, 0.46, 0.52], [0, 1, 1, 0]);
 
   /* ─── ACT 3: The Equation (0.50 → 0.72) — tightened entry ─── */
   const crucibleReturnOp = useTransform(scrollYProgress, [0.46, 0.52, 0.95, 1.0], [0, 1, 1, 1]);
@@ -351,23 +352,32 @@ const CruxwayOriginStory = () => {
               className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
               style={{ opacity: act2Line1Op, textShadow: videoSubShadow }}
             >
-              <span className="text-gold/70">English:</span>{' '}
+              <span className="text-gold/70 font-medium">English:</span>{' '}
               <span style={{ color: videoBodyColor }}>the path and method one takes</span>
             </motion.p>
             <motion.p
               className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
               style={{ opacity: act2Line2Op, textShadow: videoSubShadow }}
             >
-              <span className="text-gold/70">Japanese (道):</span>{' '}
-              <span style={{ color: videoBodyColor }}>a discipline-based path of mastery</span>
+              <span className="text-gold/70 font-medium">Japanese (道, dō):</span>{' '}
+              <span style={{ color: videoBodyColor }}>the disciplined path of mastery through practice</span>
             </motion.p>
             <motion.p
               className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
               style={{ opacity: act2Line3Op, textShadow: videoSubShadow }}
             >
-              <span className="text-gold/70">Chinese (道):</span>{' '}
-              <span style={{ color: videoBodyColor }}>alignment with reality; the way things are when undistorted</span>
+              <span className="text-gold/70 font-medium">Chinese (道, dào):</span>{' '}
+              <span style={{ color: videoBodyColor }}>the natural order; reality flowing when unforced</span>
             </motion.p>
+            {isIndia && (
+              <motion.p
+                className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
+                style={{ opacity: act2Line4Op, textShadow: videoSubShadow }}
+              >
+                <span className="text-gold/70 font-medium">Hindi (मार्ग, mārg):</span>{' '}
+                <span style={{ color: videoBodyColor }}>the committed road; a path walked with purpose</span>
+              </motion.p>
+            )}
           </div>
         </motion.div>
 
@@ -428,7 +438,7 @@ const CruxwayOriginStory = () => {
           </motion.p>
 
           <motion.p
-            className="font-sans leading-[1.75] mt-4 max-w-[520px]"
+            className="font-sans leading-[1.75] mt-4 max-w-[540px]"
             style={{
               opacity: act3ExplainOp,
               color: videoBodyColor,
@@ -437,7 +447,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            We believe that building something enduring demands both: the pressure that forges conviction, and the discipline to walk the path every single day.
+            Getting from A to B matters. To do that, one must transform under pressure and sustained discipline. But the journey itself matters too. It must be aligned with the natural order of things.
           </motion.p>
         </motion.div>
 
@@ -478,7 +488,7 @@ const CruxwayOriginStory = () => {
             className="font-sans text-[11px] md:text-[13px] font-semibold uppercase tracking-[0.22em] mt-8"
             style={{ opacity: act4ClosingOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
-            Forging conviction through rigour
+            Forging conviction through rigor
           </motion.p>
         </motion.div>
       </div>

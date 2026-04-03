@@ -251,7 +251,7 @@ const OurFocus = () => {
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               What We Look For
             </h2>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
@@ -387,7 +387,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
                 transition={{ duration: 0.4, delay: 0.15 }}
                 className="h-[1.5px] bg-gold/30 mb-4"
               />
-              <p className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+              <p className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${isDark ? 'text-primary-foreground/65' : 'text-muted-foreground'}`}>
                 {items[active].desc}
               </p>
             </div>
