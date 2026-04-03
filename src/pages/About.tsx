@@ -85,7 +85,7 @@ const About = () => {
         highlights={isIndia ? ['families', 'founders'] : ['already', 'working']}
         subtext={
           isIndia
-            ? 'Majority positions. Founder-aligned structures. A commitment that extends well beyond the typical investment horizon.'
+            ? 'Majority positions. Founder-aligned structures. A partnership that extends well beyond the typical investment horizon.'
             : 'Preserve what the founder built. Professionalize what holds it back. Hold it for as long as the opportunity warrants.'
         }
         variant="light"
