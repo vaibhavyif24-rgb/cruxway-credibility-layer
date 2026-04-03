@@ -407,7 +407,7 @@ const CruxwayOriginStory = () => {
             {isIndia && (
               <motion.div
                 className="relative pl-4 border-l-2 border-gold/30"
-                style={{ opacity: act2Line4Op, y: useTransform(scrollYProgress, [0.38, 0.41], [12, 0]) }}
+                style={{ opacity: act2Line4Op, y: act2Line4Y }}
               >
                 <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
                   Hindi (मार्ग, mārg)
