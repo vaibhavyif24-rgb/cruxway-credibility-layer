@@ -23,13 +23,11 @@ const evaluationSteps = [
 ];
 
 const valueCreationItems = [
-  { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-  { title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+  { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+  { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
   { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
   { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
 ];
-
-const STEP_DURATION = 10000;
 
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
   const [active, setActive] = useState(0);
