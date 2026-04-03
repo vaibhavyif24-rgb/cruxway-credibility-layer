@@ -51,6 +51,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return 'light';
   });
 
+  const [isManualOverride, setIsManualOverride] = useState(false);
+  const [currentRegion, setCurrentRegion] = useState<Region>(null);
+
   // Clear stale localStorage from older versions
   useEffect(() => {
     try {
@@ -69,11 +72,27 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [theme]);
 
   const toggleTheme = useCallback(() => {
+    setIsManualOverride(true);
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   }, []);
 
   const setRegionTheme = useCallback((region: Region) => {
-    setTheme(getThemeForRegion(region));
+    // Region changed (india ↔ us) → reset manual override
+    setCurrentRegion(prev => {
+      if (prev !== null && prev !== region) {
+        setIsManualOverride(false);
+        setTheme(getThemeForRegion(region));
+      } else {
+        // Same region or first load → only set if no manual override
+        setIsManualOverride(current => {
+          if (!current) {
+            setTheme(getThemeForRegion(region));
+          }
+          return current;
+        });
+      }
+      return region;
+    });
   }, []);
 
   return (
