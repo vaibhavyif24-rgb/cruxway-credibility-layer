@@ -101,8 +101,8 @@ const Contact = () => {
                 </p>
                 <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
                   {isIndia
-                    ? 'India operations based in Delhi, with a network spanning key industrial regions.'
-                    : 'Headquartered in San Diego, with a nationwide investment focus.'}
+                    ? 'Based in Delhi, with relationships across India\'s key industrial corridors.'
+                    : 'Based in San Diego, investing across the United States.'}
                 </p>
               </GlassCard>
               </motion.a>
