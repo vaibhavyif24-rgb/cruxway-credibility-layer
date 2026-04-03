@@ -359,7 +359,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
                   >
                     {items[active].num}
                   </motion.span>
-                  <h3 className={`font-serif text-[clamp(1.4rem,3vw,2rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  <h3 className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                     {items[active].title}
                   </h3>
                   <motion.div
