@@ -193,7 +193,7 @@ const OurFocus = () => {
         <div className="relative max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel light={isDark}>Sectors We Cover</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               Where We Invest
             </h2>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
@@ -295,12 +295,12 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
   return (
     <div>
       {/* Tab row */}
-      <div className="flex border-b border-gold/10">
+      <div className="flex overflow-x-auto scrollbar-hide border-b border-gold/10">
         {items.map((item, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`flex-1 text-left relative py-3 px-3 transition-all duration-300 ${
+            className={`min-w-[140px] md:min-w-0 md:flex-1 text-left relative py-3 px-4 transition-all duration-300 shrink-0 ${
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
@@ -312,7 +312,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
             }`}>
               {item.num}
             </span>
-            <span className={`block font-serif text-[1rem] md:text-[1.1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+            <span className={`block font-serif text-[1.05rem] md:text-[1.15rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
               i === active
                 ? isDark ? 'text-primary-foreground' : 'text-foreground'
                 : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
@@ -425,7 +425,7 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                 >
                   <div className="pb-5 pl-[calc(1.5rem+12px)]">
                     <div className="w-8 h-[1.5px] bg-gold/30 mb-3" />
-                    <p className={`font-sans text-[14px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                    <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                       {item.desc}
                     </p>
                   </div>
