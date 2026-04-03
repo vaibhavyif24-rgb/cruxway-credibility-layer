@@ -163,7 +163,7 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
       />
 
       {/* Description */}
-      <p className={`text-center font-sans text-[13px] md:text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+      <p className={`text-center font-sans text-[14px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
         {step.desc}
       </p>
     </motion.div>
