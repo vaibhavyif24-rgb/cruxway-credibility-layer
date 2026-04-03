@@ -347,14 +347,6 @@ const CruxwayOriginStory = () => {
             <div className="h-[1px] w-full bg-gold/30" />
           </motion.div>
 
-          {/* Gold divider between heading and definitions */}
-          <motion.div
-            className="w-12 h-px mx-auto mt-5 mb-6"
-            style={{
-              opacity: act2Line1Op,
-              background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.5), transparent)',
-            }}
-          />
 
           {/* Definitions with gold left-border accents */}
           <div className="flex flex-col items-start gap-4 max-w-[420px] text-left relative">
