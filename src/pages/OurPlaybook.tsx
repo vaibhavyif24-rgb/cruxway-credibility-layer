@@ -98,20 +98,69 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
 const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItems; isDark: boolean }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const isMobile = useIsMobile();
-  const barHeights = isMobile ? [90, 140, 195, 260] : [120, 190, 265, 350];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+  const barHeights = isMobile ? [100, 160, 230, 310] : [130, 210, 295, 390];
+  const barWidth = isMobile ? 64 : 100;
+  const gap = isMobile ? 20 : 40;
+
+  // Calculate SVG points for growth trajectory line
+  const totalWidth = barWidth * 4 + gap * 3;
+  const chartHeight = isMobile ? 380 : 480;
+  const baselineY = chartHeight - 60;
+  const points = barHeights.map((h, i) => ({
+    x: i * (barWidth + gap) + barWidth / 2,
+    y: baselineY - h - 8,
+  }));
+  const pathD = points.length === 4
+    ? `M${points[0].x},${points[0].y} C${points[0].x + gap},${points[0].y} ${points[1].x - gap},${points[1].y} ${points[1].x},${points[1].y} S${points[2].x - gap},${points[2].y} ${points[2].x},${points[2].y} S${points[3].x - gap},${points[3].y} ${points[3].x},${points[3].y}`
+    : '';
 
   return (
-    <div className="w-full">
+    <div className="w-full" ref={containerRef}>
       {/* Chart area */}
-      <div className="relative" style={{ height: isMobile ? 340 : 440 }}>
-        {/* Horizontal baseline */}
+      <div className="relative flex justify-center" style={{ height: chartHeight }}>
+        {/* SVG growth trajectory line */}
+        <svg
+          className="absolute pointer-events-none"
+          style={{
+            width: totalWidth,
+            height: chartHeight,
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
+          viewBox={`0 0 ${totalWidth} ${chartHeight}`}
+          fill="none"
+        >
+          <motion.path
+            d={pathD}
+            stroke={isDark ? 'hsl(43 78% 50% / 0.2)' : 'hsl(43 78% 50% / 0.25)'}
+            strokeWidth="1.5"
+            strokeDasharray="6 4"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
+            transition={{ duration: 1.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </svg>
+
+        {/* Horizontal baseline with gradient fade */}
         <div
-          className="absolute bottom-[60px] left-0 right-0 h-[1px]"
-          style={{ background: isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.2)' }}
+          className="absolute left-0 right-0"
+          style={{
+            bottom: 60,
+            height: '1.5px',
+            background: isDark
+              ? 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.15) 15%, hsl(43 78% 50% / 0.15) 85%, transparent)'
+              : 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.2) 15%, hsl(43 78% 50% / 0.2) 85%, transparent)',
+          }}
         />
 
         {/* Bars */}
-        <div className="absolute bottom-[60px] left-0 right-0 flex items-end justify-center gap-5 md:gap-8 lg:gap-10">
+        <div
+          className="absolute left-0 right-0 flex items-end justify-center"
+          style={{ bottom: 60, gap }}
+        >
           {items.map((item, i) => {
             const isActive = selected === i;
             const isOther = selected !== null && !isActive;
@@ -121,67 +170,93 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                 key={i}
                 onClick={() => setSelected(prev => prev === i ? null : i)}
                 className="flex flex-col items-center cursor-pointer group focus:outline-none"
-                animate={{ opacity: isOther ? 0.12 : 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: isInView ? (isOther ? 0.2 : 1) : 0,
+                }}
+                transition={{ duration: 0.5, delay: isInView ? i * 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Bar */}
+                {/* Bar container */}
                 <motion.div
                   className="relative rounded-t overflow-hidden"
-                  style={{ width: isMobile ? 52 : 80 }}
+                  style={{ width: barWidth }}
+                  initial={{ height: 0 }}
                   animate={{
-                    height: isActive ? barHeights[i] + 16 : barHeights[i],
+                    height: isInView ? (isActive ? barHeights[i] + 16 : barHeights[i]) : 0,
                   }}
-                  transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+                  transition={{
+                    height: {
+                      type: 'spring',
+                      stiffness: 200,
+                      damping: 25,
+                      delay: isInView ? i * 0.12 : 0,
+                    },
+                  }}
                 >
-                  {/* Bar fill: gradient */}
+                  {/* Bar fill: multi-layer gradient + vertical line texture */}
                   <div
                     className="absolute inset-0 rounded-t"
                     style={{
                       background: isActive
-                        ? 'linear-gradient(180deg, hsl(43 78% 60%) 0%, hsl(43 78% 45%) 100%)'
+                        ? 'linear-gradient(180deg, hsl(43 78% 60%) 0%, hsl(43 78% 42%) 100%)'
                         : isDark
-                          ? 'linear-gradient(180deg, hsl(43 78% 50% / 0.18) 0%, hsl(43 78% 50% / 0.06) 100%)'
-                          : 'linear-gradient(180deg, hsl(43 78% 50% / 0.22) 0%, hsl(43 78% 50% / 0.08) 100%)',
-                      border: isActive
-                        ? '1px solid hsl(43 78% 50% / 0.5)'
-                        : isDark
-                          ? '1px solid hsl(43 78% 50% / 0.08)'
-                          : '1px solid hsl(43 78% 50% / 0.12)',
-                      borderBottom: 'none',
+                          ? 'linear-gradient(180deg, hsl(43 78% 50% / 0.30) 0%, hsl(43 78% 50% / 0.08) 100%)'
+                          : 'linear-gradient(180deg, hsl(43 78% 50% / 0.35) 0%, hsl(43 78% 50% / 0.12) 100%)',
+                      boxShadow: isActive
+                        ? '0 0 30px hsl(43 78% 50% / 0.25), inset 0 1px 0 hsl(43 78% 70% / 0.4)'
+                        : `0 4px 20px -4px hsl(43 78% 50% / 0.08), inset 0 0 0 1px ${
+                            isDark ? 'hsl(43 78% 50% / 0.10)' : 'hsl(43 78% 50% / 0.15)'
+                          }`,
                     }}
                   />
 
-                  {/* Active: gold top highlight */}
-                  {isActive && (
-                    <motion.div
-                      className="absolute top-0 left-0 right-0 h-[3px]"
-                      style={{ background: 'hsl(43 78% 50%)' }}
-                      layoutId="bar-highlight"
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                    />
-                  )}
+                  {/* Vertical line texture */}
+                  <div
+                    className="absolute inset-0 rounded-t pointer-events-none"
+                    style={{
+                      background: `repeating-linear-gradient(90deg, transparent, transparent 11px, ${
+                        isDark ? 'hsl(43 78% 50% / 0.04)' : 'hsl(43 78% 50% / 0.06)'
+                      } 11px, ${
+                        isDark ? 'hsl(43 78% 50% / 0.04)' : 'hsl(43 78% 50% / 0.06)'
+                      } 12px)`,
+                    }}
+                  />
 
-                  {/* Active: shimmer overlay */}
+                  {/* Top-edge highlight */}
+                  <motion.div
+                    className="absolute top-0 left-0 right-0"
+                    style={{ background: 'hsl(43 78% 50%)' }}
+                    animate={{ height: isActive ? 4 : 1.5 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+
+                  {/* Active shimmer overlay */}
                   {isActive && (
                     <motion.div
                       className="absolute inset-0"
-                      style={{ background: 'linear-gradient(180deg, hsl(43 78% 80% / 0.2) 0%, transparent 50%)' }}
-                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      style={{
+                        background: 'linear-gradient(180deg, hsl(43 78% 80% / 0.25) 0%, transparent 40%)',
+                      }}
+                      animate={{ opacity: [0.4, 0.7, 0.4] }}
                       transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
                     />
                   )}
                 </motion.div>
 
                 {/* Labels below bar */}
-                <div className="mt-3 text-center">
-                  <span className={`block font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
-                    isActive ? 'text-gold' : isDark ? 'text-primary-foreground/25' : 'text-foreground/25'
-                  }`}>
+                <div className="mt-3 text-center" style={{ width: isMobile ? 90 : 110 }}>
+                  <span
+                    className={`block font-sans text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
+                      isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+                    }`}
+                  >
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className={`block font-serif text-[11px] md:text-[12px] mt-0.5 leading-[1.3] max-w-[72px] md:max-w-[90px] transition-colors duration-300 ${
-                    isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
-                  }`}>
+                  <span
+                    className={`block font-serif text-[12px] md:text-[13px] mt-1 leading-[1.3] transition-colors duration-300 ${
+                      isActive ? 'text-gold' : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
+                    }`}
+                  >
                     {item.title}
                   </span>
                 </div>
@@ -200,34 +275,45 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className={`mt-6 rounded-sm border p-7 md:p-10 relative overflow-hidden ${
+            className={`mt-6 rounded-sm border relative overflow-hidden flex ${
               isDark
                 ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
                 : 'border-[hsl(38,15%,88%)] bg-[hsl(40,20%,98%)]'
             }`}
           >
-            {/* Watermark number */}
-            <span className={`absolute top-3 right-5 font-serif text-[5rem] leading-none select-none pointer-events-none ${
-              isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
-            }`}>
-              {String(selected + 1).padStart(2, '0')}
-            </span>
+            {/* Left gold accent strip */}
+            <div className="w-[3px] flex-shrink-0 bg-gold/40" />
 
-            <div className="relative">
-              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/60 block mb-2">
-                Phase {String(selected + 1).padStart(2, '0')}
+            <div className="p-7 md:p-10 flex-1 relative">
+              {/* Watermark number */}
+              <span
+                className={`absolute top-2 right-5 font-serif text-[6rem] leading-none select-none pointer-events-none ${
+                  isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
+                }`}
+              >
+                {String(selected + 1).padStart(2, '0')}
               </span>
-              <h3 className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
-                isDark ? 'text-primary-foreground' : 'text-foreground'
-              }`}>
-                {items[selected].title}
-              </h3>
-              <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] max-w-[600px] ${
-                isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
-              }`}>
-                {items[selected].desc}
-              </p>
+
+              <div className="relative">
+                <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold block mb-2">
+                  Phase {String(selected + 1).padStart(2, '0')}
+                </span>
+                <h3
+                  className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                    isDark ? 'text-primary-foreground' : 'text-foreground'
+                  }`}
+                >
+                  {items[selected].title}
+                </h3>
+                <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+                <p
+                  className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
+                    isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
+                  }`}
+                >
+                  {items[selected].desc}
+                </p>
+              </div>
             </div>
           </motion.div>
         )}
@@ -235,7 +321,6 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
     </div>
   );
 };
-
 
 const OurPlaybook = () => {
   const { region } = useRegion();
