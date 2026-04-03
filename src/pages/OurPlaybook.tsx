@@ -98,97 +98,134 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
 const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItems; isDark: boolean }) => {
   const [selected, setSelected] = useState<number | null>(null);
   const isMobile = useIsMobile();
-  const barHeights = isMobile ? [100, 150, 200, 260] : [140, 200, 270, 350];
-
-  const handleClick = (i: number) => {
-    setSelected(prev => prev === i ? null : i);
-  };
+  const barHeights = isMobile ? [90, 140, 195, 260] : [120, 190, 265, 350];
 
   return (
     <div className="w-full">
-      {/* Bar chart */}
-      <div className="flex items-end justify-center gap-4 md:gap-8 mb-8" style={{ height: isMobile ? 280 : 380 }}>
-        {items.map((item, i) => {
-          const isActive = selected === i;
-          const isOther = selected !== null && !isActive;
+      {/* Chart area */}
+      <div className="relative" style={{ height: isMobile ? 340 : 440 }}>
+        {/* Horizontal baseline */}
+        <div
+          className="absolute bottom-[60px] left-0 right-0 h-[1px]"
+          style={{ background: isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.2)' }}
+        />
 
-          return (
-            <motion.div
-              key={i}
-              onClick={() => handleClick(i)}
-              className="relative flex flex-col items-center cursor-pointer group"
-              animate={{ opacity: isOther ? 0.15 : 1 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Bar */}
-              <motion.div
-                className="rounded-t-sm relative overflow-hidden"
-                style={{
-                  width: isMobile ? 48 : 80,
-                  background: isActive
-                    ? 'hsl(43 78% 50%)'
-                    : isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.1)',
-                }}
-                animate={{
-                  height: isActive ? barHeights[i] + 20 : barHeights[i],
-                }}
-                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        {/* Bars */}
+        <div className="absolute bottom-[60px] left-0 right-0 flex items-end justify-center gap-5 md:gap-8 lg:gap-10">
+          {items.map((item, i) => {
+            const isActive = selected === i;
+            const isOther = selected !== null && !isActive;
+
+            return (
+              <motion.button
+                key={i}
+                onClick={() => setSelected(prev => prev === i ? null : i)}
+                className="flex flex-col items-center cursor-pointer group focus:outline-none"
+                animate={{ opacity: isOther ? 0.12 : 1 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               >
-                {isActive && (
-                  <motion.div
-                    className="absolute inset-0"
+                {/* Bar */}
+                <motion.div
+                  className="relative rounded-t overflow-hidden"
+                  style={{ width: isMobile ? 52 : 80 }}
+                  animate={{
+                    height: isActive ? barHeights[i] + 16 : barHeights[i],
+                  }}
+                  transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+                >
+                  {/* Bar fill: gradient */}
+                  <div
+                    className="absolute inset-0 rounded-t"
                     style={{
-                      background: 'linear-gradient(180deg, hsl(43 78% 60% / 0.3) 0%, transparent 100%)',
+                      background: isActive
+                        ? 'linear-gradient(180deg, hsl(43 78% 60%) 0%, hsl(43 78% 45%) 100%)'
+                        : isDark
+                          ? 'linear-gradient(180deg, hsl(43 78% 50% / 0.18) 0%, hsl(43 78% 50% / 0.06) 100%)'
+                          : 'linear-gradient(180deg, hsl(43 78% 50% / 0.22) 0%, hsl(43 78% 50% / 0.08) 100%)',
+                      border: isActive
+                        ? '1px solid hsl(43 78% 50% / 0.5)'
+                        : isDark
+                          ? '1px solid hsl(43 78% 50% / 0.08)'
+                          : '1px solid hsl(43 78% 50% / 0.12)',
+                      borderBottom: 'none',
                     }}
-                    animate={{ opacity: [0.3, 0.6, 0.3] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   />
-                )}
-              </motion.div>
 
-              {/* Phase number below bar */}
-              <span className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] mt-3 ${
-                isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
-              }`}>
-                {String(i + 1).padStart(2, '0')}
-              </span>
+                  {/* Active: gold top highlight */}
+                  {isActive && (
+                    <motion.div
+                      className="absolute top-0 left-0 right-0 h-[3px]"
+                      style={{ background: 'hsl(43 78% 50%)' }}
+                      layoutId="bar-highlight"
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
 
-              {/* Title below number */}
-              <span className={`font-serif text-[11px] md:text-[13px] text-center mt-1 max-w-[80px] md:max-w-[100px] leading-[1.3] ${
-                isActive
-                  ? isDark ? 'text-primary-foreground' : 'text-foreground'
-                  : isDark ? 'text-primary-foreground/40' : 'text-foreground/40'
-              }`}>
-                {item.title}
-              </span>
-            </motion.div>
-          );
-        })}
+                  {/* Active: shimmer overlay */}
+                  {isActive && (
+                    <motion.div
+                      className="absolute inset-0"
+                      style={{ background: 'linear-gradient(180deg, hsl(43 78% 80% / 0.2) 0%, transparent 50%)' }}
+                      animate={{ opacity: [0.3, 0.6, 0.3] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  )}
+                </motion.div>
+
+                {/* Labels below bar */}
+                <div className="mt-3 text-center">
+                  <span className={`block font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
+                    isActive ? 'text-gold' : isDark ? 'text-primary-foreground/25' : 'text-foreground/25'
+                  }`}>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className={`block font-serif text-[11px] md:text-[12px] mt-0.5 leading-[1.3] max-w-[72px] md:max-w-[90px] transition-colors duration-300 ${
+                    isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+                  }`}>
+                    {item.title}
+                  </span>
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Selected phase content */}
-      <AnimatePresence>
+      {/* Selected phase detail panel */}
+      <AnimatePresence mode="wait">
         {selected !== null && (
           <motion.div
-            initial={{ opacity: 0, y: 12, height: 0 }}
-            animate={{ opacity: 1, y: 0, height: 'auto' }}
-            exit={{ opacity: 0, y: -8, height: 0 }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden"
-          >
-            <div className={`rounded-sm border p-7 md:p-10 ${
+            key={selected}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className={`mt-6 rounded-sm border p-7 md:p-10 relative overflow-hidden ${
               isDark
                 ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
+                : 'border-[hsl(38,15%,88%)] bg-[hsl(40,20%,98%)]'
+            }`}
+          >
+            {/* Watermark number */}
+            <span className={`absolute top-3 right-5 font-serif text-[5rem] leading-none select-none pointer-events-none ${
+              isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
             }`}>
+              {String(selected + 1).padStart(2, '0')}
+            </span>
+
+            <div className="relative">
               <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/60 block mb-2">
                 Phase {String(selected + 1).padStart(2, '0')}
               </span>
-              <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <h3 className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                isDark ? 'text-primary-foreground' : 'text-foreground'
+              }`}>
                 {items[selected].title}
               </h3>
               <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.8] max-w-[600px] ${
+                isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
+              }`}>
                 {items[selected].desc}
               </p>
             </div>

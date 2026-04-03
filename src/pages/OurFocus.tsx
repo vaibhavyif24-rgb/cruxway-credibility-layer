@@ -387,7 +387,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
                 transition={{ duration: 0.4, delay: 0.15 }}
                 className="h-[1.5px] bg-gold/30 mb-4"
               />
-              <p className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+              <p className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${isDark ? 'text-primary-foreground/65' : 'text-muted-foreground'}`}>
                 {items[active].desc}
               </p>
             </div>
