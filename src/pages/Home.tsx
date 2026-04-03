@@ -20,7 +20,7 @@ import heroUSHome from '@/assets/hero-us-home.jpg';
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
 import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
-import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
+import saltwaterLogo from '@/assets/logos/saltwater-capital.svg';
 
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
