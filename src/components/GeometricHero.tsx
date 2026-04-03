@@ -20,8 +20,8 @@ const GeometricHero = () => {
         initial={{ scale: 1.0, x: 0 }}
         animate={{ scale: kenBurnsScale, x: kenBurnsX }}
         transition={{
-          scale: { duration: 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-          x: { duration: 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+          scale: { duration: isMobile ? 16 : 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+          x: { duration: isMobile ? 20 : 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
         }}
       >
         <img
