@@ -139,9 +139,15 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
       </div>
 
       {/* Icon */}
-      <div className="flex justify-center mt-3 mb-2">
+      <motion.div
+        className="flex justify-center mt-3 mb-2"
+        initial={{ rotate: -10, opacity: 0 }}
+        whileInView={{ rotate: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      >
         <Icon className="w-5 h-5 text-gold/40" />
-      </div>
+      </motion.div>
 
       {/* Step number */}
       <motion.p className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2">

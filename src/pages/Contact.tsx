@@ -105,7 +105,7 @@ const Contact = () => {
                     : 'Headquartered in San Diego, with a nationwide investment focus.'}
                 </p>
               </GlassCard>
-              </a>
+              </motion.a>
             </FadeIn>
           </div>
         </div>

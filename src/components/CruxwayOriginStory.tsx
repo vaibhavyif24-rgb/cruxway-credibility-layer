@@ -347,36 +347,77 @@ const CruxwayOriginStory = () => {
             <div className="h-[1px] w-full bg-gold/30" />
           </motion.div>
 
-          <div className="mt-4 flex flex-col items-center gap-1">
-            <motion.p
-              className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
-              style={{ opacity: act2Line1Op, textShadow: videoSubShadow }}
+          {/* Gold divider between heading and definitions */}
+          <motion.div
+            className="w-12 h-px mx-auto mt-5 mb-6"
+            style={{
+              opacity: act2Line1Op,
+              background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.5), transparent)',
+            }}
+          />
+
+          {/* Definitions with gold left-border accents */}
+          <div className="flex flex-col items-start gap-4 max-w-[420px] text-left relative">
+            {/* Subtle breathing glow behind definitions */}
+            <motion.div
+              className="absolute -inset-8 pointer-events-none rounded-lg"
+              style={{
+                background: isDark
+                  ? 'radial-gradient(ellipse at center, hsl(43 78% 50% / 0.03), transparent 70%)'
+                  : 'radial-gradient(ellipse at center, hsl(43 78% 50% / 0.04), transparent 70%)',
+              }}
+              animate={{ scale: [0.95, 1.05, 0.95], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+            />
+
+            <motion.div
+              className="relative pl-4 border-l-2 border-gold/30"
+              style={{ opacity: act2Line1Op, y: useTransform(scrollYProgress, [0.35, 0.38], [12, 0]) }}
             >
-              <span className="text-gold/70 font-medium">English:</span>{' '}
-              <span style={{ color: videoBodyColor }}>the path and method one takes</span>
-            </motion.p>
-            <motion.p
-              className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
-              style={{ opacity: act2Line2Op, textShadow: videoSubShadow }}
+              <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
+                English
+              </p>
+              <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
+                The path and method one takes
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="relative pl-4 border-l-2 border-gold/30"
+              style={{ opacity: act2Line2Op, y: useTransform(scrollYProgress, [0.36, 0.39], [12, 0]) }}
             >
-              <span className="text-gold/70 font-medium">Japanese (道, dō):</span>{' '}
-              <span style={{ color: videoBodyColor }}>the disciplined path of mastery through practice</span>
-            </motion.p>
-            <motion.p
-              className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
-              style={{ opacity: act2Line3Op, textShadow: videoSubShadow }}
+              <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
+                Japanese (道, dō)
+              </p>
+              <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
+                The disciplined path of mastery through practice
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="relative pl-4 border-l-2 border-gold/30"
+              style={{ opacity: act2Line3Op, y: useTransform(scrollYProgress, [0.37, 0.40], [12, 0]) }}
             >
-              <span className="text-gold/70 font-medium">Chinese (道, dào):</span>{' '}
-              <span style={{ color: videoBodyColor }}>the natural order; reality flowing when unforced</span>
-            </motion.p>
+              <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
+                Chinese (道, dào)
+              </p>
+              <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
+                The natural order; reality flowing when unforced
+              </p>
+            </motion.div>
+
             {isIndia && (
-              <motion.p
-                className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
-                style={{ opacity: act2Line4Op, textShadow: videoSubShadow }}
+              <motion.div
+                className="relative pl-4 border-l-2 border-gold/30"
+                style={{ opacity: act2Line4Op, y: useTransform(scrollYProgress, [0.38, 0.41], [12, 0]) }}
               >
-                <span className="text-gold/70 font-medium">Hindi (मार्ग, mārg):</span>{' '}
-                <span style={{ color: videoBodyColor }}>the committed road; a path walked with purpose</span>
-              </motion.p>
+                <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
+                  Hindi (मार्ग, mārg)
+                </p>
+                <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
+                  The committed road; a path walked with purpose
+                </p>
+              </motion.div>
             )}
           </div>
         </motion.div>

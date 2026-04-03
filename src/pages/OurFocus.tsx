@@ -189,7 +189,13 @@ const OurFocus = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative">
             {/* Vertical divider on desktop */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gold/15" />
+            <motion.div
+              className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gold/15 origin-top"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            />
 
             {/* Left column */}
             <FadeIn delay={0}>
