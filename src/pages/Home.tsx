@@ -141,7 +141,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                 {step.num}
               </span>
               <motion.span
-                className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
                      : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
@@ -182,7 +182,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.15 }}
-                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
                   >
                     {steps[active].title}
                   </motion.h3>
@@ -414,7 +414,7 @@ const Home = () => {
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
                 ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Companies</>
                 : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
@@ -461,17 +461,9 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading={
-          isIndia
-            ? 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
-            : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
-        }
-        highlights={isIndia ? ['founders', 'long'] : ['founders', 'long']}
-        subtext={
-          isIndia
-            ? 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
-            : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
-        }
+        heading="We preserve what founders built and invest in what comes next. Every partnership is shaped around the business, not a template."
+        highlights={['founders', 'partnership']}
+        subtext="Patient capital, real operating experience, and a genuine respect for the businesses we partner with."
         variant="light"
       />
 
@@ -482,10 +474,10 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
-            : 'Patient capital and operational expertise unlock their next chapter of growth.'
+            ? 'Proven businesses deserve a partner who understands what they have built and can help them scale it.'
+            : 'Patient capital and hands-on experience open the next chapter.'
         }
-        highlights={isIndia ? ['discipline'] : ['Patient']}
+        highlights={isIndia ? ['partner'] : ['Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
@@ -500,7 +492,7 @@ const Home = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               From Discovery to Partnership
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
@@ -514,7 +506,7 @@ const Home = () => {
         <LightSectionEffects variant="section" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 text-center">
           <FadeIn>
-            <p className={`font-serif text-[clamp(1.6rem,4vw,2.6rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <p className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia
                 ? <>Global <span className="text-gold">institutional expertise</span> applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
                 : <>Decades of <span className="text-gold">institutional experience</span> dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
@@ -523,7 +515,7 @@ const Home = () => {
           </FadeIn>
         </div>
       </section>
-      <div className="bg-background">
+      <div className="bg-[hsl(40,20%,91%)]">
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 

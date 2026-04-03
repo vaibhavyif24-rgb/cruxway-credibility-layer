@@ -369,7 +369,7 @@ const Team = () => {
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
@@ -399,7 +399,7 @@ const Team = () => {
       {/* ScrollRevealText — after hero */}
       <ScrollRevealText
         label="Our People"
-        heading="Operators and investors who've built, scaled, and partnered across cycles."
+        heading="People who have been in the trenches, built businesses, and invested through every kind of market."
         variant="light"
       />
 
@@ -422,7 +422,7 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="A curated network built over decades of shared conviction and institutional rigor."
+        heading="Relationships built over years of working together, not a Rolodex."
         variant="dark"
       />
 
@@ -432,7 +432,7 @@ const Team = () => {
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Advisors &amp; Operating Partners</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 Our Network
               </h2>
               <GoldRule className="mt-3 md:mt-4" />
@@ -444,7 +444,7 @@ const Team = () => {
                 <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
                     ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
-                    : 'Our advisory network includes senior operators, industry veterans, and institutional leaders across the United States.'}
+                    : 'Operators and leaders who have built businesses like the ones we invest in.'}
                 </p>
                 <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
                   Details on our advisory network are shared selectively with prospective partners.
@@ -456,7 +456,7 @@ const Team = () => {
       </Section>
 
       {/* Institutional Experience Marquee */}
-      <div>
+      <div className="bg-[hsl(40,20%,91%)]">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-4 md:pt-5 pb-2 md:pb-3">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>

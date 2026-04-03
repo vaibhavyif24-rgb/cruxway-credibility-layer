@@ -17,17 +17,17 @@ import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
-  { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
-  { num: '02', title: 'Evaluation', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. We triangulate data with on-the-ground diligence and reference networks.' },
-  { num: '03', title: 'Diligence', description: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence, not intuition.' },
-  { num: '04', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
+  { num: '01', title: 'Discovery', description: 'We find deals where others aren\'t looking. Years of relationship-building across our sectors give us access to businesses long before they hit the market.' },
+  { num: '02', title: 'Evaluation', description: 'We pressure-test everything: the financials, the customers, the team, and the competitive dynamics. Data gets validated on the ground, not just in a spreadsheet.' },
+  { num: '03', title: 'Diligence', description: 'Deep financial, operational, and legal analysis with specialists who know the space. We model the downside first and build conviction through evidence, not gut feel.' },
+  { num: '04', title: 'Structuring', description: 'We structure deals for permanence: aligned incentives, sensible governance, and capital that compounds over decades, not exits in three years.' },
 ];
 
 const valueCreationItems = [
-  { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-  { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-  { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-  { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+  { title: 'Stabilize & Professionalize', desc: 'Put real systems, reporting, and governance in place from day one.' },
+  { title: 'Optimize Operations', desc: 'Find and fix the operational gaps that unlock margin.' },
+  { title: 'Invest in Growth', desc: 'Put capital to work in organic growth, adjacent markets, and smart acquisitions.' },
+  { title: 'Compound Value', desc: 'Hold long enough for improvements to compound and market position to deepen.' },
 ];
 
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
@@ -374,8 +374,8 @@ const OurPlaybook = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="We bring structure, experience, and patience to every business we partner with."
-        highlights={['structure', 'patience']}
+        heading="We have seen what works and what doesn't across hundreds of deals. That pattern recognition is our edge."
+        highlights={['pattern', 'edge']}
         variant="light"
       />
 
@@ -388,7 +388,7 @@ const OurPlaybook = () => {
               How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              How we professionalize operations and compound value over time.
+              What we actually do once we invest.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>

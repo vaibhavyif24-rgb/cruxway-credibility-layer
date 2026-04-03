@@ -486,7 +486,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            Getting from A to B matters. To get there, you transform under pressure and sustained discipline. But the journey itself matters. It must be aligned with the natural order of things.
+            Outcomes matter, but so does how you get there. Real conviction is forged under pressure. Real discipline is sustained over years, not quarters. The two together are what build things that last.
           </motion.p>
         </motion.div>
 

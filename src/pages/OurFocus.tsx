@@ -35,10 +35,10 @@ const investmentProfile = {
 
 const whatWeLookFor = [
   { num: '01', title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
-  { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
+  { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors in overlooked markets where reliability and recurring demand create real staying power.' },
   { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
   { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
-  { num: '05', title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalized systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
+  { num: '05', title: 'Operational Improvement Runway', desc: 'Businesses that have outgrown their systems. We professionalize operations without losing what made the company special.' },
   { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
