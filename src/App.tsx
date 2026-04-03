@@ -126,9 +126,9 @@ const PageLoader = () => {
             background: 'hsl(43 78% 50%)',
             left: `${30 + i * 14}%`,
             bottom: '30%',
-            opacity: isDark ? 0.3 : 0.25,
+            opacity: 0.25,
           }}
-          animate={{ y: [0, -40, -80], opacity: [0, isDark ? 0.3 : 0.25, 0] }}
+          animate={{ y: [0, -40, -80], opacity: [0, 0.25, 0] }}
           transition={{
             duration: 3 + i * 0.5,
             repeat: Infinity,
