@@ -1,85 +1,32 @@
 
 
-## Plan: Unified Loader, Professional Origin Copy, Light Mode Visibility, and Card Animation Polish
+## Plan: Fix PageLoader Visibility and Hooks Error
 
-### 1. Unified PageLoader for Both Themes (App.tsx)
+### 1. Fix Hooks Error in CruxwayOriginStory.tsx
 
-**Problem:** Light and dark mode loaders have different particle opacities, shimmer intensities, and gold ring opacity values, creating an inconsistent brand experience.
+The runtime error persists at line 1266 (source-mapped). The `act2Line4Y` and `act2Line4Op` hooks are always called at the top level, but the conditional `{isIndia && (...)}` JSX block at line 407 is fine since it doesn't call hooks. However, the error trace points to `useTransform` being called conditionally somewhere. Need to verify the actual compiled output -- the line numbers suggest there may be additional `useTransform` calls further in the file that were added in a later edit but not visible in the current 538-line file. The fix is to ensure no `useTransform` calls exist inside JSX or conditional blocks.
 
-**Fix:** Remove all `isDark` ternary branching from the loader. Use a single unified design that works on both backgrounds:
-- Wordmark fill: `hsl(43 78% 50% / 0.20)` (gold tint, visible on both)
-- Shimmer sweep: `hsl(43 78% 50% / 0.4)` (same for both)
-- Pulsing ring border: `hsl(43 78% 50% / 0.07)`
-- Rotating arc stroke: `hsl(43 78% 50% / 0.10)`
-- Vertical particles opacity: `0.25`
-- Horizontal particles opacity: `0.18`
-- Background: keep theme-aware (`isDark` for bg color only, since that must differ)
-- Radial glow: `hsl(43 78% 50% / 0.06)` unified
+**Action:** Re-read the full file to confirm hook count is stable, and if needed, ensure all `useTransform` calls are above the `return` statement.
 
-This ensures the animation layer is identical; only the canvas color changes.
+### 2. Fix Light Mode Loader Visibility (App.tsx)
 
-### 2. Professional Act 3 Statement (CruxwayOriginStory.tsx, line 483)
+**Problem (visible in screenshots):** The wordmark uses `hsl(43 78% 50% / 0.20)` -- gold at 20% opacity on a cream `hsl(40, 25%, 96%)` background. Gold on near-white at 20% opacity is almost invisible. The ring, arc, and particles also use very low opacities that vanish on light backgrounds.
 
-**Current (too casual):** "Getting from A to B matters. To do that, one must transform under pressure and sustained discipline. But the journey itself matters too. It must be aligned with the natural order of things."
+**Fix:** Make the loader theme-aware for visibility while keeping effects identical in structure:
+- **Wordmark fill:** Light mode: `hsl(228 45% 25% / 0.18)` (navy tint, visible on cream). Dark mode: `hsl(43 78% 50% / 0.25)` (gold tint, visible on dark navy).
+- **Shimmer sweep:** Light: `hsl(43 78% 45% / 0.6)` (richer gold). Dark: `hsl(43 78% 50% / 0.4)` (current).
+- **Pulsing ring border:** Light: `hsl(43 78% 45% / 0.15)`. Dark: `hsl(43 78% 50% / 0.10)`.
+- **Rotating arc stroke:** Light: `hsl(43 78% 45% / 0.20)`. Dark: `hsl(43 78% 50% / 0.12)`.
+- **Vertical particles:** Light: opacity `0.4`, color `hsl(43 78% 45%)`. Dark: opacity `0.25`.
+- **Horizontal particles:** Light: opacity `0.3`. Dark: opacity `0.18`.
+- **Radial glow:** Light: `hsl(43 78% 50% / 0.10)`. Dark: `hsl(43 78% 50% / 0.06)`.
 
-**Replace with:** "Outcome without process is reckless. Process without conviction is hollow. We believe enduring value is forged when both align."
-
-This is sharper, more intentional, and reads like a considered investment philosophy rather than a general statement.
-
-### 3. Light Mode Visibility Audit (Multiple Files)
-
-Scan for low-contrast text patterns in light mode and increase visibility:
-
-**Contact.tsx:**
-- `text-muted-foreground/55` (label "Email", "Location"): increase to `text-muted-foreground/70`
-- `text-muted-foreground/30` (arrow icons): increase to `text-muted-foreground/45`
-- Disclaimer text `text-muted-foreground/45`: increase to `text-muted-foreground/55`
-
-**Home.tsx:**
-- `text-foreground/20` (inactive step numbers/titles): increase to `text-foreground/30`
-- `text-foreground/25` (page indicator "01 / 04"): increase to `text-foreground/35`
-- `text-primary-foreground/50` (CTA description in dark): increase to `/55`
-
-**About.tsx:**
-- `text-primary-foreground/50` (CTA sub-text): increase to `/55`
-
-**OurFocus.tsx:**
-- `text-primary-foreground/50` sector descriptions: increase to `/55`
-
-**GuidingPrinciples.tsx:**
-- `text-primary-foreground/50` CTA description: increase to `/55`
-
-### 4. Card Animation and GlassCard Usage Audit
-
-**GlassCard is already used in:** Home.tsx (process carousel panel). But several pages use plain `div` or `border` cards without GlassCard's frosted glass, gold corners, and hover effects.
-
-**Contact.tsx (lines 61-110):** The email and location cards use plain `GlassCard` already. Verify the hover lift (`whileHover={{ y: -4 }}`) is applied to the outer wrapper. Currently it wraps the GlassCard in a `motion.div` with hover. Good.
-
-**InvestmentCriteria.tsx:** The `EvalStep` cards and the `TypographicNumber`/`TypographicText` blocks are plain styled divs. Wrap the evaluation step cards in `GlassCard` for consistent premium card treatment with gold corners and hover glow.
-
-**OurPlaybook.tsx:** The `StepNavigator` description panel and `ValueCreationChart` bar descriptions use plain bordered divs. Wrap the active description panel in `GlassCard`.
-
-**About.tsx:** The `ApproachTable` items use plain styling. Wrap each approach item in `GlassCard` with staggered index.
-
-**Home.tsx process panel:** The active content panel (line 168) uses a plain div with manual border/bg. Replace with `GlassCard` for consistency.
+The animation keyframes, durations, and structure remain identical. Only color values and opacities adapt to ensure visibility on both canvases.
 
 ### Technical Summary
 
 | File | Changes |
 |------|---------|
-| `App.tsx` | Unify all loader particle/ring/shimmer values to be theme-agnostic (only bg color differs) |
-| `CruxwayOriginStory.tsx` | Replace Act 3 explanation text (line 483) with professional philosophy statement |
-| `Contact.tsx` | Increase muted text opacity values for light mode visibility |
-| `Home.tsx` | Increase inactive step text opacity; wrap process panel in GlassCard |
-| `About.tsx` | Increase CTA text opacity |
-| `OurFocus.tsx` | Increase sector description opacity |
-| `GuidingPrinciples.tsx` | Increase CTA description opacity |
-| `InvestmentCriteria.tsx` | Wrap EvalStep cards in GlassCard |
-| `OurPlaybook.tsx` | Wrap step description panel in GlassCard |
-
-### Constraints
-- American English only
-- Both themes must look professional
-- GlassCard import added where needed
-- No changes to ThemeContext, RegionContext, SiteHeader, SiteFooter, or Landing
+| `App.tsx` | Theme-aware opacity/color values for loader wordmark, ring, arc, particles, and glow |
+| `CruxwayOriginStory.tsx` | Verify and fix any remaining conditional hook calls causing the runtime error |
 
