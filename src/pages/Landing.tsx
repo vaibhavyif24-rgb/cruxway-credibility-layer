@@ -7,7 +7,7 @@ import GeometricHero from '@/components/GeometricHero';
 
 const regions = [
   { key: 'india' as const, label: 'India' },
-  { key: 'us' as const, label: 'UNITED STATES OF AMERICA' },
+  { key: 'us' as const, label: 'UNITED STATES' },
 ];
 
 const Landing = () => {
