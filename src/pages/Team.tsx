@@ -376,7 +376,7 @@ const Team = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'Global institutional experience, local conviction. Operators and investors building alongside Indian founders.'
+                ? 'Global experience, local conviction. Building alongside the founders who are building India.'
                 : 'Operators and investors building alongside founders.'}
             </p>
           </FadeIn>
@@ -443,7 +443,7 @@ const Team = () => {
               <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
                 <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
-                    ? 'Our advisory network spans senior operators, industry veterans, and institutional leaders across India and the United States.'
+                    ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
                     : 'Our advisory network includes senior operators, industry veterans, and institutional leaders across the United States.'}
                 </p>
                 <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
@@ -463,7 +463,7 @@ const Team = () => {
             <GoldRule className="mt-1" />
           </FadeIn>
         </div>
-        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" compact />
+        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
     </div>
   );

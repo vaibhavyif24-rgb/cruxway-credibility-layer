@@ -9,19 +9,19 @@ const usSectors = {
   left: {
     heading: 'Industrials',
     items: [
-      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
-      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
-      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
-      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
+      { name: 'Process and Flow Control', desc: 'Valves, pumps, instrumentation' },
+      { name: 'Value-Added Distribution', desc: 'Technical and industrial products' },
+      { name: 'Industrial Services', desc: 'Maintenance, repair, and operations' },
+      { name: 'Packaging and Containers', desc: 'Specialty and industrial packaging' },
     ],
   },
   right: {
-    heading: 'Business & Industrial Services',
+    heading: 'Business and Industrial Services',
     items: [
-      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
-      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
+      { name: 'Facility and Support Services', desc: 'Cleaning, security, staffing' },
+      { name: 'Testing and Certification', desc: 'Quality assurance and compliance' },
       { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
-      { name: 'Industrial Technology', desc: 'Automation & process software' },
+      { name: 'Industrial Technology', desc: 'Automation and process software' },
     ],
   },
 };

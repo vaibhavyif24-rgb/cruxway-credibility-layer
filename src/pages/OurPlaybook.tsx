@@ -344,7 +344,7 @@ const OurPlaybook = () => {
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              A disciplined, repeatable process for identifying exceptional businesses and building lasting value alongside management teams.
+              We have spent our careers partnering with founders who have built industry-leading businesses. We know what separates good from great, and we bring that lens to every deal.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -374,8 +374,8 @@ const OurPlaybook = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="A disciplined, repeatable framework for building lasting value in every business we partner with."
-        highlights={['disciplined', 'lasting']}
+        heading="We bring structure, experience, and patience to every business we partner with."
+        highlights={['structure', 'patience']}
         variant="light"
       />
 
@@ -388,7 +388,7 @@ const OurPlaybook = () => {
               How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              Our four-phase approach to professionalizing operations and compounding long-term value.
+              How we professionalize operations and compound value over time.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>

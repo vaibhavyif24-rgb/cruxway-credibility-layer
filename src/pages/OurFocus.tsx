@@ -43,43 +43,54 @@ const whatWeLookFor = [
 ];
 
 const indiaSectors = {
-  left: {
-    heading: 'Industrials',
-    items: [
-      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
-      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
-      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
-      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
-    ],
-  },
-  right: {
-    heading: 'Business & Industrial Services',
-    items: [
-      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
-      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
-      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
-      { name: 'Industrial Technology', desc: 'Automation & process software' },
-    ],
-  },
+  cols: [
+    {
+      heading: 'Industrials',
+      items: [
+        { name: 'Process and Flow Control', desc: 'Valves, pumps, instrumentation' },
+        { name: 'Value-Added Distribution', desc: 'Technical and industrial products' },
+        { name: 'Industrial Services', desc: 'Maintenance, repair, and operations' },
+        { name: 'Packaging and Containers', desc: 'Specialty and industrial packaging' },
+      ],
+    },
+    {
+      heading: 'Business and Industrial Services',
+      items: [
+        { name: 'Facility and Support Services', desc: 'Cleaning, security, staffing' },
+        { name: 'Testing and Certification', desc: 'Quality assurance and compliance' },
+        { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
+        { name: 'Industrial Technology', desc: 'Automation and process software' },
+      ],
+    },
+  ],
 };
 
 const usSectors = {
-  left: {
-    heading: 'Financial and Compliance Services',
-    items: [
-      { name: 'RIAs and Wealth Management', desc: 'Registered investment advisers and wealth platforms' },
-      { name: 'Accounting, Bookkeeping, and Tax', desc: 'Full-cycle financial operations and compliance' },
-      { name: 'SOC Compliance and Related Services', desc: 'Security audits, attestation, and regulatory frameworks' },
-    ],
-  },
-  right: {
-    heading: 'Power and IT Services',
-    items: [
-      { name: 'Electrical Testing and Maintenance', desc: 'High-voltage testing, commissioning, and maintenance' },
-      { name: 'Transformer and Power Engineering', desc: 'Design, protection, controls, and automation engineering' },
-      { name: 'Cybersecurity and MSPs', desc: 'Managed security services and IT infrastructure providers' },
-    ],
-  },
+  cols: [
+    {
+      heading: 'Financial and Compliance Services',
+      items: [
+        { name: 'RIAs and Wealth Management', desc: 'Registered investment advisers and wealth platforms' },
+        { name: 'Accounting, Bookkeeping, and Tax', desc: 'Full-cycle financial operations and compliance' },
+        { name: 'SOC Compliance and Related Services', desc: 'Security audits, attestation, and regulatory frameworks' },
+      ],
+    },
+    {
+      heading: 'Power Services',
+      items: [
+        { name: 'Electrical Testing and Maintenance', desc: 'High-voltage testing, commissioning, and maintenance' },
+        { name: 'Transformer Services', desc: 'Installation, repair, and lifecycle management' },
+        { name: 'Design and Power Engineering', desc: 'Protection, controls, and automation engineering' },
+      ],
+    },
+    {
+      heading: 'IT Services',
+      items: [
+        { name: 'Cybersecurity Services', desc: 'Managed detection, response, and compliance' },
+        { name: 'Managed Service Providers', desc: 'IT infrastructure, support, and cloud services' },
+      ],
+    },
+  ],
 };
 
 const OurFocus = () => {
@@ -109,15 +120,15 @@ const OurFocus = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              {isIndia ? <><span className="text-gold">Disciplined</span> Capital for India's Best</> : <>Where <span className="text-gold">Conviction</span> Meets Capital</>}
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+              {isIndia ? <>Our <span className="text-gold">Approach</span> in India</> : <>How We <span className="text-gold">Think</span> About Investing</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
-                : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}
+                ? 'We bring institutional discipline and a personal touch to partnering with India\'s best founder-led businesses.'
+                : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -188,67 +199,33 @@ const OurFocus = () => {
             <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative">
-            {/* Vertical divider on desktop */}
-            <motion.div
-              className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gold/15 origin-top"
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            />
-
-            {/* Left column */}
-            <FadeIn delay={0}>
-              <div>
-                <h3 className={`font-serif text-[1.2rem] md:text-[1.4rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {sectors.left.heading}
-                </h3>
-                <ul className="space-y-3">
-                  {sectors.left.items.map((item, i) => (
-                    <FadeIn key={i} delay={i * 0.06}>
-                      <li className="flex items-start gap-2.5">
-                        <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
-                        <div>
-              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                            {item.name}
-                          </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                            {item.desc}
-                          </span>
-                        </div>
-                      </li>
-                    </FadeIn>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
-
-            {/* Right column */}
-            <FadeIn delay={0.08}>
-              <div>
-                <h3 className={`font-serif text-[1.2rem] md:text-[1.4rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {sectors.right.heading}
-                </h3>
-                <ul className="space-y-3">
-                  {sectors.right.items.map((item, i) => (
-                    <FadeIn key={i} delay={0.08 + i * 0.06}>
-                      <li className="flex items-start gap-2.5">
-                        <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
-                        <div>
-              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                            {item.name}
-                          </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                            {item.desc}
-                          </span>
-                        </div>
-                      </li>
-                    </FadeIn>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
+          <div className={`grid gap-8 md:gap-10 ${sectors.cols.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+            {sectors.cols.map((col, colIdx) => (
+              <FadeIn key={colIdx} delay={colIdx * 0.06}>
+                <div>
+                  <h3 className={`font-serif text-[1.15rem] md:text-[1.3rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                    {col.heading}
+                  </h3>
+                  <ul className="space-y-3">
+                    {col.items.map((item, i) => (
+                      <FadeIn key={i} delay={colIdx * 0.06 + i * 0.04}>
+                        <li className="flex items-start gap-2.5">
+                          <span className="w-[6px] h-[6px] rotate-45 bg-gold/50 shrink-0 mt-[7px]" />
+                          <div>
+                            <span className={`font-serif font-medium text-[0.95rem] md:text-[1.05rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                              {item.name}
+                            </span>
+                            <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                              {item.desc}
+                            </span>
+                          </div>
+                        </li>
+                      </FadeIn>
+                    ))}
+                  </ul>
+                </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
@@ -258,7 +235,7 @@ const OurFocus = () => {
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               What We Look For
             </h2>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
@@ -335,7 +312,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
             }`}>
               {item.num}
             </span>
-            <span className={`block font-serif text-[0.85rem] md:text-[0.9rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+            <span className={`block font-serif text-[1rem] md:text-[1.1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
               i === active
                 ? isDark ? 'text-primary-foreground' : 'text-foreground'
                 : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
@@ -382,7 +359,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
                   >
                     {items[active].num}
                   </motion.span>
-                  <h3 className={`font-serif text-[clamp(1.4rem,3vw,2rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  <h3 className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                     {items[active].title}
                   </h3>
                   <motion.div
@@ -422,7 +399,7 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                 <span className={`font-serif text-[1.6rem] leading-none ${isOpen ? 'text-gold/40' : isDark ? 'text-primary-foreground/10' : 'text-foreground/10'}`}>
                   {item.num}
                 </span>
-                <span className={`font-serif font-medium text-[1.1rem] md:text-[1.2rem] tracking-[-0.02em] ${
+                <span className={`font-serif font-medium text-[1.1rem] tracking-[-0.02em] ${
                   isOpen
                     ? isDark ? 'text-primary-foreground' : 'text-foreground'
                     : isDark ? 'text-primary-foreground/50' : 'text-foreground/50'

@@ -51,7 +51,7 @@ const PageLoader = () => {
           className="font-serif tracking-[-0.02em] relative overflow-hidden"
           style={{
             fontSize: 'clamp(4rem, 10vw, 7rem)',
-            color: isDark ? 'hsl(43 78% 50% / 0.25)' : 'hsl(228 45% 25% / 0.18)',
+            color: isDark ? 'hsl(43 78% 50% / 0.2)' : 'hsl(228 45% 25% / 0.1)',
           }}
         >
           Cruxway

@@ -62,7 +62,7 @@ const SiteFooter = () => {
             </span>
             <span className={`hidden md:inline h-3 w-px ${isDark ? 'bg-primary-foreground/10' : 'bg-foreground/15'}`} />
             <span className={`font-sans text-[10px] uppercase tracking-[0.16em] ${isDark ? 'text-primary-foreground/20' : 'text-foreground/35'}`}>
-              Lower Middle Market Private Equity
+              Long-Term Investment Partners
             </span>
           </div>
         </div>
