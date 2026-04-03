@@ -29,14 +29,14 @@ const About = () => {
         { t: 'Capital Discipline', d: 'Cash-flow-first thinking, conservative leverage, and capital deployed where the return case is clearest.' },
       ]
     : [
-        { t: 'Hold Period', d: 'We invest against an opportunity, not a fund timeline. Some positions may be held for a decade or longer.' },
+        { t: 'Hold Period', d: 'We invest against the opportunity itself. Some positions may be held for a decade or longer.' },
         { t: 'Sector Specificity', d: 'Regulated, compliance-driven industries where switching costs are high and demand is not discretionary. We stay narrow deliberately.' },
         { t: 'Operational Involvement', d: 'We work inside the business: building the finance function, creating reporting cadences, and professionalizing operations alongside management.' },
-        { t: 'Capital Discipline', d: 'Conservative structures. Returns from growing the business, not from leverage. We model the downside first.' },
+        { t: 'Capital Discipline', d: 'Conservative structures. Returns come from growing the business. We model the downside first.' },
       ];
 
   const principles = [
-    { t: 'Integrity', d: 'Say what we mean. Follow through. Even when the honest answer is not the comfortable one.' },
+    { t: 'Integrity', d: 'Say what we mean. Follow through. Especially when the honest answer is difficult.' },
     { t: 'Steward Leadership', d: 'We measure ourselves by what happens to the people and businesses we work with, not by what we extract.' },
     { t: 'Humility', d: 'Every founder we sit across from has built something we haven\'t. The best thing we can do first is listen.' },
     { t: 'Grit', d: 'The real work of improving a business is detailed and unglamorous. We signed up for that part too.' },
@@ -99,8 +99,8 @@ const About = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Our Approach</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              What a Partnership Looks Like
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              How We Partner With Founders
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
@@ -113,7 +113,7 @@ const About = () => {
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
-            The Principles Behind Every Decision
+            What We Stand For
           </h2>
           <GoldRule />
         </FadeIn>

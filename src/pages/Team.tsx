@@ -399,7 +399,7 @@ const Team = () => {
       {/* ScrollRevealText — after hero */}
       <ScrollRevealText
         label="Our People"
-        heading="We've evaluated hundreds of businesses, operated through different market conditions, and learned that the best investing comes from understanding the details, not just the numbers."
+        heading="We've evaluated hundreds of businesses, operated through different market conditions, and learned that the best investing starts with understanding the details behind the numbers."
         variant="light"
       />
 
@@ -422,7 +422,7 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="Every advisor in our network is someone we've worked with directly. People who pick up the phone, not names on a letterhead."
+        heading="Every advisor in our network is someone we've worked with directly. Relationships built through years of doing deals together."
         variant="dark"
       />
 

@@ -42,7 +42,7 @@ const whatWeLookFor = [
   { title: 'Recurring Revenue & Retention', desc: 'Businesses where the hard work of winning the customer has already been done. High retention, contractual relationships, and cash flows that compound over time.' },
   { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where no single player dominates. We invest in a strong platform and grow through disciplined acquisitions over a long hold.' },
   { title: 'Operational Improvement Runway', desc: 'Companies that have outgrown their infrastructure. Strong product, loyal customers, but systems and processes that haven\'t scaled with the business.' },
-  { title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue, not from financial engineering.' },
+  { title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue.' },
 ];
 
 /* ─── Typographic Number (Revenue/EBITDA) ─── */
@@ -287,7 +287,7 @@ const InvestmentCriteria = () => {
                 What We Look For
               </h2>
               <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-                We evaluate opportunities through a rigorous lens: target sectors, ownership transitions, cultural fit, and enduring competitive advantages that align with our long-term partnership model.
+                The criteria below reflect what we have learned over many years of evaluating businesses across our target sectors. Each one was earned through experience.
               </p>
               <GoldRule className="mt-3 mb-4 md:mb-5" />
             </FadeIn>

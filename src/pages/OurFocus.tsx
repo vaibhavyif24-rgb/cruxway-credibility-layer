@@ -39,7 +39,7 @@ const whatWeLookFor = [
   { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses where the hard work of winning the customer has already been done. High retention, contractual relationships, and cash flows that compound over time.' },
   { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where no single player dominates. We invest in a strong platform and grow through disciplined acquisitions over a long hold.' },
   { num: '05', title: 'Operational Improvement Runway', desc: 'Companies that have outgrown their infrastructure. Strong product, loyal customers, but systems and processes that haven\'t scaled with the business.' },
-  { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue, not from financial engineering.' },
+  { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue.' },
 ];
 
 const indiaSectors = {
@@ -127,8 +127,8 @@ const OurFocus = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'A focused set of criteria, applied with discipline and local knowledge, to India\'s industrial middle market.'
-                : 'Our approach was shaped over a decade of investing across dozens of transactions and refined into a specific set of criteria. Here\'s what we look for.'}
+                ? 'We bring institutional discipline and a personal touch to partnering with India\'s best founder-led businesses.'
+                : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>

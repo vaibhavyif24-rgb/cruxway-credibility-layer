@@ -406,11 +406,11 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={isDark}>Private Investment Firm</SectionLabel>
+            <SectionLabel light={isDark}>Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
-              Built Around the Owners, Not the Exit
+              Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
@@ -461,9 +461,9 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We invest in good businesses where the product works, the customers are loyal, and the operations haven't kept up. We fix the operations and keep everything else."
-        highlights={['fix', 'keep']}
-        subtext="Every partnership is structured around the business, not a timeline."
+        heading="We invest in businesses where the product works, the customers are loyal, and the operations haven't kept up. We professionalize the operations and protect everything else."
+        highlights={['professionalize', 'protect']}
+        subtext="Every partnership is structured around what the business actually needs."
         variant="light"
       />
 
@@ -493,7 +493,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              How a Deal Comes Together
+              From Discovery to Partnership
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>

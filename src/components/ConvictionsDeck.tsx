@@ -8,7 +8,7 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import WaveBackground from '@/components/WaveBackground';
 
 const principles = [
-  { t: 'Integrity', d: 'Say what we mean. Follow through. Even when the honest answer is not the comfortable one.' },
+  { t: 'Integrity', d: 'Say what we mean. Follow through. Especially when the honest answer is difficult.' },
   { t: 'Steward Leadership', d: 'We measure ourselves by what happens to the people and businesses we work with, not by what we extract.' },
   { t: 'Humility', d: 'Every founder we sit across from has built something we haven\'t. The best thing we can do first is listen.' },
   { t: 'Grit', d: 'The real work of improving a business is detailed and unglamorous. We signed up for that part too.' },
@@ -147,7 +147,7 @@ const ConvictionsDeck = () => {
               <span className="text-gold">Decision</span>
             </h2>
              <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-3">
-               Six ideas that guide how we make decisions, treat people, and do our work.
+               Six principles that shape how we partner, decide, and build.
             </p>
             <GoldRule />
           </FadeIn>
