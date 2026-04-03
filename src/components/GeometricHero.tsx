@@ -48,7 +48,7 @@ const GeometricHero = () => {
       {/* Minimal corner brackets — clean, institutional */}
       <svg
         viewBox="0 0 1200 800"
-        className="absolute inset-0 w-full h-full z-[2] opacity-40"
+        className="absolute inset-0 w-full h-full z-[2] opacity-60 md:opacity-40"
         preserveAspectRatio="xMidYMid slice"
       >
         {/* Top-left */}
