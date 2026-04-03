@@ -1,76 +1,85 @@
 
 
-## Plan: Mobile Fixes, Typography, Origin Story Polish, and Animation Enhancements
+## Plan: Unified Loader, Professional Origin Copy, Light Mode Visibility, and Card Animation Polish
 
-### 1. Mobile Overflow Fixes (Multiple Pages)
+### 1. Unified PageLoader for Both Themes (App.tsx)
 
-**OurFocus.tsx:** The `overflow-x-clip` on root div is good. Verify sector columns don't overflow. The CTA button with `px-10 py-5` is fine at 390px.
+**Problem:** Light and dark mode loaders have different particle opacities, shimmer intensities, and gold ring opacity values, creating an inconsistent brand experience.
 
-**OurPlaybook.tsx:** The ValueCreationChart container uses `overflow-x-hidden` but the root div lacks `overflow-x-clip`. Add it. Also ensure the chart container constrains bars on 390px screens.
+**Fix:** Remove all `isDark` ternary branching from the loader. Use a single unified design that works on both backgrounds:
+- Wordmark fill: `hsl(43 78% 50% / 0.20)` (gold tint, visible on both)
+- Shimmer sweep: `hsl(43 78% 50% / 0.4)` (same for both)
+- Pulsing ring border: `hsl(43 78% 50% / 0.07)`
+- Rotating arc stroke: `hsl(43 78% 50% / 0.10)`
+- Vertical particles opacity: `0.25`
+- Horizontal particles opacity: `0.18`
+- Background: keep theme-aware (`isDark` for bg color only, since that must differ)
+- Radial glow: `hsl(43 78% 50% / 0.06)` unified
 
-**Home.tsx, Contact.tsx, About.tsx:** Add `overflow-x-clip` to root containers where missing (Contact.tsx has bare `<div>` wrapper).
+This ensures the animation layer is identical; only the canvas color changes.
 
-**GuidingPrinciples.tsx:** Already has `overflowX: 'clip'`. Good.
+### 2. Professional Act 3 Statement (CruxwayOriginStory.tsx, line 483)
 
-### 2. "What We Look For" Accordion Titles: Larger and Bolder (OurFocus.tsx)
+**Current (too casual):** "Getting from A to B matters. To do that, one must transform under pressure and sustained discipline. But the journey itself matters too. It must be aligned with the natural order of things."
 
-**CriteriaAccordion (lines 408-462):**
-- Accordion title font: increase from `text-[1rem]` to `text-[1.1rem] md:text-[1.2rem]` and add `font-medium`
-- Number: increase from `text-[1.5rem]` to `text-[1.6rem]`  
-- Description text: increase from `text-[13px]` to `text-[14px]`
+**Replace with:** "Outcome without process is reckless. Process without conviction is hollow. We believe enduring value is forged when both align."
 
-**CriteriaTabs tab labels (lines 337-343):**
-- Increase tab title from `text-[0.8rem]` to `text-[0.85rem] md:text-[0.9rem]`
+This is sharper, more intentional, and reads like a considered investment philosophy rather than a general statement.
 
-**Sector item names (lines 212, 238):**
-- Add `font-medium` to sector names for prominence
+### 3. Light Mode Visibility Audit (Multiple Files)
 
-### 3. Remove Extra Effect Under "Way" (CruxwayOriginStory.tsx)
-
-There are TWO dividers after the "Way道" heading:
-- Line 346: Gold accent line (the standard one under all headings)
-- Line 351: A second gold gradient divider between heading and definitions
-
-**Remove the duplicate divider at lines 350-357.** Keep only the accent line at 346. This eliminates the redundant visual clutter.
-
-### 4. Professional Definition Text in Way Act (CruxwayOriginStory.tsx)
-
-Current definitions are too simple. Replace with more institutional, thematic language:
-
-- **English:** "A deliberate path chosen with intent and conviction" (was: "The path and method one takes")
-- **Japanese (道, do):** "A lifelong discipline pursued through relentless refinement" (was: "The disciplined path of mastery through practice")  
-- **Chinese (道, dao):** "The natural principle that governs all things when left unforced" (was: "The natural order; reality flowing when unforced")
-- **Hindi (मार्ग, marg):** "A sacred road walked with purpose and moral resolve" (was: "The committed road; a path walked with purpose")
-
-### 5. Additional Animations Across the Site
-
-**OurFocus.tsx:**
-- Accordion items: Add staggered `FadeIn` wrapping each accordion item with `delay={i * 0.06}`
-- Investment profile section: Add a subtle shimmer sweep animation to the section background
-
-**Home.tsx:**
-- Process step cards: Add `whileHover={{ y: -3, transition: { duration: 0.2 } }}` to GlassCard wrappers
-- Active dot in carousel: Add `layoutId` for smooth dot transition animation
-
-**GuidingPrinciples.tsx:**
-- ConvictionsDeck: Wrap each `AccordionRow` in a `FadeIn` with staggered delays
-
-**About.tsx:**
-- PrinciplesSlider section: Ensure the section entry has a gold shimmer line that animates `scaleX` from 0 to 1
+Scan for low-contrast text patterns in light mode and increase visibility:
 
 **Contact.tsx:**
-- Add `overflow-x-clip` to root div
-- Footer CTA area: Add a breathing gold glow behind the email link
+- `text-muted-foreground/55` (label "Email", "Location"): increase to `text-muted-foreground/70`
+- `text-muted-foreground/30` (arrow icons): increase to `text-muted-foreground/45`
+- Disclaimer text `text-muted-foreground/45`: increase to `text-muted-foreground/55`
+
+**Home.tsx:**
+- `text-foreground/20` (inactive step numbers/titles): increase to `text-foreground/30`
+- `text-foreground/25` (page indicator "01 / 04"): increase to `text-foreground/35`
+- `text-primary-foreground/50` (CTA description in dark): increase to `/55`
+
+**About.tsx:**
+- `text-primary-foreground/50` (CTA sub-text): increase to `/55`
+
+**OurFocus.tsx:**
+- `text-primary-foreground/50` sector descriptions: increase to `/55`
+
+**GuidingPrinciples.tsx:**
+- `text-primary-foreground/50` CTA description: increase to `/55`
+
+### 4. Card Animation and GlassCard Usage Audit
+
+**GlassCard is already used in:** Home.tsx (process carousel panel). But several pages use plain `div` or `border` cards without GlassCard's frosted glass, gold corners, and hover effects.
+
+**Contact.tsx (lines 61-110):** The email and location cards use plain `GlassCard` already. Verify the hover lift (`whileHover={{ y: -4 }}`) is applied to the outer wrapper. Currently it wraps the GlassCard in a `motion.div` with hover. Good.
+
+**InvestmentCriteria.tsx:** The `EvalStep` cards and the `TypographicNumber`/`TypographicText` blocks are plain styled divs. Wrap the evaluation step cards in `GlassCard` for consistent premium card treatment with gold corners and hover glow.
+
+**OurPlaybook.tsx:** The `StepNavigator` description panel and `ValueCreationChart` bar descriptions use plain bordered divs. Wrap the active description panel in `GlassCard`.
+
+**About.tsx:** The `ApproachTable` items use plain styling. Wrap each approach item in `GlassCard` with staggered index.
+
+**Home.tsx process panel:** The active content panel (line 168) uses a plain div with manual border/bg. Replace with `GlassCard` for consistency.
 
 ### Technical Summary
 
 | File | Changes |
 |------|---------|
-| `CruxwayOriginStory.tsx` | Remove duplicate Way divider; upgrade definition text to professional language |
-| `OurFocus.tsx` | Increase accordion title/description sizes; add font-medium to sector names; staggered FadeIn on accordion items |
-| `Home.tsx` | Hover lift on process cards; active dot layoutId |
-| `Contact.tsx` | Add overflow-x-clip; breathing glow on email |
-| `GuidingPrinciples.tsx` | Staggered FadeIn on ConvictionsDeck rows |
-| `OurPlaybook.tsx` | Add overflow-x-clip to root div |
-| `About.tsx` | Gold shimmer line entry animation |
+| `App.tsx` | Unify all loader particle/ring/shimmer values to be theme-agnostic (only bg color differs) |
+| `CruxwayOriginStory.tsx` | Replace Act 3 explanation text (line 483) with professional philosophy statement |
+| `Contact.tsx` | Increase muted text opacity values for light mode visibility |
+| `Home.tsx` | Increase inactive step text opacity; wrap process panel in GlassCard |
+| `About.tsx` | Increase CTA text opacity |
+| `OurFocus.tsx` | Increase sector description opacity |
+| `GuidingPrinciples.tsx` | Increase CTA description opacity |
+| `InvestmentCriteria.tsx` | Wrap EvalStep cards in GlassCard |
+| `OurPlaybook.tsx` | Wrap step description panel in GlassCard |
+
+### Constraints
+- American English only
+- Both themes must look professional
+- GlassCard import added where needed
+- No changes to ThemeContext, RegionContext, SiteHeader, SiteFooter, or Landing
 
