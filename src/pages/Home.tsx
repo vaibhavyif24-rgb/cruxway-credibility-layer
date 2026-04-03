@@ -447,7 +447,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="btn-premium btn-gold inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                  className="btn-premium btn-gold inline-block font-sans text-[11px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
                 >
                   Get in Touch
                 </Link>
