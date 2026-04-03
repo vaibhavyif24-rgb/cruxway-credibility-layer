@@ -37,7 +37,7 @@ const whatWeLookFor = [
   { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
   { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
   { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
-  { num: '05', title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
+  { num: '05', title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalized systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
   { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
@@ -64,21 +64,19 @@ const indiaSectors = {
 
 const usSectors = {
   left: {
-    heading: 'Industrials',
+    heading: 'Financial and Compliance Services',
     items: [
-      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
-      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
-      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
-      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
+      { name: 'RIAs and Wealth Management', desc: 'Registered investment advisers and wealth platforms' },
+      { name: 'Accounting, Bookkeeping, and Tax', desc: 'Full-cycle financial operations and compliance' },
+      { name: 'SOC Compliance and Related Services', desc: 'Security audits, attestation, and regulatory frameworks' },
     ],
   },
   right: {
-    heading: 'Business & Industrial Services',
+    heading: 'Power and IT Services',
     items: [
-      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
-      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
-      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
-      { name: 'Industrial Technology', desc: 'Automation & process software' },
+      { name: 'Electrical Testing and Maintenance', desc: 'High-voltage testing, commissioning, and maintenance' },
+      { name: 'Transformer and Power Engineering', desc: 'Design, protection, controls, and automation engineering' },
+      { name: 'Cybersecurity and MSPs', desc: 'Managed security services and IT infrastructure providers' },
     ],
   },
 };
@@ -380,7 +378,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
               >
                 {items[active].num}
               </motion.span>
-              <h3 className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <h3 className={`font-serif text-[clamp(1.4rem,3vw,2rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 {items[active].title}
               </h3>
               <motion.div

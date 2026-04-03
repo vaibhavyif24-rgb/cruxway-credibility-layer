@@ -21,7 +21,7 @@ import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
 import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
 import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
-import lamResearchLogo from '@/assets/logos/lam-research.png';
+
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
@@ -35,7 +35,7 @@ const foundersLogos = [
   { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
   { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
-  { src: lamResearchLogo, alt: 'Lam Research', scale: 0.7 },
+  
   { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
   { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
 ];
@@ -53,14 +53,14 @@ const processStepsUS = [
   { num: '01', title: 'Identify', description: 'We go where others don\'t. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market.' },
   { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position. Rigour is our edge.' },
   { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
-  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management.' },
+  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'Deep networks across India\'s industrial heartland surface founder-led businesses with strong fundamentals and operational upside.' },
   { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigour.' },
   { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
-  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalise systems, deploy capital, and accelerate growth alongside management.' },
+  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(

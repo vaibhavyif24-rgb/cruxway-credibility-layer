@@ -10,7 +10,7 @@ const sectorData = {
         category: 'Industrials',
         items: [
           { name: 'Process & Flow Control', desc: 'Valves, pumps, filtration, and fluid handling across industrial verticals' },
-          { name: 'Value-Added Distribution', desc: 'Specialised distribution with technical expertise and aftermarket services' },
+          { name: 'Value-Added Distribution', desc: 'Specialized distribution with technical expertise and aftermarket services' },
           { name: 'Industrial Services', desc: 'Maintenance, turnaround, and mission-critical operational support' },
           { name: 'Packaging', desc: 'Industrial and specialty packaging for regulated and essential sectors' },
         ],
@@ -28,20 +28,20 @@ const sectorData = {
     ],
   },
   us: {
-    descriptor: 'Essential B2B services characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.',
+    descriptor: 'Essential B2B services characterized by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.',
     columns: [
       {
         category: 'Infrastructure & Industrial',
         items: [
-          { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
-          { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
-          { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
+          { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernization, and critical infrastructure maintenance' },
+          { name: 'Industrial Distribution', desc: 'Specialized parts, equipment, and supply chain solutions' },
+          { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialized engineering solutions' },
         ],
       },
       {
         category: 'Services & Compliance',
         items: [
-          { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
+          { name: 'Facility Services', desc: 'Building maintenance, security, and specialized facility management' },
           { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
           { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
         ],

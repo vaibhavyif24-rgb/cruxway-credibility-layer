@@ -40,7 +40,7 @@ const whatWeLookFor = [
   { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
   { title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
   { title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
-  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalised systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
+  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalized systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
   { title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
 ];
 
@@ -348,8 +348,8 @@ const InvestmentCriteria = () => {
         <div className="max-w-[1080px] mx-auto">
           <CriteriaCarousel
             items={[
-              { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-              { title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+              { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+              { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
               { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
               { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
             ]}

@@ -9,8 +9,9 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import GlassCard from '@/components/GlassCard';
 import WaveBackground from '@/components/WaveBackground';
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
@@ -23,13 +24,11 @@ const evaluationSteps = [
 ];
 
 const valueCreationItems = [
-  { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-  { title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+  { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+  { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
   { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
   { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
 ];
-
-const STEP_DURATION = 10000;
 
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
   const [active, setActive] = useState(0);
@@ -40,13 +39,6 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
     setActive(i);
   }, []);
 
-  useEffect(() => {
-    if (!isInView) return;
-    const interval = setInterval(() => {
-      setActive(prev => (prev + 1) % steps.length);
-    }, STEP_DURATION);
-    return () => clearInterval(interval);
-  }, [isInView, active, steps.length]);
 
   return (
     <div ref={containerRef}>
@@ -68,16 +60,6 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
               <span className="text-gold/85 mr-1.5">{step.num}</span>
               <span>{step.title}</span>
             </span>
-            {active === i && isInView && (
-              <motion.div
-                key={`progress-${active}`}
-                className="absolute bottom-0 left-0 h-[2px] bg-gold/50 origin-left"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: STEP_DURATION / 1000, ease: 'linear' }}
-                style={{ width: '100%' }}
-              />
-            )}
           </button>
         ))}
       </div>
@@ -113,6 +95,111 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
   );
 };
 
+const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItems; isDark: boolean }) => {
+  const [selected, setSelected] = useState<number | null>(null);
+  const isMobile = useIsMobile();
+  const barHeights = isMobile ? [100, 150, 200, 260] : [140, 200, 270, 350];
+
+  const handleClick = (i: number) => {
+    setSelected(prev => prev === i ? null : i);
+  };
+
+  return (
+    <div className="w-full">
+      {/* Bar chart */}
+      <div className="flex items-end justify-center gap-4 md:gap-8 mb-8" style={{ height: isMobile ? 280 : 380 }}>
+        {items.map((item, i) => {
+          const isActive = selected === i;
+          const isOther = selected !== null && !isActive;
+
+          return (
+            <motion.div
+              key={i}
+              onClick={() => handleClick(i)}
+              className="relative flex flex-col items-center cursor-pointer group"
+              animate={{ opacity: isOther ? 0.15 : 1 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {/* Bar */}
+              <motion.div
+                className="rounded-t-sm relative overflow-hidden"
+                style={{
+                  width: isMobile ? 48 : 80,
+                  background: isActive
+                    ? 'hsl(43 78% 50%)'
+                    : isDark ? 'hsl(43 78% 50% / 0.15)' : 'hsl(43 78% 50% / 0.1)',
+                }}
+                animate={{
+                  height: isActive ? barHeights[i] + 20 : barHeights[i],
+                }}
+                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              >
+                {isActive && (
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(180deg, hsl(43 78% 60% / 0.3) 0%, transparent 100%)',
+                    }}
+                    animate={{ opacity: [0.3, 0.6, 0.3] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                )}
+              </motion.div>
+
+              {/* Phase number below bar */}
+              <span className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] mt-3 ${
+                isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+              }`}>
+                {String(i + 1).padStart(2, '0')}
+              </span>
+
+              {/* Title below number */}
+              <span className={`font-serif text-[11px] md:text-[13px] text-center mt-1 max-w-[80px] md:max-w-[100px] leading-[1.3] ${
+                isActive
+                  ? isDark ? 'text-primary-foreground' : 'text-foreground'
+                  : isDark ? 'text-primary-foreground/40' : 'text-foreground/40'
+              }`}>
+                {item.title}
+              </span>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Selected phase content */}
+      <AnimatePresence>
+        {selected !== null && (
+          <motion.div
+            initial={{ opacity: 0, y: 12, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: -8, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className={`rounded-sm border p-7 md:p-10 ${
+              isDark
+                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
+                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
+            }`}>
+              <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/60 block mb-2">
+                Phase {String(selected + 1).padStart(2, '0')}
+              </span>
+              <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                {items[selected].title}
+              </h3>
+              <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+              <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                {items[selected].desc}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+
 const OurPlaybook = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
@@ -131,7 +218,7 @@ const OurPlaybook = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Playbook, India' : 'Our Playbook'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.2rem)] max-w-[720px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               From <span className="text-gold">Sourcing</span> to Value Creation
             </h1>
           </FadeIn>
@@ -181,28 +268,11 @@ const OurPlaybook = () => {
               How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              Our four-phase approach to professionalising operations and compounding long-term value.
+              Our four-phase approach to professionalizing operations and compounding long-term value.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
-            {valueCreationItems.map((item, i) => (
-              <GlassCard key={i} index={i} variant={isDark ? 'dark' : 'light'}>
-                <div className="p-6 md:p-7">
-                  <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2 block">
-                    Phase {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="font-serif text-[1.25rem] text-foreground leading-[1.2] tracking-[-0.02em] mb-3">
-                    {item.title}
-                  </h3>
-                  <div className="w-8 h-[1.5px] bg-gold/25 mb-3" />
-                  <p className="font-sans text-[1rem] text-muted-foreground leading-[1.75]">
-                    {item.desc}
-                  </p>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
+          <ValueCreationChart items={valueCreationItems} isDark={isDark} />
         </div>
       </section>
 

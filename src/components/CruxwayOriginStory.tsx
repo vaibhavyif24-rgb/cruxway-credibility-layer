@@ -187,8 +187,9 @@ const CruxwayOriginStory = () => {
   const act2HeadingScale = useTransform(scrollYProgress, [0.29, 0.34], [0.92, 1]);
   const act2HeadingY = useTransform(scrollYProgress, [0.29, 0.34], [20, 0]);
   const act2RuleW = useTransform(scrollYProgress, [0.31, 0.36], [0, 48]);
-  const act2PhoneticOp = useTransform(scrollYProgress, [0.31, 0.35, 0.46, 0.52], [0, 1, 1, 0]);
-  const act2DefOp = useTransform(scrollYProgress, [0.33, 0.38, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2Line1Op = useTransform(scrollYProgress, [0.35, 0.38, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2Line2Op = useTransform(scrollYProgress, [0.36, 0.39, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2Line3Op = useTransform(scrollYProgress, [0.37, 0.40, 0.46, 0.52], [0, 1, 1, 0]);
 
   /* ─── ACT 3: The Equation (0.50 → 0.72) — tightened entry ─── */
   const crucibleReturnOp = useTransform(scrollYProgress, [0.46, 0.52, 0.95, 1.0], [0, 1, 1, 1]);
@@ -258,7 +259,7 @@ const CruxwayOriginStory = () => {
             className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
             style={{ opacity: act1LabelOp, textShadow: isDark ? '0 1px 16px rgba(0,0,0,0.7), 0 0 40px hsl(43 78% 50% / 0.25)' : '0 1px 8px hsl(40 30% 94% / 0.9), 0 0 30px hsl(43 78% 50% / 0.2)' }}
           >
-            The First Word
+            What's in a name
           </motion.p>
 
           <motion.h2
@@ -322,7 +323,7 @@ const CruxwayOriginStory = () => {
             className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
             style={{ opacity: act2LabelOp, textShadow: videoSubShadow }}
           >
-            The second word
+            The other half
           </motion.p>
 
           <motion.h2
@@ -337,7 +338,7 @@ const CruxwayOriginStory = () => {
               willChange: 'transform',
             }}
           >
-            Way
+            Way<span style={{ fontSize: '0.7em', opacity: 0.5, marginLeft: '0.15em' }}>道</span>
           </motion.h2>
 
           {/* Gold accent line under heading */}
@@ -345,32 +346,29 @@ const CruxwayOriginStory = () => {
             <div className="h-[1px] w-full bg-gold/30" />
           </motion.div>
 
-          <motion.p
-            className="mt-1"
-            style={{
-              opacity: act2PhoneticOp,
-              color: videoMutedColor,
-              textShadow: videoSubShadow,
-              fontFamily: "'SF Mono', 'Fira Code', 'Courier New', monospace",
-              fontSize: isMobile ? '13px' : '15px',
-            }}
-          >
-            /weɪ/ · <span className="font-sans italic">noun</span>
-            {isIndia && <span className="font-sans not-italic"> · Hindi: मार्ग (mārg)</span>}
-          </motion.p>
-
-          <motion.p
-            className="font-sans leading-[1.8] mt-5 max-w-[480px]"
-            style={{
-              opacity: act2DefOp,
-              color: videoBodyColor,
-              textShadow: videoSubShadow,
-              fontSize: isMobile ? '15px' : '16px',
-              letterSpacing: '0.01em',
-            }}
-          >
-            A path. A method. A discipline. The road one commits to walking.
-          </motion.p>
+          <div className="mt-4 flex flex-col items-center gap-1">
+            <motion.p
+              className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
+              style={{ opacity: act2Line1Op, textShadow: videoSubShadow }}
+            >
+              <span className="text-gold/70">English:</span>{' '}
+              <span style={{ color: videoBodyColor }}>the path and method one takes</span>
+            </motion.p>
+            <motion.p
+              className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
+              style={{ opacity: act2Line2Op, textShadow: videoSubShadow }}
+            >
+              <span className="text-gold/70">Japanese (道):</span>{' '}
+              <span style={{ color: videoBodyColor }}>a discipline-based path of mastery</span>
+            </motion.p>
+            <motion.p
+              className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
+              style={{ opacity: act2Line3Op, textShadow: videoSubShadow }}
+            >
+              <span className="text-gold/70">Chinese (道):</span>{' '}
+              <span style={{ color: videoBodyColor }}>alignment with reality; the way things are when undistorted</span>
+            </motion.p>
+          </div>
         </motion.div>
 
         {/* ─── ACT 3: The Equation ─── */}

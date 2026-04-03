@@ -32,7 +32,7 @@ import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
 import deutscheBankLogo from '@/assets/logos/deutsche-bank.png';
 import saltwaterLogo from '@/assets/logos/saltwater-capital.png';
-import lamResearchLogo from '@/assets/logos/lam-research.png';
+
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 
@@ -143,7 +143,7 @@ const foundersLogos = [
   { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
   { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
-  { src: lamResearchLogo, alt: 'Lam Research', scale: 0.7 },
+  
   { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
   { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
 ];

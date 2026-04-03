@@ -34,12 +34,12 @@ const GuidingPrinciples = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[540px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              The Name. The <span className="text-gold">Conviction</span>. The Way.
+              The Meaning Behind <span className="text-gold">Cruxway</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[460px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              How we named ourselves, what we believe, and why it matters in every decision we make.
+              Why we chose this name, and what it says about how we invest.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -48,45 +48,6 @@ const GuidingPrinciples = () => {
         </div>
         <HeroDivider />
       </section>
-
-      {/* ═══ Origin Story Bridge ═══ */}
-      <div
-        className="relative -mt-1"
-        style={{
-          zIndex: 5,
-          background: isDark
-            ? 'hsl(228, 55%, 8%)'
-            : 'hsl(40, 25%, 94%)',
-        }}
-      >
-        <motion.div
-          className="flex flex-col items-center justify-center py-6 md:py-8 px-6"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-        >
-          {/* Flanked gold rules + serif heading */}
-          <div className="flex items-center gap-4 md:gap-6">
-            <span className="h-[1px] w-10 md:w-16 bg-gold/40" />
-            <h2 className={`font-serif text-[18px] md:text-[22px] tracking-[-0.01em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              The Origin Story
-            </h2>
-            <span className="h-[1px] w-10 md:w-16 bg-gold/40" />
-          </div>
-
-          {/* Gold gradient underline */}
-          <div
-            className="h-[1px] w-16 md:w-20 mt-3"
-            style={{ background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.5), transparent)' }}
-          />
-
-          {/* Subtitle */}
-          <p className={`font-sans text-[11px] md:text-[12px] leading-[1.7] mt-2 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/40' : 'text-muted-foreground'}`}>
-            Every name carries weight. Ours was forged with intent.
-          </p>
-        </motion.div>
-      </div>
 
       {/* Naming Story */}
       <CruxwayOriginStory />

@@ -31,7 +31,7 @@ const About = () => {
     : [
         { t: 'Long-Term Alignment', d: 'Hold periods designed around the growth opportunity. Patient capital by design.' },
         { t: 'Essential Services', d: 'Regulated industries where trust and deep relationships create lasting advantages.' },
-        { t: 'Operational Partnership', d: 'Professionalising operations and driving sustainable growth alongside management.' },
+        { t: 'Operational Partnership', d: 'Professionalizing operations and driving sustainable growth alongside management.' },
         { t: 'Disciplined Capital', d: 'Protecting downside and investing for long-term upside.' },
       ];
 
@@ -86,7 +86,7 @@ const About = () => {
         subtext={
           isIndia
             ? 'Cruxway invests in and takes majority stakes in founder-led companies across India\'s essential sectors.'
-            : 'Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.'
+            : 'Our role is to honor that legacy while bringing the resources, systems, and capital to take these companies to the next level.'
         }
         variant="light"
       />
