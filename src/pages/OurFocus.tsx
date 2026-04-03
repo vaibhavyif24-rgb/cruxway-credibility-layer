@@ -193,7 +193,7 @@ const OurFocus = () => {
         <div className="relative max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel light={isDark}>Sectors We Cover</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               Where We Invest
             </h2>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
