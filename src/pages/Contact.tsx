@@ -81,11 +81,11 @@ const Contact = () => {
                       : 'For general inquiries, partnership discussions, and deal flow.'}
                   </p>
                 </GlassCard>
-              </a>
+              </motion.a>
             </FadeIn>
 
             <FadeIn delay={0.08}>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
+              <motion.a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block h-full" whileHover={{ y: -4 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
               <GlassCard index={1} className="p-6 md:p-8 h-full">
                 <div className="flex items-start justify-between mb-6">
                   <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center group-hover:border-gold/25 transition-colors duration-500">
