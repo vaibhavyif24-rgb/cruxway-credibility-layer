@@ -376,8 +376,8 @@ const Team = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'Global experience, local conviction. Building alongside the founders who are building India.'
-                : 'Operators and investors who understand what it takes to build.'}
+                ? 'A team that combines global investing experience with deep, on-the-ground conviction in India\'s industrial economy.'
+                : 'Investors who have spent their careers studying what makes businesses work, and who started Cruxway to do the work themselves.'}
             </p>
           </FadeIn>
         </div>
@@ -399,7 +399,7 @@ const Team = () => {
       {/* ScrollRevealText — after hero */}
       <ScrollRevealText
         label="Our People"
-        heading="People who have been in the trenches, built businesses, and invested through every kind of market."
+        heading="We've evaluated hundreds of businesses, operated through different market conditions, and learned that the best investing comes from understanding the details, not just the numbers."
         variant="light"
       />
 
@@ -422,7 +422,7 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="Relationships built over years of working together, not a contact list."
+        heading="Every advisor in our network is someone we've worked with directly. People who pick up the phone, not names on a letterhead."
         variant="dark"
       />
 
@@ -443,8 +443,8 @@ const Team = () => {
               <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
                 <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
-                    ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
-                    : 'Operators and leaders who have built businesses like the ones we invest in.'}
+                    ? 'Industrialists and operators across India whose sector knowledge and relationships inform how we evaluate and build.'
+                    : 'Senior operators and executives with direct experience in the industries where we invest.'}
                 </p>
                 <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
                   Details on our advisory network are shared selectively with prospective partners.

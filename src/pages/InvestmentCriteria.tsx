@@ -37,12 +37,12 @@ const investmentProfile = {
 };
 
 const whatWeLookFor = [
-  { title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
-  { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
-  { title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
-  { title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
-  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalized systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
-  { title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
+  { title: 'Ownership Succession', desc: 'Founders thinking about retirement. Families navigating a generational transition. Owners who care deeply about what happens to their company and their people after they step back.' },
+  { title: 'Essential & Regulated Services', desc: 'Compliance-driven sectors where barriers to entry are real, customer relationships are long-standing, and demand doesn\'t depend on the economic cycle.' },
+  { title: 'Recurring Revenue & Retention', desc: 'Businesses where the hard work of winning the customer has already been done. High retention, contractual relationships, and cash flows that compound over time.' },
+  { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where no single player dominates. We invest in a strong platform and grow through disciplined acquisitions over a long hold.' },
+  { title: 'Operational Improvement Runway', desc: 'Companies that have outgrown their infrastructure. Strong product, loyal customers, but systems and processes that haven\'t scaled with the business.' },
+  { title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue, not from financial engineering.' },
 ];
 
 /* ─── Typographic Number (Revenue/EBITDA) ─── */
@@ -334,10 +334,10 @@ const InvestmentCriteria = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-4">
               {[
-                { num: '01', title: 'Discovery', desc: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process.' },
-                { num: '02', title: 'Evaluation', desc: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment.' },
-                { num: '03', title: 'Diligence', desc: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios and build conviction through evidence.' },
-                { num: '04', title: 'Structuring', desc: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term reflects our commitment to permanence.' },
+                { num: '01', title: 'Discovery', desc: 'Most of our deal flow comes from relationships we\'ve cultivated over many years in our target sectors. When an owner starts thinking about a transition, we want to be someone they already know.' },
+                { num: '02', title: 'Evaluation', desc: 'We focus first on what could go wrong: customer concentration, key-person risk, competitive threats, and regulatory exposure. Businesses that survive that analysis earn a deeper look.' },
+                { num: '03', title: 'Diligence', desc: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. We aim to understand the business as well as the owner does before we make a commitment.' },
+                { num: '04', title: 'Structuring', desc: 'Aligned incentives between Cruxway and the owner. Governance that fits the size of the company. Conservative leverage. No artificial timelines.' },
               ].map((step, i) => (
                 <EvalStep key={i} step={step} index={i} isDark={isDark} />
               ))}
@@ -349,8 +349,8 @@ const InvestmentCriteria = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="A disciplined, repeatable framework for building lasting value in every business we partner with."
-        highlights={['disciplined', 'lasting']}
+        heading="Every business we back shares the same foundation: compliance-driven demand that recurs, customers who stay because switching is costly, and an operator who built something worth scaling."
+        highlights={['foundation', 'scaling']}
         variant="light"
       />
 
@@ -359,10 +359,10 @@ const InvestmentCriteria = () => {
         <div className="max-w-[1080px] mx-auto">
           <CriteriaCarousel
             items={[
-              { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-              { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-              { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-              { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+              { title: 'Stabilize & Professionalize', desc: 'Establish financial reporting, build or upgrade the finance function, create governance structures, and set an operating cadence that lets management focus forward.' },
+              { title: 'Optimize Operations', desc: 'Identify the operational gaps that limit margin. Renegotiate where needed, streamline where possible, and fix the things the founder never had time to address.' },
+              { title: 'Invest in Growth', desc: 'Deploy capital into organic growth, adjacent markets, and add-on acquisitions where the strategic fit is clear and the return case is strong.' },
+              { title: 'Compound Value', desc: 'Operational improvements take time to compound. That\'s why we hold. Year three looks different from year one, and year seven looks different again.' },
             ]}
           />
         </div>
@@ -380,12 +380,12 @@ const InvestmentCriteria = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                  {isIndia ? "See Yourself Here?" : "Think This Describes Your Business?"}
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
-                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
+                    ? "If the criteria above describe your business, we'd welcome the opportunity to learn more about what you've built."
+                    : "If what you've read here sounds like your situation, reach out. We're direct, we're respectful, and we respond to every serious inquiry."}
                 </p>
               </FadeIn>
             </div>

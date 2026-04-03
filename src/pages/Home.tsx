@@ -50,17 +50,17 @@ const allLogos = [
 ];
 
 const processStepsUS = [
-  { num: '01', title: 'Identify', description: 'We go where others don\'t. Years of relationship-building across our sectors give us access to businesses before they reach the market.' },
-  { num: '02', title: 'Evaluate', description: 'We pressure-test everything: financials, operations, culture, and competitive position. Rigor is our edge.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
-  { num: '04', title: 'Build', description: 'From day one, we work alongside management to put better systems in place, deploy capital, and build.' },
+  { num: '01', title: 'Identify', description: 'Our deal flow comes from relationships we\'ve built over years in our target sectors. Accountants, brokers, attorneys, and business owners who know how we operate. Most of our opportunities never go to market.' },
+  { num: '02', title: 'Evaluate', description: 'Financials, operations, customer quality, and competitive positioning. We want to understand what the numbers say and, just as importantly, what they don\'t.' },
+  { num: '03', title: 'Invest', description: 'Majority positions structured to preserve continuity. Management stays. Employees stay. The founder decides how involved they want to be going forward.' },
+  { num: '04', title: 'Build', description: 'Real systems from day one: financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
 ];
 
 const processStepsIndia = [
-  { num: '01', title: 'Identify', description: 'We go deep into India\'s industrial heartland to find founder-led businesses with strong fundamentals and room to grow.' },
-  { num: '02', title: 'Evaluate', description: 'We pressure-test every opportunity: the financials, the operations, the culture, and the competitive position.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
-  { num: '04', title: 'Build', description: 'From day one, we work alongside management to put better systems in place, deploy capital, and build.' },
+  { num: '01', title: 'Identify', description: 'We source directly through local networks across India\'s industrial corridors. Relationships with chartered accountants, industry associations, and family business advisors.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is evaluated in person: the financials, the operations, the team, and the competitive dynamics of the local market.' },
+  { num: '03', title: 'Invest', description: 'Majority positions with structures designed around the founder\'s priorities. Continuity for the team and flexibility on the founder\'s level of involvement.' },
+  { num: '04', title: 'Build', description: 'Institutional-grade governance, financial reporting, working capital management, and a growth roadmap. We bring the infrastructure. They bring the business.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
@@ -357,8 +357,8 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             className={`font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
           >
             {isIndia
-              ? <>India's founder-led companies represent one of the most <span className="text-gold font-semibold">overlooked</span> opportunities in global investing.</>
-              : <>Tens of thousands of <span className="text-gold font-semibold">essential</span> businesses keep America running.</>
+              ? <>India's industrial middle market is one of the largest pools of <span className="text-gold font-semibold">uninstitutionalized</span> value in the world.</>
+              : <>Every year, thousands of American business owners start thinking about what comes <span className="text-gold font-semibold">next.</span> Most of them don't have an answer.</>
             }
           </motion.h2>
 
@@ -406,25 +406,25 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={isDark}>Investment Firm</SectionLabel>
+            <SectionLabel light={isDark}>Private Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
-              Built for Owners Thinking Long-Term
+              Built Around the Owners, Not the Exit
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
-                ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Companies</>
-                : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
+                ? <>Partnering with the Industrial Businesses Shaping <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>India's Next Decade</span></>
+                : <>Acquiring and Building America's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Overlooked</span> Industrial and Services Businesses</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'Long-term capital and hands-on partnership for the founder-led companies building India\'s future.'
-                : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
+                ? 'We take majority positions in India\'s industrial and business services companies, bringing an investment approach refined over a decade of global dealmaking.'
+                : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our investment philosophy was shaped at some of the best firms in the world and refined into something we could call our own.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -461,9 +461,9 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We preserve what founders built and invest in what comes next. Every partnership is shaped around the business, not a template."
-        highlights={['founders', 'partnership']}
-        subtext="Patient capital, real operating experience, and a genuine respect for the businesses we partner with."
+        heading="We invest in good businesses where the product works, the customers are loyal, and the operations haven't kept up. We fix the operations and keep everything else."
+        highlights={['fix', 'keep']}
+        subtext="Every partnership is structured around the business, not a timeline."
         variant="light"
       />
 
@@ -474,10 +474,10 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Proven businesses deserve a partner who understands what they have built and can help them scale it.'
-            : 'Patient capital and hands-on experience open the next chapter.'
+            ? 'Sixty-three million MSMEs, real revenue, real customers, and almost no access to the kind of capital and systems that could scale them.'
+            : 'Between the large funds and the local buyers, there\'s a gap. Profitable companies that need more than money but don\'t fit the megafund model.'
         }
-        highlights={isIndia ? ['partner'] : ['Patient']}
+        highlights={isIndia ? ['scale'] : ['gap']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
@@ -493,7 +493,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              From Discovery to Partnership
+              How a Deal Comes Together
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
@@ -508,8 +508,8 @@ const Home = () => {
           <FadeIn>
             <p className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia
-                ? <>Global <span className="text-gold">institutional expertise</span> applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
-                : <>Decades of <span className="text-gold">institutional experience</span> dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
+                ? <>Global training refined into a local <span className="text-gold">conviction.</span> Working alongside the founders and families building India's <span className="text-gold">industrial base.</span></>
+                : <>An investment philosophy shaped at some of the best firms in the world, now applied with personal <span className="text-gold">conviction</span> to the businesses that run America's <span className="text-gold">infrastructure.</span></>
               }
             </p>
           </FadeIn>
@@ -534,12 +534,12 @@ const Home = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                  {isIndia ? "Let's Talk" : 'Start a Conversation'}
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
-                    : "If you're a founder considering your next chapter, we'd welcome an honest discussion about long-term partnership."}
+                    ? "If you run a business in India's industrial or services space and you're exploring what partnership could look like, reach out. Every conversation starts with listening."
+                    : "If you're a business owner in one of our sectors and you've been thinking about what the next chapter looks like, we'd welcome a conversation. No pitch. Just a straightforward discussion."}
                 </p>
               </FadeIn>
             </div>

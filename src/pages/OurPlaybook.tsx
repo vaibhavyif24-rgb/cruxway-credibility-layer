@@ -17,17 +17,17 @@ import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
-  { num: '01', title: 'Discovery', description: 'We find deals where others aren\'t looking. Years of relationship-building across our sectors give us access to businesses long before they hit the market.' },
-  { num: '02', title: 'Evaluation', description: 'We pressure-test everything: the financials, the customers, the team, and the competitive dynamics. Data gets validated on the ground, not just in a spreadsheet.' },
-  { num: '03', title: 'Diligence', description: 'Deep financial, operational, and legal analysis with specialists who know the space. We model the downside first and build conviction through evidence, not gut feel.' },
-  { num: '04', title: 'Structuring', description: 'We structure deals for permanence: aligned incentives, sensible governance, and capital that compounds over decades, not exits in three years.' },
+  { num: '01', title: 'Discovery', description: 'Most of our deal flow comes from relationships we\'ve cultivated over many years in our target sectors. When an owner starts thinking about a transition, we want to be someone they already know.' },
+  { num: '02', title: 'Evaluation', description: 'We focus first on what could go wrong: customer concentration, key-person risk, competitive threats, and regulatory exposure. Businesses that survive that analysis earn a deeper look.' },
+  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. We aim to understand the business as well as the owner does before we make a commitment.' },
+  { num: '04', title: 'Structuring', description: 'Aligned incentives between Cruxway and the owner. Governance that fits the size of the company. Conservative leverage. No artificial timelines.' },
 ];
 
 const valueCreationItems = [
-  { title: 'Stabilize & Professionalize', desc: 'Put real systems, reporting, and governance in place from day one.' },
-  { title: 'Optimize Operations', desc: 'Find and fix the operational gaps that unlock margin.' },
-  { title: 'Invest in Growth', desc: 'Put capital to work in organic growth, adjacent markets, and smart acquisitions.' },
-  { title: 'Compound Value', desc: 'Hold long enough for improvements to compound and market position to deepen.' },
+  { title: 'Stabilize & Professionalize', desc: 'Establish financial reporting, build or upgrade the finance function, create governance structures, and set an operating cadence that lets management focus forward.' },
+  { title: 'Optimize Operations', desc: 'Identify the operational gaps that limit margin. Renegotiate where needed, streamline where possible, and fix the things the founder never had time to address.' },
+  { title: 'Invest in Growth', desc: 'Deploy capital into organic growth, adjacent markets, and add-on acquisitions where the strategic fit is clear and the return case is strong.' },
+  { title: 'Compound Value', desc: 'Operational improvements take time to compound. That\'s why we hold. Year three looks different from year one, and year seven looks different again.' },
 ];
 
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
@@ -344,7 +344,7 @@ const OurPlaybook = () => {
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              We have spent our careers partnering with founders who have built industry-leading businesses. We know what separates good from great, and we bring that lens to every deal.
+              A process refined over a decade of investing and dozens of transactions. From how we find opportunities to how we build value after closing.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -374,8 +374,8 @@ const OurPlaybook = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="We have seen what works and what doesn't across hundreds of deals. That pattern recognition is our edge."
-        highlights={['pattern', 'edge']}
+        heading="The pattern recognition that comes from years of evaluating and operating businesses in our sectors is something we bring to every new opportunity. It doesn't replace judgment, but it sharpens it."
+        highlights={['sharpens']}
         variant="light"
       />
 
@@ -388,7 +388,7 @@ const OurPlaybook = () => {
               How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              What we actually do once we invest.
+              What the work looks like after closing.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
@@ -408,12 +408,12 @@ const OurPlaybook = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                  {isIndia ? "Want to Understand Our Approach?" : "Interested in How This Works in Practice?"}
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
-                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
+                    ? "No two businesses are alike, and neither is our approach to any two deals. If you'd like to discuss how this would work for your company, we're here."
+                    : "Every business is different and so is every partnership. If you'd like to understand how our process would apply to your specific situation, reach out."}
                 </p>
               </FadeIn>
             </div>

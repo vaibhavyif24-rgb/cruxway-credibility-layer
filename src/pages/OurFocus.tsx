@@ -34,12 +34,12 @@ const investmentProfile = {
 };
 
 const whatWeLookFor = [
-  { num: '01', title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
-  { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors in overlooked markets where reliability and recurring demand create real staying power.' },
-  { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
-  { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
-  { num: '05', title: 'Operational Improvement Runway', desc: 'Businesses that have outgrown their systems. We professionalize operations without losing what made the company special.' },
-  { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
+  { num: '01', title: 'Ownership Succession', desc: 'Founders thinking about retirement. Families navigating a generational transition. Owners who care deeply about what happens to their company and their people after they step back.' },
+  { num: '02', title: 'Essential & Regulated Services', desc: 'Compliance-driven sectors where barriers to entry are real, customer relationships are long-standing, and demand doesn\'t depend on the economic cycle.' },
+  { num: '03', title: 'Recurring Revenue & Retention', desc: 'Businesses where the hard work of winning the customer has already been done. High retention, contractual relationships, and cash flows that compound over time.' },
+  { num: '04', title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where no single player dominates. We invest in a strong platform and grow through disciplined acquisitions over a long hold.' },
+  { num: '05', title: 'Operational Improvement Runway', desc: 'Companies that have outgrown their infrastructure. Strong product, loyal customers, but systems and processes that haven\'t scaled with the business.' },
+  { num: '06', title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue, not from financial engineering.' },
 ];
 
 const indiaSectors = {
@@ -127,8 +127,8 @@ const OurFocus = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'We bring institutional discipline and a personal touch to partnering with India\'s best founder-led businesses.'
-                : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
+                ? 'A focused set of criteria, applied with discipline and local knowledge, to India\'s industrial middle market.'
+                : 'Our approach was shaped over a decade of investing across dozens of transactions and refined into a specific set of criteria. Here\'s what we look for.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -261,12 +261,12 @@ const OurFocus = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                  {isIndia ? "See Yourself Here?" : "Think This Describes Your Business?"}
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
-                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
+                    ? "If the criteria above describe your business, we'd welcome the opportunity to learn more about what you've built."
+                    : "If what you've read here sounds like your situation, reach out. We're direct, we're respectful, and we respond to every serious inquiry."}
                 </p>
               </FadeIn>
             </div>
