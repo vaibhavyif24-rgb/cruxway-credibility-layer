@@ -443,8 +443,8 @@ const Team = () => {
               <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
                 <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
-                    ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
-                    : 'Operators and leaders who have built businesses like the ones we invest in.'}
+                    ? 'Industrialists and operators across India whose sector knowledge and relationships inform how we evaluate and build.'
+                    : 'Senior operators and executives with direct experience in the industries where we invest.'}
                 </p>
                 <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
                   Details on our advisory network are shared selectively with prospective partners.
