@@ -69,10 +69,10 @@ const GuidingPrinciples = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
+                  If This Resonates
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                  If you share our values and are exploring long-term partnership, we'd welcome the conversation.
+                  Alignment on values makes everything else easier. If what you've read here reflects how you think about business and partnership, we'd welcome the conversation.
                 </p>
               </FadeIn>
             </div>

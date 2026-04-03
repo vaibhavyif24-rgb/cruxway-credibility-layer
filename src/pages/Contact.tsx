@@ -114,8 +114,9 @@ const Contact = () => {
       {/* Commitment */}
       <ScrollRevealText
         label="Our Commitment"
-        heading="Every conversation is treated with discretion and respect. We engage selectively and commit deeply to the founders we partner with."
+        heading="Every conversation is confidential. We are selective about who we partner with, and fully committed to those we do."
         subtext="Privileged & Confidential"
+        highlights={['selective', 'committed']}
         variant="light"
       />
 
