@@ -383,6 +383,16 @@
     animation-fill-mode: forwards;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .text-shimmer-gold {
+      background: none;
+      -webkit-background-clip: unset;
+      background-clip: unset;
+      -webkit-text-fill-color: unset;
+      animation: none;
+    }
+  }
+
   /* CTA button pulse glow */
   @keyframes btn-pulse {
     0%, 100% { box-shadow: 0 0 0 0 hsl(43 78% 50% / 0); }
