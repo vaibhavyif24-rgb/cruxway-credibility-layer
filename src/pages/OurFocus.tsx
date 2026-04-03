@@ -150,7 +150,7 @@ const OurFocus = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Investment Profile</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
             <GoldRule className="mb-8 md:mb-10" />
