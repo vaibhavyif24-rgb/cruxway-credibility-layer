@@ -136,7 +136,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
 
             <div className="px-2 md:px-4">
               <span className={`font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
-                i === active ? 'text-gold' : isDark ? 'text-primary-foreground/20' : 'text-foreground/20'
+                i === active ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
               }`}>
                 {step.num}
               </span>
