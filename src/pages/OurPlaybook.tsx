@@ -42,12 +42,12 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
 
   return (
     <div ref={containerRef}>
-      <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 md:mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
             onClick={() => handleClick(i)}
-            className={`relative min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden
+            className={`relative w-full min-h-[48px] px-3 md:px-5 py-3 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden text-center flex items-center justify-center
               ${active === i
                 ? 'bg-gold/20 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
                 : isDark
