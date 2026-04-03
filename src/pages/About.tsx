@@ -23,16 +23,16 @@ const About = () => {
 
   const approach = isIndia
     ? [
-        { t: 'Low Market Focus', d: 'High-potential businesses where operational improvement unlocks outsized returns.' },
-        { t: 'Founder Alignment', d: 'Partnerships designed around the founder\'s vision and growth timeline.' },
-        { t: 'Operational Partnership', d: 'Driving meaningful, sustainable outcomes across Indian markets.' },
-        { t: 'Disciplined Capital', d: 'Capital allocated toward highest-return uses with discipline.' },
+        { t: 'Market Focus', d: 'The ₹10Cr–₹100Cr revenue segment, where professionalizing operations creates outsized returns relative to capital deployed.' },
+        { t: 'Founder-First Terms', d: 'Structures built around the founder\'s priorities: team continuity, personal legacy, and flexibility on involvement.' },
+        { t: 'Operational Involvement', d: 'Governance, financial controls, reporting, and working capital optimization, implemented on the ground alongside the existing team.' },
+        { t: 'Capital Discipline', d: 'Cash-flow-first thinking, conservative leverage, and capital deployed where the return case is clearest.' },
       ]
     : [
-        { t: 'Long-Term Alignment', d: 'Hold periods designed around the growth opportunity. Patient capital by design.' },
-        { t: 'Essential Services', d: 'Regulated industries where trust and deep relationships create lasting advantages.' },
-        { t: 'Operational Partnership', d: 'Professionalizing operations and driving sustainable growth alongside management.' },
-        { t: 'Disciplined Capital', d: 'Protecting downside and investing for long-term upside.' },
+        { t: 'Hold Period', d: 'We invest against an opportunity, not a fund timeline. Some positions may be held for a decade or longer.' },
+        { t: 'Sector Specificity', d: 'Regulated, compliance-driven industries where switching costs are high and demand is not discretionary. We stay narrow deliberately.' },
+        { t: 'Operational Involvement', d: 'We work inside the business: building the finance function, creating reporting cadences, and professionalizing operations alongside management.' },
+        { t: 'Capital Discipline', d: 'Conservative structures. Returns from growing the business, not from leverage. We model the downside first.' },
       ];
 
   const principles = [
