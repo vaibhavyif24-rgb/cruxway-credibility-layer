@@ -456,15 +456,18 @@ const Team = () => {
       </Section>
 
       {/* Institutional Experience Marquee */}
-      <div className="bg-[hsl(40,20%,91%)]">
-        <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-4 md:pt-5 pb-2 md:pb-3">
+      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-[hsl(40,18%,96%)] border-y border-[hsl(38,12%,90%)]'}`}>
+        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
+        <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10 pb-2 md:pb-3">
           <FadeIn>
-            <SectionLabel>Institutional Experience</SectionLabel>
+            <SectionLabel light={isDark}>Institutional Experience</SectionLabel>
             <GoldRule className="mt-1" />
           </FadeIn>
         </div>
-        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
-      </div>
+        <div className="relative pb-6 md:pb-8">
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="inline" />
+        </div>
+      </section>
     </div>
   );
 };
