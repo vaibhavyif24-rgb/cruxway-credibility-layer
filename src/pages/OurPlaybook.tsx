@@ -38,13 +38,6 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
     setActive(i);
   }, []);
 
-  useEffect(() => {
-    if (!isInView) return;
-    const interval = setInterval(() => {
-      setActive(prev => (prev + 1) % steps.length);
-    }, STEP_DURATION);
-    return () => clearInterval(interval);
-  }, [isInView, active, steps.length]);
 
   return (
     <div ref={containerRef}>
