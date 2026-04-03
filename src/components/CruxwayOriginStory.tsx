@@ -210,6 +210,12 @@ const CruxwayOriginStory = () => {
   const act4StatementOp = useTransform(scrollYProgress, [0.78, 0.82], [0, 1]);
   const act4ClosingOp = useTransform(scrollYProgress, [0.82, 0.86], [0, 1]);
 
+  /* Hoisted definition line Y transforms (cannot call hooks inside JSX) */
+  const act2Line1Y = useTransform(scrollYProgress, [0.35, 0.38], [12, 0]);
+  const act2Line2Y = useTransform(scrollYProgress, [0.36, 0.39], [12, 0]);
+  const act2Line3Y = useTransform(scrollYProgress, [0.37, 0.40], [12, 0]);
+  const act2Line4Y = useTransform(scrollYProgress, [0.38, 0.41], [12, 0]);
+
   const headingSize = isMobile ? 'clamp(3rem, 13vw, 4.5rem)' : 'clamp(3.5rem, 8vw, 6rem)';
 
   return (
@@ -364,7 +370,7 @@ const CruxwayOriginStory = () => {
 
             <motion.div
               className="relative pl-4 border-l-2 border-gold/30"
-              style={{ opacity: act2Line1Op, y: useTransform(scrollYProgress, [0.35, 0.38], [12, 0]) }}
+              style={{ opacity: act2Line1Op, y: act2Line1Y }}
             >
               <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
                 English
@@ -376,7 +382,7 @@ const CruxwayOriginStory = () => {
 
             <motion.div
               className="relative pl-4 border-l-2 border-gold/30"
-              style={{ opacity: act2Line2Op, y: useTransform(scrollYProgress, [0.36, 0.39], [12, 0]) }}
+              style={{ opacity: act2Line2Op, y: act2Line2Y }}
             >
               <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
                 Japanese (道, dō)
@@ -388,7 +394,7 @@ const CruxwayOriginStory = () => {
 
             <motion.div
               className="relative pl-4 border-l-2 border-gold/30"
-              style={{ opacity: act2Line3Op, y: useTransform(scrollYProgress, [0.37, 0.40], [12, 0]) }}
+              style={{ opacity: act2Line3Op, y: act2Line3Y }}
             >
               <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
                 Chinese (道, dào)
@@ -401,7 +407,7 @@ const CruxwayOriginStory = () => {
             {isIndia && (
               <motion.div
                 className="relative pl-4 border-l-2 border-gold/30"
-                style={{ opacity: act2Line4Op, y: useTransform(scrollYProgress, [0.38, 0.41], [12, 0]) }}
+                style={{ opacity: act2Line4Op, y: act2Line4Y }}
               >
                 <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
                   Hindi (मार्ग, mārg)
