@@ -475,7 +475,7 @@ const Home = () => {
         heading={
           isIndia
             ? 'Sixty-three million MSMEs, real revenue, real customers, and almost no access to the kind of capital and systems that could scale them.'
-            : 'Between the large funds and the local buyers, there\'s a gap. Profitable companies that need more than money but don\'t fit the megafund model.'
+            : 'Thousands of profitable service businesses will change hands this decade. Most founders want more than a buyer. They want a partner who will stay close and think long-term.'
         }
         highlights={isIndia ? ['scale'] : ['gap']}
         stats={
