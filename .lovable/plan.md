@@ -1,54 +1,86 @@
 
 
-## Plan: Professional StepNavigator + Mobile-Optimized Value Creation Chart
+## Plan: Senior UI/UX Overhaul: Origin Story, Animations, Spellings, Loader, and Headings
 
-### Problem 1: StepNavigator Buttons Look Childish
-The current `flex-wrap gap-2` layout creates an uneven 2x2 grid on mobile with mismatched button widths. This looks amateurish. The screenshot confirms the issue: buttons have inconsistent sizing and awkward wrapping.
+### 1. CRU x WAY Origin Story: Professional Definition Layout (CruxwayOriginStory.tsx)
 
-### Fix: Clean Vertical List on Mobile, Horizontal Row on Desktop
-Replace the `flex-wrap` button layout with a structured approach:
+**Problem:** The Act 2 definitions are plain text lines stacked vertically with tiny 12px font. Looks like a bulleted list, not a cinematic naming story.
 
-**Mobile (< 768px):** A clean 2-column CSS grid with equal-width buttons, consistent height, and proper alignment. Each button fills its cell evenly. This eliminates the ragged wrapping.
+**Fix:** Redesign the definition area into a structured, elegant layout:
+- Each language definition gets a subtle left gold border accent (2px vertical line), creating visual hierarchy
+- Increase font size to `text-[13px] md:text-[15px]`
+- Add staggered `y` entrance transforms (each line slides up 12px as it fades in) using individual `useTransform` for `y` values
+- Add a thin gold horizontal divider between the "Way道" heading and the definitions
+- Language labels get `tracking-[0.12em]` uppercase styling for gravitas
+- Add a subtle glow pulse behind the definition block using a radial gradient that breathes
 
-**Desktop:** A single horizontal row with `grid-cols-4` so all four buttons are equal width and perfectly aligned.
+### 2. Animation Audit: Add Motion Throughout (Multiple Files)
 
-**Button styling upgrade:**
-- Remove `min-w-[44px]` (causes uneven sizing)
-- Use `grid grid-cols-2 md:grid-cols-4` for perfect alignment
-- Add `text-center justify-center` so content is centered within each cell
-- Slightly increase padding for institutional feel
+**Files to enhance:**
 
-### Problem 2: Value Creation Chart Overflows on Mobile
-The chart uses absolute positioning with fixed pixel widths (`barWidth: 64px * 4 + gap: 20px * 3 = 316px`) but the SVG and bar container don't constrain properly on 390px screens. The bars and trajectory line may clip or overflow.
+**InvestmentCriteria.tsx:**
+- Sector items in lists: stagger `FadeIn` with `delay={index * 0.08}`  
+- EvalStep icons: add `whileInView` rotate entrance (rotate from -10deg to 0)
+- CTA button: add `whileHover={{ y: -2, boxShadow }}` if missing
 
-### Fix: Reduce Mobile Bar Dimensions + Responsive Chart
-- Reduce mobile bar widths from `64px` to `52px`
-- Reduce mobile gaps from `20px` to `14px`
-- Reduce mobile bar heights from `[100, 160, 230, 310]` to `[80, 135, 195, 260]`
-- Reduce chart height on mobile from `380px` to `340px`
-- Make label containers narrower on mobile (`width: 70px` instead of `90px`)
-- Ensure the SVG trajectory line recalculates with the smaller dimensions
+**OurFocus.tsx:**
+- Sector list items (`<li>` elements): wrap each in `motion.li` with staggered `whileInView` fade-up
+- Vertical divider between sector columns: animate `scaleY` from 0 to 1 on viewport entry
+- CriteriaTabs/Accordion content: ensure `AnimatePresence` transitions on tab change
 
-### Technical Changes
+**Contact.tsx:**
+- Email/location cards: add `whileHover={{ y: -4 }}` lift effect
+- Map link: gold underline animation on hover
 
-**File: `src/pages/OurPlaybook.tsx`**
+**Home.tsx:**
+- Process carousel step indicators: add scale pulse on active dot
+- Social proof heading: add word-by-word stagger if not present
 
-**StepNavigator (lines 43-95):** Replace the button container `div` with a CSS grid layout:
-- `grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3`
-- Each button becomes `w-full` with centered text
-- Consistent `py-3` height across all buttons
+**GuidingPrinciples.tsx:**
+- ConvictionsDeck entry: ensure cards have staggered entrance
 
-**ValueCreationChart (lines 98-322):** Adjust mobile dimensions:
-- `barHeights`: `[80, 135, 195, 260]` mobile
-- `barWidth`: `52` mobile
-- `gap`: `14` mobile  
-- `chartHeight`: `340` mobile
-- Label container width: `70px` mobile
-- Font sizes slightly smaller on mobile for labels
+### 3. British to American English (Multiple Files)
 
-### What stays the same
-- All interaction logic (click-to-select, AnimatePresence)
-- Desktop dimensions unchanged
-- All styling layers (gradients, textures, shimmer)
-- Growth trajectory SVG (just recalculates with new mobile coords)
+**src/pages/Home.tsx line 54:** "Rigour" -> "Rigor"
+
+Global search confirmed this is the only remaining British spelling instance.
+
+### 4. PageLoader Light Mode Effects (App.tsx)
+
+**Problem:** Light mode loader has floating particles but they're nearly invisible at 0.15 opacity. Dark mode looks rich; light mode looks bare.
+
+**Fix:**
+- Increase light-mode particle opacity from 0.15 to 0.25
+- Add a soft pulsing radial gradient ring behind the wordmark (gold/8 that breathes from scale 0.9 to 1.1)
+- Add a second set of particles that drift horizontally (not just vertically) for more visual depth
+- Add a subtle rotating gold arc (thin SVG circle segment, 120 degrees, rotating slowly) around the wordmark area
+
+### 5. Investment Criteria Headings (InvestmentCriteria.tsx)
+
+**Problem:** Section headings use `text-[clamp(1.3rem,2.5vw,1.8rem)]` and `text-[clamp(1.5rem,2.8vw,2.2rem)]` which are too small on mobile at 390px (renders ~1.3rem = 20.8px).
+
+**Fix:**
+- "Our Target Parameters" heading: `text-[clamp(1.5rem,3vw,2.2rem)]` (was 1.3rem min)
+- "What We Look For" heading: `text-[clamp(1.6rem,3.2vw,2.4rem)]` (was 1.5rem min)  
+- "How We Evaluate Opportunities" heading: `text-[clamp(1.6rem,3.2vw,2.4rem)]` (was 1.5rem min)
+- EvalStep titles: `text-[1.2rem] md:text-[1.35rem]` (was 1.1rem/1.25rem)
+- EvalStep descriptions: `text-[14px] md:text-[15px]` (was 13px/14px)
+- Value Creation carousel heading in CriteriaCarousel: verify and increase if needed
+
+### Technical Summary
+
+| File | Changes |
+|------|---------|
+| `CruxwayOriginStory.tsx` | Redesign Act 2 definitions with gold accent borders, larger text, staggered y-entrance, divider |
+| `App.tsx` | PageLoader: brighter light-mode particles, pulsing glow ring, rotating gold arc |
+| `InvestmentCriteria.tsx` | Increase all section headings, eval step titles/descriptions |
+| `Home.tsx` | Fix "Rigour" -> "Rigor" |
+| `OurFocus.tsx` | Animate sector list items with staggered fade-up, animate vertical divider |
+| `Contact.tsx` | Add hover lift effects to cards |
+
+### Constraints
+- No em-dashes. American English only.
+- Framer Motion for all animations. Standard ease: [0.22, 1, 0.36, 1].
+- Both themes must look professional.
+- Do not touch ThemeContext, RegionContext, SiteHeader, SiteFooter, or Landing page.
 
