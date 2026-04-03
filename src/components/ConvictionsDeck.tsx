@@ -154,11 +154,10 @@ const ConvictionsDeck = () => {
         </div>
 
         {/* Accordion */}
-        <FadeIn delay={0.1}>
-          <div className="border-t border-gold/10">
-            {principles.map((p, i) => (
+        <div className="border-t border-gold/10">
+          {principles.map((p, i) => (
+            <FadeIn key={i} delay={0.1 + i * 0.06}>
               <AccordionRow
-                key={i}
                 index={i}
                 principle={p}
                 isOpen={openIndex === i}
@@ -166,9 +165,9 @@ const ConvictionsDeck = () => {
                 isDark={isDark}
                 isMobile={isMobile}
               />
-            ))}
-          </div>
-        </FadeIn>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );

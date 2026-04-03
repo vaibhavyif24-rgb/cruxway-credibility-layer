@@ -27,7 +27,7 @@ const Contact = () => {
     : 'https://maps.google.com/?q=San+Diego+California';
 
   return (
-    <div>
+    <div style={{ overflowX: 'clip' }}>
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[45vh] md:min-h-[50vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaContact : heroUSContact} overlay="strong" />

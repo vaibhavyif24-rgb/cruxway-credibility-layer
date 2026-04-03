@@ -347,17 +347,9 @@ const CruxwayOriginStory = () => {
             <div className="h-[1px] w-full bg-gold/30" />
           </motion.div>
 
-          {/* Gold divider between heading and definitions */}
-          <motion.div
-            className="w-12 h-px mx-auto mt-5 mb-6"
-            style={{
-              opacity: act2Line1Op,
-              background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.5), transparent)',
-            }}
-          />
 
           {/* Definitions with gold left-border accents */}
-          <div className="flex flex-col items-start gap-4 max-w-[420px] text-left relative">
+          <div className="flex flex-col items-start gap-4 max-w-[420px] text-left relative mt-5">
             {/* Subtle breathing glow behind definitions */}
             <motion.div
               className="absolute -inset-8 pointer-events-none rounded-lg"
@@ -378,7 +370,7 @@ const CruxwayOriginStory = () => {
                 English
               </p>
               <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                The path and method one takes
+                A deliberate path chosen with intent and conviction
               </p>
             </motion.div>
 
@@ -390,7 +382,7 @@ const CruxwayOriginStory = () => {
                 Japanese (道, dō)
               </p>
               <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                The disciplined path of mastery through practice
+                A lifelong discipline pursued through relentless refinement
               </p>
             </motion.div>
 
@@ -402,7 +394,7 @@ const CruxwayOriginStory = () => {
                 Chinese (道, dào)
               </p>
               <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                The natural order; reality flowing when unforced
+                The natural principle that governs all things when left unforced
               </p>
             </motion.div>
 
@@ -415,7 +407,7 @@ const CruxwayOriginStory = () => {
                   Hindi (मार्ग, mārg)
                 </p>
                 <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                  The committed road; a path walked with purpose
+                  A sacred road walked with purpose and moral resolve
                 </p>
               </motion.div>
             )}

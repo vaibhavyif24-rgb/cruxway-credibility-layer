@@ -45,7 +45,7 @@ const About = () => {
   ];
 
   return (
-    <div>
+    <div style={{ overflowX: 'clip' }}>
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaAbout : heroUSAbout} overlay="strong" />
@@ -117,6 +117,14 @@ const About = () => {
           </h2>
           <GoldRule />
         </FadeIn>
+        <motion.div
+          className="h-px mt-4 origin-left"
+          style={{ background: 'linear-gradient(90deg, hsl(43 78% 50% / 0.3), transparent)' }}
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        />
       </div>
       <PrinciplesSlider principles={principles} />
 

@@ -209,7 +209,7 @@ const OurFocus = () => {
                       <li className="flex items-start gap-2.5">
                         <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
                         <div>
-                          <span className={`font-serif text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                             {item.name}
                           </span>
                           <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
@@ -235,7 +235,7 @@ const OurFocus = () => {
                       <li className="flex items-start gap-2.5">
                         <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
                         <div>
-                          <span className={`font-serif text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                             {item.name}
                           </span>
                           <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
@@ -334,7 +334,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
             }`}>
               {item.num}
             </span>
-            <span className={`block font-serif text-[0.8rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+            <span className={`block font-serif text-[0.85rem] md:text-[0.9rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
               i === active
                 ? isDark ? 'text-primary-foreground' : 'text-foreground'
                 : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
@@ -419,10 +419,10 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
               className={`w-full flex items-center justify-between py-4 min-h-[44px] text-left`}
             >
               <div className="flex items-center gap-3">
-                <span className={`font-serif text-[1.5rem] leading-none ${isOpen ? 'text-gold/40' : isDark ? 'text-primary-foreground/10' : 'text-foreground/10'}`}>
+                <span className={`font-serif text-[1.6rem] leading-none ${isOpen ? 'text-gold/40' : isDark ? 'text-primary-foreground/10' : 'text-foreground/10'}`}>
                   {item.num}
                 </span>
-                <span className={`font-serif text-[1rem] tracking-[-0.02em] ${
+                <span className={`font-serif font-medium text-[1.1rem] md:text-[1.2rem] tracking-[-0.02em] ${
                   isOpen
                     ? isDark ? 'text-primary-foreground' : 'text-foreground'
                     : isDark ? 'text-primary-foreground/50' : 'text-foreground/50'
@@ -448,7 +448,7 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                 >
                   <div className="pb-5 pl-[calc(1.5rem+12px)]">
                     <div className="w-8 h-[1.5px] bg-gold/30 mb-3" />
-                    <p className={`font-sans text-[13px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                    <p className={`font-sans text-[14px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                       {item.desc}
                     </p>
                   </div>
