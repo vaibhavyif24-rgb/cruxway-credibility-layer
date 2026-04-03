@@ -139,10 +139,10 @@ const indiaPartner: TeamMember = {
 };
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.95 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.0 },
   { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
-  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
+  { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 0.75 },
   
   { src: evercoreLogo, alt: 'Evercore', scale: 1.2 },
   { src: dunesPointLogo, alt: 'Dunes Point Capital', scale: 1.0 },
