@@ -349,7 +349,7 @@ const CruxwayOriginStory = () => {
 
 
           {/* Definitions with gold left-border accents */}
-          <div className="flex flex-col items-start gap-4 max-w-[420px] text-left relative">
+          <div className="flex flex-col items-start gap-4 max-w-[420px] text-left relative mt-5">
             {/* Subtle breathing glow behind definitions */}
             <motion.div
               className="absolute -inset-8 pointer-events-none rounded-lg"
