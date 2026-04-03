@@ -196,7 +196,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, delay: 0.25 }}
-                    className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
+                    className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
                   >
                     {steps[active].description}
                   </motion.p>
