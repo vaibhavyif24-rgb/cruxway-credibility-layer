@@ -123,7 +123,7 @@ const Contact = () => {
       <section className="bg-background px-5 md:px-10 lg:px-16 py-6 md:py-8 border-t border-border">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
-            <p className="font-sans text-[12px] text-muted-foreground/45 leading-[1.7] max-w-[560px]">
+            <p className="font-sans text-[12px] text-muted-foreground/55 leading-[1.7] max-w-[560px]">
               This website has been prepared by Cruxway LLC solely for informational purposes. It does not constitute an offer, agreement, or commitment to invest.
             </p>
           </FadeIn>

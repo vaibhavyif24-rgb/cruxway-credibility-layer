@@ -480,7 +480,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            Getting from A to B matters. To do that, one must transform under pressure and sustained discipline. But the journey itself matters too. It must be aligned with the natural order of things.
+            Outcome without process is reckless. Process without conviction is hollow. We believe enduring value is forged when both align.
           </motion.p>
         </motion.div>
 

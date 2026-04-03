@@ -71,7 +71,7 @@ const GuidingPrinciples = () => {
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   If you share our values and are exploring long-term partnership, we'd welcome the conversation.
                 </p>
               </FadeIn>
