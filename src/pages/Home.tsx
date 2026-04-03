@@ -536,7 +536,7 @@ const Home = () => {
                 <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? "Let's Talk" : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If you run a business in India's industrial or services space and you're exploring what partnership could look like, reach out. Every conversation starts with listening."
                     : "If you're a business owner in one of our sectors and you've been thinking about what the next chapter looks like, we'd welcome a conversation. No pitch. Just a straightforward discussion."}
