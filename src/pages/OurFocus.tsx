@@ -120,15 +120,15 @@ const OurFocus = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              {isIndia ? <><span className="text-gold">Disciplined</span> Capital for India's Best</> : <>Where <span className="text-gold">Conviction</span> Meets Capital</>}
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+              {isIndia ? <>Our <span className="text-gold">Approach</span> in India</> : <>How We <span className="text-gold">Think</span> About Investing</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'A rigorous framework for identifying, evaluating, and partnering with India\'s most promising founder-led companies.'
-                : 'Our disciplined criteria for identifying exceptional businesses with enduring competitive advantages.'}
+                ? 'We bring institutional discipline and a personal touch to partnering with India\'s best founder-led businesses.'
+                : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
