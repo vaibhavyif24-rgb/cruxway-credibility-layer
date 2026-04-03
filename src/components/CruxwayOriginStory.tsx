@@ -258,7 +258,7 @@ const CruxwayOriginStory = () => {
             className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.28em] text-gold mb-4 md:mb-5"
             style={{ opacity: act1LabelOp, textShadow: isDark ? '0 1px 16px rgba(0,0,0,0.7), 0 0 40px hsl(43 78% 50% / 0.25)' : '0 1px 8px hsl(40 30% 94% / 0.9), 0 0 30px hsl(43 78% 50% / 0.2)' }}
           >
-            The First Word
+            What's in a name
           </motion.p>
 
           <motion.h2
