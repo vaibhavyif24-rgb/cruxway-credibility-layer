@@ -334,7 +334,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
             }`}>
               {item.num}
             </span>
-            <span className={`block font-serif text-[0.8rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+            <span className={`block font-serif text-[0.85rem] md:text-[0.9rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
               i === active
                 ? isDark ? 'text-primary-foreground' : 'text-foreground'
                 : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
