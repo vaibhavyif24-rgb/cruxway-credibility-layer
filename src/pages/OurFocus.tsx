@@ -425,7 +425,7 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                 >
                   <div className="pb-5 pl-[calc(1.5rem+12px)]">
                     <div className="w-8 h-[1.5px] bg-gold/30 mb-3" />
-                    <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                    <p className={`font-sans text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                       {item.desc}
                     </p>
                   </div>
