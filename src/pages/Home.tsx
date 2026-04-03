@@ -417,7 +417,7 @@ const Home = () => {
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
                 ? <>Partnering with the Industrial Businesses Shaping <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>India's Next Decade</span></>
-                : <>Acquiring and Building America's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Overlooked</span> Industrial and Services Businesses</>}
+                : <>Partnering with America's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Industrial and Services Businesses</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
@@ -461,7 +461,7 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We invest in businesses where the product works, the customers are loyal, and the operations haven't kept up. We professionalize the operations and protect everything else."
+        heading="We partner with businesses where the product is proven and the customers are loyal. We help professionalize the systems around them and protect what the founder built."
         highlights={['professionalize', 'protect']}
         subtext="Every partnership is structured around what the business actually needs."
         variant="light"
@@ -475,9 +475,9 @@ const Home = () => {
         heading={
           isIndia
             ? 'Sixty-three million MSMEs, real revenue, real customers, and almost no access to the kind of capital and systems that could scale them.'
-            : 'Between the large funds and the local buyers, there\'s a gap. Profitable companies that need more than money but don\'t fit the megafund model.'
+            : 'Thousands of profitable service businesses will change hands this decade. Most founders want more than a buyer. They want a partner who will stay close and think long-term.'
         }
-        highlights={isIndia ? ['scale'] : ['gap']}
+        highlights={isIndia ? ['scale'] : ['partner']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
