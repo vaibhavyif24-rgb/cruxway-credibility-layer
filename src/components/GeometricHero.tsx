@@ -9,8 +9,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const GeometricHero = () => {
   const isMobile = useIsMobile();
 
-  const kenBurnsScale = isMobile ? 1.08 : 1.18;
-  const kenBurnsX = isMobile ? [0, 3, -2, 1, 0] : [0, 15, -10, 5, 0];
+  const kenBurnsScale = isMobile ? 1.14 : 1.18;
+  const kenBurnsX = isMobile ? [0, 8, -6, 4, 0] : [0, 15, -10, 5, 0];
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
