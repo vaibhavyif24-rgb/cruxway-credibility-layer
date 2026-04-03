@@ -520,7 +520,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            The path to building something enduring runs through the crucible. There are no shortcuts.
+            The path to building anything enduring has no shortcuts.
           </motion.p>
 
           <motion.p
