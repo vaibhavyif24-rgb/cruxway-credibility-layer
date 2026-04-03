@@ -124,54 +124,58 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
   const Icon = evalIcons[index] || Search;
 
   return (
-    <motion.div ref={ref} style={{ opacity: glowOpacity }} className="relative pt-10">
-      {/* Timeline dot with ring */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center group hover:bg-gold/10 transition-colors duration-300">
+    <motion.div ref={ref} style={{ opacity: glowOpacity }} className="relative">
+      <GlassCard index={index} hover={true}>
+        <div className="pt-10 px-4 pb-6">
+          {/* Timeline dot with ring */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full border border-gold/20 flex items-center justify-center group hover:bg-gold/10 transition-colors duration-300">
+              <motion.div
+                style={{
+                  scale: dotScale,
+                  boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
+                }}
+                className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
+              />
+            </div>
+          </div>
+
+          {/* Icon */}
           <motion.div
-            style={{
-              scale: dotScale,
-              boxShadow: useTransform(dotGlow, v => `0 0 ${v * 20}px hsl(43 78% 50% / ${v * 0.5})`),
-            }}
-            className="w-3 h-3 rounded-full bg-gold/60 border-2 border-gold/30"
+            className="flex justify-center mt-3 mb-2"
+            initial={{ rotate: -10, opacity: 0 }}
+            whileInView={{ rotate: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Icon className="w-5 h-5 text-gold/40" />
+          </motion.div>
+
+          {/* Step number */}
+          <motion.p className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2">
+            Step {step.num}
+          </motion.p>
+
+          {/* Title */}
+          <h3 className={`text-center font-serif text-[1.2rem] md:text-[1.35rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            {step.title}
+          </h3>
+
+          {/* Gold underline */}
+          <motion.div
+            className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3 origin-left"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
           />
+
+          {/* Description */}
+          <p className={`text-center font-sans text-[14px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+            {step.desc}
+          </p>
         </div>
-      </div>
-
-      {/* Icon */}
-      <motion.div
-        className="flex justify-center mt-3 mb-2"
-        initial={{ rotate: -10, opacity: 0 }}
-        whileInView={{ rotate: 0, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Icon className="w-5 h-5 text-gold/40" />
-      </motion.div>
-
-      {/* Step number */}
-      <motion.p className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2">
-        Step {step.num}
-      </motion.p>
-
-      {/* Title */}
-      <h3 className={`text-center font-serif text-[1.2rem] md:text-[1.35rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-        {step.title}
-      </h3>
-
-      {/* Gold underline */}
-      <motion.div
-        className="w-8 h-[1.5px] bg-gold/25 mx-auto mb-3 origin-left"
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      />
-
-      {/* Description */}
-      <p className={`text-center font-sans text-[14px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-        {step.desc}
-      </p>
+      </GlassCard>
     </motion.div>
   );
 });
