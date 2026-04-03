@@ -86,7 +86,7 @@ const Landing = () => {
         <p className="font-sans text-[11px] md:text-[12px] font-medium uppercase text-white/30 tracking-[0.3em] text-center mb-10">
           Select Region
         </p>
-        <div className="flex gap-5 sm:gap-6">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           {regions.map((r, i) => {
             const isSelected = selected === r.key;
             const isOther = selected !== null && !isSelected;
