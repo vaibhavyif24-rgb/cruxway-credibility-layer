@@ -141,7 +141,7 @@ const ConvictionsDeck = () => {
         {/* Header */}
         <div className="mb-8 md:mb-10">
           <FadeIn>
-            <SectionLabel>What we stand for</SectionLabel>
+            <SectionLabel>Our Convictions</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-1">
               <span className="text-foreground">Guiding </span>
               <span className="text-gold">Principles</span>
