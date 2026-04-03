@@ -515,7 +515,7 @@ const Home = () => {
           </FadeIn>
         </div>
       </section>
-      <div className="bg-background">
+      <div className="bg-[hsl(40,20%,91%)]">
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 
