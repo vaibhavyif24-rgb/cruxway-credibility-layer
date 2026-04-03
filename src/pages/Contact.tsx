@@ -76,9 +76,9 @@ const Contact = () => {
                     {email}
                   </p>
                   <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
-                    {isIndia
-                      ? 'For inquiries related to partnerships and opportunities in India.'
-                      : 'For general inquiries, partnership discussions, and deal flow.'}
+                  {isIndia
+                      ? 'For partnership and investment inquiries in India.'
+                      : 'For partnership discussions and general inquiries.'}
                   </p>
                 </GlassCard>
               </motion.a>
