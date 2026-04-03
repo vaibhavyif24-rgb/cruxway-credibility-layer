@@ -86,7 +86,7 @@ const Landing = () => {
         <p className="font-sans text-[11px] md:text-[12px] font-medium uppercase text-white/30 tracking-[0.3em] text-center mb-10">
           Select Region
         </p>
-        <div className="flex gap-5 sm:gap-6">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
           {regions.map((r, i) => {
             const isSelected = selected === r.key;
             const isOther = selected !== null && !isSelected;
@@ -104,7 +104,7 @@ const Landing = () => {
                 whileTap={!selected ? { scale: 0.98 } : {}}
                 onClick={() => !selected && selectRegion(r.key)}
                 disabled={selected !== null}
-                className="group relative w-[180px] sm:w-[220px] aspect-[4/3] flex items-center justify-center cursor-pointer overflow-hidden"
+                className="group relative w-[200px] sm:w-[260px] md:w-[280px] aspect-[3/2] flex items-center justify-center cursor-pointer overflow-hidden"
               >
                 <span className={`
                   absolute inset-0 border transition-all duration-700 ease-out
@@ -127,15 +127,25 @@ const Landing = () => {
                 <span className={`absolute bottom-0 right-0 w-5 h-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 w-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
                 <span className={`absolute bottom-0 right-0 h-5 w-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 h-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
 
-                <span className={`
-                  relative z-10 font-sans text-[12px] sm:text-[14px] font-semibold uppercase tracking-[0.28em]
-                  transition-all duration-500
-                  ${isSelected
-                    ? 'text-gold'
-                    : 'text-white/50 group-hover:text-white/85'
-                  }
-                `}>
-                  {r.label}
+                <span className="relative z-10 flex flex-col items-center gap-2">
+                  <span className={`
+                    font-sans text-[13px] sm:text-[14px] md:text-[15px] font-semibold uppercase tracking-[0.28em]
+                    transition-all duration-500
+                    ${isSelected
+                      ? 'text-gold'
+                      : 'text-white/50 group-hover:text-white/85'
+                    }
+                  `}>
+                    {r.label}
+                  </span>
+                  {isSelected && (
+                    <motion.span
+                      initial={{ width: 0, opacity: 0 }}
+                      animate={{ width: 32, opacity: 1 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="h-[1.5px] bg-gold/40"
+                    />
+                  )}
                 </span>
 
                 <AnimatePresence>
