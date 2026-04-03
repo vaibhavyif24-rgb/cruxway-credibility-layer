@@ -357,8 +357,8 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             className={`font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
           >
             {isIndia
-              ? <>India's founder-led companies represent one of the most <span className="text-gold font-semibold">overlooked</span> opportunities in global investing.</>
-              : <>Tens of thousands of <span className="text-gold font-semibold">essential</span> businesses keep America running.</>
+              ? <>India's industrial middle market is one of the largest pools of <span className="text-gold font-semibold">uninstitutionalized</span> value in the world.</>
+              : <>Every year, thousands of American business owners start thinking about what comes <span className="text-gold font-semibold">next.</span> Most of them don't have an answer.</>
             }
           </motion.h2>
 
