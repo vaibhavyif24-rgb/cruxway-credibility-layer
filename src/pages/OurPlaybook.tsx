@@ -274,46 +274,45 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className={`mt-6 rounded-sm border relative overflow-hidden flex ${
-              isDark
-                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,88%)] bg-[hsl(40,20%,98%)]'
-            }`}
           >
-            {/* Left gold accent strip */}
-            <div className="w-[3px] flex-shrink-0 bg-gold/40" />
+            <GlassCard index={selected} hover={true}>
+              <div className="flex">
+                {/* Left gold accent strip */}
+                <div className="w-[3px] flex-shrink-0 bg-gold/40" />
 
-            <div className="p-7 md:p-10 flex-1 relative">
-              {/* Watermark number */}
-              <span
-                className={`absolute top-2 right-5 font-serif text-[6rem] leading-none select-none pointer-events-none ${
-                  isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
-                }`}
-              >
-                {String(selected + 1).padStart(2, '0')}
-              </span>
+                <div className="p-7 md:p-10 flex-1 relative">
+                  {/* Watermark number */}
+                  <span
+                    className={`absolute top-2 right-5 font-serif text-[6rem] leading-none select-none pointer-events-none ${
+                      isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
+                    }`}
+                  >
+                    {String(selected + 1).padStart(2, '0')}
+                  </span>
 
-              <div className="relative">
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold block mb-2">
-                  Phase {String(selected + 1).padStart(2, '0')}
-                </span>
-                <h3
-                  className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
-                    isDark ? 'text-primary-foreground' : 'text-foreground'
-                  }`}
-                >
-                  {items[selected].title}
-                </h3>
-                <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-                <p
-                  className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
-                    isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
-                  }`}
-                >
-                  {items[selected].desc}
-                </p>
+                  <div className="relative">
+                    <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold block mb-2">
+                      Phase {String(selected + 1).padStart(2, '0')}
+                    </span>
+                    <h3
+                      className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                        isDark ? 'text-primary-foreground' : 'text-foreground'
+                      }`}
+                    >
+                      {items[selected].title}
+                    </h3>
+                    <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+                    <p
+                      className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
+                        isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
+                      }`}
+                    >
+                      {items[selected].desc}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </GlassCard>
           </motion.div>
         )}
       </AnimatePresence>
