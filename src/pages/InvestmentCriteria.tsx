@@ -149,7 +149,7 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
       </motion.p>
 
       {/* Title */}
-      <h3 className={`text-center font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <h3 className={`text-center font-serif text-[1.2rem] md:text-[1.35rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         {step.title}
       </h3>
 
