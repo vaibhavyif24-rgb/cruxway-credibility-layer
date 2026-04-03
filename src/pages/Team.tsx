@@ -374,7 +374,7 @@ const Team = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'A team that combines global investing experience with deep, on-the-ground conviction in India\'s industrial economy.'
                 : 'Investors who have spent their careers studying what makes businesses work, and who started Cruxway to do the work themselves.'}
