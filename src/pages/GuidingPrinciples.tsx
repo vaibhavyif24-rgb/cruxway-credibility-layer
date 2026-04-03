@@ -34,12 +34,12 @@ const GuidingPrinciples = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[540px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              The Name. The <span className="text-gold">Conviction</span>. The Way.
+              The Meaning Behind <span className="text-gold">Cruxway</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[460px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              How we named ourselves, what we believe, and why it matters in every decision we make.
+              Why we chose this name, and what it says about how we invest.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
