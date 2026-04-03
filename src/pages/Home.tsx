@@ -220,7 +220,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
           >
             ← Previous
           </button>
-          <span className={`font-sans text-[10px] font-medium tracking-[0.15em] ${isDark ? 'text-primary-foreground/25' : 'text-foreground/25'}`}>
+          <span className={`font-sans text-[10px] font-medium tracking-[0.15em] ${isDark ? 'text-primary-foreground/35' : 'text-foreground/35'}`}>
             {String(active + 1).padStart(2, '0')} / {String(steps.length).padStart(2, '0')}
           </span>
           <button
