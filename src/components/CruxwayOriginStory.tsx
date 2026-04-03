@@ -394,7 +394,7 @@ const CruxwayOriginStory = () => {
                 Chinese (道, dào)
               </p>
               <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                The natural order; reality flowing when unforced
+                The natural principle that governs all things when left unforced
               </p>
             </motion.div>
 
