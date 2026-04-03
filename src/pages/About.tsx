@@ -32,7 +32,7 @@ const About = () => {
         { t: 'Hold Period', d: 'We invest against the opportunity itself. Some positions may be held for a decade or longer.' },
         { t: 'Sector Specificity', d: 'Regulated, compliance-driven industries where switching costs are high and demand is not discretionary. We stay narrow deliberately.' },
         { t: 'Operational Involvement', d: 'We work inside the business: building the finance function, creating reporting cadences, and professionalizing operations alongside management.' },
-        { t: 'Capital Discipline', d: 'Conservative structures. Returns from growing the business, not from leverage. We model the downside first.' },
+        { t: 'Capital Discipline', d: 'Conservative structures. Returns come from growing the business. We model the downside first.' },
       ];
 
   const principles = [
