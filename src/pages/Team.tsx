@@ -444,7 +444,7 @@ const Team = () => {
                 <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
                     ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
-                    : 'Our advisory network includes senior operators, industry veterans, and institutional leaders across the United States.'}
+                    : 'Operators and leaders who have built businesses like the ones we invest in.'}
                 </p>
                 <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">
                   Details on our advisory network are shared selectively with prospective partners.
