@@ -165,47 +165,44 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={`rounded-sm border p-6 md:p-10 ${
-              isDark
-                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
-            }`}
-            whileHover={{ rotateX: 0.5, rotateY: -0.5 }}
-            style={{ transformPerspective: 800 }}
           >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="font-serif text-[3rem] md:text-[4rem] leading-none text-gold/15 block mb-2"
-            >
-              {steps[active].num}
-            </motion.span>
+            <GlassCard index={active} hover={true}>
+              <div className="p-6 md:p-10">
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  className="font-serif text-[3rem] md:text-[4rem] leading-none text-gold/15 block mb-2"
+                >
+                  {steps[active].num}
+                </motion.span>
 
-            <div>
-              <motion.h3
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.15 }}
-                className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
-              >
-                {steps[active].title}
-              </motion.h3>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: 40 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="h-[1.5px] bg-gold/30 mb-4"
-              />
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.25 }}
-                className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
-              >
-                {steps[active].description}
-              </motion.p>
-            </div>
+                <div>
+                  <motion.h3
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.15 }}
+                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+                  >
+                    {steps[active].title}
+                  </motion.h3>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: 40 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="h-[1.5px] bg-gold/30 mb-4"
+                  />
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.25 }}
+                    className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
+                  >
+                    {steps[active].description}
+                  </motion.p>
+                </div>
+              </div>
+            </GlassCard>
           </motion.div>
         </AnimatePresence>
 
