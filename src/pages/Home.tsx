@@ -461,9 +461,9 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We preserve what founders built and invest in what comes next. Every partnership is shaped around the business, not a template."
-        highlights={['founders', 'partnership']}
-        subtext="Patient capital, real operating experience, and a genuine respect for the businesses we partner with."
+        heading="We invest in good businesses where the product works, the customers are loyal, and the operations haven't kept up. We fix the operations and keep everything else."
+        highlights={['fix', 'keep']}
+        subtext="Every partnership is structured around the business, not a timeline."
         variant="light"
       />
 
