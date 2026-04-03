@@ -474,10 +474,10 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
-            : 'Patient capital and operational expertise unlock their next chapter of growth.'
+            ? 'Proven businesses deserve a partner who understands what they have built and can help them scale it.'
+            : 'Patient capital and hands-on experience open the next chapter.'
         }
-        highlights={isIndia ? ['discipline'] : ['Patient']}
+        highlights={isIndia ? ['partner'] : ['Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
