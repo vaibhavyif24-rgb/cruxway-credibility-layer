@@ -86,7 +86,7 @@ const About = () => {
         subtext={
           isIndia
             ? 'Cruxway invests in and takes majority stakes in founder-led companies across India\'s essential sectors.'
-            : 'Our role is to honour that legacy while bringing the resources, systems, and capital to take these companies to the next level.'
+            : 'Our role is to honor that legacy while bringing the resources, systems, and capital to take these companies to the next level.'
         }
         variant="light"
       />
