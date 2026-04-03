@@ -57,9 +57,7 @@ const PageLoader = () => {
           <motion.span
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: isDark
-                ? 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.5) 50%, transparent 100%)'
-                : 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.35) 50%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.4) 50%, transparent 100%)',
               backgroundSize: '200% 100%',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
