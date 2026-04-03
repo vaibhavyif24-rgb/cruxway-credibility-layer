@@ -24,10 +24,10 @@ const evaluationSteps = [
 ];
 
 const valueCreationItems = [
-  { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-  { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-  { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-  { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+  { title: 'Stabilize & Professionalize', desc: 'Put real systems, reporting, and governance in place from day one.' },
+  { title: 'Optimize Operations', desc: 'Find and fix the operational gaps that unlock margin.' },
+  { title: 'Invest in Growth', desc: 'Put capital to work in organic growth, adjacent markets, and smart acquisitions.' },
+  { title: 'Compound Value', desc: 'Hold long enough for improvements to compound and market position to deepen.' },
 ];
 
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
