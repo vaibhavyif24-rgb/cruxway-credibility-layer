@@ -120,7 +120,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
         {subtext && !stats && (
           <motion.p
-            style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
+            style={{ opacity: subtextOpacity }}
             className={`font-sans text-[14px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
               (isActuallyDark || isLightVariantDarkTheme) ? 'text-primary-foreground/45' : 'text-muted-foreground'
             }`}
