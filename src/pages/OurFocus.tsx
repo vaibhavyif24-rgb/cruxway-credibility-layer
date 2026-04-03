@@ -238,7 +238,7 @@ const OurFocus = () => {
               <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                             {item.name}
                           </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                             {item.desc}
                           </span>
                         </div>
