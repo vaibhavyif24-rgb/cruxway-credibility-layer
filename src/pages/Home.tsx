@@ -51,7 +51,7 @@ const allLogos = [
 
 const processStepsUS = [
   { num: '01', title: 'Identify', description: 'We go where others don\'t. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market.' },
-  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position. Rigour is our edge.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position. Rigor is our edge.' },
   { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
   { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management.' },
 ];

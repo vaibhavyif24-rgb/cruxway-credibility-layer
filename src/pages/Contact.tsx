@@ -61,7 +61,7 @@ const Contact = () => {
         <div className="max-w-[1080px] mx-auto">
           <div className="grid md:grid-cols-2 gap-4 md:gap-5">
             <FadeIn>
-              <a href={`mailto:${email}`} className="block h-full">
+              <motion.a href={`mailto:${email}`} className="block h-full" whileHover={{ y: -4 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
                 <GlassCard index={0} className="p-6 md:p-8 h-full">
                   <div className="flex items-start justify-between mb-6">
                     <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center group-hover:border-gold/25 transition-colors duration-500">
@@ -81,11 +81,11 @@ const Contact = () => {
                       : 'For general inquiries, partnership discussions, and deal flow.'}
                   </p>
                 </GlassCard>
-              </a>
+              </motion.a>
             </FadeIn>
 
             <FadeIn delay={0.08}>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block h-full">
+              <motion.a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="block h-full" whileHover={{ y: -4 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}>
               <GlassCard index={1} className="p-6 md:p-8 h-full">
                 <div className="flex items-start justify-between mb-6">
                   <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center group-hover:border-gold/25 transition-colors duration-500">
@@ -105,7 +105,7 @@ const Contact = () => {
                     : 'Headquartered in San Diego, with a nationwide investment focus.'}
                 </p>
               </GlassCard>
-              </a>
+              </motion.a>
             </FadeIn>
           </div>
         </div>

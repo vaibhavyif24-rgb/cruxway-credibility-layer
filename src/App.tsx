@@ -79,10 +79,48 @@ const PageLoader = () => {
         />
       </div>
 
-      {/* Floating gold particles */}
+      {/* Pulsing radial gold ring */}
+      <motion.div
+        className="absolute pointer-events-none"
+        style={{
+          width: 200,
+          height: 200,
+          borderRadius: '50%',
+          border: `1px solid hsl(43 78% 50% / ${isDark ? 0.08 : 0.06})`,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+        animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.3, 0.7, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* Rotating gold arc */}
+      <motion.svg
+        className="absolute pointer-events-none"
+        width="160"
+        height="160"
+        viewBox="0 0 160 160"
+        style={{ top: '50%', left: '50%', marginTop: -80, marginLeft: -80 }}
+        animate={{ rotate: [0, 360] }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+      >
+        <circle
+          cx="80"
+          cy="80"
+          r="70"
+          fill="none"
+          stroke={`hsl(43 78% 50% / ${isDark ? 0.12 : 0.08})`}
+          strokeWidth="0.5"
+          strokeDasharray="120 340"
+          strokeLinecap="round"
+        />
+      </motion.svg>
+
+      {/* Floating gold particles (vertical) */}
       {[...Array(4)].map((_, i) => (
         <motion.div
-          key={i}
+          key={`v-${i}`}
           className="absolute rounded-full"
           style={{
             width: 2 + (i % 2),
@@ -90,13 +128,36 @@ const PageLoader = () => {
             background: 'hsl(43 78% 50%)',
             left: `${30 + i * 14}%`,
             bottom: '30%',
-            opacity: isDark ? 0.3 : 0.15,
+            opacity: isDark ? 0.3 : 0.25,
           }}
-          animate={{ y: [0, -40, -80], opacity: [0, isDark ? 0.3 : 0.15, 0] }}
+          animate={{ y: [0, -40, -80], opacity: [0, isDark ? 0.3 : 0.25, 0] }}
           transition={{
             duration: 3 + i * 0.5,
             repeat: Infinity,
             delay: 0.5 + i * 0.4,
+            ease: 'easeOut',
+          }}
+        />
+      ))}
+
+      {/* Horizontal drifting particles (light + dark) */}
+      {[...Array(3)].map((_, i) => (
+        <motion.div
+          key={`h-${i}`}
+          className="absolute rounded-full"
+          style={{
+            width: 2,
+            height: 2,
+            background: 'hsl(43 78% 50%)',
+            top: `${40 + i * 10}%`,
+            left: '20%',
+            opacity: isDark ? 0.2 : 0.18,
+          }}
+          animate={{ x: [0, 60, 120], opacity: [0, isDark ? 0.2 : 0.18, 0] }}
+          transition={{
+            duration: 5 + i * 0.8,
+            repeat: Infinity,
+            delay: 1 + i * 0.6,
             ease: 'easeOut',
           }}
         />

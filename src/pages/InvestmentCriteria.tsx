@@ -139,9 +139,15 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
       </div>
 
       {/* Icon */}
-      <div className="flex justify-center mt-3 mb-2">
+      <motion.div
+        className="flex justify-center mt-3 mb-2"
+        initial={{ rotate: -10, opacity: 0 }}
+        whileInView={{ rotate: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      >
         <Icon className="w-5 h-5 text-gold/40" />
-      </div>
+      </motion.div>
 
       {/* Step number */}
       <motion.p className="text-center font-sans text-[9px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-2">
@@ -149,7 +155,7 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
       </motion.p>
 
       {/* Title */}
-      <h3 className={`text-center font-serif text-[1.1rem] md:text-[1.25rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <h3 className={`text-center font-serif text-[1.2rem] md:text-[1.35rem] leading-[1.2] tracking-[-0.02em] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         {step.title}
       </h3>
 
@@ -163,7 +169,7 @@ const EvalStep = React.memo(({ step, index, isDark }: { step: { num: string; tit
       />
 
       {/* Description */}
-      <p className={`text-center font-sans text-[13px] md:text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+      <p className={`text-center font-sans text-[14px] md:text-[15px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
         {step.desc}
       </p>
     </motion.div>
@@ -238,7 +244,7 @@ const InvestmentCriteria = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Investment Profile</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
             <GoldRule className="mb-8 md:mb-10" />
@@ -272,7 +278,7 @@ const InvestmentCriteria = () => {
           <div className="max-w-[1080px] mx-auto">
             <FadeIn>
               <SectionLabel>Investment Criteria</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 What We Look For
               </h2>
               <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
@@ -304,7 +310,7 @@ const InvestmentCriteria = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Evaluation Framework</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.15] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               How We Evaluate Opportunities
             </h2>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
