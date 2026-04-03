@@ -144,7 +144,7 @@ const ConvictionsDeck = () => {
             <SectionLabel>Our Convictions</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-1">
               <span className="text-foreground">What Drives Every </span>
-              <span className="text-gold">Principles</span>
+              <span className="text-gold">Decision</span>
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-3">
               Six principles that shape how we partner, decide, and build.
