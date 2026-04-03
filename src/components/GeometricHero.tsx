@@ -9,8 +9,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const GeometricHero = () => {
   const isMobile = useIsMobile();
 
-  const kenBurnsScale = isMobile ? 1.08 : 1.18;
-  const kenBurnsX = isMobile ? [0, 3, -2, 1, 0] : [0, 15, -10, 5, 0];
+  const kenBurnsScale = isMobile ? 1.14 : 1.18;
+  const kenBurnsX = isMobile ? [0, 8, -6, 4, 0] : [0, 15, -10, 5, 0];
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -27,7 +27,7 @@ const GeometricHero = () => {
         <img
           src={heroImage}
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[55%_35%] md:object-center"
           loading="eager"
           fetchPriority="high"
           aria-hidden="true"
@@ -48,7 +48,7 @@ const GeometricHero = () => {
       {/* Minimal corner brackets — clean, institutional */}
       <svg
         viewBox="0 0 1200 800"
-        className="absolute inset-0 w-full h-full z-[2] opacity-40"
+        className="absolute inset-0 w-full h-full z-[2] opacity-60 md:opacity-40"
         preserveAspectRatio="xMidYMid slice"
       >
         {/* Top-left */}
