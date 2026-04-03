@@ -29,7 +29,7 @@ const About = () => {
         { t: 'Capital Discipline', d: 'Cash-flow-first thinking, conservative leverage, and capital deployed where the return case is clearest.' },
       ]
     : [
-        { t: 'Hold Period', d: 'We invest against an opportunity, not a fund timeline. Some positions may be held for a decade or longer.' },
+        { t: 'Hold Period', d: 'We invest against the opportunity itself. Some positions may be held for a decade or longer.' },
         { t: 'Sector Specificity', d: 'Regulated, compliance-driven industries where switching costs are high and demand is not discretionary. We stay narrow deliberately.' },
         { t: 'Operational Involvement', d: 'We work inside the business: building the finance function, creating reporting cadences, and professionalizing operations alongside management.' },
         { t: 'Capital Discipline', d: 'Conservative structures. Returns from growing the business, not from leverage. We model the downside first.' },
