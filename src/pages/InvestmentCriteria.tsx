@@ -349,8 +349,8 @@ const InvestmentCriteria = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="A disciplined, repeatable framework for building lasting value in every business we partner with."
-        highlights={['disciplined', 'lasting']}
+        heading="Every business we back shares the same foundation: compliance-driven demand that recurs, customers who stay because switching is costly, and an operator who built something worth scaling."
+        highlights={['foundation', 'scaling']}
         variant="light"
       />
 
