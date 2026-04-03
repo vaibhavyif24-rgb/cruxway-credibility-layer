@@ -262,8 +262,8 @@ const CinematicScrollReveal = () => {
             textShadow: textIsLight ? '0 3px 20px rgba(0,0,0,0.8)' : imageProgress > 0.3 ? '0 1px 10px rgba(40,30,10,0.12)' : 'none',
           }}
         >
-          Building enduring platforms across India's{' '}
-          <span style={{ color: 'hsl(43, 78%, 50%)' }}>lower middle market.</span>
+          Building enduring platforms alongside India's{' '}
+          <span style={{ color: 'hsl(43, 78%, 50%)' }}>best founder-led businesses.</span>
         </h2>
 
         <div
