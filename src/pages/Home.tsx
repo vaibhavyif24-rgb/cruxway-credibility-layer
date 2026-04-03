@@ -461,17 +461,9 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading={
-          isIndia
-            ? 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
-            : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
-        }
-        highlights={isIndia ? ['founders', 'long'] : ['founders', 'long']}
-        subtext={
-          isIndia
-            ? 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
-            : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
-        }
+        heading="We preserve what founders built and invest in what comes next. Every partnership is shaped around the business, not a template."
+        highlights={['founders', 'partnership']}
+        subtext="Patient capital, real operating experience, and a genuine respect for the businesses we partner with."
         variant="light"
       />
 
