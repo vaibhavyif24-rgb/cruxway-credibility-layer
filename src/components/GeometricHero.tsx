@@ -1,24 +1,18 @@
 import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-forking-road.jpg';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * Landing page hero: cinematic mountain ridge with Ken Burns zoom + parallax drift.
  * Minimal gold accent lines keep the focus on the photograph.
  */
 const GeometricHero = () => {
-  const isMobile = useIsMobile();
-
-  const kenBurnsScale = isMobile ? 1.08 : 1.18;
-  const kenBurnsX = isMobile ? [0, 3, -2, 1, 0] : [0, 15, -10, 5, 0];
-
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Photo with Ken Burns cinematic zoom + slow drift */}
       <motion.div
         className="absolute inset-[-10%] z-[0]"
         initial={{ scale: 1.0, x: 0 }}
-        animate={{ scale: kenBurnsScale, x: kenBurnsX }}
+        animate={{ scale: 1.18, x: [0, 15, -10, 5, 0] }}
         transition={{
           scale: { duration: 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
           x: { duration: 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
@@ -27,7 +21,7 @@ const GeometricHero = () => {
         <img
           src={heroImage}
           alt=""
-          className="w-full h-full object-cover object-[35%_center] md:object-center"
+          className="w-full h-full object-cover"
           loading="eager"
           fetchPriority="high"
           aria-hidden="true"
@@ -35,7 +29,7 @@ const GeometricHero = () => {
       </motion.div>
 
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy-deep/70 via-prussian/50 to-navy-deep/80 md:from-navy-deep/80 md:via-prussian/60 md:to-navy-deep/85" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy-deep/80 via-prussian/60 to-navy-deep/85" />
       {/* Vignette */}
       <div
         className="absolute inset-0 z-[1]"
