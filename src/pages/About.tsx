@@ -63,8 +63,8 @@ const About = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[460px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'An approach shaped at global firms and focused on India\'s founder-led industrial companies, where operational improvement creates disproportionate value.'
-                : 'We spent our early careers at large institutions, studying what makes businesses succeed and fail. Cruxway was built to apply those lessons to a part of the market we believe deserves better.'}
+                ? 'An approach shaped at global firms and focused on India\'s founder-led industrial companies, where operational improvement creates outsized value.'
+                : 'We spent our early careers at large institutions, studying what makes businesses succeed and fail. Cruxway was built to apply those lessons to a part of the market that deserves better.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -85,7 +85,7 @@ const About = () => {
         highlights={isIndia ? ['families', 'founders'] : ['already', 'working']}
         subtext={
           isIndia
-            ? 'Majority positions. Founder-aligned structures. A commitment that extends well beyond the typical investment horizon.'
+            ? 'Majority positions. Founder-aligned structures. A partnership that extends well beyond the typical investment horizon.'
             : 'Preserve what the founder built. Professionalize what holds it back. Hold it for as long as the opportunity warrants.'
         }
         variant="light"

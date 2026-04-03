@@ -90,7 +90,7 @@ const founders: TeamMember[] = [
     photo: harinPhoto,
     linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
-      'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy.',
+      'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy. Based in San Diego, he spends most of his time outside of work reading history and finding good food.',
     highlights: [
       'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
       'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
@@ -123,7 +123,7 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. He developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value.',
+    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. He developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value. Based in Delhi. Golf, fountain pens, watches, and wherever the next flight goes.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
     'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
