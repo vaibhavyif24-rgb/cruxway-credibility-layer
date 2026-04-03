@@ -150,12 +150,12 @@ const PageLoader = () => {
           style={{
             width: 2,
             height: 2,
-            background: 'hsl(43 78% 50%)',
+            background: isDark ? 'hsl(43 78% 50%)' : 'hsl(43 78% 45%)',
             top: `${40 + i * 10}%`,
             left: '20%',
-            opacity: 0.18,
+            opacity: isDark ? 0.18 : 0.3,
           }}
-          animate={{ x: [0, 60, 120], opacity: [0, 0.18, 0] }}
+          animate={{ x: [0, 60, 120], opacity: [0, isDark ? 0.18 : 0.3, 0] }}
           transition={{
             duration: 5 + i * 0.8,
             repeat: Infinity,
