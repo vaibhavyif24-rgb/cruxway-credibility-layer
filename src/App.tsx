@@ -108,7 +108,7 @@ const PageLoader = () => {
           cy="80"
           r="70"
           fill="none"
-          stroke={`hsl(43 78% 50% / ${isDark ? 0.12 : 0.08})`}
+          stroke="hsl(43 78% 50% / 0.10)"
           strokeWidth="0.5"
           strokeDasharray="120 340"
           strokeLinecap="round"
