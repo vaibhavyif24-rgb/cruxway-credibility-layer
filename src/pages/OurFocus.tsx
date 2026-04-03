@@ -295,12 +295,12 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
   return (
     <div>
       {/* Tab row */}
-      <div className="flex border-b border-gold/10">
+      <div className="flex overflow-x-auto scrollbar-hide border-b border-gold/10">
         {items.map((item, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`flex-1 text-left relative py-3 px-3 transition-all duration-300 ${
+            className={`min-w-[140px] md:min-w-0 md:flex-1 text-left relative py-3 px-4 transition-all duration-300 shrink-0 ${
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
@@ -312,7 +312,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
             }`}>
               {item.num}
             </span>
-            <span className={`block font-serif text-[1rem] md:text-[1.1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+            <span className={`block font-serif text-[1.05rem] md:text-[1.15rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
               i === active
                 ? isDark ? 'text-primary-foreground' : 'text-foreground'
                 : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
