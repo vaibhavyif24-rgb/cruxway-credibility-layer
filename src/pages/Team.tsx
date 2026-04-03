@@ -441,7 +441,7 @@ const Team = () => {
           <div className="lg:col-span-8 flex items-center">
             <FadeIn delay={0.08}>
               <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
-                <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
+                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
                     ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
                     : 'Operators and leaders who have built businesses like the ones we invest in.'}
