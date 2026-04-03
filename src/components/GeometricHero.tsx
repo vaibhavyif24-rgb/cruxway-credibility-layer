@@ -29,7 +29,7 @@ const GeometricHero = () => {
       </motion.div>
 
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy-deep/85 via-prussian/70 to-navy-deep/90" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy-deep/80 via-prussian/60 to-navy-deep/85" />
       {/* Vignette */}
       <div
         className="absolute inset-0 z-[1]"
