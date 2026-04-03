@@ -27,7 +27,7 @@ const GeometricHero = () => {
         <img
           src={heroImage}
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-[62%_center] md:object-center"
           loading="eager"
           fetchPriority="high"
           aria-hidden="true"
