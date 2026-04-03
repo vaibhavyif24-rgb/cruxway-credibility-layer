@@ -52,11 +52,13 @@ const InlineMarquee: React.FC<{
     >
       <div className="absolute left-0 top-0 bottom-0 w-10 z-10 pointer-events-none" style={{ background: `linear-gradient(to right, ${bg}, transparent)` }} />
       <div className="absolute right-0 top-0 bottom-0 w-10 z-10 pointer-events-none" style={{ background: `linear-gradient(to left, ${bg}, transparent)` }} />
-      <motion.div
+      <div
         className="flex items-center gap-6 md:gap-8 lg:gap-10 w-max"
-        animate={{ x: ['0%', '-33.333%'] }}
-        transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 16, ease: 'linear' } }}
-        style={{ animationPlayState: hovered ? 'paused' : 'running' }}
+        style={{
+          animation: 'marquee-scroll 16s linear infinite',
+          animationPlayState: hovered ? 'paused' : 'running',
+          willChange: 'transform',
+        }}
       >
         {track.map((logo, i) => (
           <div
@@ -77,7 +79,7 @@ const InlineMarquee: React.FC<{
             />
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
