@@ -456,7 +456,7 @@ const Team = () => {
       </Section>
 
       {/* Institutional Experience Marquee */}
-      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-[hsl(40,18%,96%)] border-y border-[hsl(38,12%,90%)]'}`}>
+      <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-[hsl(40,20%,91%)] border-y border-[hsl(38,12%,90%)]'}`}>
         {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-8 md:pt-10 pb-2 md:pb-3">
           <FadeIn>
