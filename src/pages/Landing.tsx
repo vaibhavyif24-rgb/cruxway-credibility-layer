@@ -32,7 +32,7 @@ const Landing = () => {
 
   return (
     <div className="min-h-[100dvh] relative flex flex-col items-center justify-center px-6 overflow-hidden">
-      {/* Crossroads photo + Ken Burns + peripheral geometric gold lines */}
+      {/* Abstract dark hero with compass-rose geometric accents */}
       <GeometricHero />
 
       {/* Extra top/bottom line accents */}
