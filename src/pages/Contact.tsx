@@ -38,12 +38,12 @@ const Contact = () => {
             <SectionLabel light={isDark}>Contact</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[420px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[420px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               Get in <span className="text-gold">Touch</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.12}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'Confidential, direct conversations with founders and business owners across India.'
                 : 'Direct, confidential conversations with business owners. No intermediaries, no pressure.'}
@@ -69,13 +69,13 @@ const Contact = () => {
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-muted-foreground/45 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                   </div>
-                  <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
+                  <p className="font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
                     Email
                   </p>
                   <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground group-hover:text-gold-dim transition-colors duration-500 tracking-[-0.01em]">
                     {email}
                   </p>
-                  <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
+                  <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] mt-3">
                   {isIndia
                       ? 'For partnership and investment inquiries in India.'
                       : 'For partnership discussions and general inquiries.'}
@@ -93,13 +93,13 @@ const Contact = () => {
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground/45 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                 </div>
-                <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
+                <p className="font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
                   Location
                 </p>
                 <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground tracking-[-0.01em]">
                   {location}
                 </p>
-                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
+                <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] mt-3">
                   {isIndia
                     ? 'Based in Delhi, with relationships across India\'s key industrial corridors.'
                     : 'Based in San Diego, investing across the United States.'}

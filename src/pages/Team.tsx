@@ -267,7 +267,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
           </div>
 
           <div className="md:col-span-9 overflow-hidden">
-            <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.75] mb-3 md:mb-4">
+            <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] mb-3 md:mb-4">
               {member.summary}
             </p>
             <ul className="space-y-1.5 md:space-y-2">
@@ -369,12 +369,12 @@ const Team = () => {
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? 'India Leadership' : 'Leadership'}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'A team that combines global investing experience with deep, on-the-ground conviction in India\'s industrial economy.'
                 : 'Investors who have spent their careers studying what makes businesses work, and who started Cruxway to do the work themselves.'}

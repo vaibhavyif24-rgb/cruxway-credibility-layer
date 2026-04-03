@@ -120,12 +120,12 @@ const OurFocus = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[600px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[600px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? <>Our <span className="text-gold">Approach</span> in India</> : <>How We <span className="text-gold">Think</span> About Investing</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'We bring institutional discipline and a personal touch to partnering with India\'s best founder-led businesses.'
                 : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
@@ -260,10 +260,10 @@ const OurFocus = () => {
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
-                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? "See Yourself Here?" : "Think This Describes Your Business?"}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If the criteria above describe your business, we'd welcome the opportunity to learn more about what you've built."
                     : "If what you've read here sounds like your situation, reach out. We're direct, we're respectful, and we respond to every serious inquiry."}
@@ -274,7 +274,7 @@ const OurFocus = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -359,7 +359,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
                   >
                     {items[active].num}
                   </motion.span>
-                  <h3 className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  <h3 className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                     {items[active].title}
                   </h3>
                   <motion.div
@@ -368,7 +368,7 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
                     transition={{ duration: 0.4, delay: 0.15 }}
                     className="h-[1.5px] bg-gold/30 mb-4"
                   />
-                  <p className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${isDark ? 'text-primary-foreground/65' : 'text-muted-foreground'}`}>
+                  <p className={`font-sans text-[14px] leading-[1.7] max-w-[640px] ${isDark ? 'text-primary-foreground/65' : 'text-muted-foreground'}`}>
                     {items[active].desc}
                   </p>
                 </div>
@@ -425,7 +425,7 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                 >
                   <div className="pb-5 pl-[calc(1.5rem+12px)]">
                     <div className="w-8 h-[1.5px] bg-gold/30 mb-3" />
-                    <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                    <p className={`font-sans text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                       {item.desc}
                     </p>
                   </div>
@@ -496,7 +496,7 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
         <span className="w-1.5 h-1.5 rounded-full bg-gold/30" />
         {label}
       </p>
-      <p className={`font-sans text-[14.5px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
+      <p className={`font-sans text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
         {value}
       </p>
     </motion.div>

@@ -182,7 +182,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.15 }}
-                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+                    className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
                   >
                     {steps[active].title}
                   </motion.h3>
@@ -196,7 +196,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, delay: 0.25 }}
-                    className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
+                    className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
                   >
                     {steps[active].description}
                   </motion.p>
@@ -409,19 +409,19 @@ const Home = () => {
             <SectionLabel light={isDark}>Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-gold mb-4">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
                 ? <>Partnering with the Industrial Businesses Shaping <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>India's Next Decade</span></>
                 : <>Partnering with America's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Industrial and Services Businesses</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'We take majority positions in India\'s industrial and business services companies, bringing an investment approach refined over a decade of global dealmaking.'
                 : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our investment philosophy was shaped at some of the best firms in the world and refined into something we could call our own.'}
@@ -435,7 +435,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/focus`}
-                  className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
+                  className={`btn-premium inline-block font-sans text-[11px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
                     isDark
                       ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
                       : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
@@ -447,7 +447,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="btn-premium btn-gold inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                  className="btn-premium btn-gold inline-block font-sans text-[11px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
                 >
                   Get in Touch
                 </Link>
@@ -533,10 +533,10 @@ const Home = () => {
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
-                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? "Let's Talk" : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If you run a business in India's industrial or services space and you're exploring what partnership could look like, reach out. Every conversation starts with listening."
                     : "If you're a business owner in one of our sectors and you've been thinking about what the next chapter looks like, we'd welcome a conversation. No pitch. Just a straightforward discussion."}
@@ -548,7 +548,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

@@ -107,7 +107,7 @@ const AccordionRow = ({
                 transition={{ duration: 0.5, ease }}
               />
               <p
-                className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${
+                className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${
                   isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                 }`}
               >
@@ -146,7 +146,7 @@ const ConvictionsDeck = () => {
               <span className="text-foreground">What Drives Every </span>
               <span className="text-gold">Decision</span>
             </h2>
-             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-3">
+             <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] max-w-[480px] mt-2 mb-3">
                Six principles that shape how we partner, decide, and build.
             </p>
             <GoldRule />

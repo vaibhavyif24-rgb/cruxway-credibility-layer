@@ -78,11 +78,11 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
                 <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-3 block">
                   Step {steps[active].num}
                 </span>
-                <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h3 className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {steps[active].title}
                 </h3>
                 <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-                <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
                   {steps[active].description}
                 </p>
               </div>
@@ -295,7 +295,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                       Phase {String(selected + 1).padStart(2, '0')}
                     </span>
                     <h3
-                      className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                      className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
                         isDark ? 'text-primary-foreground' : 'text-foreground'
                       }`}
                     >
@@ -303,7 +303,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                     </h3>
                     <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
                     <p
-                      className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
+                      className={`font-sans text-[14px] leading-[1.7] max-w-[640px] ${
                         isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                       }`}
                     >
@@ -338,12 +338,12 @@ const OurPlaybook = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Playbook, India' : 'Our Playbook'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[720px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[720px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               How We <span className="text-gold">Find,</span> Evaluate, and Build
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               We have spent our careers partnering with founders who have built industry-leading businesses. We know what separates good from great, and we bring that lens to every deal.
             </p>
           </FadeIn>
@@ -387,7 +387,7 @@ const OurPlaybook = () => {
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-foreground leading-[1.15] mb-2">
               How We Build Value
             </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
+            <p className="font-sans text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
               What the work looks like after closing.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
@@ -407,10 +407,10 @@ const OurPlaybook = () => {
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
-                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? "Want to Understand Our Approach?" : "Interested in How This Works in Practice?"}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "No two businesses are alike, and neither is our approach to any two deals. If you'd like to discuss how this would work for your company, we're here."
                     : "Every business is different and so is every partnership. If you'd like to understand how our process would apply to your specific situation, reach out."}
@@ -421,7 +421,7 @@ const OurPlaybook = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
