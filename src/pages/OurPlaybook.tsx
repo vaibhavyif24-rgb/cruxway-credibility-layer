@@ -295,7 +295,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                       Phase {String(selected + 1).padStart(2, '0')}
                     </span>
                     <h3
-                      className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                      className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
                         isDark ? 'text-primary-foreground' : 'text-foreground'
                       }`}
                     >
