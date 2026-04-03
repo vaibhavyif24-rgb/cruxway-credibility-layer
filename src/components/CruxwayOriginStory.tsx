@@ -190,6 +190,7 @@ const CruxwayOriginStory = () => {
   const act2Line1Op = useTransform(scrollYProgress, [0.35, 0.38, 0.46, 0.52], [0, 1, 1, 0]);
   const act2Line2Op = useTransform(scrollYProgress, [0.36, 0.39, 0.46, 0.52], [0, 1, 1, 0]);
   const act2Line3Op = useTransform(scrollYProgress, [0.37, 0.40, 0.46, 0.52], [0, 1, 1, 0]);
+  const act2Line4Op = useTransform(scrollYProgress, [0.38, 0.41, 0.46, 0.52], [0, 1, 1, 0]);
 
   /* ─── ACT 3: The Equation (0.50 → 0.72) — tightened entry ─── */
   const crucibleReturnOp = useTransform(scrollYProgress, [0.46, 0.52, 0.95, 1.0], [0, 1, 1, 1]);
