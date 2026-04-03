@@ -28,7 +28,7 @@ const sectorData = {
     ],
   },
   us: {
-    descriptor: 'Essential B2B services characterised by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.',
+    descriptor: 'Essential B2B services characterized by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.',
     columns: [
       {
         category: 'Infrastructure & Industrial',

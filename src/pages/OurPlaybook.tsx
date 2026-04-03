@@ -162,7 +162,7 @@ const OurPlaybook = () => {
               How We Build Value
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              Our four-phase approach to professionalising operations and compounding long-term value.
+              Our four-phase approach to professionalizing operations and compounding long-term value.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>

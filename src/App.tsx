@@ -41,7 +41,7 @@ const PageLoader = () => {
       />
 
       <div className="relative flex flex-col items-center">
-        {/* Wordmark with shimmer */}
+        {/* Wordmark with outline + shimmer */}
         <motion.h1
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -49,16 +49,19 @@ const PageLoader = () => {
           className="font-serif tracking-[-0.02em] relative overflow-hidden"
           style={{
             fontSize: 'clamp(4rem, 10vw, 7rem)',
-            color: isDark ? 'hsl(43 78% 50%)' : 'hsl(228 58% 18%)',
+            color: 'transparent',
+            WebkitTextStroke: isDark ? '1.5px hsl(43 78% 50%)' : '1.5px hsl(228 58% 18%)',
           }}
         >
           Cruxway
-          {/* Gold shimmer sweep */}
+          {/* Gold shimmer sweep through outline */}
           <motion.span
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.3) 50%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.4) 50%, transparent 100%)',
               backgroundSize: '200% 100%',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
             }}
             animate={{ backgroundPosition: ['-100% 0', '200% 0'] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'linear', repeatDelay: 1 }}
