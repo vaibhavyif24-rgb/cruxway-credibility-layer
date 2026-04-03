@@ -75,7 +75,7 @@ const Contact = () => {
                   <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground group-hover:text-gold-dim transition-colors duration-500 tracking-[-0.01em]">
                     {email}
                   </p>
-                  <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
+                  <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] mt-3">
                   {isIndia
                       ? 'For partnership and investment inquiries in India.'
                       : 'For partnership discussions and general inquiries.'}
