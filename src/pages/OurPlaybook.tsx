@@ -78,7 +78,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
                 <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-3 block">
                   Step {steps[active].num}
                 </span>
-                <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h3 className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {steps[active].title}
                 </h3>
                 <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
