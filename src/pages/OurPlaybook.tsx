@@ -106,7 +106,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
 
   // Calculate SVG points for growth trajectory line
   const totalWidth = barWidth * 4 + gap * 3;
-  const chartHeight = isMobile ? 380 : 480;
+  const chartHeight = isMobile ? 340 : 480;
   const baselineY = chartHeight - 60;
   const points = barHeights.map((h, i) => ({
     x: i * (barWidth + gap) + barWidth / 2,
