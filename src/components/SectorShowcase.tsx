@@ -33,9 +33,9 @@ const sectorData = {
       {
         category: 'Infrastructure & Industrial',
         items: [
-          { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernisation, and critical infrastructure maintenance' },
-          { name: 'Industrial Distribution', desc: 'Specialised parts, equipment, and supply chain solutions' },
-          { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialised engineering solutions' },
+          { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernization, and critical infrastructure maintenance' },
+          { name: 'Industrial Distribution', desc: 'Specialized parts, equipment, and supply chain solutions' },
+          { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialized engineering solutions' },
         ],
       },
       {
