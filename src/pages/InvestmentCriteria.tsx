@@ -304,7 +304,7 @@ const InvestmentCriteria = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Evaluation Framework</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,2.8vw,2.2rem)] leading-[1.15] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.6rem,3.2vw,2.4rem)] leading-[1.15] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               How We Evaluate Opportunities
             </h2>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
