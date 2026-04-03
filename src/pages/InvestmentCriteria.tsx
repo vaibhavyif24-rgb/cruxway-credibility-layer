@@ -14,6 +14,7 @@ import USCinematicScrollReveal from '@/components/USCinematicScrollReveal';
 import WaveBackground from '@/components/WaveBackground';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import React, { useRef } from 'react';
+import GlassCard from '@/components/GlassCard';
 
 import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
 import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
