@@ -83,10 +83,10 @@ const Landing = () => {
         transition={{ duration: 0.4, delay: 0.2 }}
         className="relative z-10 mt-20 sm:mt-28"
       >
-        <p className="font-sans text-[11px] md:text-[12px] font-medium uppercase text-white/30 tracking-[0.3em] text-center mb-10">
+        <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase text-white/45 tracking-[0.35em] text-center mb-10">
           Select Region
         </p>
-        <div className="flex flex-row items-center gap-3 sm:gap-8">
+        <div className="flex flex-row items-center justify-center gap-4 sm:gap-8">
           {regions.map((r, i) => {
             const isSelected = selected === r.key;
             const isOther = selected !== null && !isSelected;
@@ -104,7 +104,7 @@ const Landing = () => {
                 whileTap={!selected ? { scale: 0.98 } : {}}
                 onClick={() => !selected && selectRegion(r.key)}
                 disabled={selected !== null}
-                className="group relative w-[150px] sm:w-[220px] md:w-[280px] h-[60px] sm:h-[72px] md:h-[80px] flex items-center justify-center cursor-pointer overflow-hidden"
+                className="group relative w-[165px] sm:w-[240px] md:w-[300px] h-[64px] sm:h-[76px] md:h-[84px] flex items-center justify-center cursor-pointer overflow-hidden"
               >
                 <span className={`
                   absolute inset-0 border transition-all duration-700 ease-out

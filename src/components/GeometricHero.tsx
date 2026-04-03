@@ -9,8 +9,8 @@ import { useIsMobile } from '@/hooks/use-mobile';
 const GeometricHero = () => {
   const isMobile = useIsMobile();
 
-  const kenBurnsScale = isMobile ? 1.14 : 1.18;
-  const kenBurnsX = isMobile ? [0, 8, -6, 4, 0] : [0, 15, -10, 5, 0];
+  const kenBurnsScale = isMobile ? 1.16 : 1.18;
+  const kenBurnsX = isMobile ? [0, 10, -8, 5, 0] : [0, 15, -10, 5, 0];
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -20,8 +20,8 @@ const GeometricHero = () => {
         initial={{ scale: 1.0, x: 0 }}
         animate={{ scale: kenBurnsScale, x: kenBurnsX }}
         transition={{
-          scale: { duration: 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-          x: { duration: 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+          scale: { duration: isMobile ? 16 : 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+          x: { duration: isMobile ? 20 : 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
         }}
       >
         <img
