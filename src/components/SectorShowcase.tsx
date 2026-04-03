@@ -4,25 +4,25 @@ import { SectionLabel, GoldRule } from '@/components/ui/Section';
 
 const sectorData = {
   india: {
-    descriptor: 'Long-term capital partnering with India\'s essential B2B industries — built around recurring revenue, operational depth, and enduring competitive advantages.',
+    descriptor: 'Long-term capital partnering with India\'s essential B2B industries, built around recurring revenue, operational depth, and durable market positions.',
     columns: [
       {
         category: 'Industrials',
         items: [
-          { name: 'Process & Flow Control', desc: 'Valves, pumps, filtration, and fluid handling across industrial verticals' },
+          { name: 'Process and Flow Control', desc: 'Valves, pumps, filtration, and fluid handling across industrial verticals' },
           { name: 'Value-Added Distribution', desc: 'Specialized distribution with technical expertise and aftermarket services' },
           { name: 'Industrial Services', desc: 'Maintenance, turnaround, and mission-critical operational support' },
           { name: 'Packaging', desc: 'Industrial and specialty packaging for regulated and essential sectors' },
         ],
       },
       {
-        category: 'Business & Industrial Services',
+        category: 'Business and Industrial Services',
         items: [
-          { name: 'Facility & Support Services', desc: 'Integrated facility management, security, and support infrastructure' },
-          { name: 'Testing & Certification', desc: 'Quality assurance, compliance testing, and certification services' },
+          { name: 'Facility and Support Services', desc: 'Integrated facility management, security, and support infrastructure' },
+          { name: 'Testing and Certification', desc: 'Quality assurance, compliance testing, and certification services' },
           { name: 'Infrastructure Services', desc: 'Civil, electrical, and telecom infrastructure build and maintenance' },
           { name: 'Industrial Technology', desc: 'Automation, instrumentation, and digital solutions for industrial operations' },
-          { name: 'Aerospace & Defense', desc: 'Component manufacturing, MRO, and defence supply chain services' },
+          { name: 'Aerospace and Defense', desc: 'Component manufacturing, MRO, and defense supply chain services' },
         ],
       },
     ],
@@ -31,18 +31,18 @@ const sectorData = {
     descriptor: 'Essential B2B services characterized by recurring revenue, regulatory requirements, and critical infrastructure dependency across the United States.',
     columns: [
       {
-        category: 'Infrastructure & Industrial',
+        category: 'Infrastructure and Industrial',
         items: [
-          { name: 'Electrical & Infrastructure', desc: 'High-voltage services, grid modernization, and critical infrastructure maintenance' },
+          { name: 'Electrical and Infrastructure', desc: 'High-voltage services, grid modernization, and critical infrastructure maintenance' },
           { name: 'Industrial Distribution', desc: 'Specialized parts, equipment, and supply chain solutions' },
-          { name: 'Engineering & Technical', desc: 'Inspection, testing, calibration, and specialized engineering solutions' },
+          { name: 'Engineering and Technical', desc: 'Inspection, testing, calibration, and specialized engineering solutions' },
         ],
       },
       {
-        category: 'Services & Compliance',
+        category: 'Services and Compliance',
         items: [
           { name: 'Facility Services', desc: 'Building maintenance, security, and specialized facility management' },
-          { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
+          { name: 'Compliance and Safety', desc: 'Regulatory compliance, audit, and risk management services' },
           { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
         ],
       },
