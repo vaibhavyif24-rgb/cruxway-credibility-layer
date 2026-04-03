@@ -407,7 +407,7 @@ const CruxwayOriginStory = () => {
                   Hindi (मार्ग, mārg)
                 </p>
                 <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                  The committed road; a path walked with purpose
+                  A sacred road walked with purpose and moral resolve
                 </p>
               </motion.div>
             )}
