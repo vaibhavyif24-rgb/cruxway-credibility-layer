@@ -59,16 +59,6 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
               <span className="text-gold/85 mr-1.5">{step.num}</span>
               <span>{step.title}</span>
             </span>
-            {active === i && isInView && (
-              <motion.div
-                key={`progress-${active}`}
-                className="absolute bottom-0 left-0 h-[2px] bg-gold/50 origin-left"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: STEP_DURATION / 1000, ease: 'linear' }}
-                style={{ width: '100%' }}
-              />
-            )}
           </button>
         ))}
       </div>
