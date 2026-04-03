@@ -113,7 +113,7 @@ const About = () => {
         <FadeIn>
           <SectionLabel>Principles</SectionLabel>
           <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] text-foreground leading-[1.15] mb-3">
-            What We Stand For
+            The Principles Behind Every Decision
           </h2>
           <GoldRule />
         </FadeIn>
