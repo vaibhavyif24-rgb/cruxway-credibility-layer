@@ -52,6 +52,10 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
     if (typeof ref === 'function') ref(node);
     else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
   }, [ref]);
+
+  return (
+    <section
+      ref={setRefs}
       className={`relative overflow-hidden ${
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
