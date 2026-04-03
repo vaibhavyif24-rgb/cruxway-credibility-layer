@@ -8,6 +8,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import WaveBackground from '@/components/WaveBackground';
+import GlassCard from '@/components/GlassCard';
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
