@@ -88,7 +88,7 @@ const PageLoader = () => {
           width: 200,
           height: 200,
           borderRadius: '50%',
-          border: '1px solid hsl(43 78% 50% / 0.07)',
+          border: isDark ? '1px solid hsl(43 78% 50% / 0.10)' : '1px solid hsl(43 78% 45% / 0.15)',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
