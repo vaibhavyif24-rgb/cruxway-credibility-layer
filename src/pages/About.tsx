@@ -36,12 +36,12 @@ const About = () => {
       ];
 
   const principles = [
-    { t: 'Integrity', d: 'We say what we mean and follow through. Transparency and intellectual honesty in every interaction, even when the truth is uncomfortable.' },
-    { t: 'Steward Leadership', d: 'Leadership is earned through stewardship, not authority. We succeed when the people and businesses around us succeed.' },
-    { t: 'Humility', d: 'The best investors never stop learning. We approach every situation with curiosity and an open mind.' },
-    { t: 'Grit', d: 'Building lasting businesses requires perseverance. We do hard things, especially when things get hard.' },
-    { t: 'Bias to Action', d: 'Analysis has its place, but progress demands execution. We move decisively and learn in motion.' },
-    { t: 'The Golden Rule', d: 'Treat every person, from founder to frontline employee, with respect, fairness, and genuine compassion.' },
+    { t: 'Integrity', d: 'Say what we mean. Follow through. Even when the honest answer is not the comfortable one.' },
+    { t: 'Steward Leadership', d: 'We measure ourselves by what happens to the people and businesses we work with, not by what we extract.' },
+    { t: 'Humility', d: 'Every founder we sit across from has built something we haven\'t. The best thing we can do first is listen.' },
+    { t: 'Grit', d: 'The real work of improving a business is detailed and unglamorous. We signed up for that part too.' },
+    { t: 'Bias to Action', d: 'Analysis is valuable up to a point. After that, you have to move.' },
+    { t: 'The Golden Rule', d: 'Treat every person with respect and fairness. Founder, employee, partner. No exceptions, no qualifications.' },
   ];
 
   return (
