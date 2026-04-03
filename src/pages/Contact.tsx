@@ -99,7 +99,7 @@ const Contact = () => {
                 <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground tracking-[-0.01em]">
                   {location}
                 </p>
-                <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.7] mt-3">
+                <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] mt-3">
                   {isIndia
                     ? 'Based in Delhi, with relationships across India\'s key industrial corridors.'
                     : 'Based in San Diego, investing across the United States.'}
