@@ -49,45 +49,6 @@ const GuidingPrinciples = () => {
         <HeroDivider />
       </section>
 
-      {/* ═══ Origin Story Bridge ═══ */}
-      <div
-        className="relative -mt-1"
-        style={{
-          zIndex: 5,
-          background: isDark
-            ? 'hsl(228, 55%, 8%)'
-            : 'hsl(40, 25%, 94%)',
-        }}
-      >
-        <motion.div
-          className="flex flex-col items-center justify-center py-6 md:py-8 px-6"
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: 'easeOut' }}
-        >
-          {/* Flanked gold rules + serif heading */}
-          <div className="flex items-center gap-4 md:gap-6">
-            <span className="h-[1px] w-10 md:w-16 bg-gold/40" />
-            <h2 className={`font-serif text-[18px] md:text-[22px] tracking-[-0.01em] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              The Origin Story
-            </h2>
-            <span className="h-[1px] w-10 md:w-16 bg-gold/40" />
-          </div>
-
-          {/* Gold gradient underline */}
-          <div
-            className="h-[1px] w-16 md:w-20 mt-3"
-            style={{ background: 'linear-gradient(90deg, transparent, hsl(43 78% 50% / 0.5), transparent)' }}
-          />
-
-          {/* Subtitle */}
-          <p className={`font-sans text-[11px] md:text-[12px] leading-[1.7] mt-2 text-center max-w-[400px] ${isDark ? 'text-primary-foreground/40' : 'text-muted-foreground'}`}>
-            Every name carries weight. Ours was forged with intent.
-          </p>
-        </motion.div>
-      </div>
-
       {/* Naming Story */}
       <CruxwayOriginStory />
 

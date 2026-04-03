@@ -143,8 +143,8 @@ const ConvictionsDeck = () => {
           <FadeIn>
             <SectionLabel>What we stand for</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] mb-1">
-              <span className="text-foreground">Our </span>
-              <span className="text-gold">Convictions</span>
+              <span className="text-foreground">Guiding </span>
+              <span className="text-gold">Principles</span>
             </h2>
             <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-3">
               Six principles that govern every partnership, every decision, and every relationship we build.
