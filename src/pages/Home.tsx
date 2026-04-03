@@ -144,7 +144,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                 className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
-                    : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+                     : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
                 }`}
                 animate={i === active ? { scale: [1, 1.01, 1] } : {}}
                 transition={{ duration: 0.3 }}
