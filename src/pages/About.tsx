@@ -79,14 +79,14 @@ const About = () => {
         label="Mission"
         heading={
           isIndia
-            ? 'Scale what India builds. Preserve what founders value. Long-term capital for companies meant to last.'
-            : 'Preserve what founders built. Scale what matters. Long-term capital with operating expertise.'
+            ? 'India\'s strongest companies have been built by families and founders with deep industry knowledge. What many of them need next is capital that comes with the right operating systems.'
+            : 'The companies we invest in don\'t need a new strategy. They need someone who understands what\'s already working and can build the infrastructure around it.'
         }
-        highlights={isIndia ? ['India', 'founders'] : ['founders', 'Scale']}
+        highlights={isIndia ? ['families', 'founders'] : ['already', 'working']}
         subtext={
           isIndia
-            ? 'Cruxway invests in and takes majority stakes in founder-led companies across India\'s essential sectors.'
-            : 'Our role is to honor that legacy while bringing the resources, systems, and capital to take these companies to the next level.'
+            ? 'Majority positions. Founder-aligned structures. A commitment that extends well beyond the typical investment horizon.'
+            : 'Preserve what the founder built. Professionalize what holds it back. Hold it for as long as the opportunity warrants.'
         }
         variant="light"
       />
