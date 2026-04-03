@@ -42,12 +42,12 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
 
   return (
     <div ref={containerRef}>
-      <div className="flex flex-wrap gap-2 md:gap-3 mb-6 md:mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 md:mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
             onClick={() => handleClick(i)}
-            className={`relative min-w-[44px] min-h-[44px] px-4 md:px-5 py-2.5 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden
+            className={`relative w-full min-h-[48px] px-3 md:px-5 py-3 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden text-center flex items-center justify-center
               ${active === i
                 ? 'bg-gold/20 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
                 : isDark
@@ -100,13 +100,13 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
-  const barHeights = isMobile ? [100, 160, 230, 310] : [130, 210, 295, 390];
-  const barWidth = isMobile ? 64 : 100;
-  const gap = isMobile ? 20 : 40;
+  const barHeights = isMobile ? [80, 135, 195, 260] : [130, 210, 295, 390];
+  const barWidth = isMobile ? 52 : 100;
+  const gap = isMobile ? 14 : 40;
 
   // Calculate SVG points for growth trajectory line
   const totalWidth = barWidth * 4 + gap * 3;
-  const chartHeight = isMobile ? 380 : 480;
+  const chartHeight = isMobile ? 340 : 480;
   const baselineY = chartHeight - 60;
   const points = barHeights.map((h, i) => ({
     x: i * (barWidth + gap) + barWidth / 2,
@@ -244,7 +244,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                 </motion.div>
 
                 {/* Labels below bar */}
-                <div className="mt-3 text-center" style={{ width: isMobile ? 90 : 110 }}>
+                <div className="mt-3 text-center" style={{ width: isMobile ? 70 : 110 }}>
                   <span
                     className={`block font-sans text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
                       isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
