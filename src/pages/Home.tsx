@@ -461,7 +461,7 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We invest in businesses where the product works, the customers are loyal, and the operations haven't kept up. We professionalize the operations and protect everything else."
+        heading="We partner with businesses where the product is proven and the customers are loyal. We help professionalize the systems around them and protect what the founder built."
         highlights={['professionalize', 'protect']}
         subtext="Every partnership is structured around what the business actually needs."
         variant="light"
