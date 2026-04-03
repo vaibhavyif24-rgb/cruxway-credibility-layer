@@ -10,7 +10,7 @@ const sectorData = {
         category: 'Industrials',
         items: [
           { name: 'Process & Flow Control', desc: 'Valves, pumps, filtration, and fluid handling across industrial verticals' },
-          { name: 'Value-Added Distribution', desc: 'Specialised distribution with technical expertise and aftermarket services' },
+          { name: 'Value-Added Distribution', desc: 'Specialized distribution with technical expertise and aftermarket services' },
           { name: 'Industrial Services', desc: 'Maintenance, turnaround, and mission-critical operational support' },
           { name: 'Packaging', desc: 'Industrial and specialty packaging for regulated and essential sectors' },
         ],
