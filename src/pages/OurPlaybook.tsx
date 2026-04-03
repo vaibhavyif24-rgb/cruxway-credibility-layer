@@ -380,11 +380,12 @@ const OurPlaybook = () => {
       />
 
       {/* Value Creation Playbook */}
-      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14 overflow-x-hidden">
-        <div className="max-w-[1080px] mx-auto">
+      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14 ${isDark ? 'bg-primary' : 'bg-background'}`}>
+        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
+        <div className="relative max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
-            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-foreground leading-[1.15] mb-2">
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               How We Build Value
             </h2>
             <p className="font-sans text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
