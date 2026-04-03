@@ -37,12 +37,12 @@ const investmentProfile = {
 };
 
 const whatWeLookFor = [
-  { title: 'Ownership Succession', desc: 'Partnering with owners ready for the next chapter: retirees, families, and founders seeking continuity for the businesses and teams they built.' },
-  { title: 'Essential & Regulated Services', desc: 'Compliance-driven B2B sectors across underserved and overlooked markets where reliability, safety, and recurring demand create natural moats.' },
-  { title: 'Recurring Revenue & Retention', desc: 'Businesses with established customer trust, high switching costs, and proven persistency that generates predictable, compounding cash flows.' },
-  { title: 'Platform & Consolidation Potential', desc: 'Fragmented, underserved markets where disciplined investment compounds value over a long hold period across multiple stages of growth.' },
-  { title: 'Operational Improvement Runway', desc: 'Undermanaged businesses where professionalized systems, reporting, and governance unlock enterprise value while preserving the culture that built the company.' },
-  { title: 'Prudent Capital Structure', desc: 'Conservative leverage philosophy focused on business building and cash flow generation, not financial engineering.' },
+  { title: 'Ownership Succession', desc: 'Founders thinking about retirement. Families navigating a generational transition. Owners who care deeply about what happens to their company and their people after they step back.' },
+  { title: 'Essential & Regulated Services', desc: 'Compliance-driven sectors where barriers to entry are real, customer relationships are long-standing, and demand doesn\'t depend on the economic cycle.' },
+  { title: 'Recurring Revenue & Retention', desc: 'Businesses where the hard work of winning the customer has already been done. High retention, contractual relationships, and cash flows that compound over time.' },
+  { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where no single player dominates. We invest in a strong platform and grow through disciplined acquisitions over a long hold.' },
+  { title: 'Operational Improvement Runway', desc: 'Companies that have outgrown their infrastructure. Strong product, loyal customers, but systems and processes that haven\'t scaled with the business.' },
+  { title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue, not from financial engineering.' },
 ];
 
 /* ─── Typographic Number (Revenue/EBITDA) ─── */
