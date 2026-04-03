@@ -244,7 +244,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                 </motion.div>
 
                 {/* Labels below bar */}
-                <div className="mt-3 text-center" style={{ width: isMobile ? 90 : 110 }}>
+                <div className="mt-3 text-center" style={{ width: isMobile ? 70 : 110 }}>
                   <span
                     className={`block font-sans text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
                       isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
