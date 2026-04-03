@@ -359,16 +359,25 @@ const CruxwayOriginStory = () => {
               className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
               style={{ opacity: act2Line2Op, textShadow: videoSubShadow }}
             >
-              <span className="text-gold/70">Japanese (道):</span>{' '}
-              <span style={{ color: videoBodyColor }}>a discipline-based path of mastery</span>
+              <span className="text-gold/70 font-medium">Japanese (道, dō):</span>{' '}
+              <span style={{ color: videoBodyColor }}>the disciplined path of mastery through practice</span>
             </motion.p>
             <motion.p
               className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
               style={{ opacity: act2Line3Op, textShadow: videoSubShadow }}
             >
-              <span className="text-gold/70">Chinese (道):</span>{' '}
-              <span style={{ color: videoBodyColor }}>alignment with reality; the way things are when undistorted</span>
+              <span className="text-gold/70 font-medium">Chinese (道, dào):</span>{' '}
+              <span style={{ color: videoBodyColor }}>the natural order; reality flowing when unforced</span>
             </motion.p>
+            {isIndia && (
+              <motion.p
+                className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
+                style={{ opacity: act2Line4Op, textShadow: videoSubShadow }}
+              >
+                <span className="text-gold/70 font-medium">Hindi (मार्ग, mārg):</span>{' '}
+                <span style={{ color: videoBodyColor }}>the committed road; a path walked with purpose</span>
+              </motion.p>
+            )}
           </div>
         </motion.div>
 
