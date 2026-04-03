@@ -17,10 +17,10 @@ import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
-  { num: '01', title: 'Discovery', description: 'We find deals where others aren\'t looking. Years of relationship-building across our sectors give us access to businesses long before they hit the market.' },
-  { num: '02', title: 'Evaluation', description: 'We pressure-test everything: the financials, the customers, the team, and the competitive dynamics. Data gets validated on the ground, not just in a spreadsheet.' },
-  { num: '03', title: 'Diligence', description: 'Deep financial, operational, and legal analysis with specialists who know the space. We model the downside first and build conviction through evidence, not gut feel.' },
-  { num: '04', title: 'Structuring', description: 'We structure deals for permanence: aligned incentives, sensible governance, and capital that compounds over decades, not exits in three years.' },
+  { num: '01', title: 'Discovery', description: 'Most of our deal flow comes from relationships we\'ve cultivated over many years in our target sectors. When an owner starts thinking about a transition, we want to be someone they already know.' },
+  { num: '02', title: 'Evaluation', description: 'We focus first on what could go wrong: customer concentration, key-person risk, competitive threats, and regulatory exposure. Businesses that survive that analysis earn a deeper look.' },
+  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. We aim to understand the business as well as the owner does before we make a commitment.' },
+  { num: '04', title: 'Structuring', description: 'Aligned incentives between Cruxway and the owner. Governance that fits the size of the company. Conservative leverage. No artificial timelines.' },
 ];
 
 const valueCreationItems = [
