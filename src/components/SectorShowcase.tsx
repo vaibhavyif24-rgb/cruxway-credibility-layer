@@ -41,7 +41,7 @@ const sectorData = {
       {
         category: 'Services & Compliance',
         items: [
-          { name: 'Facility Services', desc: 'Building maintenance, security, and specialised facility management' },
+          { name: 'Facility Services', desc: 'Building maintenance, security, and specialized facility management' },
           { name: 'Compliance & Safety', desc: 'Regulatory compliance, audit, and risk management services' },
           { name: 'Environmental Services', desc: 'Compliance-driven remediation, waste management, and sustainability services' },
         ],
