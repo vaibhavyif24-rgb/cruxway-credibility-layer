@@ -209,7 +209,7 @@ const OurFocus = () => {
                       <li className="flex items-start gap-2.5">
                         <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
                         <div>
-                          <span className={`font-serif text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                             {item.name}
                           </span>
                           <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
