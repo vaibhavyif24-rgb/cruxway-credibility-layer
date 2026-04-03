@@ -210,6 +210,12 @@ const CruxwayOriginStory = () => {
   const act4StatementOp = useTransform(scrollYProgress, [0.78, 0.82], [0, 1]);
   const act4ClosingOp = useTransform(scrollYProgress, [0.82, 0.86], [0, 1]);
 
+  /* Hoisted definition line Y transforms (cannot call hooks inside JSX) */
+  const act2Line1Y = useTransform(scrollYProgress, [0.35, 0.38], [12, 0]);
+  const act2Line2Y = useTransform(scrollYProgress, [0.36, 0.39], [12, 0]);
+  const act2Line3Y = useTransform(scrollYProgress, [0.37, 0.40], [12, 0]);
+  const act2Line4Y = useTransform(scrollYProgress, [0.38, 0.41], [12, 0]);
+
   const headingSize = isMobile ? 'clamp(3rem, 13vw, 4.5rem)' : 'clamp(3.5rem, 8vw, 6rem)';
 
   return (
