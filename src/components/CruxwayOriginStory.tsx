@@ -438,7 +438,7 @@ const CruxwayOriginStory = () => {
           </motion.p>
 
           <motion.p
-            className="font-sans leading-[1.75] mt-4 max-w-[520px]"
+            className="font-sans leading-[1.75] mt-4 max-w-[540px]"
             style={{
               opacity: act3ExplainOp,
               color: videoBodyColor,
@@ -447,7 +447,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            We believe that building something enduring demands both: the pressure that forges conviction, and the discipline to walk the path every single day.
+            Getting from A to B matters. To do that, one must transform under pressure and sustained discipline. But the journey itself matters too. It must be aligned with the natural order of things.
           </motion.p>
         </motion.div>
 
