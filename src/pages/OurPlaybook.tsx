@@ -374,8 +374,8 @@ const OurPlaybook = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="We bring structure, experience, and patience to every business we partner with."
-        highlights={['structure', 'patience']}
+        heading="We have seen what works and what doesn't across hundreds of deals. That pattern recognition is our edge."
+        highlights={['pattern', 'edge']}
         variant="light"
       />
 
