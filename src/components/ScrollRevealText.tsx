@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import WaveBackground from '@/components/WaveBackground';
@@ -32,6 +32,9 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
     offset: ['start 0.85', 'end 0.5'],
   });
 
+  const labelOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
+  const subtextOpacity = useTransform(scrollYProgress, [0.7, 1], [0, 0.65]);
+
   const words = heading.split(' ');
 
   const isActuallyDark = variant === 'dark' && theme === 'dark';
@@ -44,13 +47,11 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
 
   const normHighlights = highlights.map(h => h.toLowerCase().replace(/[.,/#!$%^&*;:{}=\-_`~()']/g, ''));
 
-  return (
-    <section
-      ref={(node) => {
-        (containerRef as any).current = node;
-        if (typeof ref === 'function') ref(node as any);
-        else if (ref) (ref as any).current = node;
-      }}
+  const setRefs = useCallback((node: HTMLDivElement | null) => {
+    containerRef.current = node;
+    if (typeof ref === 'function') ref(node);
+    else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+  }, [ref]);
       className={`relative overflow-hidden ${
         isActuallyDark
           ? 'bg-primary text-primary-foreground'
