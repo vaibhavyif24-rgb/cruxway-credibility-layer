@@ -1,86 +1,76 @@
 
 
-## Plan: Senior UI/UX Overhaul: Origin Story, Animations, Spellings, Loader, and Headings
+## Plan: Mobile Fixes, Typography, Origin Story Polish, and Animation Enhancements
 
-### 1. CRU x WAY Origin Story: Professional Definition Layout (CruxwayOriginStory.tsx)
+### 1. Mobile Overflow Fixes (Multiple Pages)
 
-**Problem:** The Act 2 definitions are plain text lines stacked vertically with tiny 12px font. Looks like a bulleted list, not a cinematic naming story.
+**OurFocus.tsx:** The `overflow-x-clip` on root div is good. Verify sector columns don't overflow. The CTA button with `px-10 py-5` is fine at 390px.
 
-**Fix:** Redesign the definition area into a structured, elegant layout:
-- Each language definition gets a subtle left gold border accent (2px vertical line), creating visual hierarchy
-- Increase font size to `text-[13px] md:text-[15px]`
-- Add staggered `y` entrance transforms (each line slides up 12px as it fades in) using individual `useTransform` for `y` values
-- Add a thin gold horizontal divider between the "Way道" heading and the definitions
-- Language labels get `tracking-[0.12em]` uppercase styling for gravitas
-- Add a subtle glow pulse behind the definition block using a radial gradient that breathes
+**OurPlaybook.tsx:** The ValueCreationChart container uses `overflow-x-hidden` but the root div lacks `overflow-x-clip`. Add it. Also ensure the chart container constrains bars on 390px screens.
 
-### 2. Animation Audit: Add Motion Throughout (Multiple Files)
+**Home.tsx, Contact.tsx, About.tsx:** Add `overflow-x-clip` to root containers where missing (Contact.tsx has bare `<div>` wrapper).
 
-**Files to enhance:**
+**GuidingPrinciples.tsx:** Already has `overflowX: 'clip'`. Good.
 
-**InvestmentCriteria.tsx:**
-- Sector items in lists: stagger `FadeIn` with `delay={index * 0.08}`  
-- EvalStep icons: add `whileInView` rotate entrance (rotate from -10deg to 0)
-- CTA button: add `whileHover={{ y: -2, boxShadow }}` if missing
+### 2. "What We Look For" Accordion Titles: Larger and Bolder (OurFocus.tsx)
+
+**CriteriaAccordion (lines 408-462):**
+- Accordion title font: increase from `text-[1rem]` to `text-[1.1rem] md:text-[1.2rem]` and add `font-medium`
+- Number: increase from `text-[1.5rem]` to `text-[1.6rem]`  
+- Description text: increase from `text-[13px]` to `text-[14px]`
+
+**CriteriaTabs tab labels (lines 337-343):**
+- Increase tab title from `text-[0.8rem]` to `text-[0.85rem] md:text-[0.9rem]`
+
+**Sector item names (lines 212, 238):**
+- Add `font-medium` to sector names for prominence
+
+### 3. Remove Extra Effect Under "Way" (CruxwayOriginStory.tsx)
+
+There are TWO dividers after the "Way道" heading:
+- Line 346: Gold accent line (the standard one under all headings)
+- Line 351: A second gold gradient divider between heading and definitions
+
+**Remove the duplicate divider at lines 350-357.** Keep only the accent line at 346. This eliminates the redundant visual clutter.
+
+### 4. Professional Definition Text in Way Act (CruxwayOriginStory.tsx)
+
+Current definitions are too simple. Replace with more institutional, thematic language:
+
+- **English:** "A deliberate path chosen with intent and conviction" (was: "The path and method one takes")
+- **Japanese (道, do):** "A lifelong discipline pursued through relentless refinement" (was: "The disciplined path of mastery through practice")  
+- **Chinese (道, dao):** "The natural principle that governs all things when left unforced" (was: "The natural order; reality flowing when unforced")
+- **Hindi (मार्ग, marg):** "A sacred road walked with purpose and moral resolve" (was: "The committed road; a path walked with purpose")
+
+### 5. Additional Animations Across the Site
 
 **OurFocus.tsx:**
-- Sector list items (`<li>` elements): wrap each in `motion.li` with staggered `whileInView` fade-up
-- Vertical divider between sector columns: animate `scaleY` from 0 to 1 on viewport entry
-- CriteriaTabs/Accordion content: ensure `AnimatePresence` transitions on tab change
-
-**Contact.tsx:**
-- Email/location cards: add `whileHover={{ y: -4 }}` lift effect
-- Map link: gold underline animation on hover
+- Accordion items: Add staggered `FadeIn` wrapping each accordion item with `delay={i * 0.06}`
+- Investment profile section: Add a subtle shimmer sweep animation to the section background
 
 **Home.tsx:**
-- Process carousel step indicators: add scale pulse on active dot
-- Social proof heading: add word-by-word stagger if not present
+- Process step cards: Add `whileHover={{ y: -3, transition: { duration: 0.2 } }}` to GlassCard wrappers
+- Active dot in carousel: Add `layoutId` for smooth dot transition animation
 
 **GuidingPrinciples.tsx:**
-- ConvictionsDeck entry: ensure cards have staggered entrance
+- ConvictionsDeck: Wrap each `AccordionRow` in a `FadeIn` with staggered delays
 
-### 3. British to American English (Multiple Files)
+**About.tsx:**
+- PrinciplesSlider section: Ensure the section entry has a gold shimmer line that animates `scaleX` from 0 to 1
 
-**src/pages/Home.tsx line 54:** "Rigour" -> "Rigor"
-
-Global search confirmed this is the only remaining British spelling instance.
-
-### 4. PageLoader Light Mode Effects (App.tsx)
-
-**Problem:** Light mode loader has floating particles but they're nearly invisible at 0.15 opacity. Dark mode looks rich; light mode looks bare.
-
-**Fix:**
-- Increase light-mode particle opacity from 0.15 to 0.25
-- Add a soft pulsing radial gradient ring behind the wordmark (gold/8 that breathes from scale 0.9 to 1.1)
-- Add a second set of particles that drift horizontally (not just vertically) for more visual depth
-- Add a subtle rotating gold arc (thin SVG circle segment, 120 degrees, rotating slowly) around the wordmark area
-
-### 5. Investment Criteria Headings (InvestmentCriteria.tsx)
-
-**Problem:** Section headings use `text-[clamp(1.3rem,2.5vw,1.8rem)]` and `text-[clamp(1.5rem,2.8vw,2.2rem)]` which are too small on mobile at 390px (renders ~1.3rem = 20.8px).
-
-**Fix:**
-- "Our Target Parameters" heading: `text-[clamp(1.5rem,3vw,2.2rem)]` (was 1.3rem min)
-- "What We Look For" heading: `text-[clamp(1.6rem,3.2vw,2.4rem)]` (was 1.5rem min)  
-- "How We Evaluate Opportunities" heading: `text-[clamp(1.6rem,3.2vw,2.4rem)]` (was 1.5rem min)
-- EvalStep titles: `text-[1.2rem] md:text-[1.35rem]` (was 1.1rem/1.25rem)
-- EvalStep descriptions: `text-[14px] md:text-[15px]` (was 13px/14px)
-- Value Creation carousel heading in CriteriaCarousel: verify and increase if needed
+**Contact.tsx:**
+- Add `overflow-x-clip` to root div
+- Footer CTA area: Add a breathing gold glow behind the email link
 
 ### Technical Summary
 
 | File | Changes |
 |------|---------|
-| `CruxwayOriginStory.tsx` | Redesign Act 2 definitions with gold accent borders, larger text, staggered y-entrance, divider |
-| `App.tsx` | PageLoader: brighter light-mode particles, pulsing glow ring, rotating gold arc |
-| `InvestmentCriteria.tsx` | Increase all section headings, eval step titles/descriptions |
-| `Home.tsx` | Fix "Rigour" -> "Rigor" |
-| `OurFocus.tsx` | Animate sector list items with staggered fade-up, animate vertical divider |
-| `Contact.tsx` | Add hover lift effects to cards |
-
-### Constraints
-- No em-dashes. American English only.
-- Framer Motion for all animations. Standard ease: [0.22, 1, 0.36, 1].
-- Both themes must look professional.
-- Do not touch ThemeContext, RegionContext, SiteHeader, SiteFooter, or Landing page.
+| `CruxwayOriginStory.tsx` | Remove duplicate Way divider; upgrade definition text to professional language |
+| `OurFocus.tsx` | Increase accordion title/description sizes; add font-medium to sector names; staggered FadeIn on accordion items |
+| `Home.tsx` | Hover lift on process cards; active dot layoutId |
+| `Contact.tsx` | Add overflow-x-clip; breathing glow on email |
+| `GuidingPrinciples.tsx` | Staggered FadeIn on ConvictionsDeck rows |
+| `OurPlaybook.tsx` | Add overflow-x-clip to root div |
+| `About.tsx` | Gold shimmer line entry animation |
 
