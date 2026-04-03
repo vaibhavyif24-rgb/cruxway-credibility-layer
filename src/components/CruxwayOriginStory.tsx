@@ -382,7 +382,7 @@ const CruxwayOriginStory = () => {
                 Japanese (道, dō)
               </p>
               <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                The disciplined path of mastery through practice
+                A lifelong discipline pursued through relentless refinement
               </p>
             </motion.div>
 
