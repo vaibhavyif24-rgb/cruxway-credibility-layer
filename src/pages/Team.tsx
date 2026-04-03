@@ -422,7 +422,7 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="Every advisor in our network is someone we've worked with directly. People who pick up the phone, not names on a letterhead."
+        heading="Every advisor in our network is someone we've worked with directly. Relationships built through years of doing deals together."
         variant="dark"
       />
 
