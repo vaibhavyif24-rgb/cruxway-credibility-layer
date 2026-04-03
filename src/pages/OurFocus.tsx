@@ -43,43 +43,54 @@ const whatWeLookFor = [
 ];
 
 const indiaSectors = {
-  left: {
-    heading: 'Industrials',
-    items: [
-      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
-      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
-      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
-      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
-    ],
-  },
-  right: {
-    heading: 'Business & Industrial Services',
-    items: [
-      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
-      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
-      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
-      { name: 'Industrial Technology', desc: 'Automation & process software' },
-    ],
-  },
+  cols: [
+    {
+      heading: 'Industrials',
+      items: [
+        { name: 'Process and Flow Control', desc: 'Valves, pumps, instrumentation' },
+        { name: 'Value-Added Distribution', desc: 'Technical and industrial products' },
+        { name: 'Industrial Services', desc: 'Maintenance, repair, and operations' },
+        { name: 'Packaging and Containers', desc: 'Specialty and industrial packaging' },
+      ],
+    },
+    {
+      heading: 'Business and Industrial Services',
+      items: [
+        { name: 'Facility and Support Services', desc: 'Cleaning, security, staffing' },
+        { name: 'Testing and Certification', desc: 'Quality assurance and compliance' },
+        { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
+        { name: 'Industrial Technology', desc: 'Automation and process software' },
+      ],
+    },
+  ],
 };
 
 const usSectors = {
-  left: {
-    heading: 'Financial and Compliance Services',
-    items: [
-      { name: 'RIAs and Wealth Management', desc: 'Registered investment advisers and wealth platforms' },
-      { name: 'Accounting, Bookkeeping, and Tax', desc: 'Full-cycle financial operations and compliance' },
-      { name: 'SOC Compliance and Related Services', desc: 'Security audits, attestation, and regulatory frameworks' },
-    ],
-  },
-  right: {
-    heading: 'Power and IT Services',
-    items: [
-      { name: 'Electrical Testing and Maintenance', desc: 'High-voltage testing, commissioning, and maintenance' },
-      { name: 'Transformer and Power Engineering', desc: 'Design, protection, controls, and automation engineering' },
-      { name: 'Cybersecurity and MSPs', desc: 'Managed security services and IT infrastructure providers' },
-    ],
-  },
+  cols: [
+    {
+      heading: 'Financial and Compliance Services',
+      items: [
+        { name: 'RIAs and Wealth Management', desc: 'Registered investment advisers and wealth platforms' },
+        { name: 'Accounting, Bookkeeping, and Tax', desc: 'Full-cycle financial operations and compliance' },
+        { name: 'SOC Compliance and Related Services', desc: 'Security audits, attestation, and regulatory frameworks' },
+      ],
+    },
+    {
+      heading: 'Power Services',
+      items: [
+        { name: 'Electrical Testing and Maintenance', desc: 'High-voltage testing, commissioning, and maintenance' },
+        { name: 'Transformer Services', desc: 'Installation, repair, and lifecycle management' },
+        { name: 'Design and Power Engineering', desc: 'Protection, controls, and automation engineering' },
+      ],
+    },
+    {
+      heading: 'IT Services',
+      items: [
+        { name: 'Cybersecurity Services', desc: 'Managed detection, response, and compliance' },
+        { name: 'Managed Service Providers', desc: 'IT infrastructure, support, and cloud services' },
+      ],
+    },
+  ],
 };
 
 const OurFocus = () => {
