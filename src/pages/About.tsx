@@ -57,7 +57,7 @@ const About = () => {
           </FadeIn>
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[540px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              {isIndia ? <>Building Enduring Value Across <span className="text-gold">India</span></> : <>Investing Tailored to Each <span className="text-gold">Company's Needs</span></>}
+              {isIndia ? <>An Investment Philosophy Built for India's <span className="text-gold">Industrial Middle Market</span></> : <>An Approach Shaped by Experience, Refined by <span className="text-gold">Conviction</span></>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
