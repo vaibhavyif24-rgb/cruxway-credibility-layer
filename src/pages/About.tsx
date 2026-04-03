@@ -140,12 +140,12 @@ const About = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  Built for Owners Thinking Long-Term
+                  Built for Owners Ready for Their Next Chapter
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
-                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
+                    ? "We partner with a small number of businesses at a time. If you're exploring what institutional partnership could look like for your company, get in touch."
+                    : "We work with a small number of companies at any given time and commit fully to each one. If you think there may be a fit, we'd like to hear from you."}
                 </p>
               </FadeIn>
             </div>
