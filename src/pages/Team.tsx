@@ -456,7 +456,7 @@ const Team = () => {
       </Section>
 
       {/* Institutional Experience Marquee */}
-      <div>
+      <div className="bg-[hsl(40,20%,91%)]">
         <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-4 md:pt-5 pb-2 md:pb-3">
           <FadeIn>
             <SectionLabel>Institutional Experience</SectionLabel>
