@@ -359,10 +359,10 @@ const InvestmentCriteria = () => {
         <div className="max-w-[1080px] mx-auto">
           <CriteriaCarousel
             items={[
-              { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-              { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
-              { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
-              { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
+              { title: 'Stabilize & Professionalize', desc: 'Establish financial reporting, build or upgrade the finance function, create governance structures, and set an operating cadence that lets management focus forward.' },
+              { title: 'Optimize Operations', desc: 'Identify the operational gaps that limit margin. Renegotiate where needed, streamline where possible, and fix the things the founder never had time to address.' },
+              { title: 'Invest in Growth', desc: 'Deploy capital into organic growth, adjacent markets, and add-on acquisitions where the strategic fit is clear and the return case is strong.' },
+              { title: 'Compound Value', desc: 'Operational improvements take time to compound. That\'s why we hold. Year three looks different from year one, and year seven looks different again.' },
             ]}
           />
         </div>
