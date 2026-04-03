@@ -370,7 +370,7 @@ const CruxwayOriginStory = () => {
                 English
               </p>
               <p className="font-sans text-[13px] md:text-[15px] leading-[1.7]" style={{ color: videoBodyColor, textShadow: videoSubShadow }}>
-                The path and method one takes
+                A deliberate path chosen with intent and conviction
               </p>
             </motion.div>
 
