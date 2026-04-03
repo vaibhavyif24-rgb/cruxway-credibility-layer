@@ -348,8 +348,8 @@ const InvestmentCriteria = () => {
         <div className="max-w-[1080px] mx-auto">
           <CriteriaCarousel
             items={[
-              { title: 'Stabilise & Professionalise', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
-              { title: 'Optimise Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+              { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+              { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
               { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
               { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
             ]}
