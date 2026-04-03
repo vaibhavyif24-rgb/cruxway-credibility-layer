@@ -463,7 +463,7 @@ const Team = () => {
             <GoldRule className="mt-1" />
           </FadeIn>
         </div>
-        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" compact />
+        <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
     </div>
   );

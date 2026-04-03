@@ -486,7 +486,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            Outcome without process is reckless. Process without conviction is hollow. We believe enduring value is forged when both align.
+            Getting from A to B matters. To get there, you transform under pressure and sustained discipline. But the journey itself matters. It must be aligned with the natural order of things.
           </motion.p>
         </motion.div>
 
