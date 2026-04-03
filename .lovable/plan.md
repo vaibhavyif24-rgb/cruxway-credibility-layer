@@ -1,24 +1,62 @@
 
 
-## Extract Flag Icon Components — Plan
+## Dead Code Cleanup — Plan
 
-### What
-Move duplicated `IndiaFlag`, `USFlag`, and `FlagForRegion` SVG components into a shared file and update both consumers.
+### Summary
+Delete ~35 unused files (components, assets, directories) and one HTML preload tag. Two listed pages and `App.css` don't exist, so they're skipped.
 
-### Steps
+### Files to delete
 
-1. **Create `src/components/FlagIcons.tsx`** — Export `IndiaFlag`, `USFlag` (with `size` prop), and `FlagForRegion` (with `region` prop). SVG markup copied verbatim from `SiteHeader.tsx`.
+**Components (16 files):**
+- `src/components/ApproachTable.tsx`
+- `src/components/CriteriaCarousel.tsx`
+- `src/components/CriteriaPipeline.tsx`
+- `src/components/HorizontalStickyDeck.tsx`
+- `src/components/NavLink.tsx`
+- `src/components/PrinciplesDeck.tsx`
+- `src/components/PrinciplesGrid.tsx`
+- `src/components/PrinciplesSlider.tsx`
+- `src/components/SectorShowcase.tsx`
+- `src/components/StrengthsWidget.tsx`
+- `src/components/USCinematicScrollReveal.tsx`
+- `src/components/AnimatedAccent.tsx`
+- `src/components/CelestialIllustrations.tsx`
+- `src/components/CinematicScrollReveal.tsx`
+- `src/components/StickyCardStack.tsx`
+- `src/components/CriteriaIllustrations.tsx`
 
-2. **Update `SiteHeader.tsx`** — Remove the three inline component definitions (~lines 10-30), add `import { IndiaFlag, USFlag, FlagForRegion } from '@/components/FlagIcons'`.
+**Assets (11 files + 1 directory):**
+- `src/assets/hero-crossroads.jpg`
+- `src/assets/hero-crossroads.webp`
+- `src/assets/hero-crossroads-road.webp`
+- `src/assets/hero-india-business.jpg`
+- `src/assets/hero-industry.jpg`
+- `src/assets/hero-nyc-skyline.jpg`
+- `src/assets/hero-partnership.jpg`
+- `src/assets/cruxway-crucible.jpg`
+- `src/assets/cruxway-merge-v2.jpg`
+- `src/assets/cruxway-merge-v3.jpg`
+- `src/assets/india-industrial-reveal.jpg`
+- `src/assets/us-industrial-reveal.jpg`
+- `src/assets/cities/` (entire directory: `new-york-skyline.jpg`, `san-diego-beach.jpg`)
 
-3. **Update `SiteFooter.tsx`** — Remove the two inline definitions (`IndiaFlag`, `USFlag`), add `import { IndiaFlag, USFlag } from '@/components/FlagIcons'`.
+**HTML edit (index.html):**
+- Remove the `<link rel="preload" href="/src/assets/hero-crossroads-road.webp" .../>` tag (line ~22)
 
-### Files touched
-| File | Action |
-|------|--------|
-| `src/components/FlagIcons.tsx` | Create |
-| `src/components/SiteHeader.tsx` | Remove definitions, add import |
-| `src/components/SiteFooter.tsx` | Remove definitions, add import |
+### Skipped (don't exist)
+- `src/pages/About.tsx` — already deleted
+- `src/pages/InvestmentCriteria.tsx` — already deleted
+- `src/App.css` — already deleted
+- `src/assets/hero-india-about.jpg` — already deleted
+- `src/assets/hero-us-about.jpg` — already deleted
 
-No visual or behavioral changes.
+### Verification
+- Confirmed zero imports of any listed component/asset in the active codebase
+- `CelestialIllustrations` and `CriteriaIllustrations` are only imported by other dead components (`PrinciplesDeck`, `PrinciplesSlider`, `StickyCardStack`)
+- Will run `npm run build` after deletion to confirm zero errors
+
+### Not touched
+- `cruxway-crucible-v2.jpg`, `cruxway-way.jpg`, `cruxway-merge-v4.jpg` (used by CruxwayOriginStory)
+- `hero-india-criteria.jpg`, `hero-us-criteria.jpg` (used by OurFocus)
+- All active pages and components
 
