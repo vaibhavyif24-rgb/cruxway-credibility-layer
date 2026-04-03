@@ -410,7 +410,7 @@ const OurPlaybook = () => {
                 <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? "Want to Understand Our Approach?" : "Interested in How This Works in Practice?"}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "No two businesses are alike, and neither is our approach to any two deals. If you'd like to discuss how this would work for your company, we're here."
                     : "Every business is different and so is every partnership. If you'd like to understand how our process would apply to your specific situation, reach out."}
