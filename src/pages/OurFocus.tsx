@@ -64,21 +64,19 @@ const indiaSectors = {
 
 const usSectors = {
   left: {
-    heading: 'Industrials',
+    heading: 'Financial and Compliance Services',
     items: [
-      { name: 'Process & Flow Control', desc: 'Valves, pumps, instrumentation' },
-      { name: 'Value-Added Distribution', desc: 'Technical & industrial products' },
-      { name: 'Industrial Services', desc: 'Maintenance, repair & operations' },
-      { name: 'Packaging & Containers', desc: 'Speciality & industrial packaging' },
+      { name: 'RIAs and Wealth Management', desc: 'Registered investment advisers and wealth platforms' },
+      { name: 'Accounting, Bookkeeping, and Tax', desc: 'Full-cycle financial operations and compliance' },
+      { name: 'SOC Compliance and Related Services', desc: 'Security audits, attestation, and regulatory frameworks' },
     ],
   },
   right: {
-    heading: 'Business & Industrial Services',
+    heading: 'Power and IT Services',
     items: [
-      { name: 'Facility & Support Services', desc: 'Cleaning, security, staffing' },
-      { name: 'Testing & Certification', desc: 'Quality assurance & compliance' },
-      { name: 'Infrastructure Services', desc: 'Utilities, telecom, transport' },
-      { name: 'Industrial Technology', desc: 'Automation & process software' },
+      { name: 'Electrical Testing and Maintenance', desc: 'High-voltage testing, commissioning, and maintenance' },
+      { name: 'Transformer and Power Engineering', desc: 'Design, protection, controls, and automation engineering' },
+      { name: 'Cybersecurity and MSPs', desc: 'Managed security services and IT infrastructure providers' },
     ],
   },
 };
