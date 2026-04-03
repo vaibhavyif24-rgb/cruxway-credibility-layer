@@ -382,7 +382,7 @@ const CruxwayOriginStory = () => {
 
             <motion.div
               className="relative pl-4 border-l-2 border-gold/30"
-              style={{ opacity: act2Line2Op, y: useTransform(scrollYProgress, [0.36, 0.39], [12, 0]) }}
+              style={{ opacity: act2Line2Op, y: act2Line2Y }}
             >
               <p className="font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-gold/70 mb-1" style={{ textShadow: videoSubShadow }}>
                 Japanese (道, dō)
