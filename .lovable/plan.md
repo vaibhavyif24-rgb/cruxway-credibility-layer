@@ -1,62 +1,31 @@
 
 
-## Dead Code Cleanup — Plan
+## Landing Page Refinements
 
-### Summary
-Delete ~35 unused files (components, assets, directories) and one HTML preload tag. Two listed pages and `App.css` don't exist, so they're skipped.
+### Changes
 
-### Files to delete
+**1. Larger, better-aligned region boxes** (`src/pages/Landing.tsx`)
+- Increase button dimensions: `w-[165px] sm:w-[240px] md:w-[300px]` and `h-[64px] sm:h-[76px] md:h-[84px]`
+- Use consistent `gap-4 sm:gap-8` for balanced spacing
+- Center the button container with `justify-center`
 
-**Components (16 files):**
-- `src/components/ApproachTable.tsx`
-- `src/components/CriteriaCarousel.tsx`
-- `src/components/CriteriaPipeline.tsx`
-- `src/components/HorizontalStickyDeck.tsx`
-- `src/components/NavLink.tsx`
-- `src/components/PrinciplesDeck.tsx`
-- `src/components/PrinciplesGrid.tsx`
-- `src/components/PrinciplesSlider.tsx`
-- `src/components/SectorShowcase.tsx`
-- `src/components/StrengthsWidget.tsx`
-- `src/components/USCinematicScrollReveal.tsx`
-- `src/components/AnimatedAccent.tsx`
-- `src/components/CelestialIllustrations.tsx`
-- `src/components/CinematicScrollReveal.tsx`
-- `src/components/StickyCardStack.tsx`
-- `src/components/CriteriaIllustrations.tsx`
+**2. "Select Region" label — more visible and professional** (`src/pages/Landing.tsx`)
+- Increase size: `text-[12px] md:text-[13px]`
+- Change from `font-medium` to `font-semibold`
+- Boost opacity: `text-white/45` (from `text-white/30`)
+- Slightly increase letter-spacing to `tracking-[0.35em]`
 
-**Assets (11 files + 1 directory):**
-- `src/assets/hero-crossroads.jpg`
-- `src/assets/hero-crossroads.webp`
-- `src/assets/hero-crossroads-road.webp`
-- `src/assets/hero-india-business.jpg`
-- `src/assets/hero-industry.jpg`
-- `src/assets/hero-nyc-skyline.jpg`
-- `src/assets/hero-partnership.jpg`
-- `src/assets/cruxway-crucible.jpg`
-- `src/assets/cruxway-merge-v2.jpg`
-- `src/assets/cruxway-merge-v3.jpg`
-- `src/assets/india-industrial-reveal.jpg`
-- `src/assets/us-industrial-reveal.jpg`
-- `src/assets/cities/` (entire directory: `new-york-skyline.jpg`, `san-diego-beach.jpg`)
+**3. Faster Ken Burns movement on mobile** (`src/components/GeometricHero.tsx`)
+- Reduce mobile animation durations: scale from 26s → 16s, x-drift from 34s → 20s
+- Keep desktop durations unchanged
+- Increase mobile x-drift slightly: `[0, 10, -8, 5, 0]` and scale to `1.16`
 
-**HTML edit (index.html):**
-- Remove the `<link rel="preload" href="/src/assets/hero-crossroads-road.webp" .../>` tag (line ~22)
+### Files Modified
+- `src/pages/Landing.tsx` — button sizing, label styling
+- `src/components/GeometricHero.tsx` — mobile animation speed
 
-### Skipped (don't exist)
-- `src/pages/About.tsx` — already deleted
-- `src/pages/InvestmentCriteria.tsx` — already deleted
-- `src/App.css` — already deleted
-- `src/assets/hero-india-about.jpg` — already deleted
-- `src/assets/hero-us-about.jpg` — already deleted
-
-### Verification
-- Confirmed zero imports of any listed component/asset in the active codebase
-- `CelestialIllustrations` and `CriteriaIllustrations` are only imported by other dead components (`PrinciplesDeck`, `PrinciplesSlider`, `StickyCardStack`)
-- Will run `npm run build` after deletion to confirm zero errors
-
-### Not touched
-- `cruxway-crucible-v2.jpg`, `cruxway-way.jpg`, `cruxway-merge-v4.jpg` (used by CruxwayOriginStory)
-- `hero-india-criteria.jpg`, `hero-us-criteria.jpg` (used by OurFocus)
-- All active pages and components
+### Constraints Preserved
+- All background effects, corner accents, gold animations untouched
+- Horizontal layout (`flex-row`) maintained
+- No changes to selection logic or navigation behavior
 
