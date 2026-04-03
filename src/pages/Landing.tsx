@@ -127,15 +127,25 @@ const Landing = () => {
                 <span className={`absolute bottom-0 right-0 w-5 h-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 w-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
                 <span className={`absolute bottom-0 right-0 h-5 w-px transition-all duration-500 delay-100 ${isSelected ? 'bg-gold/50 h-10' : 'bg-gold/0 group-hover:bg-gold/30'}`} />
 
-                <span className={`
-                  relative z-10 font-sans text-[12px] sm:text-[14px] font-semibold uppercase tracking-[0.28em]
-                  transition-all duration-500
-                  ${isSelected
-                    ? 'text-gold'
-                    : 'text-white/50 group-hover:text-white/85'
-                  }
-                `}>
-                  {r.label}
+                <span className="relative z-10 flex flex-col items-center gap-2">
+                  <span className={`
+                    font-sans text-[13px] sm:text-[14px] md:text-[15px] font-semibold uppercase tracking-[0.28em]
+                    transition-all duration-500
+                    ${isSelected
+                      ? 'text-gold'
+                      : 'text-white/50 group-hover:text-white/85'
+                    }
+                  `}>
+                    {r.label}
+                  </span>
+                  {isSelected && (
+                    <motion.span
+                      initial={{ width: 0, opacity: 0 }}
+                      animate={{ width: 32, opacity: 1 }}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="h-[1.5px] bg-gold/40"
+                    />
+                  )}
                 </span>
 
                 <AnimatePresence>
