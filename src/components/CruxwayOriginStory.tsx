@@ -486,7 +486,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            Outcomes matter, but so does how you get there. Real conviction is forged under pressure. Real discipline is sustained over years, not quarters. The two together are what build things that last.
+            Conviction that has been tested is different from conviction that hasn't. Discipline sustained over years is different from discipline sustained over quarters. We chose a name that holds both ideas, because both define how we want to invest.
           </motion.p>
         </motion.div>
 
