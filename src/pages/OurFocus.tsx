@@ -399,7 +399,7 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                 <span className={`font-serif text-[1.6rem] leading-none ${isOpen ? 'text-gold/40' : isDark ? 'text-primary-foreground/10' : 'text-foreground/10'}`}>
                   {item.num}
                 </span>
-                <span className={`font-serif font-medium text-[1.1rem] md:text-[1.2rem] tracking-[-0.02em] ${
+                <span className={`font-serif font-medium text-[1.1rem] tracking-[-0.02em] ${
                   isOpen
                     ? isDark ? 'text-primary-foreground' : 'text-foreground'
                     : isDark ? 'text-primary-foreground/50' : 'text-foreground/50'
