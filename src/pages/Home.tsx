@@ -136,7 +136,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
 
             <div className="px-2 md:px-4">
               <span className={`font-sans text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
-                i === active ? 'text-gold' : isDark ? 'text-primary-foreground/20' : 'text-foreground/20'
+                i === active ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
               }`}>
                 {step.num}
               </span>
@@ -144,7 +144,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                 className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
-                    : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
+                     : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
                 }`}
                 animate={i === active ? { scale: [1, 1.01, 1] } : {}}
                 transition={{ duration: 0.3 }}
@@ -165,47 +165,44 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={`rounded-sm border p-6 md:p-10 ${
-              isDark
-                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
-            }`}
-            whileHover={{ rotateX: 0.5, rotateY: -0.5 }}
-            style={{ transformPerspective: 800 }}
           >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="font-serif text-[3rem] md:text-[4rem] leading-none text-gold/15 block mb-2"
-            >
-              {steps[active].num}
-            </motion.span>
+            <GlassCard index={active} hover={true}>
+              <div className="p-6 md:p-10">
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                  className="font-serif text-[3rem] md:text-[4rem] leading-none text-gold/15 block mb-2"
+                >
+                  {steps[active].num}
+                </motion.span>
 
-            <div>
-              <motion.h3
-                initial={{ opacity: 0, x: -8 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.15 }}
-                className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
-              >
-                {steps[active].title}
-              </motion.h3>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: 40 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="h-[1.5px] bg-gold/30 mb-4"
-              />
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.25 }}
-                className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
-              >
-                {steps[active].description}
-              </motion.p>
-            </div>
+                <div>
+                  <motion.h3
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.15 }}
+                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+                  >
+                    {steps[active].title}
+                  </motion.h3>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: 40 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="h-[1.5px] bg-gold/30 mb-4"
+                  />
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3, delay: 0.25 }}
+                    className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
+                  >
+                    {steps[active].description}
+                  </motion.p>
+                </div>
+              </div>
+            </GlassCard>
           </motion.div>
         </AnimatePresence>
 
@@ -220,7 +217,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
           >
             ← Previous
           </button>
-          <span className={`font-sans text-[10px] font-medium tracking-[0.15em] ${isDark ? 'text-primary-foreground/25' : 'text-foreground/25'}`}>
+          <span className={`font-sans text-[10px] font-medium tracking-[0.15em] ${isDark ? 'text-primary-foreground/35' : 'text-foreground/35'}`}>
             {String(active + 1).padStart(2, '0')} / {String(steps.length).padStart(2, '0')}
           </span>
           <button
@@ -547,7 +544,7 @@ const Home = () => {
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
                     : "If you're a founder considering your next chapter, we'd welcome an honest discussion about long-term partnership."}

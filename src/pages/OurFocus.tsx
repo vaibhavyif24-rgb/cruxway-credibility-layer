@@ -8,6 +8,7 @@ import DarkSectionEffects from '@/components/DarkSectionEffects';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import CinematicHero from '@/components/CinematicHero';
 import WaveBackground from '@/components/WaveBackground';
+import GlassCard from '@/components/GlassCard';
 import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -212,7 +213,7 @@ const OurFocus = () => {
               <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                             {item.name}
                           </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                             {item.desc}
                           </span>
                         </div>
@@ -238,7 +239,7 @@ const OurFocus = () => {
               <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                             {item.name}
                           </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                             {item.desc}
                           </span>
                         </div>
@@ -285,7 +286,7 @@ const OurFocus = () => {
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
                     : "If you're a founder considering your next chapter, we'd welcome the conversation."}
@@ -363,40 +364,39 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={`rounded-sm border p-8 md:p-10 relative overflow-hidden ${
-              isDark
-                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
-            }`}
           >
-            {/* Watermark number */}
-            <span className={`absolute top-4 right-6 font-serif text-[6rem] leading-none select-none pointer-events-none ${
-              isDark ? 'text-primary-foreground/[0.04]' : 'text-foreground/[0.04]'
-            }`}>
-              {items[active].num}
-            </span>
+            <GlassCard index={active} hover={true}>
+              <div className="p-8 md:p-10 relative overflow-hidden">
+                {/* Watermark number */}
+                <span className={`absolute top-4 right-6 font-serif text-[6rem] leading-none select-none pointer-events-none ${
+                  isDark ? 'text-primary-foreground/[0.04]' : 'text-foreground/[0.04]'
+                }`}>
+                  {items[active].num}
+                </span>
 
-            <div className="relative">
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/60 block mb-2"
-              >
-                {items[active].num}
-              </motion.span>
-              <h3 className={`font-serif text-[clamp(1.4rem,3vw,2rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                {items[active].title}
-              </h3>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: 40 }}
-                transition={{ duration: 0.4, delay: 0.15 }}
-                className="h-[1.5px] bg-gold/30 mb-4"
-              />
-              <p className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${isDark ? 'text-primary-foreground/65' : 'text-muted-foreground'}`}>
-                {items[active].desc}
-              </p>
-            </div>
+                <div className="relative">
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/60 block mb-2"
+                  >
+                    {items[active].num}
+                  </motion.span>
+                  <h3 className={`font-serif text-[clamp(1.4rem,3vw,2rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                    {items[active].title}
+                  </h3>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: 40 }}
+                    transition={{ duration: 0.4, delay: 0.15 }}
+                    className="h-[1.5px] bg-gold/30 mb-4"
+                  />
+                  <p className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${isDark ? 'text-primary-foreground/65' : 'text-muted-foreground'}`}>
+                    {items[active].desc}
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
           </motion.div>
         </AnimatePresence>
       </div>

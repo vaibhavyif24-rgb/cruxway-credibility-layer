@@ -49,7 +49,7 @@ const PageLoader = () => {
           className="font-serif tracking-[-0.02em] relative overflow-hidden"
           style={{
             fontSize: 'clamp(4rem, 10vw, 7rem)',
-            color: isDark ? 'hsl(43 78% 50% / 0.25)' : 'hsl(228 45% 30% / 0.12)',
+            color: 'hsl(43 78% 50% / 0.20)',
           }}
         >
           Cruxway
@@ -57,9 +57,7 @@ const PageLoader = () => {
           <motion.span
             className="absolute inset-0 pointer-events-none"
             style={{
-              background: isDark
-                ? 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.5) 50%, transparent 100%)'
-                : 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.35) 50%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, hsl(43 78% 50% / 0.4) 50%, transparent 100%)',
               backgroundSize: '200% 100%',
               WebkitBackgroundClip: 'text',
               backgroundClip: 'text',
@@ -86,7 +84,7 @@ const PageLoader = () => {
           width: 200,
           height: 200,
           borderRadius: '50%',
-          border: `1px solid hsl(43 78% 50% / ${isDark ? 0.08 : 0.06})`,
+          border: '1px solid hsl(43 78% 50% / 0.07)',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
@@ -110,7 +108,7 @@ const PageLoader = () => {
           cy="80"
           r="70"
           fill="none"
-          stroke={`hsl(43 78% 50% / ${isDark ? 0.12 : 0.08})`}
+          stroke="hsl(43 78% 50% / 0.10)"
           strokeWidth="0.5"
           strokeDasharray="120 340"
           strokeLinecap="round"
@@ -128,9 +126,9 @@ const PageLoader = () => {
             background: 'hsl(43 78% 50%)',
             left: `${30 + i * 14}%`,
             bottom: '30%',
-            opacity: isDark ? 0.3 : 0.25,
+            opacity: 0.25,
           }}
-          animate={{ y: [0, -40, -80], opacity: [0, isDark ? 0.3 : 0.25, 0] }}
+          animate={{ y: [0, -40, -80], opacity: [0, 0.25, 0] }}
           transition={{
             duration: 3 + i * 0.5,
             repeat: Infinity,
@@ -151,9 +149,9 @@ const PageLoader = () => {
             background: 'hsl(43 78% 50%)',
             top: `${40 + i * 10}%`,
             left: '20%',
-            opacity: isDark ? 0.2 : 0.18,
+            opacity: 0.18,
           }}
-          animate={{ x: [0, 60, 120], opacity: [0, isDark ? 0.2 : 0.18, 0] }}
+          animate={{ x: [0, 60, 120], opacity: [0, 0.18, 0] }}
           transition={{
             duration: 5 + i * 0.8,
             repeat: Infinity,

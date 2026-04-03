@@ -72,22 +72,21 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className={`rounded-sm border p-7 md:p-10 ${
-              isDark
-                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,90%)]/50 bg-[hsl(40,20%,98%)]/80'
-            }`}
           >
-            <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-3 block">
-              Step {steps[active].num}
-            </span>
-            <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              {steps[active].title}
-            </h3>
-            <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
-              {steps[active].description}
-            </p>
+            <GlassCard index={active} hover={false}>
+              <div className="p-7 md:p-10">
+                <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-3 block">
+                  Step {steps[active].num}
+                </span>
+                <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  {steps[active].title}
+                </h3>
+                <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+                <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                  {steps[active].description}
+                </p>
+              </div>
+            </GlassCard>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -275,46 +274,45 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className={`mt-6 rounded-sm border relative overflow-hidden flex ${
-              isDark
-                ? 'border-primary-foreground/10 bg-primary-foreground/[0.03]'
-                : 'border-[hsl(38,15%,88%)] bg-[hsl(40,20%,98%)]'
-            }`}
           >
-            {/* Left gold accent strip */}
-            <div className="w-[3px] flex-shrink-0 bg-gold/40" />
+            <GlassCard index={selected} hover={true}>
+              <div className="flex">
+                {/* Left gold accent strip */}
+                <div className="w-[3px] flex-shrink-0 bg-gold/40" />
 
-            <div className="p-7 md:p-10 flex-1 relative">
-              {/* Watermark number */}
-              <span
-                className={`absolute top-2 right-5 font-serif text-[6rem] leading-none select-none pointer-events-none ${
-                  isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
-                }`}
-              >
-                {String(selected + 1).padStart(2, '0')}
-              </span>
+                <div className="p-7 md:p-10 flex-1 relative">
+                  {/* Watermark number */}
+                  <span
+                    className={`absolute top-2 right-5 font-serif text-[6rem] leading-none select-none pointer-events-none ${
+                      isDark ? 'text-primary-foreground/[0.03]' : 'text-foreground/[0.03]'
+                    }`}
+                  >
+                    {String(selected + 1).padStart(2, '0')}
+                  </span>
 
-              <div className="relative">
-                <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold block mb-2">
-                  Phase {String(selected + 1).padStart(2, '0')}
-                </span>
-                <h3
-                  className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
-                    isDark ? 'text-primary-foreground' : 'text-foreground'
-                  }`}
-                >
-                  {items[selected].title}
-                </h3>
-                <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-                <p
-                  className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
-                    isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
-                  }`}
-                >
-                  {items[selected].desc}
-                </p>
+                  <div className="relative">
+                    <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold block mb-2">
+                      Phase {String(selected + 1).padStart(2, '0')}
+                    </span>
+                    <h3
+                      className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                        isDark ? 'text-primary-foreground' : 'text-foreground'
+                      }`}
+                    >
+                      {items[selected].title}
+                    </h3>
+                    <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
+                    <p
+                      className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
+                        isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
+                      }`}
+                    >
+                      {items[selected].desc}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </GlassCard>
           </motion.div>
         )}
       </AnimatePresence>
@@ -412,7 +410,7 @@ const OurPlaybook = () => {
                 <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/50' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
                     : "If you're a founder considering your next chapter, we'd welcome the conversation."}

@@ -67,9 +67,9 @@ const Contact = () => {
                     <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center group-hover:border-gold/25 transition-colors duration-500">
                       <Mail className="w-4 h-4 text-muted-foreground group-hover:text-gold-dim transition-colors duration-500" />
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
+                    <ArrowUpRight className="w-4 h-4 text-muted-foreground/45 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                   </div>
-                  <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/55 mb-2">
+                  <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
                     Email
                   </p>
                   <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground group-hover:text-gold-dim transition-colors duration-500 tracking-[-0.01em]">
@@ -91,9 +91,9 @@ const Contact = () => {
                   <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center group-hover:border-gold/25 transition-colors duration-500">
                     <MapPin className="w-4 h-4 text-muted-foreground group-hover:text-gold-dim transition-colors duration-500" />
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground/45 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                 </div>
-                <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/55 mb-2">
+                <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
                   Location
                 </p>
                 <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground tracking-[-0.01em]">
@@ -123,7 +123,7 @@ const Contact = () => {
       <section className="bg-background px-5 md:px-10 lg:px-16 py-6 md:py-8 border-t border-border">
         <div className="max-w-[1080px] mx-auto">
           <FadeIn>
-            <p className="font-sans text-[12px] text-muted-foreground/45 leading-[1.7] max-w-[560px]">
+            <p className="font-sans text-[12px] text-muted-foreground/55 leading-[1.7] max-w-[560px]">
               This website has been prepared by Cruxway LLC solely for informational purposes. It does not constitute an offer, agreement, or commitment to invest.
             </p>
           </FadeIn>
