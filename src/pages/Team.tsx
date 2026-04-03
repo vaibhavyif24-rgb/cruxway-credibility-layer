@@ -465,7 +465,7 @@ const Team = () => {
           </FadeIn>
         </div>
         <div className="relative pb-6 md:pb-8">
-          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="inline" />
+          <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
         </div>
       </section>
     </div>
