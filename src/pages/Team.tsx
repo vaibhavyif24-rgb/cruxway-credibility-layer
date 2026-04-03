@@ -377,7 +377,7 @@ const Team = () => {
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[360px] md:max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'Global experience, local conviction. Building alongside the founders who are building India.'
-                : 'Operators and investors building alongside founders.'}
+                : 'Operators and investors who understand what it takes to build.'}
             </p>
           </FadeIn>
         </div>
