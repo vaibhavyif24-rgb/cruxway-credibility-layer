@@ -58,7 +58,7 @@ const processStepsUS = [
 
 const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'Deep networks across India\'s industrial heartland surface founder-led businesses with strong fundamentals and operational upside.' },
-  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigour.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigor.' },
   { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
   { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management.' },
 ];

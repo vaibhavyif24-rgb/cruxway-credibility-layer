@@ -352,7 +352,7 @@ const CruxwayOriginStory = () => {
               className="font-sans text-[12px] md:text-[13px] leading-[1.7]"
               style={{ opacity: act2Line1Op, textShadow: videoSubShadow }}
             >
-              <span className="text-gold/70">English:</span>{' '}
+              <span className="text-gold/70 font-medium">English:</span>{' '}
               <span style={{ color: videoBodyColor }}>the path and method one takes</span>
             </motion.p>
             <motion.p
