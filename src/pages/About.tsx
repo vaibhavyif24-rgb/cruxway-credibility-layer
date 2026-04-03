@@ -100,7 +100,7 @@ const About = () => {
           <FadeIn>
             <SectionLabel light={isDark}>Our Approach</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              How We Partner With Founders
+              What a Partnership Looks Like
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
