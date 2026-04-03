@@ -99,7 +99,7 @@ const About = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Our Approach</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.4rem,2.8vw,2.1rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               How We Partner With Founders
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
