@@ -93,7 +93,7 @@ const Contact = () => {
                   </div>
                   <ArrowUpRight className="w-4 h-4 text-muted-foreground/45 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-500" />
                 </div>
-                <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
+                <p className="font-sans text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
                   Location
                 </p>
                 <p className="font-serif text-[1.2rem] md:text-[1.4rem] text-foreground tracking-[-0.01em]">
