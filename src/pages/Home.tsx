@@ -50,17 +50,17 @@ const allLogos = [
 ];
 
 const processStepsUS = [
-  { num: '01', title: 'Identify', description: 'We go where others don\'t. Years of relationship-building across our sectors give us access to businesses before they reach the market.' },
-  { num: '02', title: 'Evaluate', description: 'We pressure-test everything: financials, operations, culture, and competitive position. Rigor is our edge.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
-  { num: '04', title: 'Build', description: 'From day one, we work alongside management to put better systems in place, deploy capital, and build.' },
+  { num: '01', title: 'Identify', description: 'Our deal flow comes from relationships we\'ve built over years in our target sectors. Accountants, brokers, attorneys, and business owners who know how we operate. Most of our opportunities never go to market.' },
+  { num: '02', title: 'Evaluate', description: 'Financials, operations, customer quality, and competitive positioning. We want to understand what the numbers say and, just as importantly, what they don\'t.' },
+  { num: '03', title: 'Invest', description: 'Majority positions structured to preserve continuity. Management stays. Employees stay. The founder decides how involved they want to be going forward.' },
+  { num: '04', title: 'Build', description: 'Real systems from day one: financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
 ];
 
 const processStepsIndia = [
-  { num: '01', title: 'Identify', description: 'We go deep into India\'s industrial heartland to find founder-led businesses with strong fundamentals and room to grow.' },
-  { num: '02', title: 'Evaluate', description: 'We pressure-test every opportunity: the financials, the operations, the culture, and the competitive position.' },
-  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
-  { num: '04', title: 'Build', description: 'From day one, we work alongside management to put better systems in place, deploy capital, and build.' },
+  { num: '01', title: 'Identify', description: 'We source directly through local networks across India\'s industrial corridors. Relationships with chartered accountants, industry associations, and family business advisors.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is evaluated in person: the financials, the operations, the team, and the competitive dynamics of the local market.' },
+  { num: '03', title: 'Invest', description: 'Majority positions with structures designed around the founder\'s priorities. Continuity for the team and flexibility on the founder\'s level of involvement.' },
+  { num: '04', title: 'Build', description: 'Institutional-grade governance, financial reporting, working capital management, and a growth roadmap. We bring the infrastructure. They bring the business.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
