@@ -1,76 +1,124 @@
 
 
-## Plan: Mobile Scan, Copy Polish, Font Consistency, and Marquee Fix
+## Typography Consistency Audit — Plan
 
-### 1. Team "Rolodex" Copy Fix (Team.tsx line 425)
-**Current**: "Relationships built over years of working together, not a Rolodex."
-**Replace with**: "Relationships built over years of working together, not a contact list."
+### Target Scale
 
-### 2. Team Institutional Experience Marquee Fix (Team.tsx line 468)
-The marquee uses `variant="inline"` which applies NO background and uses `from-background` for fade gradients. But the parent section uses `bg-[hsl(40,18%,96%)]` in light mode. The fade gradients don't match the parent, obscuring logos.
+| Role | Spec |
+|------|------|
+| Hero H1 | `font-serif text-[clamp(2.2rem,5vw,3.4rem)] leading-[1.08] tracking-[-0.03em]` |
+| Section H2 | `font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em]` |
+| Eyebrow/Label | `font-sans text-[11px] font-bold uppercase tracking-[0.25em] text-gold` |
+| Body text | `font-sans text-[15px] leading-[1.75]` |
+| Card titles | `font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em]` |
+| Card body | `font-sans text-[14px] leading-[1.7]` |
+| Button/CTA | `font-sans text-[11px] font-semibold uppercase tracking-[0.16em]` |
 
-**Fix**: Change `variant="inline"` to `variant="dark"` on line 468. The `variant="dark"` in light mode applies `bg-[hsl(40,20%,91%)]` which closely matches the parent `bg-[hsl(40,18%,96%)]`, and uses `from-[hsl(38,16%,92%)]` for fades. Also sync the parent section bg to `bg-[hsl(40,20%,91%)]` so fades blend perfectly.
+### Deviations Found & Fixes
 
-Line 459: change `bg-[hsl(40,18%,96%)]` to `bg-[hsl(40,20%,91%)]`
-Line 468: change `variant="inline"` to `variant="dark"`
+#### 1. SectionLabel component (`src/components/ui/Section.tsx` line 68)
+- **Current**: `text-[11px] md:text-[12px] font-semibold tracking-[0.25em]`
+- **Fix**: `text-[11px] font-bold tracking-[0.25em]` (remove responsive md:text-[12px], change semibold→bold)
 
-### 3. Font Consistency: Mobile Typography Audit
+#### 2. ScrollRevealText label (`src/components/ScrollRevealText.tsx` line 99)
+- **Current**: `text-[12px] md:text-[13px] font-bold tracking-[0.3em]`
+- **Fix**: `text-[11px] font-bold tracking-[0.25em]` (standardize size and tracking)
 
-**ScrollRevealText heading** (line 106): `text-[clamp(1.9rem,5.5vw,3.2rem)]` — on a 375px mobile, 5.5vw = 20.6px which is less than the 1.9rem (30.4px) minimum. The clamp floor holds at 1.9rem. This is fine but quite large for mobile. Reduce minimum to `1.6rem` so it breathes better on small screens:
-`text-[clamp(1.6rem,5vw,3.2rem)]`
+#### 3. Hero H1s — standardize min clamp from 2rem to 2.2rem
+All hero H1s currently use `text-[clamp(2rem,5vw,3.4rem)]`. Change min to 2.2rem:
+- `Home.tsx` line 417
+- `OurFocus.tsx` line 123
+- `OurPlaybook.tsx` line 341
+- `GuidingPrinciples.tsx` line 36
+- `Team.tsx` line 372
+- `Contact.tsx` line 41
 
-**Process step titles** (Home.tsx line 144): Already `text-[0.85rem]` on mobile. Good.
+#### 4. CTA section H2s — standardize to section H2 scale
+Three CTA sections use `text-[clamp(1.6rem,3.5vw,2.6rem)]` instead of the standard H2:
+- `Home.tsx` line 536
+- `OurPlaybook.tsx` line 410
+- `GuidingPrinciples.tsx` line 71
+- `OurFocus.tsx` line 263
 
-**Home.tsx process panel body** (line 199): `text-[14px] md:text-[15px]` — consistent with other panels.
+**Fix**: Change all to `text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15]`
 
-**OurFocus.tsx sector item names** (line 215): `text-[0.95rem] md:text-[1.05rem]` — on mobile 0.95rem = 15.2px. Fine.
+#### 5. Hero body text — standardize
+Currently `text-[15px] md:text-[16px]`. Spec says body = `text-[15px]`.
+- `Home.tsx` line 424
+- `OurFocus.tsx` line 128
+- `OurPlaybook.tsx` line 346
+- `GuidingPrinciples.tsx` line 41
+- `Team.tsx` line 377
+- `Contact.tsx` line 46
 
-**OurFocus.tsx sector descriptions** (line 218): `text-[13px]` — acceptable for mobile descriptions.
+**Fix**: Remove `md:text-[16px]`, keep `text-[15px] leading-[1.75]`
 
-**CriteriaTabs title** (line 315): `text-[1.05rem] md:text-[1.15rem]` — correct. But the tab row has `min-w-[140px]` per tab. With 6 tabs, that's 840px minimum which triggers horizontal scroll. This is fine on mobile with overflow-x-auto.
+#### 6. CTA body text — standardize
+Currently `text-[13px] md:text-[15px]` in multiple CTA sections.
+- `Home.tsx` line 539
+- `OurPlaybook.tsx` line 413
+- `GuidingPrinciples.tsx` line 74
+- `OurFocus.tsx` line 266
 
-**CriteriaAccordion title** (line 402): `text-[1.1rem]` — consistent with tab titles. Good.
+**Fix**: `text-[15px] leading-[1.75]` (remove responsive step-up from 13px)
 
-**Standardize all body text to minimum 14px on mobile**, verify:
-- OurPlaybook panel: `text-[14px] md:text-[15px]` ✓
-- OurFocus panel: `text-[15px] md:text-[17px]` ✓ (slightly larger, fine for criteria)
-- OurFocus accordion: `text-[15px]` ✓
-- Contact cards: `text-[13px] md:text-[14px]` — bump to `text-[14px] md:text-[15px]`
-- Team advisory text: `text-[12.5px] md:text-[13px]` — too small on mobile. Bump to `text-[14px] md:text-[15px]`
-- Team advisory disclaimer: `text-[10.5px] md:text-[11px]` — fine for disclaimer
+#### 7. Home.tsx gold tagline (line 412)
+- **Current**: `text-[12px] md:text-[13px] font-semibold tracking-[0.22em]`
+- **Fix**: `text-[11px] font-semibold tracking-[0.16em]` (align to CTA/button spec)
 
-### 4. Remaining Copy Issues
+#### 8. Card titles — standardize to `clamp(1.1rem,2vw,1.4rem)`
+- Home ProcessCarousel card title (line 185): `text-[clamp(1.2rem,2.5vw,1.6rem)]` → `text-[clamp(1.1rem,2vw,1.4rem)]`
+- OurPlaybook StepNavigator card title (line 81): `text-[clamp(1.2rem,2.2vw,1.6rem)]` → `text-[clamp(1.1rem,2vw,1.4rem)]`
+- OurPlaybook ValueCreation card title (line 298): `text-[clamp(1.3rem,2.5vw,1.8rem)]` → `text-[clamp(1.1rem,2vw,1.4rem)]`
+- OurFocus CriteriaTabs card title (line 362): `text-[clamp(1.2rem,2.5vw,1.6rem)]` → `text-[clamp(1.1rem,2vw,1.4rem)]`
 
-**Home.tsx India process steps** (lines 60-63): Some still sound formulaic.
-- Line 60: "Deep networks across India's industrial heartland surface founder-led businesses with strong fundamentals and operational upside." → "We go deep into India's industrial heartland to find founder-led businesses with strong fundamentals and room to grow."
-- Line 61: "Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigor." → "We pressure-test every opportunity: the financials, the operations, the culture, and the competitive position."
-- Line 63: "Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management." → "From day one, we work alongside management to put better systems in place, deploy capital, and build."
+#### 9. Card body text — standardize to `text-[14px] leading-[1.7]`
+- Home ProcessCarousel body (line 199): `text-[14px] md:text-[15px] leading-[1.8]` → `text-[14px] leading-[1.7]`
+- OurPlaybook StepNavigator body (line 85): `text-[15px] md:text-[16px] leading-[1.75]` → `text-[14px] leading-[1.7]`
+- OurPlaybook ValueCreation body (line 306): `text-[15px] md:text-[17px] leading-[1.85]` → `text-[14px] leading-[1.7]`
+- OurFocus CriteriaTabs body (line 371): `text-[15px] md:text-[17px] leading-[1.85]` → `text-[14px] leading-[1.7]`
+- OurFocus CriteriaAccordion body (line 428): `text-[15px] leading-[1.75]` → `text-[14px] leading-[1.7]`
+- ConvictionsDeck body (line 110): `text-[14px] md:text-[15px] leading-[1.8]` → `text-[14px] leading-[1.7]`
+- ConvictionsDeck subtext (line 149): `text-[14px] md:text-[15px]` → `text-[14px] leading-[1.7]` (already close)
 
-**Home.tsx US process steps** (lines 53-56):
-- Line 53: "We go where others don't. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market." → "We go where others don't. Years of relationship-building across our sectors give us access to businesses before they reach the market."
-- Line 54: "Every opportunity is stress-tested across financials, operations, culture, and market position. Rigor is our edge." → "We pressure-test everything: financials, operations, culture, and competitive position. Rigor is our edge."
-- Line 56: "Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management." → "From day one, we work alongside management to put better systems in place, deploy capital, and build."
+#### 10. CTA button text — standardize
+Currently `text-[11px] md:text-[12px]` in most CTA buttons. Spec says `text-[11px]`.
+- Remove `md:text-[12px]` from all CTA link elements across Home, OurFocus, OurPlaybook, GuidingPrinciples
 
-**Team.tsx India hero subtitle** (line 379): "Global experience, local conviction. Building alongside the founders who are building India." — Good, keep.
+#### 11. Team.tsx profile card specifics
+- Profile name (line 253): `text-[1.05rem] md:text-[1.3rem]` — this is a name, not a card title per se. Leave as-is.
+- Profile summary (line 270): `text-[12.5px] md:text-[13px]` — bump to `text-[14px] leading-[1.7]` per card body spec
+- Profile highlights (line 281): `text-[11.5px] md:text-[12px]` — small detail text, leave as-is (intentionally subordinate)
 
-**Team.tsx US hero subtitle** (line 380): "Operators and investors building alongside founders." — A bit thin. Change to: "Operators and investors who understand what it takes to build."
+#### 12. Contact.tsx card body (line 78, 102)
+- Already `text-[14px] md:text-[15px]` → standardize to `text-[14px] leading-[1.7]`
 
-**Team.tsx US advisory text** (line 447): "Operators and leaders who have built businesses like the ones we invest in." — Good.
+#### 13. OurFocus.tsx TypographicText body (line 499)
+- `text-[14.5px]` → `text-[14px] leading-[1.7]`
 
-**Team.tsx India advisory text** (line 446): "Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build." — Good, keep.
+#### 14. Contact.tsx card eyebrow labels (lines 72, 96)
+- `text-[10px] md:text-[11px]` → `text-[11px]` (standardize)
 
-### 5. Home.tsx Logo Marquee Wrapper (line 518)
-Currently `<div className="bg-[hsl(40,20%,91%)]">` — good, matches the `variant="dark"` light-mode bg.
+#### 15. OurPlaybook.tsx value creation description body (line 390)
+- `text-[14px] md:text-[15px]` → `text-[15px] leading-[1.75]` (this is section body, not card body)
 
-### 6. Contact.tsx Body Text Size Fix
-Line 78: `text-[13px] md:text-[14px]` → `text-[14px] md:text-[15px]`
+### Files Modified
 
-### Summary of Changes
+| File | Change count |
+|------|-------------|
+| `src/components/ui/Section.tsx` | 1 |
+| `src/components/ScrollRevealText.tsx` | 1 |
+| `src/components/ConvictionsDeck.tsx` | 2 |
+| `src/pages/Home.tsx` | ~8 |
+| `src/pages/OurFocus.tsx` | ~7 |
+| `src/pages/OurPlaybook.tsx` | ~7 |
+| `src/pages/GuidingPrinciples.tsx` | ~4 |
+| `src/pages/Team.tsx` | ~4 |
+| `src/pages/Contact.tsx` | ~4 |
 
-| File | Changes |
-|------|---------|
-| `Team.tsx` | "Rolodex" → "contact list"; marquee variant to "dark"; parent bg synced; advisory body text bumped to 14px; US subtitle improved |
-| `Home.tsx` | India process steps rewritten; US process steps tightened |
-| `Contact.tsx` | Card description text bumped to 14px/15px |
-| `ScrollRevealText.tsx` | Heading min clamp reduced from 1.9rem to 1.6rem for mobile |
+### What stays unchanged
+- Font families (EB Garamond / Inter)
+- All animations, layout, responsive breakpoints, theme conditionals
+- Decorative/watermark text sizes
+- Navigation text, stat numbers, disclaimer text
 
