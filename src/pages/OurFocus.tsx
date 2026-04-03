@@ -199,67 +199,33 @@ const OurFocus = () => {
             <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 relative">
-            {/* Vertical divider on desktop */}
-            <motion.div
-              className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gold/15 origin-top"
-              initial={{ scaleY: 0 }}
-              whileInView={{ scaleY: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            />
-
-            {/* Left column */}
-            <FadeIn delay={0}>
-              <div>
-                <h3 className={`font-serif text-[1.2rem] md:text-[1.4rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {sectors.left.heading}
-                </h3>
-                <ul className="space-y-3">
-                  {sectors.left.items.map((item, i) => (
-                    <FadeIn key={i} delay={i * 0.06}>
-                      <li className="flex items-start gap-2.5">
-                        <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
-                        <div>
-              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                            {item.name}
-                          </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                            {item.desc}
-                          </span>
-                        </div>
-                      </li>
-                    </FadeIn>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
-
-            {/* Right column */}
-            <FadeIn delay={0.08}>
-              <div>
-                <h3 className={`font-serif text-[1.2rem] md:text-[1.4rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {sectors.right.heading}
-                </h3>
-                <ul className="space-y-3">
-                  {sectors.right.items.map((item, i) => (
-                    <FadeIn key={i} delay={0.08 + i * 0.06}>
-                      <li className="flex items-start gap-2.5">
-                        <span className="w-[7px] h-[7px] rotate-45 bg-gold/50 shrink-0 mt-[6px]" />
-                        <div>
-              <span className={`font-serif font-medium text-[1rem] md:text-[1.1rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                            {item.name}
-                          </span>
-                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                            {item.desc}
-                          </span>
-                        </div>
-                      </li>
-                    </FadeIn>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
+          <div className={`grid gap-8 md:gap-10 ${sectors.cols.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+            {sectors.cols.map((col, colIdx) => (
+              <FadeIn key={colIdx} delay={colIdx * 0.06}>
+                <div>
+                  <h3 className={`font-serif text-[1.15rem] md:text-[1.3rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                    {col.heading}
+                  </h3>
+                  <ul className="space-y-3">
+                    {col.items.map((item, i) => (
+                      <FadeIn key={i} delay={colIdx * 0.06 + i * 0.04}>
+                        <li className="flex items-start gap-2.5">
+                          <span className="w-[6px] h-[6px] rotate-45 bg-gold/50 shrink-0 mt-[7px]" />
+                          <div>
+                            <span className={`font-serif font-medium text-[0.95rem] md:text-[1.05rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                              {item.name}
+                            </span>
+                            <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                              {item.desc}
+                            </span>
+                          </div>
+                        </li>
+                      </FadeIn>
+                    ))}
+                  </ul>
+                </div>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
