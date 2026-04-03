@@ -474,10 +474,10 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Proven businesses deserve a partner who understands what they have built and can help them scale it.'
-            : 'Patient capital and hands-on experience open the next chapter.'
+            ? 'Sixty-three million MSMEs, real revenue, real customers, and almost no access to the kind of capital and systems that could scale them.'
+            : 'Between the large funds and the local buyers, there\'s a gap. Profitable companies that need more than money but don\'t fit the megafund model.'
         }
-        highlights={isIndia ? ['partner'] : ['Patient']}
+        highlights={isIndia ? ['scale'] : ['gap']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
