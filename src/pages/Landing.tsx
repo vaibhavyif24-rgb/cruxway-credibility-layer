@@ -104,7 +104,7 @@ const Landing = () => {
                 whileTap={!selected ? { scale: 0.98 } : {}}
                 onClick={() => !selected && selectRegion(r.key)}
                 disabled={selected !== null}
-                className="group relative w-[180px] sm:w-[220px] aspect-[4/3] flex items-center justify-center cursor-pointer overflow-hidden"
+                className="group relative w-[200px] sm:w-[260px] md:w-[280px] aspect-[3/2] flex items-center justify-center cursor-pointer overflow-hidden"
               >
                 <span className={`
                   absolute inset-0 border transition-all duration-700 ease-out
