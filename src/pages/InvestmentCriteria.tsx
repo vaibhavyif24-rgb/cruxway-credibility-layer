@@ -42,7 +42,7 @@ const whatWeLookFor = [
   { title: 'Recurring Revenue & Retention', desc: 'Businesses where the hard work of winning the customer has already been done. High retention, contractual relationships, and cash flows that compound over time.' },
   { title: 'Platform & Consolidation Potential', desc: 'Fragmented markets where no single player dominates. We invest in a strong platform and grow through disciplined acquisitions over a long hold.' },
   { title: 'Operational Improvement Runway', desc: 'Companies that have outgrown their infrastructure. Strong product, loyal customers, but systems and processes that haven\'t scaled with the business.' },
-  { title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue, not from financial engineering.' },
+  { title: 'Prudent Capital Structure', desc: 'Conservative leverage. Our returns come from improving the business and growing revenue.' },
 ];
 
 /* ─── Typographic Number (Revenue/EBITDA) ─── */
