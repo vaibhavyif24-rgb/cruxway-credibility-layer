@@ -100,9 +100,9 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, { once: true, amount: 0.3 });
-  const barHeights = isMobile ? [100, 160, 230, 310] : [130, 210, 295, 390];
-  const barWidth = isMobile ? 64 : 100;
-  const gap = isMobile ? 20 : 40;
+  const barHeights = isMobile ? [80, 135, 195, 260] : [130, 210, 295, 390];
+  const barWidth = isMobile ? 52 : 100;
+  const gap = isMobile ? 14 : 40;
 
   // Calculate SVG points for growth trajectory line
   const totalWidth = barWidth * 4 + gap * 3;
