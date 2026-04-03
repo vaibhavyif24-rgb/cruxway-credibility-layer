@@ -387,7 +387,7 @@ const OurPlaybook = () => {
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-foreground leading-[1.15] mb-2">
               How We Build Value
             </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
+            <p className="font-sans text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
               What the work looks like after closing.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
