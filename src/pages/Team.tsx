@@ -399,7 +399,7 @@ const Team = () => {
       {/* ScrollRevealText — after hero */}
       <ScrollRevealText
         label="Our People"
-        heading="Operators and investors who've built, scaled, and partnered across cycles."
+        heading="People who have been in the trenches, built businesses, and invested through every kind of market."
         variant="light"
       />
 
