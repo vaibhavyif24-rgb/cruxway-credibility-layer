@@ -31,8 +31,8 @@ import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
-  { src: warburgLogo, alt: 'Warburg Pincus', scale: 1.3 },
-  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 1.2 },
+  { src: warburgLogo, alt: 'Warburg Pincus', scale: 2.6 },
+  { src: neosPartnersLogo, alt: 'Neos Partners', scale: 2.1 },
   { src: deutscheBankLogo, alt: 'Deutsche Bank', scale: 0.7 },
   { src: saltwaterLogo, alt: 'Saltwater Capital', scale: 1.2 },
   
