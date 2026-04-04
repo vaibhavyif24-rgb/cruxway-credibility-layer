@@ -90,12 +90,12 @@ const founders: TeamMember[] = [
     photo: harinPhoto,
     linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
-      'Harin has spent more than a decade investing in and operating companies across business and consumer sectors. His approach pairs operating experience with patient capital, always with the founder\'s legacy in mind. Based in San Diego. Reads history. Finds good food.',
+      'Harin has spent over a decade investing in and operating companies in business services, consumer, and industrial sectors. He brings the same rigor whether deploying capital or advising a founder on what comes next. Lives in San Diego. Reads history and is always looking for a good meal.',
     highlights: [
-      'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
-      'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
-      'Successfully helped launch and scale Honest Hospitality Group as a family business from ideation to 100+ locations globally; serves on the Board of Directors',
-      'Began his finance career at leading investment banks, including J.P. Morgan, Evercore, and Deutsche Bank',
+      'Invested through the Business Services Group at Warburg Pincus ($85B+ AUM)',
+      'Served on the Board of Directors for RMS Energy, a high-voltage electrical services company',
+      'Helped launch and grow Honest Hospitality Group from concept to 100+ locations globally; serves on the Board of Directors',
+      'Started in investment banking at J.P. Morgan, Evercore, and Deutsche Bank',
     ],
     logos: [
       { src: warburgLogo, alt: 'Warburg Pincus' },
@@ -123,11 +123,11 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav has built his career across early-stage investing, venture capital, and company-building in India. He developed a conviction for the lower middle market in manufacturing and industrial services, where operational improvement drives outsized returns. Based in Delhi. Golf, fountain pens, watches, and wherever the next flight goes.',
+    'Vaibhav has invested, built companies, and operated across India\'s early-stage and venture ecosystem. That experience shaped a clear view: the lower middle market in manufacturing and industrial services is where operational rigor creates the most value. Lives in Delhi. Plays golf, collects fountain pens and watches, and will travel anywhere on short notice.',
   highlights: [
-    'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
-    'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
-    'Exposure to fundraising across early-stage, growth, and late-stage rounds, spanning venture capital, private equity, and multiple asset classes',
+    'Led investments and due diligence across a venture fund and family office in cleantech, deeptech, manufacturing, and marketplace sectors',
+    'Co-founded and scaled multiple ventures with full P&L responsibility, from product to growth to operations',
+    'Raised capital across early-stage, growth, and late-stage rounds, working across venture capital, private equity, and multiple asset classes',
   ],
   logos: [
     { src: iicLogo, alt: 'Impact Investors Council' },
