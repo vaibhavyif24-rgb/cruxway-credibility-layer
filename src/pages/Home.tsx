@@ -53,7 +53,7 @@ const processStepsUS = [
   { num: '01', title: 'Identify', description: 'Our deal flow comes from relationships we\'ve built over years in our target sectors. Accountants, brokers, attorneys, and business owners who know how we operate. Most of our opportunities never go to market.' },
   { num: '02', title: 'Evaluate', description: 'Financials, operations, customer quality, and competitive positioning. We want to understand what the numbers say and, just as importantly, what they don\'t.' },
   { num: '03', title: 'Invest', description: 'Majority positions structured to preserve continuity. Management stays. Employees stay. The founder decides how involved they want to be going forward.' },
-  { num: '04', title: 'Build', description: 'Real systems from day one: financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
+  { num: '04', title: 'Build', description: 'Real systems from day one. Financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
 ];
 
 const processStepsIndia = [
