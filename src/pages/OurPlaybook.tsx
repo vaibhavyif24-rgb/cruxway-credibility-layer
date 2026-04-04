@@ -19,7 +19,7 @@ import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'Most of our deal flow comes from relationships we\'ve cultivated over many years in our target sectors. When an owner starts thinking about a transition, we want to be someone they already know.' },
   { num: '02', title: 'Evaluation', description: 'We focus first on what could go wrong: customer concentration, key-person risk, competitive threats, and regulatory exposure. Businesses that survive that analysis earn a deeper look.' },
-  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. We aim to understand the business as well as the owner does before we make a commitment.' },
+  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. Our goal is to understand the business as well as the owner does before we commit.' },
   { num: '04', title: 'Structuring', description: 'Aligned incentives between Cruxway and the owner. Governance that fits the size of the company. Conservative leverage. No artificial timelines.' },
 ];
 
