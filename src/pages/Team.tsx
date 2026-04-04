@@ -123,7 +123,7 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav has built his career across early-stage investing, venture capital, and company-building in India. He developed a conviction for the lower middle market in manufacturing and industrial services, where operational improvement drives outsized returns. Based in Delhi. Golf, fountain pens, watches, and wherever the next flight goes.',
+    'Vaibhav has invested, built companies, and operated across India\'s early-stage and venture ecosystem. That experience shaped a clear view: the lower middle market in manufacturing and industrial services is where operational rigor creates the most value. Lives in Delhi. Plays golf, collects fountain pens and watches, and will travel anywhere on short notice.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
     'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
