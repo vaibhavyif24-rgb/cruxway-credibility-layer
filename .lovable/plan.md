@@ -1,25 +1,25 @@
 
 
-## Plan: Fix Clipped Descenders on Hero H1 Headings
+## Fix: Clipped Descenders on Hero H1 Headings
 
 ### Problem
-Letters with descenders (g, y, p, j) are being clipped at the bottom in hero headings across all pages. The cause is tight line-height values (`leading-[1.08]` or `leading-[1.1]`) that don't provide enough room for EB Garamond's descender depth at large display sizes.
+The serif font EB Garamond has deep descenders on letters like "g", "y", "p". The current hero H1 line-height values (`leading-[1.08]` and `leading-[1.1]`) are too tight, causing these descenders to clip at the bottom — visible in the uploaded screenshot where the "g" in "Backbone" is cut off.
 
 ### Fix
-Change line-height to `leading-[1.18]` on all hero H1 elements — just enough to clear descenders without visually loosening the heading.
+Change line-height to `leading-[1.18]` on every hero H1 across all 8 pages. This clears the descenders while keeping the heading visually tight.
 
-### Changes (8 files, one value each)
+### All Changes
 
-| File | Current | New |
-|------|---------|-----|
-| `Home.tsx` (line 417) | `leading-[1.08]` | `leading-[1.18]` |
-| `Team.tsx` (line 372) | `leading-[1.08]` | `leading-[1.18]` |
-| `Contact.tsx` (line 41) | `leading-[1.1]` | `leading-[1.18]` |
-| `OurFocus.tsx` (line 123) | `leading-[1.1]` | `leading-[1.18]` |
-| `OurPlaybook.tsx` (line 341) | `leading-[1.1]` | `leading-[1.18]` |
-| `GuidingPrinciples.tsx` (line 36) | `leading-[1.1]` | `leading-[1.18]` |
-| `About.tsx` (line 59) | `leading-[1.1]` | `leading-[1.18]` |
-| `InvestmentCriteria.tsx` (line 206) | `leading-[1.1]` | `leading-[1.18]` |
+| File | Line | Current | New |
+|------|------|---------|-----|
+| `Home.tsx` | 417 | `leading-[1.08]` | `leading-[1.18]` |
+| `Team.tsx` | 372 | `leading-[1.08]` | `leading-[1.18]` |
+| `Contact.tsx` | 41 | `leading-[1.1]` | `leading-[1.18]` |
+| `OurFocus.tsx` | 123 | `leading-[1.1]` | `leading-[1.18]` |
+| `OurPlaybook.tsx` | 341 | `leading-[1.1]` | `leading-[1.18]` |
+| `GuidingPrinciples.tsx` | 36 | `leading-[1.1]` | `leading-[1.18]` |
+| `About.tsx` | 59 | `leading-[1.1]` | `leading-[1.18]` |
+| `InvestmentCriteria.tsx` | 206 | `leading-[1.1]` | `leading-[1.18]` |
 
-No layout, copy, animation, or structural changes. Line-height only.
+8 single-value replacements. No layout, copy, animation, or structural changes.
 
