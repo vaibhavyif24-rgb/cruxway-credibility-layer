@@ -82,7 +82,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
                   {steps[active].title}
                 </h3>
                 <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-                <p className={`font-sans <p className={`font-sans text-[15px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}> ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
                   {steps[active].description}
                 </p>
               </div>
