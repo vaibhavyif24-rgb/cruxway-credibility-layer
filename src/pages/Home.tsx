@@ -493,7 +493,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              From Discovery to Partnership
+              How a Deal Comes Together
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
