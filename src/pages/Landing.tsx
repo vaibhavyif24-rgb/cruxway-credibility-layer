@@ -72,7 +72,7 @@ const Landing = () => {
         </div>
 
         <p className="font-sans text-[13px] md:text-[15px] font-medium uppercase text-white/50 tracking-[0.3em]">
-          Investment &amp; Partnership
+          Capital &amp; Partnership for Essential Businesses
         </p>
       </motion.div>
 

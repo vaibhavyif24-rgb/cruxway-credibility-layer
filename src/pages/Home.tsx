@@ -60,7 +60,7 @@ const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'We source directly through local networks across India\'s industrial corridors. Relationships with chartered accountants, industry associations, and family business advisors.' },
   { num: '02', title: 'Evaluate', description: 'Every opportunity is evaluated in person: the financials, the operations, the team, and the competitive dynamics of the local market.' },
   { num: '03', title: 'Invest', description: 'Majority positions with structures designed around the founder\'s priorities. Continuity for the team and flexibility on the founder\'s level of involvement.' },
-  { num: '04', title: 'Build', description: 'Institutional-grade governance, financial reporting, working capital management, and a growth roadmap. We bring the infrastructure. They bring the business.' },
+  { num: '04', title: 'Build', description: 'We bring the infrastructure: governance, financial reporting, working capital discipline, and a growth roadmap. They bring the business.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
