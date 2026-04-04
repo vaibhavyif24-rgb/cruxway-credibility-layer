@@ -141,7 +141,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                 {step.num}
               </span>
               <motion.span
-                className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                className={`block font-serif className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${ tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
                      : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
