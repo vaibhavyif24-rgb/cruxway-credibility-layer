@@ -8,7 +8,7 @@ EB Garamond's deep descenders on letters like "g", "y", "p" are being cut off be
 ### Fix
 Change line-height to `leading-[1.18]` on every hero H1 across all 8 pages. This clears descenders without visually loosening the heading.
 
-### All Changes (line-height value only, nothing else)
+### All Changes (line-height value only)
 
 | File | Line | Current | New |
 |------|------|---------|-----|
