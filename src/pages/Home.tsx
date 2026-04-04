@@ -406,7 +406,7 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={isDark}>Investment Firm</SectionLabel>
+            <SectionLabel light={isDark}>Long-Term Capital</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-gold mb-4">
