@@ -473,7 +473,7 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Sixty-three million MSMEs with real revenue and real customers, but almost none have access to the capital and systems that could scale them into something larger.'
+            ? 'Sixty-three million MSMEs with real revenue and real customers, but limited access to the capital, systems, and know-how required to grow.'
             : 'Thousands of profitable service businesses will change hands this decade. Most founders want more than a buyer. They want a partner who will stay close and think long-term.'
         }
         highlights={isIndia ? ['scale'] : ['partner']}
