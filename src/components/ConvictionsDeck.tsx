@@ -147,7 +147,7 @@ const ConvictionsDeck = () => {
               <span className="text-gold">Decision</span>
             </h2>
              <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] max-w-[480px] mt-2 mb-3">
-               Six principles that shape how we partner, decide, and build.
+               Six principles that shape how we partner and build.
             </p>
             <GoldRule />
           </FadeIn>
