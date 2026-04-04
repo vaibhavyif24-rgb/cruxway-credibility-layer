@@ -3,7 +3,7 @@
 ## Plan: Fix Clipped Descenders on Hero H1 Headings
 
 ### Problem
-Letters with descenders (g, y, p, j) are being clipped at the bottom in hero headings across all pages. The cause is tight line-height values (`leading-[1.08]` or `leading-[1.1]`) that don't leave enough room for EB Garamond's descender depth at large display sizes.
+Letters with descenders (g, y, p, j) are being clipped at the bottom in hero headings across all pages. The cause is tight line-height values (`leading-[1.08]` or `leading-[1.1]`) that don't provide enough room for EB Garamond's descender depth at large display sizes.
 
 ### Fix
 Change line-height to `leading-[1.18]` on all hero H1 elements — just enough to clear descenders without visually loosening the heading.
