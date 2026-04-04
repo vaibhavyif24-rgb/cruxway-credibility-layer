@@ -245,7 +245,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                 {/* Labels below bar */}
                 <div className="mt-3 text-center" style={{ width: isMobile ? 70 : 110 }}>
                   <span
-                    className={`block font-sans className={`block font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${ transition-colors duration-300 ${
+                    className={`block font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
                       isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
                     }`}
                   >
