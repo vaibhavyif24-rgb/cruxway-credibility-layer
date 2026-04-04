@@ -422,7 +422,7 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="A curated network built over decades of shared conviction and institutional rigor."
+        heading="Relationships built over decades of shared work and mutual respect."
         variant="dark"
       />
 
