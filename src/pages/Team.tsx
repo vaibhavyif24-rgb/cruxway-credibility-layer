@@ -322,7 +322,7 @@ const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => 
 
   return (
     <motion.p
-      className={`font-serif text-[clamp(1.2rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-gold'}`}
+      className={`font-serif text-[className={`font-serif text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-gold'}`}] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-gold'}`}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
