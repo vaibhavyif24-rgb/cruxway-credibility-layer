@@ -73,7 +73,7 @@ const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; d
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       className="text-center"
     >
-      <p className={`<p className={`font-serif text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}> tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <p className={`font-serif text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
         {val}
       </p>
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${light ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
