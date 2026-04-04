@@ -3,12 +3,12 @@
 ## Fix: Clipped Descenders on Hero H1 Headings
 
 ### Problem
-EB Garamond has deep descenders on letters like "g", "y", "p". The hero H1 line-height values (`leading-[1.08]` and `leading-[1.1]`) are too tight, clipping the bottom of these characters.
+EB Garamond's deep descenders on letters like "g", "y", "p" are being cut off because the hero H1 line-height values (`leading-[1.08]` and `leading-[1.1]`) are too tight.
 
 ### Fix
-Change line-height to `leading-[1.18]` on every hero H1 -- just enough to clear descenders without loosening the heading.
+Change line-height to `leading-[1.18]` on every hero H1 across all 8 pages. This clears descenders without visually loosening the heading.
 
-### All Changes (line-height value only)
+### All Changes (line-height value only, nothing else)
 
 | File | Line | Current | New |
 |------|------|---------|-----|
@@ -21,5 +21,5 @@ Change line-height to `leading-[1.18]` on every hero H1 -- just enough to clear 
 | `About.tsx` | 59 | `leading-[1.1]` | `leading-[1.18]` |
 | `InvestmentCriteria.tsx` | 206 | `leading-[1.1]` | `leading-[1.18]` |
 
-8 single-value replacements across 8 files. No layout, copy, animation, or structural changes.
+8 single-value replacements. No layout, copy, animation, or structural changes.
 
