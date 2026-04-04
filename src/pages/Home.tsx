@@ -357,7 +357,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             className={`font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
           >
             {isIndia
-              ? <>India's lower middle market is one of the most <span className="text-gold font-semibold">overlooked</span> opportunities in global investing.</>
+              ? <>India's essential service economy is large, fragmented, and ready for partners who can build <span className="text-gold font-semibold">resilient platforms</span> with long-term capital.</>
               : <>Tens of thousands of <span className="text-gold font-semibold">essential</span> businesses keep America running.</>
             }
           </motion.h2>
@@ -416,14 +416,14 @@ const Home = () => {
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
-                ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Companies</>
+                ? <>Investing in India's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Industrial</span> Backbone</>
                 : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'Long-term capital and hands-on partnership for the founder-led companies building India\'s future.'
+                ? 'Enabling India\'s essential businesses to move from fragmented operators to scaled, system-critical platforms.'
                 : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
             </p>
           </FadeIn>
@@ -463,13 +463,13 @@ const Home = () => {
         label="What We Do"
         heading={
           isIndia
-            ? 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
+            ? 'We invest to strengthen operations and scale businesses, enabling continuity, capability, and sustained growth.'
             : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
         }
-        highlights={isIndia ? ['founders', 'long'] : ['founders', 'long']}
+        highlights={isIndia ? ['strengthen', 'continuity'] : ['founders', 'long']}
         subtext={
           isIndia
-            ? 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
+            ? 'Long-term capital, operating discipline, and the patience to build something that lasts.'
             : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
         }
         variant="light"
@@ -482,10 +482,10 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
+            ? 'Proven businesses deserve a partner who understands what they have built and can help them scale it.'
             : 'Patient capital and operational expertise unlock their next chapter of growth.'
         }
-        highlights={isIndia ? ['discipline'] : ['Patient']}
+        highlights={isIndia ? ['partner'] : ['Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
@@ -516,7 +516,7 @@ const Home = () => {
           <FadeIn>
             <p className={`font-serif text-[clamp(1.6rem,4vw,2.6rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia
-                ? <>Global <span className="text-gold">institutional expertise</span> applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
+                ? <>The founders building India's industrial base deserve <span className="text-gold">institutional capital</span> that respects what they have <span className="text-gold">built</span>.</>
                 : <>Decades of <span className="text-gold">institutional experience</span> dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
               }
             </p>
@@ -546,7 +546,7 @@ const Home = () => {
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
+                    ? "If you have built something real and want a partner for the next chapter, we would welcome a conversation."
                     : "If you're a founder considering your next chapter, we'd welcome an honest discussion about long-term partnership."}
                 </p>
               </FadeIn>
