@@ -261,7 +261,7 @@ const OurFocus = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? "See Yourself Here?" : "Think This Describes Your Business?"}
+                  {isIndia ? "Does This Sound Like Your Business?" : "Think This Describes Your Business?"}
                 </h2>
                 <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
