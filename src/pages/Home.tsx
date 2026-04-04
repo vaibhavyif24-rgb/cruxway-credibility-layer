@@ -409,7 +409,7 @@ const Home = () => {
             <SectionLabel light={isDark}>Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
+            <p className="font-sans <p className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
