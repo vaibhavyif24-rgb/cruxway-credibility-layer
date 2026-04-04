@@ -260,7 +260,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
                 )}
               </LinkedWrapper>
-              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
+              <p className="font-sans <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1"> tracking-[0.22em] text-gold-dim mt-1">
                 {member.role}
               </p>
             </div>
