@@ -463,13 +463,13 @@ const Home = () => {
         label="What We Do"
         heading={
           isIndia
-            ? 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
+            ? 'We invest to strengthen operations and scale businesses, enabling continuity, capability, and sustained growth.'
             : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
         }
-        highlights={isIndia ? ['founders', 'long'] : ['founders', 'long']}
+        highlights={isIndia ? ['strengthen', 'continuity'] : ['founders', 'long']}
         subtext={
           isIndia
-            ? 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
+            ? 'Long-term capital, operating discipline, and the patience to build something that lasts.'
             : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
         }
         variant="light"
