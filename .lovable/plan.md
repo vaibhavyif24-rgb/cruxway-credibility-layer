@@ -1,100 +1,110 @@
 
 
-## Plan: Remaining Fixes Across Copy, Fonts, Sectors, and Team Marquee
+## Plan: Improve India Copy as a Senior Copywriter
 
-### Status Check: What is Already Done vs. Still Needs Fixing
+The user wants a clear narrative arc across the India sections: **What we invest in → What our capital unlocks → How we do it → The opportunity gap → Social proof.** This plan refines copy across Home.tsx, OurFocus.tsx, OurPlaybook.tsx, and Team.tsx for the India region only, following the copy-only constraint (no layout/animation changes).
 
-| Item | Status |
-|------|--------|
-| Footer tagline "Long-Term Investment Partners" | Done |
-| Act 4 statement "The path to building anything enduring has no shortcuts." | Done |
-| ConvictionsDeck subtitle "Six principles that shape how we partner, decide, and build." | Done |
-| US hero heading "How We Think About Investing" | Done |
-| US hero subtitle (blue-chip institutions) | Done |
-| India hero heading/subtitle | Done |
-| US sectors split into 3 columns | Done |
-| OurPlaybook hero subtitle (partnered with founders) | Done |
-| British spellings (Speciality/defence) | Done |
-| Home.tsx India copy (overlooked, building India's future) | Done |
-| Team.tsx India subtitle | Done |
-| Team.tsx advisory text | Done |
+---
 
-### What Still Needs Fixing
+### Narrative Architecture
 
-**1. CruxwayOriginStory.tsx: Act 3 explanation text**
-Current (line 489): "Getting from A to B matters. To get there, you transform under pressure and sustained discipline. But the journey itself matters. It must be aligned with the natural order of things."
+```text
+Hero (Home)     → WHAT: "Investing in India's Industrial Backbone"
+Subtitle        → VALUE-ADD: Enabling fragmented operators to become scaled platforms
+What We Do      → HOW: Strengthening operations, enabling continuity and capability
+Opportunity     → GAP: Large, fragmented essential service economy + our capital unlocks
+Social Proof    → TRUST: Proven businesses deserve the right partner
+```
 
-The user explicitly wants this kept. The previous round overwrote it with a different version, but the current file shows this version is back. Confirmed: no change needed here.
+---
 
-**2. OurFocus.tsx: Font size inconsistencies in CriteriaTabs**
-The tab titles at line 315 use `text-[1rem] md:text-[1.1rem]` which was already bumped. But the user says "Ownership Succession" and "Essential and Regulated Industries" are still tiny. The issue is these are inside tab buttons that are `flex-1` with `py-3 px-3` -- on desktop with 6 tabs in a row, `flex-1` squeezes each tab very narrow. The font itself is `1rem` (16px) on mobile, `1.1rem` (17.6px) on desktop. This is reasonable, but 6 tabs in a single row may compress text.
+### 1. Home.tsx — India Hero (lines 416-428)
 
-Fix: The real problem is likely that the tabs are too cramped. Allow horizontal scroll on the tab row to prevent text compression.
+**Hero h1** (line 419):
+- Current: `Investing in India's Next Generation of Essential Companies`
+- New: `Investing in India's <gold>Industrial</gold> Backbone`
 
-**3. Font size standardization audit**
+**Hero subtitle** (line 426):
+- Current: `Long-term capital and hands-on partnership for the founder-led companies building India's future.`
+- New: `Enabling India's essential businesses to move from fragmented operators to scaled, system-critical platforms.`
 
-Current h2 sizes across pages:
-- OurFocus "Where We Invest": `clamp(1.5rem,2.8vw,2.2rem)` -- slightly different from standard `clamp(1.5rem,3vw,2.2rem)`
-- OurFocus "What We Look For": `clamp(1.5rem,3vw,2.2rem)` -- correct
-- OurPlaybook "How We Evaluate": `clamp(1.5rem,2.8vw,2.2rem)` -- slightly different
-- ConvictionsDeck "Guiding Principles": `clamp(1.5rem,3vw,2.4rem)` -- different max (2.4rem vs 2.2rem)
-- GuidingPrinciples hero h1: `clamp(1.6rem,4.5vw,3.6rem)` -- different from standard `clamp(2rem,5vw,3.4rem)`
+### 2. Home.tsx — What We Do (lines 462-476)
 
-Fix: Standardize ALL section h2s to `clamp(1.5rem,3vw,2.2rem)`. Standardize all hero h1s to `clamp(2rem,5vw,3.4rem)`.
+**India heading** (line 466):
+- Current: `Preserve what founders built. Scale what matters. Investing tailored to each company's needs, for the long term.`
+- New: `We invest to strengthen operations and scale businesses, enabling continuity, capability, and sustained growth.`
+- Highlights: `['strengthen', 'continuity']`
 
-Files with h2 fixes:
-- `OurFocus.tsx` line 196: change `2.8vw` to `3vw`
-- `OurPlaybook.tsx` line 365: change `2.8vw` to `3vw`
-- `ConvictionsDeck.tsx` line 145: change `2.4rem` to `2.2rem`
-- `GuidingPrinciples.tsx` line 36: change hero h1 `clamp(1.6rem,4.5vw,3.6rem)` to `clamp(2rem,5vw,3.4rem)`
-- `OurPlaybook.tsx` line 341: hero h1 uses `clamp(2.2rem,5vw,3.2rem)` -- standardize to `clamp(2rem,5vw,3.4rem)`
+**India subtext** (line 472):
+- Current: `Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.`
+- New: `Long-term capital, operating discipline, and the patience to build something that lasts.`
 
-**4. OurFocus.tsx: Sector heading font size**
-Line 206: sector column headings use `text-[1.15rem] md:text-[1.3rem]`. This is fine and matches h3 hierarchy.
+### 3. Home.tsx — Opportunity Cinematic (line 360)
 
-Sector item names at line 215: `text-[0.95rem] md:text-[1.05rem]` -- these are body-level items, acceptable.
+**India heading**:
+- Current: `India's lower middle market is one of the most overlooked opportunities in global investing.`
+- New: `India's essential service economy is large, fragmented, and ready for partners who can build resilient platforms with long-term capital.`
+- Gold highlight: `resilient platforms` instead of `overlooked`
 
-**5. OurFocus.tsx: CriteriaTabs content panel description**
-Line 371: `text-[15px] md:text-[17px]` -- correct per plan.
-Mobile accordion at line 428: `text-[14px]` -- should be `text-[15px]` for consistency.
+### 4. Home.tsx — Market Thesis (lines 484-485)
 
-**6. Team.tsx: Institutional Experience blank marquee**
-Line 466: `<LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />`
+**India heading**:
+- Current: `Companies proven over decades are ready for a partner who can help them scale with discipline.`
+- New: `Proven businesses deserve a partner who understands what they have built and can help them scale it.`
+- Highlight: `['partner']`
 
-The `foundersLogos` array (line 141-149) has 6 logos with valid imports. The `variant="dark"` in light mode uses `isContrastLight = true`, which sets bg to `bg-[hsl(40,20%,91%)]`. The parent div has `bg-background`. If `bg-background` is white/cream and the marquee bg is slightly different, the fade edges may hide logos.
+### 5. Home.tsx — Social Proof (line 519)
 
-Fix: Change the parent wrapper at line 459 from `bg-background` to match the marquee's bg, OR change the LogoMarquee's `fadeFromClass` for `isContrastLight` to use `from-background`. Also ensure the section has enough vertical padding -- the `compact` prop was removed, which gives more padding. The logos use `goldFilter` which should make them visible. If they're still blank, the issue may be that `fadeFromClass` gradients are too wide and cover all logos. Reduce fade gradient widths.
+**India text**:
+- Current: `Global institutional expertise applied locally, partnering with the founders shaping India's industrial future.`
+- New: `The founders building India's industrial base deserve institutional capital that respects what they have built.`
+- Gold highlights: `institutional capital`, `built`
 
-**7. OurFocus.tsx: CriteriaTabs sub-heading in content panel**
-Line 362: `text-[clamp(1.2rem,2.5vw,1.6rem)]` -- this is the correct h3 size per the standard.
+### 6. Home.tsx — CTA (line 549)
 
-### Changes by File
+**India CTA subtitle**:
+- Current: `If you're building a business meant to last in India, we'd welcome a conversation about partnership.`
+- New: `If you have built something real and want a partner for the next chapter, we would welcome a conversation.`
 
-**CruxwayOriginStory.tsx**
-- No changes needed. Act 3 and Act 4 text are correct.
+### 7. OurFocus.tsx — India Hero (lines 124, 130)
 
-**ConvictionsDeck.tsx**
-- Line 145: h2 max clamp from `2.4rem` to `2.2rem`
+**India subtitle**:
+- Current: `We bring institutional discipline and a personal touch to partnering with India's best founder-led businesses.`
+- New: `We spent our careers at global institutions. This firm exists to bring that discipline to founders who built something real in India, for India.`
 
-**OurFocus.tsx**
-- Line 196: h2 `2.8vw` to `3vw`
-- Line 428: accordion description `text-[14px]` to `text-[15px]`
-- CriteriaTabs: make tab row horizontally scrollable so titles don't compress
+### 8. OurPlaybook.tsx — India context (line 347)
 
-**OurPlaybook.tsx**
-- Line 341: hero h1 `clamp(2.2rem,5vw,3.2rem)` to `clamp(2rem,5vw,3.4rem)`
-- Line 365: h2 `2.8vw` to `3vw`
+The subtitle is shared across regions. Keep as-is since it already reflects the founder-partnership voice. No change.
 
-**GuidingPrinciples.tsx**
-- Line 36: hero h1 `clamp(1.6rem,4.5vw,3.6rem)` to `clamp(2rem,5vw,3.4rem)`
+### 9. Team.tsx — India Hero (lines 373, 379)
 
-**Team.tsx**
-- Line 459: change parent wrapper `bg-background` to match marquee light bg, or sync fade gradients
-- Verify the marquee renders by ensuring the `foundersLogos` array is non-empty and images load
+**India h1**:
+- Current: `India Leadership`
+- New: `Our Team in India`
 
-**Home.tsx**
-- No changes. Copy is already updated.
+**India subtitle**:
+- Current: `Global experience, local conviction. Building alongside the founders who are building India.`
+- New: `Global experience, applied with local conviction. We partner with founders and families building India's industrial base.`
 
-**SiteFooter.tsx**
-- No changes. Tagline already updated.
+### 10. Team.tsx — Advisory text (line 446)
+
+- Current: `Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.`
+- New: `Our advisors are operators and industry leaders across India and the US. They have built what we aspire to build, and they inform how we partner.`
+
+### 11. Team.tsx — Network ScrollRevealText (line 425)
+
+- Current: `A curated network built over decades of shared conviction and institutional rigor.`
+- New: `Relationships built over decades of shared work and mutual respect.`
+
+---
+
+### Files Changed
+
+| File | Scope |
+|------|-------|
+| `Home.tsx` | India hero h1, subtitle, What We Do, Opportunity, Market Thesis, Social Proof, CTA |
+| `OurFocus.tsx` | India hero subtitle |
+| `Team.tsx` | India hero h1, subtitle, advisory text, network heading |
+
+No layout, animation, font, or structural changes. Copy strings only.
 
