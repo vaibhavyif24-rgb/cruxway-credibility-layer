@@ -1,110 +1,145 @@
 
 
-## Plan: Improve India Copy as a Senior Copywriter
+## Plan: Complete Typographic Consistency Audit and Fix
 
-The user wants a clear narrative arc across the India sections: **What we invest in → What our capital unlocks → How we do it → The opportunity gap → Social proof.** This plan refines copy across Home.tsx, OurFocus.tsx, OurPlaybook.tsx, and Team.tsx for the India region only, following the copy-only constraint (no layout/animation changes).
+### Current Inconsistencies Found
 
----
-
-### Narrative Architecture
+After auditing every page and component, here are all deviations from the enforced type scale:
 
 ```text
-Hero (Home)     → WHAT: "Investing in India's Industrial Backbone"
-Subtitle        → VALUE-ADD: Enabling fragmented operators to become scaled platforms
-What We Do      → HOW: Strengthening operations, enabling continuity and capability
-Opportunity     → GAP: Large, fragmented essential service economy + our capital unlocks
-Social Proof    → TRUST: Proven businesses deserve the right partner
+HIERARCHY (Target System):
+──────────────────────────────────────────────────
+Hero H1:           clamp(2rem, 5vw, 3.4rem)
+Section H2:        clamp(1.5rem, 3vw, 2.2rem)
+CTA H2:            clamp(1.6rem, 3.5vw, 2.6rem)
+Sub-section H3:    clamp(1.2rem, 2.5vw, 1.6rem)
+ScrollReveal:      clamp(1.9rem, 5.5vw, 3.2rem)  [pull-quote style, OK]
+Eyebrow/Label:     11px, font-bold, uppercase, tracking-[0.25em]
+Body:              15px, leading-[1.75]
+Body-sm:           14px, leading-[1.7]
+Caption/Meta:      10-11px, uppercase, tracking-[0.18-0.22em]
 ```
 
----
+### Deviations by File
 
-### 1. Home.tsx — India Hero (lines 416-428)
+**Home.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 76 | `clamp(1.4rem,3vw,2rem)` | `clamp(1.5rem,3vw,2.2rem)` | StatBlock value (should match section scale) |
+| 144 | `text-[0.75rem] md:text-[1rem]` | `text-[0.85rem] md:text-[1rem]` | Process carousel step title (0.75rem = 12px, too small on mobile) |
+| 175 | `text-[3rem] md:text-[4rem]` | `text-[3.5rem] md:text-[4.5rem]` | Watermark number (decorative, OK to leave) |
+| 185 | `clamp(1.2rem,2.5vw,1.7rem)` | `clamp(1.2rem,2.5vw,1.6rem)` | Process card h3 (max 1.7rem vs standard 1.6rem) |
+| 357 | `clamp(1.6rem,4.5vw,2.8rem)` | `clamp(1.6rem,4vw,2.6rem)` | Opportunity cinematic h2 (should match CTA h2 scale) |
+| 412 | `text-[12px] md:text-[13px]` | `text-[11px] md:text-[12px]` | "Built for Owners" tagline (slightly large for eyebrow) |
+| 417 | `clamp(2.2rem,5vw,3.6rem)` | `clamp(2rem,5vw,3.4rem)` | Hero h1 (oversized vs standard) |
+| 503 | `clamp(1.5rem,3vw,2.4rem)` | `clamp(1.5rem,3vw,2.2rem)` | "From Discovery to Partnership" h2 (max 2.4rem) |
 
-**Hero h1** (line 419):
-- Current: `Investing in India's Next Generation of Essential Companies`
-- New: `Investing in India's <gold>Industrial</gold> Backbone`
+**Team.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 253 | `text-[1.05rem] md:text-[1.3rem]` | `text-[1.1rem] md:text-[1.3rem]` | ProfileCard name h3 (minor) |
+| 263 | `text-[9px]` | `text-[10px]` | Role label (too small, below minimum) |
+| 270 | `text-[12.5px] md:text-[13px]` | `text-[13px] md:text-[14px]` | Summary body (fractional px, normalize) |
+| 281 | `text-[11.5px] md:text-[12px]` | `text-[12px] md:text-[12px]` | Highlight bullets (fractional px) |
+| 291 | `text-[8px]` | `text-[9px]` | "Select Investments" label (below minimum) |
+| 325 | `clamp(1.2rem,3vw,2rem)` | `clamp(1.5rem,3vw,2.2rem)` | CountingStat value (too small for a stat display) |
+| 347 | `text-[8.5px] md:text-[10px]` | `text-[10px] md:text-[11px]` | Stat label (below minimum on mobile) |
+| 372 | `clamp(2.2rem,5vw,3.6rem)` | `clamp(2rem,5vw,3.4rem)` | Hero h1 (oversized) |
+| 435 | `clamp(1.3rem,2.5vw,1.85rem)` | `clamp(1.5rem,3vw,2.2rem)` | "Our Network" h2 (too small for h2) |
 
-**Hero subtitle** (line 426):
-- Current: `Long-term capital and hands-on partnership for the founder-led companies building India's future.`
-- New: `Enabling India's essential businesses to move from fragmented operators to scaled, system-critical platforms.`
+**Contact.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 41 | `clamp(2.2rem,5vw,3.6rem)` | `clamp(2rem,5vw,3.4rem)` | Hero h1 (oversized) |
+| 75 | `text-[1.2rem] md:text-[1.4rem]` | `text-[1.15rem] md:text-[1.3rem]` | Email/location display (too large for card content) |
+| 99 | same | same | Location display |
+| 72 | `text-[10px] md:text-[11px]` | OK | |
 
-### 2. Home.tsx — What We Do (lines 462-476)
+**OurFocus.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 128 | `text-[15px] md:text-[16px]` | `text-[15px]` | Hero subtitle (md override breaks clamp philosophy) |
+| 499 | `text-[14.5px]` | `text-[14px]` | TypographicText body (fractional px) |
 
-**India heading** (line 466):
-- Current: `Preserve what founders built. Scale what matters. Investing tailored to each company's needs, for the long term.`
-- New: `We invest to strengthen operations and scale businesses, enabling continuity, capability, and sustained growth.`
-- Highlights: `['strengthen', 'continuity']`
+**OurPlaybook.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 85 | `text-[15px] md:text-[16px]` | `text-[15px]` | Step description (md override) |
+| 248 | `text-[12px] md:text-[14px]` | `text-[11px] md:text-[12px]` | Bar chart step number (too large for caption) |
+| 255 | `text-[12px] md:text-[13px]` | `text-[12px] md:text-[13px]` | Bar label (OK) |
+| 298 | `clamp(1.3rem,2.5vw,1.8rem)` | `clamp(1.2rem,2.5vw,1.6rem)` | Value creation panel h3 (oversized) |
+| 306 | `text-[15px] md:text-[17px]` | `text-[15px]` | Panel description (md override inconsistent) |
+| 346 | `text-[15px] md:text-[16px]` | `text-[15px]` | Hero subtitle (md override) |
+| 390 | `text-[14px] md:text-[15px]` | `text-[14px]` | Value creation subtitle (md override) |
 
-**India subtext** (line 472):
-- Current: `Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.`
-- New: `Long-term capital, operating discipline, and the patience to build something that lasts.`
+**ConvictionsDeck.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 61 | `text-[14px]` | `text-[12px]` | Accordion number (too large for a number index) |
+| 110 | `text-[14px] md:text-[15px]` | `text-[14px]` | Accordion body (md override) |
 
-### 3. Home.tsx — Opportunity Cinematic (line 360)
+**ScrollRevealText.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 99 | `text-[12px] md:text-[13px]` | `text-[11px]` | Label eyebrow (too large, should match SectionLabel) |
+| 119 | `text-[14px] md:text-[15px]` | `text-[14px]` | Subtext (md override) |
 
-**India heading**:
-- Current: `India's lower middle market is one of the most overlooked opportunities in global investing.`
-- New: `India's essential service economy is large, fragmented, and ready for partners who can build resilient platforms with long-term capital.`
-- Gold highlight: `resilient platforms` instead of `overlooked`
+**SiteFooter.tsx**
+| Line | Current | Target | Element |
+|------|---------|--------|---------|
+| 43 | `text-[12px]` | `text-[11px]` | Nav links (slightly oversized for footer) |
 
-### 4. Home.tsx — Market Thesis (lines 484-485)
+**SiteHeader.tsx**
+- Already uses `text-nav` (11px). OK.
 
-**India heading**:
-- Current: `Companies proven over decades are ready for a partner who can help them scale with discipline.`
-- New: `Proven businesses deserve a partner who understands what they have built and can help them scale it.`
-- Highlight: `['partner']`
+### Changes by File
 
-### 5. Home.tsx — Social Proof (line 519)
+**Home.tsx** (6 fixes)
+- Line 76: StatBlock value `clamp(1.4rem,3vw,2rem)` to `clamp(1.5rem,3vw,2rem)`
+- Line 144: step title `text-[0.75rem]` to `text-[0.85rem]`
+- Line 185: card h3 max `1.7rem` to `1.6rem`
+- Line 357: opportunity h2 `clamp(1.6rem,4.5vw,2.8rem)` to `clamp(1.6rem,4vw,2.6rem)`
+- Line 417: hero h1 `clamp(2.2rem,5vw,3.6rem)` to `clamp(2rem,5vw,3.4rem)`
+- Line 503: process h2 `clamp(1.5rem,3vw,2.4rem)` to `clamp(1.5rem,3vw,2.2rem)`
 
-**India text**:
-- Current: `Global institutional expertise applied locally, partnering with the founders shaping India's industrial future.`
-- New: `The founders building India's industrial base deserve institutional capital that respects what they have built.`
-- Gold highlights: `institutional capital`, `built`
+**Team.tsx** (8 fixes)
+- Line 263: role label `text-[9px]` to `text-[10px]`
+- Line 270: summary `text-[12.5px]` to `text-[13px]`
+- Line 281: highlights `text-[11.5px]` to `text-[12px]`
+- Line 291: deal label `text-[8px]` to `text-[9px]`
+- Line 325: CountingStat `clamp(1.2rem,3vw,2rem)` to `clamp(1.5rem,3vw,2rem)`
+- Line 347: stat label `text-[8.5px]` to `text-[10px]`
+- Line 372: hero h1 `clamp(2.2rem,5vw,3.6rem)` to `clamp(2rem,5vw,3.4rem)`
+- Line 435: "Our Network" h2 `clamp(1.3rem,2.5vw,1.85rem)` to `clamp(1.5rem,3vw,2.2rem)`
 
-### 6. Home.tsx — CTA (line 549)
+**Contact.tsx** (3 fixes)
+- Line 41: hero h1 `clamp(2.2rem,5vw,3.6rem)` to `clamp(2rem,5vw,3.4rem)`
+- Line 75: email display `text-[1.2rem] md:text-[1.4rem]` to `text-[1.15rem] md:text-[1.3rem]`
+- Line 99: location display same fix
 
-**India CTA subtitle**:
-- Current: `If you're building a business meant to last in India, we'd welcome a conversation about partnership.`
-- New: `If you have built something real and want a partner for the next chapter, we would welcome a conversation.`
+**OurFocus.tsx** (2 fixes)
+- Line 128: remove `md:text-[16px]` (keep `text-[15px]` only)
+- Line 499: `text-[14.5px]` to `text-[14px]`
 
-### 7. OurFocus.tsx — India Hero (lines 124, 130)
+**OurPlaybook.tsx** (5 fixes)
+- Line 85: remove `md:text-[16px]` override
+- Line 248: bar number `text-[12px] md:text-[14px]` to `text-[11px] md:text-[12px]`
+- Line 298: value creation h3 `clamp(1.3rem,2.5vw,1.8rem)` to `clamp(1.2rem,2.5vw,1.6rem)`
+- Line 306: remove `md:text-[17px]` override
+- Line 346, 390: remove `md:` overrides
 
-**India subtitle**:
-- Current: `We bring institutional discipline and a personal touch to partnering with India's best founder-led businesses.`
-- New: `We spent our careers at global institutions. This firm exists to bring that discipline to founders who built something real in India, for India.`
+**ConvictionsDeck.tsx** (2 fixes)
+- Line 61: accordion number `text-[14px]` to `text-[12px]`
+- Line 110: remove `md:text-[15px]` override
 
-### 8. OurPlaybook.tsx — India context (line 347)
+**ScrollRevealText.tsx** (2 fixes)
+- Line 99: label `text-[12px] md:text-[13px]` to `text-[11px]`
+- Line 119: remove `md:text-[15px]` override
 
-The subtitle is shared across regions. Keep as-is since it already reflects the founder-partnership voice. No change.
+**SiteFooter.tsx** (1 fix)
+- Line 43: nav links `text-[12px]` to `text-[11px]`
 
-### 9. Team.tsx — India Hero (lines 373, 379)
+### Summary
 
-**India h1**:
-- Current: `India Leadership`
-- New: `Our Team in India`
-
-**India subtitle**:
-- Current: `Global experience, local conviction. Building alongside the founders who are building India.`
-- New: `Global experience, applied with local conviction. We partner with founders and families building India's industrial base.`
-
-### 10. Team.tsx — Advisory text (line 446)
-
-- Current: `Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.`
-- New: `Our advisors are operators and industry leaders across India and the US. They have built what we aspire to build, and they inform how we partner.`
-
-### 11. Team.tsx — Network ScrollRevealText (line 425)
-
-- Current: `A curated network built over decades of shared conviction and institutional rigor.`
-- New: `Relationships built over decades of shared work and mutual respect.`
-
----
-
-### Files Changed
-
-| File | Scope |
-|------|-------|
-| `Home.tsx` | India hero h1, subtitle, What We Do, Opportunity, Market Thesis, Social Proof, CTA |
-| `OurFocus.tsx` | India hero subtitle |
-| `Team.tsx` | India hero h1, subtitle, advisory text, network heading |
-
-No layout, animation, font, or structural changes. Copy strings only.
+29 targeted font-size corrections across 8 files. No layout, animation, copy, or structural changes. Every fix aligns an element to the defined hierarchy, eliminates fractional pixel values, removes `md:` responsive overrides that conflict with the `clamp()` philosophy, and raises any text below the 9px floor.
 
