@@ -45,7 +45,7 @@ const Contact = () => {
           <FadeIn delay={0.12}>
             <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[420px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'Confidential, direct conversations with founders and business owners across India.'
+                ? 'Confidential, direct conversations with founders and business owners across India. No intermediaries.'
                 : 'Direct, confidential conversations with business owners. No intermediaries, no pressure.'}
             </p>
           </FadeIn>
