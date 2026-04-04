@@ -90,7 +90,7 @@ const founders: TeamMember[] = [
     photo: harinPhoto,
     linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
-      'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy. Based in San Diego, he spends most of his time outside of work reading history and finding good food.',
+      'Harin has spent more than a decade investing in and operating companies across business and consumer sectors. His approach pairs operating experience with patient capital, always with the founder\'s legacy in mind. Based in San Diego. Reads history. Finds good food.',
     highlights: [
       'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
       'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
