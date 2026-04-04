@@ -424,7 +424,7 @@ const Home = () => {
             <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'We take majority positions in India\'s industrial and business services companies, bringing an investment approach refined over a decade of global dealmaking.'
-                : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our investment philosophy was shaped at some of the best firms in the world and refined into something we could call our own.'}
+                : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our approach was shaped at blue-chip firms and refined into something distinctly our own.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
