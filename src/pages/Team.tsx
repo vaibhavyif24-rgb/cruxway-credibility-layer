@@ -125,9 +125,9 @@ const indiaPartner: TeamMember = {
   summary:
     'Vaibhav has invested, built companies, and operated across India\'s early-stage and venture ecosystem. That experience shaped a clear view: the lower middle market in manufacturing and industrial services is where operational rigor creates the most value. Lives in Delhi. Plays golf, collects fountain pens and watches, and will travel anywhere on short notice.',
   highlights: [
-    'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
-    'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
-    'Exposure to fundraising across early-stage, growth, and late-stage rounds, spanning venture capital, private equity, and multiple asset classes',
+    'Led investments and due diligence across a venture fund and family office in cleantech, deeptech, manufacturing, and marketplace sectors',
+    'Co-founded and scaled multiple ventures with full P&L responsibility, from product to growth to operations',
+    'Raised capital across early-stage, growth, and late-stage rounds, working across venture capital, private equity, and multiple asset classes',
   ],
   logos: [
     { src: iicLogo, alt: 'Impact Investors Council' },
