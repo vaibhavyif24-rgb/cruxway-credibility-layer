@@ -516,7 +516,7 @@ const Home = () => {
           <FadeIn>
             <p className={`font-serif text-[clamp(1.6rem,4vw,2.6rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia
-                ? <>Global <span className="text-gold">institutional expertise</span> applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
+                ? <>The founders building India's industrial base deserve <span className="text-gold">institutional capital</span> that respects what they have <span className="text-gold">built</span>.</>
                 : <>Decades of <span className="text-gold">institutional experience</span> dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
               }
             </p>
