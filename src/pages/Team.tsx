@@ -432,7 +432,7 @@ const Team = () => {
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Advisors &amp; Operating Partners</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <h2 className={`font-serif text-[<h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 Our Network
               </h2>
               <GoldRule className="mt-3 md:mt-4" />

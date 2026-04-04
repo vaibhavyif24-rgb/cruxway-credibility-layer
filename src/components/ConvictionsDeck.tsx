@@ -107,7 +107,7 @@ const AccordionRow = ({
                 transition={{ duration: 0.5, ease }}
               />
               <p
-                className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${
+                className={`font-sans className={`font-sans text-[14px] leading-[1.8] max-w-[600px] ${ max-w-[600px] ${
                   isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                 }`}
               >

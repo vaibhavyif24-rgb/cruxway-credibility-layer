@@ -40,7 +40,7 @@ const SiteFooter = () => {
     { label: 'Contact', path: `${prefix}/contact` },
   ];
 
-  const navLinkClass = `font-sans text-[12px] font-medium uppercase tracking-[0.12em] transition-colors duration-200 ${
+  const navLinkClass = `const navLinkClass = `font-sans text-[11px] font-medium uppercase tracking-[0.12em] transition-colors duration-200 ${ transition-colors duration-200 ${
     isDark
       ? 'text-primary-foreground/40 hover:text-primary-foreground/70'
       : 'text-foreground/50 hover:text-foreground/75'
