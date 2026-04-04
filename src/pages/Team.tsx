@@ -443,7 +443,7 @@ const Team = () => {
               <div className="border-l-0 lg:border-l border-foreground/[0.06] pl-0 lg:pl-8">
                 <p className="font-sans text-[12.5px] md:text-[13px] text-muted-foreground leading-[1.7] md:leading-[1.8] mb-2 md:mb-3">
                   {isIndia
-                    ? 'Our advisors are senior operators and industry leaders across India and the US who have built what we aspire to build.'
+                    ? 'Our advisors are operators and industry leaders across India and the US. They have built what we aspire to build, and they inform how we partner.'
                     : 'Our advisory network includes senior operators, industry veterans, and institutional leaders across the United States.'}
                 </p>
                 <p className="font-sans text-[10.5px] md:text-[11px] text-muted-foreground/40 leading-[1.6]">

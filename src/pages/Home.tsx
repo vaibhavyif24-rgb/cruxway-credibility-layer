@@ -546,7 +546,7 @@ const Home = () => {
                 </h2>
                 <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
+                    ? "If you have built something real and want a partner for the next chapter, we would welcome a conversation."
                     : "If you're a founder considering your next chapter, we'd welcome an honest discussion about long-term partnership."}
                 </p>
               </FadeIn>
