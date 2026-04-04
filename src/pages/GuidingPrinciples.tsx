@@ -72,7 +72,7 @@ const GuidingPrinciples = () => {
                   Aligned on What Matters
                 </h2>
                 <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                  Alignment on values makes everything else easier. If what you've read here reflects how you think about business and partnership, we'd welcome the conversation.
+                  When values are aligned, everything else gets easier. If what you've read here reflects how you think about business and partnership, we'd welcome the conversation.
                 </p>
               </FadeIn>
             </div>
