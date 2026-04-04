@@ -96,7 +96,7 @@ const Contact = () => {
                 <p className="font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] text-muted-foreground/70 mb-2">
                   Location
                 </p>
-                <p className="font-serif <p className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.01em]">">
+                <p className="font-serif text-[1.15rem] md:text-[1.3rem] text-foreground tracking-[-0.01em]">
                   {location}
                 </p>
                 <p className="font-sans text-[13px] md:text-[14px] text-muted-foreground leading-[1.7] mt-3">
