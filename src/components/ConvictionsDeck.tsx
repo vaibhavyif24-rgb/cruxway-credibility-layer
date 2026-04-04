@@ -58,7 +58,7 @@ const AccordionRow = ({
 
         {/* Number */}
         <span
-          className="className="font-serif text-gold text-[12px] tracking-[0.1em] min-w-[2.5rem] md:min-w-[3rem] transition-opacity duration-300 select-none" tracking-[0.1em] min-w-[2.5rem] md:min-w-[3rem] transition-opacity duration-300 select-none"
+          className="font-serif text-gold text-[12px] tracking-[0.1em] min-w-[2.5rem] md:min-w-[3rem] transition-opacity duration-300 select-none"
           style={{ opacity: nameIsGold ? 0.7 : 0.4 }}
         >
           {num}
