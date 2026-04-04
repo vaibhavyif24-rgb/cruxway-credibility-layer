@@ -93,6 +93,16 @@ const usSectors = {
   ],
 };
 
+/* ─── Stagger container helper ─── */
+const staggerContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06, delayChildren: 0.1 } },
+};
+const staggerItem = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
+
 const OurFocus = () => {
   const { region } = useRegion();
   const { theme } = useTheme();
@@ -105,29 +115,25 @@ const OurFocus = () => {
   const numberCards = profile.slice(0, 2);
   const textCards = profile.slice(2);
 
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="overflow-x-clip">
-      {/* Hero */}
-      <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+      {/* ═══ Hero ═══ */}
+      <section className={`relative overflow-hidden min-h-[55vh] md:min-h-[58vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
-        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
+        <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-12 md:pt-36 md:pb-14 lg:pt-40 lg:pb-16">
           <FadeIn>
-            <SectionLabel light={isDark}>{isIndia ? 'Our Focus, India' : 'Our Focus'}</SectionLabel>
+            <SectionLabel light={isDark}>{isIndia ? 'Our Focus · India' : 'Our Focus'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[600px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[600px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? <>Our <span className="text-gold">Approach</span> in India</> : <>How We <span className="text-gold">Think</span> About Investing</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[14px] md:text-[15px] leading-[1.75] mt-4 md:mt-5 max-w-[500px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'We bring the rigor of global institutions to the relationships that matter most: founder-led businesses across India.'
+                ? 'We spent our careers at global institutions. This firm exists to bring that work to founders who built something real in India for India.'
                 : 'Our approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is what it looks like in practice.'}
             </p>
           </FadeIn>
@@ -139,7 +145,7 @@ const OurFocus = () => {
       </section>
 
 
-      {/* Investment Profile */}
+      {/* ═══ Investment Profile ═══ */}
       <section id="investment-profile" className={`relative overflow-hidden ${
         isDark ? 'bg-primary text-primary-foreground' : 'bg-[hsl(40,18%,96%)] text-foreground border-y border-[hsl(38,12%,90%)]'
       }`}>
@@ -162,16 +168,24 @@ const OurFocus = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14">
           <FadeIn>
             <SectionLabel light={isDark}>Investment Profile</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia ? 'Our Target Parameters, India' : 'Our Target Parameters'}
             </h2>
             <GoldRule className="mb-8 md:mb-10" />
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-10">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-10"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-40px' }}
+          >
             {numberCards.map((stat, i) => (
-              <TypographicNumber key={stat.label} label={stat.label} value={stat.value} delay={i * 0.08} isDark={isDark} />
+              <motion.div key={stat.label} variants={staggerItem}>
+                <TypographicNumber label={stat.label} value={stat.value} delay={0} isDark={isDark} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
           <motion.div
             className="h-px bg-gold/20 mb-8 md:mb-10 origin-left"
             initial={{ scaleX: 0 }}
@@ -179,65 +193,96 @@ const OurFocus = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-40px' }}
+          >
             {textCards.map((stat, i) => (
-              <TypographicText key={stat.label} label={stat.label} value={stat.value} delay={(i + 2) * 0.08} isDark={isDark} />
+              <motion.div key={stat.label} variants={staggerItem}>
+                <TypographicText label={stat.label} value={stat.value} delay={0} isDark={isDark} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Sectors We Cover */}
-      <section id="sectors" className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 ${isDark ? 'bg-primary' : 'bg-background'}`}>
+      {/* ═══ Sectors We Cover ═══ */}
+      <section id="sectors" className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 ${isDark ? 'bg-primary' : 'bg-background'}`}>
         {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
         <div className="relative max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel light={isDark}>Sectors We Cover</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               Where We Invest
             </h2>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
-          <div className={`grid gap-8 md:gap-10 ${sectors.cols.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+          <motion.div
+            className={`grid gap-8 md:gap-10 ${sectors.cols.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: '-40px' }}
+          >
             {sectors.cols.map((col, colIdx) => (
-              <FadeIn key={colIdx} delay={colIdx * 0.06}>
+              <motion.div key={colIdx} variants={staggerItem}>
                 <div>
-                  <h3 className={`font-serif text-[1.15rem] md:text-[1.3rem] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  <h3 className={`font-serif text-[1.1rem] md:text-[1.3rem] mb-4 flex items-center gap-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                    <motion.span
+                      className="w-1.5 h-1.5 rotate-45 bg-gold/50 inline-block"
+                      initial={{ scale: 0, rotate: 0 }}
+                      whileInView={{ scale: 1, rotate: 45 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.2 }}
+                    />
                     {col.heading}
                   </h3>
                   <ul className="space-y-3">
                     {col.items.map((item, i) => (
-                      <FadeIn key={i} delay={colIdx * 0.06 + i * 0.04}>
-                        <li className="flex items-start gap-2.5">
-                          <span className="w-[6px] h-[6px] rotate-45 bg-gold/50 shrink-0 mt-[7px]" />
-                          <div>
-                            <span className={`font-serif font-medium text-[0.95rem] md:text-[1.05rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                              {item.name}
-                            </span>
-                            <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                              {item.desc}
-                            </span>
-                          </div>
-                        </li>
-                      </FadeIn>
+                      <motion.li
+                        key={i}
+                        className="flex items-start gap-2.5"
+                        initial={{ opacity: 0, x: -8 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: colIdx * 0.06 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <span className="w-[5px] h-[5px] rotate-45 border border-gold/40 shrink-0 mt-[7px]" />
+                        <div>
+                          <span className={`font-serif font-medium text-[0.95rem] md:text-[1.05rem] leading-[1.3] block ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                            {item.name}
+                          </span>
+                          <span className={`font-sans text-[13px] leading-[1.5] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                            {item.desc}
+                          </span>
+                        </div>
+                      </motion.li>
                     ))}
                   </ul>
                 </div>
-              </FadeIn>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* What We Look For — Tabbed Desktop / Accordion Mobile */}
-      <section id="investment-criteria" className={`overflow-hidden px-5 md:px-10 lg:px-16 py-8 md:py-12 lg:py-14 ${isDark ? 'bg-background' : 'bg-background'}`}>
-        <div className="max-w-[1080px] mx-auto">
+      {/* ═══ What We Look For ═══ */}
+      <section id="investment-criteria" className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 ${isDark ? 'bg-background' : 'bg-[hsl(40,18%,97%)]'}`}>
+        {!isDark && <LightSectionEffects variant="section" />}
+        {isDark && <DarkSectionEffects />}
+        <div className="relative max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Investment Criteria</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              What We Look For
+            <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] max-w-[520px] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              How We Identify the Right Business
             </h2>
+            <p className={`font-sans text-[14px] leading-[1.7] max-w-[520px] mt-2 mb-1 ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+              The criteria below reflect what we have learned over many years of evaluating businesses across our target sectors. Each one was earned through experience.
+            </p>
             <GoldRule className="mt-3 mb-8 md:mb-10" />
           </FadeIn>
 
@@ -249,7 +294,7 @@ const OurFocus = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ═══ CTA ═══ */}
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
       }`}>
@@ -260,10 +305,10 @@ const OurFocus = () => {
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
-                <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h2 className={`font-serif text-[clamp(1.4rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {isIndia ? "Does This Sound Like Your Business?" : "Think This Describes Your Business?"}
                 </h2>
-                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[14px] md:text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
                     ? "If the criteria above describe your business, we'd welcome the opportunity to learn more about what you've built."
                     : "If what you've read here sounds like your situation, reach out. We're direct, we're respectful, and we respond to every serious inquiry."}
@@ -274,7 +319,7 @@ const OurFocus = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-8 py-4 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
                   Start a Conversation
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -304,9 +349,18 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
               i > 0 ? 'border-l border-gold/10' : ''
             }`}
           >
-            <div className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden">
-              {i === active && <div className="h-full w-full bg-gold" />}
-            </div>
+            <motion.div
+              className="absolute top-0 left-0 right-0 h-[2px] overflow-hidden"
+              initial={false}
+            >
+              {i === active && (
+                <motion.div
+                  className="h-full w-full bg-gold"
+                  layoutId="activeTab"
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                />
+              )}
+            </motion.div>
             <span className={`font-sans text-[10px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300 ${
               i === active ? 'text-gold' : isDark ? 'text-primary-foreground/20' : 'text-foreground/20'
             }`}>
@@ -326,9 +380,15 @@ const CriteriaTabs = ({ items, isDark }: { items: typeof whatWeLookFor; isDark: 
       {/* Step dots */}
       <div className="flex justify-center gap-1.5 mt-4">
         {items.map((_, i) => (
-          <div key={i} className={`h-[3px] rounded-full transition-all duration-300 ${
-            i === active ? 'w-5 bg-gold' : `w-2 ${isDark ? 'bg-primary-foreground/10' : 'bg-foreground/10'}`
-          }`} />
+          <motion.div
+            key={i}
+            className="h-[3px] rounded-full"
+            animate={{
+              width: i === active ? 20 : 8,
+              backgroundColor: i === active ? 'hsl(43 78% 50%)' : isDark ? 'hsl(0 0% 100% / 0.1)' : 'hsl(0 0% 0% / 0.1)',
+            }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          />
         ))}
       </div>
 
@@ -386,26 +446,46 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
   const [open, setOpen] = useState(-1);
 
   return (
-    <div className="space-y-0">
+    <motion.div
+      className="space-y-0"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: '-20px' }}
+    >
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
-          <div key={i} className={`border-b ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/30'}`}>
+          <motion.div
+            key={i}
+            variants={staggerItem}
+            className={`border-b ${isDark ? 'border-primary-foreground/[0.06]' : 'border-border/30'}`}
+          >
             <button
               onClick={() => setOpen(isOpen ? -1 : i)}
-              className={`w-full flex items-center justify-between py-4 min-h-[44px] text-left`}
+              className="w-full flex items-center justify-between py-4 min-h-[48px] text-left active:bg-gold/[0.03] transition-colors duration-200"
             >
               <div className="flex items-center gap-3">
-                <span className={`font-serif text-[1.6rem] leading-none ${isOpen ? 'text-gold/40' : isDark ? 'text-primary-foreground/10' : 'text-foreground/10'}`}>
+                <motion.span
+                  className={`font-serif text-[1.6rem] leading-none`}
+                  animate={{
+                    color: isOpen ? 'hsl(43 78% 50% / 0.5)' : isDark ? 'hsl(0 0% 100% / 0.1)' : 'hsl(0 0% 0% / 0.1)',
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {item.num}
-                </span>
-                <span className={`font-serif font-medium text-[1.1rem] tracking-[-0.02em] ${
-                  isOpen
-                    ? isDark ? 'text-primary-foreground' : 'text-foreground'
-                    : isDark ? 'text-primary-foreground/50' : 'text-foreground/50'
-                }`}>
+                </motion.span>
+                <motion.span
+                  className="font-serif font-medium text-[1.05rem] tracking-[-0.02em]"
+                  animate={{
+                    color: isOpen
+                      ? isDark ? 'hsl(0 0% 100%)' : 'hsl(0 0% 0%)'
+                      : isDark ? 'hsl(0 0% 100% / 0.5)' : 'hsl(0 0% 0% / 0.5)',
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   {item.title}
-                </span>
+                </motion.span>
               </div>
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
@@ -424,18 +504,23 @@ const CriteriaAccordion = ({ items, isDark }: { items: typeof whatWeLookFor; isD
                   className="overflow-hidden"
                 >
                   <div className="pb-5 pl-[calc(1.5rem+12px)]">
-                    <div className="w-8 h-[1.5px] bg-gold/30 mb-3" />
-                    <p className={`font-sans text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                    <motion.div
+                      className="h-[1.5px] bg-gold/30 mb-3"
+                      initial={{ width: 0 }}
+                      animate={{ width: 32 }}
+                      transition={{ duration: 0.4, delay: 0.1 }}
+                    />
+                    <p className={`font-sans text-[14px] leading-[1.75] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
                       {item.desc}
                     </p>
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         );
       })}
-    </div>
+    </motion.div>
   );
 };
 
