@@ -278,7 +278,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
+                  className="font-sans className="font-sans text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start" text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
