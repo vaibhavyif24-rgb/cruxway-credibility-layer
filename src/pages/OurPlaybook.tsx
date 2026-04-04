@@ -303,7 +303,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                     </h3>
                     <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
                     <p
-                      className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
+                      className={`font-sans className={`font-sans text-[15px] leading-[1.75] max-w-[640px] ${ max-w-[640px] ${
                         isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                       }`}
                     >
