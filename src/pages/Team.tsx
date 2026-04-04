@@ -260,7 +260,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
                   <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/30 group-hover:text-gold-dim group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-400" />
                 )}
               </LinkedWrapper>
-              <p className="font-sans text-[9px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
+              <p className="font-sans text-[10px] font-medium uppercase tracking-[0.22em] text-gold-dim mt-1">
                 {member.role}
               </p>
             </div>
@@ -278,7 +278,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.15 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="font-sans text-[11.5px] md:text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
+                  className="font-sans text-[12px] text-muted-foreground/70 leading-[1.6] md:leading-[1.65] flex gap-2 md:gap-2.5 items-start"
                 >
                   <span className="shrink-0 mt-[7px] w-1.5 h-px bg-gold/25" />
                   <span>{line}</span>
@@ -288,7 +288,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
 
             {member.dealLogos && member.dealLogos.length > 0 && (
               <div className="mt-4 md:mt-6 pt-4 md:pt-5 border-t border-foreground/[0.05]">
-                <p className="font-sans text-[8px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
+                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
                   Select Investments &amp; Deals
                 </p>
                 <DealLogoMarquee logos={member.dealLogos} bgClass={fadeGradientClass} />
@@ -322,7 +322,7 @@ const CountingStat = ({ value, isDark }: { value: string; isDark: boolean }) => 
 
   return (
     <motion.p
-      className={`font-serif text-[clamp(1.2rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-gold'}`}
+      className={`font-serif text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.03em] leading-none ${isDark ? 'text-primary-foreground' : 'text-gold'}`}
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -344,7 +344,7 @@ const StatItem = ({ value, label, delay = 0, isDark }: { value: string; label: s
       transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
       className="h-[1.5px] bg-gold/30 mx-auto mt-3"
     />
-    <p className={`font-sans text-[8.5px] md:text-[10px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-2.5 md:mt-3 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
+    <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-2.5 md:mt-3 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
       {label}
     </p>
   </FadeIn>
@@ -369,7 +369,7 @@ const Team = () => {
             <SectionLabel light={isDark}>Team</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[460px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia ? 'Our Team in India' : 'Leadership'}
             </h1>
           </FadeIn>
@@ -432,7 +432,7 @@ const Team = () => {
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionLabel>Advisors &amp; Operating Partners</SectionLabel>
-              <h2 className={`font-serif text-[clamp(1.3rem,2.5vw,1.85rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.18] ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                 Our Network
               </h2>
               <GoldRule className="mt-3 md:mt-4" />

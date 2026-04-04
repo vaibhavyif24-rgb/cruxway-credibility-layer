@@ -82,7 +82,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
                   {steps[active].title}
                 </h3>
                 <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-                <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
                   {steps[active].description}
                 </p>
               </div>
@@ -245,7 +245,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                 {/* Labels below bar */}
                 <div className="mt-3 text-center" style={{ width: isMobile ? 70 : 110 }}>
                   <span
-                    className={`block font-sans text-[12px] md:text-[14px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
+                    className={`block font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.18em] transition-colors duration-300 ${
                       isActive ? 'text-gold' : isDark ? 'text-primary-foreground/30' : 'text-foreground/30'
                     }`}
                   >
@@ -295,7 +295,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                       Phase {String(selected + 1).padStart(2, '0')}
                     </span>
                     <h3
-                      className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                      className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
                         isDark ? 'text-primary-foreground' : 'text-foreground'
                       }`}
                     >
@@ -303,7 +303,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                     </h3>
                     <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
                     <p
-                      className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
+                      className={`font-sans text-[15px] leading-[1.75] max-w-[640px] ${
                         isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                       }`}
                     >
@@ -343,7 +343,7 @@ const OurPlaybook = () => {
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               We have spent our careers partnering with founders who have built industry-leading businesses. We know what separates good from great, and we bring that lens to every deal.
             </p>
           </FadeIn>
@@ -387,7 +387,7 @@ const OurPlaybook = () => {
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-foreground leading-[1.15] mb-2">
               How We Build Value
             </h2>
-            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
+            <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] max-w-[540px] mb-4">
               How we professionalize operations and compound value over time.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />

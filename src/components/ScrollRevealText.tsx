@@ -96,7 +96,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
             className="flex items-center gap-3 mb-5 md:mb-6"
           >
             <motion.div initial={{ width: 0 }} whileInView={{ width: 24 }} viewport={{ once: true }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="h-px bg-gold/50" />
-            <p className="font-sans text-[12px] md:text-[13px] font-bold uppercase tracking-[0.3em] text-gold">
+            <p className="font-sans text-[11px] font-bold uppercase tracking-[0.25em] text-gold">
               {label}
             </p>
             <motion.div initial={{ width: 0 }} whileInView={{ width: 24 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }} className="h-px bg-gold/50" />
@@ -116,7 +116,7 @@ const ScrollRevealText = React.forwardRef<HTMLDivElement, ScrollRevealTextProps>
         {subtext && !stats && (
           <motion.p
             style={{ opacity: useTransform(scrollYProgress, [0.7, 1], [0, 0.65]) }}
-            className={`font-sans text-[14px] md:text-[15px] leading-[1.85] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
+            className={`font-sans text-[14px] leading-[1.7] tracking-[0.01em] max-w-[520px] mt-7 md:mt-10 ${
               (isActuallyDark || isLightVariantDarkTheme) ? 'text-primary-foreground/45' : 'text-muted-foreground'
             }`}
           >

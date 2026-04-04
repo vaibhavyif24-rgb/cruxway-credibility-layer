@@ -73,7 +73,7 @@ const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; d
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       className="text-center"
     >
-      <p className={`font-serif text-[clamp(1.4rem,3vw,2rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
+      <p className={`font-serif text-[clamp(1.5rem,3vw,2rem)] tracking-[-0.02em] ${light ? 'text-primary-foreground' : 'text-foreground'}`}>
         {val}
       </p>
       <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] mt-1.5 ${light ? 'text-primary-foreground/35' : 'text-muted-foreground/50'}`}>
@@ -141,7 +141,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                 {step.num}
               </span>
               <motion.span
-                className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
                      : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
@@ -182,7 +182,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.15 }}
-                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
                   >
                     {steps[active].title}
                   </motion.h3>
@@ -354,7 +354,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className={`font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
+            className={`font-serif text-[clamp(1.6rem,4vw,2.6rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
           >
             {isIndia
               ? <>India's essential service economy is large, fragmented, and ready for partners who can build <span className="text-gold font-semibold">resilient platforms</span> with long-term capital.</>
@@ -409,12 +409,12 @@ const Home = () => {
             <SectionLabel light={isDark}>Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
+            <p className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
                 ? <>Investing in India's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Industrial</span> Backbone</>
                 : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
@@ -500,7 +500,7 @@ const Home = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               From Discovery to Partnership
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
