@@ -234,11 +234,6 @@
   50% { transform: translateY(-12px) scale(1.1); opacity: 0.6; }
 }
 
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-33.333%); }
-}
-
 @keyframes header-shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
@@ -386,16 +381,6 @@
     background-clip: text;
     animation: text-shimmer 3s ease-in-out 0.5s 1;
     animation-fill-mode: forwards;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .text-shimmer-gold {
-      background: none;
-      -webkit-background-clip: unset;
-      background-clip: unset;
-      -webkit-text-fill-color: unset;
-      animation: none;
-    }
   }
 
   /* CTA button pulse glow */

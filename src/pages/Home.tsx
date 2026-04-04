@@ -50,17 +50,17 @@ const allLogos = [
 ];
 
 const processStepsUS = [
-  { num: '01', title: 'Identify', description: 'Our deal flow comes from relationships we\'ve built over years in our target sectors. Accountants, brokers, attorneys, and business owners who know how we operate. Most of our opportunities never go to market.' },
-  { num: '02', title: 'Evaluate', description: 'Financials, operations, customer quality, and competitive positioning. We want to understand what the numbers say and, just as importantly, what they don\'t.' },
-  { num: '03', title: 'Invest', description: 'Majority positions structured to preserve continuity. Management stays. Employees stay. The founder decides how involved they want to be going forward.' },
-  { num: '04', title: 'Build', description: 'Real systems from day one. Financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
+  { num: '01', title: 'Identify', description: 'We go where others don\'t. Deep networks, proprietary sourcing, and years of relationship-building surface businesses before they ever reach a market.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position. Rigor is our edge.' },
+  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
+  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const processStepsIndia = [
-  { num: '01', title: 'Identify', description: 'We source directly through local networks across India\'s industrial corridors. Relationships with chartered accountants, industry associations, and family business advisors.' },
-  { num: '02', title: 'Evaluate', description: 'Every opportunity is evaluated in person: the financials, the operations, the team, and the competitive dynamics of the local market.' },
-  { num: '03', title: 'Invest', description: 'Majority positions with structures designed around the founder\'s priorities. Continuity for the team and flexibility on the founder\'s level of involvement.' },
-  { num: '04', title: 'Build', description: 'We bring the infrastructure: governance, financial reporting, working capital discipline, and a growth roadmap. They bring the business.' },
+  { num: '01', title: 'Identify', description: 'Deep networks across India\'s industrial heartland surface founder-led businesses with strong fundamentals and operational upside.' },
+  { num: '02', title: 'Evaluate', description: 'Every opportunity is stress-tested across financials, operations, culture, and market position with institutional rigor.' },
+  { num: '03', title: 'Invest', description: 'Majority stakes structured to preserve what works: continuity for employees, clients, and the legacy founders built.' },
+  { num: '04', title: 'Build', description: 'Hands-on partnership from day one. We professionalize systems, deploy capital, and accelerate growth alongside management.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
@@ -141,7 +141,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                 {step.num}
               </span>
               <motion.span
-                className={`block font-serif text-[0.85rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
+                className={`block font-serif text-[0.75rem] md:text-[1rem] tracking-[-0.02em] mt-0.5 transition-colors duration-300 ${
                   i === active
                     ? isDark ? 'text-primary-foreground font-medium' : 'text-foreground font-medium'
                      : isDark ? 'text-primary-foreground/35' : 'text-foreground/35'
@@ -182,7 +182,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3, delay: 0.15 }}
-                    className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
+                    className={`font-serif text-[clamp(1.2rem,2.5vw,1.7rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}
                   >
                     {steps[active].title}
                   </motion.h3>
@@ -196,7 +196,7 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3, delay: 0.25 }}
-                    className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
+                    className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}
                   >
                     {steps[active].description}
                   </motion.p>
@@ -357,8 +357,8 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
             className={`font-serif text-[clamp(1.6rem,4.5vw,2.8rem)] leading-[1.15] tracking-[-0.025em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-prussian'}`}
           >
             {isIndia
-              ? <>India's industrial middle market is one of the largest pools of <span className="text-gold font-semibold">uninstitutionalized</span> value in the world.</>
-              : <>Every year, thousands of American business owners start thinking about what comes <span className="text-gold font-semibold">next.</span> Most of them don't have an answer.</>
+              ? <>India's lower middle market is one of the most <span className="text-gold font-semibold">overlooked</span> opportunities in global investing.</>
+              : <>Tens of thousands of <span className="text-gold font-semibold">essential</span> businesses keep America running.</>
             }
           </motion.h2>
 
@@ -406,25 +406,25 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={isDark}>Long-Term Capital</SectionLabel>
+            <SectionLabel light={isDark}>Investment Firm</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
-            <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-gold mb-4">
+            <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
               Built for Owners Thinking Long-Term
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.6rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
-                ? <>Partnering with the Industrial Businesses Building <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>India's Next Decade</span></>
-                : <>Supporting the Essential Businesses That Keep American <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Industry</span> Running</>}
+                ? <>Investing in India's Next Generation of <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Companies</>
+                : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'We take majority positions in India\'s industrial and business services companies, bringing an investment approach refined over a decade of global dealmaking.'
-                : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our approach was shaped at blue-chip firms and refined into something distinctly our own.'}
+                ? 'Long-term capital and hands-on partnership for the founder-led companies building India\'s future.'
+                : 'Patient capital and hands-on partnership for essential businesses that keep America running.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -435,7 +435,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2, boxShadow: '0 4px 20px hsl(43 78% 50% / 0.15)' }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/focus`}
-                  className={`btn-premium inline-block font-sans text-[11px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
+                  className={`btn-premium inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 border transition-all duration-300 ${
                     isDark
                       ? 'border-white/[0.15] text-white/55 hover:border-gold/30 hover:text-white/80'
                       : 'border-border text-muted-foreground hover:border-gold/30 hover:text-foreground'
@@ -447,7 +447,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="btn-premium btn-gold inline-block font-sans text-[11px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
+                  className="btn-premium btn-gold inline-block font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.16em] px-6 md:px-8 py-3.5 transition-all duration-300"
                 >
                   Get in Touch
                 </Link>
@@ -461,8 +461,17 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We invest in essential B2B services. Businesses where reliability is not optional and customers come back because they have to."
-        highlights={['essential', 'reliability']}
+        heading={
+          isIndia
+            ? 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
+            : 'Preserve what founders built. Scale what matters. Investing tailored to each company\'s needs, for the long term.'
+        }
+        highlights={isIndia ? ['founders', 'long'] : ['founders', 'long']}
+        subtext={
+          isIndia
+            ? 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
+            : 'Combining long-term capital with operating expertise to help owners build market leaders while protecting their legacy.'
+        }
         variant="light"
       />
 
@@ -473,10 +482,10 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Sixty-three million MSMEs with real revenue and real customers, but limited access to the capital, systems, and know-how required to grow.'
-            : 'Thousands of profitable service businesses will change hands this decade. Most founders want more than a buyer. They want a partner who will stay close and think long-term.'
+            ? 'Companies proven over decades are ready for a partner who can help them scale with discipline.'
+            : 'Patient capital and operational expertise unlock their next chapter of growth.'
         }
-        highlights={isIndia ? ['scale'] : ['partner']}
+        highlights={isIndia ? ['discipline'] : ['Patient']}
         stats={
           isIndia
             ? [{ value: '63M+', label: 'MSMEs' }, { value: '<1%', label: 'Institutionally Backed' }, { value: '$7T', label: 'Economy by 2030' }]
@@ -491,8 +500,8 @@ const Home = () => {
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              How a Deal Comes Together
+            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.4rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+              From Discovery to Partnership
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
@@ -502,19 +511,19 @@ const Home = () => {
 
       {/* Social Proof */}
       <section className={`relative overflow-hidden ${isDark ? 'bg-primary' : 'bg-background'}`}>
-        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
+        <LightSectionEffects variant="section" />
         <div className="relative max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16 text-center">
           <FadeIn>
-            <p className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <p className={`font-serif text-[clamp(1.6rem,4vw,2.6rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia
-                ? <>Global training refined into a local <span className="text-gold">conviction.</span> Working alongside the founders and families building India's <span className="text-gold">industrial base.</span></>
-                : <>Trained at some of the best firms in the world. Now investing with personal <span className="text-gold">conviction</span> in the businesses that run America's <span className="text-gold">infrastructure.</span></>
+                ? <>Global <span className="text-gold">institutional expertise</span> applied locally, partnering with the founders <span className="text-gold">shaping</span> India's industrial future.</>
+                : <>Decades of <span className="text-gold">institutional experience</span> dedicated to partnering with the owners who built America's <span className="text-gold">essential</span> industries.</>
               }
             </p>
           </FadeIn>
         </div>
       </section>
-      <div className={isDark ? 'bg-[hsl(228,40%,6%)]' : 'bg-[hsl(40,20%,91%)]'}>
+      <div className="bg-background">
         <LogoMarquee logos={isIndia ? allLogos : foundersLogos} duration={55} variant="dark" />
       </div>
 
@@ -532,13 +541,13 @@ const Home = () => {
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
-                <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? "Let's Talk" : "You've Built Something Worth Protecting"}
+                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "If you run a business in India's industrial or services space and you're exploring what partnership could look like, reach out. Every conversation starts with listening."
-                    : "If you're a business owner in one of our sectors and you've been thinking about what the next chapter looks like, we'd welcome a conversation. No pitch. Just a straightforward discussion."}
+                    ? "If you're building a business meant to last in India, we'd welcome a conversation about partnership."
+                    : "If you're a founder considering your next chapter, we'd welcome an honest discussion about long-term partnership."}
                 </p>
               </FadeIn>
             </div>
@@ -547,7 +556,7 @@ const Home = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
                   Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />

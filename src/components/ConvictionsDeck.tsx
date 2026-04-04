@@ -8,12 +8,12 @@ import LightSectionEffects from '@/components/LightSectionEffects';
 import WaveBackground from '@/components/WaveBackground';
 
 const principles = [
-  { t: 'Integrity', d: 'Say what is true. Act accordingly.' },
-  { t: 'Judgment', d: 'Make decisions based on facts, not noise.' },
-  { t: 'Respect', d: 'Treat people fairly. Always.' },
-  { t: 'Humility', d: 'Listen. The best ideas rarely come from one place.' },
-  { t: 'Resilience', d: 'Difficult periods are part of building anything meaningful.' },
-  { t: 'Action', d: 'Decide. Move. Adjust.' },
+  { t: 'Integrity', d: 'We say what we mean and follow through. Transparency and intellectual honesty in every interaction, even when the truth is uncomfortable.' },
+  { t: 'Steward Leadership', d: 'Leadership is earned through stewardship, not authority. We succeed when the people and businesses around us succeed.' },
+  { t: 'Humility', d: 'The best investors never stop learning. We approach every situation with curiosity and an open mind.' },
+  { t: 'Grit', d: 'Building lasting businesses requires perseverance. We do hard things, especially when things get hard.' },
+  { t: 'Bias to Action', d: 'Analysis has its place, but progress demands execution. We move decisively and learn in motion.' },
+  { t: 'The Golden Rule', d: 'Treat every person, from founder to frontline employee, with respect, fairness, and genuine compassion.' },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -107,7 +107,7 @@ const AccordionRow = ({
                 transition={{ duration: 0.5, ease }}
               />
               <p
-                className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${
+                className={`font-sans text-[14px] md:text-[15px] leading-[1.8] max-w-[600px] ${
                   isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                 }`}
               >
@@ -141,13 +141,13 @@ const ConvictionsDeck = () => {
         {/* Header */}
         <div className="mb-8 md:mb-10">
           <FadeIn>
-            <SectionLabel>Our Convictions</SectionLabel>
+            <SectionLabel>What we stand for</SectionLabel>
             <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-1">
-              <span className="text-foreground">What Drives Every </span>
-              <span className="text-gold">Decision</span>
+              <span className="text-foreground">Guiding </span>
+              <span className="text-gold">Principles</span>
             </h2>
-             <p className="font-sans text-[14px] text-muted-foreground leading-[1.7] max-w-[480px] mt-2 mb-3">
-               Six principles that shape how we partner and build.
+            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[480px] mt-2 mb-3">
+              Six principles that shape how we partner, decide, and build.
             </p>
             <GoldRule />
           </FadeIn>

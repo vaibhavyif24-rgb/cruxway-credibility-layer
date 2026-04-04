@@ -65,7 +65,7 @@ export const SectionLabel = forwardRef<HTMLParagraphElement, { children: React.R
         viewport={{ once: true }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className={`
-          font-sans text-[11px] font-bold uppercase
+          font-sans text-[11px] md:text-[12px] font-semibold uppercase
           mb-2.5 md:mb-3 tracking-[0.25em]
           ${shouldUseGold ? 'text-gold' : 'text-[hsl(228,45%,45%)]/60'}
         `}

@@ -100,7 +100,7 @@ export const FinalMerge = () => {
             color: "#F8F6F2",
           }}
         >
-          CONVICTION-DRIVEN CAPITAL
+          LOWER MIDDLE MARKET PRIVATE EQUITY
         </div>
       )}
     </AbsoluteFill>

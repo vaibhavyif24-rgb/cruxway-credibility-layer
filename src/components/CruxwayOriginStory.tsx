@@ -486,7 +486,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            Conviction that has been tested is different from conviction that hasn't. Discipline sustained over years is different from discipline sustained over quarters. We chose a name that holds both ideas, because both define how we want to invest.
+            Getting from A to B matters. To get there, you transform under pressure and sustained discipline. But the journey itself matters. It must be aligned with the natural order of things.
           </motion.p>
         </motion.div>
 
@@ -527,7 +527,7 @@ const CruxwayOriginStory = () => {
             className="font-sans text-[11px] md:text-[13px] font-semibold uppercase tracking-[0.22em] mt-8"
             style={{ opacity: act4ClosingOp, color: videoMutedColor, textShadow: videoSubShadow }}
           >
-            Tested conviction. Disciplined path.
+            Forging conviction through rigor
           </motion.p>
         </motion.div>
       </div>

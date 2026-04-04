@@ -17,17 +17,17 @@ import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
 import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
-  { num: '01', title: 'Discovery', description: 'Most of our deal flow comes from relationships we\'ve cultivated over many years in our target sectors. When an owner starts thinking about a transition, we want to be someone they already know.' },
-  { num: '02', title: 'Evaluation', description: 'We focus first on what could go wrong: customer concentration, key-person risk, competitive threats, and regulatory exposure. Businesses that survive that analysis earn a deeper look.' },
-  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. Our goal is to understand the business as well as the owner does before we commit.' },
-  { num: '04', title: 'Structuring', description: 'Aligned incentives between Cruxway and the owner. Governance that fits the size of the company. Conservative leverage. No artificial timelines.' },
+  { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
+  { num: '02', title: 'Evaluation', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. We triangulate data with on-the-ground diligence and reference networks.' },
+  { num: '03', title: 'Diligence', description: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence, not intuition.' },
+  { num: '04', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
 ];
 
 const valueCreationItems = [
-  { title: 'Stabilize & Professionalize', desc: 'Establish financial reporting, build or upgrade the finance function, create governance structures, and set an operating cadence that lets management focus forward.' },
-  { title: 'Optimize Operations', desc: 'Identify the operational gaps that limit margin. Renegotiate where needed, streamline where possible, and fix the things the founder never had time to address.' },
-  { title: 'Invest in Growth', desc: 'Deploy capital into organic growth, adjacent markets, and add-on acquisitions where the strategic fit is clear and the return case is strong.' },
-  { title: 'Compound Value', desc: 'Operational improvements take time to compound. That\'s why we hold. Year three looks different from year one, and year seven looks different again.' },
+  { title: 'Stabilize & Professionalize', desc: 'Implement institutional-grade systems, reporting, and governance from day one.' },
+  { title: 'Optimize Operations', desc: 'Drive margin improvement through operational excellence and best-practice deployment.' },
+  { title: 'Invest in Growth', desc: 'Deploy capital into organic expansion, adjacent markets, and strategic acquisitions.' },
+  { title: 'Compound Value', desc: 'Long-term hold periods allow compounding of operational improvements and market position.' },
 ];
 
 const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDark: boolean }) => {
@@ -78,11 +78,11 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
                 <span className="font-sans text-[10px] font-semibold uppercase tracking-[0.25em] text-gold/40 mb-3 block">
                   Step {steps[active].num}
                 </span>
-                <h3 className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                <h3 className={`font-serif text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.2] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
                   {steps[active].title}
                 </h3>
                 <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
-                <p className={`font-sans text-[14px] leading-[1.7] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] max-w-[600px] ${isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'}`}>
                   {steps[active].description}
                 </p>
               </div>
@@ -295,7 +295,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                       Phase {String(selected + 1).padStart(2, '0')}
                     </span>
                     <h3
-                      className={`font-serif text-[clamp(1.1rem,2vw,1.4rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
+                      className={`font-serif text-[clamp(1.3rem,2.5vw,1.8rem)] leading-[1.2] tracking-[-0.02em] mb-3 ${
                         isDark ? 'text-primary-foreground' : 'text-foreground'
                       }`}
                     >
@@ -303,7 +303,7 @@ const ValueCreationChart = ({ items, isDark }: { items: typeof valueCreationItem
                     </h3>
                     <div className="w-10 h-[1.5px] bg-gold/25 mb-4" />
                     <p
-                      className={`font-sans text-[14px] leading-[1.7] max-w-[640px] ${
+                      className={`font-sans text-[15px] md:text-[17px] leading-[1.85] max-w-[640px] ${
                         isDark ? 'text-primary-foreground/60' : 'text-muted-foreground'
                       }`}
                     >
@@ -338,13 +338,13 @@ const OurPlaybook = () => {
             <SectionLabel light={isDark}>{isIndia ? 'Our Playbook, India' : 'Our Playbook'}</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.08}>
-            <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[720px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
-              How We <span className="text-gold">Find,</span> Evaluate, and Build
+            <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[720px] leading-[1.1] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
+              From <span className="text-gold">Sourcing</span> to Value Creation
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
-            <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              We have spent our careers partnering with founders who built exceptional businesses. We know what separates good from great, and we bring that lens to every deal.
+            <p className={`font-sans text-[15px] md:text-[16px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
+              We have spent our careers partnering with founders who have built industry-leading businesses. We know what separates good from great, and we bring that lens to every deal.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -374,22 +374,21 @@ const OurPlaybook = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="Years of evaluating and operating businesses in these sectors have built a pattern recognition we bring to every new opportunity. It does not replace judgment. It sharpens it."
-        highlights={['sharpens']}
+        heading="We bring structure, experience, and patience to every business we partner with."
+        highlights={['structure', 'patience']}
         variant="light"
       />
 
       {/* Value Creation Playbook */}
-      <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14 ${isDark ? 'bg-primary' : 'bg-background'}`}>
-        {isDark ? <DarkSectionEffects /> : <LightSectionEffects variant="section" />}
-        <div className="relative max-w-[1080px] mx-auto">
+      <section className="bg-background px-5 md:px-10 lg:px-16 pt-10 md:pt-14 pb-10 md:pb-14 overflow-x-hidden">
+        <div className="max-w-[1080px] mx-auto">
           <FadeIn>
             <SectionLabel>Value Creation</SectionLabel>
-            <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] mb-2 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+            <h2 className="font-serif text-[clamp(1.5rem,3vw,2.2rem)] text-foreground leading-[1.15] mb-2">
               How We Build Value
             </h2>
-            <p className="font-sans text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
-              What the work looks like after closing.
+            <p className="font-sans text-[14px] md:text-[15px] text-muted-foreground leading-[1.75] max-w-[540px] mb-4">
+              How we professionalize operations and compound value over time.
             </p>
             <GoldRule className="mt-3 mb-6 md:mb-8" />
           </FadeIn>
@@ -408,13 +407,13 @@ const OurPlaybook = () => {
             <div className="flex-1 max-w-[560px]">
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
-                <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? "Want to Understand Our Approach?" : "Interested in How This Works in Practice?"}
+                <h2 className={`font-serif text-[clamp(1.6rem,3.5vw,2.6rem)] leading-[1.15] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
+                  {isIndia ? 'Partner With Us in India' : 'Start a Conversation'}
                 </h2>
-                <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
+                <p className={`font-sans text-[13px] md:text-[15px] leading-[1.8] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
-                    ? "No two businesses are alike, and neither is our approach to any two deals. If you'd like to discuss how this would work for your company, we're here."
-                    : "Every business is different and so is every partnership. If you'd like to understand how our process would apply to your specific situation, reach out."}
+                    ? "If you're building a business meant to last, we'd welcome a conversation about partnership."
+                    : "If you're a founder considering your next chapter, we'd welcome the conversation."}
                 </p>
               </FadeIn>
             </div>
@@ -422,9 +421,9 @@ const OurPlaybook = () => {
               <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }}>
                 <Link
                   to={`/${region}/contact`}
-                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
+                  className="group relative inline-flex items-center gap-3 font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
-                  Reach Out
+                  Get in Touch
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </motion.div>
