@@ -288,7 +288,7 @@ const ProfileCard = React.memo(React.forwardRef<HTMLDivElement, { member: TeamMe
 
             {member.dealLogos && member.dealLogos.length > 0 && (
               <div className="mt-4 md:mt-6 pt-4 md:pt-5 border-t border-foreground/[0.05]">
-                <p className="font-sans <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3"> text-gold-dim/70 mb-2 md:mb-3">
+                <p className="font-sans text-[9px] font-medium uppercase tracking-[0.2em] text-gold-dim/70 mb-2 md:mb-3">
                   Select Investments &amp; Deals
                 </p>
                 <DealLogoMarquee logos={member.dealLogos} bgClass={fadeGradientClass} />
