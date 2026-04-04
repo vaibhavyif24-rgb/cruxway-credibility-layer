@@ -69,10 +69,10 @@ const GuidingPrinciples = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  If This Resonates
+                  Aligned on What Matters
                 </h2>
                 <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
-                  Alignment on values makes everything else easier. If what you've read here reflects how you think about business and partnership, we'd welcome the conversation.
+                  When values are aligned, everything else gets easier. If what you've read here reflects how you think about business and partnership, we'd welcome the conversation.
                 </p>
               </FadeIn>
             </div>
@@ -82,7 +82,7 @@ const GuidingPrinciples = () => {
                   to={`/${region}/contact`}
                   className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
-                  Get in Touch
+                  Let's Talk
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </motion.div>

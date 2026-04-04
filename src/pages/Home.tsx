@@ -53,14 +53,14 @@ const processStepsUS = [
   { num: '01', title: 'Identify', description: 'Our deal flow comes from relationships we\'ve built over years in our target sectors. Accountants, brokers, attorneys, and business owners who know how we operate. Most of our opportunities never go to market.' },
   { num: '02', title: 'Evaluate', description: 'Financials, operations, customer quality, and competitive positioning. We want to understand what the numbers say and, just as importantly, what they don\'t.' },
   { num: '03', title: 'Invest', description: 'Majority positions structured to preserve continuity. Management stays. Employees stay. The founder decides how involved they want to be going forward.' },
-  { num: '04', title: 'Build', description: 'Real systems from day one: financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
+  { num: '04', title: 'Build', description: 'Real systems from day one. Financial controls, reporting infrastructure, and a growth plan built around what the business actually needs.' },
 ];
 
 const processStepsIndia = [
   { num: '01', title: 'Identify', description: 'We source directly through local networks across India\'s industrial corridors. Relationships with chartered accountants, industry associations, and family business advisors.' },
   { num: '02', title: 'Evaluate', description: 'Every opportunity is evaluated in person: the financials, the operations, the team, and the competitive dynamics of the local market.' },
   { num: '03', title: 'Invest', description: 'Majority positions with structures designed around the founder\'s priorities. Continuity for the team and flexibility on the founder\'s level of involvement.' },
-  { num: '04', title: 'Build', description: 'Institutional-grade governance, financial reporting, working capital management, and a growth roadmap. We bring the infrastructure. They bring the business.' },
+  { num: '04', title: 'Build', description: 'We bring the infrastructure: governance, financial reporting, working capital discipline, and a growth roadmap. They bring the business.' },
 ];
 
 const StatBlock = React.forwardRef<HTMLDivElement, { val: string; lbl: string; delay?: number; light?: boolean }>(
@@ -406,7 +406,7 @@ const Home = () => {
 
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pb-12 md:pb-16 lg:pb-20 pt-32">
           <FadeIn>
-            <SectionLabel light={isDark}>Investment Firm</SectionLabel>
+            <SectionLabel light={isDark}>Long-Term Capital</SectionLabel>
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[11px] font-semibold uppercase tracking-[0.16em] text-gold mb-4">
@@ -416,15 +416,15 @@ const Home = () => {
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2.2rem,5vw,3.4rem)] max-w-[680px] leading-[1.08] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
-                ? <>Partnering with the Industrial Businesses Shaping <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>India's Next Decade</span></>
-                : <>Partnering with America's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Essential</span> Industrial and Services Businesses</>}
+                ? <>Partnering with the Industrial Businesses Building <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>India's Next Decade</span></>
+                : <>Supporting the Essential Businesses That Keep American <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Industry</span> Running</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[520px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
                 ? 'We take majority positions in India\'s industrial and business services companies, bringing an investment approach refined over a decade of global dealmaking.'
-                : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our investment philosophy was shaped at some of the best firms in the world and refined into something we could call our own.'}
+                : 'We take majority stakes in power services, financial compliance, and IT infrastructure companies. Our approach was shaped at blue-chip firms and refined into something distinctly our own.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -461,7 +461,7 @@ const Home = () => {
       {/* What We Do */}
       <ScrollRevealText
         label="What We Do"
-        heading="We partner with businesses where the product is proven and the customers are loyal. We help professionalize the systems around them and protect what the founder built."
+        heading="We partner with businesses where the product is proven and the customers are loyal. We professionalize the systems around them and protect what the founder built."
         highlights={['professionalize', 'protect']}
         subtext="Every partnership is structured around what the business actually needs."
         variant="light"
@@ -474,7 +474,7 @@ const Home = () => {
       <ScrollRevealText
         heading={
           isIndia
-            ? 'Sixty-three million MSMEs, real revenue, real customers, and almost no access to the kind of capital and systems that could scale them.'
+            ? 'Sixty-three million MSMEs with real revenue and real customers, but almost none have access to the capital and systems that could scale them into something larger.'
             : 'Thousands of profitable service businesses will change hands this decade. Most founders want more than a buyer. They want a partner who will stay close and think long-term.'
         }
         highlights={isIndia ? ['scale'] : ['partner']}
@@ -493,7 +493,7 @@ const Home = () => {
           <FadeIn>
             <SectionLabel light={isDark}>Our Process</SectionLabel>
             <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] max-w-[480px] mb-3 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-              From Discovery to Partnership
+              How a Deal Comes Together
             </h2>
             <GoldRule className="mb-6 md:mb-8" />
           </FadeIn>
@@ -509,7 +509,7 @@ const Home = () => {
             <p className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.22] tracking-[-0.02em] max-w-[720px] mx-auto ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
               {isIndia
                 ? <>Global training refined into a local <span className="text-gold">conviction.</span> Working alongside the founders and families building India's <span className="text-gold">industrial base.</span></>
-                : <>An investment philosophy shaped at some of the best firms in the world, now applied with personal <span className="text-gold">conviction</span> to the businesses that run America's <span className="text-gold">infrastructure.</span></>
+                : <>Trained at some of the best firms in the world. Now investing with personal <span className="text-gold">conviction</span> in the businesses that run America's <span className="text-gold">infrastructure.</span></>
               }
             </p>
           </FadeIn>
@@ -534,7 +534,7 @@ const Home = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? "Let's Talk" : 'Start a Conversation'}
+                  {isIndia ? "Let's Talk" : "You've Built Something Worth Protecting"}
                 </h2>
                 <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia

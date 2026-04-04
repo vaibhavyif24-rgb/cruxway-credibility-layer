@@ -21,14 +21,14 @@ const investmentProfile = {
     { label: 'Revenue Range', value: '$1M – $10M' },
     { label: 'EBITDA Range', value: '$500K – $2.5M+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
-    { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
+    { label: 'Hold Period', value: 'Permanent and long-term ownership. No predefined exit horizon.' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
   ],
   india: [
     { label: 'Revenue Range', value: '₹10Cr – ₹100Cr' },
     { label: 'EBITDA Range', value: '₹5Cr – ₹25Cr+' },
     { label: 'Structure', value: 'Primarily majority control, with structured minority investments where alignment is strong' },
-    { label: 'Hold Period', value: 'Long-term ownership with no predefined exit horizon' },
+    { label: 'Hold Period', value: 'Permanent and long-term ownership. No predefined exit horizon.' },
     { label: 'Aligned Partnerships', value: 'Prioritize situations where owners reinvest and teams remain in place' },
   ],
 };
@@ -127,8 +127,8 @@ const OurFocus = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'We bring institutional discipline and a personal touch to partnering with India\'s best founder-led businesses.'
-                : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
+                ? 'We bring the rigor of global institutions to the relationships that matter most: founder-led businesses across India.'
+                : 'Our approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is what it looks like in practice.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -261,7 +261,7 @@ const OurFocus = () => {
               <FadeIn>
                 <SectionLabel light={isDark}>Connect</SectionLabel>
                 <h2 className={`font-serif text-[clamp(1.5rem,3vw,2.2rem)] leading-[1.15] tracking-[-0.02em] mb-4 ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-                  {isIndia ? "See Yourself Here?" : "Think This Describes Your Business?"}
+                  {isIndia ? "Does This Sound Like Your Business?" : "Think This Describes Your Business?"}
                 </h2>
                 <p className={`font-sans text-[15px] leading-[1.75] ${isDark ? 'text-primary-foreground/55' : 'text-muted-foreground'}`}>
                   {isIndia
@@ -276,7 +276,7 @@ const OurFocus = () => {
                   to={`/${region}/contact`}
                   className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
-                  Get in Touch
+                  Start a Conversation
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </motion.div>

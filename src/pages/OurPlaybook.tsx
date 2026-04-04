@@ -19,7 +19,7 @@ import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'Most of our deal flow comes from relationships we\'ve cultivated over many years in our target sectors. When an owner starts thinking about a transition, we want to be someone they already know.' },
   { num: '02', title: 'Evaluation', description: 'We focus first on what could go wrong: customer concentration, key-person risk, competitive threats, and regulatory exposure. Businesses that survive that analysis earn a deeper look.' },
-  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. We aim to understand the business as well as the owner does before we make a commitment.' },
+  { num: '03', title: 'Diligence', description: 'Comprehensive financial, legal, and operational analysis with sector-specific specialists. Our goal is to understand the business as well as the owner does before we commit.' },
   { num: '04', title: 'Structuring', description: 'Aligned incentives between Cruxway and the owner. Governance that fits the size of the company. Conservative leverage. No artificial timelines.' },
 ];
 
@@ -344,7 +344,7 @@ const OurPlaybook = () => {
           </FadeIn>
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
-              We have spent our careers partnering with founders who have built industry-leading businesses. We know what separates good from great, and we bring that lens to every deal.
+              We have spent our careers partnering with founders who built exceptional businesses. We know what separates good from great, and we bring that lens to every deal.
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
@@ -374,7 +374,7 @@ const OurPlaybook = () => {
       {/* Our Edge */}
       <ScrollRevealText
         label="Our Edge"
-        heading="The pattern recognition that comes from years of evaluating and operating businesses in our sectors is something we bring to every new opportunity. It doesn't replace judgment, but it sharpens it."
+        heading="Years of evaluating and operating businesses in these sectors have built a pattern recognition we bring to every new opportunity. It does not replace judgment. It sharpens it."
         highlights={['sharpens']}
         variant="light"
       />
@@ -424,7 +424,7 @@ const OurPlaybook = () => {
                   to={`/${region}/contact`}
                   className="group relative inline-flex items-center gap-3 font-sans text-[11px] font-semibold uppercase tracking-[0.16em] border-2 border-gold text-gold px-10 py-5 md:px-12 md:py-6 transition-all duration-300 hover:bg-gold hover:text-white overflow-hidden"
                 >
-                  Get in Touch
+                  Reach Out
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
               </motion.div>

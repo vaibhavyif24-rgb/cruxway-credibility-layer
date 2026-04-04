@@ -90,7 +90,7 @@ const founders: TeamMember[] = [
     photo: harinPhoto,
     linkedIn: 'https://www.linkedin.com/in/harin-gupta/',
     summary:
-      'Harin has more than a decade of experience investing in and operating companies in the business and consumer sectors. He combines deep operating expertise with long-term capital to help founders transform their businesses while protecting their legacy. Based in San Diego, he spends most of his time outside of work reading history and finding good food.',
+      'Harin has spent more than a decade investing in and operating companies across business and consumer sectors. His approach pairs operating experience with patient capital, always with the founder\'s legacy in mind. Based in San Diego. Reads history. Finds good food.',
     highlights: [
       'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
       'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
@@ -123,7 +123,7 @@ const indiaPartner: TeamMember = {
   photo: vaibhavPhoto,
   linkedIn: 'https://www.linkedin.com/in/vaibhavnabha/',
   summary:
-    'Vaibhav brings hands-on experience across early-stage investing, venture capital, and startup building in India. He developed a conviction for lower middle-market businesses in manufacturing and industrial services, where operational improvement drives outsized value. Based in Delhi. Golf, fountain pens, watches, and wherever the next flight goes.',
+    'Vaibhav has built his career across early-stage investing, venture capital, and company-building in India. He developed a conviction for the lower middle market in manufacturing and industrial services, where operational improvement drives outsized returns. Based in Delhi. Golf, fountain pens, watches, and wherever the next flight goes.',
   highlights: [
     'Led investments and due diligence across a venture fund and family office, spanning cleantech, deeptech, manufacturing, and marketplace sectors',
     'Co-founded and scaled multiple ventures with direct P&L ownership across product, growth, and operations',
@@ -386,7 +386,7 @@ const Team = () => {
         <div className={`absolute bottom-0 left-0 right-0 z-10 ${isDark ? 'bg-navy-deep/40' : 'bg-background/30'} backdrop-blur-sm`}>
           <div className="max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 py-4 md:py-8">
             <div className="grid grid-cols-3 gap-3 md:gap-4">
-              <StatItem value="15+" label="Years Combined" delay={0.1} isDark={isDark} />
+              <StatItem value="15+" label="Years Experience" delay={0.1} isDark={isDark} />
               <StatItem value="$15B+" label="Deal Experience" delay={0.18} isDark={isDark} />
               <StatItem value={isIndia ? '3' : '50+'} label={isIndia ? 'Continents Covered' : 'Transactions'} delay={0.26} isDark={isDark} />
             </div>
