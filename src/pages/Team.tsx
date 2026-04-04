@@ -92,10 +92,10 @@ const founders: TeamMember[] = [
     summary:
       'Harin has spent over a decade investing in and operating companies in business services, consumer, and industrial sectors. He brings the same rigor whether deploying capital or advising a founder on what comes next. Lives in San Diego. Reads history and is always looking for a good meal.',
     highlights: [
-      'Invested through the Business Services Group at Warburg Pincus, a global private equity firm with $85bn+ AUM',
-      'Served on the Board of Directors for RMS Energy, a provider of services for high-voltage electrical equipment',
-      'Successfully helped launch and scale Honest Hospitality Group as a family business from ideation to 100+ locations globally; serves on the Board of Directors',
-      'Began his finance career at leading investment banks, including J.P. Morgan, Evercore, and Deutsche Bank',
+      'Invested through the Business Services Group at Warburg Pincus ($85B+ AUM)',
+      'Served on the Board of Directors for RMS Energy, a high-voltage electrical services company',
+      'Helped launch and grow Honest Hospitality Group from concept to 100+ locations globally; serves on the Board of Directors',
+      'Started in investment banking at J.P. Morgan, Evercore, and Deutsche Bank',
     ],
     logos: [
       { src: warburgLogo, alt: 'Warburg Pincus' },
