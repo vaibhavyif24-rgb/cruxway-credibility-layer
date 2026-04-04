@@ -344,7 +344,7 @@ const StatItem = ({ value, label, delay = 0, isDark }: { value: string; label: s
       transition={{ duration: 0.6, delay: delay + 0.3, ease: [0.22, 1, 0.36, 1] }}
       className="h-[1.5px] bg-gold/30 mx-auto mt-3"
     />
-    <p className={`font-sans text-[8.5px] md:text-[10px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-2.5 md:mt-3 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
+    <p className={`font-sans <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-2.5 md:mt-3 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}> font-medium uppercase tracking-[0.18em] md:tracking-[0.2em] mt-2.5 md:mt-3 ${isDark ? 'text-primary-foreground/25' : 'text-muted-foreground/50'}`}>
       {label}
     </p>
   </FadeIn>
