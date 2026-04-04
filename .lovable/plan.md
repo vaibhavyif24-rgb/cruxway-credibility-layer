@@ -3,12 +3,10 @@
 ## Fix: Clipped Descenders on Hero H1 Headings
 
 ### Problem
-
 The serif font EB Garamond has deep descenders on letters like "g", "y", "p". The current hero H1 line-height values (`leading-[1.08]` and `leading-[1.1]`) are too tight, causing the bottom of these letters to get cut off — visible in your screenshot where the "g" in "Backbone" is clipped.
 
 ### Fix
-
-Change line-height to `leading-[1.18]` on every hero H1 across all 8 pages. This is just enough to clear descenders without visually loosening the heading.
+Change line-height to `leading-[1.18]` on every hero H1 across all 8 pages. This clears descenders without visually loosening the heading.
 
 ### All Changes
 
