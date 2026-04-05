@@ -119,7 +119,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
           }}
         >
           {/* Animated background effects — both modes, opacity-scaled */}
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div
               className="absolute w-[140%] h-[140%] top-1/2 left-1/2"
               style={{
@@ -165,14 +165,14 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
 
           {/* Celestial SVG illustration — both modes, opacity-adjusted */}
           <div
-            className="absolute inset-0 w-full h-full z-[1]"
+            className="absolute inset-0 w-full h-full z-[1] pointer-events-none"
             style={{ opacity: isDark ? 1 : 0.35 }}
           >
             <MemoizedCelestial index={index} />
           </div>
 
           {/* Vignette overlay — theme-matched */}
-          <div className="absolute inset-0 z-[2]" style={{ background: getVignette(isDark, index) }} />
+          <div className="absolute inset-0 z-[2] pointer-events-none" style={{ background: getVignette(isDark, index) }} />
 
           {/* Active gold glow pulse on edges */}
           <div
@@ -186,7 +186,7 @@ const PrincipleCard = forwardRef<HTMLDivElement, PrincipleCardProps & { isMobile
           />
 
           {/* Content — centered */}
-          <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6">
+          <div className="relative z-10 flex flex-col items-center justify-center text-center h-full px-6 select-text">
             <div className="flex flex-col items-center max-w-[540px]">
               <span
                 className="font-serif text-[13px] md:text-[15px] tracking-[0.18em]"
