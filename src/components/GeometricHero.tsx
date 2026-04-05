@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useAnimationFrame } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useAnimationFrame } from 'framer-motion';
 import { useCallback, useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import heroImage from '@/assets/hero-forking-road.jpg';
@@ -12,14 +12,33 @@ const GeometricHero = () => {
   const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Normalised mouse position: -1 … 1
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  // Raw normalised mouse: -1 … 1
+  const rawX = useMotionValue(0);
+  const rawY = useMotionValue(0);
 
-  // Smooth springs for each depth tier
+  // Smooth spring
   const springCfg = { damping: 40, stiffness: 90, mass: 1 };
-  const smX = useSpring(mouseX, springCfg);
-  const smY = useSpring(mouseY, springCfg);
+  const smX = useSpring(rawX, springCfg);
+  const smY = useSpring(rawY, springCfg);
+
+  // Per-layer transforms (all hoisted — stable hook count)
+  // Layer 0: photo — 0.3x, max ±18px
+  const photoX = useTransform(smX, [-1, 1], [-18, 18]);
+  const photoY = useTransform(smY, [-1, 1], [-10, 10]);
+
+  // Layer 2: mist — 0.15x, max ±8px
+  const mistX = useTransform(smX, [-1, 1], [-8, 8]);
+
+  // Layer 3: haze — 0.1x opposite, max ±5px
+  const hazeX = useTransform(smX, [-1, 1], [5, -5]);
+
+  // Layer 4: vignette — 0.05x, max ±3px
+  const vigX = useTransform(smX, [-1, 1], [-3, 3]);
+  const vigY = useTransform(smY, [-1, 1], [-3, 3]);
+
+  // Layer 6: ambient glow — 0.2x, max ±12px
+  const glowX = useTransform(smX, [-1, 1], [-12, 12]);
+  const glowY = useTransform(smY, [-1, 1], [-8, 8]);
 
   // Mobile auto-oscillation
   const timeRef = useRef(0);
@@ -27,8 +46,8 @@ const GeometricHero = () => {
     if (!isMobile) return;
     timeRef.current += delta / 1000;
     const t = timeRef.current;
-    mouseX.set(Math.sin(t * 0.25) * 0.35);
-    mouseY.set(Math.cos(t * 0.18) * 0.2);
+    rawX.set(Math.sin(t * 0.25) * 0.35);
+    rawY.set(Math.cos(t * 0.18) * 0.2);
   });
 
   const handleMouseMove = useCallback(
@@ -36,19 +55,11 @@ const GeometricHero = () => {
       if (isMobile) return;
       const rect = containerRef.current?.getBoundingClientRect();
       if (!rect) return;
-      mouseX.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
-      mouseY.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
+      rawX.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
+      rawY.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
     },
-    [isMobile, mouseX, mouseY],
+    [isMobile, rawX, rawY],
   );
-
-  // Helper: px shift for a given depth multiplier
-  const px = (mult: number, axis: 'x' | 'y') => {
-    const base = axis === 'x' ? smX : smY;
-    // We can't use useTransform here in a helper, so we return the spring directly
-    // and apply the multiplier via style template
-    return base;
-  };
 
   return (
     <div
@@ -56,58 +67,42 @@ const GeometricHero = () => {
       onMouseMove={handleMouseMove}
       className="absolute inset-0 overflow-hidden"
     >
-      {/* ── Layer 0: Oak tree photo — 0.3x parallax + Ken Burns ── */}
+      {/* ── Layer 0: Oak tree photo — parallax + Ken Burns ── */}
       <motion.div
         className="absolute inset-[-10%] z-[0]"
         style={{
-          x: useSpring(useMotionValue(0), springCfg),
-          y: useSpring(useMotionValue(0), springCfg),
+          x: photoX,
+          y: photoY,
           willChange: 'transform',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
         }}
       >
         <motion.div
           className="w-full h-full"
-          style={{
-            x: smX as any,
-            y: smY as any,
-            // framer applies these as px; we scale below
+          initial={{ scale: 1.0, x: 0 }}
+          animate={{ scale: 1.18, x: [0, 15, -10, 5, 0] }}
+          transition={{
+            scale: { duration: 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+            x: { duration: 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
           }}
         >
-          {/* We wrap again so Ken Burns and parallax don't fight */}
-          <motion.div
-            className="w-full h-full"
-            initial={{ scale: 1.0, x: 0 }}
-            animate={{ scale: 1.18, x: [0, 15, -10, 5, 0] }}
-            transition={{
-              scale: { duration: 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-              x: { duration: 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
-            }}
-          >
-            <img
-              src={heroImage}
-              alt=""
-              className="w-full h-full object-cover"
-              loading="eager"
-              fetchPriority="high"
-              aria-hidden="true"
-            />
-          </motion.div>
+          <img
+            src={heroImage}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+            aria-hidden="true"
+          />
         </motion.div>
       </motion.div>
 
       {/* ── Layer 1: Dark overlay (static) ── */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy-deep/80 via-prussian/60 to-navy-deep/85" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-navy-deep/80 via-prussian/60 to-navy-deep/85 pointer-events-none" />
 
-      {/* ── Layer 2: Low mist band — 0.15x + drift ── */}
+      {/* ── Layer 2: Low mist bands — parallax + independent drift ── */}
       <motion.div
         className="absolute bottom-0 left-[-20%] right-[-20%] h-[35%] z-[2] pointer-events-none"
-        style={{
-          x: smX as any,
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-        }}
+        style={{ x: mistX, willChange: 'transform' }}
       >
         <motion.div
           className="w-full h-full"
@@ -120,14 +115,9 @@ const GeometricHero = () => {
         />
       </motion.div>
 
-      {/* Second mist band — slightly higher, opposite drift */}
       <motion.div
         className="absolute bottom-[5%] left-[-15%] right-[-15%] h-[25%] z-[2] pointer-events-none"
-        style={{
-          x: smX as any,
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-        }}
+        style={{ x: mistX, willChange: 'transform' }}
       >
         <motion.div
           className="w-full h-full"
@@ -141,14 +131,10 @@ const GeometricHero = () => {
         />
       </motion.div>
 
-      {/* ── Layer 3: Atmospheric haze (mid) — 0.1x ── */}
+      {/* ── Layer 3: Atmospheric haze (mid, opposite direction) ── */}
       <motion.div
         className="absolute top-[30%] left-[-10%] right-[-10%] h-[40%] z-[2] pointer-events-none"
-        style={{
-          x: smX as any,
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-        }}
+        style={{ x: hazeX, willChange: 'transform' }}
       >
         <motion.div
           className="w-full h-full"
@@ -162,48 +148,42 @@ const GeometricHero = () => {
         />
       </motion.div>
 
-      {/* ── Layer 4: Dynamic vignette — 0.05x ── */}
+      {/* ── Layer 4: Dynamic vignette ── */}
       <motion.div
         className="absolute inset-0 z-[3] pointer-events-none"
         style={{
-          x: smX as any,
-          y: smY as any,
+          x: vigX,
+          y: vigY,
           willChange: 'transform',
-          transform: 'translateZ(0)',
           background:
             'radial-gradient(ellipse at center, transparent 30%, hsl(214 45% 8% / 0.5) 100%)',
         }}
       />
 
-      {/* ── Layer 5: Gold corner brackets (anchored, no parallax) ── */}
+      {/* ── Layer 5: Gold corner brackets (anchored) ── */}
       <svg
         viewBox="0 0 1200 800"
         className="absolute inset-0 w-full h-full z-[4] opacity-40 pointer-events-none"
         preserveAspectRatio="xMidYMid slice"
       >
-        {/* Top-left */}
         <motion.line x1="50" y1="50" x2="130" y2="50" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }} />
         <motion.line x1="50" y1="50" x2="50" y2="130" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }} />
-        {/* Top-right */}
         <motion.line x1="1150" y1="50" x2="1070" y2="50" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }} />
         <motion.line x1="1150" y1="50" x2="1150" y2="130" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }} />
-        {/* Bottom-left */}
         <motion.line x1="50" y1="750" x2="130" y2="750" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }} />
         <motion.line x1="50" y1="750" x2="50" y2="670" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }} />
-        {/* Bottom-right */}
         <motion.line x1="1150" y1="750" x2="1070" y2="750" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }} />
         <motion.line x1="1150" y1="750" x2="1150" y2="670" stroke="hsl(43 70% 50%)" strokeWidth="0.4" initial={{ pathLength: 0, opacity: 0 }} animate={{ pathLength: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] }} />
       </svg>
 
-      {/* ── Layer 6: Ambient glow — 0.2x mouse follow ── */}
+      {/* ── Layer 6: Ambient glow — mouse-following light source ── */}
       <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full z-[5] pointer-events-none"
         style={{
-          x: smX as any,
-          y: smY as any,
+          x: glowX,
+          y: glowY,
           background: 'radial-gradient(circle, hsl(43 70% 50% / 0.04), transparent 70%)',
           willChange: 'transform',
-          transform: 'translateZ(0)',
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: [0, 1, 0.6] }}
