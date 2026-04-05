@@ -1,27 +1,34 @@
 import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-forking-road.jpg';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
  * Landing page hero: cinematic mountain ridge with Ken Burns zoom + parallax drift.
  * Minimal gold accent lines keep the focus on the photograph.
  */
 const GeometricHero = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {/* Photo with Ken Burns cinematic zoom + slow drift */}
       <motion.div
         className="absolute inset-[-10%] z-[0]"
         initial={{ scale: 1.0, x: 0 }}
-        animate={{ scale: 1.18, x: [0, 15, -10, 5, 0] }}
+        animate={{
+          scale: isMobile ? 1.2 : 1.18,
+          x: isMobile ? [0, 18, -15, 10, 0] : [0, 15, -10, 5, 0],
+        }}
         transition={{
-          scale: { duration: 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-          x: { duration: 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+          scale: { duration: isMobile ? 16 : 26, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+          x: { duration: isMobile ? 20 : 34, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
         }}
       >
         <img
           src={heroImage}
           alt=""
           className="w-full h-full object-cover"
+          style={isMobile ? { objectPosition: '50% 35%' } : undefined}
           loading="eager"
           fetchPriority="high"
           aria-hidden="true"
