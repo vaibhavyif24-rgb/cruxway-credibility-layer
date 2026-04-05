@@ -19,7 +19,7 @@ import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
   { num: '02', title: 'Diligence', description: 'Each opportunity is rigorously stress-tested against our investment criteria, supported by insights grounded in fundamental diligence and validating our findings with our trusted advisors.' },
-  { num: '03', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
+  { num: '03', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Our deal structures reflect our commitment to permanence over short-term thinking.' },
 ];
 
 const valueCreationItems = [
