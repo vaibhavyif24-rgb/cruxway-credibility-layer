@@ -319,7 +319,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 2 Content ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act2LabelOp }}
         >
           <TextAura isDark={isDark} />
@@ -422,7 +422,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 3: The Equation ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act3Op }}
         >
           <TextAura isDark={isDark} size="wide" />
@@ -492,7 +492,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 4: The Name ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform' }}
         >
           <TextAura isDark={isDark} />
