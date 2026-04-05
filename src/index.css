@@ -381,8 +381,15 @@
     background-clip: text;
     animation: text-shimmer 3s ease-in-out 0.5s 1;
     animation-fill-mode: forwards;
-    padding-bottom: 0.15em;
-    margin-bottom: -0.15em;
+    padding-bottom: 0.22em;
+    margin-bottom: -0.22em;
+  }
+
+  .text-shimmer-gold .text-gold {
+    display: inline-block;
+    padding-bottom: 0.22em;
+    margin-bottom: -0.22em;
+    vertical-align: baseline;
   }
 
   /* CTA button pulse glow */
