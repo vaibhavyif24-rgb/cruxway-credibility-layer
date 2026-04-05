@@ -37,8 +37,8 @@ const PageLoader = () => {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
-40:             ? 'radial-gradient(ellipse at center, hsl(43 78% 50% / 0.06), transparent 60%)'
-41:             : 'radial-gradient(ellipse at center, hsl(43 78% 50% / 0.18), transparent 60%)',
+            ? 'radial-gradient(ellipse at center, hsl(43 78% 50% / 0.06), transparent 60%)'
+            : 'radial-gradient(ellipse at center, hsl(43 78% 50% / 0.18), transparent 60%)',
         }}
       />
 
