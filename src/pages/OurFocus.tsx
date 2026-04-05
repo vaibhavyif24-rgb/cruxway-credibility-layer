@@ -491,12 +491,23 @@ const TypographicText = ({ label, value, delay, isDark }: { label: string; value
       initial={{ opacity: 0, y: 12 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={`relative rounded-sm p-5 md:p-6 border transition-colors duration-300 ${
+        isDark
+          ? 'bg-[hsl(228,45%,10%)] border-gold/10 hover:border-gold/25'
+          : 'bg-[hsl(40,20%,97%)] border-[hsl(38,12%,88%)] hover:border-gold/30'
+      }`}
     >
-      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-2 flex items-center gap-1.5 ${isDark ? 'text-gold/75' : 'text-gold/75'}`}>
+      <motion.div
+        className="absolute top-0 left-5 right-5 h-[1.5px] bg-gradient-to-r from-transparent via-gold/25 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={isInView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.6, delay: delay + 0.2, ease: [0.22, 1, 0.36, 1] }}
+      />
+      <p className={`font-sans text-[10px] md:text-[11px] font-medium uppercase tracking-[0.22em] mb-3 flex items-center gap-1.5 text-gold/75`}>
         <span className="w-1.5 h-1.5 rounded-full bg-gold/30" />
         {label}
       </p>
-      <p className={`font-sans text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/60' : 'text-foreground/85'}`}>
+      <p className={`font-sans text-[14px] leading-[1.7] ${isDark ? 'text-primary-foreground/65' : 'text-foreground/85'}`}>
         {value}
       </p>
     </motion.div>
