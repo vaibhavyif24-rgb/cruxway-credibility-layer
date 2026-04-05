@@ -28,7 +28,7 @@ const GeometricHero = () => {
           src={heroImage}
           alt=""
           className="w-full h-full object-cover"
-          style={isMobile ? { objectPosition: '50% 35%' } : undefined}
+          style={isMobile ? { objectPosition: '18% 35%' } : undefined}
           loading="eager"
           fetchPriority="high"
           aria-hidden="true"
