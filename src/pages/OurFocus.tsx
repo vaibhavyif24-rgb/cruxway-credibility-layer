@@ -127,8 +127,8 @@ const OurFocus = () => {
           <FadeIn delay={0.14}>
             <p className={`font-sans text-[15px] leading-[1.75] mt-5 max-w-[480px] ${isDark ? 'text-white/65 drop-shadow-[0_1px_6px_rgba(0,0,0,0.3)]' : 'text-muted-foreground drop-shadow-[0_1px_4px_rgba(0,0,0,0.08)]'}`}>
               {isIndia
-                ? 'We spent our careers at global institutions. This firm exists to bring that discipline to founders who built something real in India, for India.'
-                : 'Our investment approach was shaped by years at blue-chip institutions and refined over hundreds of deals. Here is how we put it to work.'}
+                ? 'Our approach has been shaped over time, informed by experience at leading institutions and across many deals.'
+                : 'Our approach has been shaped over time, informed by experience at leading institutions and across many deals.'}
             </p>
           </FadeIn>
           <FadeIn delay={0.2}>
