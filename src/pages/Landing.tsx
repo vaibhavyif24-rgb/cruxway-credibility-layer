@@ -83,7 +83,7 @@ const Landing = () => {
         transition={{ duration: 0.4, delay: 0.2 }}
         className="relative z-10 mt-20 sm:mt-28"
       >
-        <p className="font-sans text-[11px] md:text-[12px] font-medium uppercase text-white/30 tracking-[0.3em] text-center mb-10">
+        <p className="font-sans text-[12px] md:text-[13px] font-semibold uppercase text-white/50 tracking-[0.35em] text-center mb-10">
           Select Region
         </p>
         <div className="flex gap-5 sm:gap-6">
