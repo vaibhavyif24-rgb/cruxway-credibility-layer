@@ -1,61 +1,33 @@
 
+Goal: fix clipped descenders in desktop hero H1s across the site without changing anything except that rendering issue.
 
-# Parallax Depth Layers for Landing Page Hero
+What I found
+- The 8 hero H1s already use `leading-[1.18]`, so reapplying that value in page files will not fix the remaining clipping.
+- The shared factor across all affected hero headings is the `.text-shimmer-gold` utility in `src/index.css`.
+- That utility uses clipped/transparent text rendering (`background-clip: text` and `-webkit-text-fill-color: transparent`), which can still crop deep descenders like `g`, `y`, and `p` on desktop.
+- The uploaded screenshot from `/india` confirms the clipping still happens even with the current line-height.
 
-## What We're Building
+Implementation
+1. Change only `src/index.css`.
+2. Add a tiny desktop-only descender buffer to `.text-shimmer-gold` so the glyphs have a little extra bottom render space.
+3. Keep the shimmer effect, current hero typography, and existing `leading-[1.18]` values unchanged.
+4. Do not modify page JSX, copy, layout, images, motion, or hero section structure.
 
-Transform the current flat Ken Burns hero into a **multi-layer parallax depth system** where different visual layers (background sky, midground mist, foreground oak tree silhouette, atmospheric haze) move at different speeds on mouse movement, creating a living 3D depth illusion — like looking through a window into the scene.
+Coverage
+This one shared CSS fix will apply to all current hero pages using the hero heading treatment:
+- `src/pages/Home.tsx`
+- `src/pages/About.tsx`
+- `src/pages/Contact.tsx`
+- `src/pages/GuidingPrinciples.tsx`
+- `src/pages/InvestmentCriteria.tsx`
+- `src/pages/OurFocus.tsx`
+- `src/pages/OurPlaybook.tsx`
+- `src/pages/Team.tsx`
 
-## Current State
+Technical details
+- I would not remove `overflow-hidden` from hero sections, because that is part of the cinematic hero system and could affect the visual masks.
+- The safest fix is centralized in the shared text utility rather than touching 8 separate hero components again.
 
-The landing page uses a single `<img>` with a slow Ken Burns zoom/drift. It's cinematic but flat — no depth separation.
-
-## Approach
-
-Since we have a single photograph (not separate layers), we'll create **pseudo-depth** using:
-
-1. **Mouse-tracking parallax** — the image and overlay layers respond to cursor position at different rates, creating perceived depth
-2. **Layered atmospheric effects** — fog/haze bands at different z-depths that drift independently
-3. **Foreground depth overlay** — a subtle gradient vignette that shifts with mouse, simulating foreground out-of-focus elements
-
-### Layer Stack (back to front)
-
-| Layer | Content | Movement | Speed |
-|-------|---------|----------|-------|
-| 0 | Oak tree photo | Slow inverse mouse-track + Ken Burns | 0.3x |
-| 1 | Dark overlay gradient | Static | — |
-| 2 | Low mist band (bottom 30%) | Slow horizontal drift + slight mouse response | 0.15x |
-| 3 | Atmospheric haze (mid) | Very slow drift, opposite direction | 0.1x |
-| 4 | Vignette / depth-of-field edge | Subtle mouse shift | 0.05x |
-| 5 | Gold corner brackets | No mouse tracking (anchored) | — |
-| 6 | Ambient glow | Gentle mouse follow | 0.2x |
-
-## Technical Details
-
-### File: `src/components/GeometricHero.tsx`
-
-1. **Add mouse tracking** — `onMouseMove` handler on the container (remove `pointer-events-none` from outer div, re-apply to child layers selectively). Track normalized mouse position (-1 to 1) with `useMotionValue` + smooth spring damping.
-
-2. **Photo layer** — Apply `translateX/Y` based on mouse position at 0.3x multiplier (max ~15px shift). Keep existing Ken Burns scale animation.
-
-3. **Mist layer** — Add 2 semi-transparent gradient bands (CSS radial/linear gradients, white/blueish at ~3-5% opacity) positioned at bottom 30% of viewport. Apply slow horizontal CSS drift animation + slight mouse response at 0.15x.
-
-4. **Atmospheric haze** — A mid-height blurred gradient band drifting in the opposite direction, very subtle (2-3% opacity).
-
-5. **Dynamic vignette** — The existing vignette gets a slight translate based on mouse at 0.05x, so the dark edges subtly shift with your gaze.
-
-6. **Ambient glow** — The gold center glow follows the mouse at 0.2x, making it feel like light source tracking.
-
-7. **Mobile fallback** — On mobile (no mouse), use a gentle automatic oscillating motion via `useMotionValue` with a sine-wave timer, so the depth effect still plays without interaction.
-
-### File: `src/pages/Landing.tsx`
-
-- Minor: ensure the outer container allows pointer events to reach the hero for mouse tracking (currently the hero is `pointer-events-none`). The text/buttons above it already have `z-10` so they'll remain interactive.
-
-## Performance
-
-- All transforms use `will-change: transform` and `translateZ(0)` for GPU compositing
-- Mouse values smoothed via framer-motion springs (no jank)
-- Mist/haze layers are pure CSS gradients (no extra images)
-- Reduced particle count on mobile
-
+Validation
+- Verify desktop hero headings on the affected pages, especially `/india`, to confirm letters like `g`, `y`, and `p` are fully visible.
+- Confirm there is no visible change to copy, line breaks, spacing, or animation beyond the descender fix.
