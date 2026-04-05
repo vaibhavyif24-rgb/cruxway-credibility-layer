@@ -18,7 +18,7 @@ import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
-  { num: '02', title: 'Evaluation & Diligence', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists follows. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence.' },
+  { num: '02', title: 'Diligence', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists follows. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence.' },
   { num: '03', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
 ];
 
@@ -46,7 +46,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
           <button
             key={i}
             onClick={() => handleClick(i)}
-            className={`relative w-full min-h-[48px] px-3 md:px-5 py-3 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden text-center flex items-center justify-center
+            className={`relative w-full h-[52px] px-3 md:px-5 py-3 rounded-sm font-sans text-[11px] md:text-[12px] font-medium uppercase tracking-[0.14em] transition-all duration-300 border overflow-hidden text-center flex items-center justify-center
               ${active === i
                 ? 'bg-gold/20 border-gold/40 text-gold shadow-[0_2px_12px_-2px_hsl(var(--gold)/0.2)]'
                 : isDark
