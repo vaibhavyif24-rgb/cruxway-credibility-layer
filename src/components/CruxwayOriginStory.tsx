@@ -223,7 +223,7 @@ const CruxwayOriginStory = () => {
       <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ background: solidBg }}>
 
         {/* ─── Background: Crucible ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: act1BgOp, zIndex: 1 }}>
+        <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: act1BgOp, zIndex: 1 }}>
           <ImageBackground src={crucibleImg} />
           <CrucibleEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleOverlay }} />
@@ -233,7 +233,7 @@ const CruxwayOriginStory = () => {
         </motion.div>
 
         {/* ─── Background: The Way ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: act2BgOp, zIndex: 2 }}>
+        <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: act2BgOp, zIndex: 2 }}>
           <ImageBackground src={wayImg} variant="drift" />
           <WayEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: wayOverlay }} />
@@ -243,7 +243,7 @@ const CruxwayOriginStory = () => {
         </motion.div>
 
         {/* ─── Background: Merge (Acts 3-4) ─── */}
-        <motion.div className="absolute inset-0" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
+        <motion.div className="absolute inset-0 pointer-events-none" style={{ opacity: crucibleReturnOp, zIndex: 3 }}>
           <ImageBackground src={mergeImg} />
           <MergeEffects isMobile={isMobile} isDark={isDark} />
           <div className="absolute inset-0" style={{ background: crucibleReturnOverlay }} />
@@ -255,7 +255,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 1 Content ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act1LabelOp }}
         >
           <TextAura isDark={isDark} />
@@ -319,7 +319,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 2 Content ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act2LabelOp }}
         >
           <TextAura isDark={isDark} />
@@ -422,7 +422,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 3: The Equation ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act3Op }}
         >
           <TextAura isDark={isDark} size="wide" />
@@ -492,7 +492,7 @@ const CruxwayOriginStory = () => {
 
         {/* ─── ACT 4: The Name ─── */}
         <motion.div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
           style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform' }}
         >
           <TextAura isDark={isDark} />
