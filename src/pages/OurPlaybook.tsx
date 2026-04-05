@@ -41,7 +41,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
 
   return (
     <div ref={containerRef}>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 md:mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 mb-6 md:mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
