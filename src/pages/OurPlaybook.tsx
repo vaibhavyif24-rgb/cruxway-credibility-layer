@@ -18,9 +18,8 @@ import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
 
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
-  { num: '02', title: 'Evaluation', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. We triangulate data with on-the-ground diligence and reference networks.' },
-  { num: '03', title: 'Diligence', description: 'Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence, not intuition.' },
-  { num: '04', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
+  { num: '02', title: 'Evaluation & Diligence', description: 'Every opportunity is stress-tested across financials, unit economics, customer concentration, competitive positioning, management quality, and cultural alignment. Rigorous financial, operational, legal, regulatory, and commercial analysis with third-party specialists follows. We model downside scenarios, validate assumptions with industry operators, and build conviction through evidence.' },
+  { num: '03', title: 'Structuring', description: 'Ownership, governance, incentive alignment, and capital structures engineered for multi-decade compounding. Every term sheet reflects our commitment to permanence over optionality.' },
 ];
 
 const valueCreationItems = [
@@ -42,7 +41,7 @@ const StepNavigator = ({ steps, isDark }: { steps: typeof evaluationSteps; isDar
 
   return (
     <div ref={containerRef}>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6 md:mb-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 mb-6 md:mb-8">
         {steps.map((step, i) => (
           <button
             key={i}
