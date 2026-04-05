@@ -381,6 +381,8 @@
     background-clip: text;
     animation: text-shimmer 3s ease-in-out 0.5s 1;
     animation-fill-mode: forwards;
+    padding-bottom: 0.15em;
+    margin-bottom: -0.15em;
   }
 
   /* CTA button pulse glow */
