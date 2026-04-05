@@ -422,8 +422,9 @@ const Team = () => {
       {/* ScrollRevealText — before network */}
       <ScrollRevealText
         label="Network"
-        heading="Relationships built over decades of shared work and mutual respect."
+        heading="Relationships built patiently over decades, where small beginnings compound into lasting trust."
         variant="dark"
+        className="[&>div]:py-8 [&>div]:md:py-10 [&>div]:lg:py-12"
       />
 
       {/* Network — Advisors & Operating Partners */}
