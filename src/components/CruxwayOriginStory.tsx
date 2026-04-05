@@ -209,6 +209,10 @@ const CruxwayOriginStory = () => {
   const act4DividerOp = useTransform(scrollYProgress, [0.76, 0.78], [0, 1]);
   const act4StatementOp = useTransform(scrollYProgress, [0.78, 0.82], [0, 1]);
   const act4ClosingOp = useTransform(scrollYProgress, [0.82, 0.86], [0, 1]);
+  const act1PointerEvents = useTransform(act1LabelOp, (value) => (value > 0.05 ? 'auto' : 'none'));
+  const act2PointerEvents = useTransform(act2LabelOp, (value) => (value > 0.05 ? 'auto' : 'none'));
+  const act3PointerEvents = useTransform(act3Op, (value) => (value > 0.05 ? 'auto' : 'none'));
+  const act4PointerEvents = useTransform(act4Op, (value) => (value > 0.05 ? 'auto' : 'none'));
 
   /* Hoisted definition line Y transforms (cannot call hooks inside JSX) */
   const act2Line1Y = useTransform(scrollYProgress, [0.35, 0.38], [12, 0]);
@@ -217,6 +221,10 @@ const CruxwayOriginStory = () => {
   const act2Line4Y = useTransform(scrollYProgress, [0.38, 0.41], [12, 0]);
 
   const headingSize = isMobile ? 'clamp(3rem, 13vw, 4.5rem)' : 'clamp(3.5rem, 8vw, 6rem)';
+  const selectableContentStyles = {
+    userSelect: 'text' as const,
+    WebkitUserSelect: 'text' as const,
+  };
 
   return (
     <div ref={containerRef} className="relative" style={{ height: scrollH }}>
@@ -256,7 +264,7 @@ const CruxwayOriginStory = () => {
         {/* ─── ACT 1 Content ─── */}
         <motion.div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
-          style={{ opacity: act1LabelOp }}
+          style={{ opacity: act1LabelOp, pointerEvents: act1PointerEvents, ...selectableContentStyles }}
         >
           <TextAura isDark={isDark} />
           {/* Heading glow */}
@@ -320,7 +328,7 @@ const CruxwayOriginStory = () => {
         {/* ─── ACT 2 Content ─── */}
         <motion.div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
-          style={{ opacity: act2LabelOp }}
+          style={{ opacity: act2LabelOp, pointerEvents: act2PointerEvents, ...selectableContentStyles }}
         >
           <TextAura isDark={isDark} />
 
@@ -423,7 +431,7 @@ const CruxwayOriginStory = () => {
         {/* ─── ACT 3: The Equation ─── */}
         <motion.div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
-          style={{ opacity: act3Op }}
+          style={{ opacity: act3Op, pointerEvents: act3PointerEvents, ...selectableContentStyles }}
         >
           <TextAura isDark={isDark} size="wide" />
           <div className="flex items-baseline gap-3 md:gap-5">
@@ -493,7 +501,7 @@ const CruxwayOriginStory = () => {
         {/* ─── ACT 4: The Name ─── */}
         <motion.div
           className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6 md:px-8 text-center select-text"
-          style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform' }}
+          style={{ opacity: act4Op, scale: act4Scale, willChange: 'transform', pointerEvents: act4PointerEvents, ...selectableContentStyles }}
         >
           <TextAura isDark={isDark} />
           <p
