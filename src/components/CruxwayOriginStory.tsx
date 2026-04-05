@@ -486,7 +486,7 @@ const CruxwayOriginStory = () => {
               letterSpacing: '0.01em',
             }}
           >
-            Getting from A to B matters. To get there, you transform under pressure and sustained discipline. But the journey itself matters. It must be aligned with the natural order of things.
+            We are guided by clear goals and accept the discipline and transformation required to reach them. Yet the manner of the journey matters as much as the destination; enduring results come only when they are earned the right way, with values intact and judgment uncompromised.
           </motion.p>
         </motion.div>
 
