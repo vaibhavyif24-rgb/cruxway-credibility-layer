@@ -56,15 +56,28 @@ const CinematicHero = ({ imageSrc, videoSrc, overlay = 'strong' }: CinematicHero
             x: { duration: 32, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
           }}
         >
-          <img
-            src={imageSrc}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            aria-hidden="true"
-          />
+          {videoSrc ? (
+            <video
+              src={videoSrc}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden="true"
+              style={{ pointerEvents: 'none' }}
+            />
+          ) : (
+            <img
+              src={imageSrc}
+              alt=""
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              aria-hidden="true"
+            />
+          )}
         </motion.div>
       </motion.div>
 
