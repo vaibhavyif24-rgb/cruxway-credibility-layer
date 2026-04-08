@@ -3,6 +3,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 
 interface CinematicHeroProps {
   imageSrc: string;
+  videoSrc?: string;
   overlay?: 'strong' | 'medium';
 }
 
