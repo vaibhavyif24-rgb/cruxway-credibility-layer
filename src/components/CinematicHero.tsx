@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -41,32 +42,8 @@ const CinematicHero = ({ imageSrc, videoSrc, overlay = 'strong' }: CinematicHero
     : 'radial-gradient(ellipse at center, transparent 40%, hsl(40 20% 90% / 0.4) 100%)';
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Photo with Ken Burns + parallax */}
-      <motion.div
-        className="absolute inset-[-10%]"
-        style={{ y: parallaxY, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
-      >
-        <motion.div
-          className="w-full h-full"
-          initial={{ scale: 1.0, x: 0 }}
-          animate={{ scale: 1.22, x: [0, 20, -15, 5, 0] }}
-          transition={{
-            scale: { duration: 24, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-            x: { duration: 32, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
-          }}
-        >
-          <img
-            src={imageSrc}
-            alt=""
-            className="w-full h-full object-cover"
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            aria-hidden="true"
-          />
-        </motion.div>
-      </motion.div>
+    <CinematicHeroInner videoSrc={videoSrc} imageSrc={imageSrc} parallaxY={parallaxY} />
+
 
       {/* Theme-aware overlay */}
       <div className={`absolute inset-0 z-[1] ${overlayClass}`} />
