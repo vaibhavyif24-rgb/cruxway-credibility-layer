@@ -7,7 +7,7 @@ interface CinematicHeroProps {
   overlay?: 'strong' | 'medium';
 }
 
-const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => {
+const CinematicHero = ({ imageSrc, videoSrc, overlay = 'strong' }: CinematicHeroProps) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
