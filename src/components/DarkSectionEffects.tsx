@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 const DarkSectionEffects = forwardRef<HTMLDivElement, { variant?: 'default' | 'hero' | 'cta' }>(

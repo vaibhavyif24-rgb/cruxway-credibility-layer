@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import LightSectionEffects from '@/components/LightSectionEffects';
 import { useIsMobile } from '@/hooks/use-mobile';

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const LightSectionEffects = forwardRef<HTMLDivElement, { variant?: 'hero' | 'section' | 'cta' }>(

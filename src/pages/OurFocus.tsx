@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { SectionLabel, FadeIn, GoldRule, HeroDivider } from '@/components/ui/Section';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { useRegion } from '@/contexts/RegionContext';
