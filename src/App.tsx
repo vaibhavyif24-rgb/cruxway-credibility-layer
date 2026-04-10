@@ -5,8 +5,7 @@ import { RegionProvider } from "@/contexts/RegionContext";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import ScrollToTop from "@/components/ScrollToTop";
 import { AnimatePresence, motion } from "framer-motion";
-
-const Landing = lazy(() => import("./pages/Landing"));
+import Landing from "./pages/Landing";
 const Home = lazy(() => import("./pages/Home"));
 const GuidingPrinciples = lazy(() => import("./pages/GuidingPrinciples"));
 const OurFocus = lazy(() => import("./pages/OurFocus"));
