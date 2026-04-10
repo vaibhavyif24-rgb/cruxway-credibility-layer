@@ -420,7 +420,7 @@ const Home = () => {
           </FadeIn>
           <FadeIn delay={0.04}>
             <p className="font-sans text-[11px] md:text-[12px] font-semibold uppercase tracking-[0.22em] text-gold mb-4">
-              Built for Owners Thinking Long-Term
+              Capital That Respects What You Built
             </p>
           </FadeIn>
           <FadeIn delay={0.08}>
