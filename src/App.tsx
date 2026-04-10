@@ -81,22 +81,6 @@ const PageLoader = () => {
         />
       </div>
 
-      {/* Pulsing radial gold ring */}
-      <motion.div
-        className="absolute pointer-events-none"
-        style={{
-          width: 200,
-          height: 200,
-          borderRadius: '50%',
-          border: isDark ? '1px solid hsl(43 78% 50% / 0.10)' : '1px solid hsl(43 78% 50% / 0.25)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-        animate={{ scale: [0.9, 1.1, 0.9], opacity: [0.3, 0.7, 0.3] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
       {/* Rotating gold arc */}
       <motion.svg
         className="absolute pointer-events-none"
@@ -105,7 +89,7 @@ const PageLoader = () => {
         viewBox="0 0 160 160"
         style={{ top: '50%', left: '50%', marginTop: -80, marginLeft: -80 }}
         animate={{ rotate: [0, 360] }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
       >
         <circle
           cx="80"
@@ -118,52 +102,6 @@ const PageLoader = () => {
           strokeLinecap="round"
         />
       </motion.svg>
-
-      {/* Floating gold particles (vertical) */}
-      {[...Array(4)].map((_, i) => (
-        <motion.div
-          key={`v-${i}`}
-          className="absolute rounded-full"
-          style={{
-            width: 2 + (i % 2),
-            height: 2 + (i % 2),
-            background: 'hsl(43 78% 50%)',
-            left: `${30 + i * 14}%`,
-            bottom: '30%',
-            opacity: isDark ? 0.25 : 0.55,
-          }}
-          animate={{ y: [0, -40, -80], opacity: [0, isDark ? 0.25 : 0.55, 0] }}
-          transition={{
-            duration: 3 + i * 0.5,
-            repeat: Infinity,
-            delay: 0.5 + i * 0.4,
-            ease: 'easeOut',
-          }}
-        />
-      ))}
-
-      {/* Horizontal drifting particles (light + dark) */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={`h-${i}`}
-          className="absolute rounded-full"
-          style={{
-            width: 2,
-            height: 2,
-            background: 'hsl(43 78% 50%)',
-            top: `${40 + i * 10}%`,
-            left: '20%',
-            opacity: isDark ? 0.18 : 0.45,
-          }}
-          animate={{ x: [0, 60, 120], opacity: [0, isDark ? 0.18 : 0.45, 0] }}
-          transition={{
-            duration: 5 + i * 0.8,
-            repeat: Infinity,
-            delay: 1 + i * 0.6,
-            ease: 'easeOut',
-          }}
-        />
-      ))}
     </motion.div>
   );
 };
