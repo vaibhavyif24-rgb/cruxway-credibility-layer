@@ -113,7 +113,7 @@ const OurFocus = () => {
     <div className="overflow-x-clip">
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[50vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-        <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} videoSrc={isIndia ? '/videos/india-focus-hero.mp4' : undefined} overlay="strong" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaCriteria : heroUSCriteria} overlay="strong" />
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-10 md:pt-36 md:pb-14 lg:pt-40 lg:pb-14">
           <FadeIn>

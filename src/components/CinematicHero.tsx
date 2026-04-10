@@ -1,26 +1,17 @@
-import { useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface CinematicHeroProps {
   imageSrc: string;
-  videoSrc?: string;
   overlay?: 'strong' | 'medium';
 }
 
-const CinematicHero = ({ imageSrc, videoSrc, overlay = 'strong' }: CinematicHeroProps) => {
+const CinematicHero = ({ imageSrc, overlay = 'strong' }: CinematicHeroProps) => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const { scrollY } = useScroll();
   const parallaxY = useTransform(scrollY, [0, 600], [0, -100]);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  }, [videoSrc]);
 
   const lineStyle = {
     stroke: 'hsl(43 70% 50%)',
@@ -50,45 +41,30 @@ const CinematicHero = ({ imageSrc, videoSrc, overlay = 'strong' }: CinematicHero
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Media with Ken Burns + parallax */}
+      {/* Photo with Ken Burns + parallax */}
       <motion.div
         className="absolute inset-[-10%]"
         style={{ y: parallaxY, willChange: 'transform', transform: 'translateZ(0)', backfaceVisibility: 'hidden' }}
       >
-        {videoSrc ? (
-          <video
-            ref={videoRef}
-            src={videoSrc}
+        <motion.div
+          className="w-full h-full"
+          initial={{ scale: 1.0, x: 0 }}
+          animate={{ scale: 1.22, x: [0, 20, -15, 5, 0] }}
+          transition={{
+            scale: { duration: 24, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
+            x: { duration: 32, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
+          }}
+        >
+          <img
+            src={imageSrc}
+            alt=""
             className="w-full h-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             aria-hidden="true"
-            poster={imageSrc}
           />
-        ) : (
-          <motion.div
-            className="w-full h-full"
-            initial={{ scale: 1.0, x: 0 }}
-            animate={{ scale: 1.22, x: [0, 20, -15, 5, 0] }}
-            transition={{
-              scale: { duration: 24, ease: 'linear', repeat: Infinity, repeatType: 'reverse' },
-              x: { duration: 32, ease: 'easeInOut', repeat: Infinity, repeatType: 'reverse' },
-            }}
-          >
-            <img
-              src={imageSrc}
-              alt=""
-              className="w-full h-full object-cover"
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              aria-hidden="true"
-            />
-          </motion.div>
-        )}
+        </motion.div>
       </motion.div>
 
       {/* Theme-aware overlay */}
@@ -135,6 +111,7 @@ const CinematicHero = ({ imageSrc, videoSrc, overlay = 'strong' }: CinematicHero
           transition={{ duration: 4 + i * 0.4, delay: 2 + i * 0.6, repeat: Infinity, repeatDelay: 3 + i * 0.5, ease: 'easeOut' }}
         />
       ))}
+
     </div>
   );
 };

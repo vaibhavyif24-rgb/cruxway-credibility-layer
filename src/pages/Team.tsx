@@ -361,7 +361,7 @@ const Team = () => {
     <div style={{ overflowX: 'clip' }}>
       {/* Hero — with CinematicHero background */}
       <section className={`relative overflow-hidden min-h-[60vh] md:min-h-[55vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
-        <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} videoSrc={isIndia ? '/videos/india-team-hero.mp4' : undefined} overlay="medium" />
+        <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="medium" />
         
         {isDark ? <DarkSectionEffects variant="hero" /> : <LightSectionEffects variant="hero" />}
         <div className="relative z-10 max-w-[1080px] mx-auto px-5 md:px-10 lg:px-16 pt-28 pb-44 md:pt-36 md:pb-40 lg:pt-40 lg:pb-40">
