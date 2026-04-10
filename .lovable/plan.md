@@ -1,33 +1,25 @@
 
-Goal: fix clipped descenders in desktop hero H1s across the site without changing anything except that rendering issue.
+## Dead Code Policy
 
-What I found
-- The 8 hero H1s already use `leading-[1.18]`, so reapplying that value in page files will not fix the remaining clipping.
-- The shared factor across all affected hero headings is the `.text-shimmer-gold` utility in `src/index.css`.
-- That utility uses clipped/transparent text rendering (`background-clip: text` and `-webkit-text-fill-color: transparent`), which can still crop deep descenders like `g`, `y`, and `p` on desktop.
-- The uploaded screenshot from `/india` confirms the clipping still happens even with the current line-height.
+The following files have been deleted and should NOT be recreated:
 
-Implementation
-1. Change only `src/index.css`.
-2. Add a tiny desktop-only descender buffer to `.text-shimmer-gold` so the glyphs have a little extra bottom render space.
-3. Keep the shimmer effect, current hero typography, and existing `leading-[1.18]` values unchanged.
-4. Do not modify page JSX, copy, layout, images, motion, or hero section structure.
+- Pages: About.tsx, Index.tsx, InvestmentCriteria.tsx
 
-Coverage
-This one shared CSS fix will apply to all current hero pages using the hero heading treatment:
-- `src/pages/Home.tsx`
-- `src/pages/About.tsx`
-- `src/pages/Contact.tsx`
-- `src/pages/GuidingPrinciples.tsx`
-- `src/pages/InvestmentCriteria.tsx`
-- `src/pages/OurFocus.tsx`
-- `src/pages/OurPlaybook.tsx`
-- `src/pages/Team.tsx`
+- Components: CriteriaPipeline, HorizontalStickyDeck, NavLink, PrinciplesDeck, PrinciplesGrid, SectorShowcase, StrengthsWidget, StickyCardStack, AnimatedAccent, CriteriaIllustrations, CriteriaCarousel, CinematicScrollReveal, USCinematicScrollReveal
 
-Technical details
-- I would not remove `overflow-hidden` from hero sections, because that is part of the cinematic hero system and could affect the visual masks.
-- The safest fix is centralized in the shared text utility rather than touching 8 separate hero components again.
+- UI: 23 unused shadcn components (accordion through toggle-group), toaster.tsx, use-toast.ts, hooks/use-toast.ts
 
-Validation
-- Verify desktop hero headings on the affected pages, especially `/india`, to confirm letters like `g`, `y`, and `p` are fully visible.
-- Confirm there is no visible change to copy, line breaks, spacing, or animation beyond the descender fix.
+## Import Rules
+
+- Do NOT use `import React from 'react'` unless `React.` is explicitly referenced in the file body
+- Import hooks directly: `import { useState, useEffect } from 'react'`
+- framer-motion v12 is installed. Imports from `framer-motion` are correct for this project.
+
+## Style Rules
+
+- Extract static inline style objects to constants outside components
+- Use `useMemo` for style objects that depend on theme/region
+
+## Text Shimmer Fix
+
+The `.text-shimmer-gold` utility in `src/index.css` includes a desktop-only descender buffer to prevent clipping of letters like `g`, `y`, `p` when using `background-clip: text`. This fix is centralized — do not add per-page workarounds.
