@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import heroImage from '@/assets/hero-forking-road.jpg';
+import heroImage from '@/assets/hero-forking-road.webp';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
