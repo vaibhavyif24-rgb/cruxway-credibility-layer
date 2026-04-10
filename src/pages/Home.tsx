@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useRegion } from '@/contexts/RegionContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
@@ -236,6 +236,14 @@ const ProcessCarousel = React.memo(({ steps, isDark }: { steps: typeof processSt
 });
 ProcessCarousel.displayName = 'ProcessCarousel';
 
+/* ─── Static styles ─── */
+const opportunitySectionStyle = { height: 'clamp(50vh, 60vh, 70vh)' } as const;
+const noiseOverlayStyle = { backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' } as const;
+const lightWarmGlowStyle = { background: 'radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.08) 0%, transparent 60%)' } as const;
+const goldTextShadowStyle = { textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' } as const;
+const clipOverflowStyle = { overflowX: 'clip' } as const;
+const ctaDividerStyle = { background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.15), transparent)', animationDuration: '5s' } as const;
+
 /* ─── Opportunity Cinematic Section Header ─── */
 const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: boolean }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -254,6 +262,18 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
   const pexelsUSVid = 'https://videos.pexels.com/video-files/31209892/13331473_2560_1440_24fps.mp4';
   const pexelsUSImg = 'https://images.pexels.com/videos/31209892/pexels-photo-31209892.jpeg?auto=compress&w=1200';
 
+  const gradientOverlayStyle = useMemo(() => ({
+    background: isDark
+      ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
+      : 'linear-gradient(to bottom, hsl(40 25% 94% / 0.75) 0%, hsl(40 22% 91% / 0.88) 40%, hsl(40 22% 91% / 0.95) 100%)'
+  }), [isDark]);
+
+  const radialOverlayStyle = useMemo(() => ({
+    background: isDark
+      ? 'radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)'
+      : 'radial-gradient(ellipse at center, transparent 30%, hsl(40 20% 85% / 0.3) 100%)'
+  }), [isDark]);
+
   // Play/pause video based on viewport
   useEffect(() => {
     const video = videoRef.current;
@@ -269,7 +289,7 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
     <section
       ref={sectionRef}
       className="relative overflow-hidden"
-      style={{ height: 'clamp(50vh, 60vh, 70vh)' }}
+      style={opportunitySectionStyle}
     >
       <motion.div
         className="absolute inset-[-10%]"
@@ -299,23 +319,13 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
         </video>
       </motion.div>
 
-      <div className="absolute inset-0 z-[2]" style={{
-        background: isDark
-          ? 'linear-gradient(to bottom, hsl(228 55% 8% / 0.7) 0%, hsl(228 55% 8% / 0.85) 40%, hsl(228 55% 8% / 0.92) 100%)'
-          : 'linear-gradient(to bottom, hsl(40 25% 94% / 0.75) 0%, hsl(40 22% 91% / 0.88) 40%, hsl(40 22% 91% / 0.95) 100%)'
-      }} />
-      <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-        background: isDark
-          ? 'radial-gradient(ellipse at center, transparent 30%, hsl(228 55% 8% / 0.25) 100%)'
-          : 'radial-gradient(ellipse at center, transparent 30%, hsl(40 20% 85% / 0.3) 100%)'
-      }} />
+      <div className="absolute inset-0 z-[2]" style={gradientOverlayStyle} />
+      <div className="absolute inset-0 z-[2] pointer-events-none" style={radialOverlayStyle} />
       {!isDark && (
-        <div className="absolute inset-0 z-[2] pointer-events-none" style={{
-          background: 'radial-gradient(ellipse at 50% 60%, hsl(40 30% 50% / 0.08) 0%, transparent 60%)'
-        }} />
+        <div className="absolute inset-0 z-[2] pointer-events-none" style={lightWarmGlowStyle} />
       )}
       <div className={`absolute inset-0 z-[3] pointer-events-none ${isDark ? 'opacity-[0.03]' : 'opacity-[0.015]'}`}
-        style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }}
+        style={noiseOverlayStyle}
       />
 
       <div className="absolute inset-0 z-[4] flex items-center justify-center">
@@ -397,7 +407,7 @@ const Home = () => {
   const isIndia = region === 'india';
 
   return (
-    <div style={{ overflowX: 'clip' }}>
+    <div style={clipOverflowStyle}>
       {/* Hero */}
       <section className={`relative overflow-hidden min-h-[60vh] md:min-h-[85vh] flex items-end ${isDark ? 'text-primary-foreground' : 'text-foreground'}`}>
         <CinematicHero imageSrc={isIndia ? heroIndiaHome : heroUSHome} overlay="strong" />
@@ -416,8 +426,8 @@ const Home = () => {
           <FadeIn delay={0.08}>
             <h1 className={`text-shimmer-gold font-serif text-[clamp(2rem,5vw,3.4rem)] max-w-[680px] leading-[1.18] tracking-[-0.03em] ${isDark ? 'text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)]' : 'text-foreground drop-shadow-[0_1px_8px_rgba(0,0,0,0.12)]'}`}>
               {isIndia
-                ? <>Investing in India's <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Industrial</span> Backbone</>
-                : <>Building the <span className="text-gold" style={{ textShadow: '0 2px 12px hsl(43,78%,50%,0.4)' }}>Next Generation</span> of Essential U.S. Companies</>}
+                ? <>Investing in India's <span className="text-gold" style={goldTextShadowStyle}>Industrial</span> Backbone</>
+                : <>Building the <span className="text-gold" style={goldTextShadowStyle}>Next Generation</span> of Essential U.S. Companies</>}
             </h1>
           </FadeIn>
           <FadeIn delay={0.14}>
@@ -528,7 +538,7 @@ const Home = () => {
       </div>
 
       {/* CTA */}
-      <div className="h-px w-full shimmer-effect mt-0" style={{ background: 'linear-gradient(90deg, transparent, hsl(40, 60%, 48%, 0.15), transparent)', animationDuration: '5s' }} />
+      <div className="h-px w-full shimmer-effect mt-0" style={ctaDividerStyle} />
 
       <section className={`relative overflow-hidden px-5 md:px-10 lg:px-16 py-12 md:py-16 lg:py-20 ${
         isDark ? 'hero-gradient-animated text-primary-foreground' : 'bg-[hsl(40,20%,91%)] text-foreground border-t border-gold/20'
