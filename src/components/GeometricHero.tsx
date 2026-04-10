@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import heroImage from '@/assets/hero-forking-road.webp';
+import heroImageMobile from '@/assets/hero-forking-road-mobile.webp';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 /**
@@ -25,7 +26,7 @@ const GeometricHero = () => {
         }}
       >
         <img
-          src={heroImage}
+          src={isMobile ? heroImageMobile : heroImage}
           alt=""
           className="w-full h-full object-cover"
           style={isMobile ? { objectPosition: '18% 35%' } : undefined}
