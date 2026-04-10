@@ -26,7 +26,7 @@ const GeometricHero = () => {
         }}
       >
         <img
-          src={heroImage}
+          src={isMobile ? heroImageMobile : heroImage}
           alt=""
           className="w-full h-full object-cover"
           style={isMobile ? { objectPosition: '18% 35%' } : undefined}
