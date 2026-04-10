@@ -21,6 +21,7 @@ const RegionLayout = () => {
   }, [urlRegion, setRegion, setRegionTheme, navigate]);
 
   if (urlRegion !== 'india' && urlRegion !== 'us') return null;
+  if (!region) return null;
 
   return (
     <div className="min-h-screen flex flex-col">
