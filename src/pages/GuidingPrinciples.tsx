@@ -11,8 +11,8 @@ import WaveBackground from '@/components/WaveBackground';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
-import heroIndiaPrinciples from '@/assets/hero-india-principles.jpg';
-import heroUSPrinciples from '@/assets/hero-us-principles.jpg';
+import heroIndiaPrinciples from '@/assets/hero-india-principles.webp';
+import heroUSPrinciples from '@/assets/hero-us-principles.webp';
 
 const GuidingPrinciples = () => {
   const { region } = useRegion();

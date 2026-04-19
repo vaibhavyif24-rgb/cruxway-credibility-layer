@@ -14,8 +14,8 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import WaveBackground from '@/components/WaveBackground';
 
-import heroIndiaHome from '@/assets/hero-india-home.jpg';
-import heroUSHome from '@/assets/hero-us-home.jpg';
+import heroIndiaHome from '@/assets/hero-india-home.webp';
+import heroUSHome from '@/assets/hero-us-home.webp';
 
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
@@ -24,10 +24,10 @@ import saltwaterLogo from '@/assets/logos/saltwater-capital.svg';
 
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
-import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
+import nitiAayogLogo from '@/assets/logos/niti-aayog.webp';
 import iicLogo from '@/assets/logos/iic.png';
-import treeforestLogo from '@/assets/logos/treeforest.png';
-import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
+import treeforestLogo from '@/assets/logos/treeforest.webp';
+import lodhaGeniusLogo from '@/assets/logos/lodha-genius.webp';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [
@@ -295,28 +295,30 @@ const OpportunityCinematic = ({ isIndia, isDark }: { isIndia: boolean; isDark: b
         className="absolute inset-[-10%]"
         style={{ scale: videoScale, y: videoY, willChange: 'transform' }}
       >
-        <video
-          ref={videoRef}
-          muted
-          loop
-          playsInline
-          preload="none"
-          // @ts-ignore
-          fetchpriority="low"
-          className="w-full h-full object-cover"
-          poster={isIndia
-            ? 'https://images.pexels.com/videos/35213732/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213732.jpeg?auto=compress&w=1200'
-            : pexelsUSImg
-          }
-        >
-          <source
-            src={isIndia
-              ? 'https://videos.pexels.com/video-files/35213732/14917606_2560_1440_60fps.mp4'
-              : pexelsUSVid
+        {isVideoInView ? (
+          <video
+            ref={videoRef}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="w-full h-full object-cover"
+            poster={isIndia
+              ? 'https://images.pexels.com/videos/35213732/4k-aerial-4k-aerial-shot-abstract-sky-aerial-from-the-sky-35213732.jpeg?auto=compress&w=1200'
+              : pexelsUSImg
             }
-            type="video/mp4"
-          />
-        </video>
+          >
+            <source
+              src={isIndia
+                ? 'https://videos.pexels.com/video-files/35213732/14917606_2560_1440_60fps.mp4'
+                : pexelsUSVid
+              }
+              type="video/mp4"
+            />
+          </video>
+        ) : (
+          <div className={`w-full h-full ${isDark ? 'bg-prussian' : 'bg-[hsl(40,22%,91%)]'}`} aria-hidden="true" />
+        )}
       </motion.div>
 
       <div className="absolute inset-0 z-[2]" style={gradientOverlayStyle} />

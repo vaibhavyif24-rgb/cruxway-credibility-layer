@@ -14,8 +14,8 @@ import CinematicHero from '@/components/CinematicHero';
 import harinPhoto from '@/assets/team/harin-gupta.jpg';
 import vaibhavPhoto from '@/assets/team/vaibhav-sharma.jpg';
 
-import heroIndiaHome from '@/assets/hero-india-home.jpg';
-import heroUSHome from '@/assets/hero-us-home.jpg';
+import heroIndiaHome from '@/assets/hero-india-home.webp';
+import heroUSHome from '@/assets/hero-us-home.webp';
 
 // Deal logos — Harin
 import rmsEnergyLogo from '@/assets/deals/rms-energy.png';
@@ -37,10 +37,10 @@ import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
 
 // Logos — Vaibhav
-import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
+import nitiAayogLogo from '@/assets/logos/niti-aayog.webp';
 import iicLogo from '@/assets/logos/iic.png';
-import treeforestLogo from '@/assets/logos/treeforest.png';
-import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
+import treeforestLogo from '@/assets/logos/treeforest.webp';
+import lodhaGeniusLogo from '@/assets/logos/lodha-genius.webp';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 // Deal logos — Vaibhav
