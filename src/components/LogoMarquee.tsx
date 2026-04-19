@@ -91,6 +91,8 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
               <img
                 src={logo.src}
                 alt={logo.alt}
+                width={Math.round(clampedScale * baseMaxWidth)}
+                height={Math.round(clampedScale * baseHeight)}
                 className={`w-auto object-contain ${logoOpacity}`}
                 style={{
                   height: `${Math.round(clampedScale * baseHeight)}px`,
@@ -100,6 +102,7 @@ const LogoMarquee = forwardRef<HTMLDivElement, LogoMarqueeProps>(({ logos, durat
                   transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
                 }}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           );

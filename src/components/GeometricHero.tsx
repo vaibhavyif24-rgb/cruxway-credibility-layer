@@ -28,10 +28,13 @@ const GeometricHero = () => {
         <img
           src={isMobile ? heroImageMobile : heroImage}
           alt=""
+          width={1920}
+          height={1080}
           className="w-full h-full object-cover"
           style={isMobile ? { objectPosition: '18% 35%' } : undefined}
           loading="eager"
           fetchPriority="high"
+          decoding="async"
           aria-hidden="true"
         />
       </motion.div>
