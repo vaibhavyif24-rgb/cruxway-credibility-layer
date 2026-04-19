@@ -13,8 +13,8 @@ import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'fra
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-import heroIndiaCriteria from '@/assets/hero-india-criteria.jpg';
-import heroUSCriteria from '@/assets/hero-us-criteria.jpg';
+import heroIndiaCriteria from '@/assets/hero-india-criteria.webp';
+import heroUSCriteria from '@/assets/hero-us-criteria.webp';
 
 const investmentProfile = {
   us: [

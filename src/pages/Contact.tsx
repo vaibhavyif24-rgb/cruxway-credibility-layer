@@ -11,8 +11,8 @@ import GlassCard from '@/components/GlassCard';
 import ScrollRevealText from '@/components/ScrollRevealText';
 
 
-import heroIndiaContact from '@/assets/hero-india-contact.jpg';
-import heroUSContact from '@/assets/hero-us-contact.jpg';
+import heroIndiaContact from '@/assets/hero-india-contact.webp';
+import heroUSContact from '@/assets/hero-us-contact.webp';
 
 const Contact = () => {
   const { region } = useRegion();

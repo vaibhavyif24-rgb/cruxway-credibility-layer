@@ -14,8 +14,8 @@ import CinematicHero from '@/components/CinematicHero';
 import ScrollRevealText from '@/components/ScrollRevealText';
 import WaveBackground from '@/components/WaveBackground';
 
-import heroIndiaHome from '@/assets/hero-india-home.jpg';
-import heroUSHome from '@/assets/hero-us-home.jpg';
+import heroIndiaHome from '@/assets/hero-india-home.webp';
+import heroUSHome from '@/assets/hero-us-home.webp';
 
 import warburgLogo from '@/assets/logos/warburg-pincus.png';
 import neosPartnersLogo from '@/assets/logos/neos-partners.png';
@@ -24,10 +24,10 @@ import saltwaterLogo from '@/assets/logos/saltwater-capital.svg';
 
 import evercoreLogo from '@/assets/logos/evercore.png';
 import dunesPointLogo from '@/assets/logos/dunes-point-capital.png';
-import nitiAayogLogo from '@/assets/logos/niti-aayog.png';
+import nitiAayogLogo from '@/assets/logos/niti-aayog.webp';
 import iicLogo from '@/assets/logos/iic.png';
-import treeforestLogo from '@/assets/logos/treeforest.png';
-import lodhaGeniusLogo from '@/assets/logos/lodha-genius.png';
+import treeforestLogo from '@/assets/logos/treeforest.webp';
+import lodhaGeniusLogo from '@/assets/logos/lodha-genius.webp';
 import swishinLogo from '@/assets/logos/swishin-ventures.png';
 
 const foundersLogos = [

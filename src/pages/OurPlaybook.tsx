@@ -13,8 +13,8 @@ import { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useIsMobile } from '@/hooks/use-mobile';
 
-import heroIndiaPlaybook from '@/assets/hero-india-playbook.jpg';
-import heroUSPlaybook from '@/assets/hero-us-playbook.jpg';
+import heroIndiaPlaybook from '@/assets/hero-india-playbook.webp';
+import heroUSPlaybook from '@/assets/hero-us-playbook.webp';
 
 const evaluationSteps = [
   { num: '01', title: 'Discovery', description: 'Proprietary networks, trusted adviser relationships, and deep sector immersion surface off-market opportunities long before they reach an auction process. We invest years in building relationships that yield decades of deal flow.' },
