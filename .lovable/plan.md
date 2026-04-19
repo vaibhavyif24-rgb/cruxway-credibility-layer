@@ -1,25 +1,63 @@
 
-## Dead Code Policy
 
-The following files have been deleted and should NOT be recreated:
+## Performance Audit — Findings
 
-- Pages: About.tsx, Index.tsx, InvestmentCriteria.tsx
+**Heavy assets (the real culprit, ~3.5 MB total):**
+- 10 hero JPGs at 140–400 KB each, served as JPG (no WebP variants)
+- `niti-aayog.png` = **336 KB** (a logo!), `treeforest.png` = 206 KB, `lodha-genius.png` = 132 KB
+- Origin story images: `cruxway-merge-v4.jpg` 344 KB, `cruxway-way.jpg` 309 KB
+- Total: roughly **2.4 MB** of avoidable image weight that could be cut by ~60–75%
 
-- Components: CriteriaPipeline, HorizontalStickyDeck, NavLink, PrinciplesDeck, PrinciplesGrid, SectorShowcase, StrengthsWidget, StickyCardStack, AnimatedAccent, CriteriaIllustrations, CriteriaCarousel, CinematicScrollReveal, USCinematicScrollReveal
+**JS bundle:**
+- Single 109 KB main bundle — React, framer-motion, lucide-react, embla-carousel all bundled together
+- No `manualChunks` config in `vite.config.ts`
 
-- UI: 23 unused shadcn components (accordion through toggle-group), toaster.tsx, use-toast.ts, hooks/use-toast.ts
+**Minor formatting / hygiene:**
+- `<img>` tags missing explicit `width` / `height` (causes CLS, layout shifts during load)
+- `LogoMarquee` doesn't have a fade-in placeholder while logos load
+- `CinematicHero` has duplicate `transform: translateZ(0)` + `willChange: transform` on stacked motion divs (unnecessary GPU layers)
+- A few `// @ts-ignore` and inline magic-number styles that could be cleaned
 
-## Import Rules
+## Plan
 
-- Do NOT use `import React from 'react'` unless `React.` is explicitly referenced in the file body
-- Import hooks directly: `import { useState, useEffect } from 'react'`
-- framer-motion v12 is installed. Imports from `framer-motion` are correct for this project.
+### 1. Convert all heavy images to WebP (biggest win — ~1.5–2 MB saved)
+Generate WebP variants for:
+- All 10 region hero JPGs (`hero-india-*.jpg`, `hero-us-*.jpg`) at desktop quality 78
+- Origin story: `cruxway-crucible-v2.jpg`, `cruxway-merge-v4.jpg`, `cruxway-way.jpg`
+- Three oversized logos: `niti-aayog.png`, `treeforest.png`, `lodha-genius.png`
 
-## Style Rules
+Update all imports in `Home.tsx`, `GuidingPrinciples.tsx`, `OurFocus.tsx`, `OurPlaybook.tsx`, `Contact.tsx`, `Team.tsx`, `CruxwayOriginStory.tsx`, and Home logos array. Keep the original JPG/PNG files so nothing breaks if I miss a reference, but remove imports.
 
-- Extract static inline style objects to constants outside components
-- Use `useMemo` for style objects that depend on theme/region
+Expected savings: ~1.7 MB across the site.
 
-## Text Shimmer Fix
+### 2. Add `width` / `height` attributes to all `<img>` tags
+Reduces layout shift (CLS) and improves perceived performance. Apply to `CinematicHero`, `LogoMarquee`, `GeometricHero`, and team/deal images.
 
-The `.text-shimmer-gold` utility in `src/index.css` includes a desktop-only descender buffer to prevent clipping of letters like `g`, `y`, `p` when using `background-clip: text`. This fix is centralized — do not add per-page workarounds.
+### 3. Split the JS bundle (vite.config.ts)
+Add `build.rollupOptions.output.manualChunks`:
+- `react-vendor` → react, react-dom, react-router-dom
+- `motion` → framer-motion
+- `ui` → lucide-react, embla-carousel, radix-ui packages
+
+This lets the browser cache vendor chunks separately and parallel-download them. Expected ~40 KB faster initial parse on first visit, and near-instant subsequent navigations.
+
+### 4. Defer the `OpportunityCinematic` video poster image
+It currently loads the Pexels JPEG poster eagerly. Add `loading="lazy"` semantics by only mounting the `<video>` once `isVideoInView` is true (instead of always-mounted with `preload="none"`). Saves ~200 KB on initial load of `/india` and `/us` home pages.
+
+### 5. Lazy-load the Landing page hero image on mobile only when needed
+The `GeometricHero` already serves mobile WebP — verify the preload in `index.html` matches mobile/desktop correctly using `<link rel="preload" media="...">`.
+
+### 6. Small formatting / cleanup fixes
+- Remove duplicate `transform: translateZ(0)` where `willChange` is already set
+- Replace `// @ts-ignore` on `fetchpriority` with proper React 18 lowercase prop
+- Fix one stray double-space in `Home.tsx` line 147 indentation
+
+### Out of scope (per saved constraint)
+- Won't switch to SSR / remove framer-motion / restructure CSS — those break the design
+- Won't touch hosting cache headers (platform-level)
+
+### Expected outcome
+- LCP image: 337 KB → ~60 KB on mobile (already done) and ~140 KB on desktop hero pages
+- Total page weight on `/india` or `/us` home: ~2.8 MB → ~1.1 MB
+- JS parse time: ~310 ms savings from chunk-splitting + lazy chunks
+
